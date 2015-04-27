@@ -33,3 +33,7 @@ bower.json
 
 # Ignore pow environment settings
 .powenv
+
+.ruby-version
+.ruby-gemset
+.idea
