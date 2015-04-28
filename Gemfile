@@ -54,7 +54,7 @@ gem 'sqlite3'
 gem 'devise'
 
 group :test do
-  gem 'simplecov', group: :test
-  gem 'coveralls', group: :test
-  gem 'codeclimate-test-reporter', group: :test
+  gem 'simplecov'
+  gem 'coveralls'
+  gem 'codeclimate-test-reporter'
 end

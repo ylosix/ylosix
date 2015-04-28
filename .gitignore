@@ -32,3 +32,6 @@ bower.json
 .ruby-version
 .ruby-gemset
 .idea
+
+# Gemnasium gem configuration file
+config/gemnasium.yml
