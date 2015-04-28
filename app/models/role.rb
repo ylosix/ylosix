@@ -9,5 +9,5 @@
 #
 
 class Role < ActiveRecord::Base
-  belongs_to :client_role
+  belongs_to :user_role
 end

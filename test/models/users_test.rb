@@ -13,13 +13,20 @@
 #  last_sign_in_at        :datetime
 #  current_sign_in_ip     :string(255)
 #  last_sign_in_ip        :string(255)
+#  confirmation_token     :string(255)
+#  confirmed_at           :datetime
+#  confirmation_sent_at   :datetime
+#  unconfirmed_email      :string(255)
+#  failed_attempts        :integer          default(0), not null
+#  unlock_token           :string(255)
+#  locked_at              :datetime
 #  created_at             :datetime
 #  updated_at             :datetime
 #
 
 require 'test_helper'
 
-class ClientTest < ActiveSupport::TestCase
+class UserTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

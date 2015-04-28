@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: clients
+# Table name: admin_users
 #
 #  id                     :integer          not null, primary key
 #  email                  :string(255)      default(""), not null
@@ -17,12 +17,10 @@
 #  updated_at             :datetime
 #
 
-class Client < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+require 'test_helper'
 
-  belongs_to :client_role
-
+class AdminUserTest < ActiveSupport::TestCase
+  # test "the truth" do
+  #   assert true
+  # end
 end

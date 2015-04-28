@@ -24,8 +24,6 @@ group :development do
   gem 'spring'
 
   gem 'did_you_mean'
-  gem 'annotate'
-  gem 'rails-erd'
   gem 'rubocop'
 
   #profiling
@@ -48,10 +46,14 @@ end
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 
+gem 'rails-erd'
+gem 'annotate'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
 gem 'devise'
+gem 'activeadmin', github: 'activeadmin'
 
 group :test do
   gem 'simplecov'

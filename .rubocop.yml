@@ -1,10 +1,9 @@
 AllCops:
-  Includes:
+  Include:
     - Rakefile
     - config.ru
-  Excludes:
-    - db/**
-    - config/**
-    - script/**
-  Documentation:
-    Enabled: false
+  Exclude:
+    - bin/**/*
+    - db/**/*
+    - config/**/*
+    - script/**/*

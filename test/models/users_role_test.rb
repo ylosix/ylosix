@@ -1,9 +1,9 @@
 # == Schema Information
 #
-# Table name: client_roles
+# Table name: users_roles
 #
 #  id         :integer          not null, primary key
-#  client_id  :integer
+#  user_id    :integer
 #  role_id    :integer
 #  created_at :datetime
 #  updated_at :datetime
@@ -11,7 +11,7 @@
 
 require 'test_helper'
 
-class ClientRoleTest < ActiveSupport::TestCase
+class UsersRoleTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
