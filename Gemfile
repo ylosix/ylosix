@@ -42,6 +42,7 @@ group :development, :test do
   gem 'sdoc', '~> 0.4.0'
 
   gem 'simplecov'
+  gem 'coveralls', require: false
 end
 
 # Use ActiveModel has_secure_password
