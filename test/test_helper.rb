@@ -25,3 +25,11 @@ class TestApp < ActiveSupport::TestCase
 
   # Add more helper methods to be used by all tests here...
 end
+
+###Common methods
+def login_admin
+  admin_user = AdminUser.find_by(:email => 'admin@example.com')
+  sign_in admin_user
+
+  admin_user
+end
