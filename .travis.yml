@@ -16,7 +16,10 @@ matrix:
     - rvm: rbx-2
 before_install:
   - gem update --remote bundler
+  - cp config/secrets.travis.yml config/secrets.yml
 install:
   - bundle install --retry=3 --without development
 script:
+  - RAILS_ENV=test bundle exec rake db:create
+  - RAILS_ENV=test bundle exec rake db:migrate
   - RAILS_ENV=test bundle exec rake
