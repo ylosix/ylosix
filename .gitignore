@@ -37,3 +37,4 @@ bower.json
 .ruby-version
 .ruby-gemset
 .idea
+coverage

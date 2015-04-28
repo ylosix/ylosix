@@ -1,9 +1,5 @@
-[![Build Status](https://travis-ci.org/devcows/oscommerce.svg?branch=develop)](https://travis-ci.org/devcows/oscommerce)
-[![Coverage Status](http://img.shields.io/coveralls/devcows/oscommerce/develop.svg)](https://coveralls.io/r/devcows/oscommerce)
-[![Code Climate](https://codeclimate.com/github/devcows/oscommerce/badges/gpa.svg)](https://codeclimate.com/github/devcows/oscommerce)
-[![Inline docs](http://inch-ci.org/github/devcows/oscommerce.svg?branch=develop)](http://inch-ci.org/github/devcows/oscommerce)
-
-== README
+README
+=========
 
 This README would normally document whatever steps are necessary to get the
 application up and running.

@@ -1,0 +1,20 @@
+# == Schema Information
+#
+# Table name: client_roles
+#
+#  id         :integer          not null, primary key
+#  client_id  :integer
+#  role_id    :integer
+#  created_at :datetime
+#  updated_at :datetime
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  client_id: 
+  role_id: 
+
+two:
+  client_id: 
+  role_id: 
