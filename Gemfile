@@ -19,15 +19,9 @@ gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 
-group :development, :test do
+group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-
-  # Use sqlite3 as the database for Active Record
-  gem 'sqlite3'
-
-  # Use debugger
-  gem 'debugger'
 
   gem 'did_you_mean'
   gem 'annotate'
@@ -47,6 +41,12 @@ end
 
 # Use unicorn as the app server
 # gem 'unicorn'
+
+# Use sqlite3 as the database for Active Record
+gem 'sqlite3'
+
+# Use debugger
+gem 'debugger', group: :development
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
