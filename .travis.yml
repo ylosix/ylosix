@@ -18,4 +18,5 @@ before_install: gem update --remote bundler
 install:
   - bundle install --retry=3 --without development
 script:
+  - export SECRET_KEY_BASE="$(bundle exec rake secret)"
   - bundle exec rake
