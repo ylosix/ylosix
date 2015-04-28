@@ -1,7 +1,13 @@
 require 'coveralls'
-Coveralls.wear!
-
+require 'codeclimate-test-reporter'
 require 'simplecov'
+
+SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
+    Coveralls::SimpleCov::Formatter,
+    SimpleCov::Formatter::HTMLFormatter,
+    CodeClimate::TestReporter::Formatter
+]
+
 SimpleCov.start
 
 ENV['RAILS_ENV'] ||= 'test'

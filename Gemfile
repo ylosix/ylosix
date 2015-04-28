@@ -34,6 +34,9 @@ group :development do
 
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', '~> 0.4.0'
+
+  # Use debugger
+  gem 'debugger'
 end
 
 # Use ActiveModel has_secure_password
@@ -45,14 +48,13 @@ end
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 
-# Use debugger
-gem 'debugger', group: :development
-
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
 gem 'devise'
 
-gem 'simplecov'
-gem 'coveralls', require: false
-
+group :test do
+  gem 'simplecov', group: :test
+  gem 'coveralls', group: :test
+  gem 'codeclimate-test-reporter', group: :test
+end
