@@ -40,9 +40,6 @@ group :development, :test do
 
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', '~> 0.4.0'
-
-  gem 'simplecov'
-  gem 'coveralls', require: false
 end
 
 # Use ActiveModel has_secure_password
@@ -55,4 +52,7 @@ end
 # gem 'capistrano-rails', group: :development
 
 gem 'devise'
+
+gem 'simplecov'
+gem 'coveralls', require: false
 
