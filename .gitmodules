@@ -1,0 +1,14 @@
+[submodule "puppet/modules/apt"]
+	path = puppet/modules/apt
+	url = https://github.com/puppetlabs/puppetlabs-apt
+	branch = 1.8.x
+[submodule "puppet/modules/stdlib"]
+	path = puppet/modules/stdlib
+	url = https://github.com/puppetlabs/puppetlabs-stdlib
+	branch = 4.5.x
+[submodule "puppet/modules/ruby"]
+	path = puppet/modules/ruby
+	url = https://github.com/puppetlabs/puppetlabs-ruby
+[submodule "puppet/modules/rvm"]
+	path = puppet/modules/rvm
+	url = http://github.com/maestrodev/puppet-rvm
