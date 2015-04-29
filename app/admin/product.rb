@@ -14,7 +14,7 @@ ActiveAdmin.register Product do
   end
 
   form do |f|
-    f.inputs 'Admin Details' do
+    f.inputs 'Product Details' do
       f.input :reference_code
       f.input :name
       f.input :enabled
@@ -22,7 +22,7 @@ ActiveAdmin.register Product do
       f.input :appears_in_tag
       f.input :appears_in_search
       f.input :short_description
-      f.input :description
+      f.input :description, :as => :ckeditor
       f.input :publication_date
       f.input :unpublication_date
       f.input :retail_price_pre_tax

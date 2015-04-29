@@ -3,17 +3,17 @@ require 'test_helper'
 class Admin::ProductsControllerTest < ActionController::TestCase
   include Devise::TestHelpers
 
-  test 'should get index' do
+  def setup
     login_admin
+  end
 
+  test 'should get index' do
     get :index
     assert_response :success
   end
 
   test 'should get edit' do
-    login_admin
-
-    product = Product.first
+    product = products(:camera)
 
     get :edit, :id => product.id
     assert_response :success

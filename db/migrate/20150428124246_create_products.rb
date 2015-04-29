@@ -11,7 +11,7 @@ class CreateProducts < ActiveRecord::Migration
       t.boolean :appears_in_search
 
       t.string :short_description
-      t.string :description
+      t.text :description
       t.timestamp :publication_date
       t.timestamp :unpublication_date
 

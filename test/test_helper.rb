@@ -18,18 +18,20 @@ class ActionController::TestCase
   include Devise::TestHelpers
 end
 
-class TestApp < ActiveSupport::TestCase
-  # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical
-  # order.
+class ActionDispatch::IntegrationTest
+  include Devise::TestHelpers
+end
+
+class ActiveSupport::TestCase
+  # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
-end
 
-###Common methods
-def login_admin
-  admin_user = AdminUser.find_by(:email => 'admin@example.com')
-  sign_in admin_user
+  def login_admin
+    admin_user = admin_users(:admin_user)
+    sign_in admin_user
 
-  admin_user
+    admin_user
+  end
 end

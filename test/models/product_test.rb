@@ -11,7 +11,7 @@
 #  appears_in_tag        :boolean
 #  appears_in_search     :boolean
 #  short_description     :string(255)
-#  description           :string(255)
+#  description           :text
 #  publication_date      :datetime
 #  unpublication_date    :datetime
 #  retail_price_pre_tax  :decimal(10, 5)

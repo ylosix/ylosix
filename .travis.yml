@@ -20,8 +20,6 @@ install:
   - bundle install --retry=3 --without development
 script:
   - RAILS_ENV=test bundle exec rake db:create
-  - RAILS_ENV=test bundle exec rake db:migrate
-  - RAILS_ENV=test bundle exec rake db:fixtures:load
   - RAILS_ENV=test bundle exec rake
 notifications:
   slack: devcows:hG7SJTUWXAs1s2reFOHqNrl2

@@ -27,8 +27,8 @@ group :development do
   gem 'rubocop'
 
   #profiling
-  gem 'bullet', '4.7.1'
-  gem 'ruby-prof', '0.14.2'
+  gem 'bullet'
+  gem 'ruby-prof'
 
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', '~> 0.4.0'
@@ -54,6 +54,7 @@ gem 'annotate'
 
 gem 'devise'
 gem 'activeadmin', github: 'activeadmin'
+gem 'ckeditor'
 
 group :test do
   gem 'simplecov'

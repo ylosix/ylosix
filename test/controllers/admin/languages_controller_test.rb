@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class Admin::AdminUsersControllerTest < ActionController::TestCase
+class Admin::LanguagesControllerTest < ActionController::TestCase
   include Devise::TestHelpers
 
   def setup
@@ -13,9 +13,9 @@ class Admin::AdminUsersControllerTest < ActionController::TestCase
   end
 
   test 'should get edit' do
-    user = AdminUser.first
+    language = languages(:es)
 
-    get :edit, :id => user.id
+    get :edit, :id => language.id
     assert_response :success
   end
 
