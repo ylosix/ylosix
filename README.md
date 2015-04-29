@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/devcows/ecommerce.svg?branch=develop)](https://travis-ci.org/devcows/ecommerce)
-[![Dependency Status](https://gemnasium.com/devcows/oscommerce.svg)](https://gemnasium.com/devcows/oscommerce)
+[![Dependency Status](https://gemnasium.com/devcows/ecommerce.svg)](https://gemnasium.com/devcows/ecommerce)
 [![Coverage Status](http://img.shields.io/coveralls/devcows/ecommerce/develop.svg)](https://coveralls.io/r/devcows/ecommerce)
 [![Code Climate](https://codeclimate.com/github/devcows/ecommerce/badges/gpa.svg)](https://codeclimate.com/github/devcows/ecommerce)
 [![Inline docs](http://inch-ci.org/github/devcows/ecommerce.svg?branch=develop)](http://inch-ci.org/github/devcows/ecommerce)
