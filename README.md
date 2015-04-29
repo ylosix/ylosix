@@ -10,17 +10,17 @@ Open source for ecommerce.
 
 * Ruby version: 2.1.0
 
-* [Installation](#Installation)
+* [Installation](#installation)
 
 * Configuration
 
-* [Design schema](#Design schema)
+* [Design schema](#design-schema)
 
-* [Database creation](#Database creation)
+* [Database creation](#database-creation)
 
 * [How to run the test suite](#testing)
 
-* [The ecommerce](#The ecommerce)
+* [The ecommerce](#the-ecommerce)
 
 * Services (job queues, cache servers, search engines, etc.)
 
@@ -34,6 +34,12 @@ Please feel free to use a different markup language if you do not plan to run
 
 
 ## Installation
+
+Install git and after clone the repository(be careful with submodules):
+
+```
+$ git clone --recursive https://github.com/devcows/ecommerce.git
+```
 
 To install download [Vagrant](https://www.vagrantup.com) and install it. Install Vagrant plugin triggers, open a console and type:
 
@@ -79,5 +85,7 @@ $ rake
 The main web application is running at:
 http://localhost:13000
 
-For the backoffice the application creates a default user {:email => 'admin@example.com', :password => 'password' } and the service is running at:
+The application backoffice is running at:
 http://localhost:13000/admin
+
+The default user is {:email => 'admin@example.com', :password => 'password' }.

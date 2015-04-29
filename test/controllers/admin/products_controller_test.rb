@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class Admin::AdminUsersControllerTest < ActionController::TestCase
+class Admin::ProductsControllerTest < ActionController::TestCase
   include Devise::TestHelpers
 
   test 'should get index' do
@@ -11,9 +11,11 @@ class Admin::AdminUsersControllerTest < ActionController::TestCase
   end
 
   test 'should get edit' do
-    user = login_admin
+    login_admin
 
-    get :edit, :id => user.id
+    product = Product.first
+
+    get :edit, :id => product.id
     assert_response :success
   end
 
