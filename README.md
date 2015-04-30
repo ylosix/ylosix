@@ -6,9 +6,11 @@
 
 ## REAME
 
-Open source for ecommerce.
+Open source ecommerce.
 
 * Ruby version: 2.1.0
+
+* Rails version: 4.2.1
 
 * [Installation](#installation)
 
@@ -58,11 +60,15 @@ The first time Vagrant takes more time and prepare the virtual machine. The next
 After vagrant up the application is running at:
 http://localhost:13000
 
+Troubleshooting gem nokoguiri in Mac os x (Yosemite):
+```
+$ port install libiconv libxslt libxml2
+$ gem install nokogiri -- --use-system-libraries --with-iconv-dir=/opt/local --with-xml2-dir=/opt/local --with-xslt-dir=/opt/local
+```
 
 ## Design schema
 
 ![Alt text](https://raw.githubusercontent.com/devcows/ecommerce/develop/erd.png "Design")
-
 
 
 ## Database creation
@@ -78,7 +84,6 @@ $ rake db:fixtures:load RAILS_ENV=development
 ```
 $ rake
 ```
-
 
 ## The ecommerce
 

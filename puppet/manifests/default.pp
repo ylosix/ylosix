@@ -36,7 +36,7 @@ class install-rvm {
 
   rvm_gem {
     'ruby-2.1.0/bundler': ensure => '1.9.4';
-    'ruby-2.1.0/rails': ensure => '4.1.6';
+    'ruby-2.1.0/rails': ensure => '4.2.1';
     'ruby-2.1.0/rake': ensure => '10.4.2';
   }
 

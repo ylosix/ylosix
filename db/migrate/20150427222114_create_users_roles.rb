@@ -6,5 +6,8 @@ class CreateUsersRoles < ActiveRecord::Migration
 
       t.timestamps
     end
+
+    add_foreign_key :users_roles, :users, on_delete: :cascade, on_update: :cascade
+    add_foreign_key :users_roles, :roles, on_delete: :cascade, on_update: :cascade
   end
 end

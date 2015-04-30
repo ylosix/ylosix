@@ -13,7 +13,7 @@
 
 ActiveRecord::Schema.define(version: 20150429211148) do
 
-  create_table "active_admin_comments", force: true do |t|
+  create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
     t.text     "body"
     t.string   "resource_id",   null: false
@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 20150429211148) do
   add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace"
   add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
 
-  create_table "admin_users", force: true do |t|
+  create_table "admin_users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(version: 20150429211148) do
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
 
-  create_table "languages", force: true do |t|
+  create_table "languages", force: :cascade do |t|
     t.string   "code"
     t.string   "flag"
     t.boolean  "appears_in_backoffice"
@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 20150429211148) do
     t.datetime "updated_at"
   end
 
-  create_table "products", force: true do |t|
+  create_table "products", force: :cascade do |t|
     t.string   "reference_code"
     t.string   "name"
     t.string   "barcode"
@@ -79,13 +79,13 @@ ActiveRecord::Schema.define(version: 20150429211148) do
     t.datetime "updated_at"
   end
 
-  create_table "roles", force: true do |t|
+  create_table "roles", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "users", force: true do |t|
+  create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
@@ -112,7 +112,7 @@ ActiveRecord::Schema.define(version: 20150429211148) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true
 
-  create_table "users_roles", force: true do |t|
+  create_table "users_roles", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "role_id"
     t.datetime "created_at"
