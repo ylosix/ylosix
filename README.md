@@ -3,6 +3,7 @@
 [![Coverage Status](https://coveralls.io/repos/devcows/ecommerce/badge.svg?branch=develop)](https://coveralls.io/r/devcows/ecommerce?branch=develop)
 [![Code Climate](https://codeclimate.com/github/devcows/ecommerce/badges/gpa.svg)](https://codeclimate.com/github/devcows/ecommerce)
 [![Inline docs](http://inch-ci.org/github/devcows/ecommerce.svg?branch=develop)](http://inch-ci.org/github/devcows/ecommerce)
+[![security](https://hakiri.io/github/devcows/ecommerce/develop.svg)](https://hakiri.io/github/devcows/ecommerce/develop)
 
 ## REAME
 
@@ -76,7 +77,7 @@ $ gem install nokogiri -- --use-system-libraries --with-iconv-dir=/opt/local --w
 ```
 $ rake db:create
 $ rake db:migrate
-$ rake db:fixtures:load RAILS_ENV=development
+$ rake db:seed
 ```
 
 ## Testing

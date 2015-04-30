@@ -14,7 +14,7 @@ class { 'prepare':
 }
 include prepare
 
-$sysPackages = ['git', 'curl', 'graphviz', 'tree', 'nodejs']
+$sysPackages = ['git', 'curl', 'graphviz', 'tree', 'nodejs', 'imagemagick']
 package { $sysPackages:
   ensure => "installed",
   require  => Class['prepare']

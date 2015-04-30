@@ -9,9 +9,9 @@ su - vagrant -c "cd $APP_PATH; echo \"ecommerce\" > .ruby-gemset"
 
 su - vagrant -c "cd $APP_PATH; $RVM_PATH/gem install bundler"
 su - vagrant -c "cd $APP_PATH; $RVM_PATH/bundle install"
-su - vagrant -c "cd $APP_PATH; $RVM_PATH/rake db:create"
-su - vagrant -c "cd $APP_PATH; $RVM_PATH/rake db:migrate"
-su - vagrant -c "cd $APP_PATH; $RVM_PATH/rake db:fixtures:load RAILS_ENV=development"
+su - vagrant -c "cd $APP_PATH; $RVM_PATH/rake db:create RAILS_ENV=development"
+su - vagrant -c "cd $APP_PATH; $RVM_PATH/rake db:migrate RAILS_ENV=development"
+su - vagrant -c "cd $APP_PATH; $RVM_PATH/rake db:seed RAILS_ENV=development"
 
 sudo apt-get install -y nginx
 sudo rm /etc/nginx/sites-enabled/default

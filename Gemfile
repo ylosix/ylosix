@@ -33,8 +33,8 @@ group :development do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', '~> 0.4.0'
 
-  # Use debugger
-  gem 'debugger'
+  # Use debugger (incompatible with Rubymine)
+  #gem 'debugger'
 end
 
 # Use ActiveModel has_secure_password
@@ -55,6 +55,7 @@ gem 'annotate'
 gem 'devise'
 gem 'activeadmin', '~> 1.0.0.pre1'
 gem 'ckeditor'
+gem 'paperclip'
 
 group :test do
   gem 'simplecov'

@@ -48,11 +48,14 @@ ActiveRecord::Schema.define(version: 20150429211148) do
 
   create_table "languages", force: :cascade do |t|
     t.string   "code"
-    t.string   "flag"
     t.boolean  "appears_in_backoffice"
     t.boolean  "appears_in_web"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "flag_file_name"
+    t.string   "flag_content_type"
+    t.integer  "flag_file_size"
+    t.datetime "flag_updated_at"
   end
 
   create_table "products", force: :cascade do |t|
