@@ -187,7 +187,27 @@ ActiveAdmin.setup do |config|
   #       admin.add_logout_button_to_menu menu
   #     end
   #   end
-  #
+
+  config.namespace :admin do |admin|
+    admin.build_menu do |menu|
+      menu.add label: 'Dashboard', url: 'dashboard', :priority => 1
+
+
+      menu.add label: 'Catalog', :priority => 2
+      # menu.add label: 'Products', :parent => 'Catalog', url: '/admin/products', :priority => 0
+
+
+      menu.add label: 'Administration', :priority => 3
+      # menu.add label: 'Admin users',    :parent => 'Administration', url: 'admin/admin_users', :priority => 0
+      # menu.add label: 'Users',          :parent => 'Administration', url: 'admin/users', :priority => 1
+      # menu.add label: 'Admin comments', :parent => 'Administration', url: 'admin/comments', :priority => 2
+
+
+      menu.add label: 'Languages', url: 'languages', :priority => 4
+    end
+  end
+
+
   # If you wanted to add a static menu item to the default menu provided:
   #
   #   config.namespace :admin do |admin|

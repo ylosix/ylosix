@@ -37,6 +37,7 @@ def create_default_products
   puts '## Creating products'
   puts '####################'
 
+  camera_image = File.new "#{Rails.root}/app/assets/images/products/camera.png"
   Product.create!(:reference_code => 'ref1',
                   :name => 'Canon 450D',
                   :barcode => '123456789',
@@ -55,11 +56,24 @@ def create_default_products
                   :meta_description => 'Camera reflex canon',
                   :slug => 'canon_450d',
                   :stock => 100,
-                  :control_stock => true)
+                  :control_stock => true,
+                  :image => camera_image)
+end
+
+def create_default_categories
+  root = Category.create!(:parent_id => nil,
+                   :name => 'root',
+                   :appears_in_web => false)
+
+  Category.create!(:parent_id => root.id,
+                   :name => 'Digital Cameras',
+                   :appears_in_web => true,
+                   :slug => 'digital_cameras')
 end
 
 
 create_default_languages
 create_default_roles
 create_default_admin_user
+create_default_categories
 create_default_products

@@ -1,4 +1,6 @@
 ActiveAdmin.register User do
+  menu parent: 'Administration'
+
   permit_params :email
 
 

@@ -25,8 +25,11 @@ class CreateProducts < ActiveRecord::Migration
 
       t.integer :stock
       t.boolean :control_stock
+      t.references :category
 
       t.timestamps
     end
+
+    add_attachment :products, :image
   end
 end
