@@ -37,6 +37,7 @@ def create_default_products
   puts '## Creating products'
   puts '####################'
 
+  category = Category.find_by_slug('digital_cameras')
   camera_image = File.new "#{Rails.root}/app/assets/images/products/camera.png"
   Product.create!(:reference_code => 'ref1',
                   :name => 'Canon 450D',
@@ -57,7 +58,8 @@ def create_default_products
                   :slug => 'canon_450d',
                   :stock => 100,
                   :control_stock => true,
-                  :image => camera_image)
+                  :image => camera_image,
+                  :categories => [category])
 end
 
 def create_default_categories

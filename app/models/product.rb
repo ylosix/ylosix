@@ -22,7 +22,6 @@
 #  slug                  :string
 #  stock                 :integer
 #  control_stock         :boolean
-#  category_id           :integer
 #  created_at            :datetime
 #  updated_at            :datetime
 #  image_file_name       :string
@@ -37,5 +36,6 @@ class Product < ActiveRecord::Base
                              :thumb => '100x100>' }
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
 
-  belongs_to :category
+  has_many :products_categories
+  has_many :categories, :through => :products_categories
 end

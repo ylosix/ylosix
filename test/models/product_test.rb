@@ -22,7 +22,6 @@
 #  slug                  :string
 #  stock                 :integer
 #  control_stock         :boolean
-#  category_id           :integer
 #  created_at            :datetime
 #  updated_at            :datetime
 #  image_file_name       :string
