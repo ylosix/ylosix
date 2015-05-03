@@ -2,8 +2,9 @@ ActiveAdmin.register Product do
   menu parent: 'Catalog'
 
   permit_params :reference_code, :name, :enabled, :appears_in_categories, :appears_in_tag, :appears_in_search,
-  :short_description, :description, :publication_date, :unpublication_date, :retail_price_pre_tax, :retail_price,
-  :tax_percent, :meta_title, :meta_description, :slug, :stock, :control_stock
+                :short_description, :description, :publication_date, :unpublication_date, :retail_price_pre_tax,
+                :retail_price, :tax_percent, :meta_title, :meta_description, :slug, :stock, :control_stock,
+                :products_categories_attributes => [:id, :category_id, :product_id, :_destroy]
 
   index do
     selectable_column
@@ -37,6 +38,10 @@ ActiveAdmin.register Product do
       f.input :stock
       f.input :control_stock
       f.input :image, hint: (f.template.image_tag(f.object.image.url(:thumb)) if f.object.image?)
+
+      f.has_many :products_categories, :allow_destroy => true do |s|
+        s.input :category
+      end
     end
     f.actions
   end

@@ -12,8 +12,8 @@ class CreateProducts < ActiveRecord::Migration
 
       t.string :short_description
       t.text :description
-      t.timestamp :publication_date
-      t.timestamp :unpublication_date
+      t.timestamp :publication_date, :null => false, :default => Time.now
+      t.timestamp :unpublication_date, :default => nil
 
       t.decimal :retail_price_pre_tax, :precision => 10, :scale => 5
       t.decimal :retail_price, :precision => 10, :scale => 2

@@ -19,4 +19,17 @@ class Category < ActiveRecord::Base
 
   has_many :products_categories
   has_many :products, :through => :products_categories
+
+
+  def get_parents_array
+    array = []
+
+    parent = self.parent
+    while parent != nil
+      array << parent
+      parent = parent.parent
+    end
+
+    array.reverse
+  end
 end

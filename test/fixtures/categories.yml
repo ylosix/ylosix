@@ -15,8 +15,12 @@
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-digital_cameras:
+root:
   parent_id: nil
+  name: root
+
+digital_cameras:
+  parent: root
   name: Digital cameras
   appears_in_web: true
   meta_title: MyString

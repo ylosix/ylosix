@@ -6,7 +6,12 @@ ActiveAdmin.register Category do
   index do
     selectable_column
     id_column
-    column :parent
+
+    column 'Parent' do |category|
+      array = category.get_parents_array
+      (array.map{ |item| auto_link(item, item.name) }).join(' || ').html_safe
+    end
+
     column :name
     column :appears_in_web
     column :slug

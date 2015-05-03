@@ -12,7 +12,7 @@
 #  appears_in_search     :boolean
 #  short_description     :string
 #  description           :text
-#  publication_date      :datetime
+#  publication_date      :datetime         default(Sun, 03 May 2015 20:28:20 UTC +00:00), not null
 #  unpublication_date    :datetime
 #  retail_price_pre_tax  :decimal(10, 5)
 #  retail_price          :decimal(10, 2)
@@ -38,4 +38,6 @@ class Product < ActiveRecord::Base
 
   has_many :products_categories
   has_many :categories, :through => :products_categories
+
+  accepts_nested_attributes_for :products_categories, :allow_destroy => true
 end

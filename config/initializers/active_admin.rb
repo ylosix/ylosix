@@ -190,7 +190,7 @@ ActiveAdmin.setup do |config|
 
   config.namespace :admin do |admin|
     admin.build_menu do |menu|
-      menu.add label: 'Dashboard', url: 'dashboard', :priority => 1
+      # menu.add label: 'Dashboard', url: 'dashboard', :priority => 1
 
 
       menu.add label: 'Catalog', :priority => 2
@@ -203,7 +203,7 @@ ActiveAdmin.setup do |config|
       # menu.add label: 'Admin comments', :parent => 'Administration', url: 'admin/comments', :priority => 2
 
 
-      menu.add label: 'Languages', url: 'languages', :priority => 4
+      menu.add label: 'Languages', url: '/admin/languages', :priority => 4
     end
   end
 

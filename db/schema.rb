@@ -79,7 +79,7 @@ ActiveRecord::Schema.define(version: 20150502135707) do
     t.boolean  "appears_in_search"
     t.string   "short_description"
     t.text     "description"
-    t.datetime "publication_date"
+    t.datetime "publication_date",                               default: '2015-05-03 20:28:20', null: false
     t.datetime "unpublication_date"
     t.decimal  "retail_price_pre_tax",  precision: 10, scale: 5
     t.decimal  "retail_price",          precision: 10, scale: 2
