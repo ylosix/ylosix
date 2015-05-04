@@ -15,9 +15,9 @@ class CreateProducts < ActiveRecord::Migration
       t.timestamp :publication_date, :null => false, :default => Time.now
       t.timestamp :unpublication_date, :default => nil
 
-      t.decimal :retail_price_pre_tax, :precision => 10, :scale => 5
-      t.decimal :retail_price, :precision => 10, :scale => 2
-      t.decimal :tax_percent, :precision => 3, :scale => 2
+      t.decimal :retail_price_pre_tax, precision: 10, scale: 5
+      t.decimal :retail_price, precision: 10, scale: 2
+      t.decimal :tax_percent, precision: 3, scale: 2
 
       t.string :meta_title
       t.string :meta_description

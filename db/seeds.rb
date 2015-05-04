@@ -65,9 +65,9 @@ def create_default_products
                     :short_description => 'Camera reflex canon 12MP.',
                     :description => 'Camera reflex canon 12 MP (not includes SD).',
 
-                    :retail_price_pre_tax => 350,
+                    :retail_price_pre_tax => 350.0,
                     :retail_price => 423.5,
-                    :tax_percent => 21,
+                    :tax_percent => 21.0,
 
                     :meta_title => 'canon_450d',
                     :meta_description => 'Camera reflex canon',
