@@ -39,6 +39,7 @@ gem 'paperclip'
 
 group :production do
   gem 'pg'
+  gem 'rails_12factor' #for heroku to serve static files with puma
 end
 
 
