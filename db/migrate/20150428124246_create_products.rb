@@ -4,11 +4,11 @@ class CreateProducts < ActiveRecord::Migration
       t.string :reference_code
       t.string :name
       t.string :barcode
-      t.boolean :enabled
+      t.boolean :enabled, :default => false
 
-      t.boolean :appears_in_categories
-      t.boolean :appears_in_tag
-      t.boolean :appears_in_search
+      t.boolean :appears_in_categories, :default => true
+      t.boolean :appears_in_tag, :default => true
+      t.boolean :appears_in_search, :default => true
 
       t.string :short_description
       t.text :description
@@ -23,8 +23,8 @@ class CreateProducts < ActiveRecord::Migration
       t.string :meta_description
       t.string :slug
 
-      t.integer :stock
-      t.boolean :control_stock
+      t.integer :stock, :default => 0
+      t.boolean :control_stock, :default => false
 
       t.timestamps
     end

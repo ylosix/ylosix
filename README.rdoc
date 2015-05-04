@@ -54,3 +54,9 @@ Some setup you must do manually if you haven't yet:
 
      On config/application.rb forcing your application to not access the DB
      or load models when precompiling your assets.
+
+Users roles
+======
+
+users with roles admin and client => remove admin_users
+
