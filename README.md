@@ -95,3 +95,16 @@ The application backoffice is running at:
 http://localhost:13000/admin
 
 The default user is {:email => 'admin@example.com', :password => 'password' }.
+
+## DEPLOY IN HEROKU
+
+```
+$ register heroku
+$ git clone https://github.com/devcows/ecommerce.git
+$ cd ecommerce
+$ heroku login
+$ heroku create
+$ heroku addons:add heroku-postgresql:hobby-dev
+$ heroku config:set RAILS_DB=postgresql
+$ git push heroku develop:master
+```

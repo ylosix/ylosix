@@ -19,6 +19,29 @@ gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 
+# Use ActiveModel has_secure_password
+# gem 'bcrypt', '~> 3.1.7'
+
+# Use unicorn as the app server
+gem 'unicorn'
+gem 'puma'
+
+gem 'rails-erd'
+gem 'annotate'
+
+# Use Capistrano for deployment
+# gem 'capistrano-rails', group: :development
+
+gem 'devise'
+gem 'activeadmin', '~> 1.0.0.pre1'
+gem 'ckeditor'
+gem 'paperclip'
+
+group :production do
+  gem 'pg'
+end
+
+
 group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
@@ -34,28 +57,13 @@ group :development do
   gem 'sdoc', '~> 0.4.0'
 
   # Use debugger (incompatible with Rubymine)
-  #gem 'debugger'
+  # gem 'debugger'
 end
 
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
-
-# Use unicorn as the app server
-gem 'unicorn'
-
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
-
-gem 'rails-erd'
-gem 'annotate'
-
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
-
-gem 'devise'
-gem 'activeadmin', '~> 1.0.0.pre1'
-gem 'ckeditor'
-gem 'paperclip'
+group :development, :test do
+  # Use sqlite3 as the database for Active Record
+  gem 'sqlite3'
+end
 
 group :test do
   gem 'simplecov'

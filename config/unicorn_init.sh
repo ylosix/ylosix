@@ -27,7 +27,7 @@ SET_EXPORTS="export PATH=$PATH; export GEM_PATH=$GEM_PATH; export MY_RUBY_HOME=$
 BUNDLE_EXEC="$GEM_HOME/wrappers/bundle exec "
 
 START_UNICORN="$BUNDLE_EXEC $GEM_HOME/bin/unicorn -D -c $APP_ROOT/config/unicorn.rb -E $RAILS_ENV"
-BUNDLE_INSTALL="RAILS_ENV=$RAILS_ENV $GEM_HOME/bin/bundle install"
+BUNDLE_INSTALL="RAILS_ENV=$RAILS_ENV $GEM_HOME/bin/bundle install --without production"
 RAKE_MIGRATE="RAILS_ENV=$RAILS_ENV $BUNDLE_EXEC $GEM_HOME/wrappers/rake db:migrate"
 RESTART_NGINX="sudo service nginx restart"
 CMD="$SET_PATH; $SET_EXPORTS; $BUNDLE_INSTALL; $RAKE_MIGRATE; $START_UNICORN;"
