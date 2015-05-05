@@ -4,11 +4,9 @@ sqlite: &sqlite
 
 mysql: &mysql
   adapter: mysql2
-  url: <%= ENV['DATABASE_URL'] %>
 
 postgresql: &postgresql
   adapter: postgresql
-  url: <%= ENV['DATABASE_URL'] %>
   min_messages: ERROR
   reconnect: false
 
@@ -25,4 +23,5 @@ test:
   <<: *default
 
 production:
+  url: <%= ENV['DATABASE_URL'] %>
   <<: *default

@@ -56,13 +56,19 @@ $ vagrant up
 
 The first time Vagrant takes more time and prepare the virtual machine. The next runs Vagrant goes more quickly.
 
-After vagrant up the application is running at: <br />
+After vagrant up, you already have a develop environment, the application is running at: <br />
 [http://localhost:13000](http://localhost:13000)
 
 Troubleshooting gem nokoguiri in Mac os x (Yosemite):
 ```
 $ port install libiconv libxslt libxml2
 $ gem install nokogiri -- --use-system-libraries --with-iconv-dir=/opt/local --with-xml2-dir=/opt/local --with-xslt-dir=/opt/local
+```
+
+Troubleshooting git clone in windows:
+- Windows by default use crlf true and adds \r in every \n. The puppet recipe fails with \r. 
+```
+git config --global core.autocrlf false
 ```
 
 ## Design schema
@@ -113,4 +119,31 @@ $ git push heroku develop:master
 
 $ run rake db:migrate RAILS_ENV=production
 $ heroku run rake db:seed
+```
+
+Deploy using digital ocean:
+```
+$ vagrant plugin install vagrant-digitalocean
+```
+
+Generate API token:
+https://cloud.digitalocean.com/settings/applications
+
+- Add token code in Vagrant file at YOUR_TOKEN:
+```
+  config.vm.provider :digital_ocean do |provider, override|
+    override.ssh.private_key_path = '~/.ssh/id_rsa'
+    override.vm.box = 'digital_ocean'
+    override.vm.box_url = 'https://github.com/smdahlen/vagrant-digitalocean/raw/master/box/digital_ocean.box'
+
+    provider.token = 'YOUR_TOKEN'
+    provider.image = 'ubuntu-14-04-x64'
+    provider.region = 'nyc2'
+    provider.size = '512mb'
+  end
+```
+
+Execute:
+```
+RAILS_ENV=production vagrant up --provider=digital_ocean
 ```

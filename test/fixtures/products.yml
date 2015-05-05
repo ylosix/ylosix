@@ -12,7 +12,7 @@
 #  appears_in_search     :boolean          default(TRUE)
 #  short_description     :string
 #  description           :text
-#  publication_date      :datetime         not null
+#  publication_date      :datetime         default(Thu, 01 Jan 2015 00:00:00 UTC +00:00), not null
 #  unpublication_date    :datetime
 #  retail_price_pre_tax  :decimal(10, 5)
 #  retail_price          :decimal(10, 2)

@@ -10,10 +10,13 @@
 ### END INIT INFO
 
 # Feel free to change any of the following variables for your app:
-RAILS_ENV=development
 TIMEOUT=${TIMEOUT-60}
 APP_ROOT=/var/www
 PID=/home/vagrant/pids/unicorn.pid
+
+if [ -z $RAILS_ENV ]; then
+  RAILS_ENV=`cat $APP_ROOT/.ruby-env`
+fi
 
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/local/rvm/bin:/usr/local/rvm/gems/ruby-2.1.0@ecommerce/bin:/usr/local/rvm/gems/ruby-2.1.0@global/bin:/usr/local/rvm/rubies/ruby-2.1.0/bin
 GEM_HOME=/usr/local/rvm/gems/ruby-2.1.0@ecommerce
@@ -22,15 +25,21 @@ MY_RUBY_HOME=/usr/local/rvm/rubies/ruby-2.1.0
 IRBRC=/usr/local/rvm/rubies/ruby-2.1.0/.irbrc
 RUBY_VERSION=ruby-2.1.0
 
-SET_PATH="cd $APP_ROOT"
-SET_EXPORTS="export PATH=$PATH; export GEM_PATH=$GEM_PATH; export MY_RUBY_HOME=$MY_RUBY_HOME; export IRBRC=$IRBRC; export RUBY_VERSION=$RUBY_VERSION; export GEM_HOME=$GEM_HOME; export HOME=$APP_ROOT"
+SET_PATH="cd $APP_ROOT;"
+SET_EXPORTS="export PATH=$PATH; export GEM_PATH=$GEM_PATH; export MY_RUBY_HOME=$MY_RUBY_HOME; export IRBRC=$IRBRC; export RUBY_VERSION=$RUBY_VERSION; export GEM_HOME=$GEM_HOME; export HOME=$APP_ROOT;"
 BUNDLE_EXEC="$GEM_HOME/wrappers/bundle exec "
 
-START_UNICORN="$BUNDLE_EXEC $GEM_HOME/bin/unicorn -D -c $APP_ROOT/config/unicorn.rb -E $RAILS_ENV"
-BUNDLE_INSTALL="RAILS_ENV=$RAILS_ENV $GEM_HOME/bin/bundle install --without production"
-RAKE_MIGRATE="RAILS_ENV=$RAILS_ENV $BUNDLE_EXEC $GEM_HOME/wrappers/rake db:migrate"
+START_UNICORN="$BUNDLE_EXEC $GEM_HOME/bin/unicorn -D -c $APP_ROOT/config/unicorn.rb -E $RAILS_ENV;"
+BUNDLE_INSTALL="RAILS_ENV=$RAILS_ENV $GEM_HOME/bin/bundle install;"
+RAKE_MIGRATE="RAILS_ENV=$RAILS_ENV $BUNDLE_EXEC $GEM_HOME/wrappers/rake db:migrate;"
+COMPILE_ASSETS=""
+
+if [ "$RAILS_ENV" = "production" ]; then
+  COMPILE_ASSETS="RAILS_ENV=$RAILS_ENV $BUNDLE_EXEC $GEM_HOME/wrappers/rake assets:precompile;"
+fi
+
 RESTART_NGINX="sudo service nginx restart"
-CMD="$SET_PATH; $SET_EXPORTS; $BUNDLE_INSTALL; $RAKE_MIGRATE; $START_UNICORN;"
+CMD="$SET_PATH $SET_EXPORTS $BUNDLE_INSTALL $RAKE_MIGRATE $COMPILE_ASSETS $START_UNICORN"
 
 AS_USER=vagrant
 
