@@ -4,8 +4,8 @@
 #
 #  id                    :integer          not null, primary key
 #  code                  :string
-#  appears_in_backoffice :boolean
-#  appears_in_web        :boolean
+#  appears_in_backoffice :boolean          default(FALSE)
+#  appears_in_web        :boolean          default(FALSE)
 #  created_at            :datetime
 #  updated_at            :datetime
 #  flag_file_name        :string

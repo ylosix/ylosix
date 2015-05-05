@@ -27,9 +27,7 @@ Open source ecommerce.
 
 * Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
-
-* ...
+* [Deployment instructions](#deployment-instructions)
 
 
 Please feel free to use a different markup language if you do not plan to run
@@ -58,8 +56,8 @@ $ vagrant up
 
 The first time Vagrant takes more time and prepare the virtual machine. The next runs Vagrant goes more quickly.
 
-After vagrant up the application is running at:
-http://localhost:13000
+After vagrant up the application is running at: <br />
+[http://localhost:13000](http://localhost:13000)
 
 Troubleshooting gem nokoguiri in Mac os x (Yosemite):
 ```
@@ -88,19 +86,24 @@ $ rake
 
 ## The ecommerce
 
-The main web application is running at:
-http://localhost:13000
+The main web application is running at: <br />
+[http://localhost:13000](http://localhost:13000)
 
-The application backoffice is running at:
-http://localhost:13000/admin
+The application backoffice is running at: <br />
+[http://localhost:13000/admin](http://localhost:13000/admin)
 
 The default user is {:email => 'admin@example.com', :password => 'password' }.
 
-## DEPLOY IN HEROKU
+Demo at: <br />
+[Link to heroku](http://devcows-ecommerce.herokuapp.com)
+
+## Deployment instructions
+
+Deploy using heroku:
+- Register at [heroku](https://www.heroku.com)
 
 ```
-$ register heroku
-$ git clone https://github.com/devcows/ecommerce.git
+$ git clone --recursive https://github.com/devcows/ecommerce.git
 $ cd ecommerce
 $ heroku login
 $ heroku create

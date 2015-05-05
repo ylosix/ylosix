@@ -49,18 +49,22 @@ ActiveRecord::Schema.define(version: 20150502135707) do
   create_table "categories", force: :cascade do |t|
     t.integer  "parent_id"
     t.string   "name"
-    t.boolean  "appears_in_web"
+    t.boolean  "enabled",          default: false
+    t.boolean  "appears_in_web",   default: true
     t.string   "meta_title"
     t.string   "meta_description"
     t.string   "slug"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
   end
+
+  add_index "categories", ["parent_id"], name: "index_categories_on_parent_id"
+  add_index "categories", ["slug"], name: "index_categories_on_slug"
 
   create_table "languages", force: :cascade do |t|
     t.string   "code"
-    t.boolean  "appears_in_backoffice"
-    t.boolean  "appears_in_web"
+    t.boolean  "appears_in_backoffice", default: false
+    t.boolean  "appears_in_web",        default: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "flag_file_name"
@@ -69,26 +73,28 @@ ActiveRecord::Schema.define(version: 20150502135707) do
     t.datetime "flag_updated_at"
   end
 
+  add_index "languages", ["code"], name: "index_languages_on_code"
+
   create_table "products", force: :cascade do |t|
     t.string   "reference_code"
     t.string   "name"
     t.string   "barcode"
-    t.boolean  "enabled"
-    t.boolean  "appears_in_categories"
-    t.boolean  "appears_in_tag"
-    t.boolean  "appears_in_search"
+    t.boolean  "enabled",                                        default: false
+    t.boolean  "appears_in_categories",                          default: true
+    t.boolean  "appears_in_tag",                                 default: true
+    t.boolean  "appears_in_search",                              default: true
     t.string   "short_description"
     t.text     "description"
-    t.datetime "publication_date",                               default: '2015-05-03 20:28:20', null: false
+    t.datetime "publication_date",                                               null: false
     t.datetime "unpublication_date"
     t.decimal  "retail_price_pre_tax",  precision: 10, scale: 5
     t.decimal  "retail_price",          precision: 10, scale: 2
-    t.decimal  "tax_percent",           precision: 3,  scale: 2
+    t.decimal  "tax_percent",           precision: 5,  scale: 2
     t.string   "meta_title"
     t.string   "meta_description"
     t.string   "slug"
-    t.integer  "stock"
-    t.boolean  "control_stock"
+    t.integer  "stock",                                          default: 0
+    t.boolean  "control_stock",                                  default: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "image_file_name"
@@ -105,6 +111,8 @@ ActiveRecord::Schema.define(version: 20150502135707) do
   end
 
   add_index "products_categories", ["category_id", "product_id"], name: "index_products_categories_on_category_id_and_product_id"
+  add_index "products_categories", ["category_id"], name: "index_products_categories_on_category_id"
+  add_index "products_categories", ["product_id"], name: "index_products_categories_on_product_id"
 
   create_table "roles", force: :cascade do |t|
     t.string   "name"

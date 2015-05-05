@@ -5,7 +5,8 @@
 #  id               :integer          not null, primary key
 #  parent_id        :integer
 #  name             :string
-#  appears_in_web   :boolean
+#  enabled          :boolean          default(FALSE)
+#  appears_in_web   :boolean          default(TRUE)
 #  meta_title       :string
 #  meta_description :string
 #  slug             :string
