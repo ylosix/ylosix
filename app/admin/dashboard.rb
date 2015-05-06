@@ -14,6 +14,16 @@ ActiveAdmin.register_page 'Dashboard' do
         end
       end
 
+      columns do
+        column do
+          span 'Root folder'
+        end
+
+        column do
+          span Rails.root
+        end
+      end
+
       config_db = Rails.application.config.database_configuration[Rails.env]
 
       columns do
@@ -33,6 +43,23 @@ ActiveAdmin.register_page 'Dashboard' do
 
         column do
           span config_db['adapter']
+        end
+      end
+
+      columns do
+        column do
+          span 'GIT status'
+        end
+
+        column do
+          updates = `cd #{Rails.root}; git rev-list HEAD...origin/develop --count`
+
+          if updates.to_i == 0
+            span 'Up-to-date'
+          else
+            span "The repository has #{updates} updates."
+          end
+
         end
       end
     end

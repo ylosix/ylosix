@@ -51,7 +51,7 @@ $ vagrant plugin install vagrant-triggers
 After open a console in project path:
 
 ```
-$ vagrant up
+$ vagrant up main_app
 ```
 
 The first time Vagrant takes more time and prepare the virtual machine. The next runs Vagrant goes more quickly.
@@ -69,6 +69,18 @@ Troubleshooting git clone in windows:
 - Windows by default use crlf true and adds \r in every \n. The puppet recipe fails with \r. 
 ```
 git config --global core.autocrlf false
+```
+
+Build and run with docker:
+```
+# build your dockerfile
+$ docker build -t ryanfox1985/ecommerce .
+
+# run container
+$ docker run -d -p 80:80 -e SECRET_KEY_BASE=secretkey ryanfox1985/ecommerce
+
+# run console
+docker run -i -t ryanfox1985/ecommerce:latest /bin/bash
 ```
 
 ## Design schema
@@ -145,5 +157,5 @@ https://cloud.digitalocean.com/settings/applications
 
 Execute:
 ```
-RAILS_ENV=production vagrant up --provider=digital_ocean
+RAILS_ENV=production vagrant up main_app --provider=digital_ocean
 ```
