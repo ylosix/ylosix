@@ -1,5 +1,5 @@
-desc 'Update rails code'
-task :update_code do
+desc 'Update rails code and migrate, database, compile assets and restart'
+task :update_app do
   puts "##### Environment => #{Rails.env}"
 
   puts '##### Check github...'

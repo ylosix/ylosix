@@ -4,6 +4,18 @@ ActiveAdmin.register_page 'Dashboard' do
 
   content title: proc{ I18n.t('active_admin.dashboard') } do
     panel 'Variables' do
+      current_config = Rails.application.config
+
+      columns do
+        column do
+          span 'Version'
+        end
+
+        column do
+          span current_config.version
+        end
+      end
+
       columns do
         column do
             span 'Environment'
@@ -24,7 +36,7 @@ ActiveAdmin.register_page 'Dashboard' do
         end
       end
 
-      config_db = Rails.application.config.database_configuration[Rails.env]
+      config_db = current_config.database_configuration[Rails.env]
 
       columns do
         column do

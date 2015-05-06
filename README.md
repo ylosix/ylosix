@@ -127,7 +127,7 @@ $ heroku login
 $ heroku create
 $ heroku addons:add heroku-postgresql:hobby-dev
 $ heroku config:set RAILS_DB=postgresql
-$ git push heroku develop:master
+$ git push heroku master_heroku:master
 
 $ run rake db:migrate RAILS_ENV=production
 $ heroku run rake db:seed
@@ -158,4 +158,21 @@ https://cloud.digitalocean.com/settings/applications
 Execute:
 ```
 RAILS_ENV=production vagrant up main_app --provider=digital_ocean
+```
+
+Managed servers:
+
+- Add server ssh config:
+```
+  config.vm.provider :managed_server do |managed, override|
+    managed.server = 'example.com'
+    override.ssh.username = 'username'
+    override.ssh.private_key_path = '/path/to/user_name_private_key_path'
+  end
+```
+
+Execute:
+```
+$ vagrant plugin install vagrant-managed-servers
+$ RAILS_ENV=production vagrant up main_app --provider=managed_server
 ```

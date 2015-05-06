@@ -14,7 +14,7 @@ class { 'prepare':
 }
 include prepare
 
-$sysPackages = ['git', 'curl', 'graphviz', 'tree', 'nodejs', 'imagemagick']
+$sysPackages = ['git', 'curl', 'upstart', 'graphviz', 'tree', 'nodejs', 'imagemagick']
 package { $sysPackages:
   ensure => "installed",
   require  => Class['prepare']
@@ -31,13 +31,11 @@ class install-rvm {
   rvm_system_ruby {
     'ruby-2.1.0':
       ensure      => 'present',
-      default_use => false
+      default_use => true
   }
 
   rvm_gem {
     'ruby-2.1.0/bundler': ensure => '1.9.4';
-    'ruby-2.1.0/rails': ensure => '4.2.1';
-    'ruby-2.1.0/rake': ensure => '10.4.2';
   }
 
   rvm_gemset {

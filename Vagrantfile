@@ -1,6 +1,10 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 ENV['VAGRANT_DEFAULT_PROVIDER'] = 'virtualbox'
+ENV['RAILS_ENV'] = 'development' if ENV['RAILS_ENV'].nil? || ENV['RAILS_ENV'] == ''
+#TODO add default RUBY version
+
+puts "##### Environment => #{ENV['RAILS_ENV']}"
 
 Vagrant.configure(2) do |config|
 
@@ -26,12 +30,19 @@ Vagrant.configure(2) do |config|
       provider.size = '1gb'
     end
 
-    # install puppet provisioner for digital ocean provider
+    config.vm.provider :managed_server do |managed, override|
+      managed.server = 'example.com'
+      override.ssh.username = 'username'
+      override.ssh.private_key_path = '/path/to/user_name_private_key_path'
+    end
+
+    #TODO put this in the overrides.
+    # install puppet provisioner for digital ocean provider or managed_server
     config.vm.provision 'shell', inline: 'apt-get install -y puppet'
 
     config.vm.provision :puppet do |puppet|
       puppet.facter = {
-          'RAILS_ENV' => ENV['RAILS_ENV']
+          'RAILS_ENV' => ENV['RAILS_ENV'] #TODO Check this not works parameter not exist
       }
 
       puppet.manifests_path = 'puppet/manifests'
@@ -40,8 +51,11 @@ Vagrant.configure(2) do |config|
 
     config.vm.provision 'shell', path: 'puppet/scripts/vagrant-init.sh', :args => ENV['RAILS_ENV']
 
-    config.trigger.after :up do
-      run "vagrant ssh -c 'sudo service unicorn start'"
+    if ENV['RAILS_ENV'] == 'development'
+      config.trigger.after :up do
+        run "vagrant ssh -c 'sudo stop ecommerce'"
+        run "vagrant ssh -c 'sudo start ecommerce'"
+      end
     end
   end
 

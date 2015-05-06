@@ -33,9 +33,11 @@ bower.json
 .ruby-version
 .ruby-gemset
 .ruby-env
+.env
 .ruby-secret
 .idea
 .vagrant
 
 # Gemnasium gem configuration file
 config/gemnasium.yml
+Procfile

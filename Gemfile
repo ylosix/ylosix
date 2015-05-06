@@ -25,6 +25,7 @@ gem 'jbuilder', '~> 2.0'
 # Use unicorn as the app server
 gem 'unicorn'
 gem 'puma'
+gem 'foreman'
 
 gem 'rails-erd'
 gem 'annotate'
