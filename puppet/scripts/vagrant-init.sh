@@ -39,12 +39,25 @@ if [ -z $SECRET_KEY_BASE ]; then
   su - vagrant -c "echo 'export SECRET_KEY_BASE=$SECRET_KEY_BASE;' >> /home/vagrant/.bash_profile"
 fi
 
+su - vagrant -c "echo 'export DATABASE_URL=postgres://ecommerce_user:ecommerce_pass@localhost:5432/ecommerce;' >> /home/vagrant/.bash_profile"
+if [ "$RAILS_ENV" == "production" ]; then
+  su - vagrant -c "echo 'export RAILS_DB=postgresql;' >> /home/vagrant/.bash_profile"
+fi
+
+#Execute environment variables
 su - vagrant -c "/home/vagrant/.bash_profile"
 
 #Setup project
 su - vagrant -c "cd $APP_PATH; $RVM_WRAPPERS_PATH/gem install bundler"
-su - vagrant -c "cd $APP_PATH; $RVM_WRAPPERS_PATH/bundle install"
-su - vagrant -c "cd $APP_PATH; $RVM_WRAPPERS_PATH/rake db:create RAILS_ENV=$RAILS_ENV"
+su - vagrant -c "cd $APP_PATH; rm .bundle/config"
+
+if [ "$RAILS_ENV" == "production" ]; then
+  su - vagrant -c "cd $APP_PATH; $RVM_WRAPPERS_PATH/bundle install --without development test"
+else
+  su - vagrant -c "cd $APP_PATH; $RVM_WRAPPERS_PATH/bundle install --without production"
+  su - vagrant -c "cd $APP_PATH; $RVM_WRAPPERS_PATH/rake db:create RAILS_ENV=$RAILS_ENV"
+fi
+
 su - vagrant -c "cd $APP_PATH; $RVM_WRAPPERS_PATH/rake db:migrate RAILS_ENV=$RAILS_ENV"
 
 if [ "$RAILS_ENV" == "production" ]; then

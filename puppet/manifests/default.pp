@@ -14,7 +14,7 @@ class { 'prepare':
 }
 include prepare
 
-$sysPackages = ['git', 'curl', 'upstart', 'graphviz', 'tree', 'nodejs', 'imagemagick']
+$sysPackages = ['git', 'curl', 'libpq-dev', 'upstart', 'graphviz', 'tree', 'nodejs', 'imagemagick']
 package { $sysPackages:
   ensure => "installed",
   require  => Class['prepare']
@@ -45,6 +45,18 @@ class install-rvm {
   }
 }
 class {'install-rvm': }
+
+
+class { 'postgresql::server':
+  ip_mask_allow_all_users    => '0.0.0.0/0',
+  listen_addresses           => '*',
+  postgres_password          => 'postgres'
+}
+
+postgresql::server::db { 'ecommerce':
+  user     => 'ecommerce_user',
+  password => postgresql_password('ecommerce_user', 'ecommerce_pass');
+}
 
 #dump facts variables
 file { "/home/vagrant/facts.yaml":
