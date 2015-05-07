@@ -178,7 +178,7 @@ Managed servers:
 Execute:
 ```
 $ vagrant plugin install vagrant-managed-servers
-$ RAILS_ENV=production vagrant up main_app --provider=managed_server
+$ RAILS_ENV=production vagrant up main_app --provider=managed
 $ RAILS_ENV=production vagrant provision main_app
 ```
 

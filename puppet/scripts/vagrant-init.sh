@@ -1,7 +1,7 @@
 #!/bin/bash
 APP_PATH=/var/www
 RVM_WRAPPERS_PATH=/usr/local/rvm/wrappers/ruby-2.1.0@ecommerce
-RVM_GEMS_PATH=/usr/local/rvm/gems/ruby-2.1.0@ecommerce/bin
+RVM_SUDO_PATH=/usr/local/rvm/bin/rvmsudo
 RAILS_ENV=$1
 
 if [ -z $RAILS_ENV ]; then
@@ -11,6 +11,8 @@ fi
 #Install nginx
 su -c "apt-get install -qq -y nginx --force-yes"
 su -c "rm /etc/nginx/sites-enabled/default"
+
+#TODO Check if contains daemon off already.
 su -c "echo 'daemon off;' >> /etc/nginx/nginx.conf"
 su -c "service nginx stop"
 su -c "ln -s '$APP_PATH/puppet/nginx-default.conf' /etc/nginx/conf.d/default.conf"
@@ -28,24 +30,21 @@ su -c "chmod -R g+w $APP_PATH"
 su - vagrant -c "cd $APP_PATH; echo \"2.1.0\" > .ruby-version"
 su - vagrant -c "cd $APP_PATH; echo \"ecommerce\" > .ruby-gemset"
 su - vagrant -c "cd $APP_PATH; echo $RAILS_ENV > .ruby-env"
-su - vagrant -c "cd $APP_PATH; echo 'RAILS_ENV=$RAILS_ENV' > .env"
-
-su - vagrant -c "echo 'export RAILS_ENV=$RAILS_ENV;' >> /home/vagrant/.bash_profile"
-su - vagrant -c "chmod +x /home/vagrant/.bash_profile"
 
 if [ -z $SECRET_KEY_BASE ]; then
   su - vagrant -c "cd $APP_PATH; $RVM_WRAPPERS_PATH/rake secret > .ruby-secret"
   SECRET_KEY_BASE=`cat $APP_PATH/.ruby-secret`
-  su - vagrant -c "echo 'export SECRET_KEY_BASE=$SECRET_KEY_BASE;' >> /home/vagrant/.bash_profile"
 fi
 
-su - vagrant -c "echo 'export DATABASE_URL=postgres://ecommerce_user:ecommerce_pass@localhost:5432/ecommerce;' >> /home/vagrant/.bash_profile"
+database=sqlite
 if [ "$RAILS_ENV" == "production" ]; then
-  su - vagrant -c "echo 'export RAILS_DB=postgresql;' >> /home/vagrant/.bash_profile"
+  database=postgresql
 fi
 
-#Execute environment variables
-su - vagrant -c "/home/vagrant/.bash_profile"
+su - vagrant -c "cd $APP_PATH; echo 'RAILS_ENV=$RAILS_ENV' > .env"
+su - vagrant -c "cd $APP_PATH; echo 'SECRET_KEY_BASE=$SECRET_KEY_BASE' >> .env"
+su - vagrant -c "cd $APP_PATH; echo 'RAILS_DB=$database' >> .env"
+su - vagrant -c "cd $APP_PATH; echo 'DATABASE_URL=postgres://ecommerce_user:ecommerce_pass@localhost:5432/ecommerce' >> .env"
 
 #Setup project
 su - vagrant -c "cd $APP_PATH; $RVM_WRAPPERS_PATH/gem install bundler"
@@ -68,8 +67,8 @@ su - vagrant -c "cd $APP_PATH; $RVM_WRAPPERS_PATH/rake db:seed RAILS_ENV=$RAILS_
 
 
 #Set foreman file
-su - vagrant -c "echo 'web: $RVM_WRAPPERS_PATH/bundle exec unicorn -c config/unicorn.rb -E $RAILS_ENV' > $APP_PATH/Procfile"
+su - vagrant -c "echo 'web: bundle exec unicorn -c config/unicorn.rb -E $RAILS_ENV' > $APP_PATH/Procfile"
 su - vagrant -c "echo 'nginx: /usr/sbin/nginx -c /etc/nginx/nginx.conf' >> $APP_PATH/Procfile"
 
-su - vagrant -c "cd $APP_PATH; rvmsudo $RVM_GEMS_PATH/foreman export upstart --app=ecommerce --user=root /etc/init"
-su - vagrant -c "cd $APP_PATH; rvmsudo $RVM_GEMS_PATH/foreman start -f Procfile &"
+su -c "cd $APP_PATH; $RVM_SUDO_PATH $RVM_WRAPPERS_PATH/bundle exec foreman export upstart --app=ecommerce --user=root /etc/init"
+su -c "cd $APP_PATH; $RVM_SUDO_PATH $RVM_WRAPPERS_PATH/bundle exec foreman start -f Procfile &"
