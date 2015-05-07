@@ -30,15 +30,18 @@ Vagrant.configure(2) do |config|
       provider.size = '1gb'
     end
 
-    config.vm.provider :managed_server do |managed, override|
-      managed.server = 'example.com'
+    app.vm.provider :managed do |provider, override|
       override.ssh.username = 'username'
-      override.ssh.private_key_path = '/path/to/user_name_private_key_path'
+      override.ssh.private_key_path = '~/.ssh/id_rsa'
+      override.vm.box = 'tknerr/managed-server-dummy'
+
+      provider.server = 'example.com'
     end
 
     #TODO put this in the overrides.
     # install puppet provisioner for digital ocean provider or managed_server
-    config.vm.provision 'shell', inline: 'apt-get install -y puppet'
+    config.vm.provision 'shell', inline: 'apt-get install -qq -y puppet --force-yes'
+    config.vm.provision 'shell', path: 'puppet/scripts/add-user-vagrant.sh'
 
     config.vm.provision :puppet do |puppet|
       puppet.facter = {

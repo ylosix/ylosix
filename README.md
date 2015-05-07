@@ -13,6 +13,8 @@ Open source ecommerce.
 
 * Rails version: 4.2.1
 
+* Puppet: 3.7.5
+
 * [Installation](#installation)
 
 * Configuration
@@ -164,15 +166,21 @@ Managed servers:
 
 - Add server ssh config:
 ```
-  config.vm.provider :managed_server do |managed, override|
-    managed.server = 'example.com'
+  app.vm.provider :managed do |provider, override|
     override.ssh.username = 'username'
-    override.ssh.private_key_path = '/path/to/user_name_private_key_path'
-  end
+    override.ssh.private_key_path = '~/.ssh/id_rsa'
+    override.vm.box = 'tknerr/managed-server-dummy'
+
+    provider.server = 'example.com'
+  end  
 ```
 
 Execute:
 ```
 $ vagrant plugin install vagrant-managed-servers
 $ RAILS_ENV=production vagrant up main_app --provider=managed_server
+$ RAILS_ENV=production vagrant provision main_app
 ```
+
+Troubleshooting Puppet old version:
+https://docs.puppetlabs.com/guides/install_puppet/install_debian_ubuntu.html
