@@ -31,20 +31,19 @@
 #
 
 class Product < ActiveRecord::Base
-  has_attached_file :image, :styles => {
-                             :medium => '300x300>',
-                             :thumb => '100x100>' },
-                    :override_permissions => false
+  has_attached_file :image, styles: {
+                              medium: '300x300>',
+                              thumb: '100x100>'},
+                    override_permissions: false
 
-  validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
+  validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
   has_many :products_categories
-  has_many :categories, :through => :products_categories
+  has_many :categories, through: :products_categories
 
-  accepts_nested_attributes_for :products_categories, :allow_destroy => true
+  accepts_nested_attributes_for :products_categories, allow_destroy: true
 
   before_create :set_default_publication_date
-
 
   private
 

@@ -12,7 +12,7 @@ Vagrant.configure(2) do |config|
     app.vm.box = 'ubuntu/trusty32'
     app.vm.hostname = 'ecommerce-vm'
 
-    app.vm.network 'forwarded_port', guest: 80, host: 13000   # Rails app
+    app.vm.network 'forwarded_port', guest: 80, host: 13000 # Rails app
     app.vm.network 'forwarded_port', guest: 5432, host: 15432 # Postgresql
 
     app.vm.provider :virtualbox do |vb|
@@ -42,7 +42,7 @@ Vagrant.configure(2) do |config|
     #TODO put this in the overrides.
     # install puppet provisioner for digital ocean provider or managed_server
     config.vm.provision 'shell', inline: 'apt-get install -qq -y puppet --force-yes'
-    config.vm.provision 'shell', path: 'puppet/scripts/add-user-vagrant.sh'
+    config.vm.provision 'shell', path: 'puppet/scripts/install-add-user.sh'
 
     config.vm.provision :puppet do |puppet|
       puppet.facter = {
@@ -53,12 +53,14 @@ Vagrant.configure(2) do |config|
       puppet.module_path = 'puppet/modules'
     end
 
-    config.vm.provision 'shell', path: 'puppet/scripts/vagrant-init.sh', :args => ENV['RAILS_ENV']
+    #TODO pass args as a array app path, env, etc.
+    config.vm.provision 'shell', path: 'puppet/scripts/install-nginx.sh', :args => ENV['RAILS_ENV']
+    config.vm.provision 'shell', path: 'puppet/scripts/install-app-env.sh', :args => ENV['RAILS_ENV']
 
     if ENV['RAILS_ENV'] == 'development'
       config.trigger.after :up do
-        run "vagrant ssh -c 'sudo stop ecommerce'"
-        run "vagrant ssh -c 'sudo start ecommerce'"
+        begin run "vagrant ssh -c 'sudo stop ecommerce'"; rescue; end
+        begin run "vagrant ssh -c 'sudo start ecommerce'"; rescue; end
       end
     end
   end

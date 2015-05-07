@@ -15,8 +15,7 @@ class Admin::LanguagesControllerTest < ActionController::TestCase
   test 'should get edit' do
     language = languages(:es)
 
-    get :edit, :id => language.id
+    get :edit, id: language.id
     assert_response :success
   end
-
 end

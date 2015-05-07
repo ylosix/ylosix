@@ -15,8 +15,7 @@ class Admin::AdminUsersControllerTest < ActionController::TestCase
   test 'should get edit' do
     user = AdminUser.first
 
-    get :edit, :id => user.id
+    get :edit, id: user.id
     assert_response :success
   end
-
 end

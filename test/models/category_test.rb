@@ -17,7 +17,6 @@
 require 'test_helper'
 
 class CategoryTest < ActiveSupport::TestCase
-
   test 'get_parents_array' do
     array = categories(:root).get_parents_array
     assert array.empty?
@@ -25,5 +24,4 @@ class CategoryTest < ActiveSupport::TestCase
     array = categories(:digital_cameras).get_parents_array
     assert array.length == 1
   end
-
 end

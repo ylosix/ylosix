@@ -15,8 +15,7 @@ class Admin::CategoriesControllerTest < ActionController::TestCase
   test 'should get edit' do
     category = categories(:digital_cameras)
 
-    get :edit, :id => category.id
+    get :edit, id: category.id
     assert_response :success
   end
-
 end

@@ -1,15 +1,16 @@
 require 'test_helper'
 
-class Admin::UsersControllerTest < ActionController::TestCase
-  include Devise::TestHelpers
+module Admin
+  class UsersControllerTest < ActionController::TestCase
+    include Devise::TestHelpers
 
-  def setup
-    login_admin
+    def setup
+      login_admin
+    end
+
+    test 'should get index' do
+      get :index
+      assert_response :success
+    end
   end
-
-  test 'should get index' do
-    get :index
-    assert_response :success
-  end
-
 end
