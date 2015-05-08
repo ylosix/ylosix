@@ -30,6 +30,7 @@ su - vagrant -c "cd $APP_PATH; $RVM_WRAPPERS_PATH/gem install bundler"
 #TODO check if exist folders
 su - vagrant -c "cd $APP_PATH; rm .bundle/config"
 su - vagrant -c "cd $APP_PATH; rm -R public/assets"
+su - vagrant -c "cd $APP_PATH; rm -R public/ckeditor_assets"
 su - vagrant -c "cd $APP_PATH; rm -R public/system"
 
 if [ "$RAILS_ENV" == "production" ]; then
@@ -62,7 +63,7 @@ fi
 
 
 #Set foreman file
-su - vagrant -c "echo 'web: su - vagrant -c \"$RVM_WRAPPERS_PATH/bundle exec unicorn -c $APP_PATH/config/unicorn.rb -E $RAILS_ENV'\" > $APP_PATH/Procfile"
+su - vagrant -c "echo 'web: su - vagrant -c \"cd $APP_PATH; $RVM_WRAPPERS_PATH/bundle exec unicorn -c $APP_PATH/config/unicorn.rb -E $RAILS_ENV\"' > $APP_PATH/Procfile"
 su - vagrant -c "echo 'nginx: /usr/sbin/nginx -c /etc/nginx/nginx.conf' >> $APP_PATH/Procfile"
 
 su - vagrant -c "cd $APP_PATH; $RVM_SUDO_PATH $RVM_WRAPPERS_PATH/bundle exec foreman export upstart --app=ecommerce --user=root /etc/init"

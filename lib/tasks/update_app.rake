@@ -15,6 +15,7 @@ task :update_app do
   end
 
   puts '##### Restart server...'
-  system 'kill -12 `cat /home/vagrant/pids/unicorn.pid`; rm /home/vagrant/pids/unicorn.pid'
+  system 'sudo stop ecommerce'
+  system 'sudo start ecommerce'
   puts '##### Finish!'
 end
