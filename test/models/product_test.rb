@@ -33,7 +33,10 @@
 require 'test_helper'
 
 class ProductTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test 'set_default_publication_date' do
+    pr = Product.new
+    pr.save
+
+    assert !pr.publication_date.nil?
+  end
 end

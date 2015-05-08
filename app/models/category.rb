@@ -15,18 +15,18 @@
 #
 
 class Category < ActiveRecord::Base
-  has_many :children, :class_name => 'Category', :foreign_key => 'parent_id'
-  belongs_to :parent, :class_name => 'Category'
+  has_many :children, class_name: 'Category', foreign_key: 'parent_id'
+  belongs_to :parent, class_name: 'Category'
 
   has_many :products_categories
-  has_many :products, :through => :products_categories
+  has_many :products, through: :products_categories
 
 
   def get_parents_array
     array = []
 
     parent = self.parent
-    while parent != nil
+    until parent.nil?
       array << parent
       parent = parent.parent
     end

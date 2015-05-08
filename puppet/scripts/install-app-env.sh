@@ -25,7 +25,12 @@ su - vagrant -c "cd $APP_PATH; echo 'RAILS_DB=$database' >> .env"
 
 #Setup project
 su - vagrant -c "cd $APP_PATH; $RVM_WRAPPERS_PATH/gem install bundler"
+
+#clean shit
+#TODO check if exist folders
 su - vagrant -c "cd $APP_PATH; rm .bundle/config"
+su - vagrant -c "cd $APP_PATH; rm -R public/assets"
+su - vagrant -c "cd $APP_PATH; rm -R public/system"
 
 if [ "$RAILS_ENV" == "production" ]; then
   su - vagrant -c "cd $APP_PATH; echo 'DATABASE_URL=$DATABASE_URL' >> .env"
@@ -52,11 +57,12 @@ su - vagrant -c "cd $APP_PATH; $RVM_WRAPPERS_PATH/rake db:seed $project_paramete
 
 if [ "$RAILS_ENV" == "production" ]; then
   su - vagrant -c "cd $APP_PATH; $RVM_WRAPPERS_PATH/rake assets:precompile $project_parameters"
+  su - vagrant -c "cd $APP_PATH; sed -i 's/git@github.com:devcows\/ecommerce.git/https:\/\/github.com\/devcows\/ecommerce.git/g' .git/config"
 fi
 
 
 #Set foreman file
-su - vagrant -c "echo 'web: $RVM_WRAPPERS_PATH/bundle exec unicorn -c $APP_PATH/config/unicorn.rb -E $RAILS_ENV' > $APP_PATH/Procfile"
+su - vagrant -c "echo 'web: su - vagrant -c \"$RVM_WRAPPERS_PATH/bundle exec unicorn -c $APP_PATH/config/unicorn.rb -E $RAILS_ENV'\" > $APP_PATH/Procfile"
 su - vagrant -c "echo 'nginx: /usr/sbin/nginx -c /etc/nginx/nginx.conf' >> $APP_PATH/Procfile"
 
 su - vagrant -c "cd $APP_PATH; $RVM_SUDO_PATH $RVM_WRAPPERS_PATH/bundle exec foreman export upstart --app=ecommerce --user=root /etc/init"
