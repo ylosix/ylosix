@@ -32,6 +32,7 @@ su - vagrant -c "cd $APP_PATH; rm .bundle/config"
 su - vagrant -c "cd $APP_PATH; rm -R public/assets"
 su - vagrant -c "cd $APP_PATH; rm -R public/ckeditor_assets"
 su - vagrant -c "cd $APP_PATH; rm -R public/system"
+su - vagrant -c "cd $APP_PATH; rm db/*.sqlite3"
 
 if [ "$RAILS_ENV" == "production" ]; then
   su - vagrant -c "cd $APP_PATH; echo 'DATABASE_URL=$DATABASE_URL' >> .env"
