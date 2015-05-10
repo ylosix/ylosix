@@ -63,8 +63,8 @@ fi
 
 
 #Set foreman file
-su - vagrant -c "echo 'web: su - vagrant -c \"cd $APP_PATH; $RVM_WRAPPERS_PATH/bundle exec unicorn -c $APP_PATH/config/unicorn.rb -E $RAILS_ENV\"' > $APP_PATH/Procfile"
-su - vagrant -c "echo 'nginx: /usr/sbin/nginx -c /etc/nginx/nginx.conf' >> $APP_PATH/Procfile"
+su - vagrant -c "echo 'web: $RVM_WRAPPERS_PATH/bundle exec unicorn -c $APP_PATH/config/unicorn.rb -E $RAILS_ENV' > $APP_PATH/Procfile"
+su - vagrant -c "echo 'nginx: sudo /usr/sbin/nginx -c /etc/nginx/nginx.conf' >> $APP_PATH/Procfile"
 
-su - vagrant -c "cd $APP_PATH; $RVM_SUDO_PATH $RVM_WRAPPERS_PATH/bundle exec foreman export upstart --app=ecommerce --user=root /etc/init"
+su - vagrant -c "cd $APP_PATH; $RVM_SUDO_PATH $RVM_WRAPPERS_PATH/bundle exec foreman export upstart --app=ecommerce --user=vagrant /etc/init"
 su -c "start ecommerce"
