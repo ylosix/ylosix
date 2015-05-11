@@ -25,18 +25,18 @@ Vagrant.configure(2) do |config|
       override.vm.box = 'digital_ocean'
       override.vm.box_url = 'https://github.com/smdahlen/vagrant-digitalocean/raw/master/box/digital_ocean.box'
 
-      provider.token = 'YOUR_TOKEN'
+      provider.token = 'REPLACE_BY_YOUR_TOKEN'
       provider.image = 'ubuntu-14-04-x64'
       provider.region = 'lon1'
       provider.size = '1gb'
     end
 
     app.vm.provider :managed do |provider, override|
-      override.ssh.username = 'username'
+      override.ssh.username = 'REPLACE_BY_USERNAME'
       override.ssh.private_key_path = '~/.ssh/id_rsa'
       override.vm.box = 'tknerr/managed-server-dummy'
 
-      provider.server = 'example.com'
+      provider.server = 'REPLACE_BY_SERVER_IP'
     end
 
     #TODO put this in the overrides.
