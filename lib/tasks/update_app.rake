@@ -13,12 +13,12 @@ task :update_app do
   puts "##### Bundle install... env => #{environment}"
   system "cd #{Rails.root}; bundle install #{bundle_args}"
 
-  rake_args = "RAILS_ENV=#{environment}"
-  puts "##### Migrations... env => #{environment}"
+  rake_args = File.read('.env').split.join(' ')
+  puts "##### Migrations... env => #{rake_args}"
   system "cd #{Rails.root}; bundle exec rake db:migrate #{rake_args}"
 
   if environment == 'production'
-    puts "##### Compile assets... env => #{environment}"
+    puts "##### Compile assets... env => #{rake_args}"
     system "cd #{Rails.root}; bundle exec rake assets:precompile #{rake_args}"
   end
 
