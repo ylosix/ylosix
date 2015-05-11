@@ -66,7 +66,25 @@ ActiveAdmin.register Product do
       f.input :stock
       f.input :control_stock
     end
+
     f.actions
+  end
+
+
+  # Clone product
+  action_item :only => :show do
+    link_to('Clone Product', admin_clone_product_path(product))
+  end
+
+  controller do
+    def new
+      unless params[:product_id].blank?    # if id is passed (i.e. /product/25/new), evaluate below code before rendering new form
+        product = Product.find(params[:product_id])
+        @product = product.clone
+      end
+
+      super
+    end
   end
 
 end

@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   # Admin routes
   ActiveAdmin.routes(self)
-
+  get '/admin/products/:product_id/clone' => 'admin/products#new', :as => :admin_clone_product
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

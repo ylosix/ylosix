@@ -49,6 +49,15 @@ class Product < ActiveRecord::Base
 
   before_create :set_default_publication_date
 
+  def clone
+    product = self.dup
+    # TODO need to fix nested attributes.
+    # product.products_tags = self.products_tags
+    # product.products_categories = self.products_categories
+
+    product
+  end
+
   private
 
   def set_default_publication_date
