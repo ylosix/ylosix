@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class Admin::CategoriesControllerTest < ActionController::TestCase
+class Admin::TagsControllerTest < ActionController::TestCase
   include Devise::TestHelpers
 
   def setup
@@ -13,7 +13,7 @@ class Admin::CategoriesControllerTest < ActionController::TestCase
   end
 
   test 'should get edit' do
-    object = categories(:digital_cameras)
+    object = tags(:cameras)
 
     get :edit, id: object.id
     assert_response :success

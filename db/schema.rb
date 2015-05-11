@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150508122640) do
+ActiveRecord::Schema.define(version: 20150511094046) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -130,11 +130,33 @@ ActiveRecord::Schema.define(version: 20150508122640) do
   add_index "products_categories", ["category_id"], name: "index_products_categories_on_category_id"
   add_index "products_categories", ["product_id"], name: "index_products_categories_on_product_id"
 
+  create_table "products_tags", force: :cascade do |t|
+    t.integer  "product_id"
+    t.integer  "tag_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "products_tags", ["product_id"], name: "index_products_tags_on_product_id"
+  add_index "products_tags", ["tag_id", "product_id"], name: "index_products_tags_on_tag_id_and_product_id"
+  add_index "products_tags", ["tag_id"], name: "index_products_tags_on_tag_id"
+
   create_table "roles", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "tags", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "parent_id"
+    t.integer  "priority",       default: 1
+    t.boolean  "appears_in_web"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "tags", ["parent_id"], name: "index_tags_on_parent_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

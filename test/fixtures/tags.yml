@@ -1,0 +1,26 @@
+# == Schema Information
+#
+# Table name: tags
+#
+#  id             :integer          not null, primary key
+#  name           :string
+#  parent_id      :integer
+#  priority       :integer          default(1)
+#  appears_in_web :boolean
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+cameras:
+  parent_id: nil
+  name: Cameras
+  priority: 1
+  appears_in_web: true
+
+reflex:
+  parent: cameras
+  name: reflex
+  priority: 1
+  appears_in_web: true

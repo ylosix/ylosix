@@ -41,6 +41,12 @@ class Product < ActiveRecord::Base
 
   accepts_nested_attributes_for :products_categories, allow_destroy: true
 
+  has_many :products_tags
+  has_many :tags, through: :products_tags
+
+  accepts_nested_attributes_for :products_tags, allow_destroy: true
+
+
   before_create :set_default_publication_date
 
   private

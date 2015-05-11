@@ -53,9 +53,12 @@ def create_default_products
   category = Category.find_by_slug('digital_cameras')
   camera_image = File.new "#{Rails.root}/app/assets/images/products/camera.png"
 
+  tag_cameras = Tag.find_by(:name => 'Cameras')
+  tag_reflex = Tag.find_by(:name => 'Reflex')
+
   product = Product.find_by(:reference_code => 'ref1')
   if product.nil?
-    Product.create!(:reference_code => 'ref1',
+    product = Product.create!(:reference_code => 'ref1',
                     :name => 'Canon 450D',
                     :barcode => '123456789',
                     :enabled => true,
@@ -74,9 +77,12 @@ def create_default_products
                     :slug => 'canon_450d',
                     :stock => 100,
                     :control_stock => true,
-                    :image => camera_image,
-                    :categories => [category])
+                    :image => camera_image)
   end
+
+  product.categories = [category]
+  product.tags = [tag_cameras, tag_reflex]
+  product.save
 end
 
 def create_default_categories
@@ -99,7 +105,27 @@ def create_default_categories
                      :appears_in_web => true,
                      :slug => 'digital_cameras')
   end
+end
 
+
+def create_default_tags
+  puts '####################'
+  puts '## Creating tags'
+  puts '####################'
+
+  tag_cameras = Tag.find_by(:name => 'Cameras')
+  if tag_cameras.nil?
+    tag_cameras = Tag.create!(:parent_id => nil,
+                            :name => 'Cameras',
+                            :appears_in_web => true)
+  end
+
+  tag_reflex = Tag.find_by(:name => 'Reflex')
+  if tag_reflex.nil?
+    Tag.create!(:parent_id => tag_cameras.id,
+                     :name => 'Reflex',
+                     :appears_in_web => true)
+  end
 end
 
 
@@ -107,4 +133,5 @@ create_default_languages
 create_default_roles
 create_default_admin_user
 create_default_categories
+create_default_tags
 create_default_products

@@ -20,30 +20,51 @@ ActiveAdmin.register Product do
   end
 
   form do |f|
-    f.inputs 'Product Details' do
-      f.input :reference_code
+    f.inputs 'Information' do
       f.input :name
+      f.input :reference_code
+
       f.input :enabled
       f.input :appears_in_categories
       f.input :appears_in_tag
       f.input :appears_in_search
+
       f.input :short_description
       f.input :description, as: :ckeditor
+
       f.input :publication_date
       f.input :unpublication_date
+    end
+
+    f.inputs 'Price' do
       f.input :retail_price_pre_tax
       f.input :retail_price
       f.input :tax_percent
+    end
+
+    f.inputs 'Seo' do
       f.input :meta_title
       f.input :meta_description
       f.input :slug
-      f.input :stock
-      f.input :control_stock
-      f.input :image, hint: (f.template.image_tag(f.object.image.url(:thumb)) if f.object.image?)
+    end
 
+    f.inputs 'Images' do
+      f.input :image, hint: (f.template.image_tag(f.object.image.url(:thumb)) if f.object.image?)
+    end
+
+    f.inputs 'Association' do
       f.has_many :products_categories, allow_destroy: true do |s|
         s.input :category
       end
+
+      f.has_many :products_tags, allow_destroy: true do |s|
+        s.input :tag
+      end
+    end
+
+    f.inputs 'Stock' do
+      f.input :stock
+      f.input :control_stock
     end
     f.actions
   end
