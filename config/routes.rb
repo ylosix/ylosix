@@ -8,11 +8,19 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   get '/admin/products/:product_id/clone' => 'admin/products#new', :as => :admin_clone_product
 
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
+
+  # Frontend
+  resource :categories, only: [] do
+    get '/' => 'categories#index'
+    get '/:slug' => 'categories#show', as: :show_slug
+    get '/:id/show' => 'categories#show', as: :show_id
+  end
 
   # You can have the root of your site routed with "root"
   root 'welcome#index'
+
+  # The priority is based upon order of creation: first created -> highest priority.
+  # See how all your routes lay out with "rake routes".
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

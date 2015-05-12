@@ -18,11 +18,13 @@
 
 root:
   parent_id: nil
+  enabled: true
   name: root
 
 digital_cameras:
   parent: root
   name: Digital cameras
+  enabled: true
   appears_in_web: true
   meta_keywords: MyString
   meta_description: MyString
