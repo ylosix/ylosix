@@ -1,0 +1,13 @@
+%h1 Searches#index
+%p Find me in app/views/searches/index.html.erb
+  
+%div
+  = "Query with: #{@query_text}"
+  
+%div 
+  Results:
+  = @products.size
+
+%div
+  - @products.each do |product|
+    = product.inspect

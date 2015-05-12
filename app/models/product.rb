@@ -49,6 +49,10 @@ class Product < ActiveRecord::Base
 
   before_create :set_default_publication_date
 
+  scope :search_by_text, ->(text) { 
+    where("products.name LIKE ? OR products.description LIKE ?", "%#{text}%", "%#{text}%") 
+  } 
+
   def clone
     product = self.dup
     # TODO need to fix nested attributes.

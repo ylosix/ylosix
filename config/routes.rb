@@ -16,6 +16,10 @@ Rails.application.routes.draw do
     get '/:id/show' => 'categories#show', as: :show_id
   end
 
+  resource :searches, only: [] do
+    post '/' => 'searches#index'
+  end
+
   # You can have the root of your site routed with "root"
   root 'welcome#index'
 

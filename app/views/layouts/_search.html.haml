@@ -1,0 +1,12 @@
+= form_tag searches_path do
+  - unless notice.blank?
+    %div{:class => 'alert alert-success', :role => 'alert'}
+      = notice
+  
+  %br
+  
+  %div.form-group
+    = label_tag 'query_text'
+    = text_field_tag 'query_text', @query_text, { :class => 'form-control', placeholder: 'Enter your search query here' }  
+    
+  = submit_tag 'Search', { :class => 'btn btn-default' }
