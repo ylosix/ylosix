@@ -17,7 +17,7 @@
 #  retail_price_pre_tax  :decimal(10, 5)
 #  retail_price          :decimal(10, 2)
 #  tax_percent           :decimal(5, 2)
-#  meta_title            :string
+#  meta_keywords         :string
 #  meta_description      :string
 #  slug                  :string
 #  stock                 :integer          default(0)

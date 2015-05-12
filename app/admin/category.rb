@@ -1,7 +1,6 @@
 ActiveAdmin.register Category do
   menu parent: 'Catalog'
-
-  permit_params :parent_id, :name, :enabled, :appears_in_web, :meta_title, :meta_description, :slug
+  permit_params :parent_id, :name, :enabled, :appears_in_web, :meta_keywords, :meta_description, :slug
 
   index do
     selectable_column
@@ -28,7 +27,7 @@ ActiveAdmin.register Category do
       f.input :name
       f.input :enabled
       f.input :appears_in_web
-      f.input :meta_title
+      f.input :meta_keywords
       f.input :meta_description
       f.input :slug
     end
