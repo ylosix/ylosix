@@ -57,27 +57,31 @@ def create_default_products
   tag_reflex = Tag.find_by(:name => 'Reflex')
 
   product = Product.find_by(:reference_code => 'ref1')
+  product_attributes = {:reference_code => 'ref1',
+                        :name => 'Canon 450D',
+                        :barcode => '123456789',
+                        :enabled => true,
+                        :appears_in_categories => true,
+                        :appears_in_tag => true,
+                        :appears_in_search => true,
+                        :short_description => 'Camera reflex canon 12MP.',
+                        :description => 'Camera reflex canon 12 MP (not includes SD).',
+
+                        :retail_price_pre_tax => 350.0,
+                        :retail_price => 423.5,
+                        :tax_percent => 21.0,
+
+                        :meta_keywords => 'canon_450d',
+                        :meta_description => 'Camera reflex canon',
+                        :slug => 'canon_450d',
+                        :stock => 100,
+                        :control_stock => true,
+                        :image => camera_image}
+
   if product.nil?
-    product = Product.create!(:reference_code => 'ref1',
-                              :name => 'Canon 450D',
-                              :barcode => '123456789',
-                              :enabled => true,
-                              :appears_in_categories => true,
-                              :appears_in_tag => true,
-                              :appears_in_search => true,
-                              :short_description => 'Camera reflex canon 12MP.',
-                              :description => 'Camera reflex canon 12 MP (not includes SD).',
-
-                              :retail_price_pre_tax => 350.0,
-                              :retail_price => 423.5,
-                              :tax_percent => 21.0,
-
-                              :meta_title => 'canon_450d',
-                              :meta_description => 'Camera reflex canon',
-                              :slug => 'canon_450d',
-                              :stock => 100,
-                              :control_stock => true,
-                              :image => camera_image)
+    product = Product.create!(product_attributes)
+  else
+    product.attributes = product_attributes
   end
 
   product.categories = [category]

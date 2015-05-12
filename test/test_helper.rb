@@ -22,6 +22,8 @@ class ActionDispatch::IntegrationTest
   include Devise::TestHelpers
 end
 
+load "#{Rails.root}/db/seeds.rb"
+
 module ActiveSupport
   class TestCase
     # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical
