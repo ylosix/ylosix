@@ -7,7 +7,7 @@
 #  name             :string
 #  enabled          :boolean          default(FALSE)
 #  appears_in_web   :boolean          default(TRUE)
-#  meta_title       :string
+#  meta_keywords    :string
 #  meta_description :string
 #  slug             :string
 #  created_at       :datetime         not null

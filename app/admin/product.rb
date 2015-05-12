@@ -5,7 +5,7 @@ ActiveAdmin.register Product do
                 :appears_in_tag, :appears_in_search, :short_description,
                 :description, :publication_date, :unpublication_date,
                 :retail_price_pre_tax, :retail_price, :tax_percent,
-                :meta_title, :meta_description, :slug, :stock, :control_stock,
+                :meta_keywords, :meta_description, :slug, :stock, :control_stock,
                 products_categories_attributes: [:id, :category_id, :product_id, :_destroy]
 
   index do
@@ -43,7 +43,7 @@ ActiveAdmin.register Product do
     end
 
     f.inputs 'Seo' do
-      f.input :meta_title
+      f.input :meta_keywords
       f.input :meta_description
       f.input :slug
     end

@@ -7,7 +7,7 @@
 #  name             :string
 #  enabled          :boolean          default(FALSE)
 #  appears_in_web   :boolean          default(TRUE)
-#  meta_title       :string
+#  meta_keywords    :string
 #  meta_description :string
 #  slug             :string
 #  created_at       :datetime         not null
@@ -24,7 +24,7 @@ digital_cameras:
   parent: root
   name: Digital cameras
   appears_in_web: true
-  meta_title: MyString
+  meta_keywords: MyString
   meta_description: MyString
   slug: digital_cameras
 
