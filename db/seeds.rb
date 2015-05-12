@@ -59,25 +59,25 @@ def create_default_products
   product = Product.find_by(:reference_code => 'ref1')
   if product.nil?
     product = Product.create!(:reference_code => 'ref1',
-                    :name => 'Canon 450D',
-                    :barcode => '123456789',
-                    :enabled => true,
-                    :appears_in_categories => true,
-                    :appears_in_tag => true,
-                    :appears_in_search => true,
-                    :short_description => 'Camera reflex canon 12MP.',
-                    :description => 'Camera reflex canon 12 MP (not includes SD).',
+                              :name => 'Canon 450D',
+                              :barcode => '123456789',
+                              :enabled => true,
+                              :appears_in_categories => true,
+                              :appears_in_tag => true,
+                              :appears_in_search => true,
+                              :short_description => 'Camera reflex canon 12MP.',
+                              :description => 'Camera reflex canon 12 MP (not includes SD).',
 
-                    :retail_price_pre_tax => 350.0,
-                    :retail_price => 423.5,
-                    :tax_percent => 21.0,
+                              :retail_price_pre_tax => 350.0,
+                              :retail_price => 423.5,
+                              :tax_percent => 21.0,
 
-                    :meta_title => 'canon_450d',
-                    :meta_description => 'Camera reflex canon',
-                    :slug => 'canon_450d',
-                    :stock => 100,
-                    :control_stock => true,
-                    :image => camera_image)
+                              :meta_title => 'canon_450d',
+                              :meta_description => 'Camera reflex canon',
+                              :slug => 'canon_450d',
+                              :stock => 100,
+                              :control_stock => true,
+                              :image => camera_image)
   end
 
   product.categories = [category]
@@ -91,19 +91,31 @@ def create_default_categories
   puts '####################'
 
   root = Category.find_by(:slug => 'root')
+  root_attributes = {:parent_id => nil,
+                     :name => 'root',
+                     :enabled => true,
+                     :appears_in_web => false,
+                     :slug => 'root'}
+
   if root.nil?
-    root = Category.create!(:parent_id => nil,
-                            :name => 'root',
-                            :appears_in_web => false,
-                            :slug => 'root')
+    root = Category.create!(root_attributes)
+  else
+    root.attributes = root_attributes
+    root.save
   end
 
   category_cam = Category.find_by(:slug => 'digital_cameras')
+  category_cam_attributes = {:parent_id => root.id,
+                             :name => 'Digital Cameras',
+                             :enabled => true,
+                             :appears_in_web => true,
+                             :slug => 'digital_cameras'}
+
   if category_cam.nil?
-    Category.create!(:parent_id => root.id,
-                     :name => 'Digital Cameras',
-                     :appears_in_web => true,
-                     :slug => 'digital_cameras')
+    Category.create!(category_cam_attributes)
+  else
+    category_cam.attributes = category_cam_attributes
+    category_cam.save
   end
 end
 
@@ -116,15 +128,15 @@ def create_default_tags
   tag_cameras = Tag.find_by(:name => 'Cameras')
   if tag_cameras.nil?
     tag_cameras = Tag.create!(:parent_id => nil,
-                            :name => 'Cameras',
-                            :appears_in_web => true)
+                              :name => 'Cameras',
+                              :appears_in_web => true)
   end
 
   tag_reflex = Tag.find_by(:name => 'Reflex')
   if tag_reflex.nil?
     Tag.create!(:parent_id => tag_cameras.id,
-                     :name => 'Reflex',
-                     :appears_in_web => true)
+                :name => 'Reflex',
+                :appears_in_web => true)
   end
 end
 
