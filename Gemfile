@@ -26,9 +26,13 @@ gem 'jbuilder', '~> 2.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
-# Use unicorn as the app server
-gem 'unicorn'
-gem 'puma'
+
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
+platforms :ruby do # Only linux
+  gem 'unicorn' # Use unicorn as the app server
+  gem 'puma'
+end
+
 gem 'foreman'
 
 gem 'rails-erd'
@@ -58,7 +62,9 @@ group :development do
 
   #profiling
   gem 'bullet'
-  gem 'ruby-prof'
+  platforms :ruby do # Only linux
+    gem 'ruby-prof'
+  end
 
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', '~> 0.4.0'
