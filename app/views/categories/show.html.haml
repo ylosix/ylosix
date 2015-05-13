@@ -1,5 +1,8 @@
-%h1 Categories#show
-%p Find me in app/views/categories/show.html.haml
+%div.col-md-3
+  = render 'layouts/components/side_bar_categories'
 
-%p
-  = @category.inspect unless @category.nil?
+%div.col-md-9
+  = render 'layouts/components/search_box'
+
+  %div.row
+    = render 'layouts/components/products_list_grid'

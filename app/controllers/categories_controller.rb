@@ -7,6 +7,12 @@ class CategoriesController < ApplicationController
   end
 
   def show
+    @products = []
+
+    unless @category.nil?
+      @products = Product.includes(:products_categories).
+          where(:products_categories => {:category_id => @category.id})
+    end
   end
 
   private

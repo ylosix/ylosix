@@ -3,4 +3,11 @@
 %head
   = render 'layouts/header'
 %body
-  = render 'layouts/body'
+  = render 'layouts/components/nav_bar'
+
+  -# Page Content
+  %div.container
+    %div.row
+      = yield
+
+  = render 'layouts/components/footer'

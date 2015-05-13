@@ -1,0 +1,27 @@
+%div{:class => 'col-sm-4 col-lg-4 col-md-4'}
+  %div.thumbnail
+    -# TODO image 320x150
+    - if product.image.file?
+      = image_tag(product.image.url(:medium))
+    - else
+      %img{:src => 'http://placehold.it/320x150', :alt => ''}
+
+    %div.caption
+      %h4.pull-right
+        = "#{product.retail_price} €"
+      %h4
+        %a
+          = product.name
+
+      %p
+        = product.short_description
+
+    %div.ratings
+      %p.pull-right
+        15 reviews
+      %p
+        %span{:class => 'glyphicon glyphicon-star'}
+        %span{:class => 'glyphicon glyphicon-star'}
+        %span{:class => 'glyphicon glyphicon-star'}
+        %span{:class => 'glyphicon glyphicon-star'}
+        %span{:class => 'glyphicon glyphicon-star-empty'}

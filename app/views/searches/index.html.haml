@@ -1,13 +1,8 @@
-%h1 Searches#index
-%p Find me in app/views/searches/index.html.erb
-  
-%div
-  = "Query with: #{@query_text}"
-  
-%div 
-  Results:
-  = @products.size
+%div.col-md-3
+  = render 'layouts/components/side_bar_categories'
 
-%div
-  - @products.each do |product|
-    = product.inspect
+%div.col-md-9
+  = render 'layouts/components/search_box'
+
+  %div.row
+    = render 'layouts/components/products_list_grid'
