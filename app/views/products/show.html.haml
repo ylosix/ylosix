@@ -1,0 +1,36 @@
+%div.col-md-3
+  = render 'layouts/components/side_bar_categories'
+
+%div.col-md-9
+  %div.row
+    = render 'layouts/components/search_box'
+
+  %div.row
+    = render 'layouts/components/category_tree'
+
+  %div.row
+    %div.thumbnail
+      - if @product.image.file?
+        = image_tag(@product.image.url(:medium), :class => 'img-responsive')
+      - else
+        %img{:src => 'http://placehold.it/800x300', :alt => '', :class => 'img-responsive'}
+
+      %div.caption-full
+        %h4.pull-right
+          = "#{@product.retail_price} €"
+        %h4
+          %a
+            = @product.name
+
+        %p
+          = @product.description.html_safe
+
+      %div.ratings
+        %p.pull-right 3 reviews
+        %p
+          %span{:class => 'glyphicon glyphicon-star'}
+          %span{:class => 'glyphicon glyphicon-star'}
+          %span{:class => 'glyphicon glyphicon-star'}
+          %span{:class => 'glyphicon glyphicon-star-empty'}
+
+          4.0 stars

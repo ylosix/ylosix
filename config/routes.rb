@@ -16,6 +16,11 @@ Rails.application.routes.draw do
     get '/:id/show' => 'categories#show', as: :show_id
   end
 
+  resource :products, only: [] do
+    get '/:slug' => 'products#show', as: :show_slug
+    get '/:id/show' => 'products#show', as: :show_id
+  end
+
   resource :searches, only: [] do
     post '/' => 'searches#index'
   end

@@ -1,0 +1,7 @@
+- array_categories = Utils.get_parents_array(@category)
+- array_categories.delete_at(0) #delete root.
+- array_categories << @category #append current.
+
+= link_to '> Start', root_path
+- array_categories.each do |category|
+  = link_to "> #{category.name}", show_slug_categories_path(category.slug)

@@ -1,16 +1,17 @@
 %div{:class => 'col-sm-4 col-lg-4 col-md-4'}
   %div.thumbnail
     -# TODO image 320x150
-    - if product.image.file?
-      = image_tag(product.image.url(:medium))
-    - else
-      %img{:src => 'http://placehold.it/320x150', :alt => ''}
+    %a{:href => show_slug_products_path(product.slug)}
+      - if product.image.file?
+        = image_tag(product.image.url(:medium), :class => 'img-responsive')
+      - else
+        %img{:src => 'http://placehold.it/320x150', :alt => '', :class => 'img-responsive'}
 
     %div.caption
       %h4.pull-right
         = "#{product.retail_price} €"
       %h4
-        %a
+        %a{:href => show_slug_products_path(product.slug)}
           = product.name
 
       %p

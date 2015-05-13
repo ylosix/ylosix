@@ -1,6 +1,18 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 
+def save_or_update_model(model, search_options, attributes)
+  object = model.find_by(search_options)
+  if object.nil?
+    object = model.create!(attributes)
+  else
+    object.attributes = attributes
+  end
+
+  object.save
+  object
+end
+
 def create_default_roles
   puts '####################'
   puts '## Creating default roles'
@@ -20,7 +32,8 @@ def create_default_admin_user
 
   admin = AdminUser.find_by(:email => 'admin@example.com')
   if admin.nil?
-    AdminUser.create!(:email => 'admin@example.com', :password => 'password',
+    AdminUser.create!(:email => 'admin@example.com',
+                      :password => 'password',
                       :password_confirmation => 'password')
   end
 end
@@ -31,17 +44,14 @@ def create_default_languages
   puts '####################'
 
   language_codes = %w(gb es)
-
   language_codes.each do |lang_code|
+    flag_file = File.new "#{Rails.root}/app/assets/images/flags/#{lang_code}.png"
+    language_attributes = {:code => lang_code,
+                           :flag => flag_file,
+                           :appears_in_backoffice => true,
+                           :appears_in_web => true}
 
-    language = Language.find_by(:code => lang_code)
-    if language.nil?
-      flag_file = File.new "#{Rails.root}/app/assets/images/flags/#{lang_code}.png"
-      Language.create!(:code => lang_code,
-                       :flag => flag_file,
-                       :appears_in_backoffice => true,
-                       :appears_in_web => true)
-    end
+    save_or_update_model(Language, {:code => lang_code}, language_attributes)
   end
 end
 
@@ -51,12 +61,11 @@ def create_default_products
   puts '####################'
 
   category = Category.find_by_slug('digital_cameras')
-  camera_image = File.new "#{Rails.root}/app/assets/images/products/camera.png"
 
   tag_cameras = Tag.find_by(:name => 'Cameras')
   tag_reflex = Tag.find_by(:name => 'Reflex')
 
-  product = Product.find_by(:reference_code => 'ref1')
+  camera_image = File.new "#{Rails.root}/app/assets/images/products/camera.png"
   product_attributes = {:reference_code => 'ref1',
                         :name => 'Canon 450D',
                         :barcode => '123456789',
@@ -78,11 +87,7 @@ def create_default_products
                         :control_stock => true,
                         :image => camera_image}
 
-  if product.nil?
-    product = Product.create!(product_attributes)
-  else
-    product.attributes = product_attributes
-  end
+  product = save_or_update_model(Product, {:reference_code => 'ref1'}, product_attributes)
 
   product.categories = [category]
   product.tags = [tag_cameras, tag_reflex]
@@ -94,33 +99,19 @@ def create_default_categories
   puts '## Creating categories'
   puts '####################'
 
-  root = Category.find_by(:slug => 'root')
   root_attributes = {:parent_id => nil,
                      :name => 'root',
                      :enabled => true,
                      :appears_in_web => false,
                      :slug => 'root'}
+  root = save_or_update_model(Category, {:slug => 'root'}, root_attributes)
 
-  if root.nil?
-    root = Category.create!(root_attributes)
-  else
-    root.attributes = root_attributes
-    root.save
-  end
-
-  category_cam = Category.find_by(:slug => 'digital_cameras')
   category_cam_attributes = {:parent_id => root.id,
                              :name => 'Digital Cameras',
                              :enabled => true,
                              :appears_in_web => true,
                              :slug => 'digital_cameras'}
-
-  if category_cam.nil?
-    Category.create!(category_cam_attributes)
-  else
-    category_cam.attributes = category_cam_attributes
-    category_cam.save
-  end
+  save_or_update_model(Category, {:slug => 'digital_cameras'}, category_cam_attributes)
 end
 
 
@@ -129,19 +120,15 @@ def create_default_tags
   puts '## Creating tags'
   puts '####################'
 
-  tag_cameras = Tag.find_by(:name => 'Cameras')
-  if tag_cameras.nil?
-    tag_cameras = Tag.create!(:parent_id => nil,
-                              :name => 'Cameras',
-                              :appears_in_web => true)
-  end
+  tag_cameras_attributes = {:parent_id => nil,
+                            :name => 'Cameras',
+                            :appears_in_web => true}
+  tag_cameras = save_or_update_model(Tag, {:name => 'Cameras'}, tag_cameras_attributes)
 
-  tag_reflex = Tag.find_by(:name => 'Reflex')
-  if tag_reflex.nil?
-    Tag.create!(:parent_id => tag_cameras.id,
-                :name => 'Reflex',
-                :appears_in_web => true)
-  end
+  tag_reflex_attributes = {:parent_id => tag_cameras.id,
+                           :name => 'Reflex',
+                           :appears_in_web => true}
+  save_or_update_model(Tag, {:name => 'Reflex'}, tag_reflex_attributes)
 end
 
 

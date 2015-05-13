@@ -9,7 +9,7 @@ class CommonFrontendController < ApplicationController
   end
 
   def get_root_categories
-    root_category = Category.find_by(:parent_id => nil, :enabled => true)
+    root_category = Category.find_by(:parent_id => [nil, 0], :enabled => true)
 
     @categories = []
     unless root_category.nil?

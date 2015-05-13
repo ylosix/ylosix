@@ -24,6 +24,17 @@ end
 
 load "#{Rails.root}/db/seeds.rb"
 
+def test_again_seed
+  create_default_languages
+  create_default_roles
+  create_default_admin_user
+  create_default_categories
+  create_default_tags
+  create_default_products
+end
+
+test_again_seed
+
 module ActiveSupport
   class TestCase
     # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical
