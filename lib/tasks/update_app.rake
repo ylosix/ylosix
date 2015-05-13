@@ -10,7 +10,7 @@ task :update_app do
 
   bundle_args = '--without development test'
   bundle_args = '--without production' if environment == 'development'
-  puts "##### Bundle install... env => #{environment}"
+  puts "##### Bundle install... env => #{bundle_args}"
   system "cd #{Rails.root}; bundle install #{bundle_args}"
 
   rake_args = File.read('.env').split.join(' ')

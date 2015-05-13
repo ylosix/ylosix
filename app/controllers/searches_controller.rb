@@ -1,4 +1,4 @@
-class SearchesController < ApplicationController
+class SearchesController < CommonFrontendController
   def index
     @products = []
     
