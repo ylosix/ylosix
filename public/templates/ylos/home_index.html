@@ -1,0 +1,17 @@
+<ul id="categories">
+    {% for category in categories %}
+        <li>
+            <h2>{{ category.name }}</h2>
+            <a href="{{ category.href }}">Link</a>
+    
+            <ul id="sub-categories">
+                {% for subcategory in category.children %}
+                    <li>
+                        <h2>{{ subcategory.name }}</h2>
+                        <a href="{{ subcategory.href }}">Link</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </li>
+    {% endfor %}
+</ul>

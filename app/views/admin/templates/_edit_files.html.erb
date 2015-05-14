@@ -1,0 +1,20 @@
+<li class="string input optional stringish" id="template_name_input">
+  <textarea id="template_home_index" name="template[home_index]" class="hide"></textarea>
+  <label for="home_index" class="label">Home index</label>
+
+  <span><b>Categories [ Category {name, href, children} ]</b></span>
+  <div id="home_index" class="editor_html"><%= home_index %></div>
+</li>
+
+<script src="/plugins/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    var e_home_index = ace.edit("home_index");
+    var ta_home_index = $("#template_home_index");
+    ta_home_index.val(e_home_index.getSession().getValue());
+
+    e_home_index.setTheme("ace/theme/crimson_editor");
+    e_home_index.getSession().setMode("ace/mode/html");
+    e_home_index.getSession().on('change', function () {
+        ta_home_index.val(e_home_index.getSession().getValue());
+    });
+</script>

@@ -15,6 +15,10 @@ class CategoriesController < CommonFrontendController
     end
   end
 
+  def get_template_variables
+    {}
+  end
+
   private
 
   def set_category

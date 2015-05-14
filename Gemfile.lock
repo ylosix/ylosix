@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/devcows/liquid.git
+  revision: df74955ac4a3898f8e0665be57b37af112449c51
+  branch: master
+  specs:
+    liquid (4.0.0.alpha)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -298,6 +305,7 @@ DEPENDENCIES
   haml
   jbuilder (~> 2.0)
   jquery-rails
+  liquid!
   paperclip
   pg
   puma

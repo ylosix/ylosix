@@ -36,6 +36,7 @@ gem 'foreman'
 
 gem 'rails-erd'
 gem 'annotate'
+gem 'liquid', :git => 'https://github.com/devcows/liquid.git', :branch => 'master'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

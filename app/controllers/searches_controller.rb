@@ -8,4 +8,8 @@ class SearchesController < CommonFrontendController
       @products = Product.search_by_text(@query_text)
     end
   end
+
+  def get_template_variables
+    {}
+  end
 end

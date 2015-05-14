@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150511152820) do
+ActiveRecord::Schema.define(version: 20150514121336) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -157,6 +157,14 @@ ActiveRecord::Schema.define(version: 20150511152820) do
   end
 
   add_index "tags", ["parent_id"], name: "index_tags_on_parent_id"
+
+  create_table "templates", force: :cascade do |t|
+    t.string   "name"
+    t.string   "path"
+    t.boolean  "enabled"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

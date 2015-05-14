@@ -204,6 +204,7 @@ ActiveAdmin.setup do |config|
 
 
       menu.add label: 'Languages', url: '/admin/languages', :priority => 4
+      menu.add label: 'Design', :priority => 5
     end
   end
 

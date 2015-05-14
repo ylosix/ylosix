@@ -4,7 +4,7 @@
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
  */
 
-body {
+body.shop {
   /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top.
    * Change if height of navigation changes.
    */
@@ -53,7 +53,7 @@ body {
   color: #333;
 }
 
-footer {
+footer.shop {
   margin: 50px 0;
 }
 

@@ -20,4 +20,12 @@ class Category < ActiveRecord::Base
 
   has_many :products_categories
   has_many :products, through: :products_categories
+
+  def to_liquid
+    {
+      'name' => self.name,
+      'href' => Rails.application.routes.url_helpers.show_slug_categories_path(self.slug),
+      'children' => self.children
+    }
+  end
 end
