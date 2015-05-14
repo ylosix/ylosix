@@ -14,10 +14,13 @@
 
     -# Collect the nav links, forms, and other content for toggling
     %div{:class => 'collapse navbar-collapse', :id => 'bs-example-navbar-collapse-1'}
-      %ul{:class => 'nav navbar-nav'}
+      %ul{:class => 'nav navbar-nav pull-right'}
         %li
           %a About
         %li
           %a Services
         %li
-          %a Contact
+          - if current_user.nil?
+            = link_to 'Login', new_user_session_path
+          - else
+            %a My account
