@@ -12,12 +12,8 @@
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+test_template:
   name: MyString
-  path: MyString
+  path: tmp/templates/test
   enabled: false
 
-two:
-  name: MyString
-  path: MyString
-  enabled: false
