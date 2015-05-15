@@ -5,7 +5,7 @@ class CommonFrontendController < ApplicationController
     variables = {
         'categories' => @categories
     }
-    variables.merge!(self.get_template_variables)
+    variables.merge!(get_template_variables)
   end
 
   private
@@ -16,12 +16,12 @@ class CommonFrontendController < ApplicationController
   end
 
   def get_root_categories
-    root_category = Category.find_by(:parent_id => [nil, 0], :enabled => true)
+    root_category = Category.find_by(parent_id: [nil, 0], enabled: true)
 
     @categories = []
     unless root_category.nil?
-      @categories = root_category.children.where(:enabled => true,
-                                                 :appears_in_web => true)
+      @categories = root_category.children.where(enabled: true,
+                                                 appears_in_web: true)
     end
   end
 
@@ -30,23 +30,23 @@ class CommonFrontendController < ApplicationController
   end
 
   def render(*args)
-    template = Template.find_by(:enabled => true)
+    template = Template.find_by(enabled: true)
 
     contains_template_layout = false
     unless args.empty?
-      contains_template_layout = args.include?({:layout => 'template_layout'})
+      contains_template_layout = args.include?(layout: 'template_layout')
     end
 
-    if !contains_template_layout && !template.nil? && template.is_ok?("#{self.controller_name}_#{self.action_name}.html")
+    if !contains_template_layout && !template.nil? && template.ok?("#{controller_name}_#{action_name}.html")
       @head_javascript = template.reads_file('common.js')
       @head_css = template.reads_file('common.js')
 
-      body_code = template.reads_file("#{self.controller_name}_#{self.action_name}.html")
+      body_code = template.reads_file("#{controller_name}_#{action_name}.html")
 
       # Parses and compiles the template
       @template = Liquid::Template.parse(body_code)
 
-      variables = self.super_get_template_variables
+      variables = super_get_template_variables
       @body_content = @template.render(variables)
 
       render layout: 'template_layout'

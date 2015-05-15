@@ -8,7 +8,7 @@ ActiveAdmin.register Category do
 
     column 'Parent' do |category|
       array = Utils.get_parents_array(category)
-      (array.map{ |item| auto_link(item, item.name) }).join(' || ').html_safe
+      (array.map { |item| auto_link(item, item.name) }).join(' || ').html_safe
     end
 
     column :name
@@ -33,5 +33,4 @@ ActiveAdmin.register Category do
     end
     f.actions
   end
-
 end

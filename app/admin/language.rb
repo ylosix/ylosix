@@ -1,6 +1,5 @@
 ActiveAdmin.register Language do
-
-  #config/initializer/active_admin.rb
+  # config/initializer/active_admin.rb
   menu false
 
   permit_params :code, :flag, :appears_in_backoffice, :appears_in_web
@@ -29,5 +28,4 @@ ActiveAdmin.register Language do
     end
     f.actions
   end
-
 end

@@ -9,7 +9,7 @@ ActiveAdmin.register Tag do
 
     column 'Parent' do |tag|
       array = Utils.get_parents_array(tag)
-      (array.map{ |item| auto_link(item, item.name) }).join(' || ').html_safe
+      (array.map { |item| auto_link(item, item.name) }).join(' || ').html_safe
     end
 
     column :name
@@ -30,5 +30,4 @@ ActiveAdmin.register Tag do
     end
     f.actions
   end
-
 end

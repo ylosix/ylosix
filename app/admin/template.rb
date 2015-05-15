@@ -25,9 +25,8 @@ ActiveAdmin.register Template do
       f.input :enabled
 
       @home_index = template.reads_file('home_index.html')
-      render partial: '/admin/templates/edit_files', locals: {home_index: @home_index}
+      render partial: '/admin/templates/edit_files', locals: { home_index: @home_index }
     end
     f.actions
   end
-
 end

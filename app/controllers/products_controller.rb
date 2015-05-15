@@ -14,8 +14,8 @@ class ProductsController < CommonFrontendController
     @product = nil
     @category = nil
 
-    if !params[:slug].blank? or !params[:id].blank?
-      attributes = {enabled: true}
+    if !params[:slug].blank? || !params[:id].blank?
+      attributes = { enabled: true }
       attributes[:slug] = params[:slug] unless params[:slug].blank?
       attributes[:id] = params[:id] unless params[:id].blank?
 

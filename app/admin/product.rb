@@ -70,7 +70,6 @@ ActiveAdmin.register Product do
     f.actions
   end
 
-
   # Clone product
   action_item :view, only: :show do
     link_to('Clone Product', admin_clone_product_path(product))
@@ -86,5 +85,4 @@ ActiveAdmin.register Product do
       super
     end
   end
-
 end

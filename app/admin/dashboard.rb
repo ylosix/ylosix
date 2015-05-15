@@ -1,8 +1,7 @@
 ActiveAdmin.register_page 'Dashboard' do
+  menu priority: 1, label: proc { I18n.t('active_admin.dashboard') }
 
-  menu priority: 1, label: proc{ I18n.t('active_admin.dashboard') }
-
-  content title: proc{ I18n.t('active_admin.dashboard') } do
+  content title: proc { I18n.t('active_admin.dashboard') } do
     panel 'Variables' do
       current_config = Rails.application.config
 
@@ -18,7 +17,7 @@ ActiveAdmin.register_page 'Dashboard' do
 
       columns do
         column do
-            span 'Environment'
+          span 'Environment'
         end
 
         column do
@@ -71,7 +70,6 @@ ActiveAdmin.register_page 'Dashboard' do
           else
             span "The repository has #{updates} updates."
           end
-
         end
       end
     end

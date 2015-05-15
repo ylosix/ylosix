@@ -23,9 +23,9 @@ class Category < ActiveRecord::Base
 
   def to_liquid
     {
-      'name' => self.name,
-      'href' => Rails.application.routes.url_helpers.show_slug_categories_path(self.slug),
-      'children' => self.children
+      'name' => name,
+      'href' => Rails.application.routes.url_helpers.show_slug_categories_path(slug),
+      'children' => children
     }
   end
 end
