@@ -3,7 +3,7 @@ class CommonFrontendController < ApplicationController
 
   def super_get_template_variables
     variables = {
-        'categories' => @categories
+      'categories' => @categories
     }
     variables.merge!(get_template_variables)
   end

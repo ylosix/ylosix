@@ -23,7 +23,6 @@ class ActionDispatch::IntegrationTest
 end
 
 load "#{Rails.root}/db/seeds.rb"
-# Rake::Task['rubocop'].invoke
 
 def test_again_seed
   create_default_languages
@@ -35,6 +34,7 @@ def test_again_seed
 end
 
 test_again_seed
+Rake::Task['rubocop'].invoke
 
 module ActiveSupport
   class TestCase

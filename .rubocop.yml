@@ -1,3 +1,5 @@
+inherit_from: ./.rubocop_todo.yml
+
 AllCops:
   Include:
     - Rakefile
@@ -11,5 +13,3 @@ AllCops:
     - tmp/**/*
     - log/**/*
 
-Style/Documentation:
-  Enabled: false
