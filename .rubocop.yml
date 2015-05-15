@@ -10,3 +10,6 @@ AllCops:
     - puppet/**/*
     - tmp/**/*
     - log/**/*
+
+Style/Documentation:
+  Enabled: false
