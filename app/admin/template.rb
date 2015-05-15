@@ -1,11 +1,20 @@
 ActiveAdmin.register Template do
   menu parent: 'Design'
 
-  permit_params :name, :path, :enabled, :home_index
+  permit_params :name, :path, :enabled
   actions :all, except: [:new, :delete]
 
-  after_save do |template|
-    template.writes_file('home_index.html', template.home_index)
+  controller do
+    def save_files(template)
+      template.writes_files(params[:template])
+    end
+
+    def update
+      super
+
+      template = Template.find(params[:id])
+      save_files(template)
+    end
   end
 
   index do
@@ -24,8 +33,8 @@ ActiveAdmin.register Template do
       f.input :path
       f.input :enabled
 
-      @home_index = template.reads_file('home_index.html')
-      render partial: '/admin/templates/edit_files', locals: { home_index: @home_index }
+      locals_files = template.get_local_files
+      render partial: '/admin/templates/edit_files', locals: locals_files
     end
     f.actions
   end

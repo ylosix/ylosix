@@ -1,20 +1,34 @@
-<li class="string input optional stringish" id="template_name_input">
-  <textarea id="template_home_index" name="template[home_index]" class="hide"></textarea>
-  <label for="home_index" class="label">Home index</label>
-
-  <span><b>Categories [ Category {name, href, children} ]</b></span>
-  <div id="home_index" class="editor_html"><%= home_index %></div>
-</li>
-
 <script src="/plugins/ace/ace.js" type="text/javascript" charset="utf-8"></script>
-<script type="text/javascript">
-    var e_home_index = ace.edit("home_index");
-    var ta_home_index = $("#template_home_index");
-    ta_home_index.val(e_home_index.getSession().getValue());
 
-    e_home_index.setTheme("ace/theme/crimson_editor");
-    e_home_index.getSession().setMode("ace/mode/html");
-    e_home_index.getSession().on('change', function () {
-        ta_home_index.val(e_home_index.getSession().getValue());
-    });
-</script>
+<% local_assigns.each do |key, value| %>
+    <% next if value.nil? %>
+    <li class="string input optional stringish">
+      <textarea id="template_<%= key %>" name="template[<%= key %>]" class="hide"></textarea>
+      <label for="<%= key %>" class="label"><%= key %></label>
+
+      <% if key == 'home_index' %>
+        <span><b>Categories [ Category {name, href, children} ]</b></span>
+      <% end %>
+
+      <div id="<%= key %>" class="editor_html"><%= value %></div>
+    </li>
+
+    <script type="text/javascript">
+        var e_<%= key %> = ace.edit("<%= key %>");
+        var ta_<%= key %> = $("#template_<%= key %>");
+        ta_<%= key %>.val(e_<%= key %>.getSession().getValue());
+
+        e_<%= key %>.setTheme("ace/theme/crimson_editor");
+
+        <% if key.include? 'js' %>
+            e_<%= key %>.getSession().setMode("ace/mode/javascript");
+        <% elsif key.include? 'css' %>
+            e_<%= key %>.getSession().setMode("ace/mode/css");
+        <% else %>
+            e_<%= key %>.getSession().setMode("ace/mode/html");
+        <% end %>
+        e_<%= key %>.getSession().on('change', function () {
+            ta_<%= key %>.val(e_<%= key %>.getSession().getValue());
+        });
+    </script>
+<% end %>

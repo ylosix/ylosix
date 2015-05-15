@@ -38,8 +38,8 @@ class CommonFrontendController < ApplicationController
     end
 
     if !contains_template_layout && !template.nil? && template.ok?("#{controller_name}_#{action_name}.html")
-      @head_javascript = template.reads_file('common.js')
-      @head_css = template.reads_file('common.js')
+      @head_javascript = template.reads_file('common_js.js')
+      @head_css = template.reads_file('common_css.css')
 
       body_code = template.reads_file("#{controller_name}_#{action_name}.html")
 

@@ -24,4 +24,12 @@ class CategoryTest < ActiveSupport::TestCase
     array = Utils.get_parents_array(categories(:digital_cameras))
     assert array.length == 1
   end
+
+  test 'to_liquid' do
+    hash = categories(:digital_cameras).to_liquid
+
+    assert hash.key? 'name'
+    assert hash.key? 'href'
+    assert hash.key? 'children'
+  end
 end

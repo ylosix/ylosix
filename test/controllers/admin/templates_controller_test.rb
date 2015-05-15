@@ -23,4 +23,17 @@ class Admin::TemplatesControllerTest < ActionController::TestCase
     get :edit, id: object.id
     assert_response :success
   end
+
+  test 'should post update' do
+    object = templates(:test_template)
+
+    patch :update,
+          id: object.id,
+          template: {
+              name: 'Some title',
+              path: 'tmp/templates/test',
+              enabled: true
+          }
+    assert_response 302
+  end
 end
