@@ -36,4 +36,10 @@ class Admin::TemplatesControllerTest < ActionController::TestCase
           }
     assert_response 302
   end
+
+  test 'should export' do
+    object = templates(:test_template)
+
+    get :export, id: object.id
+  end
 end

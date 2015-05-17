@@ -77,8 +77,8 @@ ActiveAdmin.register Product do
 
   controller do
     def new
-      unless params[:product_id].blank?    # if id is passed (i.e. /product/25/new), evaluate below code before rendering new form
-        product = Product.find(params[:product_id])
+      unless params[:id].blank?    # if id is passed (i.e. /product/25/new), evaluate below code before rendering new form
+        product = Product.find(params[:id])
         @product = product.clone
       end
 

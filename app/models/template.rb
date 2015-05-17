@@ -16,14 +16,18 @@ class Template < ActiveRecord::Base
   before_save :set_only_one_template_active
 
   def ok?(file_name)
-    file_path = File.join(Rails.root, path, file_name)
+    file_path = File.join(absolute_path, file_name)
     File.exist?(file_path)
+  end
+
+  def absolute_path
+    File.join(Rails.root, path)
   end
 
   def get_local_files
     local_files = {}
 
-    files = Dir.entries(File.join(Rails.root, path))
+    files = Dir.entries(absolute_path)
     files.each do |file|
       next if file == '.' || file == '..'
 
@@ -35,7 +39,7 @@ class Template < ActiveRecord::Base
   end
 
   def reads_file(file_name)
-    file_path = File.join(Rails.root, path, file_name)
+    file_path = File.join(absolute_path, file_name)
 
     content = ''
     content = File.read(file_path) if File.exist?(file_path)
@@ -44,7 +48,7 @@ class Template < ActiveRecord::Base
   end
 
   def writes_files(params)
-    files = Dir.entries(File.join(Rails.root, path))
+    files = Dir.entries(absolute_path)
     files.each do |file|
       next if file == '.' || file == '..'
 
@@ -56,7 +60,7 @@ class Template < ActiveRecord::Base
   private
 
   def writes_file(file_name, content)
-    file_path = File.join(Rails.root, path, file_name)
+    file_path = File.join(absolute_path, file_name)
 
     File.open(file_path, 'w') do |f|
       f.write content

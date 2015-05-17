@@ -15,6 +15,14 @@ ActiveAdmin.register Template do
       template = Template.find(params[:id])
       save_files(template)
     end
+
+    def export
+      template = Template.find(params[:id])
+      zip_file_path = Utils.zip_folder(template.absolute_path)
+
+      options = { filename: "#{template.name}.zip", type: 'application/zip' }
+      send_file(zip_file_path, options)
+    end
   end
 
   index do
@@ -23,6 +31,7 @@ ActiveAdmin.register Template do
     column :name
     column :path
     column :enabled
+    column(:export) { |template| link_to 'Export', admin_export_template_path(template) }
     actions
   end
 

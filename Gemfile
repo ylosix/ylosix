@@ -32,8 +32,8 @@ platforms :ruby do # Only linux
   gem 'puma'
 end
 
+gem 'rubyzip'
 gem 'foreman'
-
 gem 'rails-erd'
 gem 'annotate'
 gem 'liquid', :git => 'https://github.com/devcows/liquid.git', :branch => 'master'
