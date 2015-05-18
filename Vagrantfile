@@ -12,7 +12,7 @@ Vagrant.configure(2) do |config|
     app.vm.box = 'ubuntu/trusty32'
     app.vm.hostname = 'ecommerce-vm'
 
-    app.vm.network 'forwarded_port', guest: 80, host: 13000 # Rails app
+    app.vm.network 'forwarded_port', guest: 3000, host: 13000 # Rails app
     app.vm.network 'forwarded_port', guest: 5432, host: 15432 # Postgresql
 
     app.vm.provider :virtualbox do |vb|

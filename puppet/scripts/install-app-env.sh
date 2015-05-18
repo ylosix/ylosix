@@ -1,5 +1,6 @@
 #!/bin/bash
 APP_PATH=/var/www
+RVM_PATH=/usr/local/rvm
 RVM_WRAPPERS_PATH=/usr/local/rvm/wrappers/ruby-2.1.0@ecommerce
 RVM_SUDO_PATH=/usr/local/rvm/bin/rvmsudo
 
@@ -22,8 +23,9 @@ fi
 
 su - vagrant -c "cd $APP_PATH; echo 'RAILS_ENV=$RAILS_ENV' > .env"
 su - vagrant -c "cd $APP_PATH; echo 'RAILS_DB=$database' >> .env"
-su - vagrant -c "cd $APP_PATH; echo 'PORT=80' >> .env"
-su - vagrant -c "cd $APP_PATH; echo 'PATH=$PATH:/usr/local/rvm/wrappers/ruby-2.1.0@ecommerce' >> .env"
+su - vagrant -c "cd $APP_PATH; echo 'PORT=3000' >> .env"
+su - vagrant -c "cd $APP_PATH; echo 'GEM_PATH=$RVM_PATH/gems/ruby-2.1.0@ecommerce' >> .env"
+su - vagrant -c "cd $APP_PATH; echo 'PATH=$RVM_PATH/wrappers/ruby-2.1.0@ecommerce:$RVM_PATH/gems/ruby-2.1.0/bin:$RVM_PATH/rubies/ruby-2.1.0/bin:/home/user/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$RVM_PATH/bin' >> .env"
 
 #Setup project
 su - vagrant -c "cd $APP_PATH; $RVM_WRAPPERS_PATH/gem install bundler"
