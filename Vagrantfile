@@ -54,6 +54,8 @@ Vagrant.configure(2) do |config|
     end
 
     # TODO pass args as a array app path, env, etc.
+    # For install nginx + unicorn
+    # config.vm.provision 'shell', path: 'puppet/scripts/install-nginx.sh', :args => ENV['RAILS_ENV']
     config.vm.provision 'shell', path: 'puppet/scripts/install-app-env.sh', :args => ENV['RAILS_ENV']
 
     if ENV['RAILS_ENV'] == 'development'
