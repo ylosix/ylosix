@@ -11,19 +11,36 @@ class Utils
     array.reverse
   end
 
+  def self.zip_extract(output_dir, file)
+    FileUtils.mkdir_p output_dir
+
+    require 'zip'
+    zf = Zip::File.new(file)
+    zf.each_with_index do |entry, index|
+      puts "entry #{index} is #{entry.name}, size = #{entry.size}, compressed size = #{entry.compressed_size}"
+      # use zf.get_input_stream(entry) to get a ZipInputStream for the entry
+      # entry can be the ZipEntry object or any object which has a to_s method that
+      # returns the name of the entry.
+
+      file_out_put = File.join(output_dir, entry.name)
+      File.open(file_out_put, 'w') do |f|
+        f.write zf.get_input_stream(entry).read
+      end
+    end
+  end
+
   # Usage:
   #   directoryToZip = "/tmp/input"
   #   outputFile = "/tmp/out.zip"
   #   Utils.zip_folder(directoryToZip, outputFile)
   def self.zip_folder(input_dir)
-    require 'zip'
-
     zip_file = "/tmp/#{Time.now.to_i}.zip"
 
     entries = Dir.entries(input_dir)
     entries.delete('.')
     entries.delete('..')
 
+    require 'zip'
     io = Zip::File.open(zip_file, Zip::File::CREATE)
 
     write_entries(input_dir, entries, '', io)

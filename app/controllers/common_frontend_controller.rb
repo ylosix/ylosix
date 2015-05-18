@@ -33,8 +33,6 @@ class CommonFrontendController < ApplicationController
 
     match_data = regex.match(content)
     if match_data
-      puts match_data
-
       snippet_content = template.reads_file(match_data[:file])
 
       new_content = content.gsub(match_data.to_s, snippet_content)

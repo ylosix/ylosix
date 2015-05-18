@@ -1,0 +1,11 @@
+= form_for :template, :url => { :action => :import }, :html => { :multipart => true } do |f|
+  %table
+    %tr
+      %td
+        %label{:for => 'template_file'}
+          Select a Zip File:
+      %td
+        = f.file_field :file
+    %tr
+      %td
+        = submit_tag 'Submit'

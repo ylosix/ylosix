@@ -29,7 +29,7 @@ class Admin::ProductsControllerTest < ActionController::TestCase
   test 'should get clone' do
     object = products(:camera)
 
-    get :new, product_id: object.id
+    get :new, id: object.id
     assert_response :success
   end
 end

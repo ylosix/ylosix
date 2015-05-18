@@ -4,6 +4,34 @@ ActiveAdmin.register Template do
   permit_params :name, :path, :enabled
   actions :all, except: [:new, :delete]
 
+  action_item :view, only: :index do
+    link_to 'Import', import_admin_templates_path
+  end
+
+  collection_action :import, method: [:get, :post] do
+    if request.get?
+      render partial: '/admin/templates/import'
+    elsif request.post?
+      notice = ''
+
+      file_data = params[:template][:file]
+      if file_data.respond_to?(:read)
+        name = params[:template][:file].original_filename
+        name = name.split('.')[0]
+
+        template = Template.find_or_create_by(name: name)
+        template.path = "/public/templates/#{DateTime.now.to_i}"
+        template.enabled = false
+        template.save
+
+        Utils.zip_extract(template.absolute_path, file_data.tempfile)
+        notice = 'Template imported successfully!'
+      end
+
+      redirect_to collection_path, notice: notice
+    end
+  end
+
   controller do
     def save_files(template)
       template.writes_files(params[:template])
@@ -22,6 +50,13 @@ ActiveAdmin.register Template do
 
       options = { filename: "#{template.name}.zip", type: 'application/zip' }
       send_file(zip_file_path, options)
+    end
+
+    def destroy
+      template = Template.find(params[:id])
+      FileUtils.rm_rf(template.absolute_path)
+
+      super
     end
   end
 

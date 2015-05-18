@@ -39,4 +39,12 @@ class ProductTest < ActiveSupport::TestCase
 
     assert !pr.publication_date.nil?
   end
+
+  test 'clone' do
+    pr = Product.new
+    pr.save
+
+    pr_cloned = pr.clone
+    assert pr_cloned.instance_of? Product
+  end
 end

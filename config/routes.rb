@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   get '/admin/products/:id/clone' => 'admin/products#new', :as => :admin_clone_product
   get '/admin/templates/:id/export' => 'admin/templates#export', :as => :admin_export_template
+  get '/admin/templates/import' => 'admin/templates#import', :as => :admin_import_template
 
   # Frontend
   resource :categories, only: [] do
