@@ -4,6 +4,7 @@ class CommonFrontendController < ApplicationController
   def get_template_variables
     @variables = {} if @variables.nil?
     @variables['categories'] = @categories
+    @variables['current_user'] = current_user
     @variables
   end
 

@@ -55,17 +55,30 @@ def create_default_languages
   end
 end
 
+
+def create_product(product_attributes, categories, tags)
+  product = save_or_update_model(Product,
+                                 { reference_code: product_attributes[:reference_code] },
+                                 product_attributes)
+
+  product.categories = categories
+  product.tags = tags
+  product.save
+end
+
 def create_default_products
   puts '####################'
   puts '## Creating products'
   puts '####################'
 
   category = Category.find_by_slug('digital_cameras')
+  categories = [category]
 
   tag_cameras = Tag.find_by(:name => 'Cameras')
   tag_reflex = Tag.find_by(:name => 'Reflex')
+  tags = [tag_cameras, tag_reflex]
 
-  camera_image = File.new "#{Rails.root}/app/assets/images/products/camera.png"
+  camera_image = File.new "#{Rails.root}/app/assets/images/products/canon_450d.png"
   product_attributes = {:reference_code => 'ref1',
                         :name => 'Canon 450D',
                         :barcode => '123456789',
@@ -87,11 +100,58 @@ def create_default_products
                         :control_stock => true,
                         :image => camera_image}
 
-  product = save_or_update_model(Product, {:reference_code => 'ref1'}, product_attributes)
+  create_product(product_attributes, categories, tags)
 
-  product.categories = [category]
-  product.tags = [tag_cameras, tag_reflex]
-  product.save
+  camera_image = File.new "#{Rails.root}/app/assets/images/products/nikon_d5500.png"
+  product_attributes = {:reference_code => 'ref2',
+                        :name => 'Nikon D5500',
+                        :barcode => '1234567890',
+                        :enabled => true,
+                        :appears_in_categories => true,
+                        :appears_in_tag => true,
+                        :appears_in_search => true,
+                        :short_description => 'Camera reflex Nikon 24MP.',
+                        :description => 'Camera reflex Nikon 24 MP (not includes SD).',
+
+                        :retail_price_pre_tax => 350.0,
+                        :retail_price => 423.5,
+                        :tax_percent => 21.0,
+
+                        :meta_keywords => 'nikon_D5500',
+                        :meta_description => 'Camera reflex nikon',
+                        :slug => 'nikon_d5500',
+                        :stock => 100,
+                        :control_stock => true,
+                        :image => camera_image}
+
+  create_product(product_attributes, categories, tags)
+
+
+  zoom_image = File.new "#{Rails.root}/app/assets/images/products/DX-Zoom-10-24mm.png"
+  product_attributes = {:reference_code => 'ref3',
+                        :name => 'AF-S DX 10-24mm',
+                        :barcode => '1234567891',
+                        :enabled => true,
+                        :appears_in_categories => true,
+                        :appears_in_tag => true,
+                        :appears_in_search => true,
+                        :short_description => 'AF-S DX Zoom-NIKKOR 10-24mm f/3.5-4.5G ED.',
+                        :description => 'AF-S DX Zoom-NIKKOR 10-24mm f/3.5-4.5G ED.',
+
+                        :retail_price_pre_tax => 350.0,
+                        :retail_price => 423.5,
+                        :tax_percent => 21.0,
+
+                        :meta_keywords => 'dx_zoom_10-24mm',
+                        :meta_description => 'Zoom reflex nikon',
+                        :slug => 'zoom-nikkor-10-24mm',
+                        :stock => 100,
+                        :control_stock => true,
+                        :image => zoom_image}
+
+  category = Category.find_by_slug('lenses')
+  categories = [category]
+  create_product(product_attributes, categories, tags)
 end
 
 def create_default_categories
@@ -111,7 +171,14 @@ def create_default_categories
                              :enabled => true,
                              :appears_in_web => true,
                              :slug => 'digital_cameras'}
-  save_or_update_model(Category, {:slug => 'digital_cameras'}, category_cam_attributes)
+  digital_cameras = save_or_update_model(Category, {:slug => 'digital_cameras'}, category_cam_attributes)
+
+  category_cam_attributes = {:parent_id => digital_cameras.id,
+                             :name => 'Lenses',
+                             :enabled => true,
+                             :appears_in_web => true,
+                             :slug => 'lenses'}
+  save_or_update_model(Category, {:slug => 'lenses'}, category_cam_attributes)
 end
 
 
