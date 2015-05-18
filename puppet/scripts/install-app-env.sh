@@ -22,6 +22,8 @@ fi
 
 su - vagrant -c "cd $APP_PATH; echo 'RAILS_ENV=$RAILS_ENV' > .env"
 su - vagrant -c "cd $APP_PATH; echo 'RAILS_DB=$database' >> .env"
+su - vagrant -c "cd $APP_PATH; echo 'PORT=80' >> .env"
+su - vagrant -c "cd $APP_PATH; echo 'PATH=$PATH:/usr/local/rvm/wrappers/ruby-2.1.0@ecommerce' >> .env"
 
 #Setup project
 su - vagrant -c "cd $APP_PATH; $RVM_WRAPPERS_PATH/gem install bundler"
@@ -64,8 +66,5 @@ fi
 
 
 #Set foreman file
-su - vagrant -c "echo 'web: $RVM_WRAPPERS_PATH/bundle exec unicorn -c $APP_PATH/config/unicorn.rb -E $RAILS_ENV' > $APP_PATH/Procfile"
-su - vagrant -c "echo 'nginx: sudo /usr/sbin/nginx -c /etc/nginx/nginx.conf' >> $APP_PATH/Procfile"
-
 su - vagrant -c "cd $APP_PATH; $RVM_SUDO_PATH $RVM_WRAPPERS_PATH/bundle exec foreman export upstart --app=ecommerce --user=vagrant /etc/init"
 su -c "start ecommerce"

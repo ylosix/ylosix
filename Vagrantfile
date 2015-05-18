@@ -53,8 +53,7 @@ Vagrant.configure(2) do |config|
       puppet.module_path = 'puppet/modules'
     end
 
-    #TODO pass args as a array app path, env, etc.
-    config.vm.provision 'shell', path: 'puppet/scripts/install-nginx.sh', :args => ENV['RAILS_ENV']
+    # TODO pass args as a array app path, env, etc.
     config.vm.provision 'shell', path: 'puppet/scripts/install-app-env.sh', :args => ENV['RAILS_ENV']
 
     if ENV['RAILS_ENV'] == 'development'
