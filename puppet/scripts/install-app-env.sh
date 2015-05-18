@@ -1,7 +1,7 @@
 #!/bin/bash
 APP_PATH=/var/www
 RVM_PATH=/usr/local/rvm
-RVM_WRAPPERS_PATH=/usr/local/rvm/wrappers/ruby-2.1.0@ecommerce
+RVM_WRAPPERS_PATH=/usr/local/rvm/wrappers/ruby-2.1.6@ecommerce
 RVM_SUDO_PATH=/usr/local/rvm/bin/rvmsudo
 
 RAILS_ENV=$1
@@ -12,7 +12,7 @@ if [ -z $RAILS_ENV ]; then
 fi
 
 #Create environment
-su - vagrant -c "cd $APP_PATH; echo \"2.1.0\" > .ruby-version"
+su - vagrant -c "cd $APP_PATH; echo \"2.1.6\" > .ruby-version"
 su - vagrant -c "cd $APP_PATH; echo \"ecommerce\" > .ruby-gemset"
 su - vagrant -c "cd $APP_PATH; echo $RAILS_ENV > .ruby-env"
 
@@ -24,8 +24,8 @@ fi
 su - vagrant -c "cd $APP_PATH; echo 'RAILS_ENV=$RAILS_ENV' > .env"
 su - vagrant -c "cd $APP_PATH; echo 'RAILS_DB=$database' >> .env"
 su - vagrant -c "cd $APP_PATH; echo 'PORT=3000' >> .env"
-su - vagrant -c "cd $APP_PATH; echo 'GEM_PATH=$RVM_PATH/gems/ruby-2.1.0@ecommerce' >> .env"
-su - vagrant -c "cd $APP_PATH; echo 'PATH=$RVM_PATH/wrappers/ruby-2.1.0@ecommerce:$RVM_PATH/gems/ruby-2.1.0/bin:$RVM_PATH/rubies/ruby-2.1.0/bin:/home/user/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$RVM_PATH/bin' >> .env"
+su - vagrant -c "cd $APP_PATH; echo 'GEM_PATH=$RVM_PATH/gems/ruby-2.1.6@ecommerce' >> .env"
+su - vagrant -c "cd $APP_PATH; echo 'PATH=$RVM_PATH/wrappers/ruby-2.1.6@ecommerce:$RVM_PATH/gems/ruby-2.1.6/bin:$RVM_PATH/rubies/ruby-2.1.6/bin:/home/user/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$RVM_PATH/bin' >> .env"
 
 #Setup project
 su - vagrant -c "cd $APP_PATH; $RVM_WRAPPERS_PATH/gem install bundler"
@@ -46,7 +46,7 @@ else
 fi
 
 if [ -z $SECRET_KEY_BASE ]; then
-  su - vagrant -c "cd $APP_PATH; $RVM_WRAPPERS_PATH/rake secret > .ruby-secret"
+  su - vagrant -c "cd $APP_PATH; $RVM_WRAPPERS_PATH/rake secret RAILS_ENV=$RAILS_ENV > .ruby-secret"
   SECRET_KEY_BASE=`cat $APP_PATH/.ruby-secret`
   su - vagrant -c "cd $APP_PATH; echo 'SECRET_KEY_BASE=$SECRET_KEY_BASE' >> .env"
 fi
