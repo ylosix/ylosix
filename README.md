@@ -9,7 +9,7 @@
 
 Open source ecommerce.
 
-* Ruby version: 2.1.0
+* Ruby version: 2.1.6
 
 * Rails version: 4.2.1
 

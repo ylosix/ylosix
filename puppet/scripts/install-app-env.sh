@@ -1,6 +1,6 @@
 #!/bin/bash
 APP_PATH=/var/www
-RVM_WRAPPERS_PATH=/usr/local/rvm/wrappers/ruby-2.1.0@ecommerce
+RVM_WRAPPERS_PATH=/usr/local/rvm/wrappers/ruby-2.1.6@ecommerce
 RVM_SUDO_PATH=/usr/local/rvm/bin/rvmsudo
 
 RAILS_ENV=$1
@@ -11,7 +11,7 @@ if [ -z $RAILS_ENV ]; then
 fi
 
 #Create environment
-su - vagrant -c "cd $APP_PATH; echo \"2.1.0\" > .ruby-version"
+su - vagrant -c "cd $APP_PATH; echo \"2.1.6\" > .ruby-version"
 su - vagrant -c "cd $APP_PATH; echo \"ecommerce\" > .ruby-gemset"
 su - vagrant -c "cd $APP_PATH; echo $RAILS_ENV > .ruby-env"
 
