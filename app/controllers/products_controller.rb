@@ -5,7 +5,7 @@ class ProductsController < CommonFrontendController
   end
 
   def get_template_variables
-    {}
+    super
   end
 
   private

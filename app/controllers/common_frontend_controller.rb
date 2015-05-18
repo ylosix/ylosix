@@ -1,11 +1,10 @@
 class CommonFrontendController < ApplicationController
   before_action :set_query_text, :get_root_categories, :get_default_products
 
-  def super_get_template_variables
-    variables = {
-      'categories' => @categories
-    }
-    variables.merge!(get_template_variables)
+  def get_template_variables
+    @variables = {} if @variables.nil?
+    @variables['categories'] = @categories
+    @variables
   end
 
   private
@@ -29,6 +28,22 @@ class CommonFrontendController < ApplicationController
     @products = Product.all.limit(10)
   end
 
+  def replace_regex_include(template, content)
+    regex = /{{\s*include\s+(?<file>[^}\s]+)\s*}}/
+
+    match_data = regex.match(content)
+    if match_data
+      puts match_data
+
+      snippet_content = template.reads_file(match_data[:file])
+
+      new_content = content.gsub(match_data.to_s, snippet_content)
+      content = replace_regex_include(template, new_content)
+    end
+
+    content
+  end
+
   def render(*args)
     template = Template.find_by(enabled: true)
 
@@ -38,16 +53,15 @@ class CommonFrontendController < ApplicationController
     end
 
     if !contains_template_layout && !template.nil? && template.ok?("#{controller_name}_#{action_name}.html")
-      @head_javascript = template.reads_file('common_js.js')
-      @head_css = template.reads_file('common_css.css')
-
       body_code = template.reads_file("#{controller_name}_#{action_name}.html")
+      body_code = replace_regex_include(template, body_code)
 
       # Parses and compiles the template
-      @template = Liquid::Template.parse(body_code)
+      template_liquid = Liquid::Template.parse(body_code)
 
-      variables = super_get_template_variables
-      @body_content = @template.render(variables)
+      @head_javascript = template.reads_file('common_js.js')
+      @head_css = template.reads_file('common_css.css')
+      @body_content = template_liquid.render(get_template_variables)
 
       render layout: 'template_layout'
     else

@@ -3,6 +3,6 @@ class HomeController < CommonFrontendController
   end
 
   def get_template_variables
-    {}
+    super
   end
 end
