@@ -1,6 +1,5 @@
 ActiveAdmin.register Language do
-  # config/initializer/active_admin.rb
-  menu false
+  menu parent: 'Localization'
 
   permit_params :code, :flag, :appears_in_backoffice, :appears_in_web
 

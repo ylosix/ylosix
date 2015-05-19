@@ -2,14 +2,10 @@
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 
 def save_or_update_model(model, search_options, attributes)
-  object = model.find_by(search_options)
-  if object.nil?
-    object = model.create!(attributes)
-  else
-    object.attributes = attributes
-  end
-
+  object = model.find_or_create_by(search_options)
+  object.attributes = attributes
   object.save
+
   object
 end
 
@@ -55,6 +51,15 @@ def create_default_languages
   end
 end
 
+def create_default_taxes
+  puts '####################'
+  puts '## Creating default taxes'
+  puts '####################'
+
+  iva_es_attributes = { :name => 'IVA ES 21%', :rate => 21.0 }
+  save_or_update_model(Tax, { :name => 'IVA ES 21%' }, iva_es_attributes)
+end
+
 
 def create_product(product_attributes, categories, tags)
   product = save_or_update_model(Product,
@@ -78,6 +83,8 @@ def create_default_products
   tag_reflex = Tag.find_by(:name => 'Reflex')
   tags = [tag_cameras, tag_reflex]
 
+  tax_iva = Tax.find_by({ :name => 'IVA ES 21%' })
+
   camera_image = File.new "#{Rails.root}/app/assets/images/products/canon_450d.png"
   product_attributes = {:reference_code => 'ref1',
                         :name => 'Canon 450D',
@@ -91,7 +98,7 @@ def create_default_products
 
                         :retail_price_pre_tax => 350.0,
                         :retail_price => 423.5,
-                        :tax_percent => 21.0,
+                        :tax => tax_iva,
 
                         :meta_keywords => 'canon_450d',
                         :meta_description => 'Camera reflex canon',
@@ -115,7 +122,7 @@ def create_default_products
 
                         :retail_price_pre_tax => 350.0,
                         :retail_price => 423.5,
-                        :tax_percent => 21.0,
+                        :tax => tax_iva,
 
                         :meta_keywords => 'nikon_D5500',
                         :meta_description => 'Camera reflex nikon',
@@ -140,7 +147,7 @@ def create_default_products
 
                         :retail_price_pre_tax => 350.0,
                         :retail_price => 423.5,
-                        :tax_percent => 21.0,
+                        :tax => tax_iva,
 
                         :meta_keywords => 'dx_zoom_10-24mm',
                         :meta_description => 'Zoom reflex nikon',
@@ -216,5 +223,6 @@ create_default_roles
 create_default_admin_user
 create_default_categories
 create_default_tags
+create_default_taxes
 create_default_products
 create_default_ylos_template

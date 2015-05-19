@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150514121336) do
+ActiveRecord::Schema.define(version: 20150519075913) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -105,7 +105,7 @@ ActiveRecord::Schema.define(version: 20150514121336) do
     t.datetime "unpublication_date"
     t.decimal  "retail_price_pre_tax",  precision: 10, scale: 5
     t.decimal  "retail_price",          precision: 10, scale: 2
-    t.decimal  "tax_percent",           precision: 5,  scale: 2
+    t.integer  "tax_id"
     t.string   "meta_keywords"
     t.string   "meta_description"
     t.string   "slug"
@@ -118,6 +118,8 @@ ActiveRecord::Schema.define(version: 20150514121336) do
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
   end
+
+  add_index "products", ["tax_id"], name: "index_products_on_tax_id"
 
   create_table "products_categories", force: :cascade do |t|
     t.integer  "product_id"
@@ -157,6 +159,13 @@ ActiveRecord::Schema.define(version: 20150514121336) do
   end
 
   add_index "tags", ["parent_id"], name: "index_tags_on_parent_id"
+
+  create_table "taxes", force: :cascade do |t|
+    t.string   "name"
+    t.decimal  "rate",       precision: 5, scale: 2
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+  end
 
   create_table "templates", force: :cascade do |t|
     t.string   "name"

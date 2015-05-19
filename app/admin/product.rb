@@ -4,7 +4,7 @@ ActiveAdmin.register Product do
   permit_params :reference_code, :name, :enabled, :appears_in_categories,
                 :appears_in_tag, :appears_in_search, :short_description,
                 :description, :publication_date, :unpublication_date,
-                :retail_price_pre_tax, :retail_price, :tax_percent,
+                :retail_price_pre_tax, :retail_price, :tax_id,
                 :meta_keywords, :meta_description, :slug, :stock, :control_stock,
                 products_categories_attributes: [:id, :category_id, :product_id, :_destroy]
 
@@ -39,7 +39,7 @@ ActiveAdmin.register Product do
     f.inputs 'Price' do
       f.input :retail_price_pre_tax
       f.input :retail_price
-      f.input :tax_percent
+      f.input :tax
     end
 
     f.inputs 'Seo' do

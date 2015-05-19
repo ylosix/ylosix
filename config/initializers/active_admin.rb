@@ -202,8 +202,9 @@ ActiveAdmin.setup do |config|
       # menu.add label: 'Users',          :parent => 'Administration', url: 'admin/users', :priority => 1
       # menu.add label: 'Admin comments', :parent => 'Administration', url: 'admin/comments', :priority => 2
 
+      menu.add label: 'Localization', :priority => 4
+      # menu.add label: 'Languages', url: '/admin/languages', :priority => 4
 
-      menu.add label: 'Languages', url: '/admin/languages', :priority => 4
       menu.add label: 'Design', :priority => 5
     end
   end
