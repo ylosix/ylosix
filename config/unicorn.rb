@@ -4,13 +4,22 @@ working_directory '/var/www'
 
 # Unicorn PID file location
 # pid "/path/to/pids/unicorn.pid"
-pid '/home/vagrant/pids/unicorn.pid'
+
 
 # Path to logs
 # stderr_path "/path/to/log/unicorn.log"
 # stdout_path "/path/to/log/unicorn.log"
-stderr_path '/home/vagrant/logs/unicorn.log'
-stdout_path '/home/vagrant/logs/unicorn.log'
+
+
+if ENV['RAILS_PIDS'].nil? && ENV['RAILS_PIDS'] != ''
+  pid ENV['RAILS_PIDS']
+end
+
+if ENV['RAILS_LOGS'].nil? && ENV['RAILS_LOGS'] != ''
+  stderr_path ENV['RAILS_LOGS']
+  stdout_path ENV['RAILS_LOGS']
+end
+
 
 # Unicorn socket
 listen '/tmp/unicorn.sock'

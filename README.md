@@ -137,7 +137,7 @@ $ heroku login
 $ heroku create
 $ heroku addons:add heroku-postgresql:hobby-dev
 $ heroku config:set RAILS_DB=postgresql
-$ git push heroku master_heroku:master
+$ git push heroku develop:master
 
 $ heroku run rake db:migrate RAILS_ENV=production
 $ heroku run rake db:seed
