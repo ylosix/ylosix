@@ -73,3 +73,11 @@ fi
 #su - vagrant -c "echo 'nginx: sudo /usr/sbin/nginx -c /etc/nginx/nginx.conf' >> $APP_PATH/Procfile"
 su - vagrant -c "cd $APP_PATH; $RVM_SUDO_PATH $RVM_WRAPPERS_PATH/bundle exec foreman export upstart --app=ecommerce --user=vagrant /etc/init"
 su -c "start ecommerce"
+
+# localhost port 80 to 3000
+su -c "iptables -t nat -I OUTPUT -p tcp -d 127.0.0.1 --dport 80 -j REDIRECT --to-ports 3000"
+
+# external port 80 to 3000
+su -c "iptables -t nat -I PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 3000"
+
+# TODO IPTABLES PERSISTENT
