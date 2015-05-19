@@ -61,6 +61,20 @@ class Product < ActiveRecord::Base
     product
   end
 
+  def to_liquid
+    image_src = 'http://placehold.it/320x150'
+    image_src = image.url(:medium) if image.file?
+
+    {
+        'name' => name,
+        'short_description' => short_description,
+        'description' => description,
+        'retail_price' => retail_price,
+        'image_src' => image_src,
+        'href' => Rails.application.routes.url_helpers.show_slug_products_path(slug)
+    }
+  end
+
   private
 
   def set_default_publication_date

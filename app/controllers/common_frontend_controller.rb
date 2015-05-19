@@ -4,6 +4,7 @@ class CommonFrontendController < ApplicationController
   def get_template_variables
     @variables = {} if @variables.nil?
     @variables['categories'] = @categories
+    @variables['products'] = @products # TODO This only for test.
     @variables['current_user'] = current_user
     @variables
   end
@@ -30,13 +31,20 @@ class CommonFrontendController < ApplicationController
   end
 
   def replace_regex_include(template, content)
-    regex = /{{\s*include\s+(?<file>[^}\s]+)\s*}}/
+    regex_include_snippet = /{{\s*include\s+(?<file>[^}\s]+)\s*}}/
 
-    match_data = regex.match(content)
+    match_data = regex_include_snippet.match(content)
     if match_data
       snippet_content = template.reads_file(match_data[:file])
 
       new_content = content.gsub(match_data.to_s, snippet_content)
+      content = replace_regex_include(template, new_content)
+    end
+
+    regex_template_public_path = /{{\s*template_public_path\s*}}/
+    match_data = regex_template_public_path.match(content)
+    if match_data
+      new_content = content.gsub(match_data.to_s, template.path.gsub('/public', ''))
       content = replace_regex_include(template, new_content)
     end
 

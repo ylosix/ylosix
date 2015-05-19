@@ -28,11 +28,11 @@ class Template < ActiveRecord::Base
     local_files = {}
 
     files = Dir.entries(absolute_path)
-    files.each do |file|
-      next if file == '.' || file == '..'
+    files.each do |file_name|
+      next if file_name == '.' || file_name == '..' || File.directory?(File.join(absolute_path, file_name))
 
-      name = file.split('.')[0]
-      local_files[name] = reads_file(file)
+      name = file_name.split('.')[0]
+      local_files[name] = reads_file(file_name)
     end
 
     local_files
