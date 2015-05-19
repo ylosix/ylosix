@@ -8,8 +8,8 @@ rackup      DefaultRackup
 port        ENV['PORT']     || 3000
 environment ENV['RAILS_ENV'] || 'development'
 
-pidfile '/home/vagrant/pids/puma.pid'
-stdout_redirect '/home/vagrant/logs/puma.log', '/home/vagrant/logs/puma.log'
+pidfile ENV['RAILS_PIDS'] || 'tmp/pids/puma.pid'
+stdout_redirect ENV['RAILS_LOGS'] || 'log/puma.log', ENV['RAILS_LOGS'] || 'log/puma.log'
 
 on_worker_boot do
   # Worker specific setup for Rails 4.1+
