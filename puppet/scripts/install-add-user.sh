@@ -10,8 +10,13 @@ if ! grep -q vagrant "/etc/passwd"; then
   su -c "useradd -m -g users -s /bin/bash vagrant"
 fi
 
+if ! grep -q www-data "/etc/group"; then
+  su -c "groupadd www-data"
+fi
+
 #TODO check if exist
 su -c "adduser vagrant vagrant"
+su -c "adduser vagrant www-data"
 
 if ! grep -q vagrant "/etc/sudoers"; then
   su -c "echo 'vagrant ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers"

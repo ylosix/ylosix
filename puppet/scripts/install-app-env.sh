@@ -11,7 +11,13 @@ if [ -z $RAILS_ENV ]; then
   RAILS_ENV=development
 fi
 
-#Create environment
+# Set permisions
+su -c "chmod 775 $APP_PATH"
+
+su -c "chown -R www-data:www-data $APP_PATH"
+su -c "chmod -R g+w $APP_PATH"
+
+# Create environment
 su - vagrant -c "cd $APP_PATH; echo \"2.1.6\" > .ruby-version"
 su - vagrant -c "cd $APP_PATH; echo \"ecommerce\" > .ruby-gemset"
 su - vagrant -c "cd $APP_PATH; echo $RAILS_ENV > .ruby-env"

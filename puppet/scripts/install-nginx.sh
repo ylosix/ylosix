@@ -15,8 +15,3 @@ su -c "ln -s '$APP_PATH/puppet/nginx-default.conf' /etc/nginx/conf.d/default.con
 su -c "chown -R www-data:www-data /var/log/nginx"
 
 su -c "chmod -R 775 /var/log/nginx"
-su -c "chmod 775 $APP_PATH"
-
-su -c "adduser vagrant www-data"
-su -c "chown -R www-data:www-data $APP_PATH"
-su -c "chmod -R g+w $APP_PATH"

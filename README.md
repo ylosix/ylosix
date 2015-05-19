@@ -9,27 +9,27 @@
 
 Open source ecommerce.
 
-* Ruby version: 2.1.6
-
-* Rails version: 4.2.1
-
-* Puppet: 3.7.5
-
-* [Installation](#installation)
-
-* Configuration
-
-* [Design schema](#design-schema)
-
-* [Database creation](#database-creation)
-
-* [How to run the test suite](#testing)
-
-* [The ecommerce](#the-ecommerce)
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* [Deployment instructions](#deployment-instructions)
+  * Ruby version: 2.1.6
+  
+  * Rails version: 4.2.1
+  
+  * Puppet: 3.7.5
+  
+  * [Installation](#installation)
+  
+  * Configuration
+  
+  * [Design schema](#design-schema)
+  
+  * [Database creation](#database-creation)
+  
+  * [How to run the test suite](#testing)
+  
+  * [The ecommerce](#the-ecommerce)
+  
+  * Services (job queues, cache servers, search engines, etc.)
+  
+  * [Deployment instructions](#deployment-instructions)
 
 
 Please feel free to use a different markup language if you do not plan to run
@@ -44,7 +44,7 @@ Install git and after clone the repository(be careful with submodules):
 $ git clone --recursive https://github.com/devcows/ecommerce.git
 ```
 
-To install download [Vagrant](https://www.vagrantup.com) and install it. Install Vagrant plugin triggers, open a console and type:
+To install Vagrant download [Vagrant](https://www.vagrantup.com) and install it. Install Vagrant plugin triggers, open a console and type:
 
 ```
 $ vagrant plugin install vagrant-triggers
@@ -68,7 +68,7 @@ $ gem install nokogiri -- --use-system-libraries --with-iconv-dir=/opt/local --w
 ```
 
 Troubleshooting git clone in windows:
-- Windows by default use crlf true and adds \r in every \n. The puppet recipe fails with \r. 
+  - Windows by default use crlf true and adds \r in every \n. The puppet recipe fails with \r. 
 ```
 git config --global core.autocrlf false
 ```
@@ -100,11 +100,19 @@ $ rake db:seed
 
 ## Testing
 
+To run the test suite execute:
+
 ```
 $ rake
 ```
 
 ## The ecommerce
+
+Default Postgresql config: <br />
+  - Port: 15432 <br />
+  - Database: ecommerce <br />
+  - User: ecommerce_user <br />
+  - Password: ecommerce_pass <br />
 
 The main web application is running at: <br />
 [http://localhost:13000](http://localhost:13000)
@@ -119,8 +127,8 @@ Demo at: <br />
 
 ## Deployment instructions
 
-Deploy using heroku:
-- Register at [heroku](https://www.heroku.com)
+__With heroku:__
+  - Register at [heroku](https://www.heroku.com)
 
 ```
 $ git clone --recursive https://github.com/devcows/ecommerce.git
@@ -135,15 +143,15 @@ $ heroku run rake db:migrate RAILS_ENV=production
 $ heroku run rake db:seed
 ```
 
-Deploy using digital ocean:
+__With digital ocean:__
 ```
 $ vagrant plugin install vagrant-digitalocean
 ```
 
-Generate API token:
-https://cloud.digitalocean.com/settings/applications
+  - Generate API token:
+    https://cloud.digitalocean.com/settings/applications
 
-- Add token code in Vagrant file at YOUR_TOKEN:
+  - Add token code in Vagrant file at YOUR_TOKEN:
 ```
   config.vm.provider :digital_ocean do |provider, override|
     override.ssh.private_key_path = '~/.ssh/id_rsa'
@@ -157,16 +165,16 @@ https://cloud.digitalocean.com/settings/applications
   end
 ```
 
-Execute:
+  - Execute:
 ```
 $ git clone --recursive https://github.com/devcows/ecommerce.git
 $ cd ecommerce
 $ RAILS_ENV=production vagrant up main_app --provider=digital_ocean
 ```
 
-Managed servers:
+__With a managed server:__
 
-- Add server ssh config:
+  - Add server ssh config:
 ```
   app.vm.provider :managed do |provider, override|
     override.ssh.username = 'username'
@@ -177,7 +185,7 @@ Managed servers:
   end  
 ```
 
-Execute:
+  - Execute:
 ```
 $ vagrant plugin install vagrant-managed-servers
 $ git clone --recursive https://github.com/devcows/ecommerce.git
@@ -186,5 +194,5 @@ $ RAILS_ENV=production vagrant up main_app --provider=managed
 $ RAILS_ENV=production vagrant provision main_app
 ```
 
-Troubleshooting Puppet old version:
-https://docs.puppetlabs.com/guides/install_puppet/install_debian_ubuntu.html
+  - Troubleshooting Puppet old version:
+    https://docs.puppetlabs.com/guides/install_puppet/install_debian_ubuntu.html
