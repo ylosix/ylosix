@@ -37,9 +37,11 @@ ActiveAdmin.register Product do
     end
 
     f.inputs 'Price' do
-      f.input :retail_price_pre_tax
-      f.input :retail_price
-      f.input :tax
+      f.input :retail_price_pre_tax, input_html: { onchange: 'javascript:change_price_pre_tax(this);' }
+      f.input :retail_price, input_html: { onchange: 'javascript:change_price(this);' }
+
+      taxes = Tax.all
+      render partial: 'admin/products/taxes', locals: { taxes: taxes, tax: f.object.tax }
     end
 
     f.inputs 'Seo' do
