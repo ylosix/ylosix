@@ -12,6 +12,7 @@
 #  flag_content_type     :string
 #  flag_file_size        :integer
 #  flag_updated_at       :datetime
+#  name                  :string
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

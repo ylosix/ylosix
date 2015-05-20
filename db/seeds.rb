@@ -41,8 +41,12 @@ def create_default_languages
 
   language_codes = %w(gb es)
   language_codes.each do |lang_code|
+    name = 'English'
+    name = 'Español' if lang_code == 'es'
+
     flag_file = File.new "#{Rails.root}/app/assets/images/flags/#{lang_code}.png"
     language_attributes = {:code => lang_code,
+                           :name => name,
                            :flag => flag_file,
                            :appears_in_backoffice => true,
                            :appears_in_web => true}
@@ -79,8 +83,8 @@ def create_default_products
   category = Category.find_by_slug('digital_cameras')
   categories = [category]
 
-  tag_cameras = Tag.find_by(:name => 'Cameras')
-  tag_reflex = Tag.find_by(:name => 'Reflex')
+  tag_cameras = Tag.with_translations.find_by(:tag_translations => {:name => 'Cameras', :locale => :en })
+  tag_reflex = Tag.with_translations.find_by(:tag_translations => {:name => 'Reflex', :locale => :en })
   tags = [tag_cameras, tag_reflex]
 
   tax_iva = Tax.find_by({ :name => 'IVA ES 21%' })
@@ -88,6 +92,7 @@ def create_default_products
   camera_image = File.new "#{Rails.root}/app/assets/images/products/canon_450d.png"
   product_attributes = {:reference_code => 'ref1',
                         :name => 'Canon 450D',
+                        :locale => :en,
                         :barcode => '123456789',
                         :enabled => true,
                         :appears_in_categories => true,
@@ -112,6 +117,7 @@ def create_default_products
   camera_image = File.new "#{Rails.root}/app/assets/images/products/nikon_d5500.png"
   product_attributes = {:reference_code => 'ref2',
                         :name => 'Nikon D5500',
+                        :locale => :en,
                         :barcode => '1234567890',
                         :enabled => true,
                         :appears_in_categories => true,
@@ -137,6 +143,7 @@ def create_default_products
   zoom_image = File.new "#{Rails.root}/app/assets/images/products/DX-Zoom-10-24mm.png"
   product_attributes = {:reference_code => 'ref3',
                         :name => 'AF-S DX 10-24mm',
+                        :locale => :en,
                         :barcode => '1234567891',
                         :enabled => true,
                         :appears_in_categories => true,
@@ -168,6 +175,7 @@ def create_default_categories
 
   root_attributes = {:parent_id => nil,
                      :name => 'root',
+                     :locale => :en,
                      :enabled => true,
                      :appears_in_web => false,
                      :slug => 'root'}
@@ -175,6 +183,7 @@ def create_default_categories
 
   category_cam_attributes = {:parent_id => root.id,
                              :name => 'Digital Cameras',
+                             :locale => :en,
                              :enabled => true,
                              :appears_in_web => true,
                              :slug => 'digital_cameras'}
@@ -182,6 +191,7 @@ def create_default_categories
 
   category_cam_attributes = {:parent_id => digital_cameras.id,
                              :name => 'Lenses',
+                             :locale => :en,
                              :enabled => true,
                              :appears_in_web => true,
                              :slug => 'lenses'}
@@ -196,13 +206,21 @@ def create_default_tags
 
   tag_cameras_attributes = {:parent_id => nil,
                             :name => 'Cameras',
+                            :locale => :en,
                             :appears_in_web => true}
-  tag_cameras = save_or_update_model(Tag, {:name => 'Cameras'}, tag_cameras_attributes)
+  tag_cameras = Tag.with_translations.find_by(:tag_translations => {:name => 'Cameras', :locale => :en })
+  if tag_cameras.nil?
+    tag_cameras = Tag.create!(tag_cameras_attributes)
+  end
 
   tag_reflex_attributes = {:parent_id => tag_cameras.id,
                            :name => 'Reflex',
+                           :locale => :en,
                            :appears_in_web => true}
-  save_or_update_model(Tag, {:name => 'Reflex'}, tag_reflex_attributes)
+  tag_reflex = Tag.with_translations.find_by(:tag_translations => {:name => 'Reflex', :locale => :en })
+  if tag_reflex.nil?
+    Tag.create!(tag_reflex_attributes)
+  end
 end
 
 

@@ -3,6 +3,7 @@ class CommonFrontendController < ApplicationController
 
   def get_template_variables
     @variables = {} if @variables.nil?
+    @variables['languages'] = Language.all
     @variables['categories'] = @categories
     @variables['products'] = @products # TODO This only for test.
     @variables['current_user'] = current_user

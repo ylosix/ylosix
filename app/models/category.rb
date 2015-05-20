@@ -15,6 +15,8 @@
 #
 
 class Category < ActiveRecord::Base
+  translates :name
+
   has_many :children, class_name: 'Category', foreign_key: 'parent_id'
   belongs_to :parent, class_name: 'Category'
 
