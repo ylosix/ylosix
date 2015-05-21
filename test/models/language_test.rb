@@ -18,7 +18,12 @@
 require 'test_helper'
 
 class LanguageTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test 'to_liquid' do
+    hash = languages(:en).to_liquid
+
+    assert hash.key? 'code'
+    assert hash.key? 'name'
+    assert hash.key? 'image_src'
+    assert hash.key? 'href'
+  end
 end
