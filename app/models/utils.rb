@@ -16,15 +16,19 @@ class Utils
 
     require 'zip'
     zf = Zip::File.new(file)
-    zf.each_with_index do |entry, index|
-      puts "entry #{index} is #{entry.name}, size = #{entry.size}, compressed size = #{entry.compressed_size}"
+    zf.each_with_index do |entry, _|
+      # puts "entry #{index} is #{entry.name}, size = #{entry.size}, compressed size = #{entry.compressed_size}"
       # use zf.get_input_stream(entry) to get a ZipInputStream for the entry
       # entry can be the ZipEntry object or any object which has a to_s method that
       # returns the name of the entry.
 
-      file_out_put = File.join(output_dir, entry.name)
-      File.open(file_out_put, 'w') do |f|
-        f.write zf.get_input_stream(entry).read
+      file_output = File.join(output_dir, entry.name)
+      if entry.file?
+        File.open(file_output, 'wb') do |f|
+          f.write zf.get_input_stream(entry).read
+        end
+      else
+        FileUtils.mkdir_p file_output
       end
     end
   end
