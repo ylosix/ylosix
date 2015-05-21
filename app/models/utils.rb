@@ -16,15 +16,19 @@ class Utils
 
     require 'zip'
     zf = Zip::File.new(file)
-    zf.each_with_index do |entry, index|
-      puts "entry #{index} is #{entry.name}, size = #{entry.size}, compressed size = #{entry.compressed_size}"
+    zf.each_with_index do |entry, _|
+      # puts "entry #{index} is #{entry.name}, size = #{entry.size}, compressed size = #{entry.compressed_size}"
       # use zf.get_input_stream(entry) to get a ZipInputStream for the entry
       # entry can be the ZipEntry object or any object which has a to_s method that
       # returns the name of the entry.
 
-      file_out_put = File.join(output_dir, entry.name)
-      File.open(file_out_put, 'w') do |f|
-        f.write zf.get_input_stream(entry).read
+      file_output = File.join(output_dir, entry.name)
+      if entry.file?
+        File.open(file_output, 'wb') do |f|
+          f.write zf.get_input_stream(entry).read
+        end
+      else
+        FileUtils.mkdir_p file_output
       end
     end
   end
@@ -36,6 +40,7 @@ class Utils
   def self.zip_folder(input_dir)
     zip_file = "/tmp/#{Time.now.to_i}.zip"
 
+    File.delete(zip_file) if File.exist? zip_file
     entries = Dir.entries(input_dir)
     entries.delete('.')
     entries.delete('..')
@@ -57,7 +62,7 @@ class Utils
 
       if File.directory?(disk_file_path)
         io.mkdir(zip_file_path)
-        subdir = Dir.entries(zip_file_path)
+        subdir = Dir.entries(disk_file_path)
         subdir.delete('.')
         subdir.delete('..')
 
