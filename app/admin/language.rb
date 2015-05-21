@@ -1,7 +1,7 @@
 ActiveAdmin.register Language do
   menu parent: 'Localization'
 
-  permit_params :locale, :flag, :appears_in_backoffice, :appears_in_web
+  permit_params :locale, :flag, :appears_in_backoffice, :appears_in_web, :name
 
   index do
     selectable_column

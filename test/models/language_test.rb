@@ -26,4 +26,13 @@ class LanguageTest < ActiveSupport::TestCase
     assert hash.key? 'image_src'
     assert hash.key? 'href'
   end
+
+  test 'update appears' do
+    lang = languages(:en)
+    lang.appears_in_web = true
+    lang.appears_in_backoffice = false
+
+    lang.save
+    assert !lang.appears_in_web
+  end
 end

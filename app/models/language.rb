@@ -20,6 +20,8 @@ class Language < ActiveRecord::Base
 
   validates_attachment_content_type :flag, content_type: /\Aimage\/.*\Z/
 
+  before_save :update_appears
+
   def to_liquid
     image_src = 'http://placehold.it/15x15'
     image_src = flag.url(:medium) if flag.file?
@@ -30,5 +32,11 @@ class Language < ActiveRecord::Base
         'image_src' => image_src,
         'href' => Rails.application.routes.url_helpers.change_locale_path(locale)
     }
+  end
+
+  private
+
+  def update_appears
+    self.appears_in_web &= appears_in_backoffice
   end
 end

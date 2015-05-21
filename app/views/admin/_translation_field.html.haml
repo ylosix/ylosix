@@ -5,9 +5,9 @@
       = image_tag(language.flag.url(:thumb))
     - else
       = language.locale
-  %input{type: 'hidden', name: "#{input_name_prefix}[locale]", value: language.locale}
+  = text_field_tag "#{input_name_prefix}[locale]", language.locale, {type: 'hidden'}
 
   - unless id.nil?
-    %input{type: 'hidden', value: id, name: "#{input_name_prefix}[id]"}
+    = text_field_tag "#{input_name_prefix}[id]", id, {type: 'hidden'}
 
-  %input{type: 'text', id: id_prefix, value: value, name: "#{input_name_prefix}[#{input_name_sufix}]"}
+  = component

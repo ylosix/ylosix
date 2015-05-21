@@ -11,6 +11,20 @@ class Utils
     array.reverse
   end
 
+  def self.array_translations(model, id)
+    translations = []
+
+    languages = Language.where(appears_in_backoffice: true)
+    languages.each do |lang|
+      ct = model.find_by(locale: lang.locale, category_id: id)
+      ct = model.new(locale: lang.locale, category_id: id) if ct.nil?
+
+      translations << ct
+    end
+
+    translations
+  end
+
   def self.zip_extract(output_dir, file)
     FileUtils.mkdir_p output_dir
 

@@ -26,19 +26,8 @@ class Category < ActiveRecord::Base
 
   accepts_nested_attributes_for :category_translations
 
-  # TODO only enabled languages
   def admin_category_translations
-    translations = []
-
-    languages = Language.where(appears_in_backoffice: true)
-    languages.each do |lang|
-      ct = CategoryTranslation.find_by(locale: lang.locale, category_id: id)
-      ct = CategoryTranslation.new(locale: lang.locale, category_id: id) if ct.nil?
-
-      translations << ct
-    end
-
-    translations
+    Utils.array_translations(CategoryTranslation, id)
   end
 
   def to_liquid

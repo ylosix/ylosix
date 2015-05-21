@@ -7,8 +7,11 @@ class ApplicationController < ActionController::Base
 
   def change_locale
     locale = I18n.default_locale
-    if !params[:locale].blank? && I18n.available_locales.include?(:"#{params[:locale]}")
-      locale = params[:locale]
+
+    unless params[:locale].blank?
+      locale_param = params[:locale].parameterize.underscore.to_sym
+
+      locale = params[:locale] if I18n.available_locales.include?(locale_param)
     end
 
     session[:locale] = locale

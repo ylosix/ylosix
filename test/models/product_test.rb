@@ -47,4 +47,11 @@ class ProductTest < ActiveSupport::TestCase
     pr_cloned = pr.clone
     assert pr_cloned.instance_of? Product
   end
+
+  test 'to_liquid' do
+    hash = products(:camera).to_liquid
+
+    assert hash.key? 'name'
+    assert hash.key? 'href'
+  end
 end
