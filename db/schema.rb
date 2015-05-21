@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150519075913) do
+ActiveRecord::Schema.define(version: 20150520133231) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -61,6 +61,17 @@ ActiveRecord::Schema.define(version: 20150519075913) do
   add_index "categories", ["parent_id"], name: "index_categories_on_parent_id"
   add_index "categories", ["slug"], name: "index_categories_on_slug"
 
+  create_table "category_translations", force: :cascade do |t|
+    t.integer  "category_id", null: false
+    t.string   "locale",      null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "name"
+  end
+
+  add_index "category_translations", ["category_id"], name: "index_category_translations_on_category_id"
+  add_index "category_translations", ["locale"], name: "index_category_translations_on_locale"
+
   create_table "ckeditor_assets", force: :cascade do |t|
     t.string   "data_file_name",               null: false
     t.string   "data_content_type"
@@ -87,9 +98,23 @@ ActiveRecord::Schema.define(version: 20150519075913) do
     t.string   "flag_content_type"
     t.integer  "flag_file_size"
     t.datetime "flag_updated_at"
+    t.string   "name"
   end
 
   add_index "languages", ["code"], name: "index_languages_on_code"
+
+  create_table "product_translations", force: :cascade do |t|
+    t.integer  "product_id",        null: false
+    t.string   "locale",            null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.string   "name"
+    t.text     "short_description"
+    t.text     "description"
+  end
+
+  add_index "product_translations", ["locale"], name: "index_product_translations_on_locale"
+  add_index "product_translations", ["product_id"], name: "index_product_translations_on_product_id"
 
   create_table "products", force: :cascade do |t|
     t.string   "reference_code"
@@ -148,6 +173,17 @@ ActiveRecord::Schema.define(version: 20150519075913) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "tag_translations", force: :cascade do |t|
+    t.integer  "tag_id",     null: false
+    t.string   "locale",     null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "name"
+  end
+
+  add_index "tag_translations", ["locale"], name: "index_tag_translations_on_locale"
+  add_index "tag_translations", ["tag_id"], name: "index_tag_translations_on_tag_id"
 
   create_table "tags", force: :cascade do |t|
     t.string   "name"

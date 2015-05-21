@@ -12,6 +12,8 @@
 #
 
 class Tag < ActiveRecord::Base
+  translates :name
+
   has_many :children, class_name: 'Tag', foreign_key: 'parent_id'
   belongs_to :parent, class_name: 'Tag'
 

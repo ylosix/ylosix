@@ -12,10 +12,23 @@
 #  flag_content_type     :string
 #  flag_file_size        :integer
 #  flag_updated_at       :datetime
+#  name                  :string
 #
 
 class Language < ActiveRecord::Base
   has_attached_file :flag, styles: { medium: '300x300>', thumb: '100x100>' }
 
   validates_attachment_content_type :flag, content_type: /\Aimage\/.*\Z/
+
+  def to_liquid
+    image_src = 'http://placehold.it/15x15'
+    image_src = flag.url(:medium) if flag.file?
+
+    {
+        'code' => code,
+        'name' => name,
+        'image_src' => image_src,
+        'href' => Rails.application.routes.url_helpers.change_locale_path(code)
+    }
+  end
 end

@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     post '/' => 'searches#index'
   end
 
+  get '/locale/:locale' => 'application#change_locale', :as => 'change_locale'
   # You can have the root of your site routed with "root"
   root 'home#index'
 

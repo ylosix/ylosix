@@ -7,6 +7,7 @@ ActiveAdmin.register Language do
     selectable_column
     id_column
     column :code
+    column :name
     column (:flag) { |language| image_tag(language.flag.url(:thumb)) if language.flag? }
 
     column :appears_in_backoffice
@@ -15,12 +16,14 @@ ActiveAdmin.register Language do
   end
 
   filter :code
+  filter :name
   filter :appears_in_backoffice
   filter :appears_in_web
 
   form do |f|
     f.inputs 'Language Details' do
       f.input :code
+      f.input :name
       f.input :flag, hint: (f.template.image_tag(f.object.flag.url(:thumb)) if f.object.flag?)
       f.input :appears_in_backoffice
       f.input :appears_in_web

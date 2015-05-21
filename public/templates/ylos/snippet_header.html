@@ -13,10 +13,18 @@
 		</ul>
 	 </div>
 	 <div class="col-xs-3 col-sm-2 pull-left">
-		<a class="phone btn dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" aria-expanded="false"><div class="glyphicon glyphicon-globe"></div> Language</a>
+		<a class="phone btn dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" aria-expanded="false">
+			<div class="glyphicon glyphicon-globe"></div> Language
+		</a>
 		<ul class="dropdown-menu">
-		 <li><a href="#">Español</a></li>
-		 <li><a href="#">English</a></li>
+			{% for language in languages %}
+				<li>
+					<a href="{{ language.href }}">
+						<img src="{{ language.image_src }}" alt="flag" />
+						{{ language.name }}
+					</a>
+				</li>
+			{% endfor %}
 		</ul>
 	 </div>
 	<!-- /.navbar-collapse -->

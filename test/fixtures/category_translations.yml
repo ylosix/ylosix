@@ -1,0 +1,16 @@
+# == Schema Information
+#
+# Table name: category_translations
+#
+#  id          :integer          not null, primary key
+#  category_id :integer          not null
+#  locale      :string           not null
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  name        :string
+#
+
+one:
+  category: digital_cameras
+  locale: en
+  name: Digital cameras
