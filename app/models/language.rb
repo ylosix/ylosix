@@ -3,7 +3,7 @@
 # Table name: languages
 #
 #  id                    :integer          not null, primary key
-#  code                  :string
+#  locale                :string
 #  appears_in_backoffice :boolean          default(FALSE)
 #  appears_in_web        :boolean          default(FALSE)
 #  created_at            :datetime
@@ -25,10 +25,10 @@ class Language < ActiveRecord::Base
     image_src = flag.url(:medium) if flag.file?
 
     {
-        'code' => code,
+        'locale' => locale,
         'name' => name,
         'image_src' => image_src,
-        'href' => Rails.application.routes.url_helpers.change_locale_path(code)
+        'href' => Rails.application.routes.url_helpers.change_locale_path(locale)
     }
   end
 end

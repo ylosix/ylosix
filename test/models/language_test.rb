@@ -3,7 +3,7 @@
 # Table name: languages
 #
 #  id                    :integer          not null, primary key
-#  code                  :string
+#  locale                :string
 #  appears_in_backoffice :boolean          default(FALSE)
 #  appears_in_web        :boolean          default(FALSE)
 #  created_at            :datetime
@@ -21,7 +21,7 @@ class LanguageTest < ActiveSupport::TestCase
   test 'to_liquid' do
     hash = languages(:en).to_liquid
 
-    assert hash.key? 'code'
+    assert hash.key? 'locale'
     assert hash.key? 'name'
     assert hash.key? 'image_src'
     assert hash.key? 'href'

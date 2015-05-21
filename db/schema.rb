@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150520133231) do
+ActiveRecord::Schema.define(version: 20150521171957) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -89,7 +89,7 @@ ActiveRecord::Schema.define(version: 20150520133231) do
   add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type"
 
   create_table "languages", force: :cascade do |t|
-    t.string   "code"
+    t.string   "locale"
     t.boolean  "appears_in_backoffice", default: false
     t.boolean  "appears_in_web",        default: false
     t.datetime "created_at"
@@ -101,7 +101,7 @@ ActiveRecord::Schema.define(version: 20150520133231) do
     t.string   "name"
   end
 
-  add_index "languages", ["code"], name: "index_languages_on_code"
+  add_index "languages", ["locale"], name: "index_languages_on_locale"
 
   create_table "product_translations", force: :cascade do |t|
     t.integer  "product_id",        null: false

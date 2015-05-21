@@ -32,11 +32,11 @@ ActiveAdmin.register Category do
         render partial: 'admin/translation_field',
                locals: {
                    id: t.id,
-                   id_prefix: "category_name_#{t.language.code}_#{index}",
+                   id_prefix: "category_name_#{t.language.locale}_#{index}",
                    input_name_prefix:
                        "category[category_translations_attributes][#{index}]",
                    input_name_sufix: 'name',
-                   locale: t.language,
+                   language: t.language,
                    value: t.name
                }
       end

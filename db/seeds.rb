@@ -39,19 +39,19 @@ def create_default_languages
   puts '## Creating default languages'
   puts '####################'
 
-  language_codes = %w(en es)
-  language_codes.each do |lang_code|
+  available_locales = %w(en es)
+  available_locales.each do |locale|
     name = 'English'
-    name = 'Español' if lang_code == 'es'
+    name = 'Español' if locale == 'es'
 
-    flag_file = File.new "#{Rails.root}/app/assets/images/flags/#{lang_code}.png"
-    language_attributes = {:code => lang_code,
+    flag_file = File.new "#{Rails.root}/app/assets/images/flags/#{locale}.png"
+    language_attributes = {:locale => locale,
                            :name => name,
                            :flag => flag_file,
                            :appears_in_backoffice => true,
                            :appears_in_web => true}
 
-    save_or_update_model(Language, {:code => lang_code}, language_attributes)
+    save_or_update_model(Language, {:locale => locale}, language_attributes)
   end
 end
 

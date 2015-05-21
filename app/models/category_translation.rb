@@ -12,6 +12,6 @@
 
 class CategoryTranslation < ActiveRecord::Base
   belongs_to :category
-  belongs_to :language, primary_key: 'code', foreign_key: 'locale'
+  belongs_to :language, primary_key: :locale, foreign_key: :locale
   # validates_uniqueness_of locale: { scope: :category_id }
 end

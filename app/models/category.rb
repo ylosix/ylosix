@@ -32,16 +32,11 @@ class Category < ActiveRecord::Base
 
     languages = Language.where(appears_in_backoffice: true)
     languages.each do |lang|
-      ct = CategoryTranslation.find_by(locale: lang.code, category_id: id)
-      ct = CategoryTranslation.new(locale: lang.code, category_id: id) if ct.nil?
+      ct = CategoryTranslation.find_by(locale: lang.locale, category_id: id)
+      ct = CategoryTranslation.new(locale: lang.locale, category_id: id) if ct.nil?
 
       translations << ct
     end
-    #
-    # CategoryTranslation.find_by_sql("SELECT `ct`.* FROM `languages` as `lang`
-    #       LEFT JOIN `category_translations` as `ct` ON
-    #         `lang`.`code` = `ct`.`locale` and
-    #         `ct`.`category_id` = #{id}")
 
     translations
   end

@@ -3,7 +3,7 @@
 # Table name: languages
 #
 #  id                    :integer          not null, primary key
-#  code                  :string
+#  locale                :string
 #  appears_in_backoffice :boolean          default(FALSE)
 #  appears_in_web        :boolean          default(FALSE)
 #  created_at            :datetime
@@ -18,11 +18,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 en:
-  code: en
+  locale: en
   appears_in_backoffice: true
   appears_in_web: true
 
 es:
-  code: es
+  locale: es
   appears_in_backoffice: false
   appears_in_web: false

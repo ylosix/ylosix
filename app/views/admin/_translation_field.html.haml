@@ -1,0 +1,13 @@
+%li{id: "#{id_prefix}_input", class: 'string input optional stringish'}
+  %label{class: 'label', for: id_prefix}
+    = input_name_sufix
+    - if language.flag?
+      = image_tag(language.flag.url(:thumb))
+    - else
+      = language.locale
+  %input{type: 'hidden', name: "#{input_name_prefix}[locale]", value: language.locale}
+
+  - unless id.nil?
+    %input{type: 'hidden', value: id, name: "#{input_name_prefix}[id]"}
+
+  %input{type: 'text', id: id_prefix, value: value, name: "#{input_name_prefix}[#{input_name_sufix}]"}

@@ -1,12 +1,12 @@
 ActiveAdmin.register Language do
   menu parent: 'Localization'
 
-  permit_params :code, :flag, :appears_in_backoffice, :appears_in_web
+  permit_params :locale, :flag, :appears_in_backoffice, :appears_in_web
 
   index do
     selectable_column
     id_column
-    column :code
+    column :locale
     column :name
     column (:flag) { |language| image_tag(language.flag.url(:thumb)) if language.flag? }
 
@@ -15,14 +15,14 @@ ActiveAdmin.register Language do
     actions
   end
 
-  filter :code
+  filter :locale
   filter :name
   filter :appears_in_backoffice
   filter :appears_in_web
 
   form do |f|
     f.inputs 'Language Details' do
-      f.input :code
+      f.input :locale
       f.input :name
       f.input :flag, hint: (f.template.image_tag(f.object.flag.url(:thumb)) if f.object.flag?)
       f.input :appears_in_backoffice
