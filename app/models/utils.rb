@@ -24,6 +24,8 @@ class Utils
 
       file_output = File.join(output_dir, entry.name)
       if entry.file?
+        FileUtils.mkdir_p Pathname.new(file_output).dirname
+
         File.open(file_output, 'wb') do |f|
           f.write zf.get_input_stream(entry).read
         end
