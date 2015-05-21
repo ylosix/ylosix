@@ -34,6 +34,8 @@ platforms :ruby do # Only linux
   gem 'puma'
 end
 
+gem 'exception_notification'
+gem 'slack-notifier'
 gem 'rubyzip'
 gem 'foreman'
 gem 'rails-erd'

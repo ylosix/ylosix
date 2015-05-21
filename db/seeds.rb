@@ -39,7 +39,7 @@ def create_default_languages
   puts '## Creating default languages'
   puts '####################'
 
-  language_codes = %w(gb es)
+  language_codes = %w(en es)
   language_codes.each do |lang_code|
     name = 'English'
     name = 'Español' if lang_code == 'es'
