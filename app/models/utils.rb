@@ -36,6 +36,7 @@ class Utils
   def self.zip_folder(input_dir)
     zip_file = "/tmp/#{Time.now.to_i}.zip"
 
+    File.delete(zip_file) if File.exist? zip_file
     entries = Dir.entries(input_dir)
     entries.delete('.')
     entries.delete('..')
@@ -57,7 +58,7 @@ class Utils
 
       if File.directory?(disk_file_path)
         io.mkdir(zip_file_path)
-        subdir = Dir.entries(zip_file_path)
+        subdir = Dir.entries(disk_file_path)
         subdir.delete('.')
         subdir.delete('..')
 

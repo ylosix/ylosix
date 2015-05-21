@@ -5,8 +5,12 @@ class Admin::TemplatesControllerTest < ActionController::TestCase
 
   def setup
     login_admin
-    FileUtils.mkdir_p 'tmp/templates/test'
+    FileUtils.mkdir_p 'tmp/templates/test/snippets'
     File.open('tmp/templates/test/home_index.html', 'w') do |f|
+      f.write '<h1>hello world</h1>'
+    end
+
+    File.open('tmp/templates/test/snippets/header.html', 'w') do |f|
       f.write '<h1>hello world</h1>'
     end
 
