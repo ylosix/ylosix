@@ -8,6 +8,12 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
+# Indexes
+#
+#  index_products_categories_on_category_id                 (category_id)
+#  index_products_categories_on_category_id_and_product_id  (category_id,product_id)
+#  index_products_categories_on_product_id                  (product_id)
+#
 
 class ProductsCategory < ActiveRecord::Base
   belongs_to :product

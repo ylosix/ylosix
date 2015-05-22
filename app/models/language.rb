@@ -14,6 +14,10 @@
 #  flag_updated_at       :datetime
 #  name                  :string
 #
+# Indexes
+#
+#  index_languages_on_locale  (locale)
+#
 
 class Language < ActiveRecord::Base
   has_attached_file :flag, styles: { medium: '300x300>', thumb: '100x100>' }

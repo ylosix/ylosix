@@ -29,6 +29,10 @@
 #  image_file_size       :integer
 #  image_updated_at      :datetime
 #
+# Indexes
+#
+#  index_products_on_tax_id  (tax_id)
+#
 
 class Product < ActiveRecord::Base
   translates :name, :short_description, :description

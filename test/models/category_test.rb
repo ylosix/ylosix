@@ -13,6 +13,11 @@
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #
+# Indexes
+#
+#  index_categories_on_parent_id  (parent_id)
+#  index_categories_on_slug       (slug)
+#
 
 require 'test_helper'
 

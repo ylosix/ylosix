@@ -14,6 +14,10 @@
 #  flag_updated_at       :datetime
 #  name                  :string
 #
+# Indexes
+#
+#  index_languages_on_locale  (locale)
+#
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 

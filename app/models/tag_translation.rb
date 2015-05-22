@@ -9,6 +9,11 @@
 #  updated_at :datetime         not null
 #  name       :string
 #
+# Indexes
+#
+#  index_tag_translations_on_locale  (locale)
+#  index_tag_translations_on_tag_id  (tag_id)
+#
 
 class TagTranslation < ActiveRecord::Base
   belongs_to :tag
