@@ -27,23 +27,8 @@ ActiveAdmin.register Category do
     f.inputs 'Category Details' do
       f.input :parent
 
-      translations = f.object.admin_category_translations
-      translations.each_with_index do |t, index|
-        input_name_prefix = "category[category_translations_attributes][#{index}]"
-        input_name_suffix = 'name'
-
-        render partial: 'admin/translation_field',
-               locals: {
-                   id: t.id,
-                   id_prefix:
-                       "category_category_translations_attributes_#{index}_#{input_name_suffix}",
-                   input_name_prefix: input_name_prefix,
-                   input_name_sufix: input_name_suffix,
-                   language: t.language,
-                   component:
-                       text_field_tag("#{input_name_prefix}[#{input_name_suffix}]", t.name)
-               }
-      end
+      translations = f.object.admin_translations
+      admin_translation_text_field(translations, 'category', 'name')
 
       f.input :enabled
       f.input :appears_in_web

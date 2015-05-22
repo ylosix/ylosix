@@ -19,4 +19,11 @@ class Tag < ActiveRecord::Base
 
   has_many :products_tags
   has_many :products, through: :products_tags
+
+  has_many :tag_translations
+  accepts_nested_attributes_for :tag_translations
+
+  def admin_translations
+    Utils.array_translations(TagTranslation, tag_id: id)
+  end
 end

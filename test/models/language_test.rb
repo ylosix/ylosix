@@ -32,7 +32,7 @@ class LanguageTest < ActiveSupport::TestCase
     lang.appears_in_web = true
     lang.appears_in_backoffice = false
 
-    lang.save
+    assert lang.save
     assert !lang.appears_in_web
   end
 end

@@ -6,7 +6,8 @@ ActiveAdmin.register Product do
                 :description, :publication_date, :unpublication_date,
                 :retail_price_pre_tax, :retail_price, :tax_id,
                 :meta_keywords, :meta_description, :slug, :stock, :control_stock,
-                products_categories_attributes: [:id, :category_id, :product_id, :_destroy]
+                products_categories_attributes: [:id, :category_id, :product_id, :_destroy],
+                product_translations_attributes: [:id, :locale, :name, :short_description, :description]
 
   index do
     selectable_column
@@ -21,7 +22,8 @@ ActiveAdmin.register Product do
 
   form do |f|
     f.inputs 'Information' do
-      f.input :name
+      translations = f.object.admin_translations
+      admin_translation_text_field(translations, 'product', 'name')
       f.input :reference_code
 
       f.input :enabled
@@ -29,8 +31,8 @@ ActiveAdmin.register Product do
       f.input :appears_in_tag
       f.input :appears_in_search
 
-      f.input :short_description
-      f.input :description, as: :ckeditor
+      admin_translation_text_field(translations, 'product', 'short_description', ActiveAdminHelpers::TEXT_AREA)
+      admin_translation_text_field(translations, 'product', 'description', ActiveAdminHelpers::CKEDITOR)
 
       f.input :publication_date
       f.input :unpublication_date

@@ -11,13 +11,14 @@ class Utils
     array.reverse
   end
 
-  def self.array_translations(model, id)
+  def self.array_translations(model, attributes)
     translations = []
 
     languages = Language.where(appears_in_backoffice: true)
     languages.each do |lang|
-      ct = model.find_by(locale: lang.locale, category_id: id)
-      ct = model.new(locale: lang.locale, category_id: id) if ct.nil?
+      attributes[:locale] = lang.locale
+      ct = model.find_by(attributes)
+      ct = model.new(attributes) if ct.nil?
 
       translations << ct
     end

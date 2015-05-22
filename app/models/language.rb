@@ -37,6 +37,6 @@ class Language < ActiveRecord::Base
   private
 
   def update_appears
-    self.appears_in_web &= appears_in_backoffice
+    self.appears_in_web = 0 unless appears_in_backoffice
   end
 end

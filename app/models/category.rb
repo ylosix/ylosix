@@ -26,8 +26,8 @@ class Category < ActiveRecord::Base
 
   accepts_nested_attributes_for :category_translations
 
-  def admin_category_translations
-    Utils.array_translations(CategoryTranslation, id)
+  def admin_translations
+    Utils.array_translations(CategoryTranslation, category_id: id)
   end
 
   def to_liquid

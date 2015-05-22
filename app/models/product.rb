@@ -40,18 +40,24 @@ class Product < ActiveRecord::Base
   has_many :products_categories
   has_many :categories, through: :products_categories
 
-  accepts_nested_attributes_for :products_categories, allow_destroy: true
-
   has_many :products_tags
   has_many :tags, through: :products_tags
 
+  has_many :product_translations
+
+  accepts_nested_attributes_for :products_categories, allow_destroy: true
   accepts_nested_attributes_for :products_tags, allow_destroy: true
+  accepts_nested_attributes_for :product_translations
 
   before_create :set_default_publication_date
 
   scope :search_by_text, lambda { |text|
     where('products.name LIKE ? OR products.description LIKE ?', "%#{text}%", "%#{text}%")
   }
+
+  def admin_translations
+    Utils.array_translations(ProductTranslation, product_id: id)
+  end
 
   def clone
     product = dup

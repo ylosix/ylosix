@@ -1,7 +1,8 @@
 ActiveAdmin.register Tag do
   menu parent: 'Catalog'
 
-  permit_params :parent_id, :name, :priority
+  permit_params :parent_id, :name, :priority,
+                tag_translations_attributes: [:id, :locale, :name]
 
   index do
     selectable_column
@@ -24,7 +25,10 @@ ActiveAdmin.register Tag do
   form do |f|
     f.inputs 'Tag Details' do
       f.input :parent
-      f.input :name
+
+      translations = f.object.admin_translations
+      admin_translation_text_field(translations, 'tag', 'name')
+
       f.input :appears_in_web
       f.input :priority
     end
