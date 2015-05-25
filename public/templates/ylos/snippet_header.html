@@ -1,32 +1,104 @@
-<!-- Navigation -->
-<div class="navbar navbar-inverse navbar-fixed-top" >
+<div class="top-header">
 	<div class="container">
-	 <!-- Collect the nav links, forms, and other content for toggling -->
-	 <div class="col-xs-6 col-sm-8">
-		<div class="phone"><div class="glyphicon glyphicon-earphone"></div> Tel. 964 582 136</div>
-	 </div>
-	 <div class="col-xs-3 col-sm-2">
-		<a class="phone btn dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" aria-expanded="false"><div class="glyphicon glyphicon-user"></div> Login</a>
-		<ul class="dropdown-menu">
-		  <li><a href="#">Register</a></li>
-		  <li><a href="#">Login</a></li>
-		</ul>
-	 </div>
-	 <div class="col-xs-3 col-sm-2 pull-left">
-		<a class="phone btn dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" aria-expanded="false">
-			<div class="glyphicon glyphicon-globe"></div> Language
-		</a>
-		<ul class="dropdown-menu">
-			{% for language in languages %}
-				<li>
-					<a href="{{ language.href }}">
-						<img src="{{ language.image_src }}" alt="flag" />
-						{{ language.name }}
-					</a>
-				</li>
-			{% endfor %}
-		</ul>
-	 </div>
-	<!-- /.navbar-collapse -->
+		<div class="row">
+			<div class="col-xs-6 col-sm-6">
+				<div class="info">
+					<ul class="nav">
+						<li><a href="#"><i class="glyphicon glyphicon-earphone icon"></i> <tel>900 000 000</tel></a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-xs-6 col-sm-6">
+				<div class="social-icons pull-right">
+					<ul class="nav info">
+						<li class="col-xs-6 col-sm-6">
+							<a href="#" class="text-fade"><i class="glyphicon glyphicon-user icon text-fade"></i>&nbsp;Login</a></li>
+						<li class="col-xs-6 col-sm-6">
+							<div class="btn-group">
+								<button type="button" class="btn btn-default dropdown-toggle lang" data-toggle="dropdown">
+									LANG
+									<span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu pull-left">
+									{% for language in languages %}
+										<li>
+											<a href="{{ language.href }}">
+												<img src="{{ language.image_src }}" alt="{{ language.locale }}" />
+												{{ language.name }}
+											</a>
+										</li>
+									{% endfor %}
+								</ul>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
 	</div>
+</div>
+<div class="container header">
+	<div class="col-xs-12 col-sm-6 col-md-6">
+		<div class="img-responsive"><img src="{{ template_public_path }}/images/logo.png"></div>
+	</div>
+	<div class="col-xs-12 col-sm-6">
+		<div class="social-icons pull-right">
+			<ul class="nav navbar-nav">
+				<li class="pull-right"><a href="#"><i class="fa fa-facebook icon-medium text-fade"></i></a></li>
+				<li class="pull-right"><a href="#"><i class="fa fa-twitter icon-medium text-fade"></i></a></li>
+				<li class="pull-right"><a href="#"><i class="fa fa-linkedin icon-medium text-fade"></i></a></li>
+				<li class="pull-right"><a href="#"><i class="fa fa-google-plus icon-medium text-fade"></i></a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="col-xs-12 col-sm-6 col-md-3 pull-right">
+		<form action="{{ search_url }}" accept-charset="UTF-8" method="post">
+
+			<input name="utf8" type="hidden" value="✓">
+			<input type="hidden" name="authenticity_token" value="{{ authenticity_token }}">
+
+			<div class="input-group">
+				<input name="query_text" type="text" class="form-control" placeholder="Search for..." />
+				<span class="input-group-btn">
+					<button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search icon"></i></button>
+				</span>
+			</div>
+		</form>
+	</div>
+</div>
+</header>	
+<!-- /header -->
+<!-- Page Content -->
+<div class="container">
+	<nav class="row" role="navigation">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+				<span class="navbar-brand">Menu</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+		</div>
+
+		<!--nav-->
+		<div class="mainmenu pull-left">
+			<ul class="nav navbar-nav collapse navbar-collapse">
+				{% for category in categories %}
+					<li class="dropdown">
+						<a href="{{ category.href }}">{{ category.name }}<i class="fa fa-angle-down"></i></a>
+						<ul role="menu" class="sub-menu">
+							{% for subcategory in category.children %}
+								<a href="{{ subcategory.href }}">
+									<li>{{ subcategory.name }}</li>
+								</a>
+							{% endfor %}
+					  </ul>
+					</li>
+				{% endfor %}
+				<li class="dropdown"><a href="#">Contact</a></li>
+			</ul>
+		</div>
+		<!-- /.navbar-collapse -->
+	</nav>
 </div>

@@ -36,7 +36,7 @@
 
 class Product < ActiveRecord::Base
   translates :name, :short_description, :description
-  has_attached_file :image, styles: { medium: '300x300>', thumb: '100x100>' }
+  has_attached_file :image, styles: {medium: '300x300>', thumb: '100x100>'}
 
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
@@ -56,8 +56,9 @@ class Product < ActiveRecord::Base
   before_create :set_default_publication_date
 
   scope :search_by_text, lambda { |text|
-    where('products.name LIKE ? OR products.description LIKE ?', "%#{text}%", "%#{text}%")
-  }
+                         joins(:product_translations)
+                             .where('product_translations.name LIKE ? OR product_translations.description LIKE ?', "%#{text}%", "%#{text}%")
+                       }
 
   def admin_translations
     Utils.array_translations(ProductTranslation, product_id: id)

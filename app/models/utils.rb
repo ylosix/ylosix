@@ -1,4 +1,21 @@
 class Utils
+  def self.pretty_json_template_variables(variables)
+    content_hash_variables = {}
+    variables.each do |k, v|
+      if v.class.name.include? 'ActiveRecord'
+        content_hash_variables[k] = []
+
+        v.each do |v_elem|
+          content_hash_variables[k] << v_elem.to_liquid
+        end
+      else
+        content_hash_variables[k] = v
+      end
+    end
+
+    content_hash_variables.as_json
+  end
+
   def self.get_parents_array(object)
     array = []
 

@@ -3,13 +3,11 @@ class SearchesController < CommonFrontendController
     @products = []
 
     unless @query_text.blank?
-      # @products = Product.where("products.name LIKE concat('%', ?, '%')", params[:query])
-      # @products += Product.where("products.description LIKE concat('%', ?, '%')", params[:query])
       @products = Product.search_by_text(@query_text)
     end
   end
 
-  def get_template_variables
+  def get_template_variables(template)
     super
   end
 end

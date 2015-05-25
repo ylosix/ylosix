@@ -1,93 +1,50 @@
 {{ include snippet_header.html }}
 
-<!-- Page Content -->
-<div class="container">
-	<div class="row">
-		<div class="col-md-12">
-			<div class="img-responsive"><img src="{{ template_public_path }}/images/logo.png"></div>
-		</div>
-		<div class="col-md-9"></div>
-		
-		<nav class="col-md-12" role="navigation">
-            <!-- Brand and toggle get grouped for better mobile display -->
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-					<span class="navbar-brand">Menu</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-			</div>
-            
-            <!-- Collect the nav links, forms, and other content for toggling -->
-			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-				<ul class="nav navbar-nav">
-					{% for category in categories %}
-    					<li>
-    						<a href="{{ category.href }}" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">{{ category.name }} <span class="caret"></span></a>
-    						<ul class="dropdown-menu" role="menu">
-    							{% for subcategory in category.children %}
-    							    <li><a href="{{ subcategory.href }}">{{ subcategory.name }}</a></li>
-    							{% endfor %}    
-    						</ul>                    
-    					</li>
-    				{% endfor %}	
-					<li>
-						<a href="#">Services</a>
-					</li>
-					<li>
-						<a href="#">Contact</a>
-					</li>
-				</ul>
-			</div>
-            <!-- /.navbar-collapse -->
-		</nav>
-	</div>
-	
-	{{ include snippet_banner.html }}
-	
-	<div class="row">
+{{ include snippet_banner.html }}
+
+<div class="row">
  		<div class="container">
-			<div class="col-sm-9 col-md-9">
+			<div class="col-sm-12 col-md-12">
 				<div class="row">
-					{% for product in products %}
-						<div class="col-sm-6 col-lg-4 col-md-4">
-							<div class="thumbnail">
-							   <img src="{{ product.image_src }}" alt="">
-							   <div class="caption">
+					{% for product in products %} 
+						<div class="col-sm-6 col-lg-3 col-md-3">
+							<div class="thumbnail item-home">
+								<img src="{{ product.image_src }}" alt="">
+								<div class="caption">
 								  <h4 class="pull-right price">{{ product.retail_price }}€</h4>
-								  <h4><a href="#">{{ product.name }}</a>
+								  <h4><a href="{{ product.href }}">{{ product.name }}</a>
 								  </h4>
-								  <p>
-									{{ product.short_description }}
-								  </p>
-							   </div>
-							   <div class="ratings">
-								  <p class="pull-right">15 reviews</p>
-								  <p>
+								  <p>{{ product.short_description }}</p>
+								</div>
+								<div class="ratings">
+									<p class="pull-right">15 reviews</p>
+									<p>
 									 <span class="glyphicon glyphicon-star"></span>
 									 <span class="glyphicon glyphicon-star"></span>
 									 <span class="glyphicon glyphicon-star"></span>
 									 <span class="glyphicon glyphicon-star"></span>
 									 <span class="glyphicon glyphicon-star"></span>
-								  </p>
-							   </div>
-							</div>
+									</p>
+									<div class="item-hidden">
+										<a href="#">
+											<div class="item-home-buy">
+												<div class="fa fa-shopping-cart icon-medium"></div>&nbsp;&nbsp;Buy
+											</div>
+										</a>
+										<a href="{{ product.href }}">
+											<div class="item-home-view">
+												<div class="fa fa-eye icon-medium"></div>&nbsp;&nbsp;View
+											</div>
+										</a>
+									</div>
+								 </div>
+							 </div>
 						</div>
 					{% endfor %}
 				</div>
 			</div>
-			<div class=" col-sm-3 col-md-3">
-				 <div class="list-group">
-					<a href="#" class="list-group-item">Category 1</a>
-					<a href="#" class="list-group-item">Category 2</a>
-					<a href="#" class="list-group-item">Category 3</a>
-				 </div>
-			</div>
 		</div>
 	</div>
-</div>
-<!-- /.container -->
-
+ </div>
+ <!-- /.container -->
 {{ include snippet_footer.html }}
-

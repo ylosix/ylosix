@@ -4,7 +4,7 @@ class ProductsController < CommonFrontendController
   def show
   end
 
-  def get_template_variables
+  def get_template_variables(template)
     super
   end
 

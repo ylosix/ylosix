@@ -57,6 +57,13 @@ class Template < ActiveRecord::Base
     end
   end
 
+  def get_snippet_content(file_name)
+    snippet_content = "Error => File snippet (#{File.join(absolute_path, file_name)}) not found!!!"
+    snippet_content = template.reads_file(file_name) if ok? file_name
+
+    snippet_content
+  end
+
   private
 
   def writes_file(file_name, content)
