@@ -22,8 +22,9 @@
           %a
             = @product.name
 
-        %p
-          = @product.description.html_safe
+        - unless @product.description.blank?
+          %p
+            = @product.description.html_safe
 
       %div.ratings
         %p.pull-right 3 reviews

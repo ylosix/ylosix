@@ -1,9 +1,10 @@
 class CommonFrontendController < ApplicationController
-  before_action :set_query_text, :get_root_categories, :get_default_products
+  before_action :set_query_text
+  before_action :get_languages, :get_root_categories, :get_default_products
 
   def get_template_variables
     @variables = {} if @variables.nil?
-    @variables['languages'] = Language.all
+    @variables['languages'] = @languages
     @variables['categories'] = @categories
     @variables['products'] = @products # TODO This only for test.
     @variables['current_user'] = current_user
@@ -25,6 +26,10 @@ class CommonFrontendController < ApplicationController
       @categories = root_category.children.where(enabled: true,
                                                  appears_in_web: true)
     end
+  end
+
+  def get_languages
+    @languages = Language.in_frontend
   end
 
   def get_default_products

@@ -14,8 +14,7 @@ class Utils
   def self.array_translations(model, attributes)
     translations = []
 
-    languages = Language.where(appears_in_backoffice: true)
-    languages.each do |lang|
+    Language.in_backoffice.each do |lang|
       attributes[:locale] = lang.locale
       ct = model.find_by(attributes)
       ct = model.new(attributes) if ct.nil?

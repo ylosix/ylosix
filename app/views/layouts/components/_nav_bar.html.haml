@@ -17,8 +17,15 @@
       %ul{:class => 'nav navbar-nav pull-right'}
         %li
           %a About
-        %li
-          %a Services
+
+        - @languages.each do |lang|
+          - image_src = ''
+          - image_src = lang.flag.url(:medium) if lang.flag.file?
+
+          %li
+            %a{href: change_locale_path(lang.locale)}
+              = image_tag image_src, { alt: lang.locale, title: lang.name}
+
         %li
           - if current_user.nil?
             = link_to 'Login', new_user_session_path
