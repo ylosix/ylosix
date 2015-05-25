@@ -42,6 +42,17 @@ class Category < ActiveRecord::Base
                      enabled: true)
   end
 
+  def self.root_categories
+    root_category = Category.root_category
+
+    root_categories = []
+    unless root_category.nil?
+      root_categories = root_category.children.in_frontend
+    end
+
+    root_categories
+  end
+
   def admin_translations
     Utils.array_translations(CategoryTranslation, category_id: id)
   end

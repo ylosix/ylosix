@@ -22,19 +22,14 @@ class ActionDispatch::IntegrationTest
   include Devise::TestHelpers
 end
 
-load "#{Rails.root}/db/seeds.rb"
+# load "#{Rails.root}/db/seeds.rb"
+#
+# def test_again_seed
+#   create_defaults
+# end
+# test_again_seed
 
-def test_again_seed
-  create_default_languages
-  create_default_roles
-  create_default_admin_user
-  create_default_categories
-  create_default_tags
-  create_default_products
-end
-
-test_again_seed
-Rake::Task['rubocop'].invoke
+# Rake::Task['rubocop'].invoke
 
 module ActiveSupport
   class TestCase

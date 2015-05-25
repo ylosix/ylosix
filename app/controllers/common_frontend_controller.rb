@@ -1,44 +1,34 @@
 class CommonFrontendController < ApplicationController
+  before_action :set_common_variables
   before_action :set_query_text
-  before_action :get_languages, :get_root_categories, :get_default_products
 
   def get_template_variables(template)
-    @variables = {} if @variables.nil?
-
-    @variables['languages'] = @languages
-    @variables['categories'] = @categories
-    @variables['products'] = @products # TODO This only for test.
-    @variables['current_user'] = current_user
-
+    @variables['current_customer'] = current_customer
+    @variables['new_customer_href'] = new_customer_session_path
     @variables['template_public_path'] = template.path.gsub('/public', '')
-    @variables['search_url'] = searches_path
-    @variables['authenticity_token'] = form_authenticity_token
 
-    @variables
+    @variables['search_url'] = Rails.application.routes.url_helpers.searches_path
+    @variables['authenticity_token'] = form_authenticity_token
+  end
+
+  def self.static_set_common_variables
+    variables = {}
+    variables['languages'] = Language.in_frontend
+    variables['categories'] = Category.root_categories
+    variables['products'] = Product.all.limit(10) # TODO This only for test.
+
+    variables
   end
 
   private
 
+  def set_common_variables
+    @variables = CommonFrontendController.static_set_common_variables
+  end
+
   def set_query_text
     @query_text = ''
     @query_text = params[:query_text] unless params[:query_text].blank?
-  end
-
-  def get_root_categories
-    root_category = Category.root_category
-
-    @categories = []
-    unless root_category.nil?
-      @categories = root_category.children.in_frontend
-    end
-  end
-
-  def get_languages
-    @languages = Language.in_frontend
-  end
-
-  def get_default_products
-    @products = Product.all.limit(10)
   end
 
   def replace_regex_include(template, content)

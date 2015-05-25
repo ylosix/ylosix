@@ -9,18 +9,6 @@ def save_or_update_model(model, search_options, attributes)
   object
 end
 
-def create_default_roles
-  puts '####################'
-  puts '## Creating default roles'
-  puts '####################'
-
-  role_admin = Role.find_by(:name => 'Client')
-  Role.create!(:name => 'Admin') if role_admin.nil?
-
-  role_user = Role.find_by(:name => 'Client')
-  Role.create!(:name => 'Client') if role_user.nil?
-end
-
 def create_default_admin_user
   puts '####################'
   puts '## Creating default admin user'
@@ -236,11 +224,14 @@ def create_default_ylos_template
 end
 
 
-create_default_languages
-create_default_roles
-create_default_admin_user
-create_default_categories
-create_default_tags
-create_default_taxes
-create_default_products
-create_default_ylos_template
+def create_defaults
+  create_default_languages
+  create_default_admin_user
+  create_default_categories
+  create_default_tags
+  create_default_taxes
+  create_default_products
+  create_default_ylos_template
+end
+
+create_defaults

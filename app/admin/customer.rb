@@ -1,7 +1,7 @@
-ActiveAdmin.register User do
-  menu parent: 'Administration'
+ActiveAdmin.register Customer do
+  menu parent: 'Customers'
 
-  permit_params :email
+  permit_params :email, :name, :last_name, :birth_date
 
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters

@@ -197,15 +197,20 @@ ActiveAdmin.setup do |config|
       # menu.add label: 'Products', :parent => 'Catalog', url: '/admin/products', :priority => 0
 
 
-      menu.add label: 'Administration', :priority => 3
+      menu.add label: 'Customers', :priority => 3
+
+
+      menu.add label: 'Administration', :priority => 4
       # menu.add label: 'Admin users',    :parent => 'Administration', url: 'admin/admin_users', :priority => 0
       # menu.add label: 'Users',          :parent => 'Administration', url: 'admin/users', :priority => 1
       # menu.add label: 'Admin comments', :parent => 'Administration', url: 'admin/comments', :priority => 2
 
-      menu.add label: 'Localization', :priority => 4
+
+      menu.add label: 'Localization', :priority => 5
       # menu.add label: 'Languages', url: '/admin/languages', :priority => 4
 
-      menu.add label: 'Design', :priority => 5
+
+      menu.add label: 'Design', :priority => 6
     end
   end
 

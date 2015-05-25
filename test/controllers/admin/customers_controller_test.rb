@@ -1,7 +1,7 @@
 require 'test_helper'
 
 module Admin
-  class UsersControllerTest < ActionController::TestCase
+  class CustomersControllerTest < ActionController::TestCase
     include Devise::TestHelpers
 
     def setup
