@@ -41,8 +41,8 @@ class Template < ActiveRecord::Base
   def reads_file(file_name)
     file_path = File.join(absolute_path, file_name)
 
-    content = ''
-    content = File.read(file_path) if File.exist?(file_path)
+    content = "Error => File (#{file_path}) not found!!!"
+    content = File.read(file_path) if ok?(file_name)
 
     content
   end
@@ -55,13 +55,6 @@ class Template < ActiveRecord::Base
       name = file.split('.')[0]
       writes_file(file, params[name]) if params.key? name
     end
-  end
-
-  def get_snippet_content(file_name)
-    snippet_content = "Error => File snippet (#{File.join(absolute_path, file_name)}) not found!!!"
-    snippet_content = template.reads_file(file_name) if ok? file_name
-
-    snippet_content
   end
 
   private

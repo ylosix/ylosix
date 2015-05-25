@@ -60,6 +60,13 @@ class Product < ActiveRecord::Base
                              .where('product_translations.name LIKE ? OR product_translations.description LIKE ?', "%#{text}%", "%#{text}%")
                        }
 
+  scope :in_frontend, lambda { |category|
+                      joins(:products_categories)
+                          .where(products_categories: {category_id: category.id},
+                                 appears_in_categories: true)
+                          .where('publication_date >= ?', DateTime.now)
+                    }
+
   def admin_translations
     Utils.array_translations(ProductTranslation, product_id: id)
   end

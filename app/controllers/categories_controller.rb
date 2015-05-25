@@ -2,17 +2,12 @@ class CategoriesController < CommonFrontendController
   before_action :set_category, except: [:index]
 
   def index
-    @categories = Category.where(enabled: true,
-                                 appears_in_web: true)
+    @categories = Category.in_frontend
   end
 
   def show
     @products = []
-
-    unless @category.nil?
-      @products = Product.includes(:products_categories)
-                  .where(products_categories: { category_id: @category.id })
-    end
+    @products = Product.in_frontend(@category) unless @category.nil?
   end
 
   def get_template_variables(template)

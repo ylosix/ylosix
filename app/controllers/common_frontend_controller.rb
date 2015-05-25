@@ -25,12 +25,11 @@ class CommonFrontendController < ApplicationController
   end
 
   def get_root_categories
-    root_category = Category.find_by(parent_id: [nil, 0], enabled: true)
+    root_category = Category.root_category
 
     @categories = []
     unless root_category.nil?
-      @categories = root_category.children.where(enabled: true,
-                                                 appears_in_web: true)
+      @categories = root_category.children.in_frontend
     end
   end
 
@@ -47,7 +46,7 @@ class CommonFrontendController < ApplicationController
 
     match_data = regex_include_snippet.match(content)
     if match_data
-      snippet_content = template.get_snippet_content(match_data[:file])
+      snippet_content = template.reads_file(match_data[:file])
 
       new_content = content.gsub(match_data.to_s, snippet_content)
       content = replace_regex_include(template, new_content)

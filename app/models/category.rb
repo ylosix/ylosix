@@ -31,15 +31,26 @@ class Category < ActiveRecord::Base
 
   accepts_nested_attributes_for :category_translations
 
+  scope :in_frontend, lambda {
+                      where(enabled: true,
+                            appears_in_web: true)
+                    }
+
+  scope :root_category, lambda {
+                        find_by(parent_id: [nil, 0],
+                                appears_in_web: true,
+                                enabled: true)
+                      }
+
   def admin_translations
     Utils.array_translations(CategoryTranslation, category_id: id)
   end
 
   def to_liquid
     {
-      'name' => name,
-      'href' => Rails.application.routes.url_helpers.show_slug_categories_path(slug),
-      'children' => children
+        'name' => name,
+        'href' => Rails.application.routes.url_helpers.show_slug_categories_path(slug),
+        'children' => children
     }
   end
 end
