@@ -6,12 +6,15 @@ class ApplicationController < ActionController::Base
   before_filter :set_user_locale
 
   def change_locale
-    locale = I18n.default_locale
+    locale = I18n.default_locale.to_s
+    param_locales = permit_locale
 
-    unless params[:locale].blank?
-      locale_param = params[:locale].parameterize.underscore.to_sym
+    unless param_locales[:locale].blank?
+      locale_param = param_locales[:locale].parameterize.underscore.to_sym
 
-      locale = params[:locale] if I18n.available_locales.include?(locale_param)
+      if I18n.available_locales.include?(locale_param)
+        locale = param_locales[:locale]
+      end
     end
 
     session[:locale] = locale
@@ -19,6 +22,10 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def permit_locale
+    params.permit(:locale)
+  end
 
   def set_user_locale
     session[:locale] = I18n.default_locale if session[:locale].blank?

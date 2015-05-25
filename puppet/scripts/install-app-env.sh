@@ -48,7 +48,7 @@ su - vagrant -c "cd $APP_PATH; rm db/*.sqlite3"
 
 if [ "$RAILS_ENV" == "production" ]; then
   su - vagrant -c "cd $APP_PATH; echo 'DATABASE_URL=$DATABASE_URL' >> .env"
-  su - vagrant -c "cd $APP_PATH; $RVM_WRAPPERS_PATH/bundle install --without development test"
+  su - vagrant -c "cd $APP_PATH; $RVM_WRAPPERS_PATH/bundle install --without development test profile"
 else
   su - vagrant -c "cd $APP_PATH; $RVM_WRAPPERS_PATH/bundle install --without production"
 fi

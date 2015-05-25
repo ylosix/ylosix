@@ -36,11 +36,11 @@ class Category < ActiveRecord::Base
                             appears_in_web: true)
                     }
 
-  scope :root_category, lambda {
-                        find_by(parent_id: [nil, 0],
-                                appears_in_web: true,
-                                enabled: true)
-                      }
+  def self.root_category
+    Category.find_by(parent_id: [nil, 0],
+                     appears_in_web: true,
+                     enabled: true)
+  end
 
   def admin_translations
     Utils.array_translations(CategoryTranslation, category_id: id)

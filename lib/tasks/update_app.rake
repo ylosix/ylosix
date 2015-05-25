@@ -8,7 +8,7 @@ task :update_app do
   puts "##### Check github... env => #{environment}"
   system "cd #{Rails.root}; git fetch origin; git pull origin;"
 
-  bundle_args = '--without development test'
+  bundle_args = '--without development test profile'
   bundle_args = '--without production' if environment == 'development'
   puts "##### Bundle install... env => #{bundle_args}"
   system "cd #{Rails.root}; bundle install #{bundle_args}"
