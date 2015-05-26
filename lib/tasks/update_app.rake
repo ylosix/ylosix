@@ -5,13 +5,13 @@ task :update_app do
   environment = 'production'
   environment = File.read(file_environment).strip if File.exist? file_environment
 
-  puts "##### Check github... env => #{environment}"
-  system "cd #{Rails.root}; git fetch origin; git pull origin;"
-
   bundle_args = '--without development test profile'
   bundle_args = '--without production' if environment == 'development'
+  bundle_cmd = "bundle install #{bundle_args}"
+
+  puts "##### Check github... env => #{environment}"
   puts "##### Bundle install... env => #{bundle_args}"
-  system "cd #{Rails.root}; bundle install #{bundle_args}"
+  system "cd #{Rails.root}; git fetch origin; git pull origin; #{bundle_cmd};"
 
   rake_args = File.read('.env').split.join(' ')
   puts "##### Migrations... env => #{rake_args}"
