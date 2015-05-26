@@ -15,7 +15,7 @@
 							{% if current_customer != nil %}
 								logged!
 							{% else %}
-								<a href="{{ new_customer_href }}" class="text-fade">
+								<a href="{{ customer_new_session_href }}" class="text-fade">
 									<i class="glyphicon glyphicon-user icon text-fade"></i>&nbsp;Login
 								</a>
 							{% endif %}
@@ -59,7 +59,7 @@
 		</div>
 	</div>
 	<div class="col-xs-12 col-sm-6 col-md-3 pull-right">
-		<form action="{{ search_url }}" accept-charset="UTF-8" method="post">
+		<form action="{{ action_search_url }}" accept-charset="UTF-8" method="post">
 
 			<input name="utf8" type="hidden" value="✓">
 			<input type="hidden" name="authenticity_token" value="{{ authenticity_token }}">

@@ -11,13 +11,17 @@ module CommonControllerModule
     unless template.nil?
       @variables['template_public_path'] = template.path.gsub('/public', '')
     end
-
+    
     @variables['authenticity_token'] = form_authenticity_token
-
-    # Urls
+    # Action form
     helper = Rails.application.routes.url_helpers
-    @variables['search_url'] = helper.searches_path
-    @variables['new_customer_href'] = helper.new_customer_session_path
+    @variables['action_search_url'] = helper.searches_path
+    @variables['action_customer_sign_in_url'] = session_path(:customer)
+    @variables['customer_sign_in_alert'] = flash[:alert] unless flash[:alert].blank?
+    # Links a
+    @variables['customer_forgot_password_href'] = new_password_path(:customer)
+    @variables['customer_sign_up_href'] = new_registration_path(:customer)
+    @variables['customer_new_session_href'] = helper.new_customer_session_path
   end
 
   def render(*args)
