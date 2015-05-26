@@ -1,29 +1,75 @@
-<h2>Sign up</h2>
-
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
+    <% if resource.errors.any? %>
+        <div class="alert alert-danger">
+          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+          <strong>
+            <%= I18n.t('errors.messages.not_saved',
+                       count: resource.errors.count,
+                       resource: resource.class.model_name.human.downcase) %>
+          </strong>
+          <ul>
+            <% resource.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @validatable %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
+    <div class="row">
+      <div class="col-xs-offset-4 col-md-offset-4">
+        <h4>Sign up</h4>
+      </div>
+    </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
+    <div class="row">
+      <div class="col-md-offset-3 col-md-5">
+        <div class="well">
+          <form id="loginForm" method="POST" action="/login/" novalidate="novalidate">
+            <div class="form-group">
+              <%= f.label :email, :class => 'control-label' %><br/>
+              <%= f.email_field :email, {:autofocus => true, :class => 'form-control', :title => 'Please enter you username', :placeholder => 'example@gmail.com'} %>
+              <span class="help-block"></span>
+            </div>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
+            <div class="form-group">
+              <%= f.label :birth_date, :class => 'control-label' %><br/>
+              <%= f.date_field :birth_date, {:class => 'form-control'} %>
+              <span class="help-block"></span>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :name, :class => 'control-label' %><br/>
+              <%= f.text_field :name, {:class => 'form-control'} %>
+              <span class="help-block"></span>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :last_name, :class => 'control-label' %><br/>
+              <%= f.text_field :last_name, {:class => 'form-control'} %>
+              <span class="help-block"></span>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :password, :class => 'control-label' %>
+              <% if @validatable %>
+                  <em>(<%= @minimum_password_length %> characters minimum)</em>
+              <% end %>
+              <br/>
+              <%= f.password_field :password, {autocomplete: 'off', :class => 'form-control'} %>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :password_confirmation, :class => 'control-label' %><br/>
+              <%= f.password_field :password_confirmation, {autocomplete: 'off', :class => 'form-control'} %>
+            </div>
+
+            <%= f.submit 'Sign up', :class => 'btn btn-success btn-block' %>
+          </form>
+
+          <br/>
+          <%= render 'devise/shared/links' %>
+        </div>
+      </div>
+    </div>
 <% end %>
-
-<%= render "devise/shared/links" %>

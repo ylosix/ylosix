@@ -31,4 +31,18 @@ class Customer < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+
+  validates :name, presence: true
+  validates :last_name, presence: true
+  validates :birth_date, presence: true
+
+  def to_liquid
+    {
+        'email' => email,
+        'name' => name,
+        'last_name' => last_name,
+        'birth_date' => birth_date,
+        'href' => Rails.application.routes.url_helpers.show_customers_path
+    }
+  end
 end

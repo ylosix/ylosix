@@ -13,7 +13,10 @@
 					<ul class="nav info">
 						<li class="col-xs-6 col-sm-6">
 							{% if current_customer != nil %}
-								logged!
+								welcome
+								<a href="{{ current_customer.href }}" class="text-fade">
+									{{ current_customer.name }},
+								</a>
 							{% else %}
 								<a href="{{ customer_new_session_href }}" class="text-fade">
 									<i class="glyphicon glyphicon-user icon text-fade"></i>&nbsp;Login
@@ -93,10 +96,10 @@
 			<ul class="nav navbar-nav collapse navbar-collapse">
 				{% for category in categories %}
 					<li class="dropdown">
-						<a href="{{ category.href }}">{{ category.name }}<i class="fa fa-angle-down"></i></a>
+						<a href="{{ category.href }}" class="text-fade">{{ category.name }}<i class="fa fa-angle-down"></i></a>
 						<ul role="menu" class="sub-menu">
 							{% for subcategory in category.children %}
-								<a href="{{ subcategory.href }}">
+								<a href="{{ subcategory.href }}" class="text-fade">
 									<li>{{ subcategory.name }}</li>
 								</a>
 							{% endfor %}

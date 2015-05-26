@@ -3,7 +3,8 @@ Rails.application.routes.draw do
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   devise_for :customers, controllers: {
-                           sessions: 'customers/sessions'
+                           sessions: 'customers/sessions',
+                           registrations: 'customers/registrations'
                        }
 
 
@@ -27,6 +28,10 @@ Rails.application.routes.draw do
 
   resource :searches, only: [] do
     post '/' => 'searches#index'
+  end
+
+  resource :customers, only: [] do
+    get '/show' => 'customers#show'
   end
 
   get '/locale/:locale' => 'application#change_locale', :as => 'change_locale'

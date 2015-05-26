@@ -13,15 +13,26 @@ module CommonControllerModule
     end
 
     @variables['authenticity_token'] = form_authenticity_token
-    # Action form
     helper = Rails.application.routes.url_helpers
+
+    # Action form
     @variables['action_search_url'] = helper.searches_path
-    @variables['action_customer_sign_in_url'] = session_path(:customer)
-    @variables['customer_sign_in_alert'] = flash[:alert] unless flash[:alert].blank?
     # Links a
-    @variables['customer_forgot_password_href'] = new_password_path(:customer)
-    @variables['customer_sign_up_href'] = new_registration_path(:customer)
-    @variables['customer_new_session_href'] = helper.new_customer_session_path
+
+    @variables['action_search_url'] = helper.searches_path
+    if current_customer.nil?
+      # Action form
+      @variables['action_customer_sign_in_url'] = customer_session_path
+      @variables['customer_sign_in_alert'] = flash[:alert] unless flash[:alert].blank?
+
+      # Links a
+      @variables['customer_forgot_password_href'] = new_customer_password_path
+      @variables['customer_sign_up_href'] = new_customer_registration_path
+      @variables['customer_new_session_href'] = helper.new_customer_session_path
+    else
+      # Action form
+      @variables['customer_destroy_session_href'] = destroy_customer_session_path
+    end
   end
 
   def render(*args)
