@@ -1,4 +1,27 @@
 class Utils
+  def self.replace_regex_include(variables, template, content)
+    regex_include_snippet = /{{\s*include\s+(?<file>[^}\s]+)\s*}}/
+
+    match_data = regex_include_snippet.match(content)
+    if match_data
+      snippet_content = template.reads_file(match_data[:file])
+
+      new_content = content.gsub(match_data.to_s, snippet_content)
+      content = Utils.replace_regex_include(variables, template, new_content)
+    end
+
+    regex_all_variables_public_path = /{{\s*all_variables\s*}}/
+    match_data = regex_all_variables_public_path.match(content)
+    if match_data
+      content_hash_variables = Utils.pretty_json_template_variables(variables)
+
+      new_content = content.gsub(match_data.to_s, "<pre><code>#{JSON.pretty_generate(content_hash_variables)}</code></pre>")
+      content = Utils.replace_regex_include(variables, template, new_content)
+    end
+
+    content
+  end
+
   def self.pretty_json_template_variables(variables)
     content_hash_variables = {}
     variables.each do |k, v|

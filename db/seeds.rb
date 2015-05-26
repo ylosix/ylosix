@@ -165,7 +165,7 @@ def create_default_categories
                      :name => 'root',
                      :locale => :en,
                      :enabled => true,
-                     :appears_in_web => false,
+                     :appears_in_web => true,
                      :slug => 'root'}
   root = save_or_update_model(Category, {:slug => 'root'}, root_attributes)
 
