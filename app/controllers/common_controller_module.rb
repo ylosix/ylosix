@@ -11,7 +11,7 @@ module CommonControllerModule
     unless template.nil?
       @variables['template_public_path'] = template.path.gsub('/public', '')
     end
-    
+
     @variables['authenticity_token'] = form_authenticity_token
     # Action form
     helper = Rails.application.routes.url_helpers
