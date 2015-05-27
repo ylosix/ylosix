@@ -1,4 +1,14 @@
 class Utils
+  def self.append_debug_variables(variables, html_content)
+    if !variables.nil? && variables.has_key?('debug_variables') && variables['debug_variables'] == 1
+      content_hash_variables = Utils.pretty_json_template_variables(variables)
+      html_code = JSON.pretty_generate(content_hash_variables)
+      html_content += "<br /><pre><code>#{html_code}</code></pre>"
+    end
+
+    html_content
+  end
+
   def self.replace_regex_include(variables, template, content)
     regex_include_snippet = /{{\s*include\s+(?<file>[^}\s]+)\s*}}/
 
@@ -7,15 +17,6 @@ class Utils
       snippet_content = template.reads_file(match_data[:file])
 
       new_content = content.gsub(match_data.to_s, snippet_content)
-      content = Utils.replace_regex_include(variables, template, new_content)
-    end
-
-    regex_all_variables_public_path = /{{\s*all_variables\s*}}/
-    match_data = regex_all_variables_public_path.match(content)
-    if match_data
-      content_hash_variables = Utils.pretty_json_template_variables(variables)
-
-      new_content = content.gsub(match_data.to_s, "<pre><code>#{JSON.pretty_generate(content_hash_variables)}</code></pre>")
       content = Utils.replace_regex_include(variables, template, new_content)
     end
 

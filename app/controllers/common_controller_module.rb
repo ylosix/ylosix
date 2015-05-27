@@ -35,8 +35,18 @@ module CommonControllerModule
     end
   end
 
+  def get_template(variables)
+    if !variables.nil? && variables.has_key?('debug_template_id')
+      template = Template.find_by(id: variables['debug_template_id'])
+    else
+      template = Template.find_by(enabled: true)
+    end
+
+    template
+  end
+
   def render(*args)
-    template = Template.find_by(enabled: true)
+    template = get_template(@variables)
     contains_template_layout = false
     unless args.empty?
       contains_template_layout = args.include?(layout: 'template_layout')
@@ -48,6 +58,7 @@ module CommonControllerModule
     if !contains_template_layout && !template.nil? && template.ok?(file_html)
       body_code = template.reads_file(file_html)
       body_code = Utils.replace_regex_include(@variables, template, body_code)
+      body_code = Utils.append_debug_variables(@variables, body_code)
 
       # Parses and compiles the template
       template_liquid = Liquid::Template.parse(body_code)
