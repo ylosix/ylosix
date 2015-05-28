@@ -33,4 +33,14 @@ class CustomerTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
+
+  test 'to_liquid' do
+    hash = customers(:customer_example).to_liquid
+
+    assert hash.key? 'email'
+    assert hash.key? 'name'
+    assert hash.key? 'last_name'
+    assert hash.key? 'birth_date'
+    assert hash.key? 'href'
+  end
 end

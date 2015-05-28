@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150528094033) do
+ActiveRecord::Schema.define(version: 20150528133537) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -190,6 +190,24 @@ ActiveRecord::Schema.define(version: 20150528094033) do
   add_index "products_tags", ["product_id"], name: "index_products_tags_on_product_id"
   add_index "products_tags", ["tag_id", "product_id"], name: "index_products_tags_on_tag_id_and_product_id"
   add_index "products_tags", ["tag_id"], name: "index_products_tags_on_tag_id"
+
+  create_table "shopping_carts", force: :cascade do |t|
+    t.integer  "customer_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "shopping_carts", ["customer_id"], name: "index_shopping_carts_on_customer_id"
+
+  create_table "shopping_carts_products", force: :cascade do |t|
+    t.integer  "shopping_cart_id"
+    t.integer  "product_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "shopping_carts_products", ["product_id"], name: "index_shopping_carts_products_on_product_id"
+  add_index "shopping_carts_products", ["shopping_cart_id"], name: "index_shopping_carts_products_on_shopping_cart_id"
 
   create_table "tag_translations", force: :cascade do |t|
     t.integer  "tag_id",     null: false

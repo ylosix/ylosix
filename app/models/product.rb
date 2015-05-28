@@ -48,6 +48,7 @@ class Product < ActiveRecord::Base
   has_many :tags, through: :products_tags
 
   has_many :product_translations
+  has_many :shopping_carts_products
 
   accepts_nested_attributes_for :products_categories, allow_destroy: true
   accepts_nested_attributes_for :products_tags, allow_destroy: true

@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   resource :products, only: [] do
     get '/:slug' => 'products#show', as: :show_slug
     get '/:id/show' => 'products#show', as: :show_id
+    get '/:slug/add_to_shopping_cart' => 'products#add_to_shopping_cart', as: :add_to_shopping_cart
   end
 
   resource :searches, only: [] do

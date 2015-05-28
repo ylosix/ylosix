@@ -9,8 +9,8 @@
         %span.icon-bar
         %span.icon-bar
 
-      %a.navbar-brand Start Bootstrap
-
+      %a.navbar-brand{:href => root_path}
+        Start Bootstrap
 
     -# Collect the nav links, forms, and other content for toggling
     %div{:class => 'collapse navbar-collapse', :id => 'bs-example-navbar-collapse-1'}
@@ -28,7 +28,16 @@
                 = image_tag image_src, { alt: lang.locale, title: lang.name}
 
         %li
-          - if current_customer.nil?
-            = link_to 'Login', new_customer_session_path
-          - else
-            = link_to 'My account', show_customers_path
+          %a{class: 'dropdown-toggle', 'data-toggle' => 'dropdown'}
+            My account
+          %ul.dropdown-menu
+            - if customer_signed_in?
+              %li
+                = link_to 'My account', show_customers_path
+              %li
+                = link_to 'My orders', '#todo'
+              %li
+                = link_to 'Logout', destroy_customer_session_path, :method => :delete
+            - else
+              %li
+                = link_to 'Login', new_customer_session_path

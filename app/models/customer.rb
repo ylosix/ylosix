@@ -37,6 +37,8 @@ class Customer < ActiveRecord::Base
   validates :last_name, presence: true
   validates :birth_date, presence: true
 
+  has_one :shopping_cart
+
   def to_liquid
     {
         'email' => email,

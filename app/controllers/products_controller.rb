@@ -8,6 +8,9 @@ class ProductsController < CommonFrontendController
     super
   end
 
+  def add_to_shopping_cart
+  end
+
   private
 
   def get_product
