@@ -7,7 +7,7 @@ class CreateShoppingCartProducts < ActiveRecord::Migration
       t.timestamps null: false
     end
 
-    add_foreign_key :shopping_carts_products, :shopping_cart, on_update: :cascade, on_delete: :cascade
-    add_foreign_key :shopping_carts_products, :product, on_update: :cascade, on_delete: :cascade
+    add_foreign_key :shopping_carts_products, :shopping_carts, on_update: :cascade, on_delete: :cascade
+    add_foreign_key :shopping_carts_products, :products, on_update: :cascade, on_delete: :cascade
   end
 end
