@@ -7,6 +7,8 @@ require 'rails/all'
 Bundler.require(*Rails.groups)
 
 module Ecommerce
+  Version = '0.1'.freeze
+
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
@@ -21,8 +23,6 @@ module Ecommerce
     config.i18n.default_locale = :en
     config.i18n.available_locales = [:es, :en]
 
-    config.version = '0.1'
     config.assets.precompile += %w( ckeditor/* )
-
   end
 end

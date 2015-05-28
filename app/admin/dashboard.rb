@@ -11,7 +11,7 @@ ActiveAdmin.register_page 'Dashboard' do
         end
 
         column do
-          span current_config.version
+          span Ecommerce::Version.dup
         end
       end
 
