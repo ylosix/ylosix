@@ -22,13 +22,18 @@ class ApplicationController < ActionController::Base
     end
 
     session[:locale] = locale
-    redirect_to root_path
+    session[:return_to] ||= request.referer
+
+    return_url = session.delete(:return_to)
+    return_url ||= root_url
+
+    redirect_to return_url
   end
 
   private
 
   def get_debug_params
-    @variables = {} if @variables.nil?
+    @variables ||= {}
 
     params_debug = permit_debug_params
     unless params_debug[:debug_variables].blank?
@@ -41,7 +46,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_customer_locale
-    session[:locale] = I18n.default_locale if session[:locale].blank?
+    session[:locale] ||= I18n.default_locale
     I18n.locale = session[:locale]
   end
 

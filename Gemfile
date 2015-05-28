@@ -46,6 +46,7 @@ gem 'liquid', :git => 'https://github.com/devcows/liquid.git', :branch => 'maste
 # gem 'capistrano-rails', group: :development
 
 gem 'devise'
+gem 'devise-i18n'
 gem 'activeadmin', '~> 1.0.0.pre1'
 gem 'ckeditor'
 gem 'paperclip'

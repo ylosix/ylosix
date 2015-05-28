@@ -1,4 +1,6 @@
 class Customers::RegistrationsController < Devise::RegistrationsController
+  include CommonControllerModule
+
   before_filter :configure_sign_up_params, only: [:create]
   before_filter :configure_account_update_params, only: [:update]
 
@@ -43,6 +45,7 @@ class Customers::RegistrationsController < Devise::RegistrationsController
     devise_parameter_sanitizer.for(:sign_up) << :name
     devise_parameter_sanitizer.for(:sign_up) << :last_name
     devise_parameter_sanitizer.for(:sign_up) << :birth_date
+    devise_parameter_sanitizer.for(:sign_up) << :locale
   end
 
   # If you have extra params to permit, append them to the sanitizer.
@@ -50,6 +53,7 @@ class Customers::RegistrationsController < Devise::RegistrationsController
     devise_parameter_sanitizer.for(:account_update) << :name
     devise_parameter_sanitizer.for(:account_update) << :last_name
     devise_parameter_sanitizer.for(:account_update) << :birth_date
+    devise_parameter_sanitizer.for(:account_update) << :locale
   end
 
   # The path used after sign up.

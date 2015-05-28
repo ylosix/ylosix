@@ -109,6 +109,7 @@ GEM
       responders
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
+    devise-i18n (0.12.0)
     did_you_mean (0.9.10)
       interception
     docile (1.1.5)
@@ -307,6 +308,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   coveralls
   devise
+  devise-i18n
   did_you_mean
   exception_notification
   font-awesome-rails

@@ -19,5 +19,12 @@
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
 
-en:
-  hello: "Hello world"
+es:
+  activerecord:
+    errors:
+      models:
+        customer:
+          attributes:
+            email:
+              blank: "el campo no puede estar vacio."
+

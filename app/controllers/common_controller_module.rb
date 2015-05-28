@@ -3,6 +3,9 @@ module CommonControllerModule
     @variables = {} if @variables.nil?
 
     @variables['languages'] = Language.in_frontend
+    @variables['current_locale'] = I18n.default_locale.to_s
+    @variables['current_locale'] = session[:locale] unless session[:locale].blank?
+
     @variables['categories'] = Category.root_categories
     @variables['products'] = Product.all.limit(10) # TODO This only for test.
 
