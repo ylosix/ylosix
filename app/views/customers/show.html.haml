@@ -1,0 +1,18 @@
+%h1 Customer#show
+%p Find me in app/views/customer/show.html.haml
+
+My orders.
+%br
+
+My profile.
+%br
+
+Etc
+%br
+
+%h3 Customer variable
+= @customer.inspect
+%br
+
+= link_to 'Edit profile', edit_customer_registration_path
+

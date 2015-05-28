@@ -31,4 +31,4 @@
           - if current_customer.nil?
             = link_to 'Login', new_customer_session_path
           - else
-            %a My account
+            = link_to 'My account', show_customers_path

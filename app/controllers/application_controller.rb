@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  before_action :set_customer_locale
+  before_action :set_locale
 
   # if !Rails.env.production? # TODO In the future this only is for development
   before_action :get_debug_params
@@ -45,9 +45,29 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def set_customer_locale
-    session[:locale] ||= I18n.default_locale
+  def set_locale
+    if session[:locale].blank?
+      session[:locale] = extract_locale_from_accept_language_header
+
+      session[:locale] = I18n.default_locale unless Language.locale_valid?(session[:locale])
+      session[:locale] = current_customer.locale unless current_customer.nil?
+    end
+
+    if Language.locale_valid?(params[:locale])
+      session[:locale] = params[:locale]
+    end
+
     I18n.locale = session[:locale]
+  end
+
+  def extract_locale_from_accept_language_header
+    locale = nil
+
+    if !request.nil? && !request.env['HTTP_ACCEPT_LANGUAGE'].nil?
+      locale = request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
+    end
+
+    locale
   end
 
   def permit_locale

@@ -29,6 +29,13 @@ class Language < ActiveRecord::Base
   scope :in_backoffice, -> () { where(appears_in_backoffice: true) }
   scope :in_frontend, -> () { where(appears_in_web: true) }
 
+  def self.locale_valid?(locale)
+    return false if locale.nil?
+
+    language = Language.find_by(locale: locale, appears_in_web: true)
+    return !language.nil?
+  end
+
   def to_liquid
     image_src = 'http://placehold.it/15x15'
     image_src = flag.url(:medium) if flag.file?
