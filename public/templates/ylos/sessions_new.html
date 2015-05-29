@@ -5,7 +5,7 @@ Login user.
     {% if customer_sign_in_alert != nil && customer_sign_in_alert != '' %}
         <div class="alert alert-danger">
             <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-            <strong>{{ customer_sign_in_alert }}</strong>
+            <strong>{{ alert_message }}</strong>
         </div>
     {% endif %}
     <input name="utf8" type="hidden" value="✓">

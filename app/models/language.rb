@@ -33,7 +33,7 @@ class Language < ActiveRecord::Base
     return false if locale.nil?
 
     language = Language.find_by(locale: locale, appears_in_web: true)
-    return !language.nil?
+    !language.nil?
   end
 
   def to_liquid

@@ -33,14 +33,14 @@ class HomeControllerTest < ActionController::TestCase
   test 'should get index with debug variables' do
     prepare_template
 
-    get :index, { :debug_variables => 1 }
+    get :index, debug_variables: 1
     assert_response :success
   end
 
   test 'should get index with debug template' do
     object = prepare_template
 
-    get :index, { :debug_variables => 1, :debug_template_id => object.id }
+    get :index, debug_variables: 1, debug_template_id: object.id
     assert_response :success
   end
 end

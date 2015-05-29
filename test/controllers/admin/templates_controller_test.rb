@@ -1,67 +1,69 @@
 require 'test_helper'
 
-class Admin::TemplatesControllerTest < ActionController::TestCase
-  include Devise::TestHelpers
+module Admin
+  class TemplatesControllerTest < ActionController::TestCase
+    include Devise::TestHelpers
 
-  def setup
-    login_admin
-    FileUtils.mkdir_p 'tmp/templates/test/snippets'
-    File.open('tmp/templates/test/home_index.html', 'w') do |f|
-      f.write '<h1>hello world</h1>'
+    def setup
+      login_admin
+      FileUtils.mkdir_p 'tmp/templates/test/snippets'
+      File.open('tmp/templates/test/home_index.html', 'w') do |f|
+        f.write '<h1>hello world</h1>'
+      end
+
+      File.open('tmp/templates/test/snippets/header.html', 'w') do |f|
+        f.write '<h1>hello world</h1>'
+      end
+
+      object = templates(:test_template)
+      object.enabled = true
+      object.save
     end
 
-    File.open('tmp/templates/test/snippets/header.html', 'w') do |f|
-      f.write '<h1>hello world</h1>'
+    test 'should get index' do
+      get :index
+      assert_response :success
     end
 
-    object = templates(:test_template)
-    object.enabled = true
-    object.save
-  end
+    test 'should get edit' do
+      object = templates(:test_template)
 
-  test 'should get index' do
-    get :index
-    assert_response :success
-  end
+      get :edit, id: object.id
+      assert_response :success
+    end
 
-  test 'should get edit' do
-    object = templates(:test_template)
+    test 'should post update' do
+      object = templates(:test_template)
 
-    get :edit, id: object.id
-    assert_response :success
-  end
+      patch :update,
+            id: object.id,
+            template: {
+                name: 'Some title',
+                path: 'tmp/templates/test',
+                enabled: true
+            }
+      assert_response 302
+    end
 
-  test 'should post update' do
-    object = templates(:test_template)
+    test 'should export' do
+      object = templates(:test_template)
 
-    patch :update,
-          id: object.id,
-          template: {
-              name: 'Some title',
-              path: 'tmp/templates/test',
-              enabled: true
-          }
-    assert_response 302
-  end
+      get :export, id: object.id
+      assert_response :success
+      assert_equal 'application/zip', response.content_type
+    end
 
-  test 'should export' do
-    object = templates(:test_template)
+    test 'should get import' do
+      object = templates(:test_template)
+      get :import, id: object.id
+      assert_response :success
+    end
 
-    get :export, id: object.id
-    assert_response :success
-    assert_equal 'application/zip', response.content_type
-  end
+    test 'should post import' do
+      object = templates(:test_template)
+      zip_file = Utils.zip_folder(object.absolute_path)
 
-  test 'should get import' do
-    object = templates(:test_template)
-    get :import, id: object.id
-    assert_response :success
-  end
-
-  test 'should post import' do
-    object = templates(:test_template)
-    zip_file = Utils.zip_folder(object.absolute_path)
-
-    post :import, template: { file: zip_file }
+      post :import, template: {file: zip_file}
+    end
   end
 end

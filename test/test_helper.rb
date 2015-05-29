@@ -14,22 +14,26 @@ ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 
-class ActionController::TestCase
-  include Devise::TestHelpers
+module ActionController
+  class TestCase
+    include Devise::TestHelpers
+  end
 end
 
-class ActionDispatch::IntegrationTest
-  include Devise::TestHelpers
+module ActionDispatch
+  class IntegrationTest
+    include Devise::TestHelpers
+  end
 end
 
-# load "#{Rails.root}/db/seeds.rb"
-#
-# def test_again_seed
-#   create_defaults
-# end
-# test_again_seed
+load "#{Rails.root}/db/seeds.rb"
 
-# Rake::Task['rubocop'].invoke
+def test_again_seed
+  create_defaults
+end
+test_again_seed
+
+Rake::Task['rubocop'].invoke
 
 module ActiveSupport
   class TestCase

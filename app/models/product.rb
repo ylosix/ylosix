@@ -85,10 +85,16 @@ class Product < ActiveRecord::Base
     image_src = 'http://placehold.it/320x150'
     image_src = image.url(:medium) if image.file?
 
+    s_short_description = ''
+    s_short_description = short_description.html_safe unless short_description.blank?
+
+    s_description = ''
+    s_description = description.html_safe unless description.blank?
+
     {
         'name' => name,
-        'short_description' => short_description,
-        'description' => description,
+        'short_description' => s_short_description,
+        'description' => s_description,
         'retail_price' => retail_price,
         'image_src' => image_src,
         'href' => Rails.application.routes.url_helpers.show_slug_products_path(slug)

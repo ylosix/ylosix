@@ -48,7 +48,6 @@ class ApplicationController < ActionController::Base
   def set_locale
     if session[:locale].blank?
       session[:locale] = extract_locale_from_accept_language_header
-      session[:locale] = I18n.default_locale unless Language.locale_valid?(session[:locale])
     end
 
     session[:locale] = current_customer.locale unless current_customer.nil?
@@ -60,10 +59,12 @@ class ApplicationController < ActionController::Base
   end
 
   def extract_locale_from_accept_language_header
-    locale = nil
+    locale = I18n.default_locale
 
     if !request.nil? && !request.env['HTTP_ACCEPT_LANGUAGE'].nil?
-      locale = request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
+      browser = request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
+      browser = browser.underscore
+      locale = browser if Language.locale_valid?(browser)
     end
 
     locale

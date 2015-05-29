@@ -8,6 +8,8 @@
     -# Page Content
     %div.container
       %div.row
+        = render 'layouts/components/notice_messages'
+      %div.row
         = yield
 
     = render 'layouts/components/footer'

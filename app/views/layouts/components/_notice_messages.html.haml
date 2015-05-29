@@ -1,0 +1,14 @@
+- if !@variables.nil? && !@variables['notice'].blank?
+  %div{:class => 'alert alert-success', :role => 'alert'}
+    = @variables['notice']
+
+- if !@variables.nil? && @variables['error_messages'].any?
+  %div{:class => 'alert alert-danger'}
+    %span{:class => 'glyphicon glyphicon-exclamation-sign', 'aria-hidden' => 'true'}
+    - unless @variables['error_messages_title'].blank?
+      %strong
+        = @variables['error_messages_title']
+    %ul
+      - @variables['error_messages'].each do |msg|
+        %li
+          = msg
