@@ -8,53 +8,51 @@
     <div class="row">
       <div class="col-md-offset-3 col-md-5">
         <div class="well">
-          <form id="loginForm" method="POST" action="/login/" novalidate="novalidate">
-            <div class="form-group">
-              <%= f.label :email, :class => 'control-label' %><br/>
-              <%= f.email_field :email, {:autofocus => true, :class => 'form-control', :title => 'Please enter you username', :placeholder => 'example@gmail.com'} %>
-              <span class="help-block"></span>
-            </div>
+          <div class="form-group">
+            <%= f.label :email, :class => 'control-label' %><br/>
+            <%= f.email_field :email, {:autofocus => true, :class => 'form-control', :title => 'Please enter you username', :placeholder => 'example@gmail.com'} %>
+            <span class="help-block"></span>
+          </div>
 
-            <div class="form-group">
-              <%= f.label :birth_date, :class => 'control-label' %><br/>
-              <%= f.date_field :birth_date, {:class => 'form-control'} %>
-              <span class="help-block"></span>
-            </div>
+          <div class="form-group">
+            <%= f.label :birth_date, :class => 'control-label' %><br/>
+            <%= f.date_field :birth_date, {:class => 'form-control'} %>
+            <span class="help-block"></span>
+          </div>
 
-            <div class="form-group">
-              <%= f.label :name, :class => 'control-label' %><br/>
-              <%= f.text_field :name, {:class => 'form-control'} %>
-              <span class="help-block"></span>
-            </div>
+          <div class="form-group">
+            <%= f.label :name, :class => 'control-label' %><br/>
+            <%= f.text_field :name, {:class => 'form-control'} %>
+            <span class="help-block"></span>
+          </div>
 
-            <div class="form-group">
-              <%= f.label :last_name, :class => 'control-label' %><br/>
-              <%= f.text_field :last_name, {:class => 'form-control'} %>
-              <span class="help-block"></span>
-            </div>
+          <div class="form-group">
+            <%= f.label :last_name, :class => 'control-label' %><br/>
+            <%= f.text_field :last_name, {:class => 'form-control'} %>
+            <span class="help-block"></span>
+          </div>
 
-            <div class="form-group">
-              <%= f.label :locale, :class => 'control-label' %><br/>
-              <%= f.select(:locale, options_for_select(@variables['languages'].collect { |p| [p.name, p.locale] }, @variables['locale']), {:class => 'form-control'}) %>
-              <span class="help-block"></span>
-            </div>
+          <div class="form-group">
+            <%= f.label :locale, :class => 'control-label' %><br/>
+            <%= f.select(:locale, options_for_select(@variables['languages'].collect { |p| [p.name, p.locale] }, @variables['locale']), {:class => 'form-control'}) %>
+            <span class="help-block"></span>
+          </div>
 
-            <div class="form-group">
-              <%= f.label :password, :class => 'control-label' %>
-              <% if @validatable %>
-                  <em>(<%= @minimum_password_length %> characters minimum)</em>
-              <% end %>
-              <br/>
-              <%= f.password_field :password, {autocomplete: 'off', :class => 'form-control'} %>
-            </div>
+          <div class="form-group">
+            <%= f.label :password, :class => 'control-label' %>
+            <% if @validatable %>
+                <em>(<%= @minimum_password_length %> characters minimum)</em>
+            <% end %>
+            <br/>
+            <%= f.password_field :password, {autocomplete: 'off', :class => 'form-control'} %>
+          </div>
 
-            <div class="form-group">
-              <%= f.label :password_confirmation, :class => 'control-label' %><br/>
-              <%= f.password_field :password_confirmation, {autocomplete: 'off', :class => 'form-control'} %>
-            </div>
+          <div class="form-group">
+            <%= f.label :password_confirmation, :class => 'control-label' %><br/>
+            <%= f.password_field :password_confirmation, {autocomplete: 'off', :class => 'form-control'} %>
+          </div>
 
-            <%= f.submit 'Sign up', :class => 'btn btn-success btn-block' %>
-          </form>
+          <%= f.submit 'Sign up', :class => 'btn btn-success btn-block' %>
 
           <br/>
           <%= render 'devise/shared/links' %>

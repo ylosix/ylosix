@@ -41,6 +41,10 @@ module Customers
 
     protected
 
+    def after_update_path_for(_resource)
+      show_customers_path
+    end
+
     # If you have extra params to permit, append them to the sanitizer.
     def configure_sign_up_params
       devise_parameter_sanitizer.for(:sign_up) << :name

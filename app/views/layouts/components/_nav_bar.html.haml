@@ -14,7 +14,7 @@
 
     -# Collect the nav links, forms, and other content for toggling
     %div{:class => 'collapse navbar-collapse', :id => 'bs-example-navbar-collapse-1'}
-      %ul{:class => 'nav navbar-nav pull-right'}
+      %ul{:class => 'nav navbar-nav collapse navbar-collapse pull-right'}
         %li
           %a About
 
@@ -27,17 +27,20 @@
               %a{href: change_locale_path(lang.locale)}
                 = image_tag image_src, { alt: lang.locale, title: lang.name}
 
-        %li
-          %a{class: 'dropdown-toggle', 'data-toggle' => 'dropdown'}
+        %li.dropdown
+          %a{href: show_customers_path, class: 'text-fade'}
             My account
+            %span.caret
           %ul.dropdown-menu
             - if customer_signed_in?
-              %li
+              %li.dropdown
                 = link_to 'My account', show_customers_path
-              %li
+              %li.dropdown
                 = link_to 'My orders', '#todo'
-              %li
+              %li.dropdown
+                = link_to 'Wish list', '#todo'
+              %li.dropdown
                 = link_to 'Logout', destroy_customer_session_path, :method => :delete
             - else
-              %li
+              %li.dropdown
                 = link_to 'Login', new_customer_session_path
