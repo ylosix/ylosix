@@ -14,5 +14,4 @@
   %body
     = @body_content.html_safe
 
-    - if Rails.env.development? || (!@variables.nil? && @variables['debug_console'] == 1)
-      = console if Rails.env.development?
+    = console if Rails.env.development?
