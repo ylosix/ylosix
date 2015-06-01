@@ -15,4 +15,5 @@
     = render 'layouts/components/footer'
     = Utils.append_debug_variables(@variables, '').html_safe
 
-  = console if Rails.env.development?
+  - if Rails.env.development? || (!@variables.nil? && @variables['debug_console'] == 1)
+    = console

@@ -40,6 +40,10 @@ class ApplicationController < ActionController::Base
       @variables['debug_variables'] = params_debug[:debug_variables].to_i
     end
 
+    unless params_debug[:debug_console].blank?
+      @variables['debug_console'] = params_debug[:debug_console].to_i
+    end
+
     unless params_debug[:debug_template_id].blank?
       @variables['debug_template_id'] = params_debug[:debug_template_id].to_i
     end
@@ -75,6 +79,6 @@ class ApplicationController < ActionController::Base
   end
 
   def permit_debug_params
-    params.permit(:debug_variables, :debug_template_id)
+    params.permit(:debug_console, :debug_variables, :debug_template_id)
   end
 end
