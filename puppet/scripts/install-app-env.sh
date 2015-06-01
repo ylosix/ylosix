@@ -34,6 +34,7 @@ su - vagrant -c "cd $APP_PATH; echo 'GEM_PATH=$RVM_PATH/gems/ruby-2.1.6@ecommerc
 su - vagrant -c "cd $APP_PATH; echo 'PATH=$RVM_PATH/wrappers/ruby-2.1.6@ecommerce:$RVM_PATH/gems/ruby-2.1.6/bin:$RVM_PATH/rubies/ruby-2.1.6/bin:/home/user/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$RVM_PATH/bin' >> .env"
 su - vagrant -c "cd $APP_PATH; echo 'RAILS_PIDS=/home/vagrant/pids/rails_server.pid' >> .env"
 su - vagrant -c "cd $APP_PATH; echo 'RAILS_LOGS=/home/vagrant/logs/rails_server.log' >> .env"
+su - vagrant -c "cd $APP_PATH; echo 'RAILS_SERVE_STATIC_FILES=true' >> .env"
 
 #Setup project
 su - vagrant -c "cd $APP_PATH; $RVM_WRAPPERS_PATH/gem install bundler"
