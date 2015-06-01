@@ -32,7 +32,7 @@ class Template < ActiveRecord::Base
       next if file_name == '.' || file_name == '..' || File.directory?(File.join(absolute_path, file_name))
 
       name = file_name.split('.')[0]
-      local_files[name] = reads_file(file_name)
+      local_files[name] = reads_file(file_name) unless name.blank?
     end
 
     local_files
