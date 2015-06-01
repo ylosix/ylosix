@@ -1,64 +1,65 @@
-Login user.
-<br />
+{{ include snippet_header.html }}
 
-<form class="new_customer" id="new_customer" action="{{ action_customer_sign_in_url }}" accept-charset="UTF-8" method="post">
-    {% if customer_sign_in_alert != nil && customer_sign_in_alert != '' %}
-        <div class="alert alert-danger">
-            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-            <strong>{{ alert_message }}</strong>
-        </div>
-    {% endif %}
-    <input name="utf8" type="hidden" value="✓">
-    <input type="hidden" name="authenticity_token" value="{{ authenticity_token }}">
+<div class="panel panel-default container">
+	<div class="panel-heading row"><h3>Sign In </h3></div>
+	 <div class="row">
+	<form class="new_customer" id="new_customer" action="{{ action_customer_sign_in_url }}" accept-charset="UTF-8" method="post">
+		 {% if customer_sign_in_alert != nil && customer_sign_in_alert != '' %}
+			  <div class="alert alert-danger col-xs-12 col-sm-12 col-md-12">
+					<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+					<strong>{{ customer_sign_in_alert }}</strong>
+			  </div>
+		 {% endif %}
+		 <input name="utf8" type="hidden" value="✓">
+		 <input type="hidden" name="authenticity_token" value="{{ authenticity_token }}">
+			  <div class="col-md-5 col-sm-5 col-xs-12">
+					<div class="well">
+						 <div class="form-group">
+							  <label class="control-label" for="customer_email">Email</label><br>
+							  <input autofocus="autofocus" class="form-control" title="Please enter you username" placeholder="example@gmail.com" type="email" value="" name="customer[email]" id="customer_email">
+							  <span class="help-block"></span>
+						 </div>
+						 <div class="form-group">
+							  <label class="control-label" for="customer_password">Password</label><br>
+							  <input class="form-control" title="Please enter your password" autocomplete="off" type="password" name="customer[password]" id="customer_password">
+							  <span class="help-block"></span>
+						 </div>
+						 <div id="loginErrorMsg" class="alert alert-error hide">Wrong username og password</div>
 
-    <div class="row">
-        <div class="col-md-offset-1 col-md-5">
-            <div class="well">
-                <div class="form-group">
-                    <label class="control-label" for="customer_email">Email</label><br>
-                    <input autofocus="autofocus" class="form-control" title="Please enter you username" placeholder="example@gmail.com" type="email" value="" name="customer[email]" id="customer_email">
-                    <span class="help-block"></span>
-                </div>
-                <div class="form-group">
-                    <label class="control-label" for="customer_password">Password</label><br>
-                    <input class="form-control" title="Please enter your password" autocomplete="off" type="password" name="customer[password]" id="customer_password">
-                    <span class="help-block"></span>
-                </div>
-                <div id="loginErrorMsg" class="alert alert-error hide">Wrong username og password</div>
+						 <div class="checkbox">
+							  <label>
+									<input name="customer[remember_me]" type="hidden" value="0"><input type="checkbox" value="1" name="customer[remember_me]" id="customer_remember_me"> Remember login
+							  </label>
 
-                <div class="checkbox">
-                    <label>
-                        <input name="customer[remember_me]" type="hidden" value="0"><input type="checkbox" value="1" name="customer[remember_me]" id="customer_remember_me"> Remember login
-                    </label>
+							  <p class="help-block">(if this is a private computer)</p>
+						 </div>
+						 <input type="submit" name="commit" value="Login" class="btn btn-success btn-block">
+						 <a class="btn btn-default btn-block" href="{{ customer_forgot_password_href }}">Forgot your password?</a>
+					</div>
+			  </div>
 
-                    <p class="help-block">(if this is a private computer)</p>
-                </div>
-                <input type="submit" name="commit" value="Login" class="btn btn-success btn-block">
-                <a class="btn btn-default btn-block" href="{{ customer_forgot_password_href }}">Forgot your password?</a>
-            </div>
-        </div>
+			  <div class="col-md-5 col-sm-5 col-xs-12 pull-right">
+					<p class="lead">
+						 <u>
+							  Register now for <span class="text-success">FREE</span>
+						 </u>
+					</p>
+					<ul class="list-unstyled" style="line-height: 2">
+						 <li><span class="fa fa-check text-success"></span> See all your orders</li>
+						 <li><span class="fa fa-check text-success"></span> Fast re-order</li>
+						 <li><span class="fa fa-check text-success"></span> Save your favorites</li>
+						 <li><span class="fa fa-check text-success"></span> Fast checkout</li>
+						 <li><span class="fa fa-check text-success"></span> Get a gift
+							  <small>(only new customers)</small>
+						 </li>
+					</ul>
+					<p>
+						 <a class="btn btn-info btn-block" href="{{ customer_sign_up_href }}">Yes please, register now!</a>
+					</p>
 
-        <div class="col-md-5">
-            <p class="lead">
-                <u>
-                    Register now for <span class="text-success">FREE</span>
-                </u>
-            </p>
-            <ul class="list-unstyled" style="line-height: 2">
-                <li><span class="fa fa-check text-success"></span> See all your orders</li>
-                <li><span class="fa fa-check text-success"></span> Fast re-order</li>
-                <li><span class="fa fa-check text-success"></span> Save your favorites</li>
-                <li><span class="fa fa-check text-success"></span> Fast checkout</li>
-                <li><span class="fa fa-check text-success"></span> Get a gift
-                    <small>(only new customers)</small>
-                </li>
-            </ul>
-            <p>
-                <a class="btn btn-info btn-block" href="{{ customer_sign_up_href }}">Yes please, register now!</a>
-            </p>
-
-        </div>
-    </div>
-</form>
-
-{{ include snippet_all_variables.html }}
+			  </div>
+		</form>
+	</div>
+</div>			
+</div>
+{{ include snippet_footer.html }}

@@ -112,3 +112,26 @@
 		<!-- /.navbar-collapse -->
 	</nav>
 </div>
+
+<div class="row">
+	{% if notice_message != nil %}
+		<div class="alert alert-success" role="alert">
+			{{notice_message}}
+		</div>
+	{% endif %}
+
+	{% if error_messages != nil and error_messages.size != 0 %}
+		<div class="alert alert-danger" role="alert">
+			<span class ='glyphicon glyphicon-exclamation-sign' aria-hidden ='true'></span>
+			<strong>
+				{{error_messages_title}}
+			</strong>
+
+			<ul>
+				{% for msg in error_messages %}
+					<li>{{msg}}</li>
+				{% endfor %}
+			</ul>
+		</div>
+	{% endif %}
+</div>

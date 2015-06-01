@@ -59,12 +59,16 @@ a {
 .navbar-nav > li > a:focus, .navbar-nav > li > a:hover, .navbar-nav > li > a:active {
   background: none; }
 
+.h1, .h2, .h3 {
+  margin-top: 10px;
+  margin-bottom: 5px; }
+
 ul {
   list-style-type: square;
   padding-left: 15px;
   color: #666;
   padding-start: 15px; }
-
+	
 .footer {
   background-color: #e6e6e6;
   padding: 10px; }
@@ -89,6 +93,10 @@ links {
 
 .caption h4 {
 	white-space: normal;}
+
+.panel-heading {
+	margin-bottom:20px}
+
 /***generals** */
 /***header** */
 .top-header {

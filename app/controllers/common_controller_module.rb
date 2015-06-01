@@ -11,6 +11,7 @@ module CommonControllerModule
     if current_customer.nil?
       # Action form
       @variables['action_customer_sign_in_url'] = customer_session_path
+      @variables['action_customer_sign_up_url'] = customer_registration_path
 
       # Links a
       @variables['customer_forgot_password_href'] = new_customer_password_path

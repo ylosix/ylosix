@@ -1,0 +1,42 @@
+<div class="panel panel-default container">
+    <div class="panel-heading row"><h3>Sign Up </h3></div>
+    <div class="col-md-offset-3 col-md-5">
+        <div class="well">
+            <form action="{{ action_customer_sign_up_url }}" accept-charset="UTF-8" method="post">
+                <input name="utf8" type="hidden" value="✓"/>
+                <input type="hidden" name="authenticity_token" value="{{ authenticity_token }}"/>
+
+                <label for="customer_name">Name</label>
+                <input id="customer_name" type="text" name="customer[name]" class="form-control"/>
+
+                <label for="customer_last_name">Last name</label>
+                <input id="customer_last_name" type="text" name="customer[last_name]" class="form-control"/>
+
+                <label for="customer_email">Email address</label>
+                <input id="customer_email" type="email" title="Please enter you email" placeholder="example@gmail.com"
+                       name="email" class="form-control"/>
+
+                <label for="customer_birth_date">Birth date</label>
+                <input class="form-control" type="date" name="customer[birth_date]" id="customer_birth_date">
+
+                <label for="customer_locale">Locale</label>
+                <input id="customer_locale" type="text" name="customer[locale]" class="form-control"/>
+
+                <label for="customer_password">Password</label>
+                <input id="customer_password" type="password" name="customer[password]" class="form-control"/>
+
+                <label for="customer_password_confirmation">Password confirmation</label>
+                <input id="customer_password_confirmation" type="password" name="customer[password_confirmation]"
+                       class="form-control"/>
+
+                <label>
+                    <input type="checkbox" name="terms"> I agree with the <a href="#">Terms and Conditions</a>.
+                </label>
+
+                <input type="submit" value="Sign up" class="btn btn-info btn-block">
+                <div class="clearfix"></div>
+            </form>
+
+        </div>
+    </div>
+</div>
