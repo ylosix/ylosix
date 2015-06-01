@@ -78,7 +78,7 @@ ActiveAdmin.register Template do
       f.input :enabled
 
       locals_files = template.get_local_files
-      render partial: '/admin/templates/edit_files', locals: locals_files
+      render partial: '/admin/templates/edit_files', locals: { files: locals_files }
     end
     f.actions
   end

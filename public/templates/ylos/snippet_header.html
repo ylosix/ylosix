@@ -17,6 +17,8 @@
 								<a href="{{ current_customer.href }}" class="text-fade">
 									{{ current_customer.name }},
 								</a>
+
+								<a rel="nofollow" data-method="delete" href="{{ customer_destroy_session_href }}">Logout</a>
 							{% else %}
 								<a href="{{ customer_new_session_href }}" class="text-fade">
 									<i class="glyphicon glyphicon-user icon text-fade"></i>&nbsp;Login

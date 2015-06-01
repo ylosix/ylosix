@@ -3,11 +3,7 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
-# Use Haml
-gem 'haml'
 # Use SCSS for stylesheets
-gem 'bootstrap-sass', '~> 3.3.4'
-gem 'font-awesome-rails'
 gem 'sass-rails', '~> 5.0.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -22,6 +18,14 @@ gem 'jquery-rails'
 gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
+# bundle exec rake doc:rails generates the API under doc/api.
+gem 'sdoc', '~> 0.4.0'
+
+# Use Haml
+gem 'haml'
+
+gem 'bootstrap-sass', '~> 3.3.4'
+gem 'font-awesome-rails'
 
 gem 'globalize', '~> 5.0.0'
 
@@ -58,7 +62,13 @@ group :production do
 end
 
 
-group :development, :profile do
+group :development, :test, :profile do
+  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'byebug'
+
+  # Access an IRB console on exception pages or by using <%= console %> in views
+  gem 'web-console', '~> 2.0'
+
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'did_you_mean'
@@ -67,14 +77,9 @@ group :development, :profile do
   gem 'bullet'
   gem 'ruby-prof', platforms: :ruby
 
-  # bundle exec rake doc:rails generates the API under doc/api.
-  gem 'sdoc', '~> 0.4.0'
-
   # Use debugger (incompatible with Rubymine)
   # gem 'debugger'
-end
 
-group :development, :test, :profile do
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
   gem 'rubocop'

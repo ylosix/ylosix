@@ -6,6 +6,8 @@ class ProductsController < CommonFrontendController
 
   def get_template_variables(template)
     super
+
+    @variables['product'] = @product
   end
 
   def add_to_shopping_cart
