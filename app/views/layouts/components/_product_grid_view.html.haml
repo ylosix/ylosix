@@ -26,3 +26,6 @@
         %span{:class => 'glyphicon glyphicon-star'}
         %span{:class => 'glyphicon glyphicon-star'}
         %span{:class => 'glyphicon glyphicon-star-empty'}
+
+    %div.btn-add-cart
+      = link_to 'Add to cart', add_to_shopping_cart_products_path(product), :class => 'btn btn-success btn-block'

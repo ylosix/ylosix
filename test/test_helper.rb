@@ -49,5 +49,12 @@ module ActiveSupport
 
       admin_user
     end
+
+    def login_customer
+      customer = customers(:customer_example)
+      sign_in customer
+
+      customer
+    end
   end
 end

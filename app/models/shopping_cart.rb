@@ -14,4 +14,31 @@
 
 class ShoppingCart < ActiveRecord::Base
   belongs_to :customer
+  has_many :shopping_carts_products
+
+  def remove_product(product)
+    shopping_carts_products.where(product_id: product.id).destroy_all
+  end
+
+  def add_product(product)
+    scp = shopping_cart_product(product)
+    if scp.nil?
+      scp = ShoppingCartsProduct.new
+      scp.product = product
+      shopping_carts_products << scp
+
+      # else
+      # TODO +1 quantity
+    end
+  end
+
+  private
+
+  def shopping_cart_product(product)
+    shopping_carts_products.each do |scp|
+      return scp if scp.product_id == product.id
+    end
+
+    nil
+  end
 end

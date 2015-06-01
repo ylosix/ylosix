@@ -82,6 +82,7 @@ class Product < ActiveRecord::Base
   end
 
   def to_liquid
+    helpers = Rails.application.routes.url_helpers
     image_src = 'http://placehold.it/320x150'
     image_src = image.url(:medium) if image.file?
 
@@ -97,7 +98,8 @@ class Product < ActiveRecord::Base
         'description' => s_description,
         'retail_price' => retail_price,
         'image_src' => image_src,
-        'href' => Rails.application.routes.url_helpers.show_slug_products_path(slug)
+        'href' => helpers.show_slug_products_path(slug),
+        'buy_href' => helpers.add_to_shopping_cart_products_path(self)
     }
   end
 

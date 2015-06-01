@@ -24,7 +24,8 @@ Rails.application.routes.draw do
   resource :products, only: [] do
     get '/:slug' => 'products#show', as: :show_slug
     get '/:id/show' => 'products#show', as: :show_id
-    get '/:slug/add_to_shopping_cart' => 'products#add_to_shopping_cart', as: :add_to_shopping_cart
+    get '/:id/add_to_shopping_cart' => 'products#add_to_shopping_cart', as: :add_to_shopping_cart
+    get '/:id/delete_from_shopping_cart' => 'products#delete_from_shopping_cart', as: :delete_from_shopping_cart
   end
 
   resource :searches, only: [] do
@@ -33,6 +34,7 @@ Rails.application.routes.draw do
 
   resource :customers, only: [] do
     get '/show' => 'customers#show'
+    get '/shopping_carts' => 'shopping_carts#show'
   end
 
   get '/locale/:locale' => 'application#change_locale', :as => 'change_locale'

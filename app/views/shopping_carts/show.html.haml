@@ -1,0 +1,26 @@
+%h1 Cart
+
+%table
+  %tr
+    %th
+    %th Price
+    %th Quantity
+
+  - subtotal = 0
+  - @cart_products.each do |cp|
+    - product = cp.product
+    - subtotal += product.retail_price
+    %tr
+      %td
+        = link_to product.name, show_slug_products_path(product.slug)
+        %br
+        = link_to 'remove', delete_from_shopping_cart_products_path(product)
+      %td
+        = "#{product.retail_price} €"
+      %td
+        1
+
+  %tr
+    %td
+    %td{:colspan => '2'}
+      = "Subtotal (#{@cart_products.size} products): #{subtotal} €"

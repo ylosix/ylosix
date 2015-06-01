@@ -1,5 +1,5 @@
 class ProductsController < CommonFrontendController
-  before_filter :get_product
+  before_action :get_product
 
   def show
   end
@@ -9,6 +9,34 @@ class ProductsController < CommonFrontendController
   end
 
   def add_to_shopping_cart
+    if customer_signed_in?
+      sc = current_customer.shopping_cart
+      sc ||= ShoppingCart.new
+      sc.add_product(@product)
+
+      current_customer.shopping_cart = sc
+      current_customer.save
+
+      # TODO save Shopping Cart in cache
+    end
+
+    redirect_to :shopping_carts_customers
+  end
+
+  def delete_from_shopping_cart
+    if customer_signed_in?
+      sc = current_customer.shopping_cart
+
+      unless sc.blank?
+        sc.remove_product(@product)
+        current_customer.shopping_cart = sc
+        current_customer.save
+
+        # TODO save Shopping Cart in cache
+      end
+    end
+
+    redirect_to :shopping_carts_customers
   end
 
   private
