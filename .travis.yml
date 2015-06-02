@@ -24,4 +24,6 @@ script:
   - RAILS_ENV=test bundle exec rake db:create
   - RAILS_ENV=test bundle exec rake
 notifications:
-  slack: ylos:PdkYQ8whHX8Wp4dGyOGSmq7x
+  slack:
+    rooms:
+      - ylos:PdkYQ8whHX8Wp4dGyOGSmq7x#notificationsci
