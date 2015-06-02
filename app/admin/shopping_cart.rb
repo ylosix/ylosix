@@ -1,7 +1,7 @@
-ActiveAdmin.register Customer do
+ActiveAdmin.register ShoppingCart do
   menu parent: 'Customers'
 
-  permit_params :email, :locale, :name, :last_name, :birth_date
+  # permit_params :email, :name, :last_name, :birth_date
 
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters

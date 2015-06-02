@@ -13,7 +13,7 @@
 #  last_name              :string
 #  last_sign_in_at        :datetime
 #  last_sign_in_ip        :string
-#  locale                 :string
+#  locale                 :string           default("en"), not null
 #  name                   :string
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
@@ -36,6 +36,7 @@ class Customer < ActiveRecord::Base
   validates :name, presence: true
   validates :last_name, presence: true
   validates :birth_date, presence: true
+  validates :locale, presence: true
 
   has_one :shopping_cart
 

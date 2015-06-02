@@ -55,9 +55,10 @@ class ApplicationController < ActionController::Base
       session[:locale] = extract_locale_from_accept_language_header
     end
 
+    session[:locale] = current_admin_user.locale unless current_admin_user.nil?
     session[:locale] = current_customer.locale unless current_customer.nil?
-    if Language.locale_valid?(params[:locale])
-      session[:locale] = params[:locale]
+    if !@variables.nil? && Language.locale_valid?(@variables['debug_locale'])
+      session[:locale] = @variables['debug_locale']
     end
 
     I18n.locale = session[:locale]
