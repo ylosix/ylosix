@@ -43,6 +43,11 @@ class ApplicationController < ActionController::Base
     unless params_debug[:debug_template_id].blank?
       @variables['debug_template_id'] = params_debug[:debug_template_id].to_i
     end
+
+    unless params_debug[:debug_locale].blank?
+      @variables['debug_locale'] = params_debug[:debug_locale]
+      session[:locale] = @variables['debug_locale']
+    end
   end
 
   def set_locale
@@ -75,6 +80,6 @@ class ApplicationController < ActionController::Base
   end
 
   def permit_debug_params
-    params.permit(:debug_variables, :debug_template_id)
+    params.permit(:debug_locale, :debug_variables, :debug_template_id)
   end
 end

@@ -33,6 +33,6 @@ rate_tax = (taxes_inputs, selected_index_tax) ->
     price = parseFloat($(input).val())
     rate = rate_tax(taxes_inputs, selected_index_tax)
 
-    price_pre_tax = (price * (1.0 - rate)).toFixed(5)
+    price_pre_tax = (price / (1.0 + rate)).toFixed(5)
     $('#product_retail_price_pre_tax').val(price_pre_tax)
 ####
