@@ -37,6 +37,10 @@ Rails.application.routes.draw do
     get '/shopping_carts' => 'shopping_carts#show'
   end
 
+  resource :shopping_carts, only: [] do
+    get '/:shopping_cart_product_id/update/:quantity' => 'shopping_carts#update', as: :update
+  end
+
   get '/locale/:locale' => 'application#change_locale', :as => 'change_locale'
   # You can have the root of your site routed with "root"
   root 'home#index'

@@ -1,3 +1,21 @@
 // Place all the styles related to the shopping_carts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.sc-list-item-border {
+  border-top: 1px solid #DDD;
+  min-height: 105px;
+  padding: 10px 10px;
+}
+
+.a-color-price{
+  color: #b12704;
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (max-width: 480px) {
+  .item-image{
+    display: none;
+  }
+}
+
