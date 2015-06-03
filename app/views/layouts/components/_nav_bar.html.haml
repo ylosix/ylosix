@@ -9,8 +9,7 @@
         %span.icon-bar
         %span.icon-bar
 
-      %a.navbar-brand{:href => root_path}
-        Start Bootstrap
+      = link_to 'Start Bootstrap', @variables['root_href'], :class => 'navbar-brand'
 
     -# Collect the nav links, forms, and other content for toggling
     %div{:class => 'collapse navbar-collapse', :id => 'bs-example-navbar-collapse-1'}

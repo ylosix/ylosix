@@ -5,6 +5,8 @@
 #  created_at       :datetime         not null
 #  id               :integer          not null, primary key
 #  product_id       :integer
+#  quantity         :integer          default(1), not null
+#  retail_price     :decimal(10, 2)   default(0.0), not null
 #  shopping_cart_id :integer
 #  updated_at       :datetime         not null
 #
@@ -17,4 +19,12 @@
 class ShoppingCartsProduct < ActiveRecord::Base
   belongs_to :shopping_cart
   belongs_to :product
+
+  def to_liquid
+    {
+        'product' => product,
+        'quantity' => quantity,
+        'retail_price' => retail_price
+    }
+  end
 end

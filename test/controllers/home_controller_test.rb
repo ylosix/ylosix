@@ -43,4 +43,9 @@ class HomeControllerTest < ActionController::TestCase
     get :index, debug_variables: 1, debug_template_id: object.id
     assert_response :success
   end
+
+  test 'should get index with debug locale' do
+    get :index, debug_locale: 'en'
+    assert_response :success
+  end
 end

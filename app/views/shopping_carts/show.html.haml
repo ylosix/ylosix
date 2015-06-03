@@ -7,20 +7,26 @@
     %th Quantity
 
   - subtotal = 0
-  - @cart_products.each do |cp|
+  - @variables['shopping_cart_products'].each do |cp|
     - product = cp.product
-    - subtotal += product.retail_price
+    - subtotal += product.retail_price * cp.quantity
     %tr
       %td
         = link_to product.name, show_slug_products_path(product.slug)
         %br
         = link_to 'remove', delete_from_shopping_cart_products_path(product)
       %td
-        = "#{product.retail_price} €"
+        = "c:#{cp.retail_price} p:#{product.retail_price} €"
       %td
-        1
+        = cp.quantity
 
   %tr
     %td
     %td{:colspan => '2'}
-      = "Subtotal (#{@cart_products.size} products): #{subtotal} €"
+      = "Subtotal (#{@variables['shopping_cart_products'].size} products): #{subtotal} €"
+
+%br
+
+= link_to 'Continue shopping', @variables['root_href'], class: 'btn btn-default'
+|
+= link_to 'Go to checkout', '#', class: 'btn btn-success btn-default'

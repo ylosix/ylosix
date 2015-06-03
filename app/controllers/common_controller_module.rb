@@ -60,6 +60,7 @@ module CommonControllerModule
     helper = Rails.application.routes.url_helpers
     append_link_variables(helper)
     append_customer_variables(helper)
+    @variables['root_href'] = helper.root_path
   end
 
   def get_template(variables)

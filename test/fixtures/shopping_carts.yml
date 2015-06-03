@@ -14,8 +14,6 @@
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  customer_id:
+customer_example_sc:
+  customer: customer_example
 
-two:
-  customer_id:

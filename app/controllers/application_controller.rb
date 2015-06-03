@@ -3,11 +3,11 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  before_action :set_locale
-
   # if !Rails.env.production? # TODO In the future this only is for development
   before_action :get_debug_params
   # end
+
+  before_action :set_locale
 
   def change_locale
     locale = I18n.default_locale.to_s

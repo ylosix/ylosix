@@ -22,14 +22,18 @@ class ShoppingCart < ActiveRecord::Base
 
   def add_product(product)
     scp = shopping_cart_product(product)
+
     if scp.nil?
       scp = ShoppingCartsProduct.new
       scp.product = product
       shopping_carts_products << scp
-
-      # else
-      # TODO +1 quantity
+    else
+      scp.quantity += 1
     end
+
+    scp.retail_price = product.retail_price
+    # scp.save unless scp.id.nil?
+    scp
   end
 
   private

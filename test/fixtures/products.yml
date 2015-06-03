@@ -56,3 +56,24 @@ camera:
   slug: canon_450d
   stock: 100
   control_stock: true
+
+lens_canon:
+  reference_code: ref2
+  name: Lens canon
+  barcode: 12345666
+  enabled: true
+  appears_in_categories: true
+  appears_in_tag: true
+  appears_in_search: true
+  short_description: Camera lens canon.
+  description: Camera lens canon.
+
+  retail_price_pre_tax: 100
+  retail_price: 120
+  tax: iva_es
+
+  meta_keywords: lenses_canon_
+  meta_description: Lens canon
+  slug: lens_canon
+  stock: 50
+  control_stock: true

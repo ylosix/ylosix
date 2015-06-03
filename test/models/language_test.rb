@@ -39,4 +39,10 @@ class LanguageTest < ActiveSupport::TestCase
     assert lang.save
     assert !lang.appears_in_web
   end
+
+  test 'valid_locale?' do
+    assert Language.locale_valid?('en')
+    assert !Language.locale_valid?('EN')
+    assert !Language.locale_valid?('ch1')
+  end
 end
