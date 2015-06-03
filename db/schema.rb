@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150602162212) do
+ActiveRecord::Schema.define(version: 20150603132319) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -211,6 +211,28 @@ ActiveRecord::Schema.define(version: 20150602162212) do
 
   add_index "shopping_carts_products", ["product_id"], name: "index_shopping_carts_products_on_product_id"
   add_index "shopping_carts_products", ["shopping_cart_id"], name: "index_shopping_carts_products_on_shopping_cart_id"
+
+  create_table "shopping_orders", force: :cascade do |t|
+    t.integer  "customer_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "shopping_orders", ["customer_id"], name: "index_shopping_orders_on_customer_id"
+
+  create_table "shopping_orders_products", force: :cascade do |t|
+    t.integer  "product_id"
+    t.integer  "shopping_order_id"
+    t.integer  "quantity",                                      default: 1,   null: false
+    t.decimal  "retail_price_pre_tax", precision: 10, scale: 5, default: 0.0, null: false
+    t.decimal  "retail_price",         precision: 10, scale: 2, default: 0.0, null: false
+    t.decimal  "tax_percent",          precision: 5,  scale: 2, default: 0.0, null: false
+    t.datetime "created_at",                                                  null: false
+    t.datetime "updated_at",                                                  null: false
+  end
+
+  add_index "shopping_orders_products", ["product_id"], name: "index_shopping_orders_products_on_product_id"
+  add_index "shopping_orders_products", ["shopping_order_id"], name: "index_shopping_orders_products_on_shopping_order_id"
 
   create_table "tag_translations", force: :cascade do |t|
     t.integer  "tag_id",     null: false

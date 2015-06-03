@@ -20,6 +20,21 @@ def create_default_admin_user
                       :password => 'password',
                       :password_confirmation => 'password')
   end
+
+  puts '####################'
+  puts '## Creating default user'
+  puts '####################'
+
+  customer = Customer.find_by(:email => 'user@example.com')
+  if customer.nil?
+    Customer.create!(:email => 'user@example.com',
+                      :name => 'User name',
+                      :last_name => 'User last_name',
+                      :birth_date => DateTime.now,
+                      :password => 'password',
+                      :locale => 'en',
+                      :password_confirmation => 'password')
+  end
 end
 
 def create_default_languages
