@@ -10,7 +10,7 @@ class ShoppingCartsController < CommonFrontendController
   end
 
   def update
-    if customer_signed_in? && current_customer.shopping_cart != nil
+    if customer_signed_in? && !current_customer.shopping_cart.nil?
       modify_shopping_cart
     end
 
@@ -25,7 +25,7 @@ class ShoppingCartsController < CommonFrontendController
 
   def modify_shopping_cart
     params_scp = params_shopping_cart
-    scp = ShoppingCartsProduct.find_by(:id => params_scp[:shopping_cart_product_id])
+    scp = ShoppingCartsProduct.find_by(id: params_scp[:shopping_cart_product_id])
     sc = current_customer.shopping_cart
 
     return if scp.shopping_cart.id != sc.id
