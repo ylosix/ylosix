@@ -16,7 +16,7 @@ def create_default_admin_user
 
   admin = AdminUser.find_by(:email => 'admin@example.com')
   if admin.nil?
-    AdminUser.create!(:email => 'admin@example.com',
+    AdminUser.create!(:email => 'admin@ylosix.com',
                       :password => 'password',
                       :password_confirmation => 'password')
   end
@@ -27,7 +27,7 @@ def create_default_admin_user
 
   customer = Customer.find_by(:email => 'user@example.com')
   if customer.nil?
-    Customer.create!(:email => 'user@example.com',
+    Customer.create!(:email => 'customer@ylosix.com',
                       :name => 'User name',
                       :last_name => 'User last_name',
                       :birth_date => DateTime.now,
