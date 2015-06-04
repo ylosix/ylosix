@@ -117,10 +117,12 @@ Default Postgresql config: <br />
 The main web application is running at: <br />
 [http://localhost:13000](http://localhost:13000)
 
+The default customer user is {:email => 'user@example.com', :password => 'password' }.
+
 The application backoffice is running at: <br />
 [http://localhost:13000/admin](http://localhost:13000/admin)
 
-The default user is {:email => 'admin@example.com', :password => 'password' }.
+The default admin user is {:email => 'admin@example.com', :password => 'password' }.
 
 Demo at: <br />
 [Link to heroku](http://devcows-ecommerce.herokuapp.com)

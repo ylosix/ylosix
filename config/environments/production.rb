@@ -85,6 +85,6 @@ Rails.application.configure do
                         #     :exception_recipients => %w{exceptions@example.com}
                         # },
                         :slack => {
-                            :webhook_url => ''
+                            :webhook_url => 'https://hooks.slack.com/services/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'
                         }
 end
