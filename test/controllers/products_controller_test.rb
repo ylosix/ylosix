@@ -19,16 +19,16 @@ class ProductsControllerTest < ActionController::TestCase
     object = products(:camera)
 
     get :add_to_shopping_cart, id: object.id
-    assert_response 302
+    assert_response :redirect
 
     get :delete_from_shopping_cart, id: object.id
-    assert_response 302
+    assert_response :redirect
 
     get :add_to_shopping_cart, id: object.id
-    assert_response 302
+    assert_response :redirect
 
     object = products(:lens_canon)
     get :add_to_shopping_cart, id: object.id
-    assert_response 302
+    assert_response :redirect
   end
 end

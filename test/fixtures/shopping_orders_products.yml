@@ -9,7 +9,7 @@
 #  retail_price         :decimal(10, 2)   default(0.0), not null
 #  retail_price_pre_tax :decimal(10, 5)   default(0.0), not null
 #  shopping_order_id    :integer
-#  tax_percent          :decimal(5, 2)    default(0.0), not null
+#  tax_rate             :decimal(5, 2)    default(0.0), not null
 #  updated_at           :datetime         not null
 #
 # Indexes

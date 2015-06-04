@@ -7,11 +7,6 @@
     <li class="string input optional stringish">
       <textarea id="template_<%= key %>" name="template[<%= key %>]" class="hide"></textarea>
       <label for="<%= key %>" class="label"><%= key %></label>
-
-      <% if key == 'home_index' %>
-        <span><b>Categories [ Category {name, href, children} ]</b></span>
-      <% end %>
-
       <div id="<%= key %>" class="editor_html"><%= value %></div>
     </li>
 

@@ -1,6 +1,7 @@
 module Customers
   class SessionsController < Devise::SessionsController
-    include CommonControllerModule
+    include Frontend::CommonModule
+
     # before_filter :configure_sign_in_params, only: [:create]
 
     # GET /resource/sign_in

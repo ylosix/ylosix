@@ -12,6 +12,11 @@
   color: #b12704;
 }
 
+.product-list > li {
+  list-style: none;
+  margin-bottom: 10px;
+}
+
 /* Extra Small Devices, Phones */
 @media only screen and (max-width: 480px) {
   .item-image{

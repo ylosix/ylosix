@@ -14,4 +14,16 @@
 
 class ShoppingOrder < ActiveRecord::Base
   belongs_to :customer
+  has_many :shopping_orders_products
+
+  def total
+    products_prices = shopping_orders_products.map { |sop| sop.retail_price * sop.quantity }
+    products_prices.reduce(:+)
+  end
+
+  def to_liquid
+    {
+        'shopping_orders_products' => shopping_orders_products
+    }
+  end
 end

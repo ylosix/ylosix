@@ -14,4 +14,12 @@ class ShoppingCartsControllerTest < ActionController::TestCase
     get :show
     assert_response :success
   end
+
+  test 'should get update with login user' do
+    login_customer
+    scp = shopping_carts_products(:scp_camera)
+
+    get :update, shopping_cart_product_id: scp.id, quantity: 5
+    assert_response :redirect
+  end
 end

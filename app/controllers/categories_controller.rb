@@ -1,4 +1,4 @@
-class CategoriesController < CommonFrontendController
+class CategoriesController < Frontend::CommonController
   before_action :set_category, except: [:index]
 
   def index

@@ -1,3 +1,23 @@
 // Place all the styles related to the customer controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.order_highlight {
+  min-height: 65px;
+  padding: 10px;
+  margin: 0 0 -1px 0;
+  word-break: break-all;
+  word-wrap: break-word;
+  color: #333333;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 4px 4px 0 0;
+}
+
+.order_container {
+  padding: 10px;
+  min-height: 130px;
+  border: 1px solid #ccc;
+  border-radius: 0 0 4px 4px;
+}

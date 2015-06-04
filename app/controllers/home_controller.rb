@@ -1,4 +1,4 @@
-class HomeController < CommonFrontendController
+class HomeController < Frontend::CommonController
   def index
   end
 

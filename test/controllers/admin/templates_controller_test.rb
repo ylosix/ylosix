@@ -42,7 +42,7 @@ module Admin
                 path: 'tmp/templates/test',
                 enabled: true
             }
-      assert_response 302
+      assert_response :redirect
     end
 
     test 'should export' do

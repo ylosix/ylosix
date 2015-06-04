@@ -1,4 +1,4 @@
-class SearchesController < CommonFrontendController
+class SearchesController < Frontend::CommonController
   def index
     @products = []
     @products += Product.search_by_text(@query_text) unless @query_text.blank?

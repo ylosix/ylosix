@@ -9,7 +9,7 @@
         %span.icon-bar
         %span.icon-bar
 
-      = link_to 'Start Bootstrap', @variables['root_href'], :class => 'navbar-brand'
+      = link_to 'Ecommerce', @variables['root_href'], :class => 'navbar-brand'
 
     -# Collect the nav links, forms, and other content for toggling
     %div{:class => 'collapse navbar-collapse', :id => 'bs-example-navbar-collapse-1'}
@@ -45,4 +45,4 @@
                 = link_to 'Login', new_customer_session_path
 
         %li
-          = link_to 'My cart', shopping_carts_customers_path
+          = link_to 'My cart', customers_shopping_carts_path

@@ -1,0 +1,38 @@
+%h1 My orders
+%hr
+
+%ul.product-list
+  - @variables['shopping_orders'].each do |order|
+    %li
+      %div{:class => 'row order_highlight'}
+        %div.col-md-9
+          %div.col-md-3
+            DATE
+            %br
+            = order.created_at
+          %div.col-md-3
+            TOTAL
+            %br
+            = "#{order.total} €"
+        %div.col-md-3
+          %div.pull-right
+            = "ORDER N.º #{order.id}"
+      %div{:class => 'order_container'}
+        - order.shopping_orders_products.each do |sop|
+          - product = sop.product
+          %div.row
+            %div.col-md-6
+              %div{:class => 'col-md-3'}
+                = image_tag product.image.url(:thumb) unless product.image.nil?
+              %div{:class => 'col-md-9'}
+                %div.col-md-12
+                  = link_to product.name, show_slug_products_path(product.slug)
+                %br
+                %div.col-md-12
+                  = "Quantity: #{sop.quantity}"
+
+                %div{class: 'col-md-12 a-color-price'}
+                  = "#{sop.retail_price} €"
+
+                %div.col-md-6
+                  = link_to 'Buy another', add_to_shopping_cart_products_path(product), :class => 'btn btn-default btn-block'

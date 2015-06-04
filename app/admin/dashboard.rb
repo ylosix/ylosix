@@ -4,6 +4,8 @@ ActiveAdmin.register_page 'Dashboard' do
   content title: proc { I18n.t('active_admin.dashboard') } do
     panel 'Variables' do
       current_config = Rails.application.config
+      config_db = current_config.database_configuration[Rails.env]
+      updates = `cd #{Rails.root}; git fetch; git rev-list HEAD...origin/develop --count`
 
       columns do
         column do
@@ -35,8 +37,6 @@ ActiveAdmin.register_page 'Dashboard' do
         end
       end
 
-      config_db = current_config.database_configuration[Rails.env]
-
       columns do
         column do
           span 'Database'
@@ -63,8 +63,6 @@ ActiveAdmin.register_page 'Dashboard' do
         end
 
         column do
-          updates = `cd #{Rails.root}; git rev-list HEAD...origin/develop --count`
-
           if updates.to_i == 0
             span 'Up-to-date'
           else
@@ -73,25 +71,5 @@ ActiveAdmin.register_page 'Dashboard' do
         end
       end
     end
-
-    # Here is an example of a simple dashboard with columns and panels.
-    #
-    # columns do
-    #   column do
-    #     panel "Recent Posts" do
-    #       ul do
-    #         Post.recent(5).map do |post|
-    #           li link_to(post.title, admin_post_path(post))
-    #         end
-    #       end
-    #     end
-    #   end
-
-    #   column do
-    #     panel "Info" do
-    #       para "Welcome to ActiveAdmin."
-    #     end
-    #   end
-    # end
   end # content
 end

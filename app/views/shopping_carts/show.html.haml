@@ -1,61 +1,63 @@
 %h1 Cart
 
-%ul.list-unstyled
-  %li
-    %div.row
-      %div{class: 'col-md-6 col-xs-6'}
-      %div{class: 'col-md-3 col-xs-3'}
-        Price
-      %div{class: 'col-md-3 col-xs-3'}
-        Quantity
-
-  - subtotal = 0
-  - subtotal_qty = 0
-  - @variables['shopping_cart_products'].each do |scp|
-    - product = scp.product
-    - subtotal_qty += scp.quantity
-    - subtotal += product.retail_price * scp.quantity
-    %li.sc-list-item-border
-
+- if !@variables['shopping_cart'].nil? && @variables['shopping_cart'].shopping_carts_products.any?
+  %ul.list-unstyled
+    %li
       %div.row
         %div{class: 'col-md-6 col-xs-6'}
-          %div.row
+        %div{class: 'col-md-3 col-xs-3'}
+          Price
+        %div{class: 'col-md-3 col-xs-3'}
+          Quantity
+
+    - subtotal_qty = 0
+    - @variables['shopping_cart'].shopping_carts_products.each do |scp|
+      - product = scp.product
+      - subtotal_qty += scp.quantity
+      %li.sc-list-item-border
+
+        %div.row
+          %div{class: 'col-md-6 col-xs-6'}
             %div{:class => 'item-image col-md-3'}
               = image_tag product.image.url(:thumb) unless product.image.nil?
             %div{:class => 'col-md-9 col-xs-12'}
               = link_to product.name, show_slug_products_path(product.slug)
               %br
               = link_to 'remove', delete_from_shopping_cart_products_path(product)
-        %div{class: 'col-md-3 col-xs-3'}
-          %div.a-color-price
-            = "c:#{scp.retail_price} p:#{product.retail_price} €"
-        %div{class: 'col-md-3 col-xs-3'}
-          %div{:class => 'btn-group', :role => 'group'}
-            %button{:type => 'button', :class => 'btn btn-default dropdown-toggle', 'data-toggle' => 'dropdown', 'aria-expanded' => 'false'}
-              = scp.quantity
-              %span.caret
+          %div{class: 'col-md-3 col-xs-3'}
+            %div.a-color-price
+              = "c:#{scp.retail_price} p:#{product.retail_price} €"
+          %div{class: 'col-md-3 col-xs-3'}
+            %div{:class => 'btn-group', :role => 'group'}
+              %button{:type => 'button', :class => 'btn btn-default dropdown-toggle', 'data-toggle' => 'dropdown', 'aria-expanded' => 'false'}
+                = scp.quantity
+                %span.caret
 
-            %ul{:class => 'dropdown-menu', :role => 'menu'}
-              - (1..9).each do |i|
+              %ul{:class => 'dropdown-menu', :role => 'menu'}
+                - (1..9).each do |i|
+                  %li
+                    = link_to i, update_customers_shopping_carts_path(scp.id, i)
+
+                %li{:role => 'presentation', :class => 'divider'}
+
                 %li
-                  = link_to i, update_shopping_carts_path(scp.id, i)
+                  %a
+                    10+
 
-              %li{:role => 'presentation', :class => 'divider'}
+    %li.sc-list-item-border
+      %div.row
+        %div{class: 'col-md-6'}
+        %div{class: 'col-md-6 col-xs-12'}
+          %div.pull-right
+            %span
+              = "Subtotal (#{subtotal_qty} products): "
+            %span.a-color-price
+              = "#{@variables['shopping_cart'].total} €"
+- else
+  %i Your cart is empty.
+  %br
 
-              %li
-                %a
-                  10+
-
-  %li.sc-list-item-border
-    %div.row
-      %div{class: 'col-md-6'}
-      %div{class: 'col-md-6 col-xs-12'}
-        %div.pull-right
-          %span
-            = "Subtotal (#{subtotal_qty} products): "
-          %span.a-color-price
-            = "#{subtotal} €"
 
 = link_to 'Continue shopping', @variables['root_href'], class: 'btn btn-default'
 |
-= link_to 'Go to checkout', '#', class: 'btn btn-success btn-default'
+= link_to 'Checkout', customers_shopping_orders_path, class: 'btn btn-success btn-default'

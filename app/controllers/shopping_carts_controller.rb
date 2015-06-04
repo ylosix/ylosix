@@ -1,12 +1,14 @@
-class ShoppingCartsController < CommonFrontendController
+class ShoppingCartsController < Frontend::CommonController
   def get_template_variables(template)
     super
 
-    get_shopping_cart_products
+    @variables['shopping_cart'] = nil
+    if customer_signed_in?
+      @variables['shopping_cart'] = current_customer.shopping_cart
+    end
   end
 
   def show
-    get_shopping_cart_products
   end
 
   def update
@@ -14,7 +16,7 @@ class ShoppingCartsController < CommonFrontendController
       modify_shopping_cart
     end
 
-    redirect_to :shopping_carts_customers
+    redirect_to :customers_shopping_carts
   end
 
   private
@@ -33,16 +35,5 @@ class ShoppingCartsController < CommonFrontendController
     scp.quantity = params_scp[:quantity]
     scp.save
     # TODO save Shopping Cart in cache
-  end
-
-  def get_shopping_cart_products
-    @variables['shopping_cart_products'] = []
-    if customer_signed_in?
-      sc = current_customer.shopping_cart
-
-      unless sc.nil?
-        @variables['shopping_cart_products'] = sc.shopping_carts_products
-      end
-    end
   end
 end

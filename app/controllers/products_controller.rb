@@ -1,4 +1,4 @@
-class ProductsController < CommonFrontendController
+class ProductsController < Frontend::CommonController
   before_action :get_product
 
   def show
@@ -22,7 +22,7 @@ class ProductsController < CommonFrontendController
       # TODO save Shopping Cart in cache
     end
 
-    redirect_to :shopping_carts_customers
+    redirect_to :customers_shopping_carts
   end
 
   def delete_from_shopping_cart
@@ -38,7 +38,7 @@ class ProductsController < CommonFrontendController
       end
     end
 
-    redirect_to :shopping_carts_customers
+    redirect_to :customers_shopping_carts
   end
 
   private

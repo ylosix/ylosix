@@ -39,6 +39,7 @@ class Customer < ActiveRecord::Base
   validates :locale, presence: true
 
   has_one :shopping_cart
+  has_many :shopping_orders
 
   def to_liquid
     {

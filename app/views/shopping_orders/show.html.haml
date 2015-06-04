@@ -1,0 +1,45 @@
+%h1 Order
+
+%ul.list-unstyled
+  %li
+    %div.row
+      %div{class: 'col-md-6 col-xs-6'}
+      %div{class: 'col-md-3 col-xs-3'}
+        Price
+      %div{class: 'col-md-3 col-xs-3'}
+        Quantity
+
+  - subtotal = 0
+  - subtotal_qty = 0
+  - @variables['shopping_cart_products'].each do |scp|
+    - product = scp.product
+    - subtotal_qty += scp.quantity
+    - subtotal += product.retail_price * scp.quantity
+    %li.sc-list-item-border
+
+      %div.row
+        %div{class: 'col-md-6 col-xs-6'}
+          %div.row
+            %div{:class => 'item-image col-md-3'}
+              = image_tag product.image.url(:thumb) unless product.image.nil?
+            %div{:class => 'col-md-9 col-xs-12'}
+              = product.name
+        %div{class: 'col-md-3 col-xs-3'}
+          %div.a-color-price
+            = "#{product.retail_price} €"
+        %div{class: 'col-md-3 col-xs-3'}
+          = scp.quantity
+
+  %li.sc-list-item-border
+    %div.row
+      %div{class: 'col-md-6'}
+      %div{class: 'col-md-6 col-xs-12'}
+        %div.pull-right
+          %span
+            = "Subtotal (#{subtotal_qty} products): "
+          %span.a-color-price
+            = "#{subtotal} €"
+
+= link_to 'Continue shopping', @variables['root_href'], class: 'btn btn-default'
+|
+= link_to 'Finalize', finalize_customers_shopping_orders_path, class: 'btn btn-success btn-default'

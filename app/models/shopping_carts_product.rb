@@ -20,6 +20,18 @@ class ShoppingCartsProduct < ActiveRecord::Base
   belongs_to :shopping_cart
   belongs_to :product
 
+  def to_shopping_order
+    sop = ShoppingOrdersProduct.new
+
+    sop.quantity = quantity
+    sop.product = product
+    sop.retail_price = product.retail_price
+    sop.retail_price_pre_tax = product.retail_price_pre_tax
+    sop.tax_rate = product.tax.rate unless product.tax.nil?
+
+    sop
+  end
+
   def to_liquid
     {
         'product' => product,

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150603132319) do
+ActiveRecord::Schema.define(version: 20150604100132) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -226,7 +226,7 @@ ActiveRecord::Schema.define(version: 20150603132319) do
     t.integer  "quantity",                                      default: 1,   null: false
     t.decimal  "retail_price_pre_tax", precision: 10, scale: 5, default: 0.0, null: false
     t.decimal  "retail_price",         precision: 10, scale: 2, default: 0.0, null: false
-    t.decimal  "tax_percent",          precision: 5,  scale: 2, default: 0.0, null: false
+    t.decimal  "tax_rate",             precision: 5,  scale: 2, default: 0.0, null: false
     t.datetime "created_at",                                                  null: false
     t.datetime "updated_at",                                                  null: false
   end

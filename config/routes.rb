@@ -34,11 +34,17 @@ Rails.application.routes.draw do
 
   resource :customers, only: [] do
     get '/show' => 'customers#show'
-    get '/shopping_carts' => 'shopping_carts#show'
-  end
+    get '/orders' => 'customers#orders'
 
-  resource :shopping_carts, only: [] do
-    get '/:shopping_cart_product_id/update/:quantity' => 'shopping_carts#update', as: :update
+    resource :shopping_carts, only: [] do
+      get '/' => 'shopping_carts#show'
+      get '/:shopping_cart_product_id/update/:quantity' => 'shopping_carts#update', as: :update
+    end
+
+    resource :shopping_orders, only: [] do
+      get '/' => 'shopping_orders#show'
+      get '/finalize' => 'shopping_orders#finalize'
+    end
   end
 
   get '/locale/:locale' => 'application#change_locale', :as => 'change_locale'

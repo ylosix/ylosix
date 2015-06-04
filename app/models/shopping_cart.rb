@@ -16,6 +16,11 @@ class ShoppingCart < ActiveRecord::Base
   belongs_to :customer
   has_many :shopping_carts_products
 
+  def total
+    products_prices = shopping_carts_products.map { |scp| scp.product.retail_price * scp.quantity }
+    products_prices.reduce(:+)
+  end
+
   def remove_product(product)
     shopping_carts_products.where(product_id: product.id).destroy_all
   end

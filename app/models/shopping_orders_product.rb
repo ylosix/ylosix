@@ -9,7 +9,7 @@
 #  retail_price         :decimal(10, 2)   default(0.0), not null
 #  retail_price_pre_tax :decimal(10, 5)   default(0.0), not null
 #  shopping_order_id    :integer
-#  tax_percent          :decimal(5, 2)    default(0.0), not null
+#  tax_rate             :decimal(5, 2)    default(0.0), not null
 #  updated_at           :datetime         not null
 #
 # Indexes
@@ -21,4 +21,14 @@
 class ShoppingOrdersProduct < ActiveRecord::Base
   belongs_to :product
   belongs_to :shopping_order
+
+  def to_liquid
+    {
+        'quantity' => quantity,
+        'product' => product,
+        'retail_price' => retail_price,
+        'retail_price_pre_tax' => retail_price_pre_tax,
+        'tax_rate' => tax_rate
+    }
+  end
 end
