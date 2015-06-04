@@ -35,9 +35,7 @@
               %li.dropdown
                 = link_to 'My account', show_customers_path
               %li.dropdown
-                = link_to 'My orders', '#todo'
-              %li.dropdown
-                = link_to 'Wish list', '#todo'
+                = link_to 'My orders', orders_customers_path
               %li.dropdown
                 = link_to 'Logout', destroy_customer_session_path, :method => :delete
             - else

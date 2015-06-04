@@ -37,7 +37,7 @@ class ShoppingCart < ActiveRecord::Base
     end
 
     scp.retail_price = product.retail_price
-    # scp.save unless scp.id.nil?
+    scp.save unless id.nil?
     scp
   end
 

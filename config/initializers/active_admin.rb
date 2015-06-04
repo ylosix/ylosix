@@ -123,10 +123,10 @@ ActiveAdmin.setup do |config|
   # config.comments = false
   #
   # You can disable the menu item for the comments index page:
-  # config.show_comments_in_menu = false
+  config.show_comments_in_menu = false
   #
   # You can change the name under which comments are registered:
-  # config.comments_registration_name = 'AdminComment'
+  config.comments_registration_name = 'AdminComment'
 
   # == Batch Actions
   #
@@ -202,9 +202,9 @@ ActiveAdmin.setup do |config|
 
 
       menu.add label: 'Administration', :priority => 5
-      # menu.add label: 'Admin users',    :parent => 'Administration', url: 'admin/admin_users', :priority => 0
-      # menu.add label: 'Users',          :parent => 'Administration', url: 'admin/users', :priority => 1
-      # menu.add label: 'Admin comments', :parent => 'Administration', url: 'admin/comments', :priority => 2
+      # menu.add label: 'Admin users',    :parent => 'Administration', url: '/admin/admin_users', :priority => 0
+      # menu.add label: 'Users',          :parent => 'Administration', url: '/admin/users', :priority => 1
+      menu.add label: 'Admin Comments', :parent => 'Administration', url: '/admin/admin_comments', :priority => 1
 
 
       menu.add label: 'Localization', :priority => 6

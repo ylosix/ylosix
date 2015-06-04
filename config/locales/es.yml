@@ -20,6 +20,12 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 es:
+  active_admin:
+      comments:
+        title_content: Comentarios internos
+
+
+## copied from: https://github.com/svenfuchs/rails-i18n/blob/master/rails/locale/es.yml
   date:
     abbr_day_names:
     - dom
