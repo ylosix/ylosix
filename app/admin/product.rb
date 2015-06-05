@@ -4,7 +4,7 @@ ActiveAdmin.register Product do
   permit_params :reference_code, :name, :enabled, :appears_in_categories,
                 :appears_in_tag, :appears_in_search, :short_description,
                 :description, :publication_date, :unpublication_date,
-                :retail_price_pre_tax, :retail_price, :tax_id,
+                :retail_price_pre_tax, :retail_price, :tax_id, :image,
                 :meta_keywords, :meta_description, :slug, :stock, :control_stock,
                 products_categories_attributes: [:id, :category_id, :product_id, :_destroy],
                 product_translations_attributes: [:id, :locale, :name, :short_description, :description]
@@ -39,11 +39,11 @@ ActiveAdmin.register Product do
     end
 
     f.inputs 'Price' do
-      f.input :retail_price_pre_tax, input_html: { onchange: 'javascript:change_price_pre_tax(this);' }
-      f.input :retail_price, input_html: { onchange: 'javascript:change_price(this);' }
+      f.input :retail_price_pre_tax, input_html: {onchange: 'javascript:change_price_pre_tax(this);'}
+      f.input :retail_price, input_html: {onchange: 'javascript:change_price(this);'}
 
       taxes = Tax.all
-      render partial: 'admin/products/taxes', locals: { taxes: taxes, tax: f.object.tax }
+      render partial: 'admin/products/taxes', locals: {taxes: taxes, tax: f.object.tax}
     end
 
     f.inputs 'Seo' do
@@ -81,7 +81,7 @@ ActiveAdmin.register Product do
 
   controller do
     def new
-      unless params[:id].blank?    # if id is passed (i.e. /product/25/new), evaluate below code before rendering new form
+      unless params[:id].blank? # if id is passed (i.e. /product/25/new), evaluate below code before rendering new form
         product = Product.find(params[:id])
         @product = product.clone
       end

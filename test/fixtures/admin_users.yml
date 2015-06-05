@@ -35,4 +35,7 @@
 admin_user:
   email: admin@example.com
   encrypted_password: <%= Devise::Encryptor.digest(AdminUser, 'password') %>
+  debug_locale: en
+  debug_template: test_template
+  debug_variables: true
 

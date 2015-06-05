@@ -1,7 +1,7 @@
 require 'test_helper'
 
 module Admin
-  class TaxesControllerTest < ActionController::TestCase
+  class ShoppingCartsControllerTest < ActionController::TestCase
     include Devise::TestHelpers
 
     def setup
@@ -12,7 +12,7 @@ module Admin
       get :index
       assert_response :success
 
-      object = taxes(:iva_es)
+      object = shopping_carts(:customer_example_sc)
 
       get :edit, id: object.id
       assert_response :success

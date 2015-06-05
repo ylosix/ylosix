@@ -34,7 +34,7 @@ class Template < ActiveRecord::Base
     File.join(Rails.root, path)
   end
 
-  def get_local_files
+  def files
     local_files = {}
 
     files = Dir.entries(absolute_path)

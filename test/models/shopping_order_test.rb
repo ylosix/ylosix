@@ -15,7 +15,9 @@
 require 'test_helper'
 
 class ShoppingOrderTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test 'should to_liquid' do
+    hash = shopping_orders(:customer_example_so).to_liquid
+
+    assert hash.key? 'shopping_orders_products'
+  end
 end

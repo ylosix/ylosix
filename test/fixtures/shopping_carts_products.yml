@@ -21,3 +21,4 @@
 scp_camera:
   shopping_cart: customer_example_sc
   product: camera
+  quantity: 5

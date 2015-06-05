@@ -1,6 +1,8 @@
 require 'test_helper'
 
 class HomeControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+
   def prepare_template
     object = templates(:test_template)
 
@@ -30,22 +32,12 @@ class HomeControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test 'should get index with debug variables' do
+  test 'should get index with debug variables/template/locale' do
     prepare_template
 
-    get :index, debug_variables: 1
-    assert_response :success
-  end
+    login_admin
 
-  test 'should get index with debug template' do
-    object = prepare_template
-
-    get :index, debug_variables: 1, debug_template_id: object.id
-    assert_response :success
-  end
-
-  test 'should get index with debug locale' do
-    get :index, debug_locale: 'en'
+    get :index
     assert_response :success
   end
 end

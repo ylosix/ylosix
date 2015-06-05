@@ -21,7 +21,11 @@
 require 'test_helper'
 
 class ShoppingOrdersProductTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test 'should to_liquid' do
+    hash = shopping_orders_products(:sop_camera).to_liquid
+
+    assert hash.key? 'product'
+    assert hash.key? 'quantity'
+    assert hash.key? 'retail_price'
+  end
 end

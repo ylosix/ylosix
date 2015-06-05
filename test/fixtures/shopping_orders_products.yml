@@ -20,12 +20,7 @@
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  product_id: 
-  quantity: 1
-  shopping_order_id: 
-
-two:
-  product_id: 
-  quantity: 1
-  shopping_order_id: 
+sop_camera:
+  shopping_order: customer_example_so
+  product: camera
+  quantity: 2

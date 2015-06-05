@@ -1,5 +1,5 @@
 class ProductsController < Frontend::CommonController
-  before_action :get_product
+  before_action :set_product
 
   def show
   end
@@ -43,7 +43,7 @@ class ProductsController < Frontend::CommonController
 
   private
 
-  def get_product
+  def set_product
     @product = nil
     @category = nil
 

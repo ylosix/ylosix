@@ -9,4 +9,11 @@ class ShoppingOrdersControllerTest < ActionController::TestCase
     get :show
     assert_response :success
   end
+
+  test 'should get finalize with login user' do
+    login_customer
+
+    get :finalize
+    assert_response :redirect
+  end
 end
