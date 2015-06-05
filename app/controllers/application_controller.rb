@@ -26,6 +26,12 @@ class ApplicationController < ActionController::Base
     redirect_to return_url
   end
 
+  # Overwrite unverified request handler to force a refresh / redirect.
+  def handle_unverified_request
+    super # call the default behaviour, including Devise override
+    throw :warden, redirect: request.referer || request.url
+  end
+
   private
 
   def set_locale

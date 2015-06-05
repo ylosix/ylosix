@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150605073352) do
+ActiveRecord::Schema.define(version: 20150605111044) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -155,12 +155,12 @@ ActiveRecord::Schema.define(version: 20150605073352) do
     t.text     "description"
     t.datetime "publication_date",                               default: '2015-01-01 00:00:00', null: false
     t.datetime "unpublication_date"
-    t.decimal  "retail_price_pre_tax",  precision: 10, scale: 5
-    t.decimal  "retail_price",          precision: 10, scale: 2
+    t.decimal  "retail_price_pre_tax",  precision: 10, scale: 5, default: 0.0,                   null: false
+    t.decimal  "retail_price",          precision: 10, scale: 2, default: 0.0,                   null: false
     t.integer  "tax_id"
     t.string   "meta_keywords"
     t.string   "meta_description"
-    t.string   "slug"
+    t.string   "slug",                                                                           null: false
     t.integer  "stock",                                          default: 0
     t.boolean  "control_stock",                                  default: false
     t.datetime "created_at"
