@@ -15,6 +15,16 @@ class Template < ActiveRecord::Base
 
   before_save :set_only_one_template_active
 
+  def self.active_template(current_admin_user)
+    if !current_admin_user.nil? && !current_admin_user.debug_template.nil?
+      template = current_admin_user.debug_template
+    else
+      template = Template.find_by(enabled: true)
+    end
+
+    template
+  end
+
   def ok?(file_name)
     file_path = File.join(absolute_path, file_name)
     File.exist?(file_path)

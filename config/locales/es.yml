@@ -23,7 +23,11 @@ es:
   active_admin:
       comments:
         title_content: Comentarios internos
-
+  time:
+    formats:
+      default: "%Y/%m/%d"
+      short: "%b %d"
+      long: "%b %d, %Y %H:%M"
 
 ## copied from: https://github.com/svenfuchs/rails-i18n/blob/master/rails/locale/es.yml
   date:
@@ -210,8 +214,3 @@ es:
       last_word_connector: " y "
       two_words_connector: " y "
       words_connector: ", "
-  time:
-    formats:
-      default: "%Y/%m/%d"
-      short: "%b %d"
-      long: "%b %d, %Y %H:%M"

@@ -3,10 +3,6 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  # if !Rails.env.production? # TODO In the future this only is for development
-  before_action :get_debug_params
-  # end
-
   before_action :set_locale
 
   def change_locale
@@ -32,24 +28,6 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def get_debug_params
-    @variables ||= {}
-
-    params_debug = permit_debug_params
-    unless params_debug[:debug_variables].blank?
-      @variables['debug_variables'] = params_debug[:debug_variables].to_i
-    end
-
-    unless params_debug[:debug_template_id].blank?
-      @variables['debug_template_id'] = params_debug[:debug_template_id].to_i
-    end
-
-    unless params_debug[:debug_locale].blank?
-      @variables['debug_locale'] = params_debug[:debug_locale]
-      session[:locale] = @variables['debug_locale']
-    end
-  end
-
   def set_locale
     if session[:locale].blank?
       session[:locale] = extract_locale_from_accept_language_header
@@ -58,8 +36,8 @@ class ApplicationController < ActionController::Base
       session[:locale] = current_customer.locale unless current_customer.nil?
     end
 
-    if !@variables.nil? && Language.locale_valid?(@variables['debug_locale'])
-      session[:locale] = @variables['debug_locale']
+    if !current_admin_user.nil? && Language.locale_valid?(current_admin_user.debug_locale)
+      session[:locale] = current_admin_user.debug_locale
     end
 
     I18n.locale = session[:locale]
@@ -79,9 +57,5 @@ class ApplicationController < ActionController::Base
 
   def permit_locale
     params.permit(:locale)
-  end
-
-  def permit_debug_params
-    params.permit(:debug_locale, :debug_variables, :debug_template_id)
   end
 end

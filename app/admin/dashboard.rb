@@ -2,11 +2,43 @@ ActiveAdmin.register_page 'Dashboard' do
   menu priority: 1, label: proc { I18n.t('active_admin.dashboard') }
 
   content title: proc { I18n.t('active_admin.dashboard') } do
-    panel 'Variables' do
-      current_config = Rails.application.config
-      config_db = current_config.database_configuration[Rails.env]
-      updates = `cd #{Rails.root}; git fetch; git rev-list HEAD...origin/develop --count`
+    current_config = Rails.application.config
+    config_db = current_config.database_configuration[Rails.env]
+    updates = `cd #{Rails.root}; git fetch; git rev-list HEAD...origin/develop --count`
 
+    panel 'Frontend variables' do
+      columns do
+        column do
+          span 'Debug variables'
+        end
+
+        column do
+          span current_admin_user.debug_variables ? 'Yes' : 'No'
+        end
+      end
+
+      columns do
+        column do
+          span 'Debug template'
+        end
+
+        column do
+          span auto_link current_admin_user.debug_template
+        end
+      end
+
+      columns do
+        column do
+          span 'Debug locale'
+        end
+
+        column do
+          span current_admin_user.debug_locale
+        end
+      end
+    end
+
+    panel 'Application variables' do
       columns do
         column do
           span 'Version'

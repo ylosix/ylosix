@@ -1,7 +1,7 @@
 ActiveAdmin.register AdminUser do
   menu parent: 'Administration'
 
-  permit_params :email, :locale, :password, :password_confirmation
+  permit_params :debug_variables, :debug_locale, :debug_template_id, :email, :locale, :password, :password_confirmation
 
   controller do
     def update
@@ -19,6 +19,9 @@ ActiveAdmin.register AdminUser do
     id_column
     column :email
     column :locale
+    column :debug_variables
+    column :debug_template
+    column :debug_locale
     column :current_sign_in_at
     column :sign_in_count
     column :created_at
@@ -35,6 +38,9 @@ ActiveAdmin.register AdminUser do
     f.inputs 'Admin Details' do
       f.input :email
       f.input :locale, as: :select, collection: Language.in_frontend.map { |lang| [lang.name, lang.locale] }, include_blank: false
+      f.input :debug_variables
+      f.input :debug_template
+      f.input :debug_locale, as: :select, collection: Language.in_frontend.map { |lang| [lang.name, lang.locale] }, include_blank: true
       f.input :password
       f.input :password_confirmation
     end

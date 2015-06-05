@@ -5,8 +5,8 @@ class Utils
     I18n.t('errors.messages.not_saved', count: messages.count, resource: 'the form')
   end
 
-  def self.append_debug_variables(variables, html_content)
-    if !variables.nil? && variables.key?('debug_variables') && variables['debug_variables'] == 1
+  def self.append_debug_variables(admin_user, variables, html_content)
+    if !admin_user.nil? && admin_user.debug_variables
       content_hash_variables = Utils.pretty_json_template_variables(variables)
       html_code = JSON.pretty_generate(content_hash_variables)
       html_content += "<br /><pre><code>#{html_code}</code></pre>"

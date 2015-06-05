@@ -5,6 +5,9 @@
 #  created_at             :datetime
 #  current_sign_in_at     :datetime
 #  current_sign_in_ip     :string
+#  debug_locale           :string
+#  debug_template_id      :integer
+#  debug_variables        :boolean          default(FALSE), not null
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
 #  id                     :integer          not null, primary key
@@ -30,4 +33,6 @@ class AdminUser < ActiveRecord::Base
          :validatable
 
   validates :locale, presence: true
+
+  belongs_to :debug_template, class_name: 'Template', foreign_key: 'debug_template_id'
 end
