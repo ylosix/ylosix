@@ -25,21 +25,5 @@ module Customers
     # def configure_sign_in_params
     #   devise_parameter_sanitizer.for(:sign_in) << :attribute
     # end
-
-    # After sign in set user locale.
-    def after_sign_in_path_for(_resource)
-      session[:locale] = current_customer.locale unless current_customer.nil?
-
-      unless session[:shopping_cart].blank?
-        # TODO if exist customer shopping cart append the products.
-        sc = ShoppingCart.retrieve(nil, session[:shopping_cart])
-        sc.customer = current_customer
-        sc.save
-
-        session.delete :shopping_cart
-      end
-
-      show_customers_path
-    end
   end
 end

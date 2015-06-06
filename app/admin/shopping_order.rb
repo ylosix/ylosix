@@ -7,7 +7,8 @@ ActiveAdmin.register ShoppingOrder do
     selectable_column
     id_column
     column :customer
-    column :total
+    column :total_products
+    column :total_retail_price
     column :created_at
     column :updated_at
     actions
@@ -17,6 +18,19 @@ ActiveAdmin.register ShoppingOrder do
     attributes_table do
       row :id
       row :customer
+
+      row 'Products' do |so|
+        table_for so.shopping_orders_products do
+          column :product
+          column :quantity
+          column :retail_price_pre_tax
+          column :tax_rate
+          column :retail_price
+        end
+      end
+
+      row :total_products
+      row :total_retail_price
 
       row :created_at
       row :updated_at

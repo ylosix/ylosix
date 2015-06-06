@@ -33,13 +33,29 @@ class ApplicationController < ActionController::Base
     throw :warden, redirect: request.referer || request.url
   end
 
+  # After sign in set user locale.
+  def after_sign_in_path_for(resource)
+    if !resource.nil? && Language.locale_valid?(resource.locale)
+      session[:locale] = resource.locale
+    end
+
+    unless session[:shopping_cart].blank?
+      # TODO if exist customer shopping cart append the products.
+      sc = ShoppingCart.retrieve(nil, session[:shopping_cart])
+      sc.customer = current_customer
+      sc.save
+
+      session.delete :shopping_cart
+    end
+
+    return show_customers_path unless current_customer.nil?
+    return admin_dashboard_path unless current_admin_user.nil?
+  end
+
   private
 
   def set_locale
-    if session[:locale].blank?
-      session[:locale] = extract_locale_from_accept_language_header
-      session[:locale] = current_admin_user.locale unless current_admin_user.nil?
-    end
+    session[:locale] ||= extract_locale_from_accept_language_header
 
     if !current_admin_user.nil? && Language.locale_valid?(current_admin_user.debug_locale)
       session[:locale] = current_admin_user.debug_locale

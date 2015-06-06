@@ -55,11 +55,11 @@ class ShoppingCart < ActiveRecord::Base
   end
 
   def self.retrieve(customer, string)
-    return customer.shopping_cart unless customer.nil?
-
-    sc = ShoppingCart.new
+    sc = customer.shopping_cart unless customer.nil?
+    sc ||= ShoppingCart.new
     return sc if string.blank?
 
+    # Load shopping cart from session variable.
     hash = ActiveSupport::JSON.decode(string)
     sc.attributes = hash.except('shopping_carts_products')
 
