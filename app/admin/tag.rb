@@ -19,7 +19,8 @@ ActiveAdmin.register Tag do
     actions
   end
 
-  filter :name
+  filter :translations_name, as: :string, label: 'Name'
+  filter :parent
   filter :appears_in_web
 
   form do |f|

@@ -58,7 +58,7 @@ module Frontend
       append_language_variables
 
       @variables['categories'] = Category.root_categories
-      @variables['products'] = Product.all.limit(10) # TODO This only for test.
+      @variables['products'] ||= Product.all.limit(10) # TODO This only for test.
 
       unless template.nil?
         @variables['template_public_path'] = template.path.gsub('/public', '')

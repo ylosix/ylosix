@@ -20,6 +20,10 @@ ActiveAdmin.register Product do
     actions
   end
 
+  filter :reference_code
+  filter :translations_name, as: :string, label: 'Name'
+  filter :enabled
+
   form do |f|
     f.inputs 'Information' do
       translations = f.object.admin_translations

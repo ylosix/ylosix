@@ -20,7 +20,7 @@ ActiveAdmin.register Category do
     actions
   end
 
-  filter :name
+  filter :translations_name, as: :string, label: 'Name'
   filter :appears_in_web
 
   form do |f|
