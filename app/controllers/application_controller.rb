@@ -28,7 +28,8 @@ class ApplicationController < ActionController::Base
 
   # Overwrite unverified request handler to force a refresh / redirect.
   def handle_unverified_request
-    super # call the default behaviour, including Devise override
+    #super # call the default behaviour, including Devise override
+    flash[:alert] = 'Error with CSRF'
     throw :warden, redirect: request.referer || request.url
   end
 
@@ -37,9 +38,7 @@ class ApplicationController < ActionController::Base
   def set_locale
     if session[:locale].blank?
       session[:locale] = extract_locale_from_accept_language_header
-
       session[:locale] = current_admin_user.locale unless current_admin_user.nil?
-      session[:locale] = current_customer.locale unless current_customer.nil?
     end
 
     if !current_admin_user.nil? && Language.locale_valid?(current_admin_user.debug_locale)
