@@ -1,0 +1,34 @@
+# == Schema Information
+#
+# Table name: product_translations
+#
+#  created_at        :datetime         not null
+#  description       :text
+#  id                :integer          not null, primary key
+#  locale            :string           not null
+#  name              :string
+#  product_id        :integer          not null
+#  short_description :text
+#  updated_at        :datetime         not null
+#
+# Indexes
+#
+#  index_product_translations_on_locale      (locale)
+#  index_product_translations_on_product_id  (product_id)
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+#
+camara_en:
+  locale: en
+  product: camera
+  name: Canon 450D
+  short_description: Camera reflex canon 12MP.
+  description: Camera reflex canon 12MP (not includes SD).
+
+camara_es:
+  locale: es
+  product: camera
+  name: Canon 450D
+  short_description: Cámara reflex canon 12MP.
+  description: Cámera reflex canon 12MP (no incluye SD).
