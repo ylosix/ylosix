@@ -17,7 +17,7 @@ class ShoppingOrder < ActiveRecord::Base
   has_many :shopping_orders_products
 
   def total
-    products_prices = shopping_orders_products.map { |sop| sop.retail_price * sop.quantity }
+    products_prices = shopping_orders_products.map { |e| e.retail_price * e.quantity }
     products_prices.reduce(:+)
   end
 

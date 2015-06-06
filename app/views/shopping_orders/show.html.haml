@@ -9,12 +9,8 @@
       %div{class: 'col-md-3 col-xs-3'}
         Quantity
 
-  - subtotal = 0
-  - subtotal_qty = 0
-  - @variables['shopping_cart_products'].each do |scp|
+  - @variables['shopping_cart'].shopping_carts_products.each do |scp|
     - product = scp.product
-    - subtotal_qty += scp.quantity
-    - subtotal += product.retail_price * scp.quantity
     %li.sc-list-item-border
 
       %div.row
@@ -36,9 +32,9 @@
       %div{class: 'col-md-6 col-xs-12'}
         %div.pull-right
           %span
-            = "Subtotal (#{subtotal_qty} products): "
+            = "Subtotal (#{@variables['shopping_cart'].total_products} products): "
           %span.a-color-price
-            = "#{subtotal} €"
+            = "#{@variables['shopping_cart'].total_retail_price} €"
 
 = link_to 'Continue shopping', @variables['root_href'], class: 'btn btn-default'
 |

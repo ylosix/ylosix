@@ -8,16 +8,11 @@ module Frontend
 
     def append_customer_variables(helper)
       @variables['current_customer'] = current_customer
-      @variables['shopping_cart_products'] = []
+      @variables['shopping_carts_products'] = []
 
       if customer_signed_in?
         # Action form
         @variables['customer_destroy_session_href'] = destroy_customer_session_path
-
-        sc = current_customer.shopping_cart
-        unless sc.nil?
-          @variables['shopping_cart_products'] = sc.shopping_carts_products
-        end
       else
         # Action form
         @variables['action_customer_sign_in_url'] = customer_session_path
@@ -28,6 +23,9 @@ module Frontend
         @variables['customer_sign_up_href'] = new_customer_registration_path
         @variables['customer_new_session_href'] = helper.new_customer_session_path
       end
+
+      sc = ShoppingCart.retrieve(current_customer, session[:shopping_cart])
+      @variables['shopping_cart'] = sc
     end
 
     def append_message_variables

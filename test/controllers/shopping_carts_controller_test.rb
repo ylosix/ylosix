@@ -19,7 +19,7 @@ class ShoppingCartsControllerTest < ActionController::TestCase
     login_customer
     scp = shopping_carts_products(:scp_camera)
 
-    get :update, shopping_cart_product_id: scp.id, quantity: 5
+    get :update, product_id: scp.product.id, quantity: 5
     assert_response :redirect
   end
 end

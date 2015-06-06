@@ -38,7 +38,7 @@ Rails.application.routes.draw do
 
     resource :shopping_carts, only: [] do
       get '/' => 'shopping_carts#show'
-      get '/:shopping_cart_product_id/update/:quantity' => 'shopping_carts#update', as: :update
+      get '/:product_id/update/:quantity' => 'shopping_carts#update', as: :update
     end
 
     resource :shopping_orders, only: [] do

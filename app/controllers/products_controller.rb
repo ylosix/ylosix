@@ -11,15 +11,14 @@ class ProductsController < Frontend::CommonController
   end
 
   def add_to_shopping_cart
+    sc = ShoppingCart.retrieve(current_customer, session[:shopping_cart])
+    sc.add_product(@product)
+
     if customer_signed_in?
-      sc = current_customer.shopping_cart
-      sc ||= ShoppingCart.new
-      sc.add_product(@product)
-
-      current_customer.shopping_cart = sc
-      current_customer.save
-
-      # TODO save Shopping Cart in cache
+      sc.customer = current_customer
+      sc.save
+    else
+      session[:shopping_cart] = sc.to_json(include: :shopping_carts_products)
     end
 
     redirect_to :customers_shopping_carts

@@ -1,4 +1,6 @@
 class ShoppingOrdersController < Frontend::CommonController
+  before_action :authenticate_customer!
+
   def get_template_variables(template)
     super
   end

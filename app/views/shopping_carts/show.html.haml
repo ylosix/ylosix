@@ -10,10 +10,8 @@
         %div{class: 'col-md-3 col-xs-3'}
           Quantity
 
-    - subtotal_qty = 0
     - @variables['shopping_cart'].shopping_carts_products.each do |scp|
       - product = scp.product
-      - subtotal_qty += scp.quantity
       %li.sc-list-item-border
 
         %div.row
@@ -36,7 +34,7 @@
               %ul{:class => 'dropdown-menu', :role => 'menu'}
                 - (1..9).each do |i|
                   %li
-                    = link_to i, update_customers_shopping_carts_path(scp.id, i)
+                    = link_to i, update_customers_shopping_carts_path(product.id, i)
 
                 %li{:role => 'presentation', :class => 'divider'}
 
@@ -50,9 +48,9 @@
         %div{class: 'col-md-6 col-xs-12'}
           %div.pull-right
             %span
-              = "Subtotal (#{subtotal_qty} products): "
+              = "Subtotal (#{@variables['shopping_cart'].total_products} products): "
             %span.a-color-price
-              = "#{@variables['shopping_cart'].total} €"
+              = "#{@variables['shopping_cart'].total_retail_price} €"
 - else
   %i Your cart is empty.
   %br
