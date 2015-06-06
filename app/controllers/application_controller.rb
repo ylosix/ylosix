@@ -28,7 +28,7 @@ class ApplicationController < ActionController::Base
 
   # Overwrite unverified request handler to force a refresh / redirect.
   def handle_unverified_request
-    #super # call the default behaviour, including Devise override
+    # super # call the default behaviour, including Devise override
     flash[:alert] = 'Error with CSRF'
     throw :warden, redirect: request.referer || request.url
   end
