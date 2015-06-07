@@ -31,7 +31,7 @@ require 'test_helper'
 
 class CustomerTest < ActiveSupport::TestCase
   test 'intern_path' do
-    object = customers(:customer_example).to_liquid
+    object = customers(:customer_example)
     assert !object.intern_path.blank?
   end
 
