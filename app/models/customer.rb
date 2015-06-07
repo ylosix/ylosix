@@ -41,6 +41,11 @@ class Customer < ActiveRecord::Base
   has_one :shopping_cart
   has_many :shopping_orders
 
+  def intern_path
+    helper = Rails.application.routes.url_helpers
+    helper.show_customers_path
+  end
+
   def to_liquid
     {
         'email' => email,

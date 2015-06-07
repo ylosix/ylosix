@@ -48,8 +48,7 @@ class ApplicationController < ActionController::Base
       session.delete :shopping_cart
     end
 
-    return show_customers_path unless current_customer.nil?
-    return admin_dashboard_path unless current_admin_user.nil?
+    resource.intern_path
   end
 
   private

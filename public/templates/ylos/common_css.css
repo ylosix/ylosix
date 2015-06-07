@@ -1,3 +1,28 @@
+/***custom css***/
+.panel-default {
+  border-color: transparent; }
+
+.panel-default > .panel-heading {
+  margin-bottom: 20px;
+  padding: 0 15px;
+  border-bottom: 1px solid #FF8F00;
+  background-color: transparent; }
+
+.well {
+  border: none;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  background-color: transparent; }
+
+.btn-info, .btn-success {
+  background-color: #FF8F00;
+  border-color: #FF8F00; }
+
+.btn-info:hover, .btn-success:hover {
+  background-color: #666;
+  border-color: #666; }
+
+/***end custom css***/
 /***animations** */
 @-webkit-keyframes shake {
   0%, 100% {
@@ -46,7 +71,7 @@
   transition-property: color; }
 
 .text-fade:hover, .fade:focus, .fade:active {
-  color: #0d1cab; }
+  color: #666; }
 
 /***animations** */
 /***generals** */
@@ -68,7 +93,7 @@ ul {
   padding-left: 15px;
   color: #666;
   padding-start: 15px; }
-	
+
 .footer {
   background-color: #e6e6e6;
   padding: 10px; }
@@ -92,12 +117,13 @@ links {
   box-shadow: 0 0 10px #999; }
 
 .caption h4 {
-	white-space: normal;}
+  white-space: normal; }
 
-.panel-heading {
-	margin-bottom:20px}
+.title1 {
+  color: #FF8F00;
+  font-weight: bold; }
 
-/***generals** */
+/***generals***/
 /***header** */
 .top-header {
   background: none repeat scroll 0 0 #f6f6f6;
@@ -194,7 +220,7 @@ links {
 .slide {
   margin: 15px 0; }
 
-/***header** */
+/***header***/
 /***dropdown menu** */
 .navbar-header .navbar-toggle .icon-bar {
   background-color: #fff; }
@@ -242,12 +268,12 @@ nav {
   margin: 20px 0 10px; }
 
 .fa-angle-down:before {
-	margin-left: 6px}
+  margin-left: 6px; }
 
 /***dropdown menu** */
 /***item home** */
 .ratings {
-	padding:0;
+  padding: 0;
   height: 40px;
   position: relative;
   overflow: hidden; }
@@ -269,6 +295,7 @@ nav {
 .item-home:hover .item-hidden, .item-home:hover .item-home-buy, .item-home:hover .item-home-view {
   height: 100%;
   opacity: 1; }
+
 .item-home:hover img {
   opacity: 0.5; }
 
@@ -302,7 +329,7 @@ nav {
 
 .price {
   font-size: 24px;
-  color: #0d1cab; }
+  color: #666; }
 
 .glyphicon-star, .glyphicon-star-empty {
   color: #c42c2c; }
@@ -347,3 +374,4 @@ nav {
   .carousel-control .glyphicon-chevron-right, .carousel-control .icon-next {
     margin-right: -15px; } }
 
+/*# sourceMappingURL=common_css.css.map */

@@ -16,8 +16,19 @@ class ShoppingOrder < ActiveRecord::Base
   belongs_to :customer
   has_many :shopping_orders_products
 
+  def total_taxes
+    shopping_orders_products.inject(0) do |a, e|
+      a + (e.retail_price - e.retail_price_pre_tax) * e.quantity
+    end
+  end
+
   def total_products
     shopping_orders_products.inject(0) { |a, e| a + e.quantity }
+  end
+
+  def total_retail_price_pre_tax
+    products_prices = shopping_orders_products.map { |e| e.retail_price_pre_tax * e.quantity }
+    products_prices.reduce(:+)
   end
 
   def total_retail_price

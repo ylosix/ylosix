@@ -30,6 +30,8 @@ ActiveAdmin.register ShoppingOrder do
       end
 
       row :total_products
+      row :total_retail_price_pre_tax
+      row :total_taxes
       row :total_retail_price
 
       row :created_at

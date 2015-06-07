@@ -29,7 +29,8 @@
 require 'test_helper'
 
 class AdminUserTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test 'intern_path' do
+    object = admin_users(:admin_user)
+    assert !object.intern_path.blank?
+  end
 end

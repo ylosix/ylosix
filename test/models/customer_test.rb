@@ -30,9 +30,10 @@
 require 'test_helper'
 
 class CustomerTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test 'intern_path' do
+    object = customers(:customer_example).to_liquid
+    assert !object.intern_path.blank?
+  end
 
   test 'to_liquid' do
     hash = customers(:customer_example).to_liquid
