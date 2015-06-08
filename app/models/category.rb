@@ -20,6 +20,8 @@
 #
 
 class Category < ActiveRecord::Base
+  include LiquidExtension
+
   translates :name
 
   has_many :children, class_name: 'Category', foreign_key: 'parent_id'
@@ -61,7 +63,7 @@ class Category < ActiveRecord::Base
     {
         'name' => name,
         'href' => Rails.application.routes.url_helpers.show_slug_categories_path(slug),
-        'children' => children
+        'children' => array_to_liquid(children)
     }
   end
 end

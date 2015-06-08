@@ -13,6 +13,8 @@
 #
 
 class ShoppingOrder < ActiveRecord::Base
+  include LiquidExtension
+
   belongs_to :customer
   has_many :shopping_orders_products
 
@@ -38,7 +40,11 @@ class ShoppingOrder < ActiveRecord::Base
 
   def to_liquid
     {
-        'shopping_orders_products' => shopping_orders_products
+        'shopping_orders_products' => array_to_liquid(shopping_orders_products),
+        'total_products' => total_products,
+        'total_taxes' => total_taxes,
+        'total_retail_price_pre_tax' => total_retail_price_pre_tax,
+        'total_retail_price' => total_retail_price
     }
   end
 end

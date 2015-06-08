@@ -13,6 +13,8 @@
 #
 
 class ShoppingCart < ActiveRecord::Base
+  include LiquidExtension
+
   belongs_to :customer
   has_many :shopping_carts_products
 
@@ -73,7 +75,7 @@ class ShoppingCart < ActiveRecord::Base
 
   def to_liquid
     {
-        'shopping_carts_products' => shopping_carts_products,
+        'shopping_carts_products' => array_to_liquid(shopping_carts_products),
         'total_products' => total_products,
         'total_retail_price' => total_retail_price
     }

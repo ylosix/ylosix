@@ -34,7 +34,7 @@ class ShoppingCartsProduct < ActiveRecord::Base
 
   def to_liquid
     {
-        'product' => product,
+        'product' => product.to_liquid,
         'quantity' => quantity,
         'retail_price' => retail_price
     }

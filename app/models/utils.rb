@@ -39,7 +39,7 @@ class Utils
           content_hash_variables[k] << v_elem.to_liquid
         end
       else
-        content_hash_variables[k] = v
+        content_hash_variables[k] = v.to_liquid
       end
     end
 

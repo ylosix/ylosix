@@ -25,7 +25,7 @@ class ShoppingOrdersProduct < ActiveRecord::Base
   def to_liquid
     {
         'quantity' => quantity,
-        'product' => product,
+        'product' => product.to_liquid,
         'retail_price' => retail_price,
         'retail_price_pre_tax' => retail_price_pre_tax,
         'tax_rate' => tax_rate
