@@ -42,5 +42,27 @@
               %li.dropdown
                 = link_to 'Login', new_customer_session_path
 
-        %li
-          = link_to 'My cart', customers_shopping_carts_path
+        - products = 0
+        - products = @variables['shopping_cart'].total_products unless @variables['shopping_cart'].nil?
+        %li.dropdown
+          %a{href: customers_shopping_carts_path, class: 'text-fade'}
+            = "My cart (#{products})"
+            %span.caret
+          %ul{class: 'dropdown-menu'}
+            %li.dropdown
+              %div.shopping-cart-panel
+                - if @variables['shopping_cart'].shopping_carts_products.empty?
+                  Your cart is empty.
+                - else
+                  - @variables['shopping_cart'].shopping_carts_products.each do |scp|
+                    %div{class: 'row shopping-cart-row'}
+                      %div.col-md-4
+                        = image_tag(scp.product.image.url(:thumb), :class => 'img-responsive')
+                      %div.col-md-8
+                        = link_to scp.product.name, show_slug_products_path(scp.product.slug)
+                        %br
+                        = "Quantity: #{scp.quantity}"
+
+                %div.row
+                  %div.col-md-12
+                    = link_to "My cart (#{products})", customers_shopping_carts_path, :class => 'btn btn-default btn-block'

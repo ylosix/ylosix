@@ -15,7 +15,11 @@
 require 'test_helper'
 
 class ShoppingCartTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test 'to_liquid' do
+    hash = shopping_carts(:customer_example_sc).to_liquid
+
+    assert hash.key? 'shopping_carts_products'
+    assert hash.key? 'total_products'
+    assert hash.key? 'total_retail_price'
+  end
 end

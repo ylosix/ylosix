@@ -8,7 +8,7 @@
   padding: 10px 10px;
 }
 
-.a-color-price{
+.a-color-price {
   color: #b12704;
 }
 
@@ -17,9 +17,23 @@
   margin-bottom: 10px;
 }
 
+.shopping-cart-panel {
+  padding: 20px 30px;
+  min-width: 225px;
+}
+
+.shopping-cart-row {
+  margin-bottom: 10px;
+  min-height: 30px;
+}
+
+.shopping-cart-row [class^="col-"]  {
+  padding: 3px;
+}
+
 /* Extra Small Devices, Phones */
 @media only screen and (max-width: 480px) {
-  .item-image{
+  .item-image {
     display: none;
   }
 }

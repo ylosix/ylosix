@@ -71,6 +71,14 @@ class ShoppingCart < ActiveRecord::Base
     sc
   end
 
+  def to_liquid
+    {
+        'shopping_carts_products' => shopping_carts_products,
+        'total_products' => total_products,
+        'total_retail_price' => total_retail_price
+    }
+  end
+
   private
 
   def shopping_carts_product(product)

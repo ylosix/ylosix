@@ -18,11 +18,9 @@ class ApplicationController < ActionController::Base
     end
 
     session[:locale] = locale
-    session[:return_to] ||= request.referer
+    session[:return_to] ||= request.referer || request.url || root_url
 
     return_url = session.delete(:return_to)
-    return_url ||= root_url
-
     redirect_to return_url
   end
 
