@@ -1,1 +1,37 @@
-Product show
+{{ include snippet_header.html }}
+
+<div class="row">
+    <div class="thumbnail">
+        <img class="img-responsive" src="{{ product.image_src }}" alt="Nikon d5500">
+        <div class="caption-full">
+            <h4 class="pull-right">
+                {{ product.retail_price }} €
+            </h4>
+            <h4>
+                <a>
+                    {{ product.name }}
+                </a>
+            </h4>
+
+            <p>
+                {{ product.description }}
+            </p>
+        </div>
+        <div class="ratings">
+            <p class="pull-right">3 reviews</p>
+            <p>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star-empty"></span>
+                4.0 stars
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <a class="btn btn-success btn-block" href="{{ product.buy_href }}">Add to cart</a>
+</div>
+
+{{ include snippet_footer.html }}

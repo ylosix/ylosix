@@ -47,6 +47,8 @@ class Utils
   end
 
   def self.get_parents_array(object)
+    return [] if object.nil?
+
     array = []
 
     parent = object.parent

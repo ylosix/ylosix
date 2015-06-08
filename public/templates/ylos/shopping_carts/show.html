@@ -1,1 +1,103 @@
-Cart
+{{ include snippet_header.html }}
+
+<div class="row">
+    <h1>Cart</h1>
+    <ul class="list-unstyled">
+        <li>
+            <div class="row">
+                <div class="col-md-6 col-xs-6"></div>
+                <div class="col-md-3 col-xs-3">
+                    Price
+                </div>
+                <div class="col-md-3 col-xs-3">
+                    Quantity
+                </div>
+            </div>
+        </li>
+
+        {% for scp in shopping_cart.shopping_carts_products %}
+            <li class="sc-list-item-border">
+                <div class="row">
+                    <div class="col-md-6 col-xs-6">
+                        <div class="item-image col-md-3">
+                            <img src="{{ scp.product.image_src }}" alt="{{ scp.product.name }}">
+                        </div>
+                        <div class="col-md-9 col-xs-12">
+                            <a href="{{ scp.product.href }}">{{ scp.product.name }}</a>
+                            <br>
+                            <a href="/products/2/delete_from_shopping_cart">remove</a>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-xs-3">
+                        <div class="a-color-price">
+                            {{ scp.product.retail_price }} €
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-xs-3">
+                        <div class="btn-group" role="group">
+                            <button aria-expanded="false" class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">
+                                {{ scp.quantity }}
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <a href="/customers/shopping_carts/2/update/1">1</a>
+                                </li>
+                                <li>
+                                    <a href="/customers/shopping_carts/2/update/2">2</a>
+                                </li>
+                                <li>
+                                    <a href="/customers/shopping_carts/2/update/3">3</a>
+                                </li>
+                                <li>
+                                    <a href="/customers/shopping_carts/2/update/4">4</a>
+                                </li>
+                                <li>
+                                    <a href="/customers/shopping_carts/2/update/5">5</a>
+                                </li>
+                                <li>
+                                    <a href="/customers/shopping_carts/2/update/6">6</a>
+                                </li>
+                                <li>
+                                    <a href="/customers/shopping_carts/2/update/7">7</a>
+                                </li>
+                                <li>
+                                    <a href="/customers/shopping_carts/2/update/8">8</a>
+                                </li>
+                                <li>
+                                    <a href="/customers/shopping_carts/2/update/9">9</a>
+                                </li>
+                                <li class="divider" role="presentation"></li>
+                                <li>
+                                    <a>
+                                        10+
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        {% endfor %}
+        <li class="sc-list-item-border">
+            <div class="row">
+                <div class="col-md-6"></div>
+                <div class="col-md-6 col-xs-12">
+                    <div class="pull-right">
+                  <span>
+                    Subtotal ({{ scp.total_products }} products):
+                  </span>
+                  <span class="a-color-price">
+                    {{ scp.total_retail_price }} €
+                  </span>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+    <a class="btn btn-default" href="{{ root_href }}">Continue shopping</a>
+    |
+    <a class="btn btn-success btn-default" href="/customers/shopping_orders">Checkout</a>
+</div>
+
+{{ include snippet_footer.html }}
