@@ -8,35 +8,7 @@
   <div class="col-md-offset-3 col-md-5">
     <div class="well">
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-          <div class="form-group">
-            <%= f.label :email, :class => 'control-label' %><br/>
-            <%= f.email_field :email, {:autofocus => true, :class => 'form-control', :title => 'Please enter you username', :placeholder => 'example@gmail.com'} %>
-            <span class="help-block"></span>
-          </div>
-
-          <div class="form-group">
-            <%= f.label :birth_date, :class => 'control-label' %><br/>
-            <%= f.date_field :birth_date, {:class => 'form-control'} %>
-            <span class="help-block"></span>
-          </div>
-
-          <div class="form-group">
-            <%= f.label :name, :class => 'control-label' %><br/>
-            <%= f.text_field :name, {:class => 'form-control'} %>
-            <span class="help-block"></span>
-          </div>
-
-          <div class="form-group">
-            <%= f.label :last_name, :class => 'control-label' %><br/>
-            <%= f.text_field :last_name, {:class => 'form-control'} %>
-            <span class="help-block"></span>
-          </div>
-
-          <div class="form-group">
-            <%= f.label :locale, :class => 'control-label' %><br/>
-            <%= f.select(:locale, options_for_select(@variables['languages'].collect { |p| [p.name, p.locale] }, @variables['locale']), {:class => 'form-control'}) %>
-            <span class="help-block"></span>
-          </div>
+          <%= render partial: 'devise/registrations/form', locals: {f: f} %>
 
           <div class="form-group">
             <%= f.label :password, :class => 'control-label' %> <i>(leave blank if you don't want to change it)</i>
