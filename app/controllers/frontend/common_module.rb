@@ -91,7 +91,7 @@ module Frontend
       end
 
       get_template_variables(template)
-      file_html = "#{controller_name}_#{action_name}.html"
+      file_html = "#{controller_name}/#{action_name}.html"
 
       if !contains_template_layout && !template.nil? && template.ok?(file_html)
         render_template(template, file_html)
