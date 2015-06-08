@@ -31,9 +31,9 @@ class Category < ActiveRecord::Base
 
   accepts_nested_attributes_for :category_translations
 
+  scope :are_enabled, -> { where(enabled: true) }
   scope :in_frontend, lambda {
-                      where(enabled: true,
-                            appears_in_web: true)
+                      where(enabled: true, appears_in_web: true)
                     }
 
   def self.root_category

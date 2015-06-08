@@ -1,0 +1,7 @@
+%li{id: 'product_products_categories_input', class: 'check_boxes input optional'}
+  %fieldset.choices
+    %legend.label
+      = label_tag 'categories', 'Products categories'
+
+    %ol.choices-group
+      = render partial: 'admin/products/categories_sub_choices', locals: {products_categories: products_categories, categories: root_category.children}

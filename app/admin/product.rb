@@ -6,6 +6,7 @@ ActiveAdmin.register Product do
                 :description, :publication_date, :unpublication_date,
                 :retail_price_pre_tax, :retail_price, :tax_id, :image,
                 :meta_keywords, :meta_description, :slug, :stock, :control_stock,
+                products_category_ids: [],
                 products_categories_attributes: [:id, :category_id, :product_id, :_destroy],
                 product_translations_attributes: [:id, :locale, :name, :short_description, :description]
 
@@ -26,7 +27,7 @@ ActiveAdmin.register Product do
 
   form do |f|
     f.inputs 'Information' do
-      translations = f.object.admin_translations
+      translations = product.admin_translations
       admin_translation_text_field(translations, 'product', 'name')
       f.input :reference_code
 
@@ -47,7 +48,7 @@ ActiveAdmin.register Product do
       f.input :retail_price, input_html: {onchange: 'javascript:change_price(this);'}
 
       taxes = Tax.all
-      render partial: 'admin/products/taxes', locals: {taxes: taxes, tax: f.object.tax}
+      render partial: 'admin/products/taxes', locals: {taxes: taxes, tax: product.tax}
     end
 
     f.inputs 'Seo' do
@@ -57,13 +58,19 @@ ActiveAdmin.register Product do
     end
 
     f.inputs 'Images' do
-      f.input :image, hint: (f.template.image_tag(f.object.image.url(:thumb)) if f.object.image?)
+      f.input :image, hint: (f.template.image_tag(product.image.url(:thumb)) if product.image?)
     end
 
     f.inputs 'Association' do
-      f.has_many :products_categories, allow_destroy: true do |s|
-        s.input :category
-      end
+      # f.input :products_categories, as: :check_boxes, collection: Category.are_enabled
+      render partial: 'admin/products/categories', locals:
+                                                {
+                                                    products_categories: product.products_categories,
+                                                    root_category: Category.root_category
+                                                }
+      # f.has_many :products_categories, allow_destroy: true do |s|
+      #   s.input :category
+      # end
 
       f.has_many :products_tags, allow_destroy: true do |s|
         s.input :tag

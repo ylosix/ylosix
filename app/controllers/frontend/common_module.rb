@@ -8,7 +8,6 @@ module Frontend
 
     def append_customer_variables(helper)
       @variables['current_customer'] = current_customer
-      @variables['shopping_carts_products'] = []
 
       if customer_signed_in?
         # Action form
