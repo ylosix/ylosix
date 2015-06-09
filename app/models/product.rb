@@ -99,7 +99,8 @@ class Product < ActiveRecord::Base
         'retail_price' => retail_price,
         'image_src' => image_src,
         'href' => helpers.show_slug_products_path(slug),
-        'buy_href' => helpers.add_to_shopping_cart_products_path(self)
+        'add_cart_href' => helpers.add_to_shopping_cart_products_path(self),
+        'delete_cart_href' => helpers.delete_from_shopping_cart_products_path(self)
     }
   end
 
