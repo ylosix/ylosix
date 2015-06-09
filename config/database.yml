@@ -2,9 +2,6 @@ sqlite: &sqlite
   adapter: sqlite3
   database: db/<%= Rails.env %>.sqlite3
 
-mysql: &mysql
-  adapter: mysql2
-
 postgresql: &postgresql
   adapter: postgresql
   min_messages: ERROR
@@ -14,14 +11,17 @@ default: &default
   pool: 5
   timeout: 5000
   encoding: utf8
-  <<: *<%= ENV['RAILS_DB'] || "sqlite" %>
+  <<: *postgresql
 
 development:
+  url: postgres://ecommerce_user:ecommerce_pass@localhost:5432/ecommerce
   <<: *default
 
 test:
+  url: postgres://ecommerce_user:ecommerce_pass@localhost:5432/ecommerce
   <<: *default
 
+# Example URL => postgres://pgusername@localhost/development_db
 production:
   url: <%= ENV['DATABASE_URL'] %>
   <<: *default

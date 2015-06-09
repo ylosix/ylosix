@@ -1,0 +1,20 @@
+# == Schema Information
+#
+# Table name: customer_addresses
+#
+#  created_at :datetime         not null
+#  fields     :hstore           default({}), not null
+#  id         :integer          not null, primary key
+#  name       :string
+#  updated_at :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  fields: 
+
+two:
+  name: MyString
+  fields: 

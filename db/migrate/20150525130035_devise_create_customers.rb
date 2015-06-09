@@ -43,8 +43,8 @@ class DeviseCreateCustomers < ActiveRecord::Migration
     # add_index :customers, :confirmation_token,   unique: true
     # add_index :customers, :unlock_token,         unique: true
 
+    drop_table :users_roles
     drop_table :users
     drop_table :roles
-    drop_table :users_roles
   end
 end

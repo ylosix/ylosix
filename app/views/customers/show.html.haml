@@ -1,8 +1,27 @@
 %h1 My account
 %hr
 
-%ul
-  %li
-    = link_to 'Edit my account', edit_customer_registration_path
-  %li
-    = link_to 'My orders', orders_customers_path
+%p
+  Welcome to your account. Here you can administrate your addresses and orders.
+
+%div.row
+  %div.col-md-3
+    %a{:href => orders_customers_path, :class => 'btn btn-default btn-block'}
+      %i{:class => 'fa fa-list-ol'}
+      My orders
+
+%br
+
+%div.row
+  %div.col-md-3
+    %a{:href => '#', :class => 'btn btn-default btn-block'}
+      %i{:class => 'fa fa-building'}
+      Edit my addresses
+
+%br
+
+%div.row
+  %div.col-md-3
+    %a{:href => edit_customer_registration_path, :class => 'btn btn-default btn-block'}
+      %i{:class => 'fa fa-user'}
+      Edit my account

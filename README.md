@@ -67,6 +67,16 @@ $ port install libiconv libxslt libxml2
 $ gem install nokogiri -- --use-system-libraries --with-iconv-dir=/opt/local --with-xml2-dir=/opt/local --with-xslt-dir=/opt/local
 ```
 
+Troubleshooting gem pg in Mac os x (Yosemite):
+```
+Download and install postgresql from:
+http://www.postgresql.org/download/macosx
+
+And after:
+
+$ gem install pg -- --with-pg-config=/Library/PostgreSQL/9.4/bin/pg_config
+```
+
 Troubleshooting git clone in windows:
   - Windows by default use crlf true and adds \r in every \n. The puppet recipe fails with \r. 
 ```
