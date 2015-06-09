@@ -13,8 +13,8 @@
 
 one:
   name: MyString
-  fields: 
+  fields: {}
 
 two:
   name: MyString
-  fields: 
+  fields: {}

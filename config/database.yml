@@ -18,7 +18,7 @@ development:
   <<: *default
 
 test:
-  url: postgres://ecommerce_user:ecommerce_pass@localhost:5432/ecommerce
+  url: postgres://ecommerce_user:ecommerce_pass@localhost:5432/ecommerce_test
   <<: *default
 
 # Example URL => postgres://pgusername@localhost/development_db

@@ -60,7 +60,9 @@ class Product < ActiveRecord::Base
 
   scope :search_by_text, lambda { |text|
                          joins(:product_translations)
-                             .where('product_translations.name LIKE ? OR product_translations.description LIKE ?', "%#{text}%", "%#{text}%")
+                             .where('LOWER(product_translations.name) LIKE LOWER(?)
+                                      OR LOWER(product_translations.description) LIKE LOWER(?)',
+                                    "%#{text}%", "%#{text}%")
                        }
 
   scope :in_frontend, lambda { |category|
