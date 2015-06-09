@@ -36,7 +36,9 @@
 
 class Product < ActiveRecord::Base
   translates :name, :short_description, :description
-  has_attached_file :image, styles: {medium: '300x300>', thumb: '100x100>'}
+  has_attached_file :image, styles: {thumb: '100x100>', medium: '300x300>'}
+
+  IMAGE_SIZES = [:thumb, :medium, :original]
 
   validates_attachment_content_type :image, content_type: %r{\Aimage/.*\Z}
 
@@ -81,30 +83,51 @@ class Product < ActiveRecord::Base
     product
   end
 
+  def retrieve_main_image(type = :original)
+    image_src = 'http://placehold.it/800x300'
+
+    # TODO add fixed sizes as small, large, original, etc.
+    case type
+      when :thumb
+        image_src = 'http://placehold.it/160x75'
+      when :medium
+        image_src = 'http://placehold.it/320x150'
+    end
+
+    image_src = image.url(type) if image.file?
+    image_src
+  end
+
   def to_liquid
     helpers = Rails.application.routes.url_helpers
-    image_src = 'http://placehold.it/320x150'
-    image_src = image.url(:medium) if image.file?
-
     s_short_description = ''
     s_short_description = short_description.html_safe unless short_description.blank?
 
     s_description = ''
     s_description = description.html_safe unless description.blank?
 
-    {
+    liquid = {
         'name' => name,
         'short_description' => s_short_description,
         'description' => s_description,
         'retail_price' => retail_price,
-        'image_src' => image_src,
         'href' => helpers.show_slug_products_path(slug),
         'add_cart_href' => helpers.add_to_shopping_cart_products_path(self),
         'delete_cart_href' => helpers.delete_from_shopping_cart_products_path(self)
     }
+
+    append_images(liquid)
   end
 
   private
+
+  def append_images(hash)
+    IMAGE_SIZES.each do |size|
+      hash["image_#{size}_src"] = retrieve_main_image(size)
+    end
+
+    hash
+  end
 
   def set_defaults
     self.publication_date = Time.now if publication_date.nil?

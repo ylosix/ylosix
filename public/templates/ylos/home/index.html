@@ -9,7 +9,7 @@
 					{% for product in products %} 
 						<div class="col-sm-6 col-lg-3 col-md-3">
 							<div class="thumbnail item-home">
-								<img src="{{ product.image_src }}" alt="">
+								<img src="{{ product.image_medium_src }}" alt="">
 								<div class="caption">
 								  <h4 class="pull-right price">{{ product.retail_price }}€</h4>
 								  <h4><a href="{{ product.href }}">{{ product.name }}</a>
