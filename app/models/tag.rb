@@ -27,6 +27,8 @@ class Tag < ActiveRecord::Base
   has_many :tag_translations
   accepts_nested_attributes_for :tag_translations
 
+  scope :root_tags, -> { where(parent_id: nil) }
+
   def admin_translations
     Utils.array_translations(TagTranslation, tag_id: id)
   end

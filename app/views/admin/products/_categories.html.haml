@@ -4,4 +4,4 @@
       = label_tag 'categories', 'Products categories'
 
     %ol.choices-group
-      = render partial: 'admin/products/categories_sub_choices', locals: {products_categories: products_categories, categories: root_category.children}
+      = render partial: 'admin/products/categories_sub_choices', locals: { products_categories: products_categories, categories: root_category.children }

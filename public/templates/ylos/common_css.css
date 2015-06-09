@@ -22,6 +22,10 @@
   background-color: #666;
   border-color: #666; }
 
+.top-text {
+  margin-top: 10px;
+  color: #FF8F00; }
+
 /***end custom css***/
 /***animations** */
 @-webkit-keyframes shake {
@@ -157,7 +161,7 @@ links {
   border-radius: 0;
   color: #f6f6f6;
   font-size: 12px;
-  margin-right: 20px;
+  margin-right: 0px;
   padding: 2px 15px;
   margin-top: 10px;
   color: #FF8F00; }

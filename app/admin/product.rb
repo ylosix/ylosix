@@ -6,7 +6,6 @@ ActiveAdmin.register Product do
                 :description, :publication_date, :unpublication_date,
                 :retail_price_pre_tax, :retail_price, :tax_id, :image,
                 :meta_keywords, :meta_description, :slug, :stock, :control_stock,
-                products_category_ids: [],
                 products_categories_attributes: [:id, :category_id, :product_id, :_destroy],
                 product_translations_attributes: [:id, :locale, :name, :short_description, :description]
 
@@ -62,19 +61,25 @@ ActiveAdmin.register Product do
     end
 
     f.inputs 'Association' do
-      # f.input :products_categories, as: :check_boxes, collection: Category.are_enabled
+      # f.has_many :products_categories, allow_destroy: true do |s|
+      #   s.input :category
+      # end
+
+      # f.has_many :products_tags, allow_destroy: true do |s|
+      #   s.input :tag
+      # end
+
       render partial: 'admin/products/categories', locals:
                                                 {
                                                     products_categories: product.products_categories,
                                                     root_category: Category.root_category
                                                 }
-      # f.has_many :products_categories, allow_destroy: true do |s|
-      #   s.input :category
-      # end
 
-      f.has_many :products_tags, allow_destroy: true do |s|
-        s.input :tag
-      end
+      render partial: 'admin/products/tags', locals:
+                                                     {
+                                                         products_tags: product.products_tags,
+                                                         root_tags: Tag.root_tags
+                                                     }
     end
 
     f.inputs 'Stock' do
@@ -98,6 +103,42 @@ ActiveAdmin.register Product do
       end
 
       super
+    end
+
+    def create
+      super
+
+      update_categories
+      update_tags
+    end
+
+    def update
+      super
+
+      update_categories
+      update_tags
+    end
+
+    private
+
+    def update_categories
+      product = resource
+      categories = params[:product][:products_categories_ids]
+      ProductsCategory.destroy_all(['category_id NOT IN (?)', categories])
+
+      categories.each do |category|
+        ProductsCategory.find_or_create_by(product_id: product.id, category_id: category)
+      end
+    end
+
+    def update_tags
+      product = resource
+      tags = params[:product][:products_tags_ids]
+      ProductsTag.destroy_all(['tag_id NOT IN (?)', tags])
+
+      tags.each do |tag|
+        ProductsTag.find_or_create_by(product_id: product.id, tag_id: tag)
+      end
     end
   end
 end

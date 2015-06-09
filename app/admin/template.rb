@@ -5,7 +5,12 @@ ActiveAdmin.register Template do
   actions :all, except: [:new, :delete]
 
   action_item :view, only: :index do
-    link_to 'Import', import_admin_templates_path
+    link_to 'Import template', import_admin_templates_path
+  end
+
+  # Export template
+  action_item :view, only: :show do
+    link_to('Export template', admin_export_template_path(template))
   end
 
   collection_action :import, method: [:get, :post] do

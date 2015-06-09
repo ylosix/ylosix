@@ -7,10 +7,8 @@
 
     -# Page Content
     %div.container
-      %div.row
-        = render 'layouts/components/notice_messages'
-      %div.row
-        = yield
+      = render 'layouts/components/notice_messages'
+      = yield
 
     = render 'layouts/components/footer'
     = Utils.append_debug_variables(current_admin_user, @variables, '').html_safe

@@ -1,6 +1,6 @@
 {{ include snippet_header.html }}
 
-<div class="row">
+<div class="container">
     <h1>Cart</h1>
     <ul class="list-unstyled">
         <li>
@@ -19,8 +19,8 @@
             <li class="sc-list-item-border">
                 <div class="row">
                     <div class="col-md-6 col-xs-6">
-                        <div class="item-image col-md-3">
-                            <img src="{{ scp.product.image_src }}" alt="{{ scp.product.name }}">
+                        <div class="col-md-3">
+                            <img class="img-thumbnail img-rounded"  src="{{ scp.product.image_src }}" alt="{{ scp.product.name }}">
                         </div>
                         <div class="col-md-9 col-xs-12">
                             <a href="{{ scp.product.href }}">{{ scp.product.name }}</a>
@@ -95,9 +95,8 @@
             </div>
         </li>
     </ul>
-    <a class="btn btn-default" href="{{ root_href }}">Continue shopping</a>
-    |
-    <a class="btn btn-success btn-default" href="/customers/shopping_orders">Checkout</a>
+    <a class="btn btn-default pull-left" href="{{ root_href }}">Continue shopping</a>
+    <a class="btn btn-success btn-default pull-right" href="/customers/shopping_orders">Checkout</a>
 </div>
 
 {{ include snippet_footer.html }}

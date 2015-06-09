@@ -1,0 +1,15 @@
+%label{for: "product_products_tags_ids_#{tag.id}", style: 'width: 150px;'}
+
+  - if products_tags.pluck(:tag_id).include? tag.id
+    %input{type: 'checkbox',
+                             name: 'product[products_tags_ids][]',
+                             id: "product_products_tags_ids_#{tag.id}",
+                             value: tag.id,
+                             checked: 'checked'}
+      = tag.name
+  - else
+    %input{type: 'checkbox',
+                             name: 'product[products_tags_ids][]',
+                             id: "product_products_tags_ids_#{tag.id}",
+                             value: tag.id}
+      = tag.name

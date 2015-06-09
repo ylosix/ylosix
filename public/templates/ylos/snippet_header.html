@@ -4,29 +4,30 @@
 			<div class="col-xs-6 col-sm-6">
 				<div class="info">
 					<ul class="nav">
-						<li><a href="#"><i class="glyphicon glyphicon-earphone icon"></i> <tel>900 000 000</tel></a></li>
+						<li><i class="glyphicon glyphicon-earphone icon top-text"></i> <tel>900 000 000</tel></li>
 					</ul>
 				</div>
 			</div>
 			<div class="col-xs-6 col-sm-6">
-				<div class="social-icons pull-right">
+				<div class="social-icons pull-right col-md-12">
 					<ul class="nav info">
-						<li class="col-xs-6 col-sm-6">
+						<li class="col-xs-6 col-sm-8">
 							{% if current_customer != nil %}
-								welcome
-								<a href="{{ current_customer.href }}" class="text-fade">
-									{{ current_customer.name }},
-								</a>
-
-								<a rel="nofollow" data-method="delete" href="{{ customer_destroy_session_href }}">Logout</a>
+								<div class="pull-left top-text">
+									Welcome {{ current_customer.name }}
+								</div>
+								<div class="pull-right top-text">
+									<a href="{{ current_customer.href }}" class="text-fade"> My account </a> | 
+									<a rel="nofollow" data-method="delete" href="{{ customer_destroy_session_href }}"> Logout </a>
+								</div>
 							{% else %}
-								<a href="{{ customer_new_session_href }}" class="text-fade">
+								<a href="{{ customer_new_session_href }}" class="text-fade pull-right">
 									<i class="glyphicon glyphicon-user icon text-fade"></i>&nbsp;Login
 								</a>
 							{% endif %}
 						</li>
-						<li class="col-xs-6 col-sm-6">
-							<div class="btn-group">
+						<li class="col-xs-6 col-sm-4">
+							<div class="btn-group pull-right">
 								<button type="button" class="btn btn-default dropdown-toggle lang" data-toggle="dropdown">
 									LANG
 									<span class="caret"></span>
@@ -51,7 +52,7 @@
 </div>
 <div class="container header">
 	<div class="col-xs-12 col-sm-6 col-md-6">
-		<div class="img-responsive"><img src="{{ template_public_path }}/assets/logo.png"></div>
+		<div class="img-responsive"><a href="{{ root_href }}"><img src="{{ template_public_path }}/assets/logo.png"></a></div>
 	</div>
 	<div class="col-xs-12 col-sm-6">
 		<div class="social-icons pull-right">
@@ -78,7 +79,7 @@
 		</form>
 	</div>
 </div>
-</header>	
+</header>
 <!-- /header -->
 <!-- Page Content -->
 <div class="container">
