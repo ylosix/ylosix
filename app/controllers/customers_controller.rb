@@ -1,6 +1,5 @@
 class CustomersController < Frontend::CommonController
   before_action :authenticate_customer!
-  before_action :set_customer
 
   def get_template_variables(template)
     super
@@ -16,11 +15,5 @@ class CustomersController < Frontend::CommonController
   end
 
   def orders
-  end
-
-  private
-
-  def set_customer
-    @customer = current_customer
   end
 end

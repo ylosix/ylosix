@@ -1,14 +1,11 @@
 <div class="row">
-  <div class="col-xs-offset-4 col-md-offset-4">
-    <h2>Edit <%= resource_name.to_s.humanize %></h2>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-md-offset-3 col-md-5">
+  <div class="col-xs-12 col-sm-12">
     <div class="well">
-      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-          <%= render partial: 'devise/registrations/form', locals: {f: f} %>
+      <h4>Edit <%= resource_name.to_s.humanize %></h4>
+      <hr/>
+
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {method: :put}) do |f| %>
+          <%= render partial: 'devise/registrations/new_or_edit_form', locals: {f: f} %>
 
           <div class="form-group">
             <%= f.label :password, :class => 'control-label' %> <i>(leave blank if you don't want to change it)</i>
@@ -23,36 +20,34 @@
           </div>
 
           <div class="form-group">
-            <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+            <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br/>
             <%= f.password_field :current_password, {autocomplete: 'off', :class => 'form-control'} %>
           </div>
 
-          <%= f.submit 'Update', :class => 'btn btn-success btn-block' %>
+          <div class="row">
+            <div class="col-md-offset-4 col-md-4">
+              <%= f.submit 'Update', :class => 'btn btn-success btn-block' %>
+            </div>
+          </div>
+
       <% end %>
 
-      <br/>
+      <hr/>
+      <h3>Unhappy?</h3>
+
+      <div class="row">
+        <div class="col-md-offset-4 col-md-4">
+          <%= link_to 'Cancel my account', registration_path(resource_name), {:method => :delete, :class => 'btn btn-danger btn-block', data: {confirm: 'Are you sure?'}} %>
+        </div>
+      </div>
+
+      <hr/>
+      <div class="row">
+        <div class="col-md-offset-4 col-md-4">
+          <%= link_to 'Back to my account', show_customers_path, {:class => 'btn btn-default btn-block'} %>
+        </div>
+      </div>
+
     </div>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-xs-offset-4 col-md-offset-4">
-    <h3>Unhappy?</h3>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-md-offset-3 col-md-5">
-    <div class="well">
-      <p>
-        <%= link_to 'Cancel my account', registration_path(resource_name), {:method => :delete, :class => 'btn btn-danger btn-block', data: {confirm: 'Are you sure?'}} %>
-      </p>
-    </div>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-xs-offset-4 col-md-offset-4">
-    <%= link_to 'Back', show_customers_path, {:class => 'btn btn-default btn-block'} %>
   </div>
 </div>

@@ -40,6 +40,7 @@ class Customer < ActiveRecord::Base
 
   has_one :shopping_cart
   has_many :shopping_orders
+  has_many :customer_addresses
 
   def intern_path
     helper = Rails.application.routes.url_helpers

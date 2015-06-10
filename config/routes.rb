@@ -36,6 +36,7 @@ Rails.application.routes.draw do
     get '/show' => 'customers#show'
     get '/orders' => 'customers#orders'
 
+    resources :addresses
     resource :shopping_carts, only: [] do
       get '/' => 'shopping_carts#show'
       get '/:product_id/update/:quantity' => 'shopping_carts#update', as: :update

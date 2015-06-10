@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150609133403) do
+ActiveRecord::Schema.define(version: 20150610070112) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -98,9 +98,12 @@ ActiveRecord::Schema.define(version: 20150609133403) do
 
   create_table "customer_addresses", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-    t.hstore   "fields",     default: {}, null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.hstore   "fields",           default: {},    null: false
+    t.integer  "customer_id"
+    t.boolean  "default_shipping", default: false, null: false
+    t.boolean  "default_billing",  default: false, null: false
   end
 
   create_table "customers", force: :cascade do |t|
@@ -285,6 +288,7 @@ ActiveRecord::Schema.define(version: 20150609133403) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "customer_addresses", "customers", on_update: :cascade, on_delete: :cascade
   add_foreign_key "products", "taxes", on_update: :cascade, on_delete: :cascade
   add_foreign_key "products_categories", "categories", on_update: :cascade, on_delete: :cascade
   add_foreign_key "products_categories", "products", on_update: :cascade, on_delete: :cascade

@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="col-xs-12 col-sm-12">
+    <div class="well">
+      <h4>Sign up</h4>
+      <hr/>
+
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+          <%= render partial: 'devise/registrations/new_or_edit_form', locals: {f: f} %>
+
+          <div class="form-group">
+            <%= f.label :password, :class => 'control-label' %>
+            <% if @validatable %>
+                <em>(<%= @minimum_password_length %> characters minimum)</em>
+            <% end %>
+            <br/>
+            <%= f.password_field :password, {autocomplete: 'off', :class => 'form-control'} %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :password_confirmation, :class => 'control-label' %><br/>
+            <%= f.password_field :password_confirmation, {autocomplete: 'off', :class => 'form-control'} %>
+          </div>
+
+          <%= f.submit 'Sign up', :class => 'btn btn-success btn-block' %>
+      <% end %>
+
+      <hr/>
+      <%= render 'devise/shared/links' %>
+    </div>
+  </div>
+</div>

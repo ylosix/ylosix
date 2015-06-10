@@ -1,0 +1,58 @@
+%h1
+  My addresses
+%hr
+
+%p
+  Configure your shipping and billing addresses. Here you can administrate your addresses and orders.
+
+%div{class: 'row voffset3'}
+  %div.col-md-12
+    - if @variables['customer_addresses'].empty?
+      %div{:class => 'alert alert-warning'}
+        No address available.
+        = link_to 'Add address', new_customers_addresses_path
+    - else
+      %div.row
+        - @variables['customer_addresses'].each do |address|
+          %div.col-md-4
+            %div.well
+              %h3= address.name
+              %p
+                b:
+                = address.default_billing
+                s:
+                = address.default_shipping
+              %hr
+
+              %ul.list-unstyled
+                %li
+                  = "#{address.customer_name} #{address.customer_last_name}"
+                %li
+                  = address.dni
+                %li
+                  = address.business
+                %li
+                  = address.address_1
+                  = "<br /> #{address.address_2}".html_safe unless address.address_2.blank?
+                %li
+                  = "#{address.postal_code} #{address.city}"
+                %li
+                  = address.country
+                %li
+                  = address.phone
+                %li
+                  = address.mobile_phone
+                %li
+                  = address.other
+
+              %hr
+              = link_to 'Edit', edit_customers_address_path(address), class: 'btn btn-default btn-block'
+              = link_to 'Destroy', customers_address_path(address), :method => :delete, class: 'btn btn-danger btn-block'
+
+%div{class: 'row voffset3'}
+  %div.col-md-3
+    = link_to 'Add address', new_customers_address_path, class: 'btn btn-success btn-block'
+
+%div{class: 'row voffset3'}
+  %div.col-md-3
+    = link_to 'Back to my account', show_customers_path, class: 'btn btn-default btn-block'

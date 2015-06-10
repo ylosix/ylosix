@@ -1,0 +1,14 @@
+%div.row
+  %div{class: 'col-xs-12 col-sm-12'}
+    %div.well
+      %h4 Create a new address
+
+      %hr
+
+      = form_for @address, url: customers_addresses_path, html: { method: :post } do |f|
+        = render partial: 'addresses/new_or_edit_form', locals: {f: f}
+        = submit_tag 'Create', { :class => 'btn btn-success btn-block' }
+
+%div{class: 'row voffset3'}
+  %div.col-md-3
+    = link_to 'Back to my account', show_customers_path, class: 'btn btn-default btn-block'

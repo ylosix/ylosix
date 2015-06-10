@@ -1,0 +1,14 @@
+%div.row
+  %div{class: 'col-xs-12 col-sm-12'}
+    %div.well
+      %h4 Edit your address
+
+      %hr
+
+      = form_for @address, url: customers_address_path(@address), html: { method: :patch } do |f|
+        = render partial: 'addresses/new_or_edit_form', locals: {f: f}
+        = submit_tag 'Update', { :class => 'btn btn-success btn-block' }
+
+%div{class: 'row voffset3'}
+  %div.col-md-3
+    = link_to 'Back to my account', show_customers_path, class: 'btn btn-default btn-block'
