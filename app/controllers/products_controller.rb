@@ -52,8 +52,7 @@ class ProductsController < Frontend::CommonController
       attributes[:id] = params[:id] unless params[:id].blank?
 
       @product = Product.find_by(attributes)
-
-      @category = @product.categories.first
+      @category = @product.categories.first unless @product.categories.empty?
     end
   end
 end

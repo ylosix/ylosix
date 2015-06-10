@@ -40,9 +40,9 @@ class ShoppingOrdersController < Frontend::CommonController
       so = ShoppingOrder.new
       so.customer = current_customer
 
-      soa = ShoppingOrdersAddress.new({fields: sc.shipping_address.fields, shipping: true})
+      soa = ShoppingOrdersAddress.new(fields: sc.shipping_address.fields, shipping: true)
       so.shopping_orders_addresses << soa
-      soa = ShoppingOrdersAddress.new({fields: sc.shipping_address.fields, billing: true})
+      soa = ShoppingOrdersAddress.new(fields: sc.shipping_address.fields, billing: true)
       so.shopping_orders_addresses << soa
 
       sc.shopping_carts_products.each do |scp|

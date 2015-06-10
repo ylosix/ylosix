@@ -38,6 +38,8 @@ class Category < ActiveRecord::Base
                       where(enabled: true, appears_in_web: true)
                     }
 
+  before_save :set_defaults
+
   def self.root_category
     Category.find_by(parent_id: [nil, 0],
                      appears_in_web: true,
@@ -65,5 +67,16 @@ class Category < ActiveRecord::Base
         'href' => Rails.application.routes.url_helpers.show_slug_categories_path(slug),
         'children' => array_to_liquid(children)
     }
+  end
+
+  private
+
+  def set_defaults
+    if slug.blank?
+      self.slug = 'needs-to-be-changed'
+      if category_translations.any? && !category_translations.first.name.blank?
+        self.slug = URI.encode(category_translations.first.name)
+      end
+    end
   end
 end
