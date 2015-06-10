@@ -37,8 +37,10 @@ module Frontend
       end
 
       @variables['error_messages_title'] = Utils.get_error_title(@variables['error_messages'])
-      @variables['notice_message'] = notice unless notice.blank?
-      @variables['alert_message'] = flash[:alert] unless flash[:alert].blank?
+
+      flash.each do |key, value|
+        @variables["#{key}_message"] = value
+      end
     end
 
     def append_link_variables(helper)

@@ -17,6 +17,15 @@ class ShoppingOrder < ActiveRecord::Base
 
   belongs_to :customer
   has_many :shopping_orders_products
+  has_many :shopping_orders_addresses
+
+  def shipping_address
+    retrieve_address(shipping: true)
+  end
+
+  def billing_address
+    retrieve_address(billing: true)
+  end
 
   def total_taxes
     shopping_orders_products.inject(0) do |a, e|
@@ -46,5 +55,13 @@ class ShoppingOrder < ActiveRecord::Base
         'total_retail_price_pre_tax' => total_retail_price_pre_tax,
         'total_retail_price' => total_retail_price
     }
+  end
+
+  private
+
+  def retrieve_address(options)
+    address = ShoppingOrdersAddress.find_by(options)
+    address ||= ShoppingOrdersAddress.first
+    address
   end
 end

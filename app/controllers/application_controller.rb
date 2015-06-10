@@ -41,6 +41,8 @@ class ApplicationController < ActionController::Base
       # TODO if exist customer shopping cart append the products.
       sc = ShoppingCart.retrieve(nil, session[:shopping_cart])
       sc.customer = current_customer
+      sc.shopping_address = current_customer.shopping_address
+      sc.billing_address = current_customer.billing_address
       sc.save
 
       session.delete :shopping_cart

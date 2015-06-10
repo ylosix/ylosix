@@ -2,6 +2,10 @@
   %div{:class => 'alert alert-success', :role => 'alert'}
     = @variables['notice_message']
 
+- if !@variables.nil? && !@variables['alert_message'].blank?
+  %div{:class => 'alert alert-danger', :role => 'alert'}
+    = @variables['alert_message']
+
 - if !@variables.nil? && @variables['error_messages'].any?
   %div{:class => 'alert alert-danger', :role => 'alert'}
     %span{:class => 'glyphicon glyphicon-exclamation-sign', 'aria-hidden' => 'true'}

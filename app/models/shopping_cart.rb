@@ -70,7 +70,7 @@ class ShoppingCart < ActiveRecord::Base
 
   def self.retrieve(customer, string)
     sc = customer.shopping_cart unless customer.nil?
-    sc ||= ShoppingCart.new
+    sc ||= ShoppingCart.new(customer)
     return sc if string.blank?
 
     # Load shopping cart from session variable.
