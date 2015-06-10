@@ -5,6 +5,8 @@ class AddressesController < Frontend::CommonController
   def get_template_variables(template)
     super
 
+    helper = Rails.application.routes.url_helpers
+    @variables['customer_new_address_href'] = helper.new_customers_address_path
     if customer_signed_in?
       # @variables['customer_addresses'] = CustomerAddress.from_user(current_customer)
       @variables['customer_addresses'] = current_customer.customer_addresses
