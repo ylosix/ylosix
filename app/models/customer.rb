@@ -47,6 +47,14 @@ class Customer < ActiveRecord::Base
     helper.show_customers_path
   end
 
+  def shipping_address
+    retrieve_address(default_shipping: true)
+  end
+
+  def billing_address
+    retrieve_address(default_billing: true)
+  end
+
   def to_liquid
     {
         'email' => email,
@@ -55,5 +63,13 @@ class Customer < ActiveRecord::Base
         'birth_date' => birth_date,
         'href' => Rails.application.routes.url_helpers.show_customers_path
     }
+  end
+
+  private
+
+  def retrieve_address(options)
+    address = CustomerAddress.find_by(options)
+    address ||= CustomerAddress.first
+    address
   end
 end

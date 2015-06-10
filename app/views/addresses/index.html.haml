@@ -3,7 +3,7 @@
 %hr
 
 %p
-  Configure your shipping and billing addresses. Here you can administrate your addresses and orders.
+  Configure your shipping and billing addresses. This addresses will be selected when you create an order.
 
 %div{class: 'row voffset3'}
   %div.col-md-12
@@ -15,35 +15,7 @@
       %div.row
         - @variables['customer_addresses'].each do |address|
           %div.col-md-4
-            %div.well
-              %h3= address.name
-              %p
-                b:
-                = address.default_billing
-                s:
-                = address.default_shipping
-              %hr
-
-              %ul.list-unstyled
-                %li
-                  = "#{address.customer_name} #{address.customer_last_name}"
-                %li
-                  = address.dni
-                %li
-                  = address.business
-                %li
-                  = address.address_1
-                  = "<br /> #{address.address_2}".html_safe unless address.address_2.blank?
-                %li
-                  = "#{address.postal_code} #{address.city}"
-                %li
-                  = address.country
-                %li
-                  = address.phone
-                %li
-                  = address.mobile_phone
-                %li
-                  = address.other
+            = render partial: 'addresses/address', locals: {address: address}
 
               %hr
               = link_to 'Edit', edit_customers_address_path(address), class: 'btn btn-default btn-block'

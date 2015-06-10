@@ -14,6 +14,7 @@
 
 class CustomerAddress < ActiveRecord::Base
   belongs_to :customer, touch: true
+  before_save :set_only_one_address_active
 
   store_accessor :fields, :customer_name
   store_accessor :fields, :customer_last_name, :business, :address_1,
@@ -26,6 +27,11 @@ class CustomerAddress < ActiveRecord::Base
   # scope :from_user, ->(customer) {
   #   where(customer_id: customer.id)
   # }
+
+  def set_only_one_address_active
+    CustomerAddress.where('id != ?', id).update_all(default_billing: false) if default_billing
+    CustomerAddress.where('id != ?', id).update_all(default_shipping: false) if default_shipping
+  end
 
   def to_liquid
     {

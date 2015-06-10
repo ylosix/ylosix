@@ -1,5 +1,6 @@
 %h1 Order
 
+- sc = @variables['shopping_cart']
 %ul.list-unstyled
   %li
     %div.row
@@ -9,7 +10,7 @@
       %div{class: 'col-md-3 col-xs-3'}
         Quantity
 
-  - @variables['shopping_cart'].shopping_carts_products.each do |scp|
+  - sc.shopping_carts_products.each do |scp|
     - product = scp.product
     %li.sc-list-item-border
 
@@ -32,10 +33,30 @@
       %div{class: 'col-md-6 col-xs-12'}
         %div.pull-right
           %span
-            = "Subtotal (#{@variables['shopping_cart'].total_products} products): "
+            = "Subtotal (#{sc.total_products} products): "
           %span.a-color-price
-            = "#{@variables['shopping_cart'].total_retail_price} €"
+            = "#{sc.total_retail_price} €"
 
-= link_to 'Continue shopping', @variables['root_href'], class: 'btn btn-default'
-|
-= link_to 'Finalize', finalize_customers_shopping_orders_path, class: 'btn btn-success btn-default'
+%div{class: 'row voffset3'}
+  %div{class: 'col-md-6'}
+    %h4 Shipping address
+    %hr
+    - if sc.shipping_address.nil?
+      = link_to 'Select shipping address', addresses_customers_shopping_orders_path('shipping_address_id')
+    - else
+      = link_to 'Select other shipping address', addresses_customers_shopping_orders_path('shipping_address_id')
+      = render partial: 'addresses/address', locals: {address: sc.shipping_address}
+
+  %div{class: 'col-md-6'}
+    %h4 Billing address
+    %hr
+    - if sc.billing_address.nil?
+      = link_to 'Select billing address', addresses_customers_shopping_orders_path('billing_address_id')
+    - else
+      = link_to 'Select other billing address', addresses_customers_shopping_orders_path('billing_address_id')
+      = render partial: 'addresses/address', locals: {address: sc.billing_address}
+
+%div{class: 'row voffset6'}
+  %div{class: 'col-md-12'}
+    = link_to 'Continue shopping', @variables['root_href'], class: 'btn btn-default btn-block'
+    = link_to 'Finalize', finalize_customers_shopping_orders_path, class: 'btn btn-success btn-block'

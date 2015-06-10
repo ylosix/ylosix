@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150610070112) do
+ActiveRecord::Schema.define(version: 20150610130148) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -211,8 +211,10 @@ ActiveRecord::Schema.define(version: 20150610070112) do
 
   create_table "shopping_carts", force: :cascade do |t|
     t.integer  "customer_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.integer  "shipping_address_id"
+    t.integer  "billing_address_id"
   end
 
   add_index "shopping_carts", ["customer_id"], name: "index_shopping_carts_on_customer_id", using: :btree
@@ -294,6 +296,8 @@ ActiveRecord::Schema.define(version: 20150610070112) do
   add_foreign_key "products_categories", "products", on_update: :cascade, on_delete: :cascade
   add_foreign_key "products_tags", "products", on_update: :cascade, on_delete: :cascade
   add_foreign_key "products_tags", "tags", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "shopping_carts", "customer_addresses", column: "billing_address_id", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "shopping_carts", "customer_addresses", column: "shipping_address_id", on_update: :cascade, on_delete: :cascade
   add_foreign_key "shopping_carts", "customers", on_update: :cascade, on_delete: :cascade
   add_foreign_key "shopping_carts_products", "products", on_update: :cascade, on_delete: :cascade
   add_foreign_key "shopping_carts_products", "shopping_carts", on_update: :cascade, on_delete: :cascade

@@ -2,10 +2,12 @@
 #
 # Table name: shopping_carts
 #
-#  created_at  :datetime         not null
-#  customer_id :integer
-#  id          :integer          not null, primary key
-#  updated_at  :datetime         not null
+#  billing_address_id  :integer
+#  created_at          :datetime         not null
+#  customer_id         :integer
+#  id                  :integer          not null, primary key
+#  shipping_address_id :integer
+#  updated_at          :datetime         not null
 #
 # Indexes
 #
@@ -17,6 +19,16 @@ class ShoppingCart < ActiveRecord::Base
 
   belongs_to :customer
   has_many :shopping_carts_products
+
+  belongs_to :shipping_address, class_name: 'CustomerAddress', foreign_key: 'shipping_address_id'
+  belongs_to :billing_address, class_name: 'CustomerAddress', foreign_key: 'billing_address_id'
+
+  def initialize(customer = nil)
+    super
+
+    self.shipping_address = customer.shipping_address unless customer.nil?
+    self.billing_address = customer.billing_address unless customer.nil?
+  end
 
   def total_products
     shopping_carts_products.inject(0) { |a, e| a + e.quantity }
@@ -90,4 +102,9 @@ class ShoppingCart < ActiveRecord::Base
 
     nil
   end
+  #
+  # def retrieve_address(address_id)
+  #   nil if address_id.nil?
+  #   CustomerAddress.find(address_id)
+  # end
 end

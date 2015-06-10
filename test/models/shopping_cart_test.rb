@@ -2,10 +2,12 @@
 #
 # Table name: shopping_carts
 #
-#  created_at  :datetime         not null
-#  customer_id :integer
-#  id          :integer          not null, primary key
-#  updated_at  :datetime         not null
+#  billing_address_id  :integer
+#  created_at          :datetime         not null
+#  customer_id         :integer
+#  id                  :integer          not null, primary key
+#  shipping_address_id :integer
+#  updated_at          :datetime         not null
 #
 # Indexes
 #

@@ -44,6 +44,8 @@ Rails.application.routes.draw do
 
     resource :shopping_orders, only: [] do
       get '/' => 'shopping_orders#show'
+      get '/:type/addresses' => 'shopping_orders#addresses', as: :addresses
+      get '/:type/:id/save_address' => 'shopping_orders#save_address', as: :save_address
       get '/finalize' => 'shopping_orders#finalize'
     end
   end
