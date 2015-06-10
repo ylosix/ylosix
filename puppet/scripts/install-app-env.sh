@@ -11,6 +11,11 @@ if [ -z $RAILS_ENV ]; then
   RAILS_ENV=development
 fi
 
+# TODO the ecommerce doesn't need super privileges remove enable hstore and did with user postgres
+su -c "apt-get install -y postgresql-contrib"
+su -c "echo 'localhost:5432:postgres:postgres:postgres' > ~/.pgpass"
+su -c "psql -c 'ALTER USER ecommerce_user WITH SUPERUSER;' -h localhost -U postgres postgres"
+
 # Set permisions
 su -c "chmod 775 $APP_PATH"
 
