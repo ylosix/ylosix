@@ -10,7 +10,7 @@
     - if @variables['customer_addresses'].empty?
       %div{:class => 'alert alert-warning'}
         No address available.
-        = link_to 'Add address', new_customers_addresses_path
+        = link_to 'Add address', @variables['customer_new_address_href']
     - else
       %div.row
         - @variables['customer_addresses'].each do |address|
