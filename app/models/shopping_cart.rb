@@ -23,7 +23,7 @@ class ShoppingCart < ActiveRecord::Base
   belongs_to :shipping_address, class_name: 'CustomerAddress', foreign_key: 'shipping_address_id'
   belongs_to :billing_address, class_name: 'CustomerAddress', foreign_key: 'billing_address_id'
 
-  def initialize(customer = nil)
+  def initialize(attributes = {}, options = {})
     super
 
     self.shipping_address = customer.shipping_address unless customer.nil?
@@ -68,20 +68,19 @@ class ShoppingCart < ActiveRecord::Base
     scp
   end
 
-  def self.retrieve(customer, string)
+  def self.retrieve(customer, session_variable)
     sc = customer.shopping_cart unless customer.nil?
-    sc ||= ShoppingCart.new(customer)
-    return sc if string.blank?
+    sc ||= ShoppingCart.new(customer: customer)
 
-    # Load shopping cart from session variable.
-    hash = ActiveSupport::JSON.decode(string)
-    sc.attributes = hash.except('shopping_carts_products')
+    ShoppingCart.retrieve_products(sc, session_variable)
 
-    sc.shopping_carts_products = []
-    hash['shopping_carts_products'].each do |scp|
-      sc.shopping_carts_products << ShoppingCartsProduct.new(scp)
+    unless customer.nil?
+      sc.customer = customer
+      sc.shipping_address = customer.shipping_address
+      sc.billing_address = customer.billing_address
     end
 
+    sc.save
     sc
   end
 
@@ -102,9 +101,16 @@ class ShoppingCart < ActiveRecord::Base
 
     nil
   end
-  #
-  # def retrieve_address(address_id)
-  #   nil if address_id.nil?
-  #   CustomerAddress.find(address_id)
-  # end
+
+  def self.retrieve_products(sc, session_variable)
+    # Load shopping cart from session variable.
+    unless session_variable.blank?
+      hash = ActiveSupport::JSON.decode(session_variable)
+
+      sc.shopping_carts_products = []
+      hash['shopping_carts_products'].each do |scp|
+        sc.shopping_carts_products << ShoppingCartsProduct.new(scp)
+      end
+    end
+  end
 end

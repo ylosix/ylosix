@@ -6,12 +6,13 @@ class CategoriesController < Frontend::CommonController
   end
 
   def show
-    @products = []
-    @products = Product.in_frontend(@category) unless @category.nil?
   end
 
   def get_template_variables(template)
     super
+
+    @variables['products'] = []
+    @variables['products'] = Product.in_frontend(@category) unless @category.nil?
   end
 
   private

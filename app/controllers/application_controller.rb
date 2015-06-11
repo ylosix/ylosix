@@ -37,14 +37,10 @@ class ApplicationController < ActionController::Base
       session[:locale] = resource.locale
     end
 
-    unless session[:shopping_cart].blank?
+    # login admin and login customer.
+    if !session[:shopping_cart].blank? && !current_customer.nil?
       # TODO if exist customer shopping cart append the products.
-      sc = ShoppingCart.retrieve(nil, session[:shopping_cart])
-      sc.customer = current_customer
-      sc.shopping_address = current_customer.shopping_address
-      sc.billing_address = current_customer.billing_address
-      sc.save
-
+      ShoppingCart.retrieve(current_customer, session[:shopping_cart])
       session.delete :shopping_cart
     end
 

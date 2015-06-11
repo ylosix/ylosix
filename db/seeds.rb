@@ -184,21 +184,38 @@ def create_default_categories
                      :slug => 'root'}
   root = save_or_update_model(Category, {:slug => 'root'}, root_attributes)
 
-  category_cam_attributes = {:parent_id => root.id,
-                             :name => 'Digital Cameras',
+  cam_attributes = {:parent_id => root.id,
+                             :name => 'Digital cameras',
                              :locale => :en,
                              :enabled => true,
                              :appears_in_web => true,
                              :slug => 'digital_cameras'}
-  digital_cameras = save_or_update_model(Category, {:slug => 'digital_cameras'}, category_cam_attributes)
+  digital_cameras = save_or_update_model(Category, {:slug => 'digital_cameras'}, cam_attributes)
 
-  category_cam_attributes = {:parent_id => digital_cameras.id,
+  mobile_attributes = {:parent_id => root.id,
+                             :name => 'Mobiles',
+                             :locale => :en,
+                             :enabled => true,
+                             :appears_in_web => true,
+                             :slug => 'mobiles'}
+  save_or_update_model(Category, {:slug => 'mobiles'}, mobile_attributes)
+
+  # Sub-categories
+  reflex_attributes = {:parent_id => digital_cameras.id,
+                             :name => 'Reflex',
+                             :locale => :en,
+                             :enabled => true,
+                             :appears_in_web => true,
+                             :slug => 'reflex'}
+  save_or_update_model(Category, {:slug => 'reflex'}, reflex_attributes)
+
+  lenses_attributes = {:parent_id => digital_cameras.id,
                              :name => 'Lenses',
                              :locale => :en,
                              :enabled => true,
                              :appears_in_web => true,
                              :slug => 'lenses'}
-  save_or_update_model(Category, {:slug => 'lenses'}, category_cam_attributes)
+  save_or_update_model(Category, {:slug => 'lenses'}, lenses_attributes)
 end
 
 

@@ -69,7 +69,7 @@ class Product < ActiveRecord::Base
                       joins(:products_categories)
                           .where(products_categories: {category_id: category.id},
                                  appears_in_categories: true)
-                          .where('publication_date >= ?', DateTime.now)
+                          .where('publication_date <= ?', DateTime.now)
                     }
 
   def admin_translations
