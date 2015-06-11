@@ -18,7 +18,7 @@ class ShoppingCart < ActiveRecord::Base
   include LiquidExtension
 
   belongs_to :customer
-  has_many :shopping_carts_products
+  has_many :shopping_carts_products, autosave: true
 
   belongs_to :shipping_address, class_name: 'CustomerAddress', foreign_key: 'shipping_address_id'
   belongs_to :billing_address, class_name: 'CustomerAddress', foreign_key: 'billing_address_id'
@@ -73,14 +73,7 @@ class ShoppingCart < ActiveRecord::Base
     sc ||= ShoppingCart.new(customer: customer)
 
     ShoppingCart.retrieve_products(sc, session_variable)
-
-    unless customer.nil?
-      sc.customer = customer
-      sc.shipping_address = customer.shipping_address
-      sc.billing_address = customer.billing_address
-    end
-
-    sc.save
+    sc.save unless customer.nil?
     sc
   end
 
