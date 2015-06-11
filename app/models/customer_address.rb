@@ -29,8 +29,10 @@ class CustomerAddress < ActiveRecord::Base
   # }
 
   def set_only_one_address_active
-    CustomerAddress.where('id != ?', id).update_all(default_billing: false) if default_billing
-    CustomerAddress.where('id != ?', id).update_all(default_shipping: false) if default_shipping
+    CustomerAddress.where(customer_id: customer_id)
+        .update_all(default_billing: false) if default_billing
+    CustomerAddress.where(customer_id: customer_id)
+        .update_all(default_shipping: false) if default_shipping
   end
 
   def to_liquid

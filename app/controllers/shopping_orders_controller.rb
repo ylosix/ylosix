@@ -11,8 +11,10 @@ class ShoppingOrdersController < Frontend::CommonController
   end
 
   def addresses
+    @variables ||= {}
+
     @type = params[:type]
-    @customer_addresses = current_customer.customer_addresses
+    @variables['customer_addresses'] = current_customer.customer_addresses
   end
 
   # TODO change this event for post.
@@ -53,7 +55,7 @@ class ShoppingOrdersController < Frontend::CommonController
       sc.destroy
     end
 
-    redirect_to :show_customers, :notice => 'Thanks for your purchase.'
+    redirect_to :show_customers, notice: 'Thanks for your purchase.'
   end
 
   private

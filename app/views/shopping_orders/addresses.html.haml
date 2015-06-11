@@ -2,7 +2,7 @@
 %hr
 
 %div.row
-  - @customer_addresses.each do |address|
+  - @variables['customer_addresses'].each do |address|
     %div.col-md-4
       %a{href: save_address_customers_shopping_orders_path(@type, address), :style => 'text-decoration: none; color: #000;'}
         = render partial: 'addresses/address', locals: {address: address}
