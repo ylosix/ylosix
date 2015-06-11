@@ -1,12 +1,35 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 
+REFLEX_SLUG = 'photography_reflex'
+LENSES_SLUG = 'photography_lenses'
+
 def save_or_update_model(model, search_options, attributes)
   object = model.find_or_create_by(search_options)
   object.attributes = attributes
   object.save
 
   object
+end
+
+def create_address(attributes = {})
+  saddress = CustomerAddress.new(attributes)
+
+  saddress.name = 'My shipping address'
+  saddress.default_billing = billing
+  saddress.default_shipping = shipping
+
+  saddress.customer_name = customer.name
+  saddress.customer_last_name = customer.last_name
+  saddress.address_1 = 'Rambla Nova, 72'
+  saddress.postal_code = '43002'
+  saddress.city = 'Tarragona'
+  saddress.country = 'Spain'
+  saddress.phone = '977112233'
+  saddress.mobile_phone = '616112233'
+  saddress.dni = '123456789T'
+
+  saddress.save
 end
 
 def create_default_admin_user
@@ -28,12 +51,17 @@ def create_default_admin_user
   customer = Customer.find_by(:email => 'customer@ylosix.com')
   if customer.nil?
     Customer.create!(:email => 'customer@ylosix.com',
-                      :name => 'User name',
-                      :last_name => 'User last_name',
+                      :name => 'Ylos',
+                      :last_name => 'Hispania',
                       :birth_date => DateTime.now,
                       :password => 'password',
                       :locale => 'en',
                       :password_confirmation => 'password')
+  end
+
+  if customer.shipping_address.nil?
+    create_address({customer: customer, default_billing: true, default_shipping: false})
+    create_address({customer: customer, default_billing: false, default_shipping: true})
   end
 end
 
@@ -83,7 +111,7 @@ def create_default_products
   puts '## Creating products'
   puts '####################'
 
-  category = Category.find_by_slug('digital_cameras')
+  category = Category.find_by_slug(REFLEX_SLUG)
   categories = [category]
 
   tag_cameras = Tag.with_translations.find_by(:tag_translations => {:name => 'Cameras', :locale => :en })
@@ -166,7 +194,7 @@ def create_default_products
                         :control_stock => true,
                         :image => zoom_image}
 
-  category = Category.find_by_slug('lenses')
+  category = Category.find_by_slug(LENSES_SLUG)
   categories = [category]
   create_product(product_attributes, categories, tags)
 end
@@ -184,38 +212,63 @@ def create_default_categories
                      :slug => 'root'}
   root = save_or_update_model(Category, {:slug => 'root'}, root_attributes)
 
-  cam_attributes = {:parent_id => root.id,
-                             :name => 'Digital cameras',
+  photo_attributes = {:parent_id => root.id,
+                             :name => 'Photography',
                              :locale => :en,
                              :enabled => true,
                              :appears_in_web => true,
-                             :slug => 'digital_cameras'}
-  digital_cameras = save_or_update_model(Category, {:slug => 'digital_cameras'}, cam_attributes)
+                             :slug => 'photography'}
+  photography = save_or_update_model(Category, {:slug => 'photography'}, photo_attributes)
 
-  mobile_attributes = {:parent_id => root.id,
-                             :name => 'Mobiles',
+  smart_phones_attributes = {:parent_id => root.id,
+                             :name => 'Smart phones',
                              :locale => :en,
                              :enabled => true,
                              :appears_in_web => true,
-                             :slug => 'mobiles'}
-  save_or_update_model(Category, {:slug => 'mobiles'}, mobile_attributes)
+                             :slug => 'smart-phones'}
+  smart_phones = save_or_update_model(Category, {:slug => 'smart-phones'}, smart_phones_attributes)
+
+
+  video_attributes = {:parent_id => root.id,
+                             :name => 'Video',
+                             :locale => :en,
+                             :enabled => true,
+                             :appears_in_web => true,
+                             :slug => 'video'}
+  save_or_update_model(Category, {:slug => 'video'}, video_attributes)
 
   # Sub-categories
-  reflex_attributes = {:parent_id => digital_cameras.id,
+  reflex_attributes = {:parent_id => photography.id,
                              :name => 'Reflex',
                              :locale => :en,
                              :enabled => true,
                              :appears_in_web => true,
-                             :slug => 'reflex'}
-  save_or_update_model(Category, {:slug => 'reflex'}, reflex_attributes)
+                             :slug => REFLEX_SLUG}
+  save_or_update_model(Category, {:slug => REFLEX_SLUG}, reflex_attributes)
 
-  lenses_attributes = {:parent_id => digital_cameras.id,
+  lenses_attributes = {:parent_id => photography.id,
                              :name => 'Lenses',
                              :locale => :en,
                              :enabled => true,
                              :appears_in_web => true,
-                             :slug => 'lenses'}
-  save_or_update_model(Category, {:slug => 'lenses'}, lenses_attributes)
+                             :slug => LENSES_SLUG}
+  save_or_update_model(Category, {:slug => LENSES_SLUG}, lenses_attributes)
+
+  accessories_attributes = {:parent_id => smart_phones.id,
+                       :name => 'Accessories',
+                       :locale => :en,
+                       :enabled => true,
+                       :appears_in_web => true,
+                       :slug => 'smart_phones_accessories'}
+  save_or_update_model(Category, {:slug => 'smart_phones_accessories'}, accessories_attributes)
+
+  phones_attributes = {:parent_id => smart_phones.id,
+                            :name => 'Phones',
+                            :locale => :en,
+                            :enabled => true,
+                            :appears_in_web => true,
+                            :slug => 'smart_phones_phones'}
+  save_or_update_model(Category, {:slug => 'smart_phone_phones'}, phones_attributes)
 end
 
 
