@@ -20,8 +20,8 @@ class ShoppingCart < ActiveRecord::Base
   belongs_to :customer
   has_many :shopping_carts_products, autosave: true
 
-  belongs_to :shipping_address, class_name: 'CustomerAddress', foreign_key: 'shipping_address_id'
-  belongs_to :billing_address, class_name: 'CustomerAddress', foreign_key: 'billing_address_id'
+  belongs_to :shipping_address, touch: true, class_name: 'CustomerAddress', foreign_key: 'shipping_address_id'
+  belongs_to :billing_address, touch: true, class_name: 'CustomerAddress', foreign_key: 'billing_address_id'
 
   def initialize(attributes = {}, options = {})
     super

@@ -15,12 +15,11 @@ end
 def create_address(attributes = {})
   saddress = CustomerAddress.new(attributes)
 
-  saddress.name = 'My shipping address'
-  saddress.default_billing = billing
-  saddress.default_shipping = shipping
+  unless saddress.customer.nil?
+    saddress.customer_name = saddress.customer.name
+    saddress.customer_last_name = saddress.customer.last_name
+  end
 
-  saddress.customer_name = customer.name
-  saddress.customer_last_name = customer.last_name
   saddress.address_1 = 'Rambla Nova, 72'
   saddress.postal_code = '43002'
   saddress.city = 'Tarragona'
@@ -50,18 +49,24 @@ def create_default_admin_user
 
   customer = Customer.find_by(:email => 'customer@ylosix.com')
   if customer.nil?
-    Customer.create!(:email => 'customer@ylosix.com',
-                      :name => 'Ylos',
-                      :last_name => 'Hispania',
-                      :birth_date => DateTime.now,
-                      :password => 'password',
-                      :locale => 'en',
-                      :password_confirmation => 'password')
+    customer = Customer.create!(:email => 'customer@ylosix.com',
+                     :name => 'Ylos',
+                     :last_name => 'Hispania',
+                     :birth_date => DateTime.now,
+                     :password => 'password',
+                     :locale => 'en',
+                     :password_confirmation => 'password')
   end
 
   if customer.shipping_address.nil?
-    create_address({customer: customer, default_billing: true, default_shipping: false})
-    create_address({customer: customer, default_billing: false, default_shipping: true})
+    create_address({name: 'My billing address',
+                    customer: customer,
+                    default_billing: true,
+                    default_shipping: false})
+    create_address({name: 'My shipping address',
+                    customer: customer,
+                    default_billing: false,
+                    default_shipping: true})
   end
 end
 
@@ -91,14 +96,14 @@ def create_default_taxes
   puts '## Creating default taxes'
   puts '####################'
 
-  iva_es_attributes = { :name => 'IVA ES 21%', :rate => 21.0 }
-  save_or_update_model(Tax, { :name => 'IVA ES 21%' }, iva_es_attributes)
+  iva_es_attributes = {:name => 'IVA ES 21%', :rate => 21.0}
+  save_or_update_model(Tax, {:name => 'IVA ES 21%'}, iva_es_attributes)
 end
 
 
 def create_product(product_attributes, categories, tags)
   product = save_or_update_model(Product,
-                                 { reference_code: product_attributes[:reference_code] },
+                                 {reference_code: product_attributes[:reference_code]},
                                  product_attributes)
 
   product.categories = categories
@@ -114,11 +119,11 @@ def create_default_products
   category = Category.find_by_slug(REFLEX_SLUG)
   categories = [category]
 
-  tag_cameras = Tag.with_translations.find_by(:tag_translations => {:name => 'Cameras', :locale => :en })
-  tag_reflex = Tag.with_translations.find_by(:tag_translations => {:name => 'Reflex', :locale => :en })
+  tag_cameras = Tag.with_translations.find_by(:tag_translations => {:name => 'Cameras', :locale => :en})
+  tag_reflex = Tag.with_translations.find_by(:tag_translations => {:name => 'Reflex', :locale => :en})
   tags = [tag_cameras, tag_reflex]
 
-  tax_iva = Tax.find_by({ :name => 'IVA ES 21%' })
+  tax_iva = Tax.find_by({:name => 'IVA ES 21%'})
 
   camera_image = File.new "#{Rails.root}/app/assets/images/products/canon_450d.png"
   product_attributes = {:reference_code => 'ref1',
@@ -213,11 +218,11 @@ def create_default_categories
   root = save_or_update_model(Category, {:slug => 'root'}, root_attributes)
 
   photo_attributes = {:parent_id => root.id,
-                             :name => 'Photography',
-                             :locale => :en,
-                             :enabled => true,
-                             :appears_in_web => true,
-                             :slug => 'photography'}
+                      :name => 'Photography',
+                      :locale => :en,
+                      :enabled => true,
+                      :appears_in_web => true,
+                      :slug => 'photography'}
   photography = save_or_update_model(Category, {:slug => 'photography'}, photo_attributes)
 
   smart_phones_attributes = {:parent_id => root.id,
@@ -230,44 +235,44 @@ def create_default_categories
 
 
   video_attributes = {:parent_id => root.id,
-                             :name => 'Video',
-                             :locale => :en,
-                             :enabled => true,
-                             :appears_in_web => true,
-                             :slug => 'video'}
+                      :name => 'Video',
+                      :locale => :en,
+                      :enabled => true,
+                      :appears_in_web => true,
+                      :slug => 'video'}
   save_or_update_model(Category, {:slug => 'video'}, video_attributes)
 
   # Sub-categories
   reflex_attributes = {:parent_id => photography.id,
-                             :name => 'Reflex',
-                             :locale => :en,
-                             :enabled => true,
-                             :appears_in_web => true,
-                             :slug => REFLEX_SLUG}
-  save_or_update_model(Category, {:slug => REFLEX_SLUG}, reflex_attributes)
-
-  lenses_attributes = {:parent_id => photography.id,
-                             :name => 'Lenses',
-                             :locale => :en,
-                             :enabled => true,
-                             :appears_in_web => true,
-                             :slug => LENSES_SLUG}
-  save_or_update_model(Category, {:slug => LENSES_SLUG}, lenses_attributes)
-
-  accessories_attributes = {:parent_id => smart_phones.id,
-                       :name => 'Accessories',
+                       :name => 'Reflex',
                        :locale => :en,
                        :enabled => true,
                        :appears_in_web => true,
-                       :slug => 'smart_phones_accessories'}
-  save_or_update_model(Category, {:slug => 'smart_phones_accessories'}, accessories_attributes)
+                       :slug => REFLEX_SLUG}
+  save_or_update_model(Category, {:slug => REFLEX_SLUG}, reflex_attributes)
 
-  phones_attributes = {:parent_id => smart_phones.id,
-                            :name => 'Phones',
+  lenses_attributes = {:parent_id => photography.id,
+                       :name => 'Lenses',
+                       :locale => :en,
+                       :enabled => true,
+                       :appears_in_web => true,
+                       :slug => LENSES_SLUG}
+  save_or_update_model(Category, {:slug => LENSES_SLUG}, lenses_attributes)
+
+  accessories_attributes = {:parent_id => smart_phones.id,
+                            :name => 'Accessories',
                             :locale => :en,
                             :enabled => true,
                             :appears_in_web => true,
-                            :slug => 'smart_phones_phones'}
+                            :slug => 'smart_phones_accessories'}
+  save_or_update_model(Category, {:slug => 'smart_phones_accessories'}, accessories_attributes)
+
+  phones_attributes = {:parent_id => smart_phones.id,
+                       :name => 'Phones',
+                       :locale => :en,
+                       :enabled => true,
+                       :appears_in_web => true,
+                       :slug => 'smart_phones_phones'}
   save_or_update_model(Category, {:slug => 'smart_phone_phones'}, phones_attributes)
 end
 
@@ -281,7 +286,7 @@ def create_default_tags
                             :name => 'Cameras',
                             :locale => :en,
                             :appears_in_web => true}
-  tag_cameras = Tag.with_translations.find_by(:tag_translations => {:name => 'Cameras', :locale => :en })
+  tag_cameras = Tag.with_translations.find_by(:tag_translations => {:name => 'Cameras', :locale => :en})
   if tag_cameras.nil?
     tag_cameras = Tag.create!(tag_cameras_attributes)
   end
@@ -290,7 +295,7 @@ def create_default_tags
                            :name => 'Reflex',
                            :locale => :en,
                            :appears_in_web => true}
-  tag_reflex = Tag.with_translations.find_by(:tag_translations => {:name => 'Reflex', :locale => :en })
+  tag_reflex = Tag.with_translations.find_by(:tag_translations => {:name => 'Reflex', :locale => :en})
   if tag_reflex.nil?
     Tag.create!(tag_reflex_attributes)
   end

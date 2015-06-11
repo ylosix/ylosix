@@ -53,7 +53,7 @@ class ShoppingOrdersController < Frontend::CommonController
       sc.destroy
     end
 
-    redirect_to :show_customers
+    redirect_to :show_customers, :notice => 'Thanks for your purchase.'
   end
 
   private
