@@ -18,4 +18,5 @@
 
 customer_example_sc:
   customer: customer_example
-
+  billing_address: ca_example
+  shipping_address: ca_example

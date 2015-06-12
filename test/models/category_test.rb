@@ -22,6 +22,17 @@
 require 'test_helper'
 
 class CategoryTest < ActiveSupport::TestCase
+  test 'set_defaults' do
+    c = Category.new(name: 'potato with spaces')
+    assert c.save
+    assert !c.slug.blank?
+
+    ct = CategoryTranslation.new(name: 'potato with spaces', locale: :en)
+    c = Category.new(category_translations: [ct])
+    assert c.save
+    assert !c.slug.blank?
+  end
+
   test 'get_parents_array' do
     array = Utils.get_parents_array(categories(:root))
     assert array.empty?

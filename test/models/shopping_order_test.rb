@@ -20,4 +20,10 @@ class ShoppingOrderTest < ActiveSupport::TestCase
 
     assert hash.key? 'shopping_orders_products'
   end
+
+  test 'retrieve shipping/billing address' do
+    so = shopping_orders(:customer_example_so)
+    assert !so.shipping_address.nil?
+    assert !so.billing_address.nil?
+  end
 end

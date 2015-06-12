@@ -6,12 +6,12 @@ class HomeControllerTest < ActionController::TestCase
   def prepare_template
     object = templates(:test_template)
 
-    FileUtils.mkdir_p 'tmp/templates/test'
-    File.open(File.join(Rails.root, 'tmp/templates/test/home_index.html'), 'w') do |f|
+    FileUtils.mkdir_p 'tmp/templates/test/home'
+    File.open(File.join(Rails.root, 'tmp/templates/test/home/index.html'), 'w') do |f|
       f.write '<h1>hello world!</h1>'
     end
 
-    params = { 'home_index' => '<h2>hello world!</h2>' }
+    params = { 'home/index' => '<h2>hello world!</h2>' }
 
     object.writes_files params
     object.enabled = true

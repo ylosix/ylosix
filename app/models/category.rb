@@ -74,7 +74,9 @@ class Category < ActiveRecord::Base
   def set_defaults
     if slug.blank?
       self.slug = 'needs-to-be-changed'
-      if category_translations.any? && !category_translations.first.name.blank?
+      if !name.blank?
+        self.slug = URI.encode(name)
+      elsif category_translations.any? && !category_translations.first.name.blank?
         self.slug = URI.encode(category_translations.first.name)
       end
     end

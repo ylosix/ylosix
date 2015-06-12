@@ -8,13 +8,15 @@ module Admin
       login_admin
     end
 
-    test 'should get index/edit' do
+    test 'should get index/edit/show' do
       get :index
       assert_response :success
 
       object = taxes(:iva_es)
-
       get :edit, id: object.id
+      assert_response :success
+
+      get :show, id: object.id
       assert_response :success
     end
   end

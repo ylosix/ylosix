@@ -15,6 +15,12 @@
 require 'test_helper'
 
 class CustomerAddressTest < ActiveSupport::TestCase
+  test 'retrieve shipping/billing address' do
+    customer = customers(:customer_example)
+    assert !customer.shipping_address.nil?
+    assert !customer.billing_address.nil?
+  end
+
   test 'to_liquid' do
     hash = customer_addresses(:ca_example).to_liquid
 

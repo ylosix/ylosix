@@ -8,7 +8,7 @@ module Admin
       login_admin
     end
 
-    test 'should get index/edit' do
+    test 'should get index/edit/show' do
       get :index
       assert_response :success
 

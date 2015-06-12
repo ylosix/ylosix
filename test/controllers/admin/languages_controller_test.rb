@@ -8,15 +8,15 @@ module Admin
       login_admin
     end
 
-    test 'should get index' do
+    test 'should get index/edit/show' do
       get :index
       assert_response :success
-    end
 
-    test 'should get edit' do
-      language = languages(:es)
+      object = languages(:es)
+      get :edit, id: object.id
+      assert_response :success
 
-      get :edit, id: language.id
+      get :show, id: object.id
       assert_response :success
     end
   end

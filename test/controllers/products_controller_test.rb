@@ -31,4 +31,11 @@ class ProductsControllerTest < ActionController::TestCase
     get :add_to_shopping_cart, id: object.id
     assert_response :redirect
   end
+
+  test 'should add to shopping cart session' do
+    object = products(:camera)
+
+    get :add_to_shopping_cart, id: object.id
+    assert_response :redirect
+  end
 end

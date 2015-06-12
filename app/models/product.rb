@@ -136,7 +136,9 @@ class Product < ActiveRecord::Base
 
     if slug.blank?
       self.slug = 'needs-to-be-changed'
-      if product_translations.any? && !product_translations.first.name.blank?
+      if !name.blank?
+        self.slug = URI.encode(name)
+      elsif product_translations.any? && !product_translations.first.name.blank?
         self.slug = URI.encode(product_translations.first.name)
       end
     end

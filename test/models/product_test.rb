@@ -37,11 +37,16 @@
 require 'test_helper'
 
 class ProductTest < ActiveSupport::TestCase
-  test 'set_default_publication_date' do
-    pr = Product.new
-    pr.save
+  test 'set_defaults' do
+    pr = Product.new(name: 'potato with spaces')
+    assert pr.save
+    assert !pr.publication_date.blank?
+    assert !pr.slug.blank?
 
-    assert !pr.publication_date.nil?
+    pt = ProductTranslation.new(name: 'potato with spaces', locale: :en)
+    pr = Product.new(product_translations: [pt])
+    assert pr.save
+    assert !pr.slug.blank?
   end
 
   test 'clone' do

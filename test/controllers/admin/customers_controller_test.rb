@@ -8,8 +8,15 @@ module Admin
       login_admin
     end
 
-    test 'should get index' do
+    test 'should get index/edit/show' do
       get :index
+      assert_response :success
+
+      object = customers(:customer_example)
+      get :edit, id: object.id
+      assert_response :success
+
+      get :show, id: object.id
       assert_response :success
     end
   end
