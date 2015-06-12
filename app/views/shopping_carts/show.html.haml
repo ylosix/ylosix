@@ -60,10 +60,12 @@
             %span.a-color-price
               = "#{@variables['shopping_cart'].total_retail_price} €"
 - else
-  %i Your cart is empty.
-  %br
+  %div.row
+    %div.col-md-12
+      %div{:class => 'alert alert-warning', :role => 'alert'}
+        %i Your cart is empty.
 
-%p
-  = link_to 'Continue shopping', @variables['root_href'], class: 'btn btn-default'
-  |
-  = link_to 'Checkout', customers_shopping_orders_path, class: 'btn btn-success btn-default'
+%div{class: 'row voffset3'}
+  %div{class: 'col-md-12'}
+    = link_to 'Continue shopping', @variables['root_href'], class: 'btn btn-default'
+    = link_to 'Checkout', customers_shopping_orders_path, class: 'btn btn-success btn-default'
