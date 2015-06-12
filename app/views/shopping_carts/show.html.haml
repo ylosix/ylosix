@@ -26,21 +26,29 @@
             %div.a-color-price
               = "c:#{scp.retail_price} p:#{product.retail_price} €"
           %div{class: 'col-md-3 col-xs-3'}
-            %div{:class => 'btn-group', :role => 'group'}
-              %button{:type => 'button', :class => 'btn btn-default dropdown-toggle', 'data-toggle' => 'dropdown', 'aria-expanded' => 'false'}
-                = scp.quantity
-                %span.caret
+            %div.col-md-12
+              %div.form-group
+                %div{id:"form-quantity-#{scp.id}", class: 'hidden'}
+                  = form_tag update_customers_shopping_carts_path(product.id), method: 'post' do
+                    %div.col-md-8
+                      %input{id: "input-quantity-#{scp.id}", type: 'number', name: 'quantity', min: '1', value: scp.quantity, class: 'form-control'}
+                    %div.col-md-4
+                      %input{type: 'submit', value: 'Submit', class: 'btn btn-warning'}
 
-              %ul{:class => 'dropdown-menu', :role => 'menu'}
-                - (1..9).each do |i|
-                  %li
-                    = link_to i, update_customers_shopping_carts_path(product.id, i)
+                %div{id: "select-quantity-#{scp.id}", :class => 'btn-group', :role => 'group'}
+                  %button{:type => 'button', :class => 'btn btn-default dropdown-toggle', 'data-toggle' => 'dropdown', 'aria-expanded' => 'false'}
+                    = scp.quantity
+                    %span.caret
 
-                %li{:role => 'presentation', :class => 'divider'}
-
-                %li
-                  %a
-                    10+
+                  %ul{:class => 'dropdown-menu', :role => 'menu'}
+                    - (1..9).each do |i|
+                      %li
+                        %a{href: "javascript:modify_quantity_form(#{scp.id}, #{i});"}
+                          = i
+                    %li{:role => 'presentation', :class => 'divider'}
+                    %li
+                      %a{onclick: "javascript:show_quantity_form(#{scp.id});"}
+                        10+
 
     %li.sc-list-item-border
       %div.row
