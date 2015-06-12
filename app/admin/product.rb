@@ -125,7 +125,7 @@ ActiveAdmin.register Product do
       unless params[:product][:products_categories_ids].blank?
         product = resource
         categories = params[:product][:products_categories_ids]
-        ProductsCategory.destroy_all(['category_id NOT IN (?)', categories])
+        ProductsCategory.where(product: product).destroy_all(['category_id NOT IN (?)', categories])
 
         categories.each do |category|
           ProductsCategory.find_or_create_by(product_id: product.id, category_id: category)
@@ -137,7 +137,7 @@ ActiveAdmin.register Product do
       unless params[:product][:products_tags_ids].blank?
         product = resource
         tags = params[:product][:products_tags_ids]
-        ProductsTag.destroy_all(['tag_id NOT IN (?)', tags])
+        ProductsTag.where(product: product).destroy_all(['tag_id NOT IN (?)', tags])
 
         tags.each do |tag|
           ProductsTag.find_or_create_by(product_id: product.id, tag_id: tag)
