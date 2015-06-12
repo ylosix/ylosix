@@ -46,6 +46,11 @@ class ProductsController < Frontend::CommonController
     @product = nil
     @category = nil
 
+    # TODO find product by category id
+    # if params[:category_slug].blank?
+    #   @category = Category.find_by(slug: params[:category_slug])
+    # end
+
     if !params[:slug].blank? || !params[:id].blank?
       attributes = { enabled: true }
       attributes[:slug] = params[:slug] unless params[:slug].blank?

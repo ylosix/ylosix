@@ -25,14 +25,14 @@ module ActionDispatch
     include Devise::TestHelpers
   end
 end
-#
-# Rake::Task['rubocop'].invoke
-# load "#{Rails.root}/db/seeds.rb"
-#
-# def test_again_seed
-#   create_defaults
-# end
-# test_again_seed
+
+Rake::Task['rubocop'].invoke
+load "#{Rails.root}/db/seeds.rb"
+
+def test_again_seed
+  create_defaults
+end
+test_again_seed
 
 module ActiveSupport
   class TestCase

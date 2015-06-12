@@ -1,14 +1,14 @@
 %div{:class => 'col-sm-4 col-lg-4 col-md-4'}
   %div.thumbnail
     -# TODO image 320x150
-    %a{:href => show_slug_products_path(product.slug)}
+    %a{:href => product.href}
       = image_tag(product.retrieve_main_image(:medium), :class => 'img-responsive')
 
     %div.caption
       %h4.pull-right
         = "#{product.retail_price} €"
       %h4
-        %a{:href => show_slug_products_path(product.slug)}
+        %a{:href => product.href}
           = product.name
 
       %p
