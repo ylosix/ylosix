@@ -20,6 +20,7 @@ RUN mv config/database.yml.docker config/database.yml
 
 # Bundle install
 RUN bundle install --without development test profile
+RUN RAILS_ENV=production SECRET_KEY_BASE=`rake secret` rake assets:precompile
 
 # Clean up APT when done.
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
