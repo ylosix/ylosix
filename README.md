@@ -83,16 +83,10 @@ Troubleshooting git clone in windows:
 git config --global core.autocrlf false
 ```
 
-Build and run with docker:
+Run with docker:
 ```
-# build your dockerfile
-$ docker build -t ryanfox1985/ecommerce .
-
-# run container
-$ docker run -d -p 80:80 -e SECRET_KEY_BASE=secretkey ryanfox1985/ecommerce
-
-# run console
-docker run -i -t ryanfox1985/ecommerce:latest /bin/bash
+$ docker-compose up
+$ docker-compose run web rake db:create db:migrate db:seed
 ```
 
 ## Design schema
