@@ -1,8 +1,8 @@
 production:
   adapter: postgresql
-  database: backbone_data_bootstrap_production
-  min_messages: WARNING
+  encoding: unicode
+  database: postgres
   pool: 5
   username: postgres
-  host: <%= ENV['BACKBONEDATABOOTSTRAP_DB_1_PORT_5432_TCP_ADDR'] %>
-  port: <%= ENV['BACKBONEDATABOOTSTRAP_DB_1_PORT_5432_TCP_PORT'] %>
+  password:
+  host: db
