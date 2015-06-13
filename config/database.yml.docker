@@ -1,7 +1,7 @@
 production:
   adapter: postgresql
   encoding: unicode
-  database: postgres
+  database: ecommerce
   pool: 5
   username: postgres
   password:
