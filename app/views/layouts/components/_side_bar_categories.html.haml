@@ -1,8 +1,0 @@
-%p.lead Shop Name
-%div.list-group
-  - unless @variables.blank?
-    - @variables['categories'].each do |category|
-      = link_to category.name, show_slug_categories_path(category.slug), :class => 'list-group-item'
-      - unless category.children.empty?
-        - category.children.each do |category_child|
-          = link_to category_child.name, show_slug_categories_path(category_child.slug), :class => 'list-group-item list-group-subitem'

@@ -58,7 +58,7 @@ def create_default_admin_user
                      :password_confirmation => 'password')
   end
 
-  if customer.shipping_address.nil?
+  if customer.customer_addresses.empty?
     create_address({name: 'My billing address',
                     customer: customer,
                     default_billing: true,

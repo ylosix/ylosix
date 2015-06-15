@@ -152,7 +152,7 @@ GEM
       railties (>= 3.2, < 5)
       responders
     interception (0.5)
-    jbuilder (2.2.16)
+    jbuilder (2.3.0)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
     jquery-rails (4.0.3)

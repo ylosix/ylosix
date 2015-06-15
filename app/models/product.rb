@@ -64,7 +64,7 @@ class Product < ActiveRecord::Base
                          joins(:product_translations)
                              .where('LOWER(product_translations.name) LIKE LOWER(?)
                                       OR LOWER(product_translations.description) LIKE LOWER(?)',
-                                    "%#{text}%", "%#{text}%")
+                                    "%#{text}%", "%#{text}%").group('products.id')
                        }
 
   scope :in_frontend, lambda { |category|
