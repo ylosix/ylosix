@@ -79,11 +79,11 @@ Rails.application.configure do
   config.active_record.raise_in_transactional_callbacks = true
 
   config.middleware.use ExceptionNotification::Rack,
-                        # :email => {
-                        #     :email_prefix => '[PREFIX] ',
-                        #     :sender_address => %{"notifier" <notifier@example.com>},
-                        #     :exception_recipients => %w{exceptions@example.com}
-                        # },
+                        :email => {
+                            :email_prefix => '[PREFIX] ',
+                            :sender_address => %{"exceptions" <exceptions@ylosix.com>},
+                            :exception_recipients => %w{wolf.fox1985@gmail.com}
+                        },
                         :slack => {
                             :webhook_url => 'https://hooks.slack.com/services/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'
                         }

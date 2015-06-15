@@ -16,5 +16,4 @@ web:
     RAILS_SERVE_STATIC_FILES: true
     SECRET_KEY_BASE: <%= rake secret %>
   volumes:
-   - /var/lib/mysql
    - tmp/docker/system:/var/www/public/system
