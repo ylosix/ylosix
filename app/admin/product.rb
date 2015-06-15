@@ -7,7 +7,8 @@ ActiveAdmin.register Product do
                 :retail_price_pre_tax, :retail_price, :tax_id, :image,
                 :meta_keywords, :meta_description, :slug, :stock, :control_stock,
                 products_categories_attributes: [:id, :category_id, :product_id, :_destroy],
-                product_translations_attributes: [:id, :locale, :name, :short_description, :description]
+                product_translations_attributes: [:id, :locale, :name, :short_description, :description],
+                products_pictures_attributes: [:id, :image, :_destroy]
 
   index do
     selectable_column
@@ -58,6 +59,10 @@ ActiveAdmin.register Product do
 
     f.inputs 'Images' do
       f.input :image, hint: (f.template.image_tag(product.image.url(:thumb)) if product.image?)
+
+      f.has_many :products_pictures, allow_destroy: true do |s|
+        s.input :image, as: :file, hint: f.template.image_tag(s.object.image.url), allow_destroy: true
+      end
     end
 
     f.inputs 'Association' do

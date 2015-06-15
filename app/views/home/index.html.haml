@@ -6,8 +6,9 @@
     = render 'layouts/components/search_box'
 
   %div{:class => 'row carousel-holder'}
+    - pictures = %w(http://placehold.it/800x300 http://placehold.it/800x300 http://placehold.it/800x300)
     %div.col-md-12
-      = render 'layouts/components/carousel'
+      = render partial: 'layouts/components/carousel', locals: { pictures: pictures }
 
   %div.row
     = render 'layouts/components/products_list_grid'

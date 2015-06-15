@@ -1,18 +1,18 @@
-%div{:id => 'carousel-example-generic', :class => 'carousel slide', 'data-ride' => 'carousel'}
-  %ol.carousel-indicators
-    %li.active{'data-target' => '#carousel-example-generic', 'data-slide-to' => '0'}
-    %li{'data-target' => '#carousel-example-generic', 'data-slide-to' => '1'}
-    %li{'data-target' => '#carousel-example-generic', 'data-slide-to' => '2'}
+- if pictures.any?
+  %div{:id => 'carousel-example-generic', :class => 'carousel slide', 'data-ride' => 'carousel'}
+    %ol.carousel-indicators
+      %li.active{'data-target' => '#carousel-example-generic', 'data-slide-to' => '0'}
+      %li{'data-target' => '#carousel-example-generic', 'data-slide-to' => '1'}
+      %li{'data-target' => '#carousel-example-generic', 'data-slide-to' => '2'}
 
-  %div.carousel-inner
-    %div{:class => 'item active'}
-      %img.slide-image{:src => 'http://placehold.it/800x300', :alt => ''}
-    %div.item
-      %img.slide-image{:src => 'http://placehold.it/800x300', :alt => ''}
-    %div.item
-      %img.slide-image{:src => 'http://placehold.it/800x300', :alt => ''}
+    %div.carousel-inner
+      - pictures.each_with_index do |picture, index|
+        - div_class = ''
+        - div_class = 'active' if index == 0
+        %div{:class => "item #{div_class}"}
+          %img.slide-image{:src => picture, :alt => ''}
 
-  %a{:class => 'left carousel-control', :href => '#carousel-example-generic', 'data-slide' => 'prev'}
-    %span{:class => 'glyphicon glyphicon-chevron-left'}
-  %a{:class => 'right carousel-control', :href => '#carousel-example-generic', 'data-slide' => 'next'}
-    %span{:class => 'glyphicon glyphicon-chevron-right'}
+    %a{:class => 'left carousel-control', :href => '#carousel-example-generic', 'data-slide' => 'prev'}
+      %span{:class => 'glyphicon glyphicon-chevron-left'}
+    %a{:class => 'right carousel-control', :href => '#carousel-example-generic', 'data-slide' => 'next'}
+      %span{:class => 'glyphicon glyphicon-chevron-right'}

@@ -48,12 +48,14 @@ class Product < ActiveRecord::Base
 
   has_many :products_tags
   has_many :tags, through: :products_tags
+  has_many :products_pictures
 
   has_many :product_translations
   has_many :shopping_carts_products
 
   accepts_nested_attributes_for :products_categories, allow_destroy: true
   accepts_nested_attributes_for :products_tags, allow_destroy: true
+  accepts_nested_attributes_for :products_pictures, allow_destroy: true
   accepts_nested_attributes_for :product_translations
 
   before_save :set_defaults
@@ -138,6 +140,14 @@ class Product < ActiveRecord::Base
   def append_images(hash)
     IMAGE_SIZES.each do |size|
       hash["image_#{size}_src"] = retrieve_main_image(size)
+    end
+
+    if products_pictures.any?
+      hash['product_pictures'] = []
+
+      products_pictures.each do |picture|
+        hash['product_pictures'] << picture.append_images
+      end
     end
 
     hash

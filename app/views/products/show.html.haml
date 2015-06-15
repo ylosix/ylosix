@@ -1,3 +1,5 @@
+- @product = @variables['product']
+
 %div.col-md-3
   = render 'layouts/components/side_bar_categories'
 
@@ -9,29 +11,37 @@
     = render 'layouts/components/category_tree'
 
   %div.row
-    %div.thumbnail
-      = image_tag(@product.retrieve_main_image, :class => 'img-responsive')
+    %div.col-md-12
+      %div.thumbnail
+        = image_tag(@product.retrieve_main_image, :class => 'img-responsive')
 
-      %div.caption-full
-        %h4.pull-right
-          = "#{@product.retail_price} €"
-        %h4
-          %a
-            = @product.name
+        - pictures = @product.products_pictures.map { |pic| pic.image(:original) unless pic.image.nil? }
+        - if pictures.any?
+          %h2 Gallery
+          = render partial: 'layouts/components/carousel', locals: { pictures: pictures }
 
-        - unless @product.description.blank?
-          %p
-            = @product.description.html_safe
+        %div{class: 'voffset3'}
+          %div.caption-full
+            %h4.pull-right
+              = "#{@product.retail_price} €"
+            %h4
+              %a
+                = @product.name
 
-      %div.ratings
-        %p.pull-right 3 reviews
-        %p
-          %span{:class => 'glyphicon glyphicon-star'}
-          %span{:class => 'glyphicon glyphicon-star'}
-          %span{:class => 'glyphicon glyphicon-star'}
-          %span{:class => 'glyphicon glyphicon-star-empty'}
+            - unless @product.description.blank?
+              %p
+                = @product.description.html_safe
 
-          4.0 stars
+        %div{class: 'voffset3'}
+          %div.ratings
+            %p.pull-right 3 reviews
+            %p
+              %span{:class => 'glyphicon glyphicon-star'}
+              %span{:class => 'glyphicon glyphicon-star'}
+              %span{:class => 'glyphicon glyphicon-star'}
+              %span{:class => 'glyphicon glyphicon-star-empty'}
+
+              4.0 stars
 
   %div.row
     = link_to 'Add to cart', add_to_shopping_cart_products_path(@product), :class => 'btn btn-success btn-block'
