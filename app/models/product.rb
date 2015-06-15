@@ -92,7 +92,7 @@ class Product < ActiveRecord::Base
 
     # TODO add fixed sizes as small, large, original, etc.
     case type
-      when :thumb
+      when :thumbnail
         image_src = 'http://placehold.it/130x100'
       when :small
         image_src = 'http://placehold.it/390x300'

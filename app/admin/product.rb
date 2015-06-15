@@ -14,7 +14,7 @@ ActiveAdmin.register Product do
     selectable_column
     id_column
     column :reference_code
-    column (:image) { |product| image_tag(product.retrieve_main_image(:thumb)) }
+    column (:image) { |product| image_tag(product.retrieve_main_image(:thumbnail)) }
     column :name
     column :enabled
     column :created_at
@@ -58,7 +58,7 @@ ActiveAdmin.register Product do
     end
 
     f.inputs 'Images' do
-      f.input :image, hint: (f.template.image_tag(product.image.url(:thumb)) if product.image?)
+      f.input :image, hint: (f.template.image_tag(product.image.url(:thumbnail)) if product.image?)
 
       f.has_many :products_pictures, allow_destroy: true do |s|
         s.input :image, as: :file, hint: f.template.image_tag(s.object.image.url), allow_destroy: true

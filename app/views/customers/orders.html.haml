@@ -23,7 +23,7 @@
           %div.row
             %div.col-md-6
               %div{:class => 'col-md-3'}
-                = image_tag product.retrieve_main_image(:thumb)
+                = image_tag product.retrieve_main_image(:thumbnail)
               %div{:class => 'col-md-9'}
                 %div.col-md-12
                   = link_to product.name, show_slug_products_path(product.slug)

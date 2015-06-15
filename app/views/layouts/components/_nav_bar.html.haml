@@ -57,7 +57,7 @@
                   - @variables['shopping_cart'].shopping_carts_products.each do |scp|
                     %div{class: 'row shopping-cart-row'}
                       %div.col-md-4
-                        = image_tag(scp.product.image.url(:thumb), :class => 'img-responsive')
+                        = image_tag(scp.product.image.url(:thumbnail), :class => 'img-responsive')
                       %div.col-md-8
                         = link_to scp.product.name, show_slug_products_path(scp.product.slug)
                         %br
