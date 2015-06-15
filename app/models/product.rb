@@ -143,10 +143,10 @@ class Product < ActiveRecord::Base
     end
 
     if products_pictures.any?
-      hash['product_pictures'] = []
+      hash['products_pictures'] = []
 
       products_pictures.each do |picture|
-        hash['product_pictures'] << picture.append_images
+        hash['products_pictures'] << picture.append_images
       end
     end
 

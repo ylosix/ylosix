@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: product_pictures
+# Table name: products_pictures
 #
 #  created_at         :datetime         not null
 #  id                 :integer          not null, primary key
@@ -14,7 +14,7 @@
 #
 # Indexes
 #
-#  index_product_pictures_on_product_id  (product_id)
+#  index_products_pictures_on_product_id  (product_id)
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
