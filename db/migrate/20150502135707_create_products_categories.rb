@@ -1,7 +1,7 @@
 class CreateProductsCategories < ActiveRecord::Migration
   def change
     create_table :products_categories do |t|
-      t.references :product
+      t.uuid :product_id
       t.references :category
 
       t.timestamps null: false

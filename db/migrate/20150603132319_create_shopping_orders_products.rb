@@ -1,7 +1,7 @@
 class CreateShoppingOrdersProducts < ActiveRecord::Migration
   def change
     create_table :shopping_orders_products do |t|
-      t.references :product, index: true
+      t.uuid :product_id, index: true
       t.references :shopping_order, index: true
 
       t.integer :quantity, default: 1, null: false

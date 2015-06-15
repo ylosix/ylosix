@@ -4,7 +4,7 @@
 #
 #  created_at       :datetime         not null
 #  id               :integer          not null, primary key
-#  product_id       :integer
+#  product_id       :uuid
 #  quantity         :integer          default(1), not null
 #  retail_price     :decimal(10, 2)   default(0.0), not null
 #  shopping_cart_id :integer

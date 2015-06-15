@@ -2,10 +2,10 @@
 #
 # Table name: products_categories
 #
-#  id          :integer          not null, primary key
-#  product_id  :integer
 #  category_id :integer
 #  created_at  :datetime         not null
+#  id          :integer          not null, primary key
+#  product_id  :uuid
 #  updated_at  :datetime         not null
 #
 # Indexes

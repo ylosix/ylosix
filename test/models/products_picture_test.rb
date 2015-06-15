@@ -9,7 +9,7 @@
 #  image_file_size    :integer
 #  image_updated_at   :datetime
 #  priority           :integer          default(1), not null
-#  product_id         :integer
+#  product_id         :uuid
 #  updated_at         :datetime         not null
 #
 # Indexes

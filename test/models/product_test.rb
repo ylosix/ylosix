@@ -10,7 +10,7 @@
 #  created_at            :datetime
 #  description           :text
 #  enabled               :boolean          default(FALSE)
-#  id                    :integer          not null, primary key
+#  id                    :uuid             not null, primary key
 #  image_content_type    :string
 #  image_file_name       :string
 #  image_file_size       :integer

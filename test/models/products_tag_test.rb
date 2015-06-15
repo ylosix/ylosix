@@ -2,10 +2,10 @@
 #
 # Table name: products_tags
 #
-#  id         :integer          not null, primary key
-#  product_id :integer
-#  tag_id     :integer
 #  created_at :datetime         not null
+#  id         :integer          not null, primary key
+#  product_id :uuid
+#  tag_id     :integer
 #  updated_at :datetime         not null
 #
 # Indexes

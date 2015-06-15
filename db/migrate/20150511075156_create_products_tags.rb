@@ -1,7 +1,7 @@
 class CreateProductsTags < ActiveRecord::Migration
   def change
     create_table :products_tags do |t|
-      t.references :product
+      t.uuid :product_id
       t.references :tag
 
       t.timestamps null: false

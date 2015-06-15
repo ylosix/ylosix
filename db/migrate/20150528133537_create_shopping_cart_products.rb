@@ -2,7 +2,7 @@ class CreateShoppingCartProducts < ActiveRecord::Migration
   def change
     create_table :shopping_carts_products do |t|
       t.references :shopping_cart, index: true
-      t.references :product, index: true
+      t.uuid :product_id, index: true
 
       t.timestamps null: false
     end

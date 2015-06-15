@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 20150615085147) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "uuid-ossp"
   enable_extension "hstore"
 
   create_table "active_admin_comments", force: :cascade do |t|
@@ -157,7 +158,7 @@ ActiveRecord::Schema.define(version: 20150615085147) do
   add_index "product_translations", ["locale"], name: "index_product_translations_on_locale", using: :btree
   add_index "product_translations", ["product_id"], name: "index_product_translations_on_product_id", using: :btree
 
-  create_table "products", force: :cascade do |t|
+  create_table "products", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "reference_code"
     t.string   "name"
     t.string   "barcode"
@@ -188,7 +189,7 @@ ActiveRecord::Schema.define(version: 20150615085147) do
   add_index "products", ["tax_id"], name: "index_products_on_tax_id", using: :btree
 
   create_table "products_categories", force: :cascade do |t|
-    t.integer  "product_id"
+    t.uuid     "product_id"
     t.integer  "category_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
@@ -200,7 +201,7 @@ ActiveRecord::Schema.define(version: 20150615085147) do
 
   create_table "products_pictures", force: :cascade do |t|
     t.integer  "priority",           default: 1, null: false
-    t.integer  "product_id"
+    t.uuid     "product_id"
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
     t.string   "image_file_name"
@@ -212,7 +213,7 @@ ActiveRecord::Schema.define(version: 20150615085147) do
   add_index "products_pictures", ["product_id"], name: "index_products_pictures_on_product_id", using: :btree
 
   create_table "products_tags", force: :cascade do |t|
-    t.integer  "product_id"
+    t.uuid     "product_id"
     t.integer  "tag_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -234,7 +235,7 @@ ActiveRecord::Schema.define(version: 20150615085147) do
 
   create_table "shopping_carts_products", force: :cascade do |t|
     t.integer  "shopping_cart_id"
-    t.integer  "product_id"
+    t.uuid     "product_id"
     t.datetime "created_at",                                              null: false
     t.datetime "updated_at",                                              null: false
     t.integer  "quantity",                                  default: 1,   null: false
@@ -264,7 +265,7 @@ ActiveRecord::Schema.define(version: 20150615085147) do
   add_index "shopping_orders_addresses", ["shopping_order_id"], name: "index_shopping_orders_addresses_on_shopping_order_id", using: :btree
 
   create_table "shopping_orders_products", force: :cascade do |t|
-    t.integer  "product_id"
+    t.uuid     "product_id"
     t.integer  "shopping_order_id"
     t.integer  "quantity",                                      default: 1,   null: false
     t.decimal  "retail_price_pre_tax", precision: 10, scale: 5, default: 0.0, null: false
