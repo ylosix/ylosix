@@ -17,4 +17,9 @@
 
 class ShoppingOrdersAddress < ActiveRecord::Base
   belongs_to :shopping_order
+
+  store_accessor :fields, :customer_name
+  store_accessor :fields, :customer_last_name, :business, :address_1,
+                 :address_2, :postal_code, :city, :country, :phone,
+                 :mobile_phone, :dni, :other
 end

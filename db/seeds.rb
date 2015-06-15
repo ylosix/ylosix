@@ -314,6 +314,46 @@ def create_default_ylos_template
 end
 
 
+def create_default_shopping_cart
+  puts '####################'
+  puts '## Creating shopping carts'
+  puts '####################'
+
+  customer = Customer.find_by(email: 'customer@ylosix.com')
+  sc = ShoppingCart.new(customer: customer)
+
+  products = Product.where(enabled: true)
+
+  sc.add_product(products[0])
+  sc.add_product(products[1])
+
+  sc.save
+end
+
+
+def create_default_orders
+  puts '####################'
+  puts '## Creating shopping orders'
+  puts '####################'
+
+  customer = Customer.find_by(email: 'customer@ylosix.com')
+  sc = customer.shopping_cart
+  sop = ShoppingOrder.new(customer: customer)
+
+  sc.shopping_carts_products.each do |scp|
+    sop.shopping_orders_products << scp.to_shopping_order
+  end
+
+  soa = ShoppingOrdersAddress.new
+  soa.billing = true
+  soa.shipping = true
+  soa.fields = customer.customer_addresses.first.fields
+
+  sop.shopping_orders_addresses << soa
+  sop.save
+end
+
+
 def create_defaults
   create_default_languages
   create_default_admin_user
@@ -321,6 +361,8 @@ def create_defaults
   create_default_tags
   create_default_taxes
   create_default_products
+  create_default_shopping_cart
+  create_default_orders
   create_default_ylos_template
 end
 

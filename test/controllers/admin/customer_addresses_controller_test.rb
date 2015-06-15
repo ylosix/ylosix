@@ -13,8 +13,8 @@ module Admin
       assert_response :success
 
       object = customer_addresses(:ca_example)
-      # get :edit, id: object.id
-      # assert_response :success
+      get :edit, id: object.id
+      assert_response :success
 
       get :show, id: object.id
       assert_response :success

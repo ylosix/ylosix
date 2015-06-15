@@ -36,9 +36,9 @@
 
 class Product < ActiveRecord::Base
   translates :name, :short_description, :description
-  has_attached_file :image, styles: {thumb: '100x100>', medium: '300x300>'}
+  has_attached_file :image, styles: {thumbnail: 'x100', small: 'x300', medium: 'x500'}
 
-  IMAGE_SIZES = [:thumb, :medium, :original]
+  IMAGE_SIZES = [:thumbnail, :small, :medium, :original]
 
   validates_attachment_content_type :image, content_type: %r{\Aimage/.*\Z}
 
@@ -86,14 +86,16 @@ class Product < ActiveRecord::Base
   end
 
   def retrieve_main_image(type = :original)
-    image_src = 'http://placehold.it/800x300'
+    image_src = 'http://placehold.it/650x500'
 
     # TODO add fixed sizes as small, large, original, etc.
     case type
       when :thumb
-        image_src = 'http://placehold.it/160x75'
+        image_src = 'http://placehold.it/130x100'
+      when :small
+        image_src = 'http://placehold.it/390x300'
       when :medium
-        image_src = 'http://placehold.it/320x150'
+        image_src = 'http://placehold.it/650x500'
     end
 
     image_src = image.url(type) if image.file?

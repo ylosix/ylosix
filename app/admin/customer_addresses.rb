@@ -3,7 +3,7 @@ ActiveAdmin.register CustomerAddress do
 
   permit_params :customer_id, :default_billing, :default_shipping, :name,
                 :customer_name, :customer_last_name, :business, :address_1,
-                :address_2 , :postal_code, :city, :country, :phone,
+                :address_2, :postal_code, :city, :country, :phone,
                 :mobile_phone, :dni, :other
 
   index do
@@ -12,7 +12,6 @@ ActiveAdmin.register CustomerAddress do
 
     column :customer
     column 'Fields' do |caddress|
-
       address_array = []
       address_array << "#{caddress.customer_name} #{caddress.customer_last_name}"
       address_array << caddress.dni
@@ -27,6 +26,7 @@ ActiveAdmin.register CustomerAddress do
 
       [address_array].join(' <br/> ').html_safe
     end
+
     column :default_billing
     column :default_shipping
     column :created_at
