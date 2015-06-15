@@ -4,15 +4,19 @@
     %a{:href => product.href}
       = image_tag(product.retrieve_main_image(:medium), :class => 'img-responsive')
 
-    %div.caption
-      %h4.pull-right
-        = "#{product.retail_price} €"
-      %h4
-        %a{:href => product.href}
-          = product.name
+    %div.row
+      %div.col-md-8
+        %h4
+          %a{:href => product.href}
+            = product.name
+      %div.col-md-4
+        %h5.pull-right
+          = "#{product.retail_price} €"
 
-      %p
-        = product.short_description
+    %div.row
+      %div.col-md-12
+        %p
+          = product.short_description
 
     %div.ratings
       %p.pull-right
