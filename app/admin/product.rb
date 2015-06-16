@@ -10,7 +10,6 @@ ActiveAdmin.register Product do
                  products_categories_attributes: [:id, :category_id, :product_id, :_destroy],
                  products_pictures_attributes: [:id, :image, :_destroy]]
 
-
     pta = [:id, :locale, :name, :short_description, :description]
     Feature.all.each do |feature|
       pta << feature.id.to_s.to_sym

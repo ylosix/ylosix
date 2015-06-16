@@ -22,4 +22,6 @@
             = feature.name
 
         %td
-          = text_field_tag "product[product_translations_attributes][#{i}][#{feature.id}]", pt.features[feature.id.to_s]
+          - value = nil
+          - value = pt.features[feature.id.to_s] unless pt.features.nil?
+          = text_field_tag "product[product_translations_attributes][#{i}][#{feature.id}]", value
