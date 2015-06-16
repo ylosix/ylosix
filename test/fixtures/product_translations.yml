@@ -4,6 +4,7 @@
 #
 #  created_at        :datetime         not null
 #  description       :text
+#  features          :hstore
 #  id                :integer          not null, primary key
 #  locale            :string           not null
 #  name              :string

@@ -1,0 +1,25 @@
+%table
+  %tr
+    %th Feature
+    %th Value
+
+  - translations.each_with_index do |pt, i|
+    - features.each do |feature|
+      %tr
+        %td
+          %label{for: "product_product_translations_attributes_#{i}_#{feature.id}"}
+            - language = pt.language
+            - if language.flag?
+              = image_tag(language.flag.url(:thumb))
+            - else
+              = language.locale
+            = text_field_tag "product[product_translations_attributes][#{i}][locale]", language.locale, {type: 'hidden'}
+
+            - unless pt.id.nil?
+              = text_field_tag "product[product_translations_attributes][#{i}][id]", pt.id, {type: 'hidden'}
+
+            = '&nbsp;'.html_safe
+            = feature.name
+
+        %td
+          = text_field_tag "product[product_translations_attributes][#{i}][#{feature.id}]", pt.features[feature.id.to_s]

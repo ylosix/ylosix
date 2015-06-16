@@ -1,14 +1,24 @@
 ActiveAdmin.register Product do
   menu parent: 'Catalog'
 
-  permit_params :reference_code, :name, :enabled, :appears_in_categories,
-                :appears_in_tag, :appears_in_search, :short_description,
-                :description, :publication_date, :unpublication_date,
-                :retail_price_pre_tax, :retail_price, :tax_id, :image,
-                :meta_keywords, :meta_description, :slug, :stock, :control_stock,
-                products_categories_attributes: [:id, :category_id, :product_id, :_destroy],
-                product_translations_attributes: [:id, :locale, :name, :short_description, :description],
-                products_pictures_attributes: [:id, :image, :_destroy]
+  permit_params do
+    permitted = [:reference_code, :name, :enabled, :appears_in_categories,
+                 :appears_in_tag, :appears_in_search, :short_description,
+                 :description, :publication_date, :unpublication_date,
+                 :retail_price_pre_tax, :retail_price, :tax_id, :image,
+                 :meta_keywords, :meta_description, :slug, :stock, :control_stock,
+                 products_categories_attributes: [:id, :category_id, :product_id, :_destroy],
+                 products_pictures_attributes: [:id, :image, :_destroy]]
+
+
+    pta = [:id, :locale, :name, :short_description, :description]
+    Feature.all.each do |feature|
+      pta << feature.id.to_s.to_sym
+    end
+    permitted << { product_translations_attributes: pta }
+
+    permitted
+  end
 
   index do
     selectable_column
@@ -26,8 +36,8 @@ ActiveAdmin.register Product do
   filter :enabled
 
   form do |f|
+    translations = Utils.array_translations(ProductTranslation, product_id: product.id)
     f.inputs 'Information' do
-      translations = Utils.array_translations(ProductTranslation, product_id: product.id)
       admin_translation_text_field(translations, 'product', 'name')
       f.input :reference_code
 
@@ -85,6 +95,11 @@ ActiveAdmin.register Product do
                                                    products_tags: product.products_tags,
                                                    root_tags: Tag.root_tags
                                                }
+    end
+
+    f.inputs 'Features' do
+      render partial: 'admin/products/features', locals: {translations: translations,
+                                                          features: Feature.all}
     end
 
     f.inputs 'Stock' do
