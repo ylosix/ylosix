@@ -35,7 +35,7 @@
 #
 
 class Product < ActiveRecord::Base
-  translates :name, :short_description, :description
+  translates :name, :short_description, :description, :features
   has_attached_file :image, styles: {thumbnail: 'x100', small: 'x300', medium: 'x500'}
 
   IMAGE_SIZES = [:thumbnail, :small, :medium, :original]

@@ -30,6 +30,43 @@ ActiveAdmin.register Product do
     actions
   end
 
+  show title: proc { |p| "Product ##{p.id}" } do
+    attributes_table do
+      row :id
+      row :reference_code
+      row :name
+      row :barcode
+      row :enabled
+      row :appears_in_categories
+      row :appears_in_tag
+      row :appears_in_search
+      row :short_description
+      row :publication_date
+      row :unpublication_date
+
+      row :retail_price_pre_tax
+      row :retail_price
+      row :tax
+
+      row 'Features' do
+        table_for Feature.all do
+          column (:feature) { |feature| feature.name }
+          column (:value) { |feature| product.features[feature.id.to_s] unless product.features.nil? }
+        end
+      end
+
+      row :meta_keywords
+      row :meta_description
+
+      row :slug
+      row :stock
+      row :control_stock
+
+      row :created_at
+      row :updated_at
+    end
+  end
+
   filter :reference_code
   filter :translations_name, as: :string, label: 'Name'
   filter :enabled

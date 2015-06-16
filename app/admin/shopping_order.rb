@@ -14,7 +14,7 @@ ActiveAdmin.register ShoppingOrder do
     actions
   end
 
-  show title: proc { |so| "Shopping order ##{so.id}" } do |_so|
+  show title: proc { |so| "Shopping order ##{so.id}" } do
     attributes_table do
       row :id
       row :customer
