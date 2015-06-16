@@ -72,6 +72,8 @@ ActiveAdmin.register Template do
     column :path
     column :enabled
     column(:export) { |template| link_to 'Export', admin_export_template_path(template) }
+    column :created_at
+    column :updated_at
     actions
   end
 
