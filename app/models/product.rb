@@ -62,6 +62,8 @@ class Product < ActiveRecord::Base
 
   scope :search_by_text, lambda { |text|
                          joins(:product_translations)
+                             .where('publication_date <= ?', DateTime.now)
+                             .where('unpublication_date is null or unpublication_date >= ?', DateTime.now)
                              .where('LOWER(product_translations.name) LIKE LOWER(?)
                                       OR LOWER(product_translations.description) LIKE LOWER(?)',
                                     "%#{text}%", "%#{text}%").group('products.id')
@@ -69,14 +71,11 @@ class Product < ActiveRecord::Base
 
   scope :in_frontend, lambda { |category|
                       joins(:products_categories)
+                          .where('publication_date <= ?', DateTime.now)
+                          .where('unpublication_date is null or unpublication_date >= ?', DateTime.now)
                           .where(products_categories: {category_id: category.id},
                                  appears_in_categories: true)
-                          .where('publication_date <= ?', DateTime.now)
                     }
-
-  def admin_translations
-    Utils.array_translations(ProductTranslation, product_id: id)
-  end
 
   def clone
     product = dup

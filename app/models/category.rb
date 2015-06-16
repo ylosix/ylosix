@@ -57,10 +57,6 @@ class Category < ActiveRecord::Base
     root_categories
   end
 
-  def admin_translations
-    Utils.array_translations(CategoryTranslation, category_id: id)
-  end
-
   def to_liquid
     {
         'name' => name,

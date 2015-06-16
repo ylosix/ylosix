@@ -27,7 +27,7 @@ ActiveAdmin.register Product do
 
   form do |f|
     f.inputs 'Information' do
-      translations = product.admin_translations
+      translations = Utils.array_translations(ProductTranslation, product_id: product.id)
       admin_translation_text_field(translations, 'product', 'name')
       f.input :reference_code
 

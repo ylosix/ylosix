@@ -27,7 +27,7 @@ ActiveAdmin.register Category do
     f.inputs 'Category Details' do
       f.input :parent
 
-      translations = f.object.admin_translations
+      translations = Utils.array_translations(CategoryTranslation, category_id: category.id)
       admin_translation_text_field(translations, 'category', 'name')
 
       f.input :enabled

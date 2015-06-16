@@ -18,18 +18,20 @@ class ShoppingOrdersController < Frontend::CommonController
   end
 
   # TODO change this event for post.
-  # TODO check id is related with customer.
   # TODO check param type
   def save_address
-    @type = params[:type]
-    id = params[:id]
+    type = params[:type]
+    id = params[:id].to_i
 
-    attributes = {}
-    attributes[@type] = id
-    sc = current_customer.shopping_cart
-    unless sc.nil?
-      sc.attributes = attributes
-      sc.save
+    addresses = current_customer.customer_addresses.pluck(:id)
+    if addresses.include? id
+      attributes = {}
+      attributes[type] = id
+      sc = current_customer.shopping_cart
+      unless sc.nil?
+        sc.attributes = attributes
+        sc.save
+      end
     end
 
     redirect_to :customers_shopping_orders

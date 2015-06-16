@@ -27,7 +27,7 @@ ActiveAdmin.register Tag do
     f.inputs 'Tag Details' do
       f.input :parent
 
-      translations = f.object.admin_translations
+      translations = Utils.array_translations(TagTranslation, tag_id: tag.id)
       admin_translation_text_field(translations, 'tag', 'name')
 
       f.input :appears_in_web
