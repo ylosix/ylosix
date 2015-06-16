@@ -34,6 +34,16 @@
               %p
                 = @product.description.html_safe
 
+            - unless @product.features.nil?
+              %h4
+                Features
+
+              - @product.features.each do |k,v|
+                %div.col-md-6
+                  = k
+                %div.col-md-6
+                  = v
+
         %div{class: 'voffset3'}
           %div.ratings
             %p.pull-right 3 reviews
