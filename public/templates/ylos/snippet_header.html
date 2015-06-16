@@ -1,51 +1,75 @@
 <div class="top-header">
 	<div class="container">
 		<div class="row">
-			<div class="col-xs-6 col-sm-6">
-				<div class="info">
-					<ul class="nav">
-						<li><i class="glyphicon glyphicon-earphone icon top-text"></i> <tel>900 000 000</tel></li>
+			<div class="col-xs-6 col-sm-3 col-md-1">
+				<div class="btn-group pull-right">
+					<button type="button" class="btn btn-default dropdown-toggle lang" data-toggle="dropdown">
+						LANG
+						<span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu pull-left">
+						{% for language in languages %}
+							<li>
+								<a href="{{ language.href }}">
+									<img src="{{ language.image_src }}" alt="{{ language.locale }}" />
+									{{ language.name }}
+								</a>
+							</li>
+						{% endfor %}
 					</ul>
 				</div>
 			</div>
-			<div class="col-xs-6 col-sm-6">
-				<div class="social-icons pull-right col-md-12">
-					<ul class="nav info">
-						<li class="col-xs-6 col-sm-8">
-							{% if current_customer != nil %}
-								<div class="pull-left top-text">
-									Welcome {{ current_customer.name }}
-								</div>
-								<div class="pull-right top-text">
-									<a href="{{ current_customer.href }}" class="text-fade"> My account </a> | 
-									<a rel="nofollow" data-method="delete" href="{{ customer_destroy_session_href }}"> Logout </a>
-								</div>
-							{% else %}
-								<a href="{{ customer_new_session_href }}" class="text-fade pull-right">
-									<i class="glyphicon glyphicon-user icon text-fade"></i>&nbsp;Login
-								</a>
-							{% endif %}
-						</li>
-						<li class="col-xs-6 col-sm-4">
-							<div class="btn-group pull-right">
-								<button type="button" class="btn btn-default dropdown-toggle lang" data-toggle="dropdown">
-									LANG
-									<span class="caret"></span>
-								</button>
-								<ul class="dropdown-menu pull-left">
-									{% for language in languages %}
-										<li>
-											<a href="{{ language.href }}">
-												<img src="{{ language.image_src }}" alt="{{ language.locale }}" />
-												{{ language.name }}
-											</a>
-										</li>
-									{% endfor %}
-								</ul>
-							</div>
-						</li>
-					</ul>
+			<div class="col-xs-6 col-sm-3 col-md-3">
+				<div class="info top-text">
+					<tel class=""><div class="glyphicon glyphicon-earphone icon"></div> 900 000 000</tel>
 				</div>
+			</div>
+			<div class="col-xs-6 col-sm-5 pull-right">
+<!--cart-->
+				<div class="col-xs-6 col-sm-4 col-md-4 pull-right">
+					<div class="homecart">
+						<i class="fa fa-shopping-cart fa-3x font-color1">
+						<div class="homecart-quant">{{ shopping_cart.total_products }}</div>
+						</i>
+						<div class="homecart-text">My Cart</div>
+						<div class="homecart-pro">
+							{% for scp in shopping_cart.shopping_carts_products %}
+								<div class="homecart-item col-md-12">
+									<div class="xs-img">
+										<img  src="{{ scp.product.image_thumb_src }}" alt="">
+									</div>
+									<div class="homecart-atr"><a href="{{ scp.product.href }}">{{ scp.product.name }}</a><br>Quantity {{ scp.quantity }}</div>
+								</div>
+							{% endfor %}
+							<div class="col-md-12">
+								<a class="btn btn-default btn-block" href="{{ customer_carts_href }}">My cart ({{ shopping_cart.total_products }}))</a></div>
+						</div>
+					</div>
+				</div>
+<!--/cart-->
+				{% if current_customer != nil %}
+					<div class="mainmenu col-xs-6 col-sm-5 col-md-5 top-text pull-right">
+						<ul class="nav navbar-nav collapse navbar-collapse">
+							<li class="dropdown">
+                                <a href="{{ current_customer.href }}">
+                                    <i class="glyphicon glyphicon-user icon text-fade"></i>
+                                    <span class="link">&nbsp;My Data<i class="fa fa-angle-down"></i></span>
+                                </a>
+								<ul role="menu" class="sub-menu">
+									<li>Welcome {{ current_customer.name }}</li>
+									<li><a href="{{ current_customer.href }}" class="link"> My account </a></li>
+									<li><a rel="nofollow" data-method="delete"  class="link" href="{{ customer_destroy_session_href }}"> Logout </a></li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				{% else %}
+					<div class="col-xs-6 col-sm-5 col-md-4 top-text pull-right">
+						<a href="{{ customer_new_session_href }}" class="text-fade pull-right">
+							<i class="glyphicon glyphicon-user icon text-fade"></i>&nbsp;Login
+						</a>
+					</div>
+				{% endif %}
 			</div>
 		</div>
 	</div>
@@ -137,33 +161,4 @@
 			</ul>
 		</div>
 	{% endif %}
-</div>
-
-<div class="container">
-	<a class="text-fade" href="{{ customer_carts_href }}">
-		My cart ({{ shopping_cart.total_products }})
-	</a>
-	<ul>
-		{% for scp in shopping_cart.shopping_carts_products %}
-			<li>
-				<div>
-					<div class="row">
-						<div class="col-md-4">
-							<img class="img-responsive" src="{{ scp.product.image_thumb_src }}" alt="{{ scp.product.name }}">
-						</div>
-						<div class="col-md-8">
-							<a href="{{ scp.product.href }}">{{ scp.product.name }}</a>
-							<br>
-							Quantity: {{ scp.quantity }}
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<a class="btn btn-default btn-block" href="{{ customer_carts_href }}">My cart ({{ shopping_cart.total_products }})</a>
-						</div>
-					</div>
-				</div>
-			</li>
-		{% endfor %}
-	</ul>
 </div>

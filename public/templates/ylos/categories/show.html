@@ -6,7 +6,9 @@
 					{% for product in products %} 
 						<div class="col-sm-6 col-lg-3 col-md-3">
 							<div class="thumbnail item-home">
+								<div class="sm-img">
 								<img src="{{ product.image_medium_src }}" alt="">
+								</div>
 								<div class="caption">
 								  <h4 class="pull-right price">{{ product.retail_price }}€</h4>
 								  <h4><a href="{{ product.href }}">{{ product.name }}</a>
@@ -28,7 +30,7 @@
 												<div class="fa fa-shopping-cart icon-medium"></div>&nbsp;&nbsp;Buy
 											</div>
 										</a>
-										<a href="{{ product.add_cart_href }}">
+										<a href="{{ product.href }}">
 											<div class="item-home-view">
 												<div class="fa fa-eye icon-medium"></div>&nbsp;&nbsp;View
 											</div>

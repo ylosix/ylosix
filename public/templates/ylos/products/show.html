@@ -1,37 +1,45 @@
 {{ include snippet_header.html }}
 
 <div class="container">
-    <div class="thumbnail">
-        <img class="img-responsive" src="{{ product.image_medium_src }}" alt="Nikon d5500">
-        <div class="caption-full">
-            <h4 class="pull-right">
-                {{ product.retail_price }} €
-            </h4>
-            <h4>
-                <a>
-                    {{ product.name }}
-                </a>
-            </h4>
-
-            <p>
-                {{ product.description }}
-            </p>
-        </div>
-        <div class="ratings">
-            <p class="pull-right">3 reviews</p>
-            <p>
-                <span class="glyphicon glyphicon-star"></span>
-                <span class="glyphicon glyphicon-star"></span>
-                <span class="glyphicon glyphicon-star"></span>
-                <span class="glyphicon glyphicon-star-empty"></span>
-                4.0 stars
-            </p>
-        </div>
-    </div>
-</div>
-
-<div class="row">
-    <a class="btn btn-success btn-block" href="{{ product.add_cart_href }}">Add to cart</a>
+	<div class="row item-product">
+		<a href="#_" class="lightbox" id="img1">
+			<img src="{{ product.image_medium_src }}">
+		</a>
+		<div class="md-img">
+			<a href="#img1">
+				<img src="{{ product.image_medium_src }}" alt="">
+			</a>
+		</div>
+		<div class="item-details">
+			<h2 class="font-color1 margin-zero">
+				{{ product.name }}
+			</h2>
+			<h4>
+				{{ product.short_description }}
+			</h4>
+			<div class="ratings col-med-12">
+			<p>
+				 <span class="glyphicon glyphicon-star"></span>
+				 <span class="glyphicon glyphicon-star"></span>
+				 <span class="glyphicon glyphicon-star"></span>
+				 <span class="glyphicon glyphicon-star-empty"></span>
+				 4.0 stars
+			<br>
+			3 reviews</p>
+		</div>
+			<div class="col-md-12 padding-zero">
+				<h2 class="font-color1 padding-zero">{{ product.retail_price }} €</h2>
+			</div>
+			<div class="col-md-12 padding-zero">
+				<a class="btn btn-success btn-block" href="{{ product.add_cart_href }}">Add to cart</a>
+			</div>
+		</div>
+		<div class="col-md-12 text-justify padding-zero">
+			<p>
+				{{ product.description }}
+			</p>
+		</div>
+	</div>
 </div>
 
 {{ include snippet_footer.html }}
