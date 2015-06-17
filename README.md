@@ -11,7 +11,7 @@ Open source ecommerce.
 
   * Ruby version: 2.1.6
   
-  * Rails version: 4.2.1
+  * Rails version: 4.2.2
   
   * Puppet: 3.7.5
   
