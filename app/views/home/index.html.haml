@@ -1,5 +1,10 @@
+- image_src = ''
+- image_src = @variables['commerce'].logo.url(:original) if @variables['commerce'].logo?
+
 %div.col-md-3
-  %p.lead Shop Name
+  %a{href: @variables['commerce'].root_href}
+    = image_tag image_src, { alt: @variables['commerce'].name, title: @variables['commerce'].name}
+
   %div.list-group
     = render partial: 'layouts/components/side_bar_category', locals: { categories: @variables['categories']}
 

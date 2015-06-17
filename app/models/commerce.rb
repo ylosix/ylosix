@@ -23,8 +23,24 @@
 #
 
 class Commerce < ActiveRecord::Base
+  attr_accessor :root_href
+
   belongs_to :template
 
   has_attached_file :logo, styles: {original: '300x100'}
   validates_attachment_content_type :logo, content_type: %r{\Aimage/.*\Z}
+
+  def to_liquid
+    image_src = 'http://placehold.it/300x100'
+    image_src = logo.url(:original) if logo?
+
+    {
+        'http' => http,
+        'image_src' => image_src,
+        'meta_description' => meta_description,
+        'meta_keywords' => meta_keywords,
+        'name' => name,
+        'root_href' => root_href
+    }
+  end
 end

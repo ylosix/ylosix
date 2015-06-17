@@ -9,7 +9,7 @@
         %span.icon-bar
         %span.icon-bar
 
-      = link_to 'Ecommerce', @variables['root_href'], :class => 'navbar-brand'
+      = link_to @variables['commerce']['name'], @variables['commerce']['root_href'], :class => 'navbar-brand'
 
     -# Collect the nav links, forms, and other content for toggling
     %div{:class => 'collapse navbar-collapse', :id => 'bs-example-navbar-collapse-1'}

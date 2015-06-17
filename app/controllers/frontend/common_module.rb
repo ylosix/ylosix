@@ -65,7 +65,6 @@ module Frontend
       helper = Rails.application.routes.url_helpers
       append_link_variables(helper)
       append_customer_variables(helper)
-      @variables['root_href'] = helper.root_path
     end
 
     def render_template(template, file_html, args)
