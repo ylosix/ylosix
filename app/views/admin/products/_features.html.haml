@@ -10,7 +10,7 @@
           %label{for: "product_product_translations_attributes_#{i}_#{feature.id}"}
             - language = pt.language
             - if language.flag?
-              = image_tag(language.flag.url(:thumb))
+              = image_tag(language.flag.url(:original))
             - else
               = language.locale
             = text_field_tag "product[product_translations_attributes][#{i}][locale]", language.locale, {type: 'hidden'}

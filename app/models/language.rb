@@ -20,7 +20,7 @@
 #
 
 class Language < ActiveRecord::Base
-  has_attached_file :flag, styles: { medium: '300x300>', thumb: '100x100>' }
+  has_attached_file :flag, styles: { original: '25x25' }
 
   validates_attachment_content_type :flag, content_type: %r{\Aimage/.*\Z}
 
@@ -37,8 +37,8 @@ class Language < ActiveRecord::Base
   end
 
   def to_liquid
-    image_src = 'http://placehold.it/15x15'
-    image_src = flag.url(:medium) if flag.file?
+    image_src = 'http://placehold.it/25x25'
+    image_src = flag.url(:original) if flag?
 
     {
         'locale' => locale,

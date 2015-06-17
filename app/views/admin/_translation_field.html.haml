@@ -2,7 +2,7 @@
   %label{class: 'label', for: id_prefix}
     = input_name_sufix
     - if language.flag?
-      = image_tag(language.flag.url(:thumb))
+      = image_tag(language.flag.url(:original))
     - else
       = language.locale
   = text_field_tag "#{input_name_prefix}[locale]", language.locale, {type: 'hidden'}

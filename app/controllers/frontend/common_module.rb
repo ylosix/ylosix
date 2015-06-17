@@ -87,10 +87,6 @@ module Frontend
     end
 
     def render(*args)
-      unless current_admin_user.nil?
-        @render_template = Template.active_template(current_admin_user)
-      end
-
       contains_template_layout = args.include?(layout: 'template_layout')
 
       get_template_variables(@render_template)

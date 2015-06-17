@@ -25,6 +25,6 @@
 class Commerce < ActiveRecord::Base
   belongs_to :template
 
-  has_attached_file :logo, styles: {:original => '300x100'}
+  has_attached_file :logo, styles: {original: '300x100'}
   validates_attachment_content_type :logo, content_type: %r{\Aimage/.*\Z}
 end

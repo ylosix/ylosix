@@ -20,7 +20,11 @@ ActiveAdmin.register Commerce do
     f.inputs 'Commerce details' do
       f.input :default
       f.input :http
-      f.input :logo, hint: (f.template.image_tag(commerce.logo.url(:original)) if commerce.logo?)
+
+      f.inputs 'Dimensions 300x100' do
+        f.input :logo, hint: (f.template.image_tag(commerce.logo.url(:original)) if commerce.logo?)
+      end
+
       f.input :meta_keywords
       f.input :meta_description
       f.input :name

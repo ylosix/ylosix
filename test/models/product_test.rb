@@ -63,7 +63,7 @@ class ProductTest < ActiveSupport::TestCase
     assert hash.key? 'name'
     assert hash.key? 'href'
 
-    Product::IMAGE_SIZES.each do |size|
+    Product::IMAGE_SIZES.each do |size, _k|
       assert hash.key? "image_#{size}_src"
     end
   end

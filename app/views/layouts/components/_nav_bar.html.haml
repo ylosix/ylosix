@@ -20,7 +20,7 @@
         - unless @variables.nil?
           - @variables['languages'].each do |lang|
             - image_src = ''
-            - image_src = lang.flag.url(:medium) if lang.flag.file?
+            - image_src = lang.flag.url(:original) if lang.flag?
 
             %li
               %a{href: change_locale_path(lang.locale)}

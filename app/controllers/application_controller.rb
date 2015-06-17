@@ -83,6 +83,9 @@ class ApplicationController < ActionController::Base
     @variable_commerce ||= Commerce.new
 
     @render_template = @variable_commerce.template
+    unless current_admin_user.nil?
+      @render_template = Template.active_template(current_admin_user)
+    end
   end
 
   def permit_locale
