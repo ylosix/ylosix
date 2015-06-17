@@ -30,6 +30,15 @@ class Commerce < ActiveRecord::Base
   has_attached_file :logo, styles: {original: '300x100'}
   validates_attachment_content_type :logo, content_type: %r{\Aimage/.*\Z}
 
+  def self.retrieve(http)
+    commerce = Commerce.find_by(http: http)
+
+    commerce ||= Commerce.find_by(default: true)
+    commerce ||= Commerce.new
+
+    commerce
+  end
+
   def to_liquid
     image_src = 'http://placehold.it/300x100'
     image_src = logo.url(:original) if logo?

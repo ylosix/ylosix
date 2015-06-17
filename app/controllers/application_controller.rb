@@ -73,15 +73,13 @@ class ApplicationController < ActionController::Base
 
   def extract_commerce_from_url
     @variables ||= {}
+    http = nil
     if !request.nil? && !request.env['SERVER_NAME'].nil?
       http = request.env['SERVER_NAME']
       http = http[4..-1] if http.starts_with?('www.')
-      @variables['commerce'] ||= Commerce.find_by(http: http)
     end
 
-    @variables['commerce'] ||= Commerce.find_by(default: true)
-    @variables['commerce'] ||= Commerce.new
-
+    @variables['commerce'] = Commerce.retrieve(http)
     @render_template = @variables['commerce'].template
     unless current_admin_user.nil?
       @render_template = Template.active_template(current_admin_user)
