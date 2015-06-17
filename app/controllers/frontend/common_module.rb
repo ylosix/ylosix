@@ -34,6 +34,7 @@ module Frontend
       @variables['error_messages'] = []
       if defined? resource
         @variables['error_messages'] = resource.errors.full_messages unless resource.nil?
+        @variables['resource'] = resource
       end
 
       @variables['error_messages_title'] = Utils.get_error_title(@variables['error_messages'])
@@ -45,11 +46,6 @@ module Frontend
 
     def append_link_variables(helper)
       @variables['authenticity_token'] = form_authenticity_token
-
-      # Action form
-      @variables['action_search_url'] = helper.searches_path
-      # Links a
-
       @variables['action_search_url'] = helper.searches_path
     end
 
@@ -72,7 +68,7 @@ module Frontend
       @variables['root_href'] = helper.root_path
     end
 
-    def render_template(template, file_html)
+    def render_template(template, file_html, args)
       body_code = template.reads_file(file_html)
       body_code = Utils.replace_regex_include(@variables, template, body_code)
       body_code = Utils.append_debug_variables(current_admin_user, @variables, body_code)
@@ -84,21 +80,26 @@ module Frontend
       @head_css = template.reads_file('common_css.css')
       @body_content = template_liquid.render(@variables)
 
-      render layout: 'template_layout'
+      hash = {}
+      hash = args[0] if args.any?
+      hash[:layout] = 'template_layout'
+      render hash
     end
 
     def render(*args)
       template = Template.active_template(current_admin_user)
-      contains_template_layout = false
-      unless args.empty?
-        contains_template_layout = args.include?(layout: 'template_layout')
-      end
+      contains_template_layout = args.include?(layout: 'template_layout')
 
       get_template_variables(template)
       file_html = "#{controller_name}/#{action_name}.html"
 
+      # Fixed route devise when fails sign up.
+      if controller_name == 'registrations' && args.include?(action: :new)
+        file_html = "#{controller_name}/new.html"
+      end
+
       if !contains_template_layout && !template.nil? && template.ok?(file_html)
-        render_template(template, file_html)
+        render_template(template, file_html, args)
       else
         super
       end
