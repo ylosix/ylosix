@@ -40,7 +40,8 @@ class Commerce < ActiveRecord::Base
         'meta_description' => meta_description,
         'meta_keywords' => meta_keywords,
         'name' => name,
-        'root_href' => root_href
+        'root_href' => root_href,
+        'template' => template
     }
   end
 end

@@ -12,6 +12,7 @@
         = @head_css.html_safe
 
   %body
+    ="<!-- #{@variables['commerce'].to_liquid} -->".html_safe
     = @body_content.html_safe
 
     = console if Rails.env.development?
