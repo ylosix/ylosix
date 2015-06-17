@@ -35,11 +35,10 @@
 #
 
 class Product < ActiveRecord::Base
+  IMAGES_SIZES = {thumbnail: 'x100', small: 'x300', medium: 'x500', original: 'x720'}
+
   translates :name, :short_description, :description, :features
-  has_attached_file :image, styles: {thumbnail: 'x100', small: 'x300', medium: 'x500'}
-
-  IMAGE_SIZES = [:thumbnail, :small, :medium, :original]
-
+  has_attached_file :image, styles: IMAGES_SIZES
   validates_attachment_content_type :image, content_type: %r{\Aimage/.*\Z}
 
   belongs_to :tax
@@ -137,7 +136,7 @@ class Product < ActiveRecord::Base
   private
 
   def append_images(hash)
-    IMAGE_SIZES.each do |size|
+    IMAGES_SIZES.each do |size, _k|
       hash["image_#{size}_src"] = retrieve_main_image(size)
     end
 

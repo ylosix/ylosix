@@ -87,10 +87,13 @@ module Frontend
     end
 
     def render(*args)
-      template = Template.active_template(current_admin_user)
+      unless current_admin_user.nil?
+        @render_template = Template.active_template(current_admin_user)
+      end
+
       contains_template_layout = args.include?(layout: 'template_layout')
 
-      get_template_variables(template)
+      get_template_variables(@render_template)
       file_html = "#{controller_name}/#{action_name}.html"
 
       # Fixed route devise when fails sign up.
@@ -98,8 +101,8 @@ module Frontend
         file_html = "#{controller_name}/new.html"
       end
 
-      if !contains_template_layout && !template.nil? && template.ok?(file_html)
-        render_template(template, file_html, args)
+      if !contains_template_layout && !@render_template.nil? && @render_template.ok?(file_html)
+        render_template(@render_template, file_html, args)
       else
         super
       end

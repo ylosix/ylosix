@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150616083712) do
+ActiveRecord::Schema.define(version: 20150617103128) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -95,6 +95,24 @@ ActiveRecord::Schema.define(version: 20150616083712) do
 
   add_index "ckeditor_assets", ["assetable_type", "assetable_id"], name: "idx_ckeditor_assetable", using: :btree
   add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type", using: :btree
+
+  create_table "commerces", force: :cascade do |t|
+    t.string   "http"
+    t.string   "name"
+    t.string   "meta_keywords"
+    t.string   "meta_description"
+    t.integer  "template_id"
+    t.boolean  "default"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.hstore   "billing_address"
+    t.string   "logo_file_name"
+    t.string   "logo_content_type"
+    t.integer  "logo_file_size"
+    t.datetime "logo_updated_at"
+  end
+
+  add_index "commerces", ["template_id"], name: "index_commerces_on_template_id", using: :btree
 
   create_table "customer_addresses", force: :cascade do |t|
     t.string   "name"
@@ -333,6 +351,7 @@ ActiveRecord::Schema.define(version: 20150616083712) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "commerces", "templates", on_update: :cascade, on_delete: :cascade
   add_foreign_key "customer_addresses", "customers", on_update: :cascade, on_delete: :cascade
   add_foreign_key "products", "taxes", on_update: :cascade, on_delete: :cascade
   add_foreign_key "products_categories", "categories", on_update: :cascade, on_delete: :cascade

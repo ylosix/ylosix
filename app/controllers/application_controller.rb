@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  before_action :set_locale
+  before_action :set_locale, :extract_commerce_from_url
 
   def change_locale
     locale = I18n.default_locale.to_s
@@ -69,6 +69,20 @@ class ApplicationController < ActionController::Base
     end
 
     locale
+  end
+
+  def extract_commerce_from_url
+    @variable_commerce = nil
+    if !request.nil? && !request.env['SERVER_NAME'].nil?
+      http = request.env['SERVER_NAME']
+      http = http[4..-1] if http.starts_with?('www.')
+      @variable_commerce ||= Commerce.find_by(http: http)
+    end
+
+    @variable_commerce ||= Commerce.find_by(default: true)
+    @variable_commerce ||= Commerce.new
+
+    @render_template = @variable_commerce.template
   end
 
   def permit_locale

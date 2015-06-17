@@ -19,10 +19,7 @@
 
 class ProductsPicture < ActiveRecord::Base
   belongs_to :product
-  has_attached_file :image, styles: {thumbnail: 'x100', small: 'x300', medium: 'x500'}
-
-  IMAGE_SIZES = [:thumbnail, :small, :medium, :original]
-
+  has_attached_file :image, styles: Product::IMAGES_SIZES
   validates_attachment_content_type :image, content_type: %r{\Aimage/.*\Z}
 
   def retrieve_main_image(type = :original)
@@ -44,7 +41,7 @@ class ProductsPicture < ActiveRecord::Base
 
   def append_images
     hash = {}
-    IMAGE_SIZES.each do |size|
+    Product::IMAGES_SIZES.each do |size, _k|
       hash["image_#{size}_src"] = retrieve_main_image(size)
     end
 
