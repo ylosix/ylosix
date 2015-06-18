@@ -5,6 +5,7 @@
 #  billing_address   :hstore
 #  created_at        :datetime         not null
 #  default           :boolean
+#  ga_account_id     :string
 #  http              :string
 #  id                :integer          not null, primary key
 #  logo_content_type :string

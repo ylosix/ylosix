@@ -1,7 +1,8 @@
 ActiveAdmin.register Commerce do
   menu parent: 'Preferences'
-  permit_params :default, :http, :logo, :meta_keywords, :meta_description, :name, :template_id,
-                :name, :address_1, :address_2, :postal_code, :city, :country, :phone, :cif
+  permit_params :default, :http, :logo, :meta_keywords, :meta_description,
+                :ga_account_id, :name, :template_id, :name, :address_1,
+                :address_2, :postal_code, :city, :country, :phone, :cif
 
   index do
     selectable_column
@@ -12,6 +13,7 @@ ActiveAdmin.register Commerce do
     column (:logo) { |commerce| image_tag(commerce.logo.url(:original)) if commerce.logo? }
     column :meta_keywords
     column :meta_description
+    column :ga_account_id
     column :name
     column :template
     actions
@@ -22,9 +24,12 @@ ActiveAdmin.register Commerce do
       f.input :name
       f.input :default
       f.input :http
+    end
 
+    f.inputs 'Seo & Google analytics' do
       f.input :meta_keywords
       f.input :meta_description
+      f.input :ga_account_id
     end
 
     f.inputs 'Design' do
