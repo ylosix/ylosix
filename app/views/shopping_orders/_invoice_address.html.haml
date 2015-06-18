@@ -1,0 +1,20 @@
+%ul.list-unstyled
+  %li
+    = "#{address.customer_name} #{address.customer_last_name}"
+  %li
+    = address.dni
+  %li
+    = address.business
+  %li
+    = address.address_1
+    = "<br /> #{address.address_2}".html_safe unless address.address_2.blank?
+  %li
+    = "#{address.postal_code} #{address.city}"
+  %li
+    = address.country
+  %li
+    = address.phone
+  %li
+    = address.mobile_phone
+  %li
+    = address.other

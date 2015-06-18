@@ -30,6 +30,9 @@ class Commerce < ActiveRecord::Base
   has_attached_file :logo, styles: {original: '300x100'}
   validates_attachment_content_type :logo, content_type: %r{\Aimage/.*\Z}
 
+  store_accessor :billing_address, :name, :address_1, :address_2, :postal_code,
+                 :city, :country, :phone, :cif
+
   def self.retrieve(http)
     commerce = Commerce.find_by(http: http)
 

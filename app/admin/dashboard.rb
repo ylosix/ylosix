@@ -41,6 +41,16 @@ ActiveAdmin.register_page 'Dashboard' do
 
         columns do
           column do
+            span 'Billing address'
+          end
+
+          column do
+            span commerce.billing_address
+          end
+        end
+
+        columns do
+          column do
             span 'Logo'
           end
 

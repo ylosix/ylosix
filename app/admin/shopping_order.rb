@@ -17,6 +17,14 @@ ActiveAdmin.register ShoppingOrder do
   show title: proc { |so| "Shopping order ##{so.id}" } do
     attributes_table do
       row :id
+      row 'Invoice' do |so|
+        columns do
+          column do
+            link_to 'Generate', admin_invoice_shopping_order_path(so.id), target: '_blank'
+          end
+        end
+      end
+
       row :customer
 
       row 'Products' do |so|
@@ -78,6 +86,12 @@ ActiveAdmin.register ShoppingOrder do
 
       row :created_at
       row :updated_at
+    end
+  end
+
+  controller do
+    def invoice
+      render layout: 'invoice', partial: '/shopping_orders/invoice', locals: {shopping_order: resource}
     end
   end
 
