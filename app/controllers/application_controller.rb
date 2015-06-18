@@ -73,19 +73,32 @@ class ApplicationController < ActionController::Base
 
   def extract_commerce_from_url
     @variables ||= {}
+    @variables['commerce'] = Commerce.retrieve(retrieve_http_server_name)
+    @render_template = @variables['commerce'].template
+
+    unless current_admin_user.nil?
+      user_template = Template.active_template(current_admin_user)
+      unless user_template.nil?
+        @render_template = user_template
+        if current_admin_user.debug_template.nil?
+          @variables['commerce'].template_from = 'default_template'
+        else
+          @variables['commerce'].template_from = 'admin_user'
+        end
+      end
+    end
+
+    @variables['commerce'].root_href = root_path
+  end
+
+  def retrieve_http_server_name
     http = nil
     if !request.nil? && !request.env['SERVER_NAME'].nil?
       http = request.env['SERVER_NAME']
       http = http[4..-1] if http.starts_with?('www.')
     end
 
-    @variables['commerce'] = Commerce.retrieve(http)
-    @render_template = @variables['commerce'].template
-    unless current_admin_user.nil?
-      @render_template = Template.active_template(current_admin_user)
-    end
-
-    @variables['commerce'].root_href = root_path
+    http
   end
 
   def permit_locale

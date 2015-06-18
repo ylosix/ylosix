@@ -31,11 +31,3 @@ one:
   meta_description: MyString
   template_id: 
   default: false
-
-two:
-  http: MyString
-  name: MyString
-  meta_keywords: MyString
-  meta_description: MyString
-  template_id: 
-  default: false

@@ -23,7 +23,7 @@
 #
 
 class Commerce < ActiveRecord::Base
-  attr_accessor :root_href
+  attr_accessor :root_href, :template_from
 
   belongs_to :template
 
@@ -36,6 +36,7 @@ class Commerce < ActiveRecord::Base
     commerce ||= Commerce.find_by(default: true)
     commerce ||= Commerce.new
 
+    commerce.template_from = 'commerce'
     commerce
   end
 
@@ -50,7 +51,8 @@ class Commerce < ActiveRecord::Base
         'meta_keywords' => meta_keywords,
         'name' => name,
         'root_href' => root_href,
-        'template' => template
+        'template' => template,
+        'template_from' => template_from
     }
   end
 end

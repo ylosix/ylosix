@@ -12,7 +12,7 @@ ActiveAdmin.register Commerce do
     column :meta_keywords
     column :meta_description
     column :name
-    column :template_id
+    column :template
     actions
   end
 

@@ -11,6 +11,8 @@ ActiveAdmin.register AdminUser do
       end
 
       super
+
+      current_admin_user.reload
     end
   end
 

@@ -6,6 +6,61 @@ ActiveAdmin.register_page 'Dashboard' do
     config_db = current_config.database_configuration[Rails.env]
     updates = `cd #{Rails.root}; git fetch; git rev-list HEAD...origin/develop --count`
 
+    commerce = Commerce.find_by(default: true)
+    unless commerce.nil?
+      panel 'Default commerce' do
+        columns do
+          column do
+            span 'Commerce'
+          end
+
+          column do
+            span auto_link commerce
+          end
+        end
+
+        columns do
+          column do
+            span 'Http'
+          end
+
+          column do
+            span commerce.http
+          end
+        end
+
+        columns do
+          column do
+            span 'Name'
+          end
+
+          column do
+            span commerce.name
+          end
+        end
+
+        columns do
+          column do
+            span 'Logo'
+          end
+
+          column do
+            (img src: commerce.logo.url(:original)) if commerce.logo?
+          end
+        end
+
+        columns do
+          column do
+            span 'Template'
+          end
+
+          column do
+            span auto_link commerce.template
+          end
+        end
+      end
+    end
+
     panel 'Frontend variables' do
       columns do
         column do
