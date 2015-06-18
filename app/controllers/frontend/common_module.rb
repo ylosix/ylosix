@@ -86,7 +86,7 @@ module Frontend
     end
 
     def render(*args)
-      contains_template_layout = args.include?(layout: 'template_layout')
+      contains_template_layout = (args.any? && args[0][:layout] == 'template_layout')
 
       get_template_variables(@render_template)
       file_html = "#{controller_name}/#{action_name}.html"
