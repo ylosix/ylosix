@@ -20,7 +20,7 @@ class CustomersController < Frontend::CommonController
   def invoice
     order_id = params[:id].to_i
     unless current_customer.shopping_orders.pluck(:id).include? order_id
-      redirect_to :show_customers, :alert => "The order doesn't exist"
+      redirect_to :show_customers, alert: "The order doesn't exist"
     end
 
     shopping_order = current_customer.shopping_orders.find_by(id: order_id)
