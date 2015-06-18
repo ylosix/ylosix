@@ -7,7 +7,7 @@
       %div{:class => 'row order_highlight'}
         %div.col-md-9
           %div.col-md-3
-            DATE
+            ORDER DATE
             %br
             = l order.created_at, :format => :long
           %div.col-md-3
@@ -17,6 +17,10 @@
         %div.col-md-3
           %div.pull-right
             = "ORDER N.º #{order.id}"
+            %br
+            Details
+            |
+            = link_to 'Invoice', orders_invoice_customers_path(order.id), target: '_blank'
       %div{:class => 'order_container'}
         - order.shopping_orders_products.each do |sop|
           - product = sop.product

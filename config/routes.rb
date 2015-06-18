@@ -37,6 +37,7 @@ Rails.application.routes.draw do
   resource :customers, only: [] do
     get '/show' => 'customers#show'
     get '/orders' => 'customers#orders'
+    get '/orders/:id/invoice' => 'customers#invoice', as: :orders_invoice
 
     resources :addresses
     resource :shopping_carts, only: [] do

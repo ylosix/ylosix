@@ -91,7 +91,7 @@ ActiveAdmin.register ShoppingOrder do
 
   controller do
     def invoice
-      render layout: 'invoice', partial: '/shopping_orders/invoice', locals: {shopping_order: resource}
+      render layout: '/layouts/invoice', partial: '/shopping_orders/invoice', locals: {shopping_order: resource}
     end
   end
 
