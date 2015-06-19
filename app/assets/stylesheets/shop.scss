@@ -33,13 +33,21 @@ body.shop {
   white-space: nowrap;
 }
 
+.sm-img {
+  width: 100% !important;
+  height: 240px !important;
+  text-align: center;
+}
+
 .thumbnail img {
   width: 100%;
 }
 
 .ratings {
-  padding-right: 10px;
-  padding-left: 10px;
+  padding: 0 10px;
+  height: 40px;
+  position: relative;
+  overflow: hidden;
   color: #d17581;
 }
 
