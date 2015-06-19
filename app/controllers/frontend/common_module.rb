@@ -8,13 +8,13 @@ module Frontend
 
     def append_customer_variables(helper)
       @variables['current_customer'] = current_customer
+      @variables['customer_carts_href'] = customers_shopping_carts_path
 
       if customer_signed_in?
         # Action form
         @variables['customer_destroy_session_href'] = destroy_customer_session_path
         @variables['customer_edit_registration_href'] = edit_customer_registration_path
         @variables['customer_orders_href'] = orders_customers_path
-        @variables['customer_carts_href'] = customers_shopping_carts_path
       else
         # Action form
         @variables['action_customer_sign_in_url'] = customer_session_path
@@ -85,17 +85,22 @@ module Frontend
       render hash
     end
 
-    def render(*args)
-      contains_template_layout = (args.any? && args[0][:layout] == 'template_layout')
-
-      get_template_variables(@render_template)
-      file_html = "#{controller_name}/#{action_name}.html"
+    def retrieve_file_html(controller, action, args = [])
+      file_html = "#{controller}/#{action}.html"
 
       # Fixed route devise when fails sign up.
-      if controller_name == 'registrations' && args.include?(action: :new)
-        file_html = "#{controller_name}/new.html"
+      if controller == 'registrations' && args.include?(action: :new)
+        file_html = "#{controller}/new.html"
       end
 
+      file_html
+    end
+
+    def render(*args)
+      get_template_variables(@render_template)
+
+      file_html = retrieve_file_html(controller_name, action_name, args)
+      contains_template_layout = (args.any? && args[0][:layout] == 'template_layout')
       if !contains_template_layout && !@render_template.nil? && @render_template.ok?(file_html)
         render_template(@render_template, file_html, args)
       else

@@ -84,17 +84,18 @@
                 <div class="col-md-6"></div>
                 <div class="col-md-6 col-xs-12">
                     <div class="pull-right">
-                  <span>
-                    Subtotal ({{ scp.total_products }} products):
-                  </span>
-                  <span class="a-color-price">
-                    {{ scp.total_retail_price }} €
-                  </span>
+                        <span>
+                            Subtotal ({{ shopping_cart.total_products }} products):
+                        </span>
+                        <span class="a-color-price">
+                            {{ shopping_cart.total_retail_price }} €
+                        </span>
                     </div>
                 </div>
             </div>
         </li>
     </ul>
+    
     <a class="btn btn-default pull-left" href="{{ commerce.root_href }}">Continue shopping</a>
     <a class="btn btn-success btn-default pull-right" href="/customers/shopping_orders">Checkout</a>
 </div>

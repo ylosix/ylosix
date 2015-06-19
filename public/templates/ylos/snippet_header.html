@@ -28,10 +28,16 @@
 <!--cart-->
 				<div class="col-xs-6 col-sm-4 col-md-4 pull-right">
 					<div class="homecart">
-						<i class="fa fa-shopping-cart fa-3x font-color1">
-						<div class="homecart-quant">{{ shopping_cart.total_products }}</div>
-						</i>
-						<div class="homecart-text">My Cart</div>
+						<a href="{{ customer_carts_href }}">
+							<i class="fa fa-shopping-cart fa-3x font-color1">
+								<div class="homecart-quant">{{ shopping_cart.total_products }}</div>
+							</i>
+						</a>
+						<div class="homecart-text">
+							<a href="{{ customer_carts_href }}">
+								My Cart
+							</a>
+						</div>
 						<div class="homecart-pro">
 							{% for scp in shopping_cart.shopping_carts_products %}
 								<div class="homecart-item col-md-12">
@@ -42,7 +48,8 @@
 								</div>
 							{% endfor %}
 							<div class="col-md-12">
-								<a class="btn btn-default btn-block" href="{{ customer_carts_href }}">My cart ({{ shopping_cart.total_products }}))</a></div>
+								<a class="btn btn-default btn-block" href="{{ customer_carts_href }}">My cart ({{ shopping_cart.total_products }}))</a>
+							</div>
 						</div>
 					</div>
 				</div>
