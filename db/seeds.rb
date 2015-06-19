@@ -50,12 +50,12 @@ def create_default_admin_user
   customer = Customer.find_by(:email => 'customer@ylosix.com')
   if customer.nil?
     customer = Customer.create!(:email => 'customer@ylosix.com',
-                     :name => 'Ylos',
-                     :last_name => 'Hispania',
-                     :birth_date => DateTime.now,
-                     :password => 'password',
-                     :locale => 'en',
-                     :password_confirmation => 'password')
+                                :name => 'Ylos',
+                                :last_name => 'Hispania',
+                                :birth_date => DateTime.now,
+                                :password => 'password',
+                                :locale => 'en',
+                                :password_confirmation => 'password')
   end
 
   if customer.customer_addresses.empty?
@@ -354,6 +354,20 @@ def create_default_orders
 end
 
 
+def create_default_commerce
+  puts '####################'
+  puts '## Creating commerce'
+  puts '####################'
+
+  logo_image = File.new "#{Rails.root}/app/assets/images/ylos-logo.png"
+  commerce_attributes = {default: true,
+                         http: 'localhost',
+                         logo: logo_image,
+                         name: 'Demo ylosix'}
+  save_or_update_model(Commerce, {name: 'Demo ylosix'}, commerce_attributes)
+end
+
+
 def create_defaults
   create_default_languages
   create_default_admin_user
@@ -364,6 +378,7 @@ def create_defaults
   create_default_shopping_cart
   create_default_orders
   create_default_ylos_template
+  create_default_commerce
 end
 
 create_defaults
