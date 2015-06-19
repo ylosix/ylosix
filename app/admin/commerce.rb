@@ -41,7 +41,6 @@ ActiveAdmin.register Commerce do
     end
 
     f.inputs 'Billing address' do
-      f.input :name
       f.input :address_1
       f.input :address_2
       f.input :postal_code
