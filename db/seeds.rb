@@ -1,8 +1,13 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 
-REFLEX_SLUG = 'photography_reflex'
-LENSES_SLUG = 'photography_lenses'
+PHOTOGRAPHY_SLUG = 'photography'
+PHOTOGRAPHY_REFLEX_SLUG = 'photography-reflex'
+PHOTOGRAPHY_LENSES_SLUG = 'photography-lenses'
+
+PHONES_SLUG = 'phones'
+PHONES_SMART_PHONES_SLUG = 'phones-smart-phones'
+PHONES_ACCESSORIES_SLUG = 'phones-accessories'
 
 def save_or_update_model(model, search_options, attributes)
   object = model.find_or_create_by(search_options)
@@ -116,7 +121,7 @@ def create_default_products
   puts '## Creating products'
   puts '####################'
 
-  category = Category.find_by_slug(REFLEX_SLUG)
+  category = Category.find_by_slug(PHOTOGRAPHY_REFLEX_SLUG)
   categories = [category]
 
   tag_cameras = Tag.with_translations.find_by(:tag_translations => {:name => 'Cameras', :locale => :en})
@@ -199,8 +204,43 @@ def create_default_products
                         :control_stock => true,
                         :image => zoom_image}
 
-  category = Category.find_by_slug(LENSES_SLUG)
+  category = Category.find_by_slug(PHOTOGRAPHY_LENSES_SLUG)
   categories = [category]
+  create_product(product_attributes, categories, tags)
+
+  category = Category.find_by_slug(PHONES_SMART_PHONES_SLUG)
+  categories = [category]
+
+  tax_iva = Tax.find_by({:name => 'IVA ES 21%'})
+
+  camera_image = File.new "#{Rails.root}/app/assets/images/products/Huawei-Ascend-G630.png"
+  product_attributes = {:reference_code => 'ref4',
+                        :name => 'Huawei Ascend G630 white 5" HD & 8MP',
+                        :locale => :en,
+                        :barcode => '12321321312',
+                        :enabled => true,
+                        :appears_in_categories => true,
+                        :appears_in_tag => true,
+                        :appears_in_search => true,
+                        :short_description => 'Sé el más de la clase (aunque ya ni vayas) y hazte ya con el móvil Huawei Ascend G630, que te dará todo lo que buscas en un smartphone, pero con el precio que aún no encontrabas..',
+                        :description => '<p>Sé el más de la clase (aunque ya ni vayas) y hazte ya con el móvil Huawei Ascend G630, que te dará todo lo que buscas en un smartphone, pero con el precio que aún no encontrabas.</p>
+<p>Tu querías una pantalla grande y él te ofrece 5 pulgadas de resolución HD con tecnología IPS, para que disfrutes de todo tu mundo a lo grande y con gran calidad de detalle.</p>
+<p>Buscabas una cámara con buena resolución y Huawei pone a tu servicio 8 Megapíxeles con enfoque automático y otra cámara frontal de 1 Mpx. para que puedas hacer vídeollamadas y retratos con total cómodidad.</p>
+<p>Ansiabas velocidad y con el G630 la tendrás gracias a su potente procesador Quad Core, que sumado a la memoria RAM de 1GB da un resultado multi-tarea increíble.</p>
+<p>Además tendrás a tu disposición todo tipo de conexiones para compartir tu mundo, como el NFC, Bluetooth, WiFi y el mejor sonido DTS.</p>
+<p>Como te decía... Huawei Ascend G630 tiene todo lo que buscas, ¡incluido el precio!</p>',
+
+                        :retail_price_pre_tax => 100.0,
+                        :retail_price => 121.0,
+                        :tax => tax_iva,
+
+                        :meta_keywords => 'huawei',
+                        :meta_description => 'huawei smartphone',
+                        :slug => 'huawei-ascend-g630',
+                        :stock => 100,
+                        :control_stock => true,
+                        :image => camera_image}
+
   create_product(product_attributes, categories, tags)
 end
 
@@ -222,16 +262,16 @@ def create_default_categories
                       :locale => :en,
                       :enabled => true,
                       :appears_in_web => true,
-                      :slug => 'photography'}
-  photography = save_or_update_model(Category, {:slug => 'photography'}, photo_attributes)
+                      :slug => PHOTOGRAPHY_SLUG}
+  photography = save_or_update_model(Category, {:slug => PHOTOGRAPHY_SLUG}, photo_attributes)
 
-  smart_phones_attributes = {:parent_id => root.id,
-                             :name => 'Smart phones',
+  phones_attributes = {:parent_id => root.id,
+                             :name => 'Phones',
                              :locale => :en,
                              :enabled => true,
                              :appears_in_web => true,
-                             :slug => 'smart-phones'}
-  smart_phones = save_or_update_model(Category, {:slug => 'smart-phones'}, smart_phones_attributes)
+                             :slug => PHONES_SLUG}
+  phones = save_or_update_model(Category, {:slug => PHONES_SLUG}, phones_attributes)
 
 
   video_attributes = {:parent_id => root.id,
@@ -248,32 +288,32 @@ def create_default_categories
                        :locale => :en,
                        :enabled => true,
                        :appears_in_web => true,
-                       :slug => REFLEX_SLUG}
-  save_or_update_model(Category, {:slug => REFLEX_SLUG}, reflex_attributes)
+                       :slug => PHOTOGRAPHY_REFLEX_SLUG}
+  save_or_update_model(Category, {:slug => PHOTOGRAPHY_REFLEX_SLUG}, reflex_attributes)
 
   lenses_attributes = {:parent_id => photography.id,
                        :name => 'Lenses',
                        :locale => :en,
                        :enabled => true,
                        :appears_in_web => true,
-                       :slug => LENSES_SLUG}
-  save_or_update_model(Category, {:slug => LENSES_SLUG}, lenses_attributes)
+                       :slug => PHOTOGRAPHY_LENSES_SLUG}
+  save_or_update_model(Category, {:slug => PHOTOGRAPHY_LENSES_SLUG}, lenses_attributes)
 
-  accessories_attributes = {:parent_id => smart_phones.id,
+  accessories_attributes = {:parent_id => phones.id,
                             :name => 'Accessories',
                             :locale => :en,
                             :enabled => true,
                             :appears_in_web => true,
-                            :slug => 'smart_phones_accessories'}
-  save_or_update_model(Category, {:slug => 'smart_phones_accessories'}, accessories_attributes)
+                            :slug => PHONES_ACCESSORIES_SLUG}
+  save_or_update_model(Category, {:slug => PHONES_ACCESSORIES_SLUG}, accessories_attributes)
 
-  phones_attributes = {:parent_id => smart_phones.id,
-                       :name => 'Phones',
+  phones_attributes = {:parent_id => phones.id,
+                       :name => 'Smart phones',
                        :locale => :en,
                        :enabled => true,
                        :appears_in_web => true,
-                       :slug => 'smart_phones_phones'}
-  save_or_update_model(Category, {:slug => 'smart_phone_phones'}, phones_attributes)
+                       :slug => PHONES_SMART_PHONES_SLUG}
+  save_or_update_model(Category, {:slug => PHONES_SMART_PHONES_SLUG}, phones_attributes)
 end
 
 

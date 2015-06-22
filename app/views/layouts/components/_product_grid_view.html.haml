@@ -2,7 +2,7 @@
   %div{class: 'thumbnail item-home'}
     %a{:href => product.href}
       %div.sm-img
-        = image_tag(product.retrieve_main_image(:medium), :class => 'img-responsive')
+        = image_tag(product.retrieve_main_image(:medium))
 
     %div.caption
       %h4{class: 'pull-right price'}

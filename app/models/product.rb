@@ -155,12 +155,7 @@ class Product < ActiveRecord::Base
     self.publication_date = Time.now if publication_date.nil?
 
     if slug.blank?
-      self.slug = 'needs-to-be-changed'
-      if !name.blank?
-        self.slug = URI.encode(name)
-      elsif product_translations.any? && !product_translations.first.name.blank?
-        self.slug = URI.encode(product_translations.first.name)
-      end
+      self.slug = Utils.generate_slug(name, product_translations, :name)
     end
   end
 end
