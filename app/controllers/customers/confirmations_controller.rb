@@ -1,5 +1,7 @@
 module Customers
   class ConfirmationsController < Devise::ConfirmationsController
+    include Frontend::CommonModule
+
     # GET /resource/confirmation/new
     # def new
     #   super

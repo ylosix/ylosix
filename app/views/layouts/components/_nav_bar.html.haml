@@ -17,7 +17,7 @@
         %li
           %a About
 
-        - unless @variables.nil?
+        - if !@variables.nil? && !@variables['languages'].nil?
           - @variables['languages'].each do |lang|
             - image_src = ''
             - image_src = lang.flag.url(:original) if lang.flag?
@@ -51,17 +51,18 @@
           %ul{class: 'dropdown-menu'}
             %li.dropdown
               %div.shopping-cart-panel
-                - if @variables['shopping_cart'].shopping_carts_products.empty?
-                  Your cart is empty.
-                - else
-                  - @variables['shopping_cart'].shopping_carts_products.each do |scp|
-                    %div{class: 'row shopping-cart-row'}
-                      %div.col-md-4
-                        = image_tag(scp.product.image.url(:thumbnail), :class => 'img-responsive')
-                      %div.col-md-8
-                        = link_to scp.product.name, show_slug_products_path(scp.product.slug)
-                        %br
-                        = "Quantity: #{scp.quantity}"
+                - if !@variables.nil? && !@variables['shopping_cart'].nil?
+                  - if @variables['shopping_cart'].shopping_carts_products.empty?
+                    Your cart is empty.
+                  - else
+                    - @variables['shopping_cart'].shopping_carts_products.each do |scp|
+                      %div{class: 'row shopping-cart-row'}
+                        %div.col-md-4
+                          = image_tag(scp.product.image.url(:thumbnail), :class => 'img-responsive')
+                        %div.col-md-8
+                          = link_to scp.product.name, show_slug_products_path(scp.product.slug)
+                          %br
+                          = "Quantity: #{scp.quantity}"
 
                 %div.row
                   %div.col-md-12

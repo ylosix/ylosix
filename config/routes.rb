@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   devise_for :customers, controllers: {
                            sessions: 'customers/sessions',
-                           registrations: 'customers/registrations'
+                           registrations: 'customers/registrations',
+                           passwords: 'customers/passwords'
                        }
 
 

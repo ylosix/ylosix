@@ -1,5 +1,7 @@
 module Customers
   class PasswordsController < Devise::PasswordsController
+    include Frontend::CommonModule
+
     # GET /resource/password/new
     # def new
     #   super

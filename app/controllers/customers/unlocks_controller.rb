@@ -1,5 +1,7 @@
 module Customers
   class UnlocksController < Devise::UnlocksController
+    include Frontend::CommonModule
+
     # GET /resource/unlock/new
     # def new
     #   super

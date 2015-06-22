@@ -12,7 +12,7 @@
     %span{:class => 'fa fa-exclamation-circle', 'aria-hidden' => 'true'}
     = @variables['alert_message']
 
-- if !@variables.nil? && @variables['error_messages'].any?
+- if !@variables.nil? && !@variables['error_messages'].blank? && @variables['error_messages'].any?
   %div{:class => 'alert alert-danger', :role => 'alert'}
     %span{:class => 'fa fa-exclamation-circle', 'aria-hidden' => 'true'}
     - unless @variables['error_messages_title'].blank?
