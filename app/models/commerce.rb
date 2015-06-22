@@ -29,6 +29,8 @@ class Commerce < ActiveRecord::Base
   belongs_to :template
 
   has_attached_file :logo, styles: {original: '300x100'}
+
+  validates_attachment_size :logo, less_than: 2.megabytes
   validates_attachment_content_type :logo, content_type: %r{\Aimage/.*\Z}
 
   store_accessor :billing_address, :address_1, :address_2, :postal_code,

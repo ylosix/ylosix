@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  before_action :set_locale, :extract_commerce_from_url
+  before_action :set_locale, :extract_commerce_from_url, :initialize_breadcrumb
 
   def change_locale
     locale = I18n.default_locale.to_s
@@ -47,6 +47,14 @@ class ApplicationController < ActionController::Base
     resource.intern_path
   end
 
+  def add_breadcrumb(breadcrumb)
+    unless breadcrumb.nil?
+      @variables ||= {}
+      @variables['breadcrumbs'] ||= []
+      @variables['breadcrumbs'] << breadcrumb
+    end
+  end
+
   private
 
   def set_locale
@@ -69,6 +77,10 @@ class ApplicationController < ActionController::Base
     end
 
     locale
+  end
+
+  def initialize_breadcrumb
+    add_breadcrumb(Breadcrumb.new(url: root_path, name: 'Home'))
   end
 
   def extract_commerce_from_url

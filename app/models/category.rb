@@ -20,7 +20,8 @@
 #
 
 class Category < ActiveRecord::Base
-  include LiquidExtension
+  include ArrayableLiquid
+  include InitializableSlug
 
   translates :name
 
@@ -68,8 +69,6 @@ class Category < ActiveRecord::Base
   private
 
   def set_defaults
-    if slug.blank?
-      self.slug = Utils.generate_slug(name, category_translations, :name)
-    end
+    self.slug ||= generate_slug(name, category_translations, :name)
   end
 end

@@ -1,5 +1,6 @@
 class CustomersController < Frontend::CommonController
   before_action :authenticate_customer!
+  before_action :set_breadcrumbs
 
   def get_template_variables(template)
     super
@@ -25,5 +26,11 @@ class CustomersController < Frontend::CommonController
 
     shopping_order = current_customer.shopping_orders.find_by(id: order_id)
     render layout: '/layouts/invoice', partial: '/shopping_orders/invoice', locals: {shopping_order: shopping_order}
+  end
+
+  private
+
+  def set_breadcrumb
+    add_breadcrumb(Breadcrumb.new(url: show_customers_path, name: 'Customers'))
   end
 end

@@ -35,10 +35,13 @@
 #
 
 class Product < ActiveRecord::Base
+  include InitializableSlug
   IMAGE_SIZES = {thumbnail: 'x100', small: 'x300', medium: 'x500', original: 'x720'}
 
   translates :name, :short_description, :description, :features
   has_attached_file :image, styles: IMAGE_SIZES
+
+  validates_attachment_size :image, less_than: 2.megabytes
   validates_attachment_content_type :image, content_type: %r{\Aimage/.*\Z}
 
   belongs_to :tax
@@ -158,10 +161,7 @@ class Product < ActiveRecord::Base
   end
 
   def set_defaults
-    self.publication_date = Time.now if publication_date.nil?
-
-    if slug.blank?
-      self.slug = Utils.generate_slug(name, product_translations, :name)
-    end
+    self.publication_date ||= Time.now
+    self.slug ||= generate_slug(name, product_translations, :name)
   end
 end

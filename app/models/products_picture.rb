@@ -20,6 +20,8 @@
 class ProductsPicture < ActiveRecord::Base
   belongs_to :product
   has_attached_file :image, styles: Product::IMAGE_SIZES
+
+  validates_attachment_size :image, less_than: 2.megabytes
   validates_attachment_content_type :image, content_type: %r{\Aimage/.*\Z}
 
   def retrieve_main_image(type = :original)

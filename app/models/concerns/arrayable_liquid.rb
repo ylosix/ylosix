@@ -1,4 +1,4 @@
-module LiquidExtension
+module ArrayableLiquid
   extend ActiveSupport::Concern
 
   def array_to_liquid(array)
