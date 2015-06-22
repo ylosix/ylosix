@@ -11,6 +11,23 @@ body.shop {
   padding-top: 70px;
 }
 
+.breadcrumb {
+  display: inline-block;
+  padding: 0 11px;
+  border: 1px solid #d6d4d4;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 24px;
+  min-height: 6px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 1;
+}
+
 .slide-image {
   width: 100%;
 }

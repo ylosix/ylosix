@@ -1,8 +1,12 @@
 - if !@variables.nil? && !@variables['breadcrumbs'].blank? && @variables['breadcrumbs'].size > 1
   %div.row
     %div.col-xs-12
-      - @variables['breadcrumbs'].each do |bread|
-        - if bread == @variables['breadcrumbs'][-1]
-          = "> #{bread.name}"
-        - else
-          = link_to "> #{bread.name}", bread.url
+      %div.breadcrumb
+        - @variables['breadcrumbs'].each_with_index do |bread, i|
+          - if bread == @variables['breadcrumbs'][-1]
+            %span.navigation-pipe
+            = "> #{bread.name}"
+          - else
+            - if i > 0
+              %i{class: 'fa fa-home'}
+            = link_to "> #{bread.name}", bread.url
