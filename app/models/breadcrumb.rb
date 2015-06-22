@@ -1,5 +1,5 @@
 class Breadcrumb
   attr_accessor :url, :name
 
-  include Initializable
+  include InitializableAttr
 end

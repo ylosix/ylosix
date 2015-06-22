@@ -19,6 +19,7 @@
 #  index_categories_on_slug       (slug)
 #
 
+require 'concerns/initializable_slug'
 class Category < ActiveRecord::Base
   include ArrayableLiquid
   include InitializableSlug
