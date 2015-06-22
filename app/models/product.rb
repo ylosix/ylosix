@@ -34,7 +34,6 @@
 #  index_products_on_tax_id  (tax_id)
 #
 
-require 'concerns/initializable_slug'
 class Product < ActiveRecord::Base
   include InitializeSlug
   IMAGE_SIZES = {thumbnail: 'x100', small: 'x300', medium: 'x500', original: 'x720'}
