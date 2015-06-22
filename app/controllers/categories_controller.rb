@@ -13,6 +13,14 @@ class CategoriesController < Frontend::CommonController
 
     @variables['products'] = []
     @variables['products'] = Product.in_frontend(@category) unless @category.nil?
+
+    array_categories = Utils.get_parents_array(@category)
+    array_categories.delete_at(0) if array_categories.any?  # delete root.
+    array_categories << @category unless @category.nil?     # append current.
+
+    array_categories.each do |category|
+      add_breadcrumb(Breadcrumb.new(url: show_slug_categories_path(category.slug), name: category.name))
+    end
   end
 
   private

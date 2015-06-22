@@ -9,7 +9,22 @@
     -# Page Content
     %div.container
       = render 'layouts/components/notice_messages'
-      = yield
+
+      - image_src = ''
+      - image_src = @variables['commerce'].logo.url(:original) if @variables['commerce'].logo?
+
+      %div.col-md-3
+        %a{href: @variables['commerce'].root_href}
+          = image_tag image_src, { alt: @variables['commerce'].name, title: @variables['commerce'].name}
+
+        %div.list-group
+          = render partial: 'layouts/components/side_bar_category', locals: { categories: @variables['categories']}
+
+      %div.col-md-9
+        %div.row
+          = render 'layouts/components/breadcrumbs'
+          = render 'layouts/components/search_box'
+          = yield
 
     = render 'layouts/components/footer'
     = Utils.append_debug_variables(current_admin_user, @variables, '').html_safe

@@ -1,0 +1,8 @@
+- if !@variables.nil? && !@variables['breadcrumbs'].blank? && @variables['breadcrumbs'].size > 1
+  %div.row
+    %div.col-xs-12
+      - @variables['breadcrumbs'].each do |bread|
+        - if bread == @variables['breadcrumbs'][-1]
+          = "> #{bread.name}"
+        - else
+          = link_to "> #{bread.name}", bread.url

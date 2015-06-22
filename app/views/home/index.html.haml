@@ -1,21 +1,7 @@
-- image_src = ''
-- image_src = @variables['commerce'].logo.url(:original) if @variables['commerce'].logo?
+%div{:class => 'row carousel-holder'}
+  - pictures = %w(http://placehold.it/800x300 http://placehold.it/800x300 http://placehold.it/800x300)
+  %div.col-md-12
+    = render partial: 'layouts/components/carousel', locals: { pictures: pictures }
 
-%div.col-md-3
-  %a{href: @variables['commerce'].root_href}
-    = image_tag image_src, { alt: @variables['commerce'].name, title: @variables['commerce'].name}
-
-  %div.list-group
-    = render partial: 'layouts/components/side_bar_category', locals: { categories: @variables['categories']}
-
-%div.col-md-9
-  %div.row
-    = render 'layouts/components/search_box'
-
-  %div{:class => 'row carousel-holder'}
-    - pictures = %w(http://placehold.it/800x300 http://placehold.it/800x300 http://placehold.it/800x300)
-    %div.col-md-12
-      = render partial: 'layouts/components/carousel', locals: { pictures: pictures }
-
-  %div.row
-    = render 'layouts/components/products_list_grid'
+%div.row
+  = render 'layouts/components/products_list_grid'
