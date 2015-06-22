@@ -21,8 +21,8 @@
 
 require 'concerns/initializable_slug'
 class Category < ActiveRecord::Base
-  include ArrayableLiquid
-  include InitializableSlug
+  include ArrayLiquid
+  include InitializeSlug
 
   translates :name
 

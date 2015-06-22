@@ -36,7 +36,7 @@
 
 require 'concerns/initializable_slug'
 class Product < ActiveRecord::Base
-  include InitializableSlug
+  include InitializeSlug
   IMAGE_SIZES = {thumbnail: 'x100', small: 'x300', medium: 'x500', original: 'x720'}
 
   translates :name, :short_description, :description, :features

@@ -13,7 +13,7 @@
 #
 
 class ShoppingOrder < ActiveRecord::Base
-  include ArrayableLiquid
+  include ArrayLiquid
 
   belongs_to :customer
   has_many :shopping_orders_products

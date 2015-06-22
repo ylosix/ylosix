@@ -1,4 +1,4 @@
-module InitializableSlug
+module InitializeSlug
   def generate_slug(name, array_translations, field_translation = nil)
     slug = 'needs-to-be-changed'
     if !name.blank?

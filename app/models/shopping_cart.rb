@@ -15,7 +15,7 @@
 #
 
 class ShoppingCart < ActiveRecord::Base
-  include ArrayableLiquid
+  include ArrayLiquid
 
   belongs_to :customer
   has_many :shopping_carts_products, autosave: true
