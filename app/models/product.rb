@@ -68,13 +68,19 @@ class Product < ActiveRecord::Base
                                     "%#{text}%", "%#{text}%").group('products.id')
                        }
 
-  scope :in_frontend, lambda { |category|
-                      joins(:products_categories)
-                          .where('publication_date <= ?', DateTime.now)
-                          .where('unpublication_date is null or unpublication_date >= ?', DateTime.now)
-                          .where(products_categories: {category_id: category.id},
-                                 appears_in_categories: true)
-                    }
+  def self.in_frontend(category)
+    products = Product.joins(:products_categories)
+                   .where('publication_date <= ?', DateTime.now)
+                   .where('unpublication_date is null or unpublication_date >= ?', DateTime.now)
+                   .where(products_categories: {category_id: category.id},
+                          appears_in_categories: true)
+
+    category.children.each do |child|
+      products += Product.in_frontend(child)
+    end
+
+    products
+  end
 
   def clone
     product = dup
