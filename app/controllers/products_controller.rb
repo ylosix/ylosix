@@ -1,4 +1,5 @@
 class ProductsController < Frontend::CommonController
+  layout 'searcher_and_side_bar'
   before_action :set_product
 
   def show

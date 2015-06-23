@@ -1,4 +1,6 @@
 class SearchesController < Frontend::CommonController
+  layout 'searcher_and_side_bar'
+
   def index
     @variables ||= {}
     @variables['products'] = []
