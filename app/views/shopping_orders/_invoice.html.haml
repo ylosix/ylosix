@@ -3,7 +3,8 @@
     window.print();
   });
 
-- commerce = @variables['commerce']
+- commerce = shopping_order.commerce
+- commerce ||= @variables['commerce']
 %div.container
   %div.row
     %div.col-xs-12
@@ -17,10 +18,10 @@
           %ul.list-unstyled
             %li
               %h2
-                = "Order ##{shopping_order.id}"
+                = "Order ##{commerce.retrieve_order_num(shopping_order)}"
             - unless commerce.billing_address.nil?
               %li
-                = render partial: 'shopping_orders/invoice_commerce_address', locals: { address: commerce.billing_address }
+                = render partial: 'shopping_orders/invoice_address', locals: { address: commerce.billing_address }
 
       %hr
       %div.row

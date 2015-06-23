@@ -9,6 +9,7 @@
   %div.col-md-12
     - if @variables['customer_addresses'].empty?
       %div{:class => 'alert alert-warning'}
+        %span{:class => 'fa fa-exclamation-triangle', 'aria-hidden' => 'true'}
         No address available.
         = link_to 'Add address', @variables['customer_new_address_href']
     - else

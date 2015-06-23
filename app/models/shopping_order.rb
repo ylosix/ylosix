@@ -2,10 +2,15 @@
 #
 # Table name: shopping_orders
 #
-#  created_at  :datetime         not null
-#  customer_id :integer
-#  id          :integer          not null, primary key
-#  updated_at  :datetime         not null
+#  billing_address  :hstore           default({}), not null
+#  billing_commerce :hstore           default({}), not null
+#  commerce_id      :integer
+#  created_at       :datetime         not null
+#  customer_id      :integer
+#  id               :integer          not null, primary key
+#  order_num        :integer          not null
+#  shipping_address :hstore           default({}), not null
+#  updated_at       :datetime         not null
 #
 # Indexes
 #
@@ -16,16 +21,8 @@ class ShoppingOrder < ActiveRecord::Base
   include ArrayLiquid
 
   belongs_to :customer
+  belongs_to :commerce
   has_many :shopping_orders_products
-  has_many :shopping_orders_addresses
-
-  def shipping_address
-    retrieve_address(shipping: true)
-  end
-
-  def billing_address
-    retrieve_address(billing: true)
-  end
 
   def total_taxes
     shopping_orders_products.inject(0) do |a, e|
@@ -55,13 +52,5 @@ class ShoppingOrder < ActiveRecord::Base
         'total_retail_price_pre_tax' => total_retail_price_pre_tax,
         'total_retail_price' => total_retail_price
     }
-  end
-
-  private
-
-  def retrieve_address(options)
-    address = ShoppingOrdersAddress.find_by(options)
-    address ||= ShoppingOrdersAddress.first
-    address
   end
 end

@@ -2,10 +2,15 @@
 #
 # Table name: shopping_orders
 #
-#  created_at  :datetime         not null
-#  customer_id :integer
-#  id          :integer          not null, primary key
-#  updated_at  :datetime         not null
+#  billing_address  :hstore           default({}), not null
+#  billing_commerce :hstore           default({}), not null
+#  commerce_id      :integer
+#  created_at       :datetime         not null
+#  customer_id      :integer
+#  id               :integer          not null, primary key
+#  order_num        :integer          not null
+#  shipping_address :hstore           default({}), not null
+#  updated_at       :datetime         not null
 #
 # Indexes
 #

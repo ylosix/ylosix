@@ -14,6 +14,23 @@ ActiveAdmin.register ShoppingOrder do
     actions
   end
 
+  def retrieve_array_address(caddress)
+    address_array = []
+
+    address_array << "#{caddress[:customer_name]} #{caddress[:customer_last_name]}"
+    address_array << caddress[:dni]
+    address_array << caddress[:business]
+    address_array << caddress[:address_1]
+    address_array << caddress[:address_2] unless caddress[:address_2].blank?
+    address_array << "#{caddress[:postal_code]} #{caddress[:city]}"
+    address_array << caddress[:country]
+    address_array << caddress[:phone]
+    address_array << caddress[:mobile_phone]
+    address_array << caddress[:other]
+
+    address_array
+  end
+
   show title: proc { |so| "Shopping order ##{so.id}" } do
     attributes_table do
       row :id
@@ -26,7 +43,6 @@ ActiveAdmin.register ShoppingOrder do
       end
 
       row :customer
-
       row 'Products' do |so|
         table_for so.shopping_orders_products do
           column :product
@@ -46,38 +62,25 @@ ActiveAdmin.register ShoppingOrder do
         columns do
           column do
             span '<b>Shipping address</b>'.html_safe
-            address_array = []
-            caddress = so.shipping_address
 
-            address_array << "#{caddress.customer_name} #{caddress.customer_last_name}"
-            address_array << caddress.dni
-            address_array << caddress.business
-            address_array << caddress.address_1
-            address_array << caddress.address_2 unless caddress.address_2.blank?
-            address_array << "#{caddress.postal_code} #{caddress.city}"
-            address_array << caddress.country
-            address_array << caddress.phone
-            address_array << caddress.mobile_phone
-            address_array << caddress.other
+            saddress = so.shipping_address
+            address_array = retrieve_array_address(saddress)
 
             div [address_array].join(' <br/> ').html_safe
           end
 
           column do
             span '<b>Billing address</b>'.html_safe
-            address_array = []
-            caddress = so.billing_address
+            baddress = so.shipping_address
+            address_array = retrieve_array_address(baddress)
 
-            address_array << "#{caddress.customer_name} #{caddress.customer_last_name}"
-            address_array << caddress.dni
-            address_array << caddress.business
-            address_array << caddress.address_1
-            address_array << caddress.address_2 unless caddress.address_2.blank?
-            address_array << "#{caddress.postal_code} #{caddress.city}"
-            address_array << caddress.country
-            address_array << caddress.phone
-            address_array << caddress.mobile_phone
-            address_array << caddress.other
+            div [address_array].join(' <br/> ').html_safe
+          end
+
+          column do
+            span '<b>Billing commerce</b>'.html_safe
+            baddress = so.billing_commerce
+            address_array = retrieve_array_address(baddress)
 
             div [address_array].join(' <br/> ').html_safe
           end

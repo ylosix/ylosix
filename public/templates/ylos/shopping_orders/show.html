@@ -1,0 +1,146 @@
+{{ include snippet_header.html }}
+
+<div class="container">
+    <h1>Order</h1>
+    <ul class="list-unstyled">
+        <li>
+            <div class="row">
+                <div class="col-md-6 col-xs-6"></div>
+                <div class="col-md-3 col-xs-3">
+                    Price
+                </div>
+                <div class="col-md-3 col-xs-3">
+                    Quantity
+                </div>
+            </div>
+        </li>
+
+        {% for scp in shopping_cart.shopping_carts_products %}
+        <li class="sc-list-item-border">
+            <div class="row">
+                <div class="col-md-6 col-xs-6">
+                    <div class="col-md-3">
+                        <img class="img-thumbnail img-rounded" src="{{ scp.product.image_medium_src }}"
+                             alt="{{ scp.product.name }}">
+                    </div>
+                    <div class="col-md-9 col-xs-12">
+                        <a href="{{ scp.product.href }}">{{ scp.product.name }}</a>
+                        <br>
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-3">
+                    <div class="a-color-price">
+                        {{ scp.product.retail_price }} €
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-3">
+                    <div class="btn-group" role="group">
+                        {{ scp.quantity }}
+                    </div>
+                </div>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+    <div class="row voffset3">
+        <div class="col-md-6">
+            <h4>Shipping address</h4>
+            <hr>
+            <a href="/customers/shopping_orders/shipping_address_id/addresses">Select other shipping address</a>
+
+            <div class="well">
+                <h3>
+                    My shipping address
+                </h3>
+
+                <p>
+                    Default shipping address
+                    <br>
+                </p>
+                <hr>
+                <ul class="list-unstyled">
+                    <li>
+                        Ylos Hispania
+                    </li>
+                    <li>
+                        123456789T
+                    </li>
+                    <li>
+
+                    </li>
+                    <li>
+                        Rambla Nova, 72
+
+                    </li>
+                    <li>
+                        43002 Tarragona
+                    </li>
+                    <li>
+                        Spain
+                    </li>
+                    <li>
+                        977112233
+                    </li>
+                    <li>
+                        616112233
+                    </li>
+                    <li>
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h4>Billing address</h4>
+            <hr>
+            <a href="/customers/shopping_orders/billing_address_id/addresses">Select other billing address</a>
+
+            <div class="well">
+                <h3>
+                    My billing address
+                </h3>
+
+                <p>
+                    Default billing address
+                    <br>
+                </p>
+                <hr>
+                <ul class="list-unstyled">
+                    <li>
+                        Ylos Hispania
+                    </li>
+                    <li>
+                        123456789T
+                    </li>
+                    <li>
+
+                    </li>
+                    <li>
+                        Rambla Nova, 72
+
+                    </li>
+                    <li>
+                        43002 Tarragona
+                    </li>
+                    <li>
+                        Spain
+                    </li>
+                    <li>
+                        977112233
+                    </li>
+                    <li>
+                        616112233
+                    </li>
+                    <li>
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <a class="btn btn-default pull-left" href="{{ commerce.root_href }}">Continue shopping</a>
+    <a class="btn btn-success btn-default pull-right" href="{{ finalize_shopping_order_href }}">Finalize</a>
+</div>
+
+{{ include snippet_footer.html }}

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150618130117) do
+ActiveRecord::Schema.define(version: 20150623121914) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -103,14 +103,15 @@ ActiveRecord::Schema.define(version: 20150618130117) do
     t.string   "meta_description"
     t.integer  "template_id"
     t.boolean  "default"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
-    t.hstore   "billing_address"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.hstore   "billing_address",   default: {}, null: false
     t.string   "logo_file_name"
     t.string   "logo_content_type"
     t.integer  "logo_file_size"
     t.datetime "logo_updated_at"
     t.string   "ga_account_id"
+    t.string   "order_prefix",      default: "", null: false
   end
 
   add_index "commerces", ["template_id"], name: "index_commerces_on_template_id", using: :btree
@@ -284,22 +285,16 @@ ActiveRecord::Schema.define(version: 20150618130117) do
 
   create_table "shopping_orders", force: :cascade do |t|
     t.integer  "customer_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                                                      null: false
+    t.datetime "updated_at",                                                      null: false
+    t.integer  "commerce_id"
+    t.hstore   "shipping_address", default: {},                                   null: false
+    t.hstore   "billing_address",  default: {},                                   null: false
+    t.hstore   "billing_commerce", default: {},                                   null: false
+    t.integer  "order_num",        default: "nextval('order_num_seq'::regclass)", null: false
   end
 
   add_index "shopping_orders", ["customer_id"], name: "index_shopping_orders_on_customer_id", using: :btree
-
-  create_table "shopping_orders_addresses", force: :cascade do |t|
-    t.integer  "shopping_order_id"
-    t.boolean  "shipping",          default: false, null: false
-    t.boolean  "billing",           default: false, null: false
-    t.hstore   "fields",            default: {},    null: false
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
-  end
-
-  add_index "shopping_orders_addresses", ["shopping_order_id"], name: "index_shopping_orders_addresses_on_shopping_order_id", using: :btree
 
   create_table "shopping_orders_products", force: :cascade do |t|
     t.integer  "product_id"
@@ -365,8 +360,8 @@ ActiveRecord::Schema.define(version: 20150618130117) do
   add_foreign_key "shopping_carts", "customers", on_update: :cascade, on_delete: :cascade
   add_foreign_key "shopping_carts_products", "products", on_update: :cascade, on_delete: :cascade
   add_foreign_key "shopping_carts_products", "shopping_carts", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "shopping_orders", "commerces", on_update: :cascade, on_delete: :cascade
   add_foreign_key "shopping_orders", "customers", on_update: :cascade, on_delete: :cascade
-  add_foreign_key "shopping_orders_addresses", "shopping_orders", on_update: :cascade, on_delete: :cascade
   add_foreign_key "shopping_orders_products", "products", on_update: :cascade, on_delete: :cascade
   add_foreign_key "shopping_orders_products", "shopping_orders", on_update: :cascade, on_delete: :cascade
 end

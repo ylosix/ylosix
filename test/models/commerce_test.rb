@@ -2,7 +2,7 @@
 #
 # Table name: commerces
 #
-#  billing_address   :hstore
+#  billing_address   :hstore           default({}), not null
 #  created_at        :datetime         not null
 #  default           :boolean
 #  ga_account_id     :string
@@ -15,6 +15,7 @@
 #  meta_description  :string
 #  meta_keywords     :string
 #  name              :string
+#  order_prefix      :string           default(""), not null
 #  template_id       :integer
 #  updated_at        :datetime         not null
 #

@@ -1,20 +1,22 @@
 %ul.list-unstyled
   %li
-    = "#{address.customer_name} #{address.customer_last_name}"
+    = "#{address['customer_name']} #{address['customer_last_name']}"
   %li
-    = address.dni
+    = address['dni']
   %li
-    = address.business
+    = address['cif']
   %li
-    = address.address_1
-    = "<br /> #{address.address_2}".html_safe unless address.address_2.blank?
+    = address['business']
   %li
-    = "#{address.postal_code} #{address.city}"
+    = address['address_1']
+    = "<br /> #{address['address_2']}".html_safe unless address['address_2'].blank?
   %li
-    = address.country
+    = "#{address['postal_code']} #{address['city']}"
   %li
-    = address.phone
+    = address['country']
   %li
-    = address.mobile_phone
+    = address['phone']
   %li
-    = address.other
+    = address['mobile_phone']
+  %li
+    = address['other']

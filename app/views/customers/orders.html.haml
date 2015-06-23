@@ -16,7 +16,7 @@
             = "#{order.total_retail_price} €"
         %div.col-md-3
           %div.pull-right
-            = "ORDER N.º #{order.id}"
+            = "ORDER N.º #{@variables['commerce'].retrieve_order_num(order)}"
             %br
             Details
             |

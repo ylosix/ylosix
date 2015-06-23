@@ -2,7 +2,7 @@
 #
 # Table name: commerces
 #
-#  billing_address   :hstore
+#  billing_address   :hstore           default({}), not null
 #  created_at        :datetime         not null
 #  default           :boolean
 #  ga_account_id     :string
@@ -15,6 +15,7 @@
 #  meta_description  :string
 #  meta_keywords     :string
 #  name              :string
+#  order_prefix      :string           default(""), not null
 #  template_id       :integer
 #  updated_at        :datetime         not null
 #
@@ -27,6 +28,7 @@ class Commerce < ActiveRecord::Base
   attr_accessor :root_href, :template_from
 
   belongs_to :template
+  has_many :shopping_orders
 
   has_attached_file :logo, styles: {original: '300x100'}
 
@@ -44,6 +46,16 @@ class Commerce < ActiveRecord::Base
 
     commerce.template_from = 'commerce'
     commerce
+  end
+
+  def retrieve_order_num(sop)
+    if order_prefix.blank?
+      str = sop.order_num.to_s
+    else
+      str = created_at.strftime(order_prefix.gsub('%order_num', sop.order_num.to_s))
+    end
+
+    str
   end
 
   def to_liquid

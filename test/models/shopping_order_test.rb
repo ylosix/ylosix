@@ -2,10 +2,15 @@
 #
 # Table name: shopping_orders
 #
-#  created_at  :datetime         not null
-#  customer_id :integer
-#  id          :integer          not null, primary key
-#  updated_at  :datetime         not null
+#  billing_address  :hstore           default({}), not null
+#  billing_commerce :hstore           default({}), not null
+#  commerce_id      :integer
+#  created_at       :datetime         not null
+#  customer_id      :integer
+#  id               :integer          not null, primary key
+#  order_num        :integer          not null
+#  shipping_address :hstore           default({}), not null
+#  updated_at       :datetime         not null
 #
 # Indexes
 #
@@ -19,11 +24,5 @@ class ShoppingOrderTest < ActiveSupport::TestCase
     hash = shopping_orders(:customer_example_so).to_liquid
 
     assert hash.key? 'shopping_orders_products'
-  end
-
-  test 'retrieve shipping/billing address' do
-    so = shopping_orders(:customer_example_so)
-    assert !so.shipping_address.nil?
-    assert !so.billing_address.nil?
   end
 end

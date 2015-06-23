@@ -1,8 +1,9 @@
 ActiveAdmin.register Commerce do
   menu parent: 'Preferences'
-  permit_params :default, :http, :logo, :meta_keywords, :meta_description,
-                :ga_account_id, :name, :template_id, :name, :address_1,
-                :address_2, :postal_code, :city, :country, :phone, :cif
+  permit_params :default, :http, :logo, :order_prefix, :meta_keywords,
+                :meta_description, :ga_account_id, :name, :template_id,
+                :name, :address_1, :address_2, :postal_code, :city, :country,
+                :phone, :cif
 
   index do
     selectable_column
@@ -41,6 +42,7 @@ ActiveAdmin.register Commerce do
     end
 
     f.inputs 'Billing address' do
+      f.input :order_prefix, :hint => 'Variables => %Y: year, %order_num: #order'
       f.input :address_1
       f.input :address_2
       f.input :postal_code

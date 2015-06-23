@@ -378,19 +378,16 @@ def create_default_orders
 
   customer = Customer.find_by(email: 'customer@ylosix.com')
   sc = customer.shopping_cart
-  sop = ShoppingOrder.new(customer: customer)
+  so = ShoppingOrder.new(customer: customer)
 
   sc.shopping_carts_products.each do |scp|
-    sop.shopping_orders_products << scp.to_shopping_order
+    so.shopping_orders_products << scp.to_shopping_order
   end
 
-  soa = ShoppingOrdersAddress.new
-  soa.billing = true
-  soa.shipping = true
-  soa.fields = customer.customer_addresses.first.fields
-
-  sop.shopping_orders_addresses << soa
-  sop.save
+  so.shipping_address = customer.customer_addresses.first.fields
+  so.billing_address = customer.customer_addresses.first.fields
+  so.billing_commerce = customer.customer_addresses.first.fields # TODO change for commerce address
+  so.save
 end
 
 

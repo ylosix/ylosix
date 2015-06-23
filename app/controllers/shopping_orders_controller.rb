@@ -4,9 +4,12 @@ class ShoppingOrdersController < Frontend::CommonController
 
   def get_template_variables(template)
     super
+
+    @variables['finalize_shopping_order_href'] = finalize_customers_shopping_orders_path
   end
 
   def show
+    # TODO check for empty cart.
     add_breadcrumb(Breadcrumb.new(url: customers_shopping_orders_path, name: 'Checkout'))
   end
 
@@ -47,10 +50,13 @@ class ShoppingOrdersController < Frontend::CommonController
       so = ShoppingOrder.new
       so.customer = current_customer
 
-      soa = ShoppingOrdersAddress.new(fields: sc.shipping_address.fields, shipping: true)
-      so.shopping_orders_addresses << soa
-      soa = ShoppingOrdersAddress.new(fields: sc.shipping_address.fields, billing: true)
-      so.shopping_orders_addresses << soa
+      so.shipping_address = sc.shipping_address.fields
+      so.billing_address = sc.billing_address.fields
+
+      unless @variables['commerce'].nil?
+        so.commerce = @variables['commerce']
+        so.billing_commerce = @variables['commerce'].billing_address
+      end
 
       sc.shopping_carts_products.each do |scp|
         so.shopping_orders_products << scp.to_shopping_order
