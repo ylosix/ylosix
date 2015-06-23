@@ -1,4 +1,5 @@
 class CategoriesController < Frontend::CommonController
+  layout 'searcher_and_side_bar'
   before_action :set_category, except: [:index]
 
   def index
@@ -23,7 +24,10 @@ class CategoriesController < Frontend::CommonController
     end
   end
 
-  private
+  protected
+
+  def set_breadcrumbs
+  end
 
   def set_category
     @category = nil

@@ -17,6 +17,7 @@ class AddressesController < Frontend::CommonController
   end
 
   def edit
+    add_breadcrumb(Breadcrumb.new(url: edit_customers_address_path, name: 'Edit'))
   end
 
   def create
@@ -55,7 +56,12 @@ class AddressesController < Frontend::CommonController
     @address.customer_last_name = current_customer.last_name
   end
 
-  private
+  protected
+
+  def set_breadcrumbs
+    add_breadcrumb(Breadcrumb.new(url: show_customers_path, name: 'Customers'))
+    add_breadcrumb(Breadcrumb.new(url: customers_addresses_path, name: 'Addresses'))
+  end
 
   def set_customer_address
     @address = CustomerAddress.find(params[:id])

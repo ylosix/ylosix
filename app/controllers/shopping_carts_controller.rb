@@ -4,6 +4,7 @@ class ShoppingCartsController < Frontend::CommonController
   end
 
   def show
+    add_breadcrumb(Breadcrumb.new(url: customers_shopping_carts_path, name: 'Cart'))
   end
 
   def update
@@ -21,7 +22,11 @@ class ShoppingCartsController < Frontend::CommonController
     redirect_to :customers_shopping_carts
   end
 
-  private
+  protected
+
+  def set_breadcrumbs
+    add_breadcrumb(Breadcrumb.new(url: show_customers_path, name: 'Customers'))
+  end
 
   def params_shopping_cart
     params.permit(:product_id, :quantity)

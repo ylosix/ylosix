@@ -7,7 +7,7 @@ class ShoppingOrdersController < Frontend::CommonController
   end
 
   def show
-    # TODO add message cart empty.
+    add_breadcrumb(Breadcrumb.new(url: customers_shopping_orders_path, name: 'Checkout'))
   end
 
   def addresses
@@ -15,6 +15,9 @@ class ShoppingOrdersController < Frontend::CommonController
 
     @type = params[:type]
     @variables['customer_addresses'] = current_customer.customer_addresses
+
+    add_breadcrumb(Breadcrumb.new(url: customers_shopping_orders_path, name: 'Checkout'))
+    add_breadcrumb(Breadcrumb.new(url: addresses_customers_shopping_orders_path(@type), name: 'Select address'))
   end
 
   # TODO change this event for post.
@@ -60,7 +63,11 @@ class ShoppingOrdersController < Frontend::CommonController
     redirect_to :show_customers, notice: 'Thanks for your purchase.'
   end
 
-  private
+  protected
+
+  def set_breadcrumbs
+    add_breadcrumb(Breadcrumb.new(url: show_customers_path, name: 'Customers'))
+  end
 
   def check_addresses
     sc = current_customer.shopping_cart

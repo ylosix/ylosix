@@ -40,7 +40,10 @@ class ProductsController < Frontend::CommonController
     redirect_to :customers_shopping_carts
   end
 
-  private
+  protected
+
+  def set_breadcrumbs
+  end
 
   def set_product
     @product = nil

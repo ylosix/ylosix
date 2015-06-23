@@ -2,7 +2,7 @@ module Customers
   class SessionsController < Devise::SessionsController
     include Frontend::CommonModule
 
-    before_filter :set_breadcrumb
+    before_action :initialize_breadcrumb, :set_breadcrumbs
     # before_filter :configure_sign_in_params, only: [:create]
 
     # GET /resource/sign_in
@@ -27,7 +27,7 @@ module Customers
     #   devise_parameter_sanitizer.for(:sign_in) << :attribute
     # end
 
-    def set_breadcrumb
+    def set_breadcrumbs
       add_breadcrumb(Breadcrumb.new(url: show_customers_path, name: 'Customers'))
     end
   end

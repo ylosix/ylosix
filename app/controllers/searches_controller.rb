@@ -8,4 +8,9 @@ class SearchesController < Frontend::CommonController
   def get_template_variables(template)
     super
   end
+
+  protected
+
+  def set_breadcrumbs
+  end
 end

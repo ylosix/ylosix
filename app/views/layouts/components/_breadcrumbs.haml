@@ -7,6 +7,6 @@
             %span.navigation-pipe
             = "> #{bread.name}"
           - else
-            - if i > 0
+            - if i == 0
               %i{class: 'fa fa-home'}
             = link_to "> #{bread.name}", bread.url

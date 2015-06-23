@@ -5,6 +5,8 @@ module Customers
     before_filter :configure_sign_up_params, only: [:create]
     before_filter :configure_account_update_params, only: [:update]
 
+    before_action :initialize_breadcrumb, :set_breadcrumbs
+
     # GET /resource/sign_up
     # def new
     #   super
@@ -16,9 +18,10 @@ module Customers
     # end
 
     # GET /resource/edit
-    # def edit
-    #   super
-    # end
+    def edit
+      add_breadcrumb(Breadcrumb.new(url: edit_customer_registration_path, name: 'Edit'))
+      super
+    end
 
     # PUT /resource
     # def update
@@ -40,6 +43,10 @@ module Customers
     # end
 
     protected
+
+    def set_breadcrumbs
+      add_breadcrumb(Breadcrumb.new(url: show_customers_path, name: 'Customers'))
+    end
 
     def after_update_path_for(_resource)
       show_customers_path

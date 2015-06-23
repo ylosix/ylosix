@@ -1,5 +1,17 @@
 module Frontend
   module CommonModule
+    def initialize_breadcrumb
+      add_breadcrumb(Breadcrumb.new(url: root_path, name: 'Home'))
+    end
+
+    def add_breadcrumb(breadcrumb)
+      unless breadcrumb.nil?
+        @variables ||= {}
+        @variables['breadcrumbs'] ||= []
+        @variables['breadcrumbs'] << breadcrumb
+      end
+    end
+
     def append_language_variables
       @variables['languages'] = Language.in_frontend
       @variables['locale'] = I18n.default_locale.to_s
@@ -81,7 +93,7 @@ module Frontend
 
       hash = {}
       hash = args[0] if args.any?
-      hash[:layout] = 'template_layout'
+      hash[:layout] = 'custom_template'
       render hash
     end
 
@@ -100,7 +112,7 @@ module Frontend
       get_template_variables(@render_template)
 
       file_html = retrieve_file_html(controller_name, action_name, args)
-      contains_template_layout = (args.any? && args[0][:layout] == 'template_layout')
+      contains_template_layout = (args.any? && args[0].is_a?(Hash) && args[0][:layout] == 'custom_template')
       if !contains_template_layout && !@render_template.nil? && @render_template.ok?(file_html)
         render_template(@render_template, file_html, args)
       else

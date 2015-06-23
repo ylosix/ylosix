@@ -3,6 +3,7 @@ module Frontend
     include CommonModule
 
     before_action :set_query_text
+    before_action :initialize_breadcrumb, :set_breadcrumbs
 
     private
 

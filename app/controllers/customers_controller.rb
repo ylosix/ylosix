@@ -1,6 +1,5 @@
 class CustomersController < Frontend::CommonController
   before_action :authenticate_customer!
-  before_action :set_breadcrumbs
 
   def get_template_variables(template)
     super
@@ -16,6 +15,7 @@ class CustomersController < Frontend::CommonController
   end
 
   def orders
+    add_breadcrumb(Breadcrumb.new(url: orders_customers_path, name: 'Orders'))
   end
 
   def invoice
@@ -28,9 +28,9 @@ class CustomersController < Frontend::CommonController
     render layout: '/layouts/invoice', partial: '/shopping_orders/invoice', locals: {shopping_order: shopping_order}
   end
 
-  private
+  protected
 
-  def set_breadcrumb
+  def set_breadcrumbs
     add_breadcrumb(Breadcrumb.new(url: show_customers_path, name: 'Customers'))
   end
 end
