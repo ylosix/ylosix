@@ -1,6 +1,6 @@
 ActiveAdmin.register Category do
   menu parent: 'Catalog'
-  permit_params :parent_id, :name, :enabled, :appears_in_web, :meta_keywords,
+  permit_params :parent_id, :name, :enabled, :visible, :meta_keywords,
                 :meta_description, :slug,
                 category_translations_attributes: [:id, :locale, :name]
 
@@ -15,13 +15,13 @@ ActiveAdmin.register Category do
 
     column :name
     column :enabled
-    column :appears_in_web
+    column :visible
     column :slug
     actions
   end
 
   filter :translations_name, as: :string, label: 'Name'
-  filter :appears_in_web
+  filter :visible
 
   form do |f|
     f.inputs 'Category Details' do
@@ -31,7 +31,7 @@ ActiveAdmin.register Category do
       admin_translation_text_field(translations, 'category', 'name')
 
       f.input :enabled
-      f.input :appears_in_web
+      f.input :visible
       f.input :meta_keywords
       f.input :meta_description
       f.input :slug

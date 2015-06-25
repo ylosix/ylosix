@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150623121914) do
+ActiveRecord::Schema.define(version: 20150625101943) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 20150623121914) do
     t.integer  "parent_id"
     t.string   "name"
     t.boolean  "enabled",          default: false
-    t.boolean  "appears_in_web",   default: true
+    t.boolean  "visible",          default: true
     t.string   "meta_keywords"
     t.string   "meta_description"
     t.string   "slug"
@@ -200,22 +200,20 @@ ActiveRecord::Schema.define(version: 20150623121914) do
     t.string   "reference_code"
     t.string   "name"
     t.string   "barcode"
-    t.boolean  "enabled",                                        default: false
-    t.boolean  "appears_in_categories",                          default: true
-    t.boolean  "appears_in_tag",                                 default: true
-    t.boolean  "appears_in_search",                              default: true
+    t.boolean  "enabled",                                       default: false
+    t.boolean  "visible",                                       default: true
     t.string   "short_description"
     t.text     "description"
-    t.datetime "publication_date",                               default: '2015-01-01 00:00:00', null: false
+    t.datetime "publication_date",                              default: '2015-01-01 00:00:00', null: false
     t.datetime "unpublication_date"
-    t.decimal  "retail_price_pre_tax",  precision: 10, scale: 5, default: 0.0,                   null: false
-    t.decimal  "retail_price",          precision: 10, scale: 2, default: 0.0,                   null: false
+    t.decimal  "retail_price_pre_tax", precision: 10, scale: 5, default: 0.0,                   null: false
+    t.decimal  "retail_price",         precision: 10, scale: 2, default: 0.0,                   null: false
     t.integer  "tax_id"
     t.string   "meta_keywords"
     t.string   "meta_description"
-    t.string   "slug",                                                                           null: false
-    t.integer  "stock",                                          default: 0
-    t.boolean  "control_stock",                                  default: false
+    t.string   "slug",                                                                          null: false
+    t.integer  "stock",                                         default: 0
+    t.boolean  "control_stock",                                 default: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "image_file_name"
@@ -324,10 +322,9 @@ ActiveRecord::Schema.define(version: 20150623121914) do
   create_table "tags", force: :cascade do |t|
     t.string   "name"
     t.integer  "parent_id"
-    t.integer  "priority",       default: 1
-    t.boolean  "appears_in_web"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.integer  "priority",   default: 1
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   add_index "tags", ["parent_id"], name: "index_tags_on_parent_id", using: :btree

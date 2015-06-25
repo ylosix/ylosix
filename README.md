@@ -4,6 +4,7 @@
 [![Code Climate](https://codeclimate.com/github/ylosix/ylosix/badges/gpa.svg)](https://codeclimate.com/github/ylosix/ylosix)
 [![Inline docs](http://inch-ci.org/github/ylosix/ylosix.svg?branch=develop)](http://inch-ci.org/github/ylosix/ylosix)
 [![security](https://hakiri.io/github/ylosix/ylosix/develop.svg)](https://hakiri.io/github/ylosix/ylosix)
+[![License](http://img.shields.io/:license-Apache_v2-blue.svg)](https://raw.githubusercontent.com/ylosix/ylosix/develop/LICENSE)
 
 ## REAME
 
@@ -30,6 +31,8 @@ Open source ecommerce.
   * Services (job queues, cache servers, search engines, etc.)
   
   * [Deployment instructions](#deployment-instructions)
+
+  * [License](#license)
 
 
 Please feel free to use a different markup language if you do not plan to run
@@ -200,3 +203,7 @@ $ RAILS_ENV=production vagrant provision main_app
 
   - Troubleshooting Puppet old version:
     https://docs.puppetlabs.com/guides/install_puppet/install_debian_ubuntu.html
+
+## License
+
+Ylosix is released under the Apache v2 License.

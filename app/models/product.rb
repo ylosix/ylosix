@@ -2,32 +2,30 @@
 #
 # Table name: products
 #
-#  appears_in_categories :boolean          default(TRUE)
-#  appears_in_search     :boolean          default(TRUE)
-#  appears_in_tag        :boolean          default(TRUE)
-#  barcode               :string
-#  control_stock         :boolean          default(FALSE)
-#  created_at            :datetime
-#  description           :text
-#  enabled               :boolean          default(FALSE)
-#  id                    :integer          not null, primary key
-#  image_content_type    :string
-#  image_file_name       :string
-#  image_file_size       :integer
-#  image_updated_at      :datetime
-#  meta_description      :string
-#  meta_keywords         :string
-#  name                  :string
-#  publication_date      :datetime         default(Thu, 01 Jan 2015 00:00:00 UTC +00:00), not null
-#  reference_code        :string
-#  retail_price          :decimal(10, 2)   default(0.0), not null
-#  retail_price_pre_tax  :decimal(10, 5)   default(0.0), not null
-#  short_description     :string
-#  slug                  :string           not null
-#  stock                 :integer          default(0)
-#  tax_id                :integer
-#  unpublication_date    :datetime
-#  updated_at            :datetime
+#  barcode              :string
+#  control_stock        :boolean          default(FALSE)
+#  created_at           :datetime
+#  description          :text
+#  enabled              :boolean          default(FALSE)
+#  id                   :integer          not null, primary key
+#  image_content_type   :string
+#  image_file_name      :string
+#  image_file_size      :integer
+#  image_updated_at     :datetime
+#  meta_description     :string
+#  meta_keywords        :string
+#  name                 :string
+#  publication_date     :datetime         default(Thu, 01 Jan 2015 00:00:00 UTC +00:00), not null
+#  reference_code       :string
+#  retail_price         :decimal(10, 2)   default(0.0), not null
+#  retail_price_pre_tax :decimal(10, 5)   default(0.0), not null
+#  short_description    :string
+#  slug                 :string           not null
+#  stock                :integer          default(0)
+#  tax_id               :integer
+#  unpublication_date   :datetime
+#  updated_at           :datetime
+#  visible              :boolean          default(TRUE)
 #
 # Indexes
 #
@@ -64,6 +62,7 @@ class Product < ActiveRecord::Base
 
   scope :search_by_text, lambda { |text|
                          joins(:product_translations)
+                             .where(visible: true)
                              .where('publication_date <= ?', DateTime.now)
                              .where('unpublication_date is null or unpublication_date >= ?', DateTime.now)
                              .where('LOWER(product_translations.name) LIKE LOWER(?)
@@ -76,7 +75,7 @@ class Product < ActiveRecord::Base
                    .where('publication_date <= ?', DateTime.now)
                    .where('unpublication_date is null or unpublication_date >= ?', DateTime.now)
                    .where(products_categories: {category_id: category.id},
-                          appears_in_categories: true)
+                          visible: true)
 
     category.children.each do |child|
       products += Product.in_frontend(child)

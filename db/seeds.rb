@@ -136,9 +136,7 @@ def create_default_products
                         :locale => :en,
                         :barcode => '123456789',
                         :enabled => true,
-                        :appears_in_categories => true,
-                        :appears_in_tag => true,
-                        :appears_in_search => true,
+                        :visible => true,
                         :short_description => 'Camera reflex canon 12MP.',
                         :description => 'Camera reflex canon 12 MP (not includes SD).',
 
@@ -161,9 +159,7 @@ def create_default_products
                         :locale => :en,
                         :barcode => '1234567890',
                         :enabled => true,
-                        :appears_in_categories => true,
-                        :appears_in_tag => true,
-                        :appears_in_search => true,
+                        :visible => true,
                         :short_description => 'Camera reflex Nikon 24MP.',
                         :description => 'Camera reflex Nikon 24 MP (not includes SD).',
 
@@ -187,9 +183,7 @@ def create_default_products
                         :locale => :en,
                         :barcode => '1234567891',
                         :enabled => true,
-                        :appears_in_categories => true,
-                        :appears_in_tag => true,
-                        :appears_in_search => true,
+                        :visible => true,
                         :short_description => 'AF-S DX Zoom-NIKKOR 10-24mm f/3.5-4.5G ED.',
                         :description => 'AF-S DX Zoom-NIKKOR 10-24mm f/3.5-4.5G ED.',
 
@@ -219,9 +213,7 @@ def create_default_products
                         :locale => :en,
                         :barcode => '12321321312',
                         :enabled => true,
-                        :appears_in_categories => true,
-                        :appears_in_tag => true,
-                        :appears_in_search => true,
+                        :visible => true,
                         :short_description => 'Sé el más de la clase (aunque ya ni vayas) y hazte ya con el móvil Huawei Ascend G630, que te dará todo lo que buscas en un smartphone, pero con el precio que aún no encontrabas..',
                         :description => '<p>Sé el más de la clase (aunque ya ni vayas) y hazte ya con el móvil Huawei Ascend G630, que te dará todo lo que buscas en un smartphone, pero con el precio que aún no encontrabas.</p>
 <p>Tu querías una pantalla grande y él te ofrece 5 pulgadas de resolución HD con tecnología IPS, para que disfrutes de todo tu mundo a lo grande y con gran calidad de detalle.</p>
@@ -253,7 +245,7 @@ def create_default_categories
                      :name => 'root',
                      :locale => :en,
                      :enabled => true,
-                     :appears_in_web => true,
+                     :visible => true,
                      :slug => 'root'}
   root = save_or_update_model(Category, {:slug => 'root'}, root_attributes)
 
@@ -261,7 +253,7 @@ def create_default_categories
                       :name => 'Photography',
                       :locale => :en,
                       :enabled => true,
-                      :appears_in_web => true,
+                      :visible => true,
                       :slug => PHOTOGRAPHY_SLUG}
   photography = save_or_update_model(Category, {:slug => PHOTOGRAPHY_SLUG}, photo_attributes)
 
@@ -269,7 +261,7 @@ def create_default_categories
                              :name => 'Phones',
                              :locale => :en,
                              :enabled => true,
-                             :appears_in_web => true,
+                             :visible => true,
                              :slug => PHONES_SLUG}
   phones = save_or_update_model(Category, {:slug => PHONES_SLUG}, phones_attributes)
 
@@ -278,7 +270,7 @@ def create_default_categories
                       :name => 'Video',
                       :locale => :en,
                       :enabled => true,
-                      :appears_in_web => true,
+                      :visible => true,
                       :slug => 'video'}
   save_or_update_model(Category, {:slug => 'video'}, video_attributes)
 
@@ -287,7 +279,7 @@ def create_default_categories
                        :name => 'Reflex',
                        :locale => :en,
                        :enabled => true,
-                       :appears_in_web => true,
+                       :visible => true,
                        :slug => PHOTOGRAPHY_REFLEX_SLUG}
   save_or_update_model(Category, {:slug => PHOTOGRAPHY_REFLEX_SLUG}, reflex_attributes)
 
@@ -295,7 +287,7 @@ def create_default_categories
                        :name => 'Lenses',
                        :locale => :en,
                        :enabled => true,
-                       :appears_in_web => true,
+                       :visible => true,
                        :slug => PHOTOGRAPHY_LENSES_SLUG}
   save_or_update_model(Category, {:slug => PHOTOGRAPHY_LENSES_SLUG}, lenses_attributes)
 
@@ -303,7 +295,7 @@ def create_default_categories
                             :name => 'Accessories',
                             :locale => :en,
                             :enabled => true,
-                            :appears_in_web => true,
+                            :visible => true,
                             :slug => PHONES_ACCESSORIES_SLUG}
   save_or_update_model(Category, {:slug => PHONES_ACCESSORIES_SLUG}, accessories_attributes)
 
@@ -311,7 +303,7 @@ def create_default_categories
                        :name => 'Smart phones',
                        :locale => :en,
                        :enabled => true,
-                       :appears_in_web => true,
+                       :visible => true,
                        :slug => PHONES_SMART_PHONES_SLUG}
   save_or_update_model(Category, {:slug => PHONES_SMART_PHONES_SLUG}, phones_attributes)
 end
@@ -324,8 +316,7 @@ def create_default_tags
 
   tag_cameras_attributes = {:parent_id => nil,
                             :name => 'Cameras',
-                            :locale => :en,
-                            :appears_in_web => true}
+                            :locale => :en}
   tag_cameras = Tag.with_translations.find_by(:tag_translations => {:name => 'Cameras', :locale => :en})
   if tag_cameras.nil?
     tag_cameras = Tag.create!(tag_cameras_attributes)
@@ -333,8 +324,7 @@ def create_default_tags
 
   tag_reflex_attributes = {:parent_id => tag_cameras.id,
                            :name => 'Reflex',
-                           :locale => :en,
-                           :appears_in_web => true}
+                           :locale => :en}
   tag_reflex = Tag.with_translations.find_by(:tag_translations => {:name => 'Reflex', :locale => :en})
   if tag_reflex.nil?
     Tag.create!(tag_reflex_attributes)

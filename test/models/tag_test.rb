@@ -2,13 +2,12 @@
 #
 # Table name: tags
 #
-#  id             :integer          not null, primary key
-#  name           :string
-#  parent_id      :integer
-#  priority       :integer          default(1)
-#  appears_in_web :boolean
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
+#  created_at :datetime         not null
+#  id         :integer          not null, primary key
+#  name       :string
+#  parent_id  :integer
+#  priority   :integer          default(1)
+#  updated_at :datetime         not null
 #
 # Indexes
 #

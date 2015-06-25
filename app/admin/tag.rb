@@ -14,14 +14,12 @@ ActiveAdmin.register Tag do
     end
 
     column :name
-    column :appears_in_web
     column :priority
     actions
   end
 
   filter :translations_name, as: :string, label: 'Name'
   filter :parent
-  filter :appears_in_web
 
   form do |f|
     f.inputs 'Tag Details' do
@@ -30,7 +28,6 @@ ActiveAdmin.register Tag do
       translations = Utils.array_translations(TagTranslation, tag_id: tag.id)
       admin_translation_text_field(translations, 'tag', 'name')
 
-      f.input :appears_in_web
       f.input :priority
     end
     f.actions

@@ -20,7 +20,17 @@
 require 'test_helper'
 
 class ProductsPictureTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test 'retrieve pictures' do
+    pic = products_pictures(:one)
+    Product::IMAGE_SIZES.each do |k, _v|
+      assert !pic.retrieve_main_image(k.to_sym).blank?
+    end
+  end
+
+  test 'append images' do
+    pic = products_pictures(:one)
+    hash = pic.append_images
+
+    assert !hash.empty?
+  end
 end

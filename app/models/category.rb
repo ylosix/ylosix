@@ -2,16 +2,16 @@
 #
 # Table name: categories
 #
-#  id               :integer          not null, primary key
-#  parent_id        :integer
-#  name             :string
-#  enabled          :boolean          default(FALSE)
-#  appears_in_web   :boolean          default(TRUE)
-#  meta_keywords    :string
-#  meta_description :string
-#  slug             :string
 #  created_at       :datetime         not null
+#  enabled          :boolean          default(FALSE)
+#  id               :integer          not null, primary key
+#  meta_description :string
+#  meta_keywords    :string
+#  name             :string
+#  parent_id        :integer
+#  slug             :string
 #  updated_at       :datetime         not null
+#  visible          :boolean          default(TRUE)
 #
 # Indexes
 #
@@ -36,14 +36,14 @@ class Category < ActiveRecord::Base
 
   scope :are_enabled, -> { where(enabled: true) }
   scope :in_frontend, lambda {
-                      where(enabled: true, appears_in_web: true)
+                      where(enabled: true, visible: true)
                     }
 
   before_save :set_defaults
 
   def self.root_category
     Category.find_by(parent_id: [nil, 0],
-                     appears_in_web: true,
+                     visible: true,
                      enabled: true)
   end
 

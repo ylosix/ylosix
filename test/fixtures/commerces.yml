@@ -32,4 +32,4 @@ one:
   meta_keywords: MyString
   meta_description: MyString
   template_id: 
-  default: false
+  default: true

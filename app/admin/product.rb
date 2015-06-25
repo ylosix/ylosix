@@ -2,8 +2,7 @@ ActiveAdmin.register Product do
   menu parent: 'Catalog'
 
   permit_params do
-    permitted = [:reference_code, :name, :enabled, :appears_in_categories,
-                 :appears_in_tag, :appears_in_search, :short_description,
+    permitted = [:reference_code, :name, :enabled, :visible, :short_description,
                  :description, :publication_date, :unpublication_date,
                  :retail_price_pre_tax, :retail_price, :tax_id, :image,
                  :meta_keywords, :meta_description, :slug, :stock, :control_stock,
@@ -37,9 +36,7 @@ ActiveAdmin.register Product do
       row :name
       row :barcode
       row :enabled
-      row :appears_in_categories
-      row :appears_in_tag
-      row :appears_in_search
+      row :visible
       row :short_description
       row :publication_date
       row :unpublication_date
@@ -78,9 +75,7 @@ ActiveAdmin.register Product do
       f.input :reference_code
 
       f.input :enabled
-      f.input :appears_in_categories
-      f.input :appears_in_tag
-      f.input :appears_in_search
+      f.input :visible
 
       admin_translation_text_field(translations, 'product', 'short_description', ActiveAdminHelpers::TEXT_AREA)
       admin_translation_text_field(translations, 'product', 'description', ActiveAdminHelpers::CKEDITOR)
