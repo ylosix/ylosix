@@ -1,0 +1,19 @@
+# == Schema Information
+#
+# Table name: tags_groups
+#
+#  created_at :datetime         not null
+#  id         :integer          not null, primary key
+#  name       :string
+#  updated_at :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  category_id: 
+
+two:
+  name: MyString
+  category_id: 

@@ -258,11 +258,11 @@ def create_default_categories
   photography = save_or_update_model(Category, {:slug => PHOTOGRAPHY_SLUG}, photo_attributes)
 
   phones_attributes = {:parent_id => root.id,
-                             :name => 'Phones',
-                             :locale => :en,
-                             :enabled => true,
-                             :visible => true,
-                             :slug => PHONES_SLUG}
+                       :name => 'Phones',
+                       :locale => :en,
+                       :enabled => true,
+                       :visible => true,
+                       :slug => PHONES_SLUG}
   phones = save_or_update_model(Category, {:slug => PHONES_SLUG}, phones_attributes)
 
 
@@ -309,26 +309,40 @@ def create_default_categories
 end
 
 
+def create_model_translations(model, key, value)
+  object = model.with_translations.find_by(key => value)
+  if object.nil?
+    object = model.create!(value)
+  end
+
+  object
+end
+
+
 def create_default_tags
   puts '####################'
   puts '## Creating tags'
   puts '####################'
 
-  tag_cameras_attributes = {:parent_id => nil,
-                            :name => 'Cameras',
-                            :locale => :en}
-  tag_cameras = Tag.with_translations.find_by(:tag_translations => {:name => 'Cameras', :locale => :en})
-  if tag_cameras.nil?
-    tag_cameras = Tag.create!(tag_cameras_attributes)
-  end
+  general_tags_group_attributes = {:name => 'General',
+                                   :locale => :en}
+  general_tags_group = create_model_translations(TagsGroup,
+                                                 :tags_group_translations,
+                                                 general_tags_group_attributes)
 
-  tag_reflex_attributes = {:parent_id => tag_cameras.id,
-                           :name => 'Reflex',
+  tag_cameras_attributes = {:name => 'Cameras',
+                            :locale => :en}
+  tag_cameras = create_model_translations(Tag,
+                                          :tag_translations,
+                                          tag_cameras_attributes)
+  tag_cameras.update_attributes(tags_group_id: general_tags_group.id)
+
+  tag_reflex_attributes = {:name => 'Reflex',
                            :locale => :en}
-  tag_reflex = Tag.with_translations.find_by(:tag_translations => {:name => 'Reflex', :locale => :en})
-  if tag_reflex.nil?
-    Tag.create!(tag_reflex_attributes)
-  end
+  tag_reflex = create_model_translations(Tag,
+                                          :tag_translations,
+                                          tag_reflex_attributes)
+  tag_reflex.update_attributes(tags_group_id: general_tags_group.id)
 end
 
 
@@ -376,7 +390,9 @@ def create_default_orders
 
   so.shipping_address = customer.customer_addresses.first.fields
   so.billing_address = customer.customer_addresses.first.fields
-  so.billing_commerce = customer.customer_addresses.first.fields # TODO change for commerce address
+
+  commerce = Commerce.first
+  so.billing_commerce = commerce.billing_address
   so.save
 end
 
@@ -390,13 +406,26 @@ def create_default_commerce
   commerce_attributes = {default: true,
                          http: 'localhost',
                          logo: logo_image,
-                         name: 'Demo ylosix'}
+                         name: 'Demo ylosix',
+                         order_prefix: 'DEMO-%Y-%order_num',
+                         billing_address: {
+                             cif: 'B12345678',
+                             city: 'Tarragona',
+                             phone: '977112233',
+                             country: 'Spain',
+                             address_1: 'Rambla Nova, 72',
+                             postal_code: '43002'
+                         }
+
+  }
   save_or_update_model(Commerce, {name: 'Demo ylosix'}, commerce_attributes)
 end
 
 
 def create_defaults
   create_default_languages
+  create_default_ylos_template
+  create_default_commerce
   create_default_admin_user
   create_default_categories
   create_default_tags
@@ -404,8 +433,6 @@ def create_defaults
   create_default_products
   create_default_shopping_cart
   create_default_orders
-  create_default_ylos_template
-  create_default_commerce
 end
 
 create_defaults

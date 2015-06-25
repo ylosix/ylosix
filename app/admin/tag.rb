@@ -1,18 +1,14 @@
 ActiveAdmin.register Tag do
   menu parent: 'Catalog'
 
-  permit_params :parent_id, :name, :priority,
+  permit_params :tags_group_id, :name, :priority,
                 tag_translations_attributes: [:id, :locale, :name]
 
   index do
     selectable_column
     id_column
 
-    column 'Parent' do |tag|
-      array = Utils.get_parents_array(tag)
-      (array.map { |item| auto_link(item, item.name) }).join(' || ').html_safe
-    end
-
+    column :tags_group
     column :name
     column :priority
     actions
@@ -20,15 +16,15 @@ ActiveAdmin.register Tag do
 
   filter :translations_name, as: :string, label: 'Name'
   filter :parent
+  filter :tags_group
 
   form do |f|
     f.inputs 'Tag Details' do
-      f.input :parent
+      f.input :priority
+      f.input :tags_group
 
       translations = Utils.array_translations(TagTranslation, tag_id: tag.id)
       admin_translation_text_field(translations, 'tag', 'name')
-
-      f.input :priority
     end
     f.actions
   end

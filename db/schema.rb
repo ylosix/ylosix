@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150625101943) do
+ActiveRecord::Schema.define(version: 20150625125119) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -321,13 +321,40 @@ ActiveRecord::Schema.define(version: 20150625101943) do
 
   create_table "tags", force: :cascade do |t|
     t.string   "name"
-    t.integer  "parent_id"
-    t.integer  "priority",   default: 1
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.integer  "tags_group_id"
+    t.integer  "priority",      default: 1
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
-  add_index "tags", ["parent_id"], name: "index_tags_on_parent_id", using: :btree
+  add_index "tags", ["tags_group_id"], name: "index_tags_on_tags_group_id", using: :btree
+
+  create_table "tags_group_translations", force: :cascade do |t|
+    t.integer  "tags_group_id", null: false
+    t.string   "locale",        null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.string   "name"
+  end
+
+  add_index "tags_group_translations", ["locale"], name: "index_tags_group_translations_on_locale", using: :btree
+  add_index "tags_group_translations", ["tags_group_id"], name: "index_tags_group_translations_on_tags_group_id", using: :btree
+
+  create_table "tags_groups", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tags_groups_categories", force: :cascade do |t|
+    t.integer  "category_id"
+    t.integer  "tags_group_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "tags_groups_categories", ["category_id"], name: "index_tags_groups_categories_on_category_id", using: :btree
+  add_index "tags_groups_categories", ["tags_group_id"], name: "index_tags_groups_categories_on_tags_group_id", using: :btree
 
   create_table "taxes", force: :cascade do |t|
     t.string   "name"
@@ -361,4 +388,6 @@ ActiveRecord::Schema.define(version: 20150625101943) do
   add_foreign_key "shopping_orders", "customers", on_update: :cascade, on_delete: :cascade
   add_foreign_key "shopping_orders_products", "products", on_update: :cascade, on_delete: :cascade
   add_foreign_key "shopping_orders_products", "shopping_orders", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "tags_groups_categories", "categories"
+  add_foreign_key "tags_groups_categories", "tags_groups"
 end

@@ -30,9 +30,12 @@ class Category < ActiveRecord::Base
 
   has_many :products_categories
   has_many :products, through: :products_categories
-  has_many :category_translations
 
+  has_many :category_translations
   accepts_nested_attributes_for :category_translations
+
+  has_many :tags_groups_categories
+  has_many :tags_groups, through: :tags_groups_categories
 
   scope :are_enabled, -> { where(enabled: true) }
   scope :in_frontend, lambda {

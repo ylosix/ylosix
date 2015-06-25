@@ -2,16 +2,16 @@
 #
 # Table name: tags
 #
-#  created_at :datetime         not null
-#  id         :integer          not null, primary key
-#  name       :string
-#  parent_id  :integer
-#  priority   :integer          default(1)
-#  updated_at :datetime         not null
+#  created_at    :datetime         not null
+#  id            :integer          not null, primary key
+#  name          :string
+#  priority      :integer          default(1)
+#  tags_group_id :integer
+#  updated_at    :datetime         not null
 #
 # Indexes
 #
-#  index_tags_on_parent_id  (parent_id)
+#  index_tags_on_tags_group_id  (tags_group_id)
 #
 
 require 'test_helper'

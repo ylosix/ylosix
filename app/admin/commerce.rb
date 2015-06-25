@@ -2,7 +2,7 @@ ActiveAdmin.register Commerce do
   menu parent: 'Preferences'
   permit_params :default, :http, :logo, :order_prefix, :meta_keywords,
                 :meta_description, :ga_account_id, :name, :template_id,
-                :name, :address_1, :address_2, :postal_code, :city, :country,
+                :address_1, :address_2, :postal_code, :city, :country,
                 :phone, :cif
 
   index do
