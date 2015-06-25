@@ -14,23 +14,6 @@ ActiveAdmin.register ShoppingOrder do
     actions
   end
 
-  def retrieve_array_address(caddress)
-    address_array = []
-
-    address_array << "#{caddress[:customer_name]} #{caddress[:customer_last_name]}"
-    address_array << caddress[:dni]
-    address_array << caddress[:business]
-    address_array << caddress[:address_1]
-    address_array << caddress[:address_2] unless caddress[:address_2].blank?
-    address_array << "#{caddress[:postal_code]} #{caddress[:city]}"
-    address_array << caddress[:country]
-    address_array << caddress[:phone]
-    address_array << caddress[:mobile_phone]
-    address_array << caddress[:other]
-
-    address_array
-  end
-
   show title: proc { |so| "Shopping order ##{so.id}" } do
     attributes_table do
       row :id
@@ -57,6 +40,23 @@ ActiveAdmin.register ShoppingOrder do
       row :total_retail_price_pre_tax
       row :total_taxes
       row :total_retail_price
+
+      def retrieve_array_address(caddress)
+        address_array = []
+
+        address_array << "#{caddress[:customer_name]} #{caddress[:customer_last_name]}"
+        address_array << caddress[:dni]
+        address_array << caddress[:business]
+        address_array << caddress[:address_1]
+        address_array << caddress[:address_2] unless caddress[:address_2].blank?
+        address_array << "#{caddress[:postal_code]} #{caddress[:city]}"
+        address_array << caddress[:country]
+        address_array << caddress[:phone]
+        address_array << caddress[:mobile_phone]
+        address_array << caddress[:other]
+
+        address_array
+      end
 
       row 'Addresses' do |so|
         columns do

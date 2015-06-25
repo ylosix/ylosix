@@ -47,22 +47,9 @@ class ShoppingOrdersController < Frontend::CommonController
     sc = current_customer.shopping_cart
 
     unless sc.nil?
-      so = ShoppingOrder.new
-      so.customer = current_customer
-
-      so.shipping_address = sc.shipping_address.fields
-      so.billing_address = sc.billing_address.fields
-
-      unless @variables['commerce'].nil?
-        so.commerce = @variables['commerce']
-        so.billing_commerce = @variables['commerce'].billing_address
-      end
-
-      sc.shopping_carts_products.each do |scp|
-        so.shopping_orders_products << scp.to_shopping_order
-      end
-
+      so = ShoppingOrder.from_shopping_cart(sc, @variables['commerce'])
       so.save
+
       sc.destroy
     end
 

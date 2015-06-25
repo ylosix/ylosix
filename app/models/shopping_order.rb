@@ -24,6 +24,25 @@ class ShoppingOrder < ActiveRecord::Base
   belongs_to :commerce
   has_many :shopping_orders_products
 
+  def self.from_shopping_cart(sc, commerce)
+    so = ShoppingOrder.new
+    so.customer = sc.customer
+
+    so.shipping_address = sc.shipping_address.fields
+    so.billing_address = sc.billing_address.fields
+
+    unless commerce.nil?
+      so.commerce = commerce
+      so.billing_commerce = commerce.billing_address
+    end
+
+    sc.shopping_carts_products.each do |scp|
+      so.shopping_orders_products << scp.to_shopping_order
+    end
+
+    so
+  end
+
   def total_taxes
     shopping_orders_products.inject(0) do |a, e|
       a + (e.retail_price - e.retail_price_pre_tax) * e.quantity

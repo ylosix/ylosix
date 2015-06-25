@@ -42,7 +42,7 @@ ActiveAdmin.register Commerce do
     end
 
     f.inputs 'Billing address' do
-      f.input :order_prefix, :hint => 'Variables => %Y: year, %order_num: #order'
+      f.input :order_prefix, hint: 'Variables => %Y: year, %order_num: #order'
       f.input :address_1
       f.input :address_2
       f.input :postal_code
