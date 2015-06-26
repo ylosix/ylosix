@@ -21,7 +21,7 @@ class TagsGroup < ActiveRecord::Base
 
   def self.general_groups(category_id = nil)
     if category_id.nil?
-      ids = TagsGroupsCategory.all.pluck(:id)
+      ids = TagsGroupsCategory.all.pluck(:tags_group_id)
       list = TagsGroup.where('id not in (?)', ids)
     else
       list = TagsGroup.joins(:tags_groups_categories).where(tags_groups_categories: {category_id: category_id})
