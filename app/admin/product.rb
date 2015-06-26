@@ -124,7 +124,7 @@ ActiveAdmin.register Product do
       render partial: 'admin/products/tags', locals:
                                                {
                                                    products_tags: product.products_tags,
-                                                   root_tags: Tag.root_tags
+                                                   tags_groups: TagsGroup.all
                                                }
     end
 

@@ -69,6 +69,7 @@ module Frontend
 
       @variables['categories'] = Category.root_categories
       @variables['products'] ||= Product.all.limit(10) # TODO This only for test.
+      @variables['tags_group'] ||= TagsGroup.general_groups
 
       unless template.nil?
         @variables['template_public_path'] = template.path.gsub('/public', '')

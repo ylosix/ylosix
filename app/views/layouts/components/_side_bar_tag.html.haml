@@ -1,0 +1,8 @@
+- @variables['tags_group'].each do |group|
+  = link_to group.name, '#', :class => 'list-group-item'
+  - if group.tags.any?
+    - group.tags.each do |tag|
+      - if @category.nil?
+        = link_to "#{tag.name} (#{tag.products.size})", tags_products_path(tag.id), :class => 'list-group-item list-group-subitem'
+      - else
+        = link_to "#{tag.name} (#{tag.products.size})", tags_categories_path(@category.slug, tag.id), :class => 'list-group-item list-group-subitem'

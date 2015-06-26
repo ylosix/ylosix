@@ -20,6 +20,8 @@
         %div.list-group
           = render partial: 'layouts/components/side_bar_category', locals: { categories: @variables['categories']}
 
+        %div.list-group
+          = render partial: 'layouts/components/side_bar_tag'
       %div.col-md-9
         %div.row
           = render 'layouts/components/breadcrumbs'

@@ -141,6 +141,19 @@ class Product < ActiveRecord::Base
     append_images(liquid)
   end
 
+  def replace_keys_features
+    hash_features = {}
+
+    unless features.blank?
+      features.each do |k, v|
+        f = Feature.find_by(id: k)
+        hash_features[f.name] = v unless f.nil?
+      end
+    end
+
+    self.features = hash_features
+  end
+
   private
 
   def append_images(hash)

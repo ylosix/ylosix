@@ -23,4 +23,7 @@ class Tag < ActiveRecord::Base
 
   has_many :tag_translations
   accepts_nested_attributes_for :tag_translations
+
+  def to_liquid
+  end
 end

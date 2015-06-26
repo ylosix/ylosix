@@ -5,6 +5,14 @@ class ProductsController < Frontend::CommonController
   def show
   end
 
+  def tags
+    @variables ||= {}
+    @variables['products'] = Product
+                                 .joins(:products_tags)
+                                 .where(products_tags: {tag_id: params[:tag_ids]})
+    render '/searches/index'
+  end
+
   def get_template_variables(template)
     super
 
@@ -47,21 +55,21 @@ class ProductsController < Frontend::CommonController
   end
 
   def set_product
-    @product = nil
-    @category = nil
-
     # TODO find product by category id
     # if params[:category_slug].blank?
     #   @category = Category.find_by(slug: params[:category_slug])
     # end
 
     if !params[:slug].blank? || !params[:id].blank?
-      attributes = { enabled: true }
+      attributes = {enabled: true}
       attributes[:slug] = params[:slug] unless params[:slug].blank?
       attributes[:id] = params[:id] unless params[:id].blank?
 
       @product = Product.find_by(attributes)
-      @category = @product.categories.first unless @product.categories.empty?
+      unless @product.nil?
+        @category = @product.categories.first if @product.categories.any?
+        @product.replace_keys_features
+      end
     end
   end
 end

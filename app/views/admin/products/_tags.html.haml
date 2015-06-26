@@ -4,12 +4,12 @@
       = label_tag 'tags', 'Products tags'
 
     %ol.choices-group
-      - root_tags.each do |tag|
-        %li.choice
-          = render partial: 'admin/products/tag_choice', locals: { products_tags: products_tags, tag: tag }
+      - tags_groups.each do |group|
+        %li{class: 'choice', style: 'margin-bottom: 18px;'}
+          = "<b>#{group.name}</b>".html_safe
 
-          - if tag.children.any?
+          - if group.tags.any?
             %br
               %div.choices-subgroup
-                - tag.children.each_with_index do |child, i|
+                - group.tags.each do |child|
                   = render partial: 'admin/products/tag_choice', locals: { products_tags: products_tags, tag: child }

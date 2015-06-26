@@ -1,46 +1,51 @@
 - @product = @variables['product']
 
+- if @product.nil?
+  %div.col-md-12
+    %div{:class => 'alert alert-warning', :role => 'alert'}
+      %span{:class => 'fa fa-exclamation-triangle', 'aria-hidden' => 'true'}
+      Sorry cannot find the product.
+- else
+  %div.thumbnail
+    = image_tag(@product.retrieve_main_image, :class => 'img-responsive')
 
-%div.thumbnail
-  = image_tag(@product.retrieve_main_image, :class => 'img-responsive')
+    - pictures = @product.products_pictures.map { |pic| pic.image(:original) unless pic.image.nil? }
+    - if pictures.any?
+      %h2 Gallery
+      = render partial: 'layouts/components/carousel', locals: { pictures: pictures }
 
-  - pictures = @product.products_pictures.map { |pic| pic.image(:original) unless pic.image.nil? }
-  - if pictures.any?
-    %h2 Gallery
-    = render partial: 'layouts/components/carousel', locals: { pictures: pictures }
-
-  %div{class: 'voffset3'}
-    %div.caption-full
-      %h4.pull-right
-        = "#{@product.retail_price} €"
-      %h4
-        %a
-          = @product.name
-
-      - unless @product.description.blank?
-        %p
-          = @product.description.html_safe
-
-      - unless @product.features.nil?
+    %div{class: 'voffset3'}
+      %div.caption-full
+        %h4.pull-right
+          = "#{@product.retail_price} €"
         %h4
-          Features
+          %a
+            = @product.name
 
-        - @product.features.each do |k,v|
-          %div.col-md-6
-            = k
-          %div.col-md-6
-            = v
+        - unless @product.description.blank?
+          %p
+            = @product.description.html_safe
 
-  %div{class: 'voffset3'}
-    %div.ratings
-      %p.pull-right 3 reviews
-      %p
-        %span{:class => 'glyphicon glyphicon-star'}
-        %span{:class => 'glyphicon glyphicon-star'}
-        %span{:class => 'glyphicon glyphicon-star'}
-        %span{:class => 'glyphicon glyphicon-star-empty'}
+        - unless @product.features.nil?
+          %h4
+            Features
 
-        4.0 stars
+          - @product.features.each do |k,v|
+            %div.col-md-6
+              = k
+            %div.col-md-6
+              = v
 
-%div.row
-  = link_to 'Add to cart', add_to_shopping_cart_products_path(@product), :class => 'btn btn-success btn-block'
+    %div{class: 'voffset3'}
+      %div.ratings
+        %p.pull-right 3 reviews
+        %p
+          %span{:class => 'glyphicon glyphicon-star'}
+          %span{:class => 'glyphicon glyphicon-star'}
+          %span{:class => 'glyphicon glyphicon-star'}
+          %span{:class => 'glyphicon glyphicon-star-empty'}
+
+          4.0 stars
+
+  %div.row
+    = link_to 'Add to cart', add_to_shopping_cart_products_path(@product), :class => 'btn btn-success btn-block'

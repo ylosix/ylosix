@@ -45,7 +45,8 @@ def create_default_admin_user
   if admin.nil?
     AdminUser.create!(:email => 'admin@ylosix.com',
                       :password => 'password',
-                      :password_confirmation => 'password')
+                      :password_confirmation => 'password',
+                      :debug_variables => true)
   end
 
   puts '####################'

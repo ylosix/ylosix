@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     get '/:slug' => 'categories#show', as: :show_slug
     get '/:id/show' => 'categories#show', as: :show_id
     get '/:category_slug/products/:slug' => 'products#show', as: :show_product_slug
+    get '/:slug/tag/:tag_ids' => 'categories#tags', as: :tags
   end
 
   resource :products, only: [] do
@@ -29,6 +30,7 @@ Rails.application.routes.draw do
     get '/:id/show' => 'products#show', as: :show_id
     get '/:id/add_to_shopping_cart' => 'products#add_to_shopping_cart', as: :add_to_shopping_cart
     get '/:id/delete_from_shopping_cart' => 'products#delete_from_shopping_cart', as: :delete_from_shopping_cart
+    get '/tag/:tag_ids' => 'products#tags', as: :tags
   end
 
   resource :searches, only: [] do

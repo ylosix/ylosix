@@ -17,11 +17,4 @@
 require 'test_helper'
 
 class TagTest < ActiveSupport::TestCase
-  test 'get_parents_array' do
-    array = Utils.get_parents_array(tags(:cameras))
-    assert array.empty?
-
-    array = Utils.get_parents_array(tags(:reflex))
-    assert array.length == 1
-  end
 end
