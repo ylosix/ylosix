@@ -72,6 +72,10 @@ class Category < ActiveRecord::Base
   private
 
   def set_defaults
-    self.slug ||= generate_slug(name, category_translations, :name)
+    if slug.blank?
+      self.slug = generate_slug(name, category_translations, :name)
+    else
+      self.slug = parse_url_chars(slug)
+    end
   end
 end

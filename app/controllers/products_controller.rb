@@ -5,14 +5,6 @@ class ProductsController < Frontend::CommonController
   def show
   end
 
-  def tags
-    @variables ||= {}
-    @variables['products'] = Product
-                                 .joins(:products_tags)
-                                 .where(products_tags: {tag_id: params[:tag_ids]})
-    render '/searches/index'
-  end
-
   def get_template_variables(template)
     super
 

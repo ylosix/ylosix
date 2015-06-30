@@ -6,6 +6,7 @@
 #  id            :integer          not null, primary key
 #  name          :string
 #  priority      :integer          default(1)
+#  slug          :string
 #  tags_group_id :integer
 #  updated_at    :datetime         not null
 #
@@ -15,6 +16,8 @@
 #
 
 class Tag < ActiveRecord::Base
+  include InitializeSlug
+  attr_accessor :href, :remove_href
   translates :name
 
   belongs_to :tags_group
@@ -24,6 +27,24 @@ class Tag < ActiveRecord::Base
   has_many :tag_translations
   accepts_nested_attributes_for :tag_translations
 
+  before_save :set_defaults
+
   def to_liquid
+    {
+        'name' => name,
+        'slug' => slug,
+        'href' => href,
+        'remove_href' => remove_href
+    }
+  end
+
+  private
+
+  def set_defaults
+    if slug.blank?
+      self.slug = generate_slug(name, tag_translations, :name)
+    else
+      self.slug = parse_url_chars(slug)
+    end
   end
 end

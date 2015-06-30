@@ -14,6 +14,7 @@ module InitializeSlug
     out = str
     out = out.gsub('.', '-')
     out = out.gsub(' ', '-')
+    out = out.gsub('/', '')
 
     URI.encode(out)
   end

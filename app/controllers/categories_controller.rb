@@ -10,10 +10,6 @@ class CategoriesController < Frontend::CommonController
   end
 
   def tags
-    @variables ||= {}
-    @variables['products'] = Product
-                                 .joins(:products_tags)
-                                 .where(products_tags: {tag_id: params[:tag_ids]})
     render '/searches/index'
   end
 
@@ -21,7 +17,15 @@ class CategoriesController < Frontend::CommonController
     super
 
     @variables['products'] = []
-    @variables['products'] = Product.in_frontend(@category) unless @category.nil?
+    if params[:slug_tags].blank?
+      @variables['products'] = Product.in_frontend(@category) unless @category.nil?
+    else
+      _tags, tags_ids, _slugs = set_tags
+      @variables['products'] = Product
+                                 .joins(:products_tags)
+                                 .where(products_tags: {tag_id: tags_ids})
+                                 .group('products.id')
+    end
 
     array_categories = Utils.get_parents_array(@category)
     array_categories.delete_at(0) if array_categories.any?  # delete root.

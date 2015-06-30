@@ -1,7 +1,7 @@
 ActiveAdmin.register Tag do
   menu parent: 'Catalog'
 
-  permit_params :tags_group_id, :name, :priority,
+  permit_params :tags_group_id, :name, :slug, :priority,
                 tag_translations_attributes: [:id, :locale, :name]
 
   index do
@@ -10,6 +10,7 @@ ActiveAdmin.register Tag do
 
     column :tags_group
     column :name
+    column :slug
     column :priority
     actions
   end
@@ -21,6 +22,7 @@ ActiveAdmin.register Tag do
   form do |f|
     f.inputs 'Tag Details' do
       f.input :priority
+      f.input :slug
       f.input :tags_group
 
       translations = Utils.array_translations(TagTranslation, tag_id: tag.id)

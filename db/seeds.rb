@@ -122,7 +122,7 @@ def create_default_products
   puts '## Creating products'
   puts '####################'
 
-  category = Category.find_by_slug(PHOTOGRAPHY_REFLEX_SLUG)
+  category = Category.find_by(slug: PHOTOGRAPHY_REFLEX_SLUG)
   categories = [category]
 
   tag_cameras = Tag.with_translations.find_by(:tag_translations => {:name => 'Cameras', :locale => :en})
@@ -199,11 +199,11 @@ def create_default_products
                         :control_stock => true,
                         :image => zoom_image}
 
-  category = Category.find_by_slug(PHOTOGRAPHY_LENSES_SLUG)
+  category = Category.find_by(slug: PHOTOGRAPHY_LENSES_SLUG)
   categories = [category]
   create_product(product_attributes, categories, tags)
 
-  category = Category.find_by_slug(PHONES_SMART_PHONES_SLUG)
+  category = Category.find_by(slug: PHONES_SMART_PHONES_SLUG)
   categories = [category]
 
   tax_iva = Tax.find_by({:name => 'IVA ES 21%'})
@@ -234,7 +234,7 @@ def create_default_products
                         :control_stock => true,
                         :image => camera_image}
 
-  create_product(product_attributes, categories, tags)
+  create_product(product_attributes, categories, [])
 end
 
 def create_default_categories
@@ -310,10 +310,10 @@ def create_default_categories
 end
 
 
-def create_model_translations(model, key, value)
+def create_model_translations(model, key, value, value_all)
   object = model.with_translations.find_by(key => value)
   if object.nil?
-    object = model.create!(value)
+    object = model.create!(value_all)
   end
 
   object
@@ -329,20 +329,29 @@ def create_default_tags
                                    :locale => :en}
   general_tags_group = create_model_translations(TagsGroup,
                                                  :tags_group_translations,
+                                                 general_tags_group_attributes,
                                                  general_tags_group_attributes)
 
   tag_cameras_attributes = {:name => 'Cameras',
                             :locale => :en}
+  tag_cameras_attributes_all = tag_cameras_attributes.clone
+  tag_cameras_attributes_all[:slug] = 'cameras'
+
   tag_cameras = create_model_translations(Tag,
                                           :tag_translations,
-                                          tag_cameras_attributes)
+                                          tag_cameras_attributes,
+                                          tag_cameras_attributes_all)
   tag_cameras.update_attributes(tags_group_id: general_tags_group.id)
 
   tag_reflex_attributes = {:name => 'Reflex',
                            :locale => :en}
+  tag_reflex_attributes_all = tag_reflex_attributes.clone
+  tag_reflex_attributes_all[:slug] = 'reflex'
+
   tag_reflex = create_model_translations(Tag,
                                           :tag_translations,
-                                          tag_reflex_attributes)
+                                          tag_reflex_attributes,
+                                         tag_reflex_attributes_all)
   tag_reflex.update_attributes(tags_group_id: general_tags_group.id)
 end
 

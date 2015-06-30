@@ -1,5 +1,7 @@
 module Frontend
   module CommonModule
+    include ArrayLiquid
+
     def initialize_breadcrumb
       add_breadcrumb(Breadcrumb.new(url: root_path, name: 'Home'))
     end
@@ -9,6 +11,60 @@ module Frontend
         @variables ||= {}
         @variables['breadcrumbs'] ||= []
         @variables['breadcrumbs'] << breadcrumb
+      end
+    end
+
+    def set_tags
+      tags = []
+      unless params[:slug_tags].blank?
+        params[:slug_tags].split('/').each do |id|
+          tag = Tag.find_by(id: id)
+          tags << tag unless tag.nil?
+        end
+      end
+
+      ids = tags.map(&:id)
+      slugs = tags.map(&:slug)
+
+      [tags, ids, slugs]
+    end
+
+    def retrieve_tags_path(ids)
+      if defined?(@category) && !@category.nil?
+        if ids.empty?
+          show_slug_categories_path(@category.slug)
+        else
+          tags_categories_path(@category.slug, ids)
+        end
+      else
+        if ids.empty?
+          root_path
+        else
+          tags_path(ids)
+        end
+      end
+    end
+
+    def append_tags
+      @variables['tags_group'] ||= TagsGroup.general_groups
+
+      tags, ids, _slugs = set_tags
+      tags.each do |tag|
+        ids_clon = ids.clone
+        ids_clon.delete(tag.id)
+
+        tag.remove_href = retrieve_tags_path(ids_clon)
+      end
+
+      @variables['selected_tags'] = array_to_liquid(tags)
+
+      @variables['tags_group'].each do |group|
+        group.tags.each do |tag|
+          ids_clon = ids.clone
+          ids_clon << tag.id unless ids.include?(tag.id)
+
+          tag.href = retrieve_tags_path(ids_clon)
+        end
       end
     end
 
@@ -69,7 +125,8 @@ module Frontend
 
       @variables['categories'] = Category.root_categories
       @variables['products'] ||= Product.all.limit(10) # TODO This only for test.
-      @variables['tags_group'] ||= TagsGroup.general_groups
+
+      append_tags
 
       unless template.nil?
         @variables['template_public_path'] = template.path.gsub('/public', '')

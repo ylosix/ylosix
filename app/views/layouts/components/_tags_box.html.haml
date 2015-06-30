@@ -1,0 +1,22 @@
+- if @variables['selected_tags'].any?
+  %div.row
+    - @variables['selected_tags'].each do |tag|
+      %div.col-md-2
+        %div.thumbnail
+          = tag['name']
+
+          %div.pull-right
+            %a{href: tag['remove_href']}
+              %i{class: 'fa fa-trash-o'}
+
+    - reset_href = @variables['commerce'].root_href
+    - unless @category.nil?
+      - reset_href = show_slug_categories_path(@category.slug)
+
+    %div.col-md-2
+      %div.thumbnail
+        Reset all
+
+        %div.pull-right
+          %a{href: reset_href}
+            %i{class: 'fa fa-trash-o'}

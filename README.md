@@ -136,6 +136,7 @@ Demo at: <br />
 
 __With heroku:__
   - Register at [heroku](https://www.heroku.com)
+  - Install [heroku cli](https://toolbelt.heroku.com)
 
 ```
 $ git clone --recursive https://github.com/devcows/ecommerce.git

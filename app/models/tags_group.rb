@@ -9,6 +9,7 @@
 #
 
 class TagsGroup < ActiveRecord::Base
+  include ArrayLiquid
   translates :name
 
   has_many :tags
@@ -22,7 +23,11 @@ class TagsGroup < ActiveRecord::Base
   def self.general_groups(category_id = nil)
     if category_id.nil?
       ids = TagsGroupsCategory.all.pluck(:tags_group_id)
-      list = TagsGroup.where('id not in (?)', ids)
+      if ids.empty?
+        list = TagsGroup.all
+      else
+        list = TagsGroup.where('id not in (?)', ids)
+      end
     else
       list = TagsGroup.joins(:tags_groups_categories).where(tags_groups_categories: {category_id: category_id})
       list = TagsGroup.general_groups if list.empty?
@@ -32,5 +37,9 @@ class TagsGroup < ActiveRecord::Base
   end
 
   def to_liquid
+    {
+        'name' => name,
+        'tags' => array_to_liquid(tags)
+    }
   end
 end
