@@ -1,4 +1,8 @@
 - if @variables['products'].any?
+  %div.col-md-12
+    %div.thumbnail
+      = "#{@variables['products'].length} products"
+
   - @variables['products'].each do |product|
     = render partial: 'layouts/components/product_grid_view', locals: {product: product}
 - else

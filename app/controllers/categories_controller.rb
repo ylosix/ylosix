@@ -20,11 +20,7 @@ class CategoriesController < Frontend::CommonController
     if params[:slug_tags].blank?
       @variables['products'] = Product.in_frontend(@category) unless @category.nil?
     else
-      _tags, tags_ids, _slugs = set_tags
-      @variables['products'] = Product
-                                 .joins(:products_tags)
-                                 .where(products_tags: {tag_id: tags_ids})
-                                 .group('products.id')
+      @variables['products'] = products_tags
     end
 
     array_categories = Utils.get_parents_array(@category)
@@ -37,6 +33,23 @@ class CategoriesController < Frontend::CommonController
   end
 
   protected
+
+  def products_tags
+    tags, _ids, _slugs = set_tags
+
+    groups = {}
+    tags.each do |tag|
+      groups[tag.tags_group_id] ||= []
+      groups[tag.tags_group_id] << tag.id
+    end
+
+    products = Product.joins(:products_tags)
+    groups.each do |_k, group_tags_ids|
+      products = products.where(products_tags: {tag_id: group_tags_ids})
+    end
+
+    products.group('products.id')
+  end
 
   def set_breadcrumbs
   end
