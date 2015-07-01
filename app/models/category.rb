@@ -9,6 +9,7 @@
 #  meta_keywords    :string
 #  name             :string
 #  parent_id        :integer
+#  priority         :integer          default(1), not null
 #  slug             :string
 #  updated_at       :datetime         not null
 #  visible          :boolean          default(TRUE)
@@ -25,7 +26,8 @@ class Category < ActiveRecord::Base
 
   translates :name
 
-  has_many :children, class_name: 'Category', foreign_key: 'parent_id'
+  # TODO put children in schema erd!
+  # has_many :children, class_name: 'Category', foreign_key: 'parent_id'
   belongs_to :parent, class_name: 'Category'
 
   has_many :products_categories
@@ -40,23 +42,31 @@ class Category < ActiveRecord::Base
   scope :are_enabled, -> { where(enabled: true) }
   scope :in_frontend, lambda {
                       where(enabled: true, visible: true)
+                          .order(:priority)
                     }
 
   before_save :set_defaults
 
+  def children
+    children = Category.in_frontend.where(parent_id: id)
+    children.to_a.sort! do |a, b|
+      if a.priority == b.priority
+        a.name.downcase <=> b.name.downcase
+      else
+        a.priority <=> b.priority
+      end
+    end
+  end
+
   def self.root_category
-    Category.find_by(parent_id: [nil, 0],
-                     visible: true,
-                     enabled: true)
+    Category.in_frontend.find_by(parent_id: [nil, 0])
   end
 
   def self.root_categories
     root_category = Category.root_category
 
     root_categories = []
-    unless root_category.nil?
-      root_categories = root_category.children.in_frontend
-    end
+    root_categories = root_category.children unless root_category.nil?
 
     root_categories
   end
@@ -64,6 +74,7 @@ class Category < ActiveRecord::Base
   def to_liquid
     {
         'name' => name,
+        'priority' => priority,
         'href' => Rails.application.routes.url_helpers.show_slug_categories_path(slug),
         'children' => array_to_liquid(children)
     }

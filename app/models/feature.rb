@@ -5,7 +5,7 @@
 #  created_at :datetime         not null
 #  id         :integer          not null, primary key
 #  name       :string
-#  priority   :integer
+#  priority   :integer          default(1), not null
 #  updated_at :datetime         not null
 #
 

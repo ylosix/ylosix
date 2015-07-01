@@ -19,7 +19,7 @@ ActiveAdmin.register Feature do
       translations = Utils.array_translations(FeatureTranslation, feature_id: feature.id)
       admin_translation_text_field(translations, 'feature', 'name')
 
-      f.input :priority
+      f.input :priority, hint: '1:+ --- 10:-'
     end
 
     f.actions

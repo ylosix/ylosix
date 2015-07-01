@@ -9,6 +9,7 @@
 #  meta_keywords    :string
 #  name             :string
 #  parent_id        :integer
+#  priority         :integer          default(1), not null
 #  slug             :string
 #  updated_at       :datetime         not null
 #  visible          :boolean          default(TRUE)

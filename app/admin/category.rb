@@ -1,7 +1,7 @@
 ActiveAdmin.register Category do
   menu parent: 'Catalog'
   permit_params :parent_id, :name, :enabled, :visible, :meta_keywords,
-                :meta_description, :slug,
+                :meta_description, :slug, :priority,
                 category_translations_attributes: [:id, :locale, :name]
 
   index do
@@ -17,6 +17,7 @@ ActiveAdmin.register Category do
     column :enabled
     column :visible
     column :slug
+    column :priority
     actions
   end
 
@@ -35,6 +36,7 @@ ActiveAdmin.register Category do
       f.input :meta_keywords
       f.input :meta_description
       f.input :slug
+      f.input :priority, hint: '1:+ --- 10:-'
     end
 
     f.actions

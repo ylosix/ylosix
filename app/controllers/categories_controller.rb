@@ -3,7 +3,7 @@ class CategoriesController < Frontend::CommonController
   before_action :set_category, except: [:index]
 
   def index
-    @categories = Category.in_frontend
+    @categories = Category.root_category.children
   end
 
   def show

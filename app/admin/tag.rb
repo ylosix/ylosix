@@ -21,7 +21,7 @@ ActiveAdmin.register Tag do
 
   form do |f|
     f.inputs 'Tag Details' do
-      f.input :priority
+      f.input :priority, hint: '1:+ --- 10:-'
       f.input :slug
       f.input :tags_group
 

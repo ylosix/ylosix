@@ -123,7 +123,7 @@ module Frontend
       append_message_variables
       append_language_variables
 
-      @variables['categories'] = Category.root_categories
+      @variables['categories'] = array_to_liquid(Category.root_categories)
       @variables['products'] ||= Product.all.limit(10) # TODO This only for test.
 
       append_tags
