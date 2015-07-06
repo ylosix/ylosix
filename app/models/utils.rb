@@ -137,4 +137,19 @@ class Utils
       end
     end
   end
+
+  def self.save_or_update_model(model, search_options, attributes)
+    object = model.find_or_create_by(search_options)
+    object.attributes = attributes
+    object.save
+
+    object
+  end
+
+  def self.create_model_translations(model, key, value, value_all)
+    object = model.with_translations.find_by(key => value)
+    object = model.create!(value_all) if object.nil?
+
+    object
+  end
 end

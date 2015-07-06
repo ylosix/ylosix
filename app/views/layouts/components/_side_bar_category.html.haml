@@ -1,5 +1,5 @@
 - sub_class = '' if sub_class.nil?
 - categories.each do |category|
-  = link_to category['name'], show_slug_categories_path(category['href']), :class => "list-group-item #{sub_class}"
+  = link_to category['name'], category['href'], :class => "list-group-item #{sub_class}"
   - if category['children'].any?
     = render partial: 'layouts/components/side_bar_category', locals: { categories: category['children'], sub_class: 'list-group-subitem'}

@@ -27,12 +27,7 @@ module ActionDispatch
 end
 
 Rake::Task['rubocop'].invoke
-load "#{Rails.root}/db/seeds.rb"
-
-def test_again_seed
-  create_defaults
-end
-test_again_seed
+Rake::Task['db:gen_demo'].invoke
 
 module ActiveSupport
   class TestCase

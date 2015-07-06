@@ -23,6 +23,7 @@ ActiveAdmin.register Category do
 
   filter :translations_name, as: :string, label: 'Name'
   filter :visible
+  filter :parent
 
   form do |f|
     f.inputs 'Category Details' do

@@ -89,7 +89,7 @@ git config --global core.autocrlf false
 Run with docker:
 ```
 $ docker-compose up
-$ docker-compose run web rake db:create db:migrate db:seed
+$ docker-compose run web rake db:create db:migrate db:gen_demo
 ```
 
 ## Design schema
@@ -100,7 +100,8 @@ $ docker-compose run web rake db:create db:migrate db:seed
 ## Database creation
 
 ```
-$ rake db:create db:migrate db:seed
+$ rake db:create db:migrate db:seed       #Empty Ecommerce
+$ rake db:create db:migrate db:gen_demo   #Demo Ecommerce
 ```
 
 ## Testing
@@ -148,7 +149,7 @@ $ heroku config:set RAILS_DB=postgresql
 $ git push heroku develop:master
 
 $ heroku run rake db:migrate RAILS_ENV=production
-$ heroku run rake db:seed
+$ heroku run rake db:gen_demo
 ```
 
 __With digital ocean:__
