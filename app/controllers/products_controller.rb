@@ -22,7 +22,12 @@ class ProductsController < Frontend::CommonController
       session[:shopping_cart] = sc.to_json(include: :shopping_carts_products)
     end
 
-    redirect_to :customers_shopping_carts
+    link = :customers_shopping_carts
+    if !@variables['commerce'].nil? && @variables['commerce'].no_redirect_shopping_cart
+      link = request.referer || request.url || root_url
+    end
+
+    redirect_to link
   end
 
   def delete_from_shopping_cart
