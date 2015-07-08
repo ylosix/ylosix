@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150701102549) do
+ActiveRecord::Schema.define(version: 20150708085507) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -116,6 +116,18 @@ ActiveRecord::Schema.define(version: 20150701102549) do
   end
 
   add_index "commerces", ["template_id"], name: "index_commerces_on_template_id", using: :btree
+
+  create_table "countries", force: :cascade do |t|
+    t.string   "code"
+    t.string   "name"
+    t.string   "iso"
+    t.boolean  "enabled",    default: false, null: false
+    t.integer  "zone_id"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "countries", ["zone_id"], name: "index_countries_on_zone_id", using: :btree
 
   create_table "customer_addresses", force: :cascade do |t|
     t.string   "name"
@@ -373,7 +385,15 @@ ActiveRecord::Schema.define(version: 20150701102549) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "zones", force: :cascade do |t|
+    t.string   "name"
+    t.string   "code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   add_foreign_key "commerces", "templates", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "countries", "zones"
   add_foreign_key "customer_addresses", "customers", on_update: :cascade, on_delete: :cascade
   add_foreign_key "products", "taxes", on_update: :cascade, on_delete: :cascade
   add_foreign_key "products_categories", "categories", on_update: :cascade, on_delete: :cascade

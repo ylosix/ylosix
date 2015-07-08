@@ -14,15 +14,15 @@ namespace :db do
     general_tags_group.tags_group_translations << TagsGroupTranslation.new({locale: :es, name: 'General'})
     general_tags_group.save
 
-    tag_cameras_attributes = {:name => 'Cameras', :locale => :en}
+    tag_cameras_attributes = {:name => 'Lenses', :locale => :en}
     tag_cameras_attributes_all = tag_cameras_attributes.clone
-    tag_cameras_attributes_all[:slug] = 'cameras'
+    tag_cameras_attributes_all[:slug] = 'lenses'
     tag_cameras = Utils.create_model_translations(Tag,
                                                   :tag_translations,
                                                   tag_cameras_attributes,
                                                   tag_cameras_attributes_all)
     tag_cameras.update_attributes(tags_group_id: general_tags_group.id)
-    tag_cameras.tag_translations << TagTranslation.new({locale: :es, name: 'Cámaras'})
+    tag_cameras.tag_translations << TagTranslation.new({locale: :es, name: 'Objetivos'})
     tag_cameras.save
 
     tag_reflex_attributes = {:name => 'Reflex', :locale => :en}
@@ -35,5 +35,16 @@ namespace :db do
     tag_reflex.update_attributes(tags_group_id: general_tags_group.id)
     tag_reflex.tag_translations << TagTranslation.new({locale: :es, name: 'Reflex'})
     tag_reflex.save
+
+    tag_smart_phones_attributes = {:name => 'Smart-phones', :locale => :en}
+    tag_smart_phones_attributes_all = tag_smart_phones_attributes.clone
+    tag_smart_phones_attributes_all[:slug] = 'smart-phones'
+    tag_smart_phones = Utils.create_model_translations(Tag,
+                                                 :tag_translations,
+                                                 tag_reflex_attributes,
+                                                 tag_reflex_attributes_all)
+    tag_smart_phones.update_attributes(tags_group_id: general_tags_group.id)
+    tag_smart_phones.tag_translations << TagTranslation.new({locale: :es, name: 'Smart-phones'})
+    tag_smart_phones.save
   end
 end

@@ -1,6 +1,29 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 
+# /db/country_list.json => List from: http://peric.github.io/GetCountries
+def create_default_countries
+  puts '####################'
+  puts '## Creating default countries'
+  puts '####################'
+
+  file = File.read("#{Rails.root}/db/country_list.json")
+  data_hash = JSON.parse(file)
+
+  data_hash['countries']['country'].each do |json|
+    z = Zone.find_or_create_by(code: json['continent'],
+                               name: json['continentName'])
+    c = Country.find_or_create_by(zone: z,
+                              code: json['countryCode'],
+                              name: json['countryName'],
+                              iso: json['isoNumeric'])
+    if c.code == 'ES'
+      c.update_attributes(enabled: true)
+    end
+  end
+end
+
+
 def create_default_admin_user
   puts '####################'
   puts '## Creating default admin user'
@@ -80,6 +103,7 @@ def create_defaults
   create_default_ylos_template
   create_default_commerce
   create_default_admin_user
+  create_default_countries
 end
 
 create_defaults

@@ -1,0 +1,1756 @@
+{
+  "countries": {
+    "country": [
+      {
+        "countryCode": "AD",
+        "countryName": "Andorra",
+        "isoNumeric": "020",
+        "continentName": "Europe",
+        "continent": "EU"
+      },
+      {
+        "countryCode": "AE",
+        "countryName": "United Arab Emirates",
+        "isoNumeric": "784",
+        "continentName": "Asia",
+        "continent": "AS"
+      },
+      {
+        "countryCode": "AF",
+        "countryName": "Afghanistan",
+        "isoNumeric": "004",
+        "continentName": "Asia",
+        "continent": "AS"
+      },
+      {
+        "countryCode": "AG",
+        "countryName": "Antigua and Barbuda",
+        "isoNumeric": "028",
+        "continentName": "North America",
+        "continent": "NA"
+      },
+      {
+        "countryCode": "AI",
+        "countryName": "Anguilla",
+        "isoNumeric": "660",
+        "continentName": "North America",
+        "continent": "NA"
+      },
+      {
+        "countryCode": "AL",
+        "countryName": "Albania",
+        "isoNumeric": "008",
+        "continentName": "Europe",
+        "continent": "EU"
+      },
+      {
+        "countryCode": "AM",
+        "countryName": "Armenia",
+        "isoNumeric": "051",
+        "continentName": "Asia",
+        "continent": "AS"
+      },
+      {
+        "countryCode": "AO",
+        "countryName": "Angola",
+        "isoNumeric": "024",
+        "continentName": "Africa",
+        "continent": "AF"
+      },
+      {
+        "countryCode": "AQ",
+        "countryName": "Antarctica",
+        "isoNumeric": "010",
+        "continentName": "Antarctica",
+        "continent": "AN"
+      },
+      {
+        "countryCode": "AR",
+        "countryName": "Argentina",
+        "isoNumeric": "032",
+        "continentName": "South America",
+        "continent": "SA"
+      },
+      {
+        "countryCode": "AS",
+        "countryName": "American Samoa",
+        "isoNumeric": "016",
+        "continentName": "Oceania",
+        "continent": "OC"
+      },
+      {
+        "countryCode": "AT",
+        "countryName": "Austria",
+        "isoNumeric": "040",
+        "continentName": "Europe",
+        "continent": "EU"
+      },
+      {
+        "countryCode": "AU",
+        "countryName": "Australia",
+        "isoNumeric": "036",
+        "continentName": "Oceania",
+        "continent": "OC"
+      },
+      {
+        "countryCode": "AW",
+        "countryName": "Aruba",
+        "isoNumeric": "533",
+        "continentName": "North America",
+        "continent": "NA"
+      },
+      {
+        "countryCode": "AX",
+        "countryName": "Åland",
+        "isoNumeric": "248",
+        "continentName": "Europe",
+        "continent": "EU"
+      },
+      {
+        "countryCode": "AZ",
+        "countryName": "Azerbaijan",
+        "isoNumeric": "031",
+        "continentName": "Asia",
+        "continent": "AS"
+      },
+      {
+        "countryCode": "BA",
+        "countryName": "Bosnia and Herzegovina",
+        "isoNumeric": "070",
+        "continentName": "Europe",
+        "continent": "EU"
+      },
+      {
+        "countryCode": "BB",
+        "countryName": "Barbados",
+        "isoNumeric": "052",
+        "continentName": "North America",
+        "continent": "NA"
+      },
+      {
+        "countryCode": "BD",
+        "countryName": "Bangladesh",
+        "isoNumeric": "050",
+        "continentName": "Asia",
+        "continent": "AS"
+      },
+      {
+        "countryCode": "BE",
+        "countryName": "Belgium",
+        "isoNumeric": "056",
+        "continentName": "Europe",
+        "continent": "EU"
+      },
+      {
+        "countryCode": "BF",
+        "countryName": "Burkina Faso",
+        "isoNumeric": "854",
+        "continentName": "Africa",
+        "continent": "AF"
+      },
+      {
+        "countryCode": "BG",
+        "countryName": "Bulgaria",
+        "isoNumeric": "100",
+        "continentName": "Europe",
+        "continent": "EU"
+      },
+      {
+        "countryCode": "BH",
+        "countryName": "Bahrain",
+        "isoNumeric": "048",
+        "continentName": "Asia",
+        "continent": "AS"
+      },
+      {
+        "countryCode": "BI",
+        "countryName": "Burundi",
+        "isoNumeric": "108",
+        "continentName": "Africa",
+        "continent": "AF"
+      },
+      {
+        "countryCode": "BJ",
+        "countryName": "Benin",
+        "isoNumeric": "204",
+        "continentName": "Africa",
+        "continent": "AF"
+      },
+      {
+        "countryCode": "BL",
+        "countryName": "Saint Barthélemy",
+        "isoNumeric": "652",
+        "continentName": "North America",
+        "continent": "NA"
+      },
+      {
+        "countryCode": "BM",
+        "countryName": "Bermuda",
+        "isoNumeric": "060",
+        "continentName": "North America",
+        "continent": "NA"
+      },
+      {
+        "countryCode": "BN",
+        "countryName": "Brunei",
+        "isoNumeric": "096",
+        "continentName": "Asia",
+        "continent": "AS"
+      },
+      {
+        "countryCode": "BO",
+        "countryName": "Bolivia",
+        "isoNumeric": "068",
+        "continentName": "South America",
+        "continent": "SA"
+      },
+      {
+        "countryCode": "BQ",
+        "countryName": "Bonaire",
+        "isoNumeric": "535",
+        "continentName": "North America",
+        "continent": "NA"
+      },
+      {
+        "countryCode": "BR",
+        "countryName": "Brazil",
+        "isoNumeric": "076",
+        "continentName": "South America",
+        "continent": "SA"
+      },
+      {
+        "countryCode": "BS",
+        "countryName": "Bahamas",
+        "isoNumeric": "044",
+        "continentName": "North America",
+        "continent": "NA"
+      },
+      {
+        "countryCode": "BT",
+        "countryName": "Bhutan",
+        "isoNumeric": "064",
+        "continentName": "Asia",
+        "continent": "AS"
+      },
+      {
+        "countryCode": "BV",
+        "countryName": "Bouvet Island",
+        "isoNumeric": "074",
+        "continentName": "Antarctica",
+        "continent": "AN"
+      },
+      {
+        "countryCode": "BW",
+        "countryName": "Botswana",
+        "isoNumeric": "072",
+        "continentName": "Africa",
+        "continent": "AF"
+      },
+      {
+        "countryCode": "BY",
+        "countryName": "Belarus",
+        "isoNumeric": "112",
+        "continentName": "Europe",
+        "continent": "EU"
+      },
+      {
+        "countryCode": "BZ",
+        "countryName": "Belize",
+        "isoNumeric": "084",
+        "continentName": "North America",
+        "continent": "NA"
+      },
+      {
+        "countryCode": "CA",
+        "countryName": "Canada",
+        "isoNumeric": "124",
+        "continentName": "North America",
+        "continent": "NA"
+      },
+      {
+        "countryCode": "CC",
+        "countryName": "Cocos [Keeling] Islands",
+        "isoNumeric": "166",
+        "continentName": "Asia",
+        "continent": "AS"
+      },
+      {
+        "countryCode": "CD",
+        "countryName": "Democratic Republic of the Congo",
+        "isoNumeric": "180",
+        "continentName": "Africa",
+        "continent": "AF"
+      },
+      {
+        "countryCode": "CF",
+        "countryName": "Central African Republic",
+        "isoNumeric": "140",
+        "continentName": "Africa",
+        "continent": "AF"
+      },
+      {
+        "countryCode": "CG",
+        "countryName": "Republic of the Congo",
+        "isoNumeric": "178",
+        "continentName": "Africa",
+        "continent": "AF"
+      },
+      {
+        "countryCode": "CH",
+        "countryName": "Switzerland",
+        "isoNumeric": "756",
+        "continentName": "Europe",
+        "continent": "EU"
+      },
+      {
+        "countryCode": "CI",
+        "countryName": "Ivory Coast",
+        "isoNumeric": "384",
+        "continentName": "Africa",
+        "continent": "AF"
+      },
+      {
+        "countryCode": "CK",
+        "countryName": "Cook Islands",
+        "isoNumeric": "184",
+        "continentName": "Oceania",
+        "continent": "OC"
+      },
+      {
+        "countryCode": "CL",
+        "countryName": "Chile",
+        "isoNumeric": "152",
+        "continentName": "South America",
+        "continent": "SA"
+      },
+      {
+        "countryCode": "CM",
+        "countryName": "Cameroon",
+        "isoNumeric": "120",
+        "continentName": "Africa",
+        "continent": "AF"
+      },
+      {
+        "countryCode": "CN",
+        "countryName": "China",
+        "isoNumeric": "156",
+        "continentName": "Asia",
+        "continent": "AS"
+      },
+      {
+        "countryCode": "CO",
+        "countryName": "Colombia",
+        "isoNumeric": "170",
+        "continentName": "South America",
+        "continent": "SA"
+      },
+      {
+        "countryCode": "CR",
+        "countryName": "Costa Rica",
+        "isoNumeric": "188",
+        "continentName": "North America",
+        "continent": "NA"
+      },
+      {
+        "countryCode": "CU",
+        "countryName": "Cuba",
+        "isoNumeric": "192",
+        "continentName": "North America",
+        "continent": "NA"
+      },
+      {
+        "countryCode": "CV",
+        "countryName": "Cape Verde",
+        "isoNumeric": "132",
+        "continentName": "Africa",
+        "continent": "AF"
+      },
+      {
+        "countryCode": "CW",
+        "countryName": "Curacao",
+        "isoNumeric": "531",
+        "continentName": "North America",
+        "continent": "NA"
+      },
+      {
+        "countryCode": "CX",
+        "countryName": "Christmas Island",
+        "isoNumeric": "162",
+        "continentName": "Asia",
+        "continent": "AS"
+      },
+      {
+        "countryCode": "CY",
+        "countryName": "Cyprus",
+        "isoNumeric": "196",
+        "continentName": "Europe",
+        "continent": "EU"
+      },
+      {
+        "countryCode": "CZ",
+        "countryName": "Czech Republic",
+        "isoNumeric": "203",
+        "continentName": "Europe",
+        "continent": "EU"
+      },
+      {
+        "countryCode": "DE",
+        "countryName": "Germany",
+        "isoNumeric": "276",
+        "continentName": "Europe",
+        "continent": "EU"
+      },
+      {
+        "countryCode": "DJ",
+        "countryName": "Djibouti",
+        "isoNumeric": "262",
+        "continentName": "Africa",
+        "continent": "AF"
+      },
+      {
+        "countryCode": "DK",
+        "countryName": "Denmark",
+        "isoNumeric": "208",
+        "continentName": "Europe",
+        "continent": "EU"
+      },
+      {
+        "countryCode": "DM",
+        "countryName": "Dominica",
+        "isoNumeric": "212",
+        "continentName": "North America",
+        "continent": "NA"
+      },
+      {
+        "countryCode": "DO",
+        "countryName": "Dominican Republic",
+        "isoNumeric": "214",
+        "continentName": "North America",
+        "continent": "NA"
+      },
+      {
+        "countryCode": "DZ",
+        "countryName": "Algeria",
+        "isoNumeric": "012",
+        "continentName": "Africa",
+        "continent": "AF"
+      },
+      {
+        "countryCode": "EC",
+        "countryName": "Ecuador",
+        "isoNumeric": "218",
+        "continentName": "South America",
+        "continent": "SA"
+      },
+      {
+        "countryCode": "EE",
+        "countryName": "Estonia",
+        "isoNumeric": "233",
+        "continentName": "Europe",
+        "continent": "EU"
+      },
+      {
+        "countryCode": "EG",
+        "countryName": "Egypt",
+        "isoNumeric": "818",
+        "continentName": "Africa",
+        "continent": "AF"
+      },
+      {
+        "countryCode": "EH",
+        "countryName": "Western Sahara",
+        "isoNumeric": "732",
+        "continentName": "Africa",
+        "continent": "AF"
+      },
+      {
+        "countryCode": "ER",
+        "countryName": "Eritrea",
+        "isoNumeric": "232",
+        "continentName": "Africa",
+        "continent": "AF"
+      },
+      {
+        "countryCode": "ES",
+        "countryName": "Spain",
+        "isoNumeric": "724",
+        "continentName": "Europe",
+        "continent": "EU"
+      },
+      {
+        "countryCode": "ET",
+        "countryName": "Ethiopia",
+        "isoNumeric": "231",
+        "continentName": "Africa",
+        "continent": "AF"
+      },
+      {
+        "countryCode": "FI",
+        "countryName": "Finland",
+        "isoNumeric": "246",
+        "continentName": "Europe",
+        "continent": "EU"
+      },
+      {
+        "countryCode": "FJ",
+        "countryName": "Fiji",
+        "isoNumeric": "242",
+        "continentName": "Oceania",
+        "continent": "OC"
+      },
+      {
+        "countryCode": "FK",
+        "countryName": "Falkland Islands",
+        "isoNumeric": "238",
+        "continentName": "South America",
+        "continent": "SA"
+      },
+      {
+        "countryCode": "FM",
+        "countryName": "Micronesia",
+        "isoNumeric": "583",
+        "continentName": "Oceania",
+        "continent": "OC"
+      },
+      {
+        "countryCode": "FO",
+        "countryName": "Faroe Islands",
+        "isoNumeric": "234",
+        "continentName": "Europe",
+        "continent": "EU"
+      },
+      {
+        "countryCode": "FR",
+        "countryName": "France",
+        "isoNumeric": "250",
+        "continentName": "Europe",
+        "continent": "EU"
+      },
+      {
+        "countryCode": "GA",
+        "countryName": "Gabon",
+        "isoNumeric": "266",
+        "continentName": "Africa",
+        "continent": "AF"
+      },
+      {
+        "countryCode": "GB",
+        "countryName": "United Kingdom",
+        "isoNumeric": "826",
+        "continentName": "Europe",
+        "continent": "EU"
+      },
+      {
+        "countryCode": "GD",
+        "countryName": "Grenada",
+        "isoNumeric": "308",
+        "continentName": "North America",
+        "continent": "NA"
+      },
+      {
+        "countryCode": "GE",
+        "countryName": "Georgia",
+        "isoNumeric": "268",
+        "continentName": "Asia",
+        "continent": "AS"
+      },
+      {
+        "countryCode": "GF",
+        "countryName": "French Guiana",
+        "isoNumeric": "254",
+        "continentName": "South America",
+        "continent": "SA"
+      },
+      {
+        "countryCode": "GG",
+        "countryName": "Guernsey",
+        "isoNumeric": "831",
+        "continentName": "Europe",
+        "continent": "EU"
+      },
+      {
+        "countryCode": "GH",
+        "countryName": "Ghana",
+        "isoNumeric": "288",
+        "continentName": "Africa",
+        "continent": "AF"
+      },
+      {
+        "countryCode": "GI",
+        "countryName": "Gibraltar",
+        "isoNumeric": "292",
+        "continentName": "Europe",
+        "continent": "EU"
+      },
+      {
+        "countryCode": "GL",
+        "countryName": "Greenland",
+        "isoNumeric": "304",
+        "continentName": "North America",
+        "continent": "NA"
+      },
+      {
+        "countryCode": "GM",
+        "countryName": "Gambia",
+        "isoNumeric": "270",
+        "continentName": "Africa",
+        "continent": "AF"
+      },
+      {
+        "countryCode": "GN",
+        "countryName": "Guinea",
+        "isoNumeric": "324",
+        "continentName": "Africa",
+        "continent": "AF"
+      },
+      {
+        "countryCode": "GP",
+        "countryName": "Guadeloupe",
+        "isoNumeric": "312",
+        "continentName": "North America",
+        "continent": "NA"
+      },
+      {
+        "countryCode": "GQ",
+        "countryName": "Equatorial Guinea",
+        "isoNumeric": "226",
+        "continentName": "Africa",
+        "continent": "AF"
+      },
+      {
+        "countryCode": "GR",
+        "countryName": "Greece",
+        "isoNumeric": "300",
+        "continentName": "Europe",
+        "continent": "EU"
+      },
+      {
+        "countryCode": "GS",
+        "countryName": "South Georgia and the South Sandwich Islands",
+        "isoNumeric": "239",
+        "continentName": "Antarctica",
+        "continent": "AN"
+      },
+      {
+        "countryCode": "GT",
+        "countryName": "Guatemala",
+        "isoNumeric": "320",
+        "continentName": "North America",
+        "continent": "NA"
+      },
+      {
+        "countryCode": "GU",
+        "countryName": "Guam",
+        "isoNumeric": "316",
+        "continentName": "Oceania",
+        "continent": "OC"
+      },
+      {
+        "countryCode": "GW",
+        "countryName": "Guinea-Bissau",
+        "isoNumeric": "624",
+        "continentName": "Africa",
+        "continent": "AF"
+      },
+      {
+        "countryCode": "GY",
+        "countryName": "Guyana",
+        "isoNumeric": "328",
+        "continentName": "South America",
+        "continent": "SA"
+      },
+      {
+        "countryCode": "HK",
+        "countryName": "Hong Kong",
+        "isoNumeric": "344",
+        "continentName": "Asia",
+        "continent": "AS"
+      },
+      {
+        "countryCode": "HM",
+        "countryName": "Heard Island and McDonald Islands",
+        "isoNumeric": "334",
+        "continentName": "Antarctica",
+        "continent": "AN"
+      },
+      {
+        "countryCode": "HN",
+        "countryName": "Honduras",
+        "isoNumeric": "340",
+        "continentName": "North America",
+        "continent": "NA"
+      },
+      {
+        "countryCode": "HR",
+        "countryName": "Croatia",
+        "isoNumeric": "191",
+        "continentName": "Europe",
+        "continent": "EU"
+      },
+      {
+        "countryCode": "HT",
+        "countryName": "Haiti",
+        "isoNumeric": "332",
+        "continentName": "North America",
+        "continent": "NA"
+      },
+      {
+        "countryCode": "HU",
+        "countryName": "Hungary",
+        "isoNumeric": "348",
+        "continentName": "Europe",
+        "continent": "EU"
+      },
+      {
+        "countryCode": "ID",
+        "countryName": "Indonesia",
+        "isoNumeric": "360",
+        "continentName": "Asia",
+        "continent": "AS"
+      },
+      {
+        "countryCode": "IE",
+        "countryName": "Ireland",
+        "isoNumeric": "372",
+        "continentName": "Europe",
+        "continent": "EU"
+      },
+      {
+        "countryCode": "IL",
+        "countryName": "Israel",
+        "isoNumeric": "376",
+        "continentName": "Asia",
+        "continent": "AS"
+      },
+      {
+        "countryCode": "IM",
+        "countryName": "Isle of Man",
+        "isoNumeric": "833",
+        "continentName": "Europe",
+        "continent": "EU"
+      },
+      {
+        "countryCode": "IN",
+        "countryName": "India",
+        "isoNumeric": "356",
+        "continentName": "Asia",
+        "continent": "AS"
+      },
+      {
+        "countryCode": "IO",
+        "countryName": "British Indian Ocean Territory",
+        "isoNumeric": "086",
+        "continentName": "Asia",
+        "continent": "AS"
+      },
+      {
+        "countryCode": "IQ",
+        "countryName": "Iraq",
+        "isoNumeric": "368",
+        "continentName": "Asia",
+        "continent": "AS"
+      },
+      {
+        "countryCode": "IR",
+        "countryName": "Iran",
+        "isoNumeric": "364",
+        "continentName": "Asia",
+        "continent": "AS"
+      },
+      {
+        "countryCode": "IS",
+        "countryName": "Iceland",
+        "isoNumeric": "352",
+        "continentName": "Europe",
+        "continent": "EU"
+      },
+      {
+        "countryCode": "IT",
+        "countryName": "Italy",
+        "isoNumeric": "380",
+        "continentName": "Europe",
+        "continent": "EU"
+      },
+      {
+        "countryCode": "JE",
+        "countryName": "Jersey",
+        "isoNumeric": "832",
+        "continentName": "Europe",
+        "continent": "EU"
+      },
+      {
+        "countryCode": "JM",
+        "countryName": "Jamaica",
+        "isoNumeric": "388",
+        "continentName": "North America",
+        "continent": "NA"
+      },
+      {
+        "countryCode": "JO",
+        "countryName": "Jordan",
+        "isoNumeric": "400",
+        "continentName": "Asia",
+        "continent": "AS"
+      },
+      {
+        "countryCode": "JP",
+        "countryName": "Japan",
+        "isoNumeric": "392",
+        "continentName": "Asia",
+        "continent": "AS"
+      },
+      {
+        "countryCode": "KE",
+        "countryName": "Kenya",
+        "isoNumeric": "404",
+        "continentName": "Africa",
+        "continent": "AF"
+      },
+      {
+        "countryCode": "KG",
+        "countryName": "Kyrgyzstan",
+        "isoNumeric": "417",
+        "continentName": "Asia",
+        "continent": "AS"
+      },
+      {
+        "countryCode": "KH",
+        "countryName": "Cambodia",
+        "isoNumeric": "116",
+        "continentName": "Asia",
+        "continent": "AS"
+      },
+      {
+        "countryCode": "KI",
+        "countryName": "Kiribati",
+        "isoNumeric": "296",
+        "continentName": "Oceania",
+        "continent": "OC"
+      },
+      {
+        "countryCode": "KM",
+        "countryName": "Comoros",
+        "isoNumeric": "174",
+        "continentName": "Africa",
+        "continent": "AF"
+      },
+      {
+        "countryCode": "KN",
+        "countryName": "Saint Kitts and Nevis",
+        "isoNumeric": "659",
+        "continentName": "North America",
+        "continent": "NA"
+      },
+      {
+        "countryCode": "KP",
+        "countryName": "North Korea",
+        "isoNumeric": "408",
+        "continentName": "Asia",
+        "continent": "AS"
+      },
+      {
+        "countryCode": "KR",
+        "countryName": "South Korea",
+        "isoNumeric": "410",
+        "continentName": "Asia",
+        "continent": "AS"
+      },
+      {
+        "countryCode": "KW",
+        "countryName": "Kuwait",
+        "isoNumeric": "414",
+        "continentName": "Asia",
+        "continent": "AS"
+      },
+      {
+        "countryCode": "KY",
+        "countryName": "Cayman Islands",
+        "isoNumeric": "136",
+        "continentName": "North America",
+        "continent": "NA"
+      },
+      {
+        "countryCode": "KZ",
+        "countryName": "Kazakhstan",
+        "isoNumeric": "398",
+        "continentName": "Asia",
+        "continent": "AS"
+      },
+      {
+        "countryCode": "LA",
+        "countryName": "Laos",
+        "isoNumeric": "418",
+        "continentName": "Asia",
+        "continent": "AS"
+      },
+      {
+        "countryCode": "LB",
+        "countryName": "Lebanon",
+        "isoNumeric": "422",
+        "continentName": "Asia",
+        "continent": "AS"
+      },
+      {
+        "countryCode": "LC",
+        "countryName": "Saint Lucia",
+        "isoNumeric": "662",
+        "continentName": "North America",
+        "continent": "NA"
+      },
+      {
+        "countryCode": "LI",
+        "countryName": "Liechtenstein",
+        "isoNumeric": "438",
+        "continentName": "Europe",
+        "continent": "EU"
+      },
+      {
+        "countryCode": "LK",
+        "countryName": "Sri Lanka",
+        "isoNumeric": "144",
+        "continentName": "Asia",
+        "continent": "AS"
+      },
+      {
+        "countryCode": "LR",
+        "countryName": "Liberia",
+        "isoNumeric": "430",
+        "continentName": "Africa",
+        "continent": "AF"
+      },
+      {
+        "countryCode": "LS",
+        "countryName": "Lesotho",
+        "isoNumeric": "426",
+        "continentName": "Africa",
+        "continent": "AF"
+      },
+      {
+        "countryCode": "LT",
+        "countryName": "Lithuania",
+        "isoNumeric": "440",
+        "continentName": "Europe",
+        "continent": "EU"
+      },
+      {
+        "countryCode": "LU",
+        "countryName": "Luxembourg",
+        "isoNumeric": "442",
+        "continentName": "Europe",
+        "continent": "EU"
+      },
+      {
+        "countryCode": "LV",
+        "countryName": "Latvia",
+        "isoNumeric": "428",
+        "continentName": "Europe",
+        "continent": "EU"
+      },
+      {
+        "countryCode": "LY",
+        "countryName": "Libya",
+        "isoNumeric": "434",
+        "continentName": "Africa",
+        "continent": "AF"
+      },
+      {
+        "countryCode": "MA",
+        "countryName": "Morocco",
+        "isoNumeric": "504",
+        "continentName": "Africa",
+        "continent": "AF"
+      },
+      {
+        "countryCode": "MC",
+        "countryName": "Monaco",
+        "isoNumeric": "492",
+        "continentName": "Europe",
+        "continent": "EU"
+      },
+      {
+        "countryCode": "MD",
+        "countryName": "Moldova",
+        "isoNumeric": "498",
+        "continentName": "Europe",
+        "continent": "EU"
+      },
+      {
+        "countryCode": "ME",
+        "countryName": "Montenegro",
+        "isoNumeric": "499",
+        "continentName": "Europe",
+        "continent": "EU"
+      },
+      {
+        "countryCode": "MF",
+        "countryName": "Saint Martin",
+        "isoNumeric": "663",
+        "continentName": "North America",
+        "continent": "NA"
+      },
+      {
+        "countryCode": "MG",
+        "countryName": "Madagascar",
+        "isoNumeric": "450",
+        "continentName": "Africa",
+        "continent": "AF"
+      },
+      {
+        "countryCode": "MH",
+        "countryName": "Marshall Islands",
+        "isoNumeric": "584",
+        "continentName": "Oceania",
+        "continent": "OC"
+      },
+      {
+        "countryCode": "MK",
+        "countryName": "Macedonia",
+        "isoNumeric": "807",
+        "continentName": "Europe",
+        "continent": "EU"
+      },
+      {
+        "countryCode": "ML",
+        "countryName": "Mali",
+        "isoNumeric": "466",
+        "continentName": "Africa",
+        "continent": "AF"
+      },
+      {
+        "countryCode": "MM",
+        "countryName": "Myanmar [Burma]",
+        "isoNumeric": "104",
+        "continentName": "Asia",
+        "continent": "AS"
+      },
+      {
+        "countryCode": "MN",
+        "countryName": "Mongolia",
+        "isoNumeric": "496",
+        "continentName": "Asia",
+        "continent": "AS"
+      },
+      {
+        "countryCode": "MO",
+        "countryName": "Macao",
+        "isoNumeric": "446",
+        "continentName": "Asia",
+        "continent": "AS"
+      },
+      {
+        "countryCode": "MP",
+        "countryName": "Northern Mariana Islands",
+        "isoNumeric": "580",
+        "continentName": "Oceania",
+        "continent": "OC"
+      },
+      {
+        "countryCode": "MQ",
+        "countryName": "Martinique",
+        "isoNumeric": "474",
+        "continentName": "North America",
+        "continent": "NA"
+      },
+      {
+        "countryCode": "MR",
+        "countryName": "Mauritania",
+        "isoNumeric": "478",
+        "continentName": "Africa",
+        "continent": "AF"
+      },
+      {
+        "countryCode": "MS",
+        "countryName": "Montserrat",
+        "isoNumeric": "500",
+        "continentName": "North America",
+        "continent": "NA"
+      },
+      {
+        "countryCode": "MT",
+        "countryName": "Malta",
+        "isoNumeric": "470",
+        "continentName": "Europe",
+        "continent": "EU"
+      },
+      {
+        "countryCode": "MU",
+        "countryName": "Mauritius",
+        "isoNumeric": "480",
+        "continentName": "Africa",
+        "continent": "AF"
+      },
+      {
+        "countryCode": "MV",
+        "countryName": "Maldives",
+        "isoNumeric": "462",
+        "continentName": "Asia",
+        "continent": "AS"
+      },
+      {
+        "countryCode": "MW",
+        "countryName": "Malawi",
+        "isoNumeric": "454",
+        "continentName": "Africa",
+        "continent": "AF"
+      },
+      {
+        "countryCode": "MX",
+        "countryName": "Mexico",
+        "isoNumeric": "484",
+        "continentName": "North America",
+        "continent": "NA"
+      },
+      {
+        "countryCode": "MY",
+        "countryName": "Malaysia",
+        "isoNumeric": "458",
+        "continentName": "Asia",
+        "continent": "AS"
+      },
+      {
+        "countryCode": "MZ",
+        "countryName": "Mozambique",
+        "isoNumeric": "508",
+        "continentName": "Africa",
+        "continent": "AF"
+      },
+      {
+        "countryCode": "NA",
+        "countryName": "Namibia",
+        "isoNumeric": "516",
+        "continentName": "Africa",
+        "continent": "AF"
+      },
+      {
+        "countryCode": "NC",
+        "countryName": "New Caledonia",
+        "isoNumeric": "540",
+        "continentName": "Oceania",
+        "continent": "OC"
+      },
+      {
+        "countryCode": "NE",
+        "countryName": "Niger",
+        "isoNumeric": "562",
+        "continentName": "Africa",
+        "continent": "AF"
+      },
+      {
+        "countryCode": "NF",
+        "countryName": "Norfolk Island",
+        "isoNumeric": "574",
+        "continentName": "Oceania",
+        "continent": "OC"
+      },
+      {
+        "countryCode": "NG",
+        "countryName": "Nigeria",
+        "isoNumeric": "566",
+        "continentName": "Africa",
+        "continent": "AF"
+      },
+      {
+        "countryCode": "NI",
+        "countryName": "Nicaragua",
+        "isoNumeric": "558",
+        "continentName": "North America",
+        "continent": "NA"
+      },
+      {
+        "countryCode": "NL",
+        "countryName": "Netherlands",
+        "isoNumeric": "528",
+        "continentName": "Europe",
+        "continent": "EU"
+      },
+      {
+        "countryCode": "NO",
+        "countryName": "Norway",
+        "isoNumeric": "578",
+        "continentName": "Europe",
+        "continent": "EU"
+      },
+      {
+        "countryCode": "NP",
+        "countryName": "Nepal",
+        "isoNumeric": "524",
+        "continentName": "Asia",
+        "continent": "AS"
+      },
+      {
+        "countryCode": "NR",
+        "countryName": "Nauru",
+        "isoNumeric": "520",
+        "continentName": "Oceania",
+        "continent": "OC"
+      },
+      {
+        "countryCode": "NU",
+        "countryName": "Niue",
+        "isoNumeric": "570",
+        "continentName": "Oceania",
+        "continent": "OC"
+      },
+      {
+        "countryCode": "NZ",
+        "countryName": "New Zealand",
+        "isoNumeric": "554",
+        "continentName": "Oceania",
+        "continent": "OC"
+      },
+      {
+        "countryCode": "OM",
+        "countryName": "Oman",
+        "isoNumeric": "512",
+        "continentName": "Asia",
+        "continent": "AS"
+      },
+      {
+        "countryCode": "PA",
+        "countryName": "Panama",
+        "isoNumeric": "591",
+        "continentName": "North America",
+        "continent": "NA"
+      },
+      {
+        "countryCode": "PE",
+        "countryName": "Peru",
+        "isoNumeric": "604",
+        "continentName": "South America",
+        "continent": "SA"
+      },
+      {
+        "countryCode": "PF",
+        "countryName": "French Polynesia",
+        "isoNumeric": "258",
+        "continentName": "Oceania",
+        "continent": "OC"
+      },
+      {
+        "countryCode": "PG",
+        "countryName": "Papua New Guinea",
+        "isoNumeric": "598",
+        "continentName": "Oceania",
+        "continent": "OC"
+      },
+      {
+        "countryCode": "PH",
+        "countryName": "Philippines",
+        "isoNumeric": "608",
+        "continentName": "Asia",
+        "continent": "AS"
+      },
+      {
+        "countryCode": "PK",
+        "countryName": "Pakistan",
+        "isoNumeric": "586",
+        "continentName": "Asia",
+        "continent": "AS"
+      },
+      {
+        "countryCode": "PL",
+        "countryName": "Poland",
+        "isoNumeric": "616",
+        "continentName": "Europe",
+        "continent": "EU"
+      },
+      {
+        "countryCode": "PM",
+        "countryName": "Saint Pierre and Miquelon",
+        "isoNumeric": "666",
+        "continentName": "North America",
+        "continent": "NA"
+      },
+      {
+        "countryCode": "PN",
+        "countryName": "Pitcairn Islands",
+        "isoNumeric": "612",
+        "continentName": "Oceania",
+        "continent": "OC"
+      },
+      {
+        "countryCode": "PR",
+        "countryName": "Puerto Rico",
+        "isoNumeric": "630",
+        "continentName": "North America",
+        "continent": "NA"
+      },
+      {
+        "countryCode": "PS",
+        "countryName": "Palestine",
+        "isoNumeric": "275",
+        "continentName": "Asia",
+        "continent": "AS"
+      },
+      {
+        "countryCode": "PT",
+        "countryName": "Portugal",
+        "isoNumeric": "620",
+        "continentName": "Europe",
+        "continent": "EU"
+      },
+      {
+        "countryCode": "PW",
+        "countryName": "Palau",
+        "isoNumeric": "585",
+        "continentName": "Oceania",
+        "continent": "OC"
+      },
+      {
+        "countryCode": "PY",
+        "countryName": "Paraguay",
+        "isoNumeric": "600",
+        "continentName": "South America",
+        "continent": "SA"
+      },
+      {
+        "countryCode": "QA",
+        "countryName": "Qatar",
+        "isoNumeric": "634",
+        "continentName": "Asia",
+        "continent": "AS"
+      },
+      {
+        "countryCode": "RE",
+        "countryName": "Réunion",
+        "isoNumeric": "638",
+        "continentName": "Africa",
+        "continent": "AF"
+      },
+      {
+        "countryCode": "RO",
+        "countryName": "Romania",
+        "isoNumeric": "642",
+        "continentName": "Europe",
+        "continent": "EU"
+      },
+      {
+        "countryCode": "RS",
+        "countryName": "Serbia",
+        "isoNumeric": "688",
+        "continentName": "Europe",
+        "continent": "EU"
+      },
+      {
+        "countryCode": "RU",
+        "countryName": "Russia",
+        "isoNumeric": "643",
+        "continentName": "Europe",
+        "continent": "EU"
+      },
+      {
+        "countryCode": "RW",
+        "countryName": "Rwanda",
+        "isoNumeric": "646",
+        "continentName": "Africa",
+        "continent": "AF"
+      },
+      {
+        "countryCode": "SA",
+        "countryName": "Saudi Arabia",
+        "isoNumeric": "682",
+        "continentName": "Asia",
+        "continent": "AS"
+      },
+      {
+        "countryCode": "SB",
+        "countryName": "Solomon Islands",
+        "isoNumeric": "090",
+        "continentName": "Oceania",
+        "continent": "OC"
+      },
+      {
+        "countryCode": "SC",
+        "countryName": "Seychelles",
+        "isoNumeric": "690",
+        "continentName": "Africa",
+        "continent": "AF"
+      },
+      {
+        "countryCode": "SD",
+        "countryName": "Sudan",
+        "isoNumeric": "729",
+        "continentName": "Africa",
+        "continent": "AF"
+      },
+      {
+        "countryCode": "SE",
+        "countryName": "Sweden",
+        "isoNumeric": "752",
+        "continentName": "Europe",
+        "continent": "EU"
+      },
+      {
+        "countryCode": "SG",
+        "countryName": "Singapore",
+        "isoNumeric": "702",
+        "continentName": "Asia",
+        "continent": "AS"
+      },
+      {
+        "countryCode": "SH",
+        "countryName": "Saint Helena",
+        "isoNumeric": "654",
+        "continentName": "Africa",
+        "continent": "AF"
+      },
+      {
+        "countryCode": "SI",
+        "countryName": "Slovenia",
+        "isoNumeric": "705",
+        "continentName": "Europe",
+        "continent": "EU"
+      },
+      {
+        "countryCode": "SJ",
+        "countryName": "Svalbard and Jan Mayen",
+        "isoNumeric": "744",
+        "continentName": "Europe",
+        "continent": "EU"
+      },
+      {
+        "countryCode": "SK",
+        "countryName": "Slovakia",
+        "isoNumeric": "703",
+        "continentName": "Europe",
+        "continent": "EU"
+      },
+      {
+        "countryCode": "SL",
+        "countryName": "Sierra Leone",
+        "isoNumeric": "694",
+        "continentName": "Africa",
+        "continent": "AF"
+      },
+      {
+        "countryCode": "SM",
+        "countryName": "San Marino",
+        "isoNumeric": "674",
+        "continentName": "Europe",
+        "continent": "EU"
+      },
+      {
+        "countryCode": "SN",
+        "countryName": "Senegal",
+        "isoNumeric": "686",
+        "continentName": "Africa",
+        "continent": "AF"
+      },
+      {
+        "countryCode": "SO",
+        "countryName": "Somalia",
+        "isoNumeric": "706",
+        "continentName": "Africa",
+        "continent": "AF"
+      },
+      {
+        "countryCode": "SR",
+        "countryName": "Suriname",
+        "isoNumeric": "740",
+        "continentName": "South America",
+        "continent": "SA"
+      },
+      {
+        "countryCode": "SS",
+        "countryName": "South Sudan",
+        "isoNumeric": "728",
+        "continentName": "Africa",
+        "continent": "AF"
+      },
+      {
+        "countryCode": "ST",
+        "countryName": "São Tomé and Príncipe",
+        "isoNumeric": "678",
+        "continentName": "Africa",
+        "continent": "AF"
+      },
+      {
+        "countryCode": "SV",
+        "countryName": "El Salvador",
+        "isoNumeric": "222",
+        "continentName": "North America",
+        "continent": "NA"
+      },
+      {
+        "countryCode": "SX",
+        "countryName": "Sint Maarten",
+        "isoNumeric": "534",
+        "continentName": "North America",
+        "continent": "NA"
+      },
+      {
+        "countryCode": "SY",
+        "countryName": "Syria",
+        "isoNumeric": "760",
+        "continentName": "Asia",
+        "continent": "AS"
+      },
+      {
+        "countryCode": "SZ",
+        "countryName": "Swaziland",
+        "isoNumeric": "748",
+        "continentName": "Africa",
+        "continent": "AF"
+      },
+      {
+        "countryCode": "TC",
+        "countryName": "Turks and Caicos Islands",
+        "isoNumeric": "796",
+        "continentName": "North America",
+        "continent": "NA"
+      },
+      {
+        "countryCode": "TD",
+        "countryName": "Chad",
+        "isoNumeric": "148",
+        "continentName": "Africa",
+        "continent": "AF"
+      },
+      {
+        "countryCode": "TF",
+        "countryName": "French Southern Territories",
+        "isoNumeric": "260",
+        "continentName": "Antarctica",
+        "continent": "AN"
+      },
+      {
+        "countryCode": "TG",
+        "countryName": "Togo",
+        "isoNumeric": "768",
+        "continentName": "Africa",
+        "continent": "AF"
+      },
+      {
+        "countryCode": "TH",
+        "countryName": "Thailand",
+        "isoNumeric": "764",
+        "continentName": "Asia",
+        "continent": "AS"
+      },
+      {
+        "countryCode": "TJ",
+        "countryName": "Tajikistan",
+        "isoNumeric": "762",
+        "continentName": "Asia",
+        "continent": "AS"
+      },
+      {
+        "countryCode": "TK",
+        "countryName": "Tokelau",
+        "isoNumeric": "772",
+        "continentName": "Oceania",
+        "continent": "OC"
+      },
+      {
+        "countryCode": "TL",
+        "countryName": "East Timor",
+        "isoNumeric": "626",
+        "continentName": "Oceania",
+        "continent": "OC"
+      },
+      {
+        "countryCode": "TM",
+        "countryName": "Turkmenistan",
+        "isoNumeric": "795",
+        "continentName": "Asia",
+        "continent": "AS"
+      },
+      {
+        "countryCode": "TN",
+        "countryName": "Tunisia",
+        "isoNumeric": "788",
+        "continentName": "Africa",
+        "continent": "AF"
+      },
+      {
+        "countryCode": "TO",
+        "countryName": "Tonga",
+        "isoNumeric": "776",
+        "continentName": "Oceania",
+        "continent": "OC"
+      },
+      {
+        "countryCode": "TR",
+        "countryName": "Turkey",
+        "isoNumeric": "792",
+        "continentName": "Asia",
+        "continent": "AS"
+      },
+      {
+        "countryCode": "TT",
+        "countryName": "Trinidad and Tobago",
+        "isoNumeric": "780",
+        "continentName": "North America",
+        "continent": "NA"
+      },
+      {
+        "countryCode": "TV",
+        "countryName": "Tuvalu",
+        "isoNumeric": "798",
+        "continentName": "Oceania",
+        "continent": "OC"
+      },
+      {
+        "countryCode": "TW",
+        "countryName": "Taiwan",
+        "isoNumeric": "158",
+        "continentName": "Asia",
+        "continent": "AS"
+      },
+      {
+        "countryCode": "TZ",
+        "countryName": "Tanzania",
+        "isoNumeric": "834",
+        "continentName": "Africa",
+        "continent": "AF"
+      },
+      {
+        "countryCode": "UA",
+        "countryName": "Ukraine",
+        "isoNumeric": "804",
+        "continentName": "Europe",
+        "continent": "EU"
+      },
+      {
+        "countryCode": "UG",
+        "countryName": "Uganda",
+        "isoNumeric": "800",
+        "continentName": "Africa",
+        "continent": "AF"
+      },
+      {
+        "countryCode": "UM",
+        "countryName": "U.S. Minor Outlying Islands",
+        "isoNumeric": "581",
+        "continentName": "Oceania",
+        "continent": "OC"
+      },
+      {
+        "countryCode": "US",
+        "countryName": "United States",
+        "isoNumeric": "840",
+        "continentName": "North America",
+        "continent": "NA"
+      },
+      {
+        "countryCode": "UY",
+        "countryName": "Uruguay",
+        "isoNumeric": "858",
+        "continentName": "South America",
+        "continent": "SA"
+      },
+      {
+        "countryCode": "UZ",
+        "countryName": "Uzbekistan",
+        "isoNumeric": "860",
+        "continentName": "Asia",
+        "continent": "AS"
+      },
+      {
+        "countryCode": "VA",
+        "countryName": "Vatican City",
+        "isoNumeric": "336",
+        "continentName": "Europe",
+        "continent": "EU"
+      },
+      {
+        "countryCode": "VC",
+        "countryName": "Saint Vincent and the Grenadines",
+        "isoNumeric": "670",
+        "continentName": "North America",
+        "continent": "NA"
+      },
+      {
+        "countryCode": "VE",
+        "countryName": "Venezuela",
+        "isoNumeric": "862",
+        "continentName": "South America",
+        "continent": "SA"
+      },
+      {
+        "countryCode": "VG",
+        "countryName": "British Virgin Islands",
+        "isoNumeric": "092",
+        "continentName": "North America",
+        "continent": "NA"
+      },
+      {
+        "countryCode": "VI",
+        "countryName": "U.S. Virgin Islands",
+        "isoNumeric": "850",
+        "continentName": "North America",
+        "continent": "NA"
+      },
+      {
+        "countryCode": "VN",
+        "countryName": "Vietnam",
+        "isoNumeric": "704",
+        "continentName": "Asia",
+        "continent": "AS"
+      },
+      {
+        "countryCode": "VU",
+        "countryName": "Vanuatu",
+        "isoNumeric": "548",
+        "continentName": "Oceania",
+        "continent": "OC"
+      },
+      {
+        "countryCode": "WF",
+        "countryName": "Wallis and Futuna",
+        "isoNumeric": "876",
+        "continentName": "Oceania",
+        "continent": "OC"
+      },
+      {
+        "countryCode": "WS",
+        "countryName": "Samoa",
+        "isoNumeric": "882",
+        "continentName": "Oceania",
+        "continent": "OC"
+      },
+      {
+        "countryCode": "XK",
+        "countryName": "Kosovo",
+        "isoNumeric": "0",
+        "continentName": "Europe",
+        "continent": "EU"
+      },
+      {
+        "countryCode": "YE",
+        "countryName": "Yemen",
+        "isoNumeric": "887",
+        "continentName": "Asia",
+        "continent": "AS"
+      },
+      {
+        "countryCode": "YT",
+        "countryName": "Mayotte",
+        "isoNumeric": "175",
+        "continentName": "Africa",
+        "continent": "AF"
+      },
+      {
+        "countryCode": "ZA",
+        "countryName": "South Africa",
+        "isoNumeric": "710",
+        "continentName": "Africa",
+        "continent": "AF"
+      },
+      {
+        "countryCode": "ZM",
+        "countryName": "Zambia",
+        "isoNumeric": "894",
+        "continentName": "Africa",
+        "continent": "AF"
+      },
+      {
+        "countryCode": "ZW",
+        "countryName": "Zimbabwe",
+        "isoNumeric": "716",
+        "continentName": "Africa",
+        "continent": "AF"
+      }
+    ]
+  }
+}

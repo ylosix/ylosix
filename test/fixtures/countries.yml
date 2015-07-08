@@ -1,0 +1,29 @@
+# == Schema Information
+#
+# Table name: countries
+#
+#  code       :string
+#  created_at :datetime         not null
+#  enabled    :boolean          default(FALSE), not null
+#  id         :integer          not null, primary key
+#  iso        :string
+#  name       :string
+#  updated_at :datetime         not null
+#  zone_id    :integer
+#
+# Indexes
+#
+#  index_countries_on_zone_id  (zone_id)
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  code: MyString
+  name: MyString
+  iso: MyString
+
+two:
+  code: MyString
+  name: MyString
+  iso: MyString

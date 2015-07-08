@@ -11,6 +11,8 @@ class AddressesController < Frontend::CommonController
       # @variables['customer_addresses'] = CustomerAddress.from_user(current_customer)
       @variables['customer_addresses'] = current_customer.customer_addresses
     end
+
+    @variables['countries'] = Country.where(enabled: true)
   end
 
   def index
