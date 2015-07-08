@@ -13,9 +13,8 @@ namespace :db do
     category = Category.find_by(slug: PHOTOGRAPHY_REFLEX_SLUG)
     categories = [category]
 
-    tag_cameras = Tag.with_translations.find_by(:tag_translations => {:name => 'Cameras', :locale => :en})
     tag_reflex = Tag.with_translations.find_by(:tag_translations => {:name => 'Reflex', :locale => :en})
-    tags = [tag_cameras, tag_reflex]
+    tags = [tag_reflex]
 
     tax_iva = Tax.find_by({:name => 'IVA ES 21%'})
 
@@ -63,6 +62,11 @@ namespace :db do
 
     create_product(product_attributes, categories, tags)
 
+    tag_lenses = Tag.with_translations.find_by(:tag_translations => {:name => 'Lenses', :locale => :en})
+    tags = [tag_lenses]
+
+    category = Category.find_by(slug: PHOTOGRAPHY_LENSES_SLUG)
+    categories = [category]
 
     zoom_image = File.new "#{Rails.root}/app/assets/images/products/DX-Zoom-10-24mm.png"
     product_attributes = {:reference_code => 'ref3',
@@ -84,8 +88,6 @@ namespace :db do
                           :control_stock => true,
                           :image => zoom_image}
 
-    category = Category.find_by(slug: PHOTOGRAPHY_LENSES_SLUG)
-    categories = [category]
     create_product(product_attributes, categories, tags)
   end
 
