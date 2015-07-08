@@ -8,6 +8,8 @@ namespace :db do
   PHONES_ACCESSORIES_SLUG = 'phones-accessories'
 
   VIDEOS_SLUG = 'video'
+  VIDEOS_CAMERAS_SLUG = 'video-cameras'
+  VIDEOS_ACCESSORIES_SLUG = 'video-accessories'
 
 
   desc 'Generate demo commerce'
@@ -42,12 +44,12 @@ namespace :db do
 
 
     video_attributes = {:parent_id => root.id,
-                        category_translations_attributes: [{:locale => :en, name: 'Video', },
-                                                           {:locale => :es, name: 'Vídeo'}],
+                        category_translations_attributes: [{:locale => :en, name: 'Video cameras', },
+                                                           {:locale => :es, name: 'Vídeo cámaras'}],
                         :enabled => true,
                         :visible => true,
                         :slug => VIDEOS_SLUG}
-    Utils.save_or_update_model(Category, {:slug => VIDEOS_SLUG}, video_attributes)
+    videos = Utils.save_or_update_model(Category, {:slug => VIDEOS_SLUG}, video_attributes)
 
     # Sub-categories
     reflex_attributes = {:parent_id => photography.id,
@@ -81,5 +83,21 @@ namespace :db do
                          :visible => true,
                          :slug => PHONES_SMART_PHONES_SLUG}
     Utils.save_or_update_model(Category, {:slug => PHONES_SMART_PHONES_SLUG}, phones_attributes)
+
+    accessories_attributes = {:parent_id => videos.id,
+                              category_translations_attributes: [{:locale => :en, name: 'Accessories', },
+                                                                 {:locale => :es, name: 'Accesorios'}],
+                              :enabled => true,
+                              :visible => true,
+                              :slug => VIDEOS_ACCESSORIES_SLUG}
+    Utils.save_or_update_model(Category, {:slug => VIDEOS_ACCESSORIES_SLUG}, accessories_attributes)
+
+    cameras_attributes = {:parent_id => videos.id,
+                         category_translations_attributes: [{:locale => :en, name: 'Cameras', },
+                                                            {:locale => :es, name: 'Cámeras'}],
+                         :enabled => true,
+                         :visible => true,
+                         :slug => VIDEOS_CAMERAS_SLUG}
+    Utils.save_or_update_model(Category, {:slug => VIDEOS_CAMERAS_SLUG}, cameras_attributes)
   end
 end
