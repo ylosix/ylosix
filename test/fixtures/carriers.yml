@@ -1,0 +1,33 @@
+# == Schema Information
+#
+# Table name: carriers
+#
+#  created_at         :datetime         not null
+#  delay              :string
+#  enabled            :boolean          default(FALSE), not null
+#  free_carrier       :boolean          default(FALSE), not null
+#  id                 :integer          not null, primary key
+#  image_content_type :string
+#  image_file_name    :string
+#  image_file_size    :integer
+#  image_updated_at   :datetime
+#  name               :string
+#  priority           :integer          default(1), not null
+#  updated_at         :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  delay: MyString
+  enabled: false
+  free_carrier: false
+  priority: 1
+
+two:
+  name: MyString
+  delay: MyString
+  enabled: false
+  free_carrier: false
+  priority: 1

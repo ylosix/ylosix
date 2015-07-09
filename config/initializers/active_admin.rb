@@ -207,15 +207,16 @@ ActiveAdmin.setup do |config|
       menu.add label: 'Admin Comments', :parent => 'Administration', url: '/admin/admin_comments', :priority => 1
 
 
-      menu.add label: 'Localization', :priority => 6
+      menu.add label: 'Transport', :priority => 6
+
+      menu.add label: 'Localization', :priority => 7
+      # menu.add label: 'Languages', url: '/admin/languages', :priority => 4
+
+      menu.add label: 'Preferences', :priority => 8
       # menu.add label: 'Languages', url: '/admin/languages', :priority => 4
 
 
-      menu.add label: 'Preferences', :priority => 7
-      # menu.add label: 'Languages', url: '/admin/languages', :priority => 4
-
-
-      menu.add label: 'Design', :priority => 8
+      menu.add label: 'Design', :priority => 9
     end
   end
 
