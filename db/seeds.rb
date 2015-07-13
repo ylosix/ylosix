@@ -45,13 +45,11 @@ def create_default_languages
   puts '####################'
 
   available_locales = %w(en es)
-  available_locales.each do |locale|
-    name = 'English'
-    name = 'Español' if locale == 'es'
-
+  names = %w(English Español)
+  available_locales.each_with_index do |locale, i|
     flag_file = File.new "#{Rails.root}/app/assets/images/flags/#{locale}.png"
     language_attributes = {:locale => locale,
-                           :name => name,
+                           :name => names[i],
                            :flag => flag_file,
                            :appears_in_backoffice => true,
                            :appears_in_web => true}

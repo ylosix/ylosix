@@ -10,7 +10,7 @@ namespace :db do
     saddress.address_1 = 'Rambla Nova, 72'
     saddress.postal_code = '43002'
     saddress.city = 'Tarragona'
-    saddress.country = 'Spain'
+    saddress.country = 'ES'
     saddress.phone = '977112233'
     saddress.mobile_phone = '616112233'
     saddress.dni = '123456789T'
