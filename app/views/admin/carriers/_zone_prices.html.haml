@@ -1,0 +1,55 @@
+%a{:onclick => 'javascript: return add_table_prices_columns();', :href => '#'}
+  Add range
+
+%br
+%br
+
+%table#table_prices{class: 'index_table index'}
+  %thead
+    %tr
+      %th
+        Applied when weight
+      %th
+        >=
+      - carrier_ranges_groups.each_with_index do |range_groups, i|
+        %th
+          %input{name: "carriers_ranges[][#{i}][greater_equal_than]", type: 'number', value: range_groups.greater_equal_than}
+    %tr
+      %th
+        Applied when weight
+      %th
+        <
+      - carrier_ranges_groups.each_with_index do |range_groups, i|
+        %th
+          %input{name: "carriers_ranges[][#{i}][lower_than]", type: 'number', value: range_groups.lower_than}
+
+  %tbody
+    - zones.each_with_index do |zone, i|
+      - enabled_inputs = carrier_ranges.where(zone: zone).count > 0
+      %tr
+        %td
+          = zone.name
+          = text_field_tag :zone_id, zone.id, :class => 'hide'
+        %td
+
+          = check_box_tag :enabled, 1, enabled_inputs, :onchange => "javascript: return click_checkbox_table_prices(#{i+2}, this);"
+        - carrier_ranges_groups.each_with_index do |range_groups, i|
+          - cr = carrier_ranges.find_by(zone: zone, greater_equal_than: range_groups.greater_equal_than, lower_than: range_groups.lower_than)
+          %td
+            - input_attributes = {type: 'number', name: "carriers_ranges[][#{i}][zones][][amount]", value: 0.0}
+            - input_attributes[:value] = cr.amount unless cr.nil?
+            - input_attributes[:disabled] = 'disabled' if cr.nil?
+            %input{input_attributes}
+
+            - input_attributes = {type: 'number', name: "carriers_ranges[][#{i}][zones][][zone_id]", value: 0.0}
+            - input_attributes[:class] = 'hide'
+            - input_attributes[:value] = zone.id
+            - input_attributes[:disabled] = 'disabled' if cr.nil?
+            %input{input_attributes}
+    %tr
+      %td
+      %td
+      - carrier_ranges_groups.each do |_|
+        %td
+          %a{onclick: 'javascript: return remove_table_prices_column(this);', href: '#'}
+            Remove

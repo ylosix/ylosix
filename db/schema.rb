@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150709082233) do
+ActiveRecord::Schema.define(version: 20150713103513) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,6 +79,19 @@ ActiveRecord::Schema.define(version: 20150709082233) do
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
   end
+
+  create_table "carriers_ranges", force: :cascade do |t|
+    t.integer  "zone_id"
+    t.integer  "carrier_id"
+    t.decimal  "greater_equal_than"
+    t.decimal  "lower_than"
+    t.decimal  "amount"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  add_index "carriers_ranges", ["carrier_id"], name: "index_carriers_ranges_on_carrier_id", using: :btree
+  add_index "carriers_ranges", ["zone_id"], name: "index_carriers_ranges_on_zone_id", using: :btree
 
   create_table "categories", force: :cascade do |t|
     t.integer  "parent_id"
@@ -419,6 +432,8 @@ ActiveRecord::Schema.define(version: 20150709082233) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "carriers_ranges", "carriers"
+  add_foreign_key "carriers_ranges", "zones"
   add_foreign_key "commerces", "templates", on_update: :cascade, on_delete: :cascade
   add_foreign_key "countries", "zones"
   add_foreign_key "customer_addresses", "customers", on_update: :cascade, on_delete: :cascade

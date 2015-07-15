@@ -173,7 +173,7 @@ ActiveAdmin.register Product do
     private
 
     def update_categories
-      ProductsCategory.where(product: resource).destroy_all
+      ProductsCategory.destroy_all(product: resource)
 
       unless params[:product][:products_categories_ids].blank?
         categories = params[:product][:products_categories_ids]
@@ -185,7 +185,7 @@ ActiveAdmin.register Product do
     end
 
     def update_tags
-      ProductsTag.where(product: resource).destroy_all
+      ProductsTag.destroy_all(product: resource)
 
       unless params[:product][:products_tags_ids].blank?
         tags = params[:product][:products_tags_ids]
