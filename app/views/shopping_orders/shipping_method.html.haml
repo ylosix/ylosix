@@ -1,0 +1,36 @@
+%h1 Order
+%hr
+
+%span
+  Select an shipping option for this address:
+  = current_customer.shopping_cart.shipping_address.name
+
+= form_tag finalize_customers_shopping_orders_path, method: :post do
+  %div{class: 'voffset6'}
+    - @carriers.each_with_index do |carrier, i|
+      %div.row
+        %div.col-xs-12
+          %table{class: 'resume table table-bordered'}
+            %tbody
+              %tr
+                %td{class: 'delivery_option_radio'}
+                  = radio_button_tag :carrier_id, carrier.id, i==0
+
+                %td{class: 'delivery_option_logo'}
+
+                %td
+                  %strong
+                    = carrier.name
+                  %br
+                    = carrier.delay
+
+                %td{class: 'delivery_option_price'}
+                  - if carrier.free_carrier
+                    = 'Free!'
+                  - else
+                    -#TODO calculate shipping
+
+  %div{class: 'row voffset6'}
+    %div{class: 'col-md-12'}
+      = link_to 'Continue shopping', @variables['commerce'].root_href, class: 'btn btn-default btn-block'
+      = submit_tag 'Finalize', class: 'btn btn-success btn-block'

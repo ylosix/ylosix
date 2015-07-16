@@ -4,6 +4,7 @@
 #
 #  billing_address  :hstore           default({}), not null
 #  billing_commerce :hstore           default({}), not null
+#  carrier_id       :integer
 #  commerce_id      :integer
 #  created_at       :datetime         not null
 #  customer_id      :integer

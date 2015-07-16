@@ -1,6 +1,6 @@
 class ShoppingOrdersController < Frontend::CommonController
   before_action :authenticate_customer!
-  before_action :check_addresses, only: :finalize
+  before_action :check_addresses, only: [:finalize, :shipping_method]
 
   def get_template_variables(template)
     super
@@ -43,12 +43,21 @@ class ShoppingOrdersController < Frontend::CommonController
     redirect_to :customers_shopping_orders
   end
 
+  def shipping_method
+    @carriers = Carrier.where(enabled: true)
+  end
+
   def finalize
     sc = current_customer.shopping_cart
 
     unless sc.nil?
       so = ShoppingOrder.from_shopping_cart(sc, @variables['commerce'])
-      so.save
+      so.attributes = params_shopping_order
+
+      unless so.save
+        redirect_to :shipping_method_customers_shopping_orders, alert: 'A carrier needs to be selected.'
+        return
+      end
 
       sc.destroy
     end
@@ -57,6 +66,10 @@ class ShoppingOrdersController < Frontend::CommonController
   end
 
   protected
+
+  def params_shopping_order
+    params.permit(:carrier_id)
+  end
 
   def set_breadcrumbs
     add_breadcrumb(Breadcrumb.new(url: show_customers_path, name: 'Customers'))

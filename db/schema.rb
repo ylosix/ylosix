@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150713103513) do
+ActiveRecord::Schema.define(version: 20150716114619) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -343,6 +343,7 @@ ActiveRecord::Schema.define(version: 20150713103513) do
     t.hstore   "billing_address",  default: {},                                   null: false
     t.hstore   "billing_commerce", default: {},                                   null: false
     t.integer  "order_num",        default: "nextval('order_num_seq'::regclass)", null: false
+    t.integer  "carrier_id"
   end
 
   add_index "shopping_orders", ["customer_id"], name: "index_shopping_orders_on_customer_id", using: :btree
@@ -448,6 +449,7 @@ ActiveRecord::Schema.define(version: 20150713103513) do
   add_foreign_key "shopping_carts", "customers", on_update: :cascade, on_delete: :cascade
   add_foreign_key "shopping_carts_products", "products", on_update: :cascade, on_delete: :cascade
   add_foreign_key "shopping_carts_products", "shopping_carts", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "shopping_orders", "carriers", on_update: :cascade, on_delete: :cascade
   add_foreign_key "shopping_orders", "commerces", on_update: :cascade, on_delete: :cascade
   add_foreign_key "shopping_orders", "customers", on_update: :cascade, on_delete: :cascade
   add_foreign_key "shopping_orders_products", "products", on_update: :cascade, on_delete: :cascade
