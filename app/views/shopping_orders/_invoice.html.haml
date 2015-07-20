@@ -77,7 +77,7 @@
                   %td{class: 'col-xs-2 text-right'}
                     %strong Totals
               %tbody
-                - shopping_order.shopping_orders_products.each do |sop|
+                - shopping_order.shopping_orders_products_plus_carrier.each do |sop|
                   %tr
                     %td.text-center
                       = sop.quantity
@@ -90,7 +90,7 @@
                     %td.text-center
                       = sop.retail_price
                     %td.text-right
-                      = sop.quantity * sop.retail_price
+                      = sop.quantity * sop.retail_price if !sop.quantity.nil? && !sop.retail_price.nil?
 
                 %tr
                   %td{class: 'no-line', 'colspan' => 5}

@@ -8,11 +8,11 @@ rackup      DefaultRackup
 port        ENV['PORT']     || 3000
 environment ENV['RAILS_ENV'] || 'development'
 
-if ENV['RAILS_PIDS'].nil? && ENV['RAILS_PIDS'] != ''
+if !ENV['RAILS_PIDS'].nil? && ENV['RAILS_PIDS'] != ''
   pidfile ENV['RAILS_PIDS']
 end
 
-if ENV['RAILS_LOGS'].nil? && ENV['RAILS_LOGS'] != ''
+if !ENV['RAILS_LOGS'].nil? && ENV['RAILS_LOGS'] != ''
   stdout_redirect ENV['RAILS_LOGS'], ENV['RAILS_LOGS']
 end
 

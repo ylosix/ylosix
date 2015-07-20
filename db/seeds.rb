@@ -83,6 +83,7 @@ def create_default_commerce
                          name: 'Demo ylosix',
                          order_prefix: 'DEMO-%Y-%order_num',
                          billing_address: {
+                             name: 'Demo ylosix',
                              cif: 'B12345678',
                              city: 'Tarragona',
                              phone: '977112233',

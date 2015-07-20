@@ -9,6 +9,7 @@ ActiveAdmin.register ShoppingOrder do
     column :customer
     column :total_products
     column :total_retail_price
+    column :carrier
     column :created_at
     column :updated_at
     actions
@@ -27,7 +28,7 @@ ActiveAdmin.register ShoppingOrder do
 
       row :customer
       row 'Products' do |so|
-        table_for so.shopping_orders_products do
+        table_for so.shopping_orders_products_plus_carrier do
           column :product
           column :quantity
           column :retail_price_pre_tax
@@ -44,16 +45,16 @@ ActiveAdmin.register ShoppingOrder do
       def retrieve_array_address(caddress)
         address_array = []
 
-        address_array << "#{caddress[:customer_name]} #{caddress[:customer_last_name]}"
-        address_array << caddress[:dni]
-        address_array << caddress[:business]
-        address_array << caddress[:address_1]
-        address_array << caddress[:address_2] unless caddress[:address_2].blank?
-        address_array << "#{caddress[:postal_code]} #{caddress[:city]}"
-        address_array << caddress[:country]
-        address_array << caddress[:phone]
-        address_array << caddress[:mobile_phone]
-        address_array << caddress[:other]
+        address_array << "#{caddress['name']} #{caddress['customer_name']} #{caddress['customer_last_name']}"
+        address_array << "#{caddress['cif']} #{caddress['dni']}"
+        address_array << caddress['business']
+        address_array << caddress['address_1']
+        address_array << caddress['address_2'] unless caddress['address_2'].blank?
+        address_array << "#{caddress['postal_code']} #{caddress['city']}"
+        address_array << caddress['country']
+        address_array << caddress['phone']
+        address_array << caddress['mobile_phone']
+        address_array << caddress['other']
 
         address_array
       end
@@ -71,7 +72,7 @@ ActiveAdmin.register ShoppingOrder do
 
           column do
             span '<b>Billing address</b>'.html_safe
-            baddress = so.shipping_address
+            baddress = so.billing_address
             address_array = retrieve_array_address(baddress)
 
             div [address_array].join(' <br/> ').html_safe

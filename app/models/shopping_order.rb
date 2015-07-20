@@ -21,9 +21,18 @@
 class ShoppingOrder < ActiveRecord::Base
   include ArrayLiquid
 
+  belongs_to :carrier
   belongs_to :customer
   belongs_to :commerce
   has_many :shopping_orders_products
+
+  def shopping_orders_products_plus_carrier
+    sop = shopping_orders_products.to_a
+
+    sop << {product: '<strong>Shipping</strong>'.html_safe}
+    sop << {product: carrier, retail_price_pre_tax: 0, retail_price: 0}
+    sop
+  end
 
   def self.from_shopping_cart(sc, commerce)
     so = ShoppingOrder.new
