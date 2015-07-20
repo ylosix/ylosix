@@ -78,19 +78,31 @@
                     %strong Totals
               %tbody
                 - shopping_order.shopping_orders_products_plus_carrier.each do |sop|
-                  %tr
-                    %td.text-center
-                      = sop.quantity
-                    %td
-                      = sop.product.name
-                    %td.text-center
-                      = sop.retail_price_pre_tax
-                    %td.text-center
-                      = "#{sop.tax_rate}%"
-                    %td.text-center
-                      = sop.retail_price
-                    %td.text-right
-                      = sop.quantity * sop.retail_price if !sop.quantity.nil? && !sop.retail_price.nil?
+                  - if sop.is_a?(Hash)
+                    %tr
+                      %td.text-center
+                      %td
+                        = sop[:product]
+                      %td.text-center
+                        = sop[:retail_price_pre_tax]
+                      %td.text-center
+                      %td.text-center
+                      %td.text-right
+                        = sop[:retail_price]
+                  - else
+                    %tr
+                      %td.text-center
+                        = sop.quantity unless sop.quantity.nil?
+                      %td
+                        = sop.product.name
+                      %td.text-center
+                        = sop.retail_price_pre_tax
+                      %td.text-center
+                        = "#{sop.tax_rate}%"
+                      %td.text-center
+                        = sop.retail_price
+                      %td.text-right
+                        = sop.quantity * sop.retail_price if !sop.quantity.nil? && !sop.retail_price.nil?
 
                 %tr
                   %td{class: 'no-line', 'colspan' => 5}
