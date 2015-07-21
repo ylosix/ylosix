@@ -5,8 +5,10 @@
 #  barcode              :string
 #  control_stock        :boolean          default(FALSE)
 #  created_at           :datetime
+#  depth                :decimal(10, 6)   default(0.0), not null
 #  description          :text
 #  enabled              :boolean          default(FALSE)
+#  height               :decimal(10, 6)   default(0.0), not null
 #  id                   :integer          not null, primary key
 #  image_content_type   :string
 #  image_file_name      :string
@@ -26,6 +28,8 @@
 #  unpublication_date   :datetime
 #  updated_at           :datetime
 #  visible              :boolean          default(TRUE)
+#  weight               :decimal(10, 6)   default(0.0), not null
+#  width                :decimal(10, 6)   default(0.0), not null
 #
 # Indexes
 #

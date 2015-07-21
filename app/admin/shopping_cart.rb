@@ -28,6 +28,7 @@ ActiveAdmin.register ShoppingCart do
       end
 
       row :total_products
+      row :total_weight
       row :total_retail_price
 
       row :created_at

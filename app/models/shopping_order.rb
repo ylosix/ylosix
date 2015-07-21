@@ -73,6 +73,10 @@ class ShoppingOrder < ActiveRecord::Base
     products_prices.reduce(:+)
   end
 
+  def total_weight
+    shopping_orders_products.inject(0) { |a, e| a + e.product.weight }
+  end
+
   def to_liquid
     {
         'shopping_orders_products' => array_to_liquid(shopping_orders_products),

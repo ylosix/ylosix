@@ -5,6 +5,7 @@ ActiveAdmin.register Product do
     permitted = [:reference_code, :name, :enabled, :visible, :short_description,
                  :description, :publication_date, :unpublication_date,
                  :retail_price_pre_tax, :retail_price, :tax_id, :image,
+                 :width, :height, :depth, :weight,
                  :meta_keywords, :meta_description, :slug, :stock, :control_stock,
                  products_categories_attributes: [:id, :category_id, :product_id, :_destroy],
                  products_pictures_attributes: [:id, :image, :_destroy]]
@@ -55,6 +56,11 @@ ActiveAdmin.register Product do
       row :meta_keywords
       row :meta_description
 
+      row :width
+      row :height
+      row :depth
+      row :weight
+
       row :slug
       row :stock
       row :control_stock
@@ -96,6 +102,13 @@ ActiveAdmin.register Product do
       f.input :meta_keywords
       f.input :meta_description
       f.input :slug
+    end
+
+    f.inputs 'Transport' do
+      f.input :width, hint: 'cm'
+      f.input :height, hint: 'cm'
+      f.input :depth, hint: 'cm'
+      f.input :weight, hint: 'kg'
     end
 
     f.inputs 'Images' do

@@ -34,6 +34,10 @@ class ShoppingCart < ActiveRecord::Base
     shopping_carts_products.inject(0) { |a, e| a + e.quantity }
   end
 
+  def total_weight
+    shopping_carts_products.inject(0) { |a, e| a + e.product.weight }
+  end
+
   def total_retail_price
     products_prices = shopping_carts_products.map { |e| e.product.retail_price * e.quantity }
     products_prices.reduce(:+)
