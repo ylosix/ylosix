@@ -4,7 +4,6 @@
   });
 
 - commerce = shopping_order.commerce
-- commerce ||= @variables['commerce']
 %div.container
   %div.row
     %div.col-xs-12
@@ -12,14 +11,14 @@
       %div.row
         %div.col-xs-8
           %h2
-            = image_tag commerce.logo.url(:original), :alt => 'Invoice'
+            = image_tag @variables['commerce']['image_src'], :alt => 'Invoice'
 
         %div{class: 'col-xs-4 text-right'}
           %ul.list-unstyled
             %li
               %h2
-                = "Order ##{commerce.retrieve_order_num(shopping_order)}"
-            - unless commerce.billing_address.nil?
+                = "Order ##{commerce.retrieve_order_num(shopping_order)}" unless commerce.nil?
+            - if !commerce.nil? && commerce.billing_address.nil?
               %li
                 = render partial: 'shopping_orders/invoice_address', locals: { address: commerce.billing_address }
 

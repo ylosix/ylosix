@@ -71,7 +71,8 @@ class Commerce < ActiveRecord::Base
         'name' => name,
         'root_href' => root_href,
         'template' => template,
-        'template_from' => template_from
+        'template_from' => template_from,
+        'ga_account_id' => ga_account_id
     }
   end
 end

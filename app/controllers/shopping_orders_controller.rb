@@ -51,7 +51,7 @@ class ShoppingOrdersController < Frontend::CommonController
     sc = current_customer.shopping_cart
 
     unless sc.nil?
-      so = ShoppingOrder.from_shopping_cart(sc, @variables['commerce'])
+      so = ShoppingOrder.from_shopping_cart(sc, @commerce)
       so.attributes = params_shopping_order
 
       unless so.save

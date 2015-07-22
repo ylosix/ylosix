@@ -72,23 +72,25 @@ class ApplicationController < ActionController::Base
   end
 
   def extract_commerce_from_url
-    @variables ||= {}
-    @variables['commerce'] = Commerce.retrieve(retrieve_http_server_name)
-    @render_template = @variables['commerce'].template
+    @commerce = Commerce.retrieve(retrieve_http_server_name)
+    @render_template = @commerce.template
 
     unless current_admin_user.nil?
       user_template = Template.active_template(current_admin_user)
       unless user_template.nil?
         @render_template = user_template
         if current_admin_user.debug_template.nil?
-          @variables['commerce'].template_from = 'default_template'
+          @commerce.template_from = 'default_template'
         else
-          @variables['commerce'].template_from = 'admin_user'
+          @commerce.template_from = 'admin_user'
         end
       end
     end
 
-    @variables['commerce'].root_href = root_path
+    @commerce.root_href = root_path
+
+    @variables ||= {}
+    @variables['commerce'] = @commerce.to_liquid
   end
 
   def retrieve_http_server_name

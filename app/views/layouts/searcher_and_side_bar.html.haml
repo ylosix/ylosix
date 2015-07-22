@@ -3,7 +3,7 @@
   %head
     = render 'layouts/header'
   %body.shop
-    ="<!-- #{@variables['commerce'].to_liquid} -->".html_safe
+    ="<!-- #{@variables['commerce']} -->".html_safe
     = render 'layouts/components/nav_bar'
 
     -# Page Content
@@ -11,12 +11,12 @@
       = render 'layouts/components/notice_messages'
 
       - image_src = ''
-      - image_src = @variables['commerce'].logo.url(:original) if @variables['commerce'].logo?
+      - image_src = @variables['commerce']['image_src'] if @variables['commerce']
 
       %div.col-md-3
         %div.text-center
-          %a{href: @variables['commerce'].root_href}
-            = image_tag image_src, { alt: @variables['commerce'].name, title: @variables['commerce'].name}
+          %a{href: @variables['commerce']['root_href']}
+            = image_tag image_src, {class: 'img-responsive', alt: @variables['commerce']['name'], title: @variables['commerce']['name']}
 
         %div.list-group
           = render partial: 'layouts/components/side_bar_category', locals: { categories: @variables['categories']}
