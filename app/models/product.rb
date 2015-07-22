@@ -74,15 +74,19 @@ class Product < ActiveRecord::Base
                                     "%#{text}%", "%#{text}%").group('products.id')
                        }
 
-  def self.in_frontend(category)
+  def self.in_frontend(category, not_in_list = [])
     products = Product.joins(:products_categories)
-                   .where('publication_date <= ?', DateTime.now)
+
+    products = products.where('products.id not in (?)', not_in_list) if not_in_list.any?
+    products = products.where('publication_date <= ?', DateTime.now)
                    .where('unpublication_date is null or unpublication_date >= ?', DateTime.now)
-                   .where(products_categories: {category_id: category.id},
+                   .where(products_categories:
+                              {category_id: category.id},
                           visible: true)
+                   .group('products.id')
 
     category.children.each do |child|
-      products += Product.in_frontend(child)
+      products += Product.in_frontend(child, products.map(&:id))
     end
 
     products
