@@ -96,7 +96,7 @@ class ApplicationController < ActionController::Base
   def retrieve_http_server_name
     http = nil
     if !request.nil? && !request.env['SERVER_NAME'].nil?
-      http = request.env['SERVER_NAME'].parameterize.underscore
+      http = request.env['SERVER_NAME']
       http = http[4..-1] if http.starts_with?('www.')
     end
 
