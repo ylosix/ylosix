@@ -25,7 +25,8 @@ module Ecommerce
 
     config.assets.precompile += %w( ckeditor/* )
 
+    # TODO env vars
     DOMAIN_HOST = 'demo.ylosix.com'
-    MAIN_EMAIL = 'demo@ylosix.com'
+    MAIN_EMAIL = 'admin@ylosix.com'
   end
 end
