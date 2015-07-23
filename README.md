@@ -16,6 +16,8 @@ Open source ecommerce.
   
   * Puppet: 3.7.5
   
+  * [Jira](#jira)
+  
   * [Installation](#installation)
   
   * Configuration
@@ -37,6 +39,10 @@ Open source ecommerce.
 
 Please feel free to use a different markup language if you do not plan to run
 <tt>rake doc:app</tt>.
+
+## Jira
+
+Follow us [here](https://ylos-hispania.atlassian.net/secure/Dashboard.jspa).
 
 
 ## Installation

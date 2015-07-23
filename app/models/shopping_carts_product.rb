@@ -15,6 +15,11 @@
 #  index_shopping_carts_products_on_product_id        (product_id)
 #  index_shopping_carts_products_on_shopping_cart_id  (shopping_cart_id)
 #
+# Foreign Keys
+#
+#  fk_rails_1ba11f7c1b  (shopping_cart_id => shopping_carts.id)
+#  fk_rails_d696c60c99  (product_id => products.id)
+#
 
 class ShoppingCartsProduct < ActiveRecord::Base
   belongs_to :shopping_cart

@@ -16,6 +16,10 @@
 #
 #  index_products_pictures_on_product_id  (product_id)
 #
+# Foreign Keys
+#
+#  fk_rails_6f2fb9f3e1  (product_id => products.id)
+#
 
 require 'test_helper'
 

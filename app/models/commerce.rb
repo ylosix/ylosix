@@ -24,6 +24,10 @@
 #
 #  index_commerces_on_template_id  (template_id)
 #
+# Foreign Keys
+#
+#  fk_rails_f6f5a5f253  (template_id => templates.id)
+#
 
 class Commerce < ActiveRecord::Base
   attr_accessor :root_href, :template_from

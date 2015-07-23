@@ -11,6 +11,10 @@
 #  name             :string
 #  updated_at       :datetime         not null
 #
+# Foreign Keys
+#
+#  fk_rails_79041ef784  (customer_id => customers.id)
+#
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 

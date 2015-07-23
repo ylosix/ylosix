@@ -17,6 +17,11 @@
 #  index_shopping_orders_products_on_product_id         (product_id)
 #  index_shopping_orders_products_on_shopping_order_id  (shopping_order_id)
 #
+# Foreign Keys
+#
+#  fk_rails_06baf62b18  (shopping_order_id => shopping_orders.id)
+#  fk_rails_a5314c7221  (product_id => products.id)
+#
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 

@@ -13,6 +13,12 @@
 #
 #  index_shopping_carts_on_customer_id  (customer_id)
 #
+# Foreign Keys
+#
+#  fk_rails_7725ef05cb  (billing_address_id => customer_addresses.id)
+#  fk_rails_95c2cdac1a  (shipping_address_id => customer_addresses.id)
+#  fk_rails_a4cc6e935e  (customer_id => customers.id)
+#
 
 require 'test_helper'
 

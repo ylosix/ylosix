@@ -17,6 +17,12 @@
 #
 #  index_shopping_orders_on_customer_id  (customer_id)
 #
+# Foreign Keys
+#
+#  fk_rails_6cc7143c73  (customer_id => customers.id)
+#  fk_rails_be0697c8ed  (commerce_id => commerces.id)
+#  fk_rails_c71875ef4e  (carrier_id => carriers.id)
+#
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 

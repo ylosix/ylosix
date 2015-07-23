@@ -24,6 +24,10 @@
 #
 #  index_commerces_on_template_id  (template_id)
 #
+# Foreign Keys
+#
+#  fk_rails_f6f5a5f253  (template_id => templates.id)
+#
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 

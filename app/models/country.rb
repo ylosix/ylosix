@@ -15,6 +15,10 @@
 #
 #  index_countries_on_zone_id  (zone_id)
 #
+# Foreign Keys
+#
+#  fk_rails_e12271a270  (zone_id => zones.id)
+#
 
 class Country < ActiveRecord::Base
   belongs_to :zone

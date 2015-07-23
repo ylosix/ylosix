@@ -13,6 +13,11 @@
 #  index_tags_groups_categories_on_category_id    (category_id)
 #  index_tags_groups_categories_on_tags_group_id  (tags_group_id)
 #
+# Foreign Keys
+#
+#  fk_rails_00620a44cd  (tags_group_id => tags_groups.id)
+#  fk_rails_b97849bb14  (category_id => categories.id)
+#
 
 class TagsGroupsCategory < ActiveRecord::Base
   belongs_to :category

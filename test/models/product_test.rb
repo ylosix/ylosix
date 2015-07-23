@@ -35,6 +35,10 @@
 #
 #  index_products_on_tax_id  (tax_id)
 #
+# Foreign Keys
+#
+#  fk_rails_f5661f270e  (tax_id => taxes.id)
+#
 
 require 'test_helper'
 
