@@ -58,7 +58,7 @@ ActiveAdmin.register Category do
 
         ids = array_ordered.map { |i| i.id }
         order_by = ids.map { |i| "id=#{i} DESC" }.join(',')
-        @categories = Category.where(:id => ids).order(order_by).page(0).per(@categories.size)
+        @categories = Category.where(id: ids).order(order_by).page(0).per(@categories.size)
       end
 
       super
