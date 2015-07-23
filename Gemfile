@@ -75,6 +75,7 @@ group :development, :test, :profile do
   # Use debugger (incompatible with Rubymine)
   # gem 'debugger'
   gem 'rubocop'
+  gem 'mailcatcher'
 
   gem 'simplecov'
   gem 'coveralls'

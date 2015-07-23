@@ -24,5 +24,7 @@ module Ecommerce
     config.i18n.available_locales = [:es, :en]
 
     config.assets.precompile += %w( ckeditor/* )
+
+    DOMAIN_HOST = 'demo.ylosix.com'
   end
 end

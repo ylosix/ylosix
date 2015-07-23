@@ -87,4 +87,7 @@ Rails.application.configure do
                         :slack => {
                             :webhook_url => 'https://hooks.slack.com/services/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'
                         }
+
+  config.action_mailer.default_url_options = {:host => Ecommerce::Application::DOMAIN_HOST}
+  config.action_mailer.asset_host = "http://#{Ecommerce::Application::DOMAIN_HOST}"
 end
