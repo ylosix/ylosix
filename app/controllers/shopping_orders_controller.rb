@@ -8,9 +8,10 @@ class ShoppingOrdersController < Frontend::CommonController
     @variables['finalize_shopping_order_href'] = finalize_customers_shopping_orders_path
   end
 
-  def show
+  def checkout
+    @carrier_id = params_shopping_order[:carrier_id]
     # TODO check for empty cart.
-    add_breadcrumb(Breadcrumb.new(url: customers_shopping_orders_path, name: 'Checkout'))
+    add_breadcrumb(Breadcrumb.new(url: shipping_method_customers_shopping_orders_path, name: 'Checkout'))
   end
 
   def addresses
@@ -19,7 +20,7 @@ class ShoppingOrdersController < Frontend::CommonController
     @type = params[:type]
     @variables['customer_addresses'] = current_customer.customer_addresses
 
-    add_breadcrumb(Breadcrumb.new(url: customers_shopping_orders_path, name: 'Checkout'))
+    add_breadcrumb(Breadcrumb.new(url: shipping_method_customers_shopping_orders_path, name: 'Checkout'))
     add_breadcrumb(Breadcrumb.new(url: addresses_customers_shopping_orders_path(@type), name: 'Select address'))
   end
 
@@ -40,7 +41,17 @@ class ShoppingOrdersController < Frontend::CommonController
       end
     end
 
-    redirect_to :customers_shopping_orders
+    redirect_to :shipping_method_customers_shopping_orders
+  end
+
+  def save_carrier
+    sc = current_customer.shopping_cart
+    unless sc.nil?
+      sc.attributes = params_shopping_order
+      sc.save
+    end
+
+    redirect_to :checkout_customers_shopping_orders
   end
 
   def shipping_method
@@ -52,8 +63,6 @@ class ShoppingOrdersController < Frontend::CommonController
 
     unless sc.nil?
       so = ShoppingOrder.from_shopping_cart(sc, @commerce)
-      so.attributes = params_shopping_order
-
       unless so.save
         redirect_to :shipping_method_customers_shopping_orders, alert: 'A carrier needs to be selected.'
         return

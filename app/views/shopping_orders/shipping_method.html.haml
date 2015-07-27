@@ -1,12 +1,31 @@
-%h1 Order
+%h1 Shipping options
 %hr
 
-%span
-  Select an shipping option for this address:
-  = current_customer.shopping_cart.shipping_address.name
+- sc = @variables['shopping_cart']
+%div{class: 'row voffset3'}
+  %div{class: 'col-md-6'}
+    %h4 Shipping address
+    %hr
+    - if sc.shipping_address.nil?
+      = link_to 'Select shipping address', addresses_customers_shopping_orders_path('shipping_address_id')
+    - else
+      = link_to 'Select other shipping address', addresses_customers_shopping_orders_path('shipping_address_id')
+      = render partial: 'addresses/address', locals: {address: sc.shipping_address}
 
-= form_tag finalize_customers_shopping_orders_path, method: :post do
-  %div{class: 'voffset6'}
+  %div{class: 'col-md-6'}
+    %h4 Billing address
+    %hr
+    - if sc.billing_address.nil?
+      = link_to 'Select billing address', addresses_customers_shopping_orders_path('billing_address_id')
+    - else
+      = link_to 'Select other billing address', addresses_customers_shopping_orders_path('billing_address_id')
+      = render partial: 'addresses/address', locals: {address: sc.billing_address}
+
+%span
+  Select an shipping option:
+
+= form_tag save_carrier_customers_shopping_orders_path, method: :post do
+  %div{class: 'voffset3'}
     - @carriers.each_with_index do |carrier, i|
       %div.row
         %div.col-xs-12
@@ -30,7 +49,8 @@
                   - else
                     -#TODO calculate shipping
 
-  %div{class: 'row voffset6'}
-    %div{class: 'col-md-12'}
+  %div{class: 'row voffset3'}
+    %div{class: 'col-md-2'}
       = link_to 'Continue shopping', @variables['commerce']['root_href'], class: 'btn btn-default btn-block'
-      = submit_tag 'Finalize', class: 'btn btn-success btn-block'
+    %div{class: 'col-md-offset-8 col-md-2'}
+      = submit_tag 'Checkout', class: 'btn btn-success btn-block'

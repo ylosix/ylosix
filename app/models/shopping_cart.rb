@@ -3,6 +3,7 @@
 # Table name: shopping_carts
 #
 #  billing_address_id  :integer
+#  carrier_id          :integer
 #  created_at          :datetime         not null
 #  customer_id         :integer
 #  id                  :integer          not null, primary key
@@ -23,6 +24,7 @@
 class ShoppingCart < ActiveRecord::Base
   include ArrayLiquid
 
+  belongs_to :carrier
   belongs_to :customer
   has_many :shopping_carts_products, autosave: true
 

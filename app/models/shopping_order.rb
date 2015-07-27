@@ -43,6 +43,7 @@ class ShoppingOrder < ActiveRecord::Base
   def self.from_shopping_cart(sc, commerce)
     so = ShoppingOrder.new
     so.customer = sc.customer
+    so.carrier = sc.carrier
 
     so.shipping_address = sc.shipping_address.fields
     so.billing_address = sc.billing_address.fields

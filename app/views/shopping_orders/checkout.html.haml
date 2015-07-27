@@ -1,4 +1,4 @@
-%h1 Order
+%h1 Checkout
 
 - sc = @variables['shopping_cart']
 %ul.list-unstyled
@@ -37,26 +37,42 @@
           %span.a-color-price
             = "#{sc.total_retail_price} €"
 
-%div{class: 'row voffset3'}
+%div{class: 'row voffset2'}
   %div{class: 'col-md-6'}
     %h4 Shipping address
     %hr
-    - if sc.shipping_address.nil?
-      = link_to 'Select shipping address', addresses_customers_shopping_orders_path('shipping_address_id')
-    - else
-      = link_to 'Select other shipping address', addresses_customers_shopping_orders_path('shipping_address_id')
       = render partial: 'addresses/address', locals: {address: sc.shipping_address}
 
   %div{class: 'col-md-6'}
     %h4 Billing address
     %hr
-    - if sc.billing_address.nil?
-      = link_to 'Select billing address', addresses_customers_shopping_orders_path('billing_address_id')
-    - else
-      = link_to 'Select other billing address', addresses_customers_shopping_orders_path('billing_address_id')
       = render partial: 'addresses/address', locals: {address: sc.billing_address}
 
-%div{class: 'row voffset6'}
-  %div{class: 'col-md-12'}
+- unless sc.carrier.nil?
+  %div{class: 'row voffset2'}
+    %div.col-xs-12
+      %table{class: 'resume table table-bordered'}
+        %tbody
+          %tr
+            %td{class: 'delivery_option_radio'}
+              = radio_button_tag :carrier_id, sc.carrier, true
+
+            %td{class: 'delivery_option_logo'}
+
+            %td
+              %strong
+                = sc.carrier.name
+              %br
+                = sc.carrier.delay
+
+            %td{class: 'delivery_option_price'}
+              - if sc.carrier.free_carrier
+                = 'Free!'
+              - else
+                -#TODO calculate shipping
+
+%div{class: 'row voffset4'}
+  %div{class: 'col-md-2'}
     = link_to 'Continue shopping', @variables['commerce']['root_href'], class: 'btn btn-default btn-block'
-    = link_to 'Shipping method', shipping_method_customers_shopping_orders_path, class: 'btn btn-success btn-block'
+  %div{class: 'col-md-offset-8 col-md-2'}
+    = link_to 'Checkout', finalize_customers_shopping_orders_path, class: 'btn btn-success btn-block'

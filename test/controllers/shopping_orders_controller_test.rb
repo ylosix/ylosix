@@ -6,7 +6,7 @@ class ShoppingOrdersControllerTest < ActionController::TestCase
   test 'should get show with login user' do
     login_customer
 
-    get :show
+    get :checkout
     assert_response :success
   end
 
