@@ -22,8 +22,12 @@ class ProductTranslation < ActiveRecord::Base
   belongs_to :product
   belongs_to :language, primary_key: :locale, foreign_key: :locale
 
-  Feature.all.each do |feature|
-    store_accessor :features, feature.id.to_s.to_sym
+  if Feature.all.empty?
+    store_accessor :features, :tmp_ylosix
+  else
+    Feature.all.each do |feature|
+      store_accessor :features, feature.id.to_s.to_sym
+    end
   end
 
   def self.reload_product_translations
