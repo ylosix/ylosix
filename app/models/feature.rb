@@ -13,13 +13,6 @@ class Feature < ActiveRecord::Base
   translates :name
 
   has_many :feature_translations
-  after_save :reload_product_translations
 
   accepts_nested_attributes_for :feature_translations
-
-  private
-
-  def reload_product_translations
-    ProductTranslation.reload_product_translations
-  end
 end
