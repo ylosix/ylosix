@@ -26,5 +26,11 @@ class ProductTranslation < ActiveRecord::Base
     store_accessor :features, feature.id.to_s.to_sym
   end
 
+  def self.reload_product_translations
+    Feature.all.each do |feature|
+      store_accessor :features, feature.id.to_s.to_sym
+    end
+  end
+
   # validates_uniqueness_of locale: { scope: :category_id }
 end

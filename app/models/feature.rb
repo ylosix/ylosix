@@ -20,6 +20,6 @@ class Feature < ActiveRecord::Base
   private
 
   def reload_product_translations
-    ProductTranslation.reset_column_information
+    ProductTranslation.reload_product_translations
   end
 end
