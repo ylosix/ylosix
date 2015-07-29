@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150727105249) do
+ActiveRecord::Schema.define(version: 20150729092850) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -318,11 +318,12 @@ ActiveRecord::Schema.define(version: 20150727105249) do
 
   create_table "shopping_carts", force: :cascade do |t|
     t.integer  "customer_id"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at",                                                  null: false
+    t.datetime "updated_at",                                                  null: false
     t.integer  "shipping_address_id"
     t.integer  "billing_address_id"
     t.integer  "carrier_id"
+    t.decimal  "carrier_retail_price", precision: 10, scale: 2, default: 0.0, null: false
   end
 
   add_index "shopping_carts", ["customer_id"], name: "index_shopping_carts_on_customer_id", using: :btree
@@ -341,14 +342,15 @@ ActiveRecord::Schema.define(version: 20150727105249) do
 
   create_table "shopping_orders", force: :cascade do |t|
     t.integer  "customer_id"
-    t.datetime "created_at",                                                      null: false
-    t.datetime "updated_at",                                                      null: false
+    t.datetime "created_at",                                                                                   null: false
+    t.datetime "updated_at",                                                                                   null: false
     t.integer  "commerce_id"
-    t.hstore   "shipping_address", default: {},                                   null: false
-    t.hstore   "billing_address",  default: {},                                   null: false
-    t.hstore   "billing_commerce", default: {},                                   null: false
-    t.integer  "order_num",        default: "nextval('order_num_seq'::regclass)", null: false
+    t.hstore   "shipping_address",                              default: {},                                   null: false
+    t.hstore   "billing_address",                               default: {},                                   null: false
+    t.hstore   "billing_commerce",                              default: {},                                   null: false
+    t.integer  "order_num",                                     default: "nextval('order_num_seq'::regclass)", null: false
     t.integer  "carrier_id"
+    t.decimal  "carrier_retail_price", precision: 10, scale: 2, default: 0.0,                                  null: false
   end
 
   add_index "shopping_orders", ["customer_id"], name: "index_shopping_orders_on_customer_id", using: :btree

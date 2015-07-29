@@ -26,6 +26,29 @@
             = "#{product.retail_price} €"
         %div{class: 'col-md-3 col-xs-3'}
           = scp.quantity
+  - unless sc.carrier.nil?
+    %li.sc-list-item-border
+      %div.row
+        %div{:class => 'col-md-12 col-xs-12'}
+          %strong Shipping
+
+      %div.row
+        %div{class: 'col-md-6 col-xs-6'}
+          %div{:class => 'item-image col-md-3'}
+            %div{class: 'delivery_option_logo'}
+
+          %div{:class => 'col-md-9 col-xs-12'}
+            %strong
+              = sc.carrier.name
+            %br
+            = sc.carrier.delay
+        %div{class: 'col-md-3 col-xs-3'}
+          %div.a-color-price
+            - if sc.carrier.free_carrier
+              = 'Free!'
+            - else
+              = "#{sc.carrier_retail_price} €"
+        %div{class: 'col-md-3 col-xs-3'}
 
   %li.sc-list-item-border
     %div.row
@@ -47,29 +70,6 @@
     %h4 Billing address
     %hr
       = render partial: 'addresses/address', locals: {address: sc.billing_address}
-
-- unless sc.carrier.nil?
-  %div{class: 'row voffset2'}
-    %div.col-xs-12
-      %table{class: 'resume table table-bordered'}
-        %tbody
-          %tr
-            %td{class: 'delivery_option_radio'}
-              = radio_button_tag :carrier_id, sc.carrier, true
-
-            %td{class: 'delivery_option_logo'}
-
-            %td
-              %strong
-                = sc.carrier.name
-              %br
-                = sc.carrier.delay
-
-            %td{class: 'delivery_option_price'}
-              - if sc.carrier.free_carrier
-                = 'Free!'
-              - else
-                -#TODO calculate shipping
 
 %div{class: 'row voffset4'}
   %div{class: 'col-md-2'}

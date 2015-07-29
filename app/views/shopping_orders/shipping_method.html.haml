@@ -47,7 +47,8 @@
                   - if carrier.free_carrier
                     = 'Free!'
                   - else
-                    -#TODO calculate shipping
+                    - country_code = sc.shipping_address.country
+                    = "#{carrier.calculate_shipping_cost_to(country_code, sc.total_weight)} €"
 
   %div{class: 'row voffset3'}
     %div{class: 'col-md-2'}

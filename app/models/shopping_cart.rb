@@ -2,13 +2,14 @@
 #
 # Table name: shopping_carts
 #
-#  billing_address_id  :integer
-#  carrier_id          :integer
-#  created_at          :datetime         not null
-#  customer_id         :integer
-#  id                  :integer          not null, primary key
-#  shipping_address_id :integer
-#  updated_at          :datetime         not null
+#  billing_address_id   :integer
+#  carrier_id           :integer
+#  carrier_retail_price :decimal(10, 2)   default(0.0), not null
+#  created_at           :datetime         not null
+#  customer_id          :integer
+#  id                   :integer          not null, primary key
+#  shipping_address_id  :integer
+#  updated_at           :datetime         not null
 #
 # Indexes
 #
@@ -31,6 +32,8 @@ class ShoppingCart < ActiveRecord::Base
   belongs_to :shipping_address, touch: true, class_name: 'CustomerAddress', foreign_key: 'shipping_address_id'
   belongs_to :billing_address, touch: true, class_name: 'CustomerAddress', foreign_key: 'billing_address_id'
 
+  before_save :calculate_shipping_cost
+
   def initialize(attributes = {}, options = {})
     super
 
@@ -47,8 +50,11 @@ class ShoppingCart < ActiveRecord::Base
   end
 
   def total_retail_price
-    products_prices = shopping_carts_products.map { |e| e.product.retail_price * e.quantity }
-    products_prices.reduce(:+)
+    array_prices = shopping_carts_products.map { |e| e.product.retail_price * e.quantity }
+    products_prices = array_prices.reduce(:+)
+    products_prices ||= 0
+
+    products_prices + carrier_retail_price
   end
 
   def remove_product(product)
@@ -98,6 +104,15 @@ class ShoppingCart < ActiveRecord::Base
   end
 
   private
+
+  def calculate_shipping_cost
+    self.carrier_retail_price = 0
+
+    if !shipping_address.nil? && !carrier.nil?
+      country_code = shipping_address.country
+      self.carrier_retail_price = carrier.calculate_shipping_cost_to(country_code, total_weight)
+    end
+  end
 
   def shopping_carts_product(product)
     shopping_carts_products.each do |scp|

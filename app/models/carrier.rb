@@ -24,4 +24,17 @@ class Carrier < ActiveRecord::Base
 
   has_attached_file :image, styles: { original: '25x25' }
   validates_attachment_content_type :image, content_type: %r{\Aimage/.*\Z}
+
+  def calculate_shipping_cost_to(country_code, weight = 0)
+    country = Country.find_by(code: country_code)
+    range = CarriersRange.find_by('zone_id = ?
+                                AND ? >= greater_equal_than
+                                AND ? < lower_than', country.zone, weight, weight)
+
+    if range.nil?
+      0
+    else
+      range.amount
+    end
+  end
 end
