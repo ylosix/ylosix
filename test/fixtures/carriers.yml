@@ -22,7 +22,7 @@ one:
   name: MyString
   delay: MyString
   enabled: false
-  free_carrier: false
+  free_carrier: true
   priority: 1
 
 two:

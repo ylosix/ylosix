@@ -27,9 +27,11 @@ class Carrier < ActiveRecord::Base
 
   def calculate_shipping_cost_to(country_code, weight = 0)
     country = Country.find_by(code: country_code)
-    range = CarriersRange.find_by('zone_id = ?
+    unless country.nil?
+      range = CarriersRange.find_by('zone_id = ?
                                 AND ? >= greater_equal_than
                                 AND ? < lower_than', country.zone, weight, weight)
+    end
 
     cost = 0
     cost = range.amount unless range.nil?
