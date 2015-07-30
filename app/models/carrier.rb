@@ -35,6 +35,6 @@ class Carrier < ActiveRecord::Base
     cost = range.amount unless range.nil?
     is_valid = !range.nil? || free_carrier
 
-    return cost, is_valid
+    [cost, is_valid]
   end
 end

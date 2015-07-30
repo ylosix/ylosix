@@ -1,0 +1,21 @@
+!!! 5
+%html
+  %head
+    = render 'layouts/header'
+  %body.shop
+    ="<!-- #{@variables['commerce'].to_liquid} -->".html_safe
+    = render 'layouts/components/nav_bar'
+
+    -# Page Content
+    %div.container
+      = render 'layouts/components/notice_messages'
+
+      %div.col-md-12
+        %div.row
+          TODO shopping progress bar || shopping cart > shipping > checkout > finalize ||
+          = yield
+
+    = render 'layouts/components/footer'
+    = Utils.append_debug_variables(current_admin_user, @variables, '').html_safe
+
+    = console if Rails.env.development?

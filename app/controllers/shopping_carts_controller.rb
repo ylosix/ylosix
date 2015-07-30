@@ -1,4 +1,6 @@
 class ShoppingCartsController < Frontend::CommonController
+  layout 'shopping'
+
   def get_template_variables(template)
     super
   end

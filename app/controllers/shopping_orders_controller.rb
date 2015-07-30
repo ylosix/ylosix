@@ -1,4 +1,6 @@
 class ShoppingOrdersController < Frontend::CommonController
+  layout 'shopping'
+
   before_action :authenticate_customer!
   before_action :check_addresses, only: [:finalize, :shipping_method]
 
