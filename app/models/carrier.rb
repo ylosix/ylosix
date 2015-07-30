@@ -31,10 +31,10 @@ class Carrier < ActiveRecord::Base
                                 AND ? >= greater_equal_than
                                 AND ? < lower_than', country.zone, weight, weight)
 
-    if range.nil?
-      0
-    else
-      range.amount
-    end
+    cost = 0
+    cost = range.amount unless range.nil?
+    is_valid = !range.nil? || free_carrier
+
+    return cost, is_valid
   end
 end

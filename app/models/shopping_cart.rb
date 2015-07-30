@@ -46,7 +46,7 @@ class ShoppingCart < ActiveRecord::Base
   end
 
   def total_weight
-    shopping_carts_products.inject(0) { |a, e| a + e.product.weight }
+    shopping_carts_products.inject(0) { |a, e| a + (e.product.weight * e.quantity) }
   end
 
   def total_retail_price
@@ -99,6 +99,7 @@ class ShoppingCart < ActiveRecord::Base
     {
         'shopping_carts_products' => array_to_liquid(shopping_carts_products),
         'total_products' => total_products,
+        'total_weight' => total_weight,
         'total_retail_price' => total_retail_price
     }
   end

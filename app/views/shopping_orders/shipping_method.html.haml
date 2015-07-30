@@ -32,9 +32,11 @@
           %table{class: 'resume table table-bordered'}
             %tbody
               %tr
+                - country_code = sc.shipping_address.country
+                - cost, is_valid = carrier.calculate_shipping_cost_to(country_code, sc.total_weight)
                 %td{class: 'delivery_option_radio'}
-                  = radio_button_tag :carrier_id, carrier.id, i==0
-
+                  - if is_valid
+                    = radio_button_tag :carrier_id, carrier.id, i==0
                 %td{class: 'delivery_option_logo'}
 
                 %td
@@ -44,11 +46,13 @@
                     = carrier.delay
 
                 %td{class: 'delivery_option_price'}
-                  - if carrier.free_carrier
-                    = 'Free!'
+                  - if is_valid
+                    - if carrier.free_carrier
+                      = 'Free!'
+                    - else
+                      = "#{cost} €"
                   - else
-                    - country_code = sc.shipping_address.country
-                    = "#{carrier.calculate_shipping_cost_to(country_code, sc.total_weight)} €"
+                    = 'Not available'
 
   %div{class: 'row voffset3'}
     %div{class: 'col-md-2'}
