@@ -11,7 +11,16 @@ ActiveAdmin.register ShoppingOrder do
     column :total_products
     column :total_retail_price
     column :carrier
-    column (:shopping_orders_status) { |so| span so.shopping_orders_status.name, class: 'status_tag', style: "background-color: #{so.shopping_orders_status.color}" unless so.shopping_orders_status.nil? }
+    column (:shopping_orders_status) do |so|
+      if so.shopping_orders_status.nil?
+        span 'pending', class: 'status_tag'
+      else
+        span so.shopping_orders_status.name,
+             class: 'status_tag',
+             style: "background-color: #{so.shopping_orders_status.color}"
+      end
+    end
+
     column :created_at
     actions
   end

@@ -11,7 +11,7 @@ module ShoppingOrdersHelper
     content_tag :div do
       concat(content_tag(:label, 'STATUS'))
       concat('<br />'.html_safe)
-      concat(content_tag(:span, status, {class: 'status_tag', style: "background-color: #{color};"}))
+      concat(content_tag(:span, status, class: 'status_tag', style: "background-color: #{color};"))
     end
   end
 end
