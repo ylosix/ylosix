@@ -17,7 +17,7 @@
           %ul.list-unstyled
             %li
               %h2
-                = "Order ##{commerce.retrieve_order_num(shopping_order)}" unless commerce.nil?
+                = "ORDER N.º #{shopping_order.retrieve_order_num}"
             - if !commerce.nil? && commerce.billing_address.nil?
               %li
                 = render partial: 'shopping_orders/invoice_address', locals: { address: commerce.billing_address }

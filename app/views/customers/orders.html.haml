@@ -7,28 +7,34 @@
       %div{:class => 'row order_highlight'}
         %div.col-md-9
           %div.col-md-3
-            ORDER DATE
+            %label
+              ORDER DATE
             %br
             = l order.created_at, :format => :long
           %div.col-md-3
-            TOTAL
+            %label
+              TOTAL
             %br
             = "#{order.total_retail_price} €"
+          %div.col-md-4
+            = shopping_order_status(order)
         %div.col-md-3
           %div.pull-right
-            = "ORDER N.º #{@variables['commerce'].retrieve_order_num(order)}"
+            %label
+              ORDER N.º
+            = order.retrieve_order_num
             %br
-            Details
-            |
-            = link_to 'Invoice', orders_invoice_customers_path(order.id), target: '_blank'
+            = link_to 'Details', '#', class: 'btn btn-default'
+            - if !order.shopping_orders_status.nil? && order.shopping_orders_status.enable_invoice
+              = link_to 'Invoice', orders_invoice_customers_path(order.id), target: '_blank', class: 'btn btn-default'
       %div{:class => 'order_container'}
         - order.shopping_orders_products.each do |sop|
           - product = sop.product
           %div.row
             %div.col-md-6
-              %div{:class => 'col-md-3'}
+              %div.col-md-3
                 = image_tag product.retrieve_main_image(:thumbnail)
-              %div{:class => 'col-md-9'}
+              %div.col-md-9
                 %div.col-md-12
                   = link_to product.name, show_slug_products_path(product.slug)
                 %br

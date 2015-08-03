@@ -6,18 +6,20 @@ ActiveAdmin.register ShoppingOrder do
   index do
     selectable_column
     id_column
+    column :retrieve_order_num
     column :customer
     column :total_products
     column :total_retail_price
     column :carrier
+    column (:shopping_orders_status) { |so| span so.shopping_orders_status.name, class: 'status_tag', style: "background-color: #{so.shopping_orders_status.color}" unless so.shopping_orders_status.nil? }
     column :created_at
-    column :updated_at
     actions
   end
 
   show title: proc { |so| "Shopping order ##{so.id}" } do
     attributes_table do
       row :id
+      row :retrieve_order_num
       row 'Invoice' do |so|
         columns do
           column do
@@ -89,6 +91,8 @@ ActiveAdmin.register ShoppingOrder do
         end
       end
 
+      row :carrier
+      row :shopping_order_status
       row :created_at
       row :updated_at
     end

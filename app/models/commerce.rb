@@ -53,16 +53,6 @@ class Commerce < ActiveRecord::Base
     commerce
   end
 
-  def retrieve_order_num(sop)
-    if order_prefix.blank?
-      str = sop.order_num.to_s
-    else
-      str = created_at.strftime(order_prefix.gsub('%order_num', sop.order_num.to_s))
-    end
-
-    str
-  end
-
   def to_liquid
     image_src = 'http://placehold.it/300x100'
     image_src = logo.url(:original) if logo?
@@ -76,7 +66,8 @@ class Commerce < ActiveRecord::Base
         'root_href' => root_href,
         'template' => template,
         'template_from' => template_from,
-        'ga_account_id' => ga_account_id
+        'ga_account_id' => ga_account_id,
+        'order_prefix' => order_prefix
     }
   end
 end

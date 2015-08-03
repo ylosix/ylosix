@@ -64,6 +64,16 @@ class ShoppingOrder < ActiveRecord::Base
     so
   end
 
+  def retrieve_order_num
+    if commerce.nil? || commerce.order_prefix.blank?
+      str = order_num.to_s
+    else
+      str = created_at.strftime(commerce.order_prefix.gsub('%order_num', order_num.to_s))
+    end
+
+    str
+  end
+
   def total_taxes
     shopping_orders_products.inject(0) do |a, e|
       a + (e.retail_price - e.retail_price_pre_tax) * e.quantity

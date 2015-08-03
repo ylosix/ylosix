@@ -1,6 +1,14 @@
 ActiveAdmin.register ShoppingOrdersStatus do
   menu parent: 'Orders'
 
+  index do
+    selectable_column
+    id_column
+    column (:name) { |status| span status.name, class: 'status_tag', style: "background-color: #{status.color}" }
+    column :enable_invoice
+    actions
+  end
+
   # permit_params :email, :name, :last_name, :birth_date
 
   # See permitted parameters documentation:
