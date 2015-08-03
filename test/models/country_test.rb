@@ -23,7 +23,11 @@
 require 'test_helper'
 
 class CountryTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test 'to_liquid' do
+    hash = countries(:one).to_liquid
+
+    assert hash.key? 'code'
+    assert hash.key? 'name'
+    assert hash.key? 'iso'
+  end
 end

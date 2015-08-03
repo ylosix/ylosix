@@ -13,7 +13,9 @@ namespace :db do
                                                        :carrier_translations,
                                                        carrier_attributes,
                                                        carrier_attributes_all)
-    carrier.carrier_translations << CarrierTranslation.new({locale: :es, delay: '24h', name: 'Recogida en tienda'})
-    carrier.save
+
+    ct = CarrierTranslation.find_or_create_by(carrier: carrier, locale: :es)
+    ct.attributes = {delay: '24h', name: 'Recogida en tienda'}
+    ct.save
   end
 end

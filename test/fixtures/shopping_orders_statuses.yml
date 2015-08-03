@@ -1,0 +1,21 @@
+# == Schema Information
+#
+# Table name: shopping_orders_statuses
+#
+#  color          :string
+#  created_at     :datetime         not null
+#  enable_invoice :boolean
+#  id             :integer          not null, primary key
+#  name           :string
+#  updated_at     :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  enable_invoice: false
+
+two:
+  name: MyString
+  enable_invoice: false

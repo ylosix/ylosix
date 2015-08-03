@@ -2,17 +2,18 @@
 #
 # Table name: shopping_orders
 #
-#  billing_address      :hstore           default({}), not null
-#  billing_commerce     :hstore           default({}), not null
-#  carrier_id           :integer
-#  carrier_retail_price :decimal(10, 2)   default(0.0), not null
-#  commerce_id          :integer
-#  created_at           :datetime         not null
-#  customer_id          :integer
-#  id                   :integer          not null, primary key
-#  order_num            :integer          not null
-#  shipping_address     :hstore           default({}), not null
-#  updated_at           :datetime         not null
+#  billing_address           :hstore           default({}), not null
+#  billing_commerce          :hstore           default({}), not null
+#  carrier_id                :integer
+#  carrier_retail_price      :decimal(10, 2)   default(0.0), not null
+#  commerce_id               :integer
+#  created_at                :datetime         not null
+#  customer_id               :integer
+#  id                        :integer          not null, primary key
+#  order_num                 :integer          not null
+#  shipping_address          :hstore           default({}), not null
+#  shopping_orders_status_id :integer
+#  updated_at                :datetime         not null
 #
 # Indexes
 #
