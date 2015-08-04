@@ -265,5 +265,5 @@ ActiveAdmin.setup do |config|
   #
   # config.filters = true
 
-  include ActiveAdminHelpers
+  include ActiveAdminHelper
 end

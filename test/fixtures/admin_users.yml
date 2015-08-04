@@ -5,7 +5,6 @@
 #  created_at             :datetime
 #  current_sign_in_at     :datetime
 #  current_sign_in_ip     :string
-#  debug_locale           :string
 #  debug_template_id      :integer
 #  debug_variables        :boolean          default(FALSE), not null
 #  email                  :string           default(""), not null
@@ -35,7 +34,6 @@
 admin_user:
   email: admin@example.com
   encrypted_password: <%= Devise::Encryptor.digest(AdminUser, 'password') %>
-  debug_locale: en
   debug_template: test_template
   debug_variables: true
 

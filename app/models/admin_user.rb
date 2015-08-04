@@ -5,7 +5,6 @@
 #  created_at             :datetime
 #  current_sign_in_at     :datetime
 #  current_sign_in_ip     :string
-#  debug_locale           :string
 #  debug_template_id      :integer
 #  debug_variables        :boolean          default(FALSE), not null
 #  email                  :string           default(""), not null

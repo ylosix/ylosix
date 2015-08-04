@@ -12,7 +12,10 @@ ActiveAdmin.register Language do
 
     column :appears_in_backoffice
     column :appears_in_web
-    actions
+
+    actions defaults: true do |language|
+      link_to 'Set', change_locale_path(language.locale)
+    end
   end
 
   filter :locale

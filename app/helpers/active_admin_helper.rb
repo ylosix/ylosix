@@ -1,4 +1,4 @@
-module ActiveAdminHelpers
+module ActiveAdminHelper
   TEXT_AREA = 1
   TEXT_FIELD = 2
   CKEDITOR = 3

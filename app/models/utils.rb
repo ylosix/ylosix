@@ -5,16 +5,6 @@ class Utils
     I18n.t('errors.messages.not_saved', count: messages.count, resource: 'the form')
   end
 
-  def self.append_debug_variables(admin_user, variables, html_content)
-    if !admin_user.nil? && admin_user.debug_variables
-      content_hash_variables = Utils.pretty_json_template_variables(variables)
-      html_code = JSON.pretty_generate(content_hash_variables)
-      html_content += "<br /><pre><code>#{html_code}</code></pre>"
-    end
-
-    html_content
-  end
-
   def self.replace_regex_include(variables, template, content)
     regex_include_snippet = /{{\s*include\s+(?<file>[^}\s]+)\s*}}/
 
@@ -29,6 +19,14 @@ class Utils
     content
   end
 
+  def self.elem_respond_to_liquid(elem)
+    if elem.respond_to?(:to_liquid)
+      elem.to_liquid
+    else
+      elem
+    end
+  end
+
   def self.pretty_json_template_variables(variables)
     content_hash_variables = {}
     variables.each do |k, v|
@@ -36,10 +34,10 @@ class Utils
         content_hash_variables[k] = []
 
         v.each do |v_elem|
-          content_hash_variables[k] << v_elem.to_liquid
+          content_hash_variables[k] << elem_respond_to_liquid(v_elem)
         end
       else
-        content_hash_variables[k] = v.to_liquid
+        content_hash_variables[k] = elem_respond_to_liquid(v)
       end
     end
 

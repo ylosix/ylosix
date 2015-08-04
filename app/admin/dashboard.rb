@@ -91,16 +91,6 @@ ActiveAdmin.register_page 'Dashboard' do
           span auto_link current_admin_user.debug_template
         end
       end
-
-      columns do
-        column do
-          span 'Debug locale'
-        end
-
-        column do
-          span current_admin_user.debug_locale
-        end
-      end
     end
 
     panel 'Application variables' do
