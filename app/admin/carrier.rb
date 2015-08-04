@@ -71,7 +71,7 @@ ActiveAdmin.register Carrier do
           hash.each do |_k, parameters|
             next if parameters.size != 3
 
-            parameters[:zones].each_with_index do |zone_param|
+            parameters[:zones].each do |zone_param|
               next if zone_param.size != 2
 
               attributes = params_carrier_range(parameters.except(:zones).merge(zone_param))

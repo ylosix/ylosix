@@ -6,19 +6,41 @@ module Admin
 
     def setup
       login_admin
+      @object = admin_users(:admin_user)
     end
 
-    test 'should get index/edit/show' do
+    test 'should index' do
       get :index
       assert_response :success
+      assert_not_nil assigns(:admin_users)
+    end
 
-      object = AdminUser.first
-
-      get :edit, id: object.id
+    test 'should new' do
+      get :new
       assert_response :success
+    end
 
-      get :show, id: object.id
+    test 'should show' do
+      get :show, id: @object
       assert_response :success
+    end
+
+    test 'should edit' do
+      get :edit, id: @object
+      assert_response :success
+    end
+
+    # test 'should create' do
+    #   assert_difference('AdminUser.count') do
+    #     post :create, admin_user: @object.attributes
+    #   end
+    #
+    #   assert_redirected_to admin_category_path(assigns(:admin_user))
+    # end
+
+    test 'should update' do
+      patch :update, id: @object, admin_user: @object.attributes
+      assert_redirected_to admin_admin_user_path(assigns(:admin_user))
     end
   end
 end

@@ -49,14 +49,14 @@ ActiveAdmin.register Category do
         array_ordered = @categories.to_a.sort do |x, y|
           if @parent_order == 'parent_desc'
             Utils.get_parents_array(y).map(&:name).join('_') <=> Utils.get_parents_array(x).map(&:name).join('_')
-          else
+          elsif @parent_order == 'parent_asc'
             Utils.get_parents_array(x).map(&:name).join('_') <=> Utils.get_parents_array(y).map(&:name).join('_')
           end
         end
 
         params[:order] = @parent_order
 
-        ids = array_ordered.map { |i| i.id }
+        ids = array_ordered.map(&:id)
         order_by = ids.map { |i| "id=#{i} DESC" }.join(',')
         @categories = Category.where(id: ids).order(order_by).page(0).per(@categories.size)
       end
