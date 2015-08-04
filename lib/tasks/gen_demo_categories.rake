@@ -24,7 +24,7 @@ namespace :db do
                        :enabled => true,
                        :visible => true,
                        :slug => 'root'}
-    root = Utils.save_or_update_model(Category, {:slug => 'root'}, root_attributes)
+    root = Utils.create_or_update_model(Category, {:slug => 'root'}, root_attributes)
 
     photo_attributes = {:parent_id => root.id,
                         category_translations_attributes: [{:locale => :en, name: 'Photography'},
@@ -32,7 +32,7 @@ namespace :db do
                         :enabled => true,
                         :visible => true,
                         :slug => PHOTOGRAPHY_SLUG}
-    photography = Utils.save_or_update_model(Category, {:slug => PHOTOGRAPHY_SLUG}, photo_attributes)
+    photography = Utils.create_or_update_model(Category, {:slug => PHOTOGRAPHY_SLUG}, photo_attributes)
 
     phones_attributes = {:parent_id => root.id,
                          category_translations_attributes: [{:locale => :en, name: 'Phones'},
@@ -40,7 +40,7 @@ namespace :db do
                          :enabled => true,
                          :visible => true,
                          :slug => PHONES_SLUG}
-    phones = Utils.save_or_update_model(Category, {:slug => PHONES_SLUG}, phones_attributes)
+    phones = Utils.create_or_update_model(Category, {:slug => PHONES_SLUG}, phones_attributes)
 
 
     video_attributes = {:parent_id => root.id,
@@ -49,7 +49,7 @@ namespace :db do
                         :enabled => true,
                         :visible => true,
                         :slug => VIDEOS_SLUG}
-    videos = Utils.save_or_update_model(Category, {:slug => VIDEOS_SLUG}, video_attributes)
+    videos = Utils.create_or_update_model(Category, {:slug => VIDEOS_SLUG}, video_attributes)
 
     # Sub-categories
     reflex_attributes = {:parent_id => photography.id,
@@ -58,7 +58,7 @@ namespace :db do
                          :enabled => true,
                          :visible => true,
                          :slug => PHOTOGRAPHY_REFLEX_SLUG}
-    Utils.save_or_update_model(Category, {:slug => PHOTOGRAPHY_REFLEX_SLUG}, reflex_attributes)
+    Utils.create_or_update_model(Category, {:slug => PHOTOGRAPHY_REFLEX_SLUG}, reflex_attributes)
 
     lenses_attributes = {:parent_id => photography.id,
                          category_translations_attributes: [{:locale => :en, name: 'Lenses', },
@@ -66,7 +66,7 @@ namespace :db do
                          :enabled => true,
                          :visible => true,
                          :slug => PHOTOGRAPHY_LENSES_SLUG}
-    Utils.save_or_update_model(Category, {:slug => PHOTOGRAPHY_LENSES_SLUG}, lenses_attributes)
+    Utils.create_or_update_model(Category, {:slug => PHOTOGRAPHY_LENSES_SLUG}, lenses_attributes)
 
     accessories_attributes = {:parent_id => phones.id,
                               category_translations_attributes: [{:locale => :en, name: 'Accessories', },
@@ -74,7 +74,7 @@ namespace :db do
                               :enabled => true,
                               :visible => true,
                               :slug => PHONES_ACCESSORIES_SLUG}
-    Utils.save_or_update_model(Category, {:slug => PHONES_ACCESSORIES_SLUG}, accessories_attributes)
+    Utils.create_or_update_model(Category, {:slug => PHONES_ACCESSORIES_SLUG}, accessories_attributes)
 
     phones_attributes = {:parent_id => phones.id,
                          category_translations_attributes: [{:locale => :en, name: 'Smart-phones', },
@@ -82,7 +82,7 @@ namespace :db do
                          :enabled => true,
                          :visible => true,
                          :slug => PHONES_SMART_PHONES_SLUG}
-    Utils.save_or_update_model(Category, {:slug => PHONES_SMART_PHONES_SLUG}, phones_attributes)
+    Utils.create_or_update_model(Category, {:slug => PHONES_SMART_PHONES_SLUG}, phones_attributes)
 
     accessories_attributes = {:parent_id => videos.id,
                               category_translations_attributes: [{:locale => :en, name: 'Accessories', },
@@ -90,7 +90,7 @@ namespace :db do
                               :enabled => true,
                               :visible => true,
                               :slug => VIDEOS_ACCESSORIES_SLUG}
-    Utils.save_or_update_model(Category, {:slug => VIDEOS_ACCESSORIES_SLUG}, accessories_attributes)
+    Utils.create_or_update_model(Category, {:slug => VIDEOS_ACCESSORIES_SLUG}, accessories_attributes)
 
     cameras_attributes = {:parent_id => videos.id,
                          category_translations_attributes: [{:locale => :en, name: 'Cameras', },
@@ -98,6 +98,6 @@ namespace :db do
                          :enabled => true,
                          :visible => true,
                          :slug => VIDEOS_CAMERAS_SLUG}
-    Utils.save_or_update_model(Category, {:slug => VIDEOS_CAMERAS_SLUG}, cameras_attributes)
+    Utils.create_or_update_model(Category, {:slug => VIDEOS_CAMERAS_SLUG}, cameras_attributes)
   end
 end

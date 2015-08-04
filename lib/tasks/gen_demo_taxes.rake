@@ -6,6 +6,6 @@ namespace :db do
     puts '####################'
 
     iva_es_attributes = {:name => 'IVA ES 21%', :rate => 21.0}
-    Utils.save_or_update_model(Tax, {:name => 'IVA ES 21%'}, iva_es_attributes)
+    Utils.create_or_update_model(Tax, {:name => 'IVA ES 21%'}, iva_es_attributes)
   end
 end

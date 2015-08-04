@@ -54,30 +54,13 @@ ActiveAdmin.register ShoppingOrder do
       row :total_taxes
       row :total_retail_price
 
-      def retrieve_array_address(caddress)
-        address_array = []
-
-        address_array << "#{caddress['name']} #{caddress['customer_name']} #{caddress['customer_last_name']}"
-        address_array << "#{caddress['cif']} #{caddress['dni']}"
-        address_array << caddress['business']
-        address_array << caddress['address_1']
-        address_array << caddress['address_2'] unless caddress['address_2'].blank?
-        address_array << "#{caddress['postal_code']} #{caddress['city']}"
-        address_array << caddress['country']
-        address_array << caddress['phone']
-        address_array << caddress['mobile_phone']
-        address_array << caddress['other']
-
-        address_array
-      end
-
       row 'Addresses' do |so|
         columns do
           column do
             span '<b>Shipping address</b>'.html_safe
 
             saddress = so.shipping_address
-            address_array = retrieve_array_address(saddress)
+            address_array = admin_retrieve_array_address(saddress)
 
             div [address_array].join(' <br/> ').html_safe
           end
@@ -85,7 +68,7 @@ ActiveAdmin.register ShoppingOrder do
           column do
             span '<b>Billing address</b>'.html_safe
             baddress = so.billing_address
-            address_array = retrieve_array_address(baddress)
+            address_array = admin_retrieve_array_address(baddress)
 
             div [address_array].join(' <br/> ').html_safe
           end
@@ -93,7 +76,7 @@ ActiveAdmin.register ShoppingOrder do
           column do
             span '<b>Billing commerce</b>'.html_safe
             baddress = so.billing_commerce
-            address_array = retrieve_array_address(baddress)
+            address_array = admin_retrieve_array_address(baddress)
 
             div [address_array].join(' <br/> ').html_safe
           end
@@ -102,9 +85,23 @@ ActiveAdmin.register ShoppingOrder do
 
       row :carrier
       row :shopping_order_status
+      row :commerce
       row :created_at
       row :updated_at
     end
+  end
+
+  form do |f|
+    f.inputs 'Shopping order details' do
+      f.input :order_num
+      f.input :carrier
+      f.input :carrier_retail_price
+      f.input :commerce
+      f.input :customer
+      f.input :shopping_orders_status
+    end
+
+    f.actions
   end
 
   controller do

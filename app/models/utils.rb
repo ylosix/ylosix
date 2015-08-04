@@ -138,7 +138,7 @@ class Utils
     end
   end
 
-  def self.save_or_update_model(model, search_options, attributes)
+  def self.create_or_update_model(model, search_options, attributes)
     object = model.find_or_create_by(search_options)
     object.attributes = attributes
     object.save

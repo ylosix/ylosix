@@ -14,8 +14,8 @@ module Admin
 
       object = shopping_orders(:customer_example_so)
 
-      # get :edit, id: object.id
-      # assert_response :success
+      get :edit, id: object.id
+      assert_response :success
 
       get :show, id: object.id
       assert_response :success

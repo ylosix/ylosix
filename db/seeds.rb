@@ -54,7 +54,7 @@ def create_default_languages
                            :appears_in_backoffice => true,
                            :appears_in_web => true}
 
-    Utils.save_or_update_model(Language, {:locale => locale}, language_attributes)
+    Utils.create_or_update_model(Language, {:locale => locale}, language_attributes)
   end
 end
 
@@ -67,7 +67,7 @@ def create_default_ylos_template
   ylos_template = {:name => 'ylos',
                    :path => '/public/templates/ylos',
                    :enabled => false}
-  Utils.save_or_update_model(Template, {:name => 'ylos'}, ylos_template)
+  Utils.create_or_update_model(Template, {:name => 'ylos'}, ylos_template)
 end
 
 
@@ -93,7 +93,7 @@ def create_default_commerce
                          }
 
   }
-  Utils.save_or_update_model(Commerce, {name: 'Demo ylosix'}, commerce_attributes)
+  Utils.create_or_update_model(Commerce, {name: 'Demo ylosix'}, commerce_attributes)
 end
 
 
@@ -106,32 +106,32 @@ def create_defaults_statuses
                                                                               {locale: :es, name: 'Pago aceptado'}],
                              enable_invoice: true,
                              color: '#32CD32'}
-  Utils.save_or_update_model(ShoppingOrdersStatus, {:color => '#32CD32'}, sos_accepted_attributes)
+  Utils.create_or_update_model(ShoppingOrdersStatus, {:color => '#32CD32'}, sos_accepted_attributes)
 
   sos_accepted_attributes = {shopping_orders_status_translations_attributes: [{locale: :en, name: 'Packaging'},
                                                                               {locale: :es, name: 'Preparando el paquete'}],
                              enable_invoice: true,
                              color: '#FF8C00'}
-  Utils.save_or_update_model(ShoppingOrdersStatus, {:color => '#FF8C00'}, sos_accepted_attributes)
+  Utils.create_or_update_model(ShoppingOrdersStatus, {:color => '#FF8C00'}, sos_accepted_attributes)
 
 
   sos_accepted_attributes = {shopping_orders_status_translations_attributes: [{locale: :en, name: 'Sent'},
                                                                               {locale: :es, name: 'Enviado'}],
                              enable_invoice: true,
                              color: '#8A2BE2'}
-  Utils.save_or_update_model(ShoppingOrdersStatus, {:color => '#8A2BE2'}, sos_accepted_attributes)
+  Utils.create_or_update_model(ShoppingOrdersStatus, {:color => '#8A2BE2'}, sos_accepted_attributes)
 
   sos_accepted_attributes = {shopping_orders_status_translations_attributes: [{locale: :en, name: 'Committed'},
                                                                               {locale: :es, name: 'Entregado'}],
                              enable_invoice: true,
                              color: '#108510'}
-  Utils.save_or_update_model(ShoppingOrdersStatus, {:color => '#108510'}, sos_accepted_attributes)
+  Utils.create_or_update_model(ShoppingOrdersStatus, {:color => '#108510'}, sos_accepted_attributes)
 
   sos_accepted_attributes = {shopping_orders_status_translations_attributes: [{locale: :en, name: 'Canceled'},
                                                                               {locale: :es, name: 'Cancelado'}],
                              enable_invoice: false,
                              color: '#DC143C'}
-  Utils.save_or_update_model(ShoppingOrdersStatus, {:color => '#DC143C'}, sos_accepted_attributes)
+  Utils.create_or_update_model(ShoppingOrdersStatus, {:color => '#DC143C'}, sos_accepted_attributes)
 end
 
 def create_defaults

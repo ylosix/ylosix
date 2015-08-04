@@ -1,6 +1,6 @@
 namespace :db do
   def create_product(product_attributes, categories, tags)
-    product = Utils.save_or_update_model(Product,
+    product = Utils.create_or_update_model(Product,
                                          {reference_code: product_attributes[:reference_code]},
                                          product_attributes)
 
