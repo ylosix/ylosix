@@ -1,7 +1,7 @@
 ActiveAdmin.register ShoppingOrder do
   menu parent: 'Orders'
 
-  # permit_params :email, :name, :last_name, :birth_date
+  permit_params :order_num, :carrier_id, :carrier_retail_price, :commerce_id, :customer_id, :shopping_orders_status_id
 
   index do
     selectable_column
