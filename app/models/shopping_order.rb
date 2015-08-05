@@ -100,6 +100,7 @@ class ShoppingOrder < ActiveRecord::Base
 
   def to_liquid
     {
+        'order_num' => retrieve_order_num,
         'shopping_orders_products' => array_to_liquid(shopping_orders_products),
         'total_products' => total_products,
         'total_taxes' => total_taxes,

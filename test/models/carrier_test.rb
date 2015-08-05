@@ -21,8 +21,9 @@ require 'test_helper'
 class CarrierTest < ActiveSupport::TestCase
   test 'calculate_shipping_cost_to' do
     carrier = carriers(:one)
+    country = countries(:one)
 
-    _, valid = carrier.calculate_shipping_cost_to('ES', 0)
+    _, valid = carrier.calculate_shipping_cost_to(country.code, 0)
     assert valid
   end
 end

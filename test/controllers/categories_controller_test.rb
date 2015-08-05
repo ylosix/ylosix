@@ -17,4 +17,11 @@ class CategoriesControllerTest < ActionController::TestCase
 
     # TODO: check when id nil return 404 not found
   end
+
+  test 'should get tag' do
+    tag = tags(:cameras)
+
+    get :tags, slug_tags: tag.id
+    assert_response :success
+  end
 end

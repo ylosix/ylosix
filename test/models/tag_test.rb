@@ -18,4 +18,12 @@
 require 'test_helper'
 
 class TagTest < ActiveSupport::TestCase
+  test 'to_liquid' do
+    hash = tags(:cameras).to_liquid
+
+    assert hash.key? 'name'
+    assert hash.key? 'slug'
+    assert hash.key? 'href'
+    assert hash.key? 'remove_href'
+  end
 end

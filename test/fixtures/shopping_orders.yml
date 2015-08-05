@@ -30,3 +30,9 @@
 
 customer_example_so:
   customer: customer_example
+
+two:
+  customer: customer_example
+  shopping_orders_status: one
+  commerce: one
+

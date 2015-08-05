@@ -11,7 +11,10 @@
 require 'test_helper'
 
 class TagsGroupTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test 'to_liquid' do
+    hash = tags_groups(:one).to_liquid
+
+    assert hash.key? 'name'
+    assert hash.key? 'tags'
+  end
 end
