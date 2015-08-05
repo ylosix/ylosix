@@ -36,4 +36,5 @@ admin_user:
   encrypted_password: <%= Devise::Encryptor.digest(AdminUser, 'password') %>
   debug_template: test_template
   debug_variables: true
+  locale: en
 

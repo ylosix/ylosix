@@ -7,6 +7,11 @@ class ShoppingOrdersControllerTest < ActionController::TestCase
     @customer = login_customer
   end
 
+  test 'should get shipping_method' do
+    get :shipping_method
+    assert_response :success
+  end
+
   test 'should get show with login user' do
     get :checkout
     assert_response :success

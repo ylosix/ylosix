@@ -15,55 +15,72 @@ module Admin
         f.write '<h1>hello world</h1>'
       end
 
-      object = templates(:test_template)
-      object.enabled = true
-      object.save
+      @object = templates(:test_template)
+      @object.enabled = true
+      @object.save
     end
 
-    test 'should get index/edit/show' do
+    test 'should index' do
       get :index
       assert_response :success
+      assert_not_nil assigns(:templates)
+    end
 
-      object = templates(:test_template)
-      get :edit, id: object.id
-      assert_response :success
-
-      get :show, id: object.id
+    test 'should show' do
+      get :show, id: @object
       assert_response :success
     end
 
-    test 'should post update' do
-      object = templates(:test_template)
+    test 'should edit' do
+      get :edit, id: @object
+      assert_response :success
+    end
 
+    test 'should create' do
+      assert_difference('Template.count') do
+        post :create, template: @object.attributes
+      end
+
+      assert_redirected_to admin_template_path(assigns(:template))
+    end
+
+    test 'should update' do
       patch :update,
-            id: object.id,
+            id: @object.id,
             template: {
                 name: 'Some title',
                 path: 'tmp/templates/test',
                 enabled: true
             }
-      assert_response :redirect
+      assert_redirected_to admin_template_path(assigns(:template))
+    end
+
+    test 'should destroy' do
+      assert_difference('Template.count', -1) do
+        delete :destroy, id: @object.id
+      end
+
+      assert_redirected_to admin_templates_path
     end
 
     test 'should export' do
-      object = templates(:test_template)
-
-      get :export, id: object.id
+      get :export, id: @object.id
       assert_response :success
+
       assert_equal 'application/zip', response.content_type
     end
 
     test 'should get import' do
-      object = templates(:test_template)
-      get :import, id: object.id
+      get :import, id: @object.id
       assert_response :success
     end
 
     test 'should post import' do
-      object = templates(:test_template)
-      zip_file = Utils.zip_folder(object.absolute_path)
+      zip_file = Utils.zip_folder(@object.absolute_path)
+      file = Rack::Test::UploadedFile.new(zip_file, 'application/zip')
 
-      post :import, template: {file: zip_file}
+      post :import, template: {file: file}
+      assert_response :redirect
     end
   end
 end

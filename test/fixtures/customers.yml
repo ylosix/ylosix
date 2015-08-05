@@ -39,6 +39,6 @@ customer_example:
   name: Customer1
   last_name: Customer1
   birth_date: <%= DateTime.now %>
-  locale: es
+  locale: en
 
 
