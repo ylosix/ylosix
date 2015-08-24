@@ -36,7 +36,7 @@ ActiveAdmin.register Category do
       f.input :visible
       f.input :meta_keywords
       f.input :meta_description
-      f.input :slug
+      f.input :slug, hint: 'Chars not allowed: (Upper chars) . spaces /'
       f.input :priority, hint: '1:+ --- 10:-'
     end
 

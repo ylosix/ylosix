@@ -101,7 +101,7 @@ ActiveAdmin.register Product do
     f.inputs 'Seo' do
       f.input :meta_keywords
       f.input :meta_description
-      f.input :slug
+      f.input :slug, hint: 'Chars not allowed: (Upper chars) . spaces /'
     end
 
     f.inputs 'Transport' do

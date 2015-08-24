@@ -57,6 +57,9 @@ class Commerce < ActiveRecord::Base
     image_src = 'http://placehold.it/300x100'
     image_src = logo.url(:original) if logo?
 
+    template_liquid = nil
+    template_liquid = template.to_liquid unless template.blank?
+
     {
         'http' => http,
         'image_src' => image_src,
@@ -64,7 +67,7 @@ class Commerce < ActiveRecord::Base
         'meta_keywords' => meta_keywords,
         'name' => name,
         'root_href' => root_href,
-        'template' => template,
+        'template' => template_liquid,
         'template_from' => template_from,
         'ga_account_id' => ga_account_id,
         'order_prefix' => order_prefix

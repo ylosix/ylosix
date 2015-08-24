@@ -15,6 +15,12 @@ class Template < ActiveRecord::Base
 
   before_save :set_only_one_template_active
 
+  def public_path
+    return nil if path.blank?
+
+    path.gsub('/public', '')
+  end
+
   def self.active_template(current_admin_user)
     if !current_admin_user.nil? && !current_admin_user.debug_template.nil?
       template = current_admin_user.debug_template
@@ -65,6 +71,15 @@ class Template < ActiveRecord::Base
       name = file.split('.')[0]
       writes_file(file, params[name]) if params.key? name
     end
+  end
+
+  def to_liquid
+    {
+        'name' => name,
+        'path' => path,
+        'public_path' => public_path,
+        'enabled' => enabled
+    }
   end
 
   private

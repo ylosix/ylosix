@@ -11,10 +11,10 @@ module InitializeSlug
   end
 
   def parse_url_chars(str)
-    out = str
-    out = out.gsub('.', '-')
-    out = out.gsub(' ', '-')
-    out = out.gsub('/', '')
+    out = str.downcase
+    out = out.tr('.', '-')
+    out = out.tr(' ', '-')
+    out = out.delete('/')
 
     URI.encode(out)
   end

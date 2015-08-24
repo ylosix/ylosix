@@ -8,7 +8,6 @@ capybara-*.html
 /public/system
 /public/assets
 /public/ckeditor_assets
-/coverage/
 /spec/tmp
 **.orig
 rerun.txt
@@ -17,6 +16,9 @@ pickle-email-*.html
 ## Environment normalisation:
 /.bundle
 /vendor/bundle
+/coverage
+
+.idea
 
 # these should all be checked in to normalise the environment:
 # Gemfile.lock, .ruby-version, .ruby-gemset
@@ -36,7 +38,6 @@ bower.json
 .ruby-env
 .env
 .ruby-secret
-.idea
 .vagrant*
 
 # Gemnasium gem configuration file
