@@ -9,7 +9,7 @@ RUN apt-get -q update
 RUN apt-get -qy upgrade
 
 # Install packages
-RUN apt-get install -qy build-essential libpq-dev libmysqlclient-dev nodejs git-core
+RUN apt-get install -qy build-essential libpq-dev libmysqlclient-dev nodejs git-core graphviz tree imagemagick
 
 ENV APP_HOME /var/www
 RUN mkdir $APP_HOME
