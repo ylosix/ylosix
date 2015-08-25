@@ -2,7 +2,8 @@ ActiveAdmin.register Category do
   menu parent: 'Catalog'
   permit_params :parent_id, :name, :enabled, :visible, :meta_keywords,
                 :meta_description, :slug, :priority,
-                category_translations_attributes: [:id, :locale, :name]
+                category_translations_attributes:
+                    [:id, :locale, :name, :description]
 
   index do
     selectable_column
@@ -28,12 +29,13 @@ ActiveAdmin.register Category do
   form do |f|
     f.inputs 'Category Details' do
       f.input :parent
+      f.input :enabled
+      f.input :visible
 
       translations = Utils.array_translations(CategoryTranslation, category_id: category.id)
       admin_translation_text_field(translations, 'category', 'name')
+      admin_translation_text_field(translations, 'category', 'description', ActiveAdminHelper::CKEDITOR)
 
-      f.input :enabled
-      f.input :visible
       f.input :meta_keywords
       f.input :meta_description
       f.input :slug, hint: 'Chars not allowed: (Upper chars) . spaces /'

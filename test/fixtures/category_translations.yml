@@ -2,12 +2,13 @@
 #
 # Table name: category_translations
 #
-#  id          :integer          not null, primary key
 #  category_id :integer          not null
-#  locale      :string           not null
 #  created_at  :datetime         not null
-#  updated_at  :datetime         not null
+#  description :text
+#  id          :integer          not null, primary key
+#  locale      :string           not null
 #  name        :string
+#  updated_at  :datetime         not null
 #
 # Indexes
 #
