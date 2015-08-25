@@ -16,6 +16,7 @@ module InitializeSlug
     out = out.tr(' ', '-')
     out = out.delete('/')
 
-    URI.encode(out)
+    out = URI.encode(out)
+    out.gsub('%23', '#') # Restore hashtags
   end
 end

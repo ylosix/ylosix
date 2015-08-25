@@ -72,10 +72,15 @@ class Category < ActiveRecord::Base
   end
 
   def to_liquid
+    href = slug
+    unless slug.start_with?('#')
+      href = Rails.application.routes.url_helpers.show_slug_categories_path(slug)
+    end
+
     {
         'name' => name,
         'priority' => priority,
-        'href' => Rails.application.routes.url_helpers.show_slug_categories_path(slug),
+        'href' => href,
         'children' => array_to_liquid(children)
     }
   end
