@@ -30,7 +30,7 @@
 #
 
 class Commerce < ActiveRecord::Base
-  attr_accessor :root_href, :template_from
+  attr_accessor :template_from
 
   belongs_to :template
   has_many :shopping_orders
@@ -67,7 +67,7 @@ class Commerce < ActiveRecord::Base
         'meta_keywords' => meta_keywords,
         'name' => name,
         'billing_address' => billing_address,
-        'root_href' => root_href,
+        'root_href' => Rails.application.routes.url_helpers.root_path,
         'template' => template_liquid,
         'template_from' => template_from,
         'ga_account_id' => ga_account_id,

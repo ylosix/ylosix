@@ -85,8 +85,6 @@ class ApplicationController < ActionController::Base
       end
     end
 
-    @commerce.root_href = root_path
-
     @variables ||= {}
     @variables['commerce'] = @commerce.to_liquid
   end
