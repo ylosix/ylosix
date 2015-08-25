@@ -66,6 +66,7 @@ class Commerce < ActiveRecord::Base
         'meta_description' => meta_description,
         'meta_keywords' => meta_keywords,
         'name' => name,
+        'billing_address' => billing_address,
         'root_href' => root_href,
         'template' => template_liquid,
         'template_from' => template_from,
