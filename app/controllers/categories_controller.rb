@@ -16,6 +16,7 @@ class CategoriesController < Frontend::CommonController
   def get_template_variables(template)
     super
 
+    @variables['category'] = @category.to_liquid unless @category.nil?
     @variables['products'] = []
     if params[:slug_tags].blank?
       @variables['products'] = array_to_liquid(Product.in_frontend(@category)) unless @category.nil?
