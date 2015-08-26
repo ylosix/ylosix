@@ -5,8 +5,8 @@
         - @variables['breadcrumbs'].each_with_index do |bread, i|
           - if bread == @variables['breadcrumbs'][-1]
             %span.navigation-pipe
-            = "> #{bread.name}"
+            = "> #{bread['name']}"
           - else
             - if i == 0
               %i{class: 'fa fa-home'}
-            = link_to "> #{bread.name}", bread.url
+            = link_to "> #{bread['name']}", bread['url']

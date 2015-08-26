@@ -18,9 +18,9 @@ class CategoriesController < Frontend::CommonController
 
     @variables['products'] = []
     if params[:slug_tags].blank?
-      @variables['products'] = Product.in_frontend(@category) unless @category.nil?
+      @variables['products'] = array_to_liquid(Product.in_frontend(@category)) unless @category.nil?
     else
-      @variables['products'] = products_tags
+      @variables['products'] = array_to_liquid(products_tags)
     end
 
     array_categories = Utils.get_parents_array(@category)

@@ -7,7 +7,7 @@ module ApplicationHelper
     unless breadcrumb.nil?
       @variables ||= {}
       @variables['breadcrumbs'] ||= []
-      @variables['breadcrumbs'] << breadcrumb
+      @variables['breadcrumbs'] << breadcrumb.to_liquid
     end
   end
 

@@ -4,7 +4,7 @@ class SearchesController < Frontend::CommonController
   def index
     @variables ||= {}
     @variables['products'] = []
-    @variables['products'] += Product.search_by_text(@query_text) unless @query_text.blank?
+    @variables['products'] += array_to_liquid(Product.search_by_text(@query_text)) unless @query_text.blank?
   end
 
   def get_template_variables(template)

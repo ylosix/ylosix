@@ -113,7 +113,7 @@ module Frontend
       append_language_variables
 
       @variables['categories'] = array_to_liquid(Category.root_categories)
-      @variables['products'] ||= Product.all.limit(10) # TODO This only for test.
+      @variables['products'] ||= array_to_liquid(Product.all.limit(10)) # TODO This only for test.
 
       append_tags
 
@@ -124,6 +124,25 @@ module Frontend
       helper = Rails.application.routes.url_helpers
       append_link_variables(helper)
       append_customer_variables(helper)
+      fill_descriptions_with_variables(@variables)
+    end
+
+    def fill_descriptions_with_variables(hash)
+      hash.each do |k, v|
+        if v.class.name == 'Array'
+          v.each do |elem|
+            fill_descriptions_with_variables(elem)
+          end
+        end
+
+        fill_descriptions_with_variables(v) if v.class.name == 'Hash'
+
+        if k == 'description' && !v.blank?
+          # Parses and compiles the description field
+          template_liquid = Liquid::Template.parse(v)
+          hash[k] = template_liquid.render(@variables)
+        end
+      end
     end
 
     def render_template(template, file_html, args)
