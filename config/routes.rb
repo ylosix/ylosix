@@ -61,6 +61,16 @@ Rails.application.routes.draw do
   end
 
   get '/locale/:locale' => 'application#change_locale', :as => 'change_locale'
+
+  # From https://www.airpair.com/ruby-on-rails/posts/building-a-restful-api-in-a-rails-application
+  scope '/api' do
+    scope '/v1' do
+      scope '/open_forms' do
+        post '/' => 'open_forms#create'
+      end
+    end
+  end
+
   # You can have the root of your site routed with "root"
   root 'home#index'
 

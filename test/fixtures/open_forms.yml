@@ -1,0 +1,20 @@
+# == Schema Information
+#
+# Table name: open_forms
+#
+#  created_at :datetime         not null
+#  fields     :hstore           default({}), not null
+#  id         :integer          not null, primary key
+#  tag        :string
+#  updated_at :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  tag: MyString
+  fields: {}
+
+two:
+  tag: MyString
+  fields: {}
