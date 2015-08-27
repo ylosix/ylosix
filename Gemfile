@@ -46,7 +46,7 @@ gem 'rubyzip'
 gem 'foreman'
 gem 'rails-erd'
 gem 'annotate'
-gem 'liquid', :git => 'https://github.com/devcows/liquid.git', :branch => 'master'
+gem 'liquid', git: 'https://github.com/ylosix/liquid.git', branch: 'master'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -56,6 +56,8 @@ gem 'devise-i18n'
 gem 'activeadmin', '~> 1.0.0.pre1'
 gem 'ckeditor'
 gem 'paperclip'
+
+gem 'formtastic', git: 'https://github.com/ylosix/formtastic.git', branch: 'master'
 
 group :development, :test, :profile do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
