@@ -18,6 +18,7 @@ pickle-email-*.html
 /.bundle
 /vendor/bundle
 /coverage
+/config/newrelic.yml
 
 .idea
 

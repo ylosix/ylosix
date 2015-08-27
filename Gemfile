@@ -57,6 +57,8 @@ gem 'activeadmin', '~> 1.0.0.pre1'
 gem 'ckeditor'
 gem 'paperclip'
 
+gem 'mailgun_rails'
+gem 'newrelic_rpm'
 gem 'formtastic', git: 'https://github.com/ylosix/formtastic.git', branch: 'master'
 
 group :development, :test, :profile do
