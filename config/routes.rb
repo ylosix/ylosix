@@ -65,8 +65,8 @@ Rails.application.routes.draw do
   # From https://www.airpair.com/ruby-on-rails/posts/building-a-restful-api-in-a-rails-application
   scope '/api' do
     scope '/v1' do
-      scope '/open_forms' do
-        post '/' => 'open_forms#create'
+      scope '/data_forms' do
+        post '/' => 'data_forms#create'
       end
     end
   end

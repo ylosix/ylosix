@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: open_forms
+# Table name: data_forms
 #
 #  created_at :datetime         not null
 #  fields     :hstore           default({}), not null
@@ -13,8 +13,6 @@
 
 one:
   tag: MyString
-  fields: {}
 
 two:
   tag: MyString
-  fields: {}

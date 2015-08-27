@@ -1,4 +1,4 @@
-ActiveAdmin.register OpenForm do
+ActiveAdmin.register DataForm do
   menu parent: 'Preferences'
 
   index do

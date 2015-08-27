@@ -13,7 +13,17 @@
 require 'test_helper'
 
 class TemplateTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test 'public path' do
+    template = templates(:test_template)
+    assert !template.public_path.blank?
+  end
+
+  test 'to_liquid' do
+    hash = templates(:test_template).to_liquid
+
+    assert hash.key? 'name'
+    assert hash.key? 'path'
+    assert hash.key? 'public_path'
+    assert hash.key? 'enabled'
+  end
 end

@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: open_forms
+# Table name: data_forms
 #
 #  created_at :datetime         not null
 #  fields     :hstore           default({}), not null
@@ -9,5 +9,5 @@
 #  updated_at :datetime         not null
 #
 
-class OpenForm < ActiveRecord::Base
+class DataForm < ActiveRecord::Base
 end

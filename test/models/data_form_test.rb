@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: open_forms
+# Table name: data_forms
 #
 #  created_at :datetime         not null
 #  fields     :hstore           default({}), not null
@@ -11,7 +11,7 @@
 
 require 'test_helper'
 
-class OpenFormTest < ActiveSupport::TestCase
+class DataFormTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

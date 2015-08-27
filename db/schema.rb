@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150826093635) do
+ActiveRecord::Schema.define(version: 20150827074308) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -202,6 +202,13 @@ ActiveRecord::Schema.define(version: 20150826093635) do
   add_index "customers", ["email"], name: "index_customers_on_email", unique: true, using: :btree
   add_index "customers", ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true, using: :btree
 
+  create_table "data_forms", force: :cascade do |t|
+    t.string   "tag"
+    t.hstore   "fields",     default: {}, null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
   create_table "feature_translations", force: :cascade do |t|
     t.integer  "feature_id", null: false
     t.string   "locale",     null: false
@@ -234,13 +241,6 @@ ActiveRecord::Schema.define(version: 20150826093635) do
   end
 
   add_index "languages", ["locale"], name: "index_languages_on_locale", using: :btree
-
-  create_table "open_forms", force: :cascade do |t|
-    t.string   "tag"
-    t.hstore   "fields",     default: {}, null: false
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-  end
 
   create_table "product_translations", force: :cascade do |t|
     t.integer  "product_id",        null: false
