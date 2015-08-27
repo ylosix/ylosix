@@ -19,7 +19,7 @@ ActiveAdmin.register DataForm do
       super
 
       @data_form[:fields] = {}
-      JSON.parse(params[:data_form][:fields].gsub('=>', ':')).each do |k,v|
+      JSON.parse(params[:data_form][:fields].gsub('=>', ':')).each do |k, v|
         @data_form[:fields][k] = v
       end
 
