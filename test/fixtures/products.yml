@@ -22,6 +22,7 @@
 #  retail_price         :decimal(10, 2)   default(0.0), not null
 #  retail_price_pre_tax :decimal(10, 5)   default(0.0), not null
 #  short_description    :string
+#  show_action_name     :string
 #  slug                 :string           not null
 #  stock                :integer          default(0)
 #  tax_id               :integer

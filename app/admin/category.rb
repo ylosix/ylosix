@@ -1,7 +1,7 @@
 ActiveAdmin.register Category do
   menu parent: 'Catalog'
   permit_params :parent_id, :name, :enabled, :visible, :meta_keywords,
-                :meta_description, :slug, :priority,
+                :meta_description, :slug, :show_action_name, :priority,
                 category_translations_attributes:
                     [:id, :locale, :name, :description]
 
@@ -39,6 +39,7 @@ ActiveAdmin.register Category do
       f.input :meta_keywords
       f.input :meta_description
       f.input :slug, hint: 'Chars not allowed: (Upper chars) . spaces /'
+      f.input :show_action_name, hint: 'File name of show render'
       f.input :priority, hint: '1:+ --- 10:-'
     end
 

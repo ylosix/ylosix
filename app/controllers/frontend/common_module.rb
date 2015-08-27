@@ -166,6 +166,13 @@ module Frontend
     def retrieve_file_html(controller, action, args = [])
       file_html = "#{controller}/#{action}.html"
 
+      if action == 'show' && !@variables['show_action_name'].blank?
+        if !@render_template.nil? &&
+            @render_template.ok?("#{controller}/#{@variables['show_action_name']}.html")
+          file_html = "#{controller}/#{@variables['show_action_name']}.html"
+        end
+      end
+
       # Fixed route devise when fails sign up.
       if controller == 'registrations' && args.include?(action: :new)
         file_html = "#{controller}/new.html"

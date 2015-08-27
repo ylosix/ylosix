@@ -1,0 +1,51 @@
+{{ include snippet_header.html }}
+
+HOLA! HOLA!
+<div class="row">
+ 		<div class="container">
+			<div class="col-sm-12 col-md-12">
+				<div class="row">
+					{% for product in products %} 
+						<div class="col-sm-6 col-lg-3 col-md-3">
+							<div class="thumbnail item-home">
+								<div class="sm-img">
+								<img src="{{ product.image_medium_src }}" alt="">
+								</div>
+								<div class="caption">
+								  <h4 class="pull-right price">{{ product.retail_price }}€</h4>
+								  <h4><a href="{{ product.href }}">{{ product.name }}</a>
+								  </h4>
+								  <p>{{ product.short_description }}</p>
+								</div>
+								<div class="ratings">
+									<p class="pull-right">15 reviews</p>
+									<p>
+									 <span class="glyphicon glyphicon-star"></span>
+									 <span class="glyphicon glyphicon-star"></span>
+									 <span class="glyphicon glyphicon-star"></span>
+									 <span class="glyphicon glyphicon-star"></span>
+									 <span class="glyphicon glyphicon-star"></span>
+									</p>
+									<div class="item-hidden">
+										<a href="{{ product.add_cart_href }}">
+											<div class="item-home-buy">
+												<div class="fa fa-shopping-cart icon-medium"></div>&nbsp;&nbsp;Buy
+											</div>
+										</a>
+										<a href="{{ product.href }}">
+											<div class="item-home-view">
+												<div class="fa fa-eye icon-medium"></div>&nbsp;&nbsp;View
+											</div>
+										</a>
+									</div>
+								 </div>
+							 </div>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+ <!-- /.container -->
+{{ include snippet_footer.html }}

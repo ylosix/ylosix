@@ -1,4 +1,5 @@
 class CategoriesController < Frontend::CommonController
+  include ShowActionName
   layout 'searcher_and_side_bar'
   before_action :set_category, except: [:index]
 
@@ -68,6 +69,7 @@ class CategoriesController < Frontend::CommonController
       unless @category.nil?
         @variables ||= {}
         @variables['tags_group'] = TagsGroup.general_groups(@category.id)
+        add_show_action_name(@category)
       end
     end
   end
