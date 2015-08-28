@@ -8,7 +8,7 @@
 
 ## REAME
 
-Open source ecommerce.
+Open source ecommerce includes bootstrap, font-awesome and animate.
 
   * Ruby version: 2.1.6
   

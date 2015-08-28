@@ -28,6 +28,7 @@ gem 'haml'
 
 gem 'bootstrap-sass', '~> 3.3.4'
 gem 'font-awesome-rails'
+gem 'animate-rails', '~> 1.0.8'
 
 gem 'globalize', '~> 5.0.0'
 
