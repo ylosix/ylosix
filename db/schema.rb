@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150827100505) do
+ActiveRecord::Schema.define(version: 20150828095749) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -154,6 +154,7 @@ ActiveRecord::Schema.define(version: 20150827100505) do
     t.string   "ga_account_id"
     t.string   "order_prefix",              default: "",    null: false
     t.boolean  "no_redirect_shopping_cart", default: false, null: false
+    t.hstore   "social_networks",           default: {},    null: false
   end
 
   add_index "commerces", ["template_id"], name: "index_commerces_on_template_id", using: :btree

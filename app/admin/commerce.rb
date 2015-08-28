@@ -3,7 +3,7 @@ ActiveAdmin.register Commerce do
   permit_params :default, :no_redirect_shopping_cart, :http, :logo,
                 :order_prefix, :meta_keywords, :meta_description,
                 :ga_account_id, :name, :template_id, :address_1, :address_2,
-                :postal_code, :city, :country, :phone, :cif
+                :postal_code, :city, :country, :phone, :cif, :social_networks
 
   index do
     selectable_column
@@ -27,6 +27,7 @@ ActiveAdmin.register Commerce do
       f.input :default
       f.input :no_redirect_shopping_cart
       f.input :http
+      f.input :social_networks
     end
 
     f.inputs 'Seo & Google analytics' do
@@ -55,5 +56,18 @@ ActiveAdmin.register Commerce do
     end
 
     f.actions
+  end
+
+  controller do
+    def update
+      super
+
+      @commerce[:social_networks] = {}
+      JSON.parse(params[:commerce][:social_networks].gsub('=>', ':')).each do |k, v|
+        @commerce[:social_networks][k] = v
+      end
+
+      @commerce.save
+    end
   end
 end

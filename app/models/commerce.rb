@@ -17,6 +17,7 @@
 #  name                      :string
 #  no_redirect_shopping_cart :boolean          default(FALSE), not null
 #  order_prefix              :string           default(""), not null
+#  social_networks           :hstore           default({}), not null
 #  template_id               :integer
 #  updated_at                :datetime         not null
 #
@@ -71,7 +72,8 @@ class Commerce < ActiveRecord::Base
         'template' => template_liquid,
         'template_from' => template_from,
         'ga_account_id' => ga_account_id,
-        'order_prefix' => order_prefix
+        'order_prefix' => order_prefix,
+        'social_networks' => social_networks
     }
   end
 end

@@ -17,6 +17,7 @@
 #  name                      :string
 #  no_redirect_shopping_cart :boolean          default(FALSE), not null
 #  order_prefix              :string           default(""), not null
+#  social_networks           :hstore           default({}), not null
 #  template_id               :integer
 #  updated_at                :datetime         not null
 #
