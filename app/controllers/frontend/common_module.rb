@@ -137,7 +137,7 @@ module Frontend
 
         fill_descriptions_with_variables(v) if v.class.name == 'Hash'
 
-        if k == 'description' && !v.blank?
+        if k.include?('description') && !v.blank?
           # Parses and compiles the description field
           template_liquid = Liquid::Template.parse(v)
           hash[k] = template_liquid.render(@variables)
