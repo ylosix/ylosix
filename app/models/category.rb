@@ -25,7 +25,7 @@ class Category < ActiveRecord::Base
   include ArrayLiquid
   include InitializeSlug
 
-  translates :name, :description
+  translates :name, :short_description, :description
 
   # TODO put children in schema erd!
   # has_many :children, class_name: 'Category', foreign_key: 'parent_id'
@@ -80,6 +80,7 @@ class Category < ActiveRecord::Base
 
     {
         'name' => name,
+        'short_description' => short_description,
         'description' => description,
         'priority' => priority,
         'href' => href,

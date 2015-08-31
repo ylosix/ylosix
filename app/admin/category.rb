@@ -3,7 +3,7 @@ ActiveAdmin.register Category do
   permit_params :parent_id, :name, :enabled, :visible, :meta_keywords,
                 :meta_description, :slug, :show_action_name, :priority,
                 category_translations_attributes:
-                    [:id, :locale, :name, :description]
+                    [:id, :locale, :name, :short_description, :description]
 
   index do
     selectable_column
@@ -34,6 +34,7 @@ ActiveAdmin.register Category do
 
       translations = Utils.array_translations(CategoryTranslation, category_id: category.id)
       admin_translation_text_field(translations, 'category', 'name')
+      admin_translation_text_field(translations, 'category', 'short_description', ActiveAdminHelper::CKEDITOR)
       admin_translation_text_field(translations, 'category', 'description', ActiveAdminHelper::CKEDITOR)
 
       f.input :meta_keywords
