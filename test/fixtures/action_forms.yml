@@ -1,0 +1,20 @@
+# == Schema Information
+#
+# Table name: action_forms
+#
+#  created_at :datetime         not null
+#  id         :integer          not null, primary key
+#  mapping    :hstore           default({}), not null
+#  tag        :string
+#  updated_at :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  tag: MyString
+  mapping: {}
+
+two:
+  tag: MyString
+  mapping: {}

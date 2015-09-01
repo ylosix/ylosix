@@ -11,11 +11,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150831100033) do
+ActiveRecord::Schema.define(version: 20150831111240) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "hstore"
+
+  create_table "action_form_translations", force: :cascade do |t|
+    t.integer  "action_form_id", null: false
+    t.string   "locale",         null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.string   "subject"
+    t.text     "body"
+  end
+
+  add_index "action_form_translations", ["action_form_id"], name: "index_action_form_translations_on_action_form_id", using: :btree
+  add_index "action_form_translations", ["locale"], name: "index_action_form_translations_on_locale", using: :btree
+
+  create_table "action_forms", force: :cascade do |t|
+    t.string   "tag"
+    t.hstore   "mapping",    default: {}, null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"

@@ -10,4 +10,5 @@
 #
 
 class DataForm < ActiveRecord::Base
+  has_many :action_forms, foreign_key: 'tag', primary_key: 'tag'
 end

@@ -66,7 +66,7 @@ Rails.application.routes.draw do
   scope '/api' do
     scope '/v1' do
       scope '/data_forms' do
-        post '/' => 'data_forms#create'
+        post '/' => 'api/data_forms#create'
       end
     end
   end
