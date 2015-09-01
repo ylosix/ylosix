@@ -16,7 +16,7 @@ class ActionForm < ActiveRecord::Base
   accepts_nested_attributes_for :action_form_translations
 
   def perform_with_data(data_form)
-    attributes = {to: Ecommerce::Application::DOMAIN_HOST}
+    attributes = {to: Ecommerce::Application::MAIN_EMAIL}
     mapping.each do |k, v|
       if data_form.fields.key? k
         # ex: replace email => reply_to
