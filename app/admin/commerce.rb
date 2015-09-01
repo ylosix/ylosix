@@ -40,7 +40,7 @@ ActiveAdmin.register Commerce do
       f.input :template
 
       f.inputs 'Dimensions 300x100' do
-        f.input :logo, hint: (f.template.image_tag(commerce.logo.url(:original)) if commerce.logo?)
+        f.input :logo, hint: (image_tag(commerce.logo.url(:original)) if commerce.logo?)
       end
     end
 

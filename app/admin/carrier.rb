@@ -26,7 +26,7 @@ ActiveAdmin.register Carrier do
       admin_translation_text_field(translations, 'carrier', 'name')
       admin_translation_text_field(translations, 'carrier', 'delay')
 
-      f.input :image, hint: (f.template.image_tag(carrier.image.url(:original)) if carrier.image?)
+      f.input :image, hint: (image_tag(carrier.image.url(:original)) if carrier.image?)
 
       f.input :enabled
       f.input :free_carrier

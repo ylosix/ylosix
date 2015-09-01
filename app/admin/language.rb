@@ -27,7 +27,7 @@ ActiveAdmin.register Language do
     f.inputs 'Language Details' do
       f.input :locale
       f.input :name
-      f.input :flag, hint: (f.template.image_tag(f.object.flag.url(:original)) if f.object.flag?)
+      f.input :flag, hint: (image_tag(f.object.flag.url(:original)) if f.object.flag?)
       f.input :appears_in_backoffice
       f.input :appears_in_web
     end

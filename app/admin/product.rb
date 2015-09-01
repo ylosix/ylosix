@@ -114,10 +114,10 @@ ActiveAdmin.register Product do
     end
 
     f.inputs 'Images' do
-      f.input :image, hint: (f.template.image_tag(product.image.url(:thumbnail)) if product.image?)
+      f.input :image, :as => :file, hint: (image_tag(product.image.url(:thumbnail)) if product.image?)
 
       f.has_many :products_pictures, allow_destroy: true do |s|
-        s.input :image, as: :file, hint: f.template.image_tag(s.object.image.url), allow_destroy: true
+        s.input :image, as: :file, hint: (image_tag(s.object.image.url(:thumbnail)) if s.object.image?), allow_destroy: true
       end
     end
 
