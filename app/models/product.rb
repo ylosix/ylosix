@@ -123,16 +123,6 @@ class Product < ActiveRecord::Base
     image_src
   end
 
-  def href
-    helpers = Rails.application.routes.url_helpers
-    href = helpers.show_slug_products_path(slug)
-    if categories.any?
-      href = helpers.show_product_slug_categories_path(categories.first.slug, slug)
-    end
-
-    href
-  end
-
   def to_liquid
     helpers = Rails.application.routes.url_helpers
     s_short_description = ''
@@ -146,7 +136,7 @@ class Product < ActiveRecord::Base
         'short_description' => s_short_description,
         'description' => s_description,
         'retail_price' => retail_price,
-        'href' => href,
+        'href' => href(self),
         'add_cart_href' => helpers.add_to_shopping_cart_products_path(self),
         'delete_cart_href' => helpers.delete_from_shopping_cart_products_path(self)
     }

@@ -12,11 +12,28 @@ module InitializeSlug
 
   def parse_url_chars(str)
     out = str.downcase
-    out = out.tr('.', '-')
     out = out.tr(' ', '-')
-    out = out.delete('/')
 
     out = URI.encode(out)
     out.gsub('%23', '#') # Restore hashtags
+  end
+
+  def href(object)
+    href = object.slug
+
+    if !object.slug.start_with?('#') && !object.slug.start_with?('http')
+      helpers = Rails.application.routes.url_helpers
+
+      if object.class == Category
+        href = helpers.show_slug_categories_path(object.slug)
+      elsif object.class == Product
+        href = helpers.show_slug_products_path(object.slug)
+        if object.categories.any?
+          href = helpers.show_product_slug_categories_path(object.categories.first.slug, object.slug)
+        end
+      end
+    end
+
+    href
   end
 end

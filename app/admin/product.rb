@@ -102,7 +102,7 @@ ActiveAdmin.register Product do
     f.inputs 'Seo' do
       f.input :meta_keywords
       f.input :meta_description
-      f.input :slug, hint: 'Chars not allowed: (Upper chars) . spaces /'
+      f.input :slug, hint: 'Chars not allowed: (Upper chars) spaces'
       f.input :show_action_name, hint: 'File name of show render'
     end
 

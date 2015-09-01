@@ -22,7 +22,7 @@ ActiveAdmin.register Tag do
   form do |f|
     f.inputs 'Tag Details' do
       f.input :priority, hint: '1:+ --- 10:-'
-      f.input :slug, hint: 'Chars not allowed: (Upper chars) . spaces /'
+      f.input :slug, hint: 'Chars not allowed: (Upper chars) spaces'
       f.input :tags_group
 
       translations = Utils.array_translations(TagTranslation, tag_id: tag.id)
