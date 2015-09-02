@@ -22,7 +22,7 @@ ActiveAdmin.register ActionForm do
 
       translations = Utils.array_translations(ActionFormTranslation, action_form_id: action_form.id)
       admin_translation_text_field(translations, 'action_form', 'subject')
-      admin_translation_text_field(translations, 'action_form', 'body', ActiveAdminHelper::CKEDITOR)
+      admin_translation_text_field(translations, 'action_form', 'body', component: ActiveAdminHelper::CKEDITOR)
     end
 
     f.actions

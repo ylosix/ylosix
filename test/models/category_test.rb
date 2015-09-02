@@ -10,29 +10,34 @@
 #  name             :string
 #  parent_id        :integer
 #  priority         :integer          default(1), not null
+#  reference_code   :string
 #  show_action_name :string
-#  slug             :string
 #  updated_at       :datetime         not null
 #  visible          :boolean          default(TRUE)
 #
 # Indexes
 #
 #  index_categories_on_parent_id  (parent_id)
-#  index_categories_on_slug       (slug)
 #
 
 require 'test_helper'
 
 class CategoryTest < ActiveSupport::TestCase
   test 'set_defaults' do
-    c = Category.new(name: 'potato with spaces')
+    c = Category.new(name: 'potato with spaces', locale: :en)
+
     assert c.save
-    assert !c.slug.blank?
+    c.category_translations.each do |translation|
+      assert !translation.slug.blank?
+    end
 
     ct = CategoryTranslation.new(name: 'potato with spaces', locale: :en)
     c = Category.new(category_translations: [ct])
     assert c.save
-    assert !c.slug.blank?
+
+    c.category_translations.each do |translation|
+      assert !translation.slug.blank?
+    end
   end
 
   test 'get_parents_array' do

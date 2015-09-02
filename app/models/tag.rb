@@ -6,7 +6,6 @@
 #  id            :integer          not null, primary key
 #  name          :string
 #  priority      :integer          default(1), not null
-#  slug          :string
 #  tags_group_id :integer
 #  updated_at    :datetime         not null
 #
@@ -18,7 +17,7 @@
 class Tag < ActiveRecord::Base
   include InitializeSlug
   attr_accessor :href, :remove_href
-  translates :name
+  translates :name, :slug
 
   belongs_to :tags_group
   has_many :products_tags
@@ -41,10 +40,6 @@ class Tag < ActiveRecord::Base
   private
 
   def set_defaults
-    if slug.blank?
-      self.slug = generate_slug(name, tag_translations, :name)
-    else
-      self.slug = parse_url_chars(slug)
-    end
+    generate_slug(:name, tag_translations)
   end
 end

@@ -10,7 +10,7 @@ namespace :db do
   end
 
   def create_photograpy_products
-    category = Category.find_by(slug: PHOTOGRAPHY_REFLEX_SLUG)
+    category = Category.find_by(reference_code: PHOTOGRAPHY_REFLEX_SLUG)
     categories = [category]
 
     tag_reflex = Tag.with_translations.find_by(:tag_translations => {:name => 'Reflex', :locale => :en})
@@ -65,7 +65,7 @@ namespace :db do
     tag_lenses = Tag.with_translations.find_by(:tag_translations => {:name => 'Lenses', :locale => :en})
     tags = [tag_lenses]
 
-    category = Category.find_by(slug: PHOTOGRAPHY_LENSES_SLUG)
+    category = Category.find_by(reference_code: PHOTOGRAPHY_LENSES_SLUG)
     categories = [category]
 
     zoom_image = File.new "#{Rails.root}/app/assets/images/products/DX-Zoom-10-24mm.png"
@@ -92,7 +92,7 @@ namespace :db do
   end
 
   def create_phones_products
-    category = Category.find_by(slug: PHONES_SMART_PHONES_SLUG)
+    category = Category.find_by(reference_code: PHONES_SMART_PHONES_SLUG)
     categories = [category]
 
     tax_iva = Tax.find_by({:name => 'IVA ES 21%'})

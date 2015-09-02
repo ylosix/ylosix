@@ -19,85 +19,75 @@ namespace :db do
     puts '####################'
 
     root_attributes = {:parent_id => nil,
-                       category_translations_attributes: [{:locale => :en, name: 'Root'},
-                                                          {:locale => :es, name: 'Inicio'}],
+                       category_translations_attributes: [{locale: :en, name: 'Root', slug: 'root'},
+                                                          {locale: :es, name: 'Inicio', slug: 'inicio'}],
                        :enabled => true,
-                       :visible => true,
-                       :slug => 'root'}
-    root = Utils.create_or_update_model(Category, {:slug => 'root'}, root_attributes)
+                       :visible => true}
+    root = Utils.create_or_update_model(Category, {:reference_code => 'root'}, root_attributes)
 
     photo_attributes = {:parent_id => root.id,
-                        category_translations_attributes: [{:locale => :en, name: 'Photography'},
-                                                           {:locale => :es, name: 'Fotografía'}],
+                        category_translations_attributes: [{locale: :en, name: 'Photography', slug: PHOTOGRAPHY_SLUG},
+                                                           {locale: :es, name: 'Fotografía', slug: PHOTOGRAPHY_SLUG}],
                         :enabled => true,
-                        :visible => true,
-                        :slug => PHOTOGRAPHY_SLUG}
-    photography = Utils.create_or_update_model(Category, {:slug => PHOTOGRAPHY_SLUG}, photo_attributes)
+                        :visible => true}
+    photography = Utils.create_or_update_model(Category, {reference_code: PHOTOGRAPHY_SLUG}, photo_attributes)
 
     phones_attributes = {:parent_id => root.id,
-                         category_translations_attributes: [{:locale => :en, name: 'Phones'},
-                                                            {:locale => :es, name: 'Teléfonos'}],
+                         category_translations_attributes: [{locale: :en, name: 'Phones', slug: PHONES_SLUG},
+                                                            {locale: :es, name: 'Teléfonos', slug: PHONES_SLUG}],
                          :enabled => true,
-                         :visible => true,
-                         :slug => PHONES_SLUG}
-    phones = Utils.create_or_update_model(Category, {:slug => PHONES_SLUG}, phones_attributes)
+                         :visible => true}
+    phones = Utils.create_or_update_model(Category, {:reference_code => PHONES_SLUG}, phones_attributes)
 
 
     video_attributes = {:parent_id => root.id,
-                        category_translations_attributes: [{:locale => :en, name: 'Video cameras', },
-                                                           {:locale => :es, name: 'Vídeo cámaras'}],
+                        category_translations_attributes: [{locale: :en, name: 'Video cameras', :slug => VIDEOS_SLUG},
+                                                           {locale: :es, name: 'Vídeo cámaras', :slug => VIDEOS_SLUG}],
                         :enabled => true,
-                        :visible => true,
-                        :slug => VIDEOS_SLUG}
-    videos = Utils.create_or_update_model(Category, {:slug => VIDEOS_SLUG}, video_attributes)
+                        :visible => true}
+    videos = Utils.create_or_update_model(Category, {:reference_code => VIDEOS_SLUG}, video_attributes)
 
     # Sub-categories
     reflex_attributes = {:parent_id => photography.id,
-                         category_translations_attributes: [{:locale => :en, name: 'Reflex', },
-                                                            {:locale => :es, name: 'Reflex'}],
+                         category_translations_attributes: [{locale: :en, name: 'Reflex', :slug => PHOTOGRAPHY_REFLEX_SLUG},
+                                                            {locale: :es, name: 'Reflex', :slug => PHOTOGRAPHY_REFLEX_SLUG}],
                          :enabled => true,
-                         :visible => true,
-                         :slug => PHOTOGRAPHY_REFLEX_SLUG}
-    Utils.create_or_update_model(Category, {:slug => PHOTOGRAPHY_REFLEX_SLUG}, reflex_attributes)
+                         :visible => true}
+    Utils.create_or_update_model(Category, {:reference_code => PHOTOGRAPHY_REFLEX_SLUG}, reflex_attributes)
 
     lenses_attributes = {:parent_id => photography.id,
-                         category_translations_attributes: [{:locale => :en, name: 'Lenses', },
-                                                            {:locale => :es, name: 'Objetivos'}],
+                         category_translations_attributes: [{locale: :en, name: 'Lenses', :slug => PHOTOGRAPHY_LENSES_SLUG},
+                                                            {locale: :es, name: 'Objetivos', :slug => PHOTOGRAPHY_LENSES_SLUG}],
                          :enabled => true,
-                         :visible => true,
-                         :slug => PHOTOGRAPHY_LENSES_SLUG}
-    Utils.create_or_update_model(Category, {:slug => PHOTOGRAPHY_LENSES_SLUG}, lenses_attributes)
+                         :visible => true}
+    Utils.create_or_update_model(Category, {:reference_code => PHOTOGRAPHY_LENSES_SLUG}, lenses_attributes)
 
     accessories_attributes = {:parent_id => phones.id,
-                              category_translations_attributes: [{:locale => :en, name: 'Accessories', },
-                                                                 {:locale => :es, name: 'Accesorios'}],
+                              category_translations_attributes: [{locale: :en, name: 'Accessories', :slug => PHONES_ACCESSORIES_SLUG},
+                                                                 {locale: :es, name: 'Accesorios', :slug => PHONES_ACCESSORIES_SLUG}],
                               :enabled => true,
-                              :visible => true,
-                              :slug => PHONES_ACCESSORIES_SLUG}
-    Utils.create_or_update_model(Category, {:slug => PHONES_ACCESSORIES_SLUG}, accessories_attributes)
+                              :visible => true}
+    Utils.create_or_update_model(Category, {:reference_code => PHONES_ACCESSORIES_SLUG}, accessories_attributes)
 
     phones_attributes = {:parent_id => phones.id,
-                         category_translations_attributes: [{:locale => :en, name: 'Smart-phones', },
-                                                            {:locale => :es, name: 'Smart-phones'}],
+                         category_translations_attributes: [{locale: :en, name: 'Smart-phones', :slug => PHONES_SMART_PHONES_SLUG},
+                                                            {locale: :es, name: 'Smart-phones', :slug => PHONES_SMART_PHONES_SLUG}],
                          :enabled => true,
-                         :visible => true,
-                         :slug => PHONES_SMART_PHONES_SLUG}
-    Utils.create_or_update_model(Category, {:slug => PHONES_SMART_PHONES_SLUG}, phones_attributes)
+                         :visible => true}
+    Utils.create_or_update_model(Category, {:reference_code => PHONES_SMART_PHONES_SLUG}, phones_attributes)
 
     accessories_attributes = {:parent_id => videos.id,
-                              category_translations_attributes: [{:locale => :en, name: 'Accessories', },
-                                                                 {:locale => :es, name: 'Accesorios'}],
+                              category_translations_attributes: [{locale: :en, name: 'Accessories', :slug => VIDEOS_ACCESSORIES_SLUG},
+                                                                 {locale: :es, name: 'Accesorios', :slug => VIDEOS_ACCESSORIES_SLUG}],
                               :enabled => true,
-                              :visible => true,
-                              :slug => VIDEOS_ACCESSORIES_SLUG}
-    Utils.create_or_update_model(Category, {:slug => VIDEOS_ACCESSORIES_SLUG}, accessories_attributes)
+                              :visible => true}
+    Utils.create_or_update_model(Category, {:reference_code => VIDEOS_ACCESSORIES_SLUG}, accessories_attributes)
 
     cameras_attributes = {:parent_id => videos.id,
-                         category_translations_attributes: [{:locale => :en, name: 'Cameras', },
-                                                            {:locale => :es, name: 'Cámeras'}],
-                         :enabled => true,
-                         :visible => true,
-                         :slug => VIDEOS_CAMERAS_SLUG}
-    Utils.create_or_update_model(Category, {:slug => VIDEOS_CAMERAS_SLUG}, cameras_attributes)
+                          category_translations_attributes: [{:locale => :en, name: 'Cameras', :slug => VIDEOS_CAMERAS_SLUG},
+                                                             {:locale => :es, name: 'Cámeras', :slug => VIDEOS_CAMERAS_SLUG}],
+                          :enabled => true,
+                          :visible => true}
+    Utils.create_or_update_model(Category, {:reference_code => VIDEOS_CAMERAS_SLUG}, cameras_attributes)
   end
 end

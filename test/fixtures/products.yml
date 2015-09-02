@@ -23,7 +23,6 @@
 #  retail_price_pre_tax :decimal(10, 5)   default(0.0), not null
 #  short_description    :string
 #  show_action_name     :string
-#  slug                 :string           not null
 #  stock                :integer          default(0)
 #  tax_id               :integer
 #  unpublication_date   :datetime
@@ -58,7 +57,6 @@ camera:
 
   meta_keywords: canon_450d
   meta_description: Camera reflex canon
-  slug: canon_450d
   stock: 100
   control_stock: true
 
@@ -77,6 +75,5 @@ lens_canon:
 
   meta_keywords: lenses_canon_
   meta_description: Lens canon
-  slug: lens_canon
   stock: 50
   control_stock: true

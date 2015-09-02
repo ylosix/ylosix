@@ -11,7 +11,7 @@ ActiveAdmin.register Product do
                  products_categories_attributes: [:id, :category_id, :product_id, :_destroy],
                  products_pictures_attributes: [:id, :image, :_destroy]]
 
-    pta = [:id, :locale, :name, :short_description, :description]
+    pta = [:id, :locale, :name, :short_description, :description, :slug]
     Feature.all.each do |feature|
       pta << feature.id.to_s.to_sym
     end
@@ -84,8 +84,8 @@ ActiveAdmin.register Product do
       f.input :enabled
       f.input :visible
 
-      admin_translation_text_field(translations, 'product', 'short_description', ActiveAdminHelper::TEXT_AREA)
-      admin_translation_text_field(translations, 'product', 'description', ActiveAdminHelper::CKEDITOR)
+      admin_translation_text_field(translations, 'product', 'short_description', component: ActiveAdminHelper::TEXT_AREA)
+      admin_translation_text_field(translations, 'product', 'description', component: ActiveAdminHelper::CKEDITOR)
 
       f.input :publication_date
       f.input :unpublication_date
@@ -102,7 +102,7 @@ ActiveAdmin.register Product do
     f.inputs 'Seo' do
       f.input :meta_keywords
       f.input :meta_description
-      f.input :slug, hint: 'Chars not allowed: (Upper chars) spaces'
+      admin_translation_text_field(translations, 'product', 'slug', hint: 'Chars not allowed: (Upper chars) spaces')
       f.input :show_action_name, hint: 'File name of show render'
     end
 

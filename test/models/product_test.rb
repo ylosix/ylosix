@@ -23,7 +23,6 @@
 #  retail_price_pre_tax :decimal(10, 5)   default(0.0), not null
 #  short_description    :string
 #  show_action_name     :string
-#  slug                 :string           not null
 #  stock                :integer          default(0)
 #  tax_id               :integer
 #  unpublication_date   :datetime
@@ -48,12 +47,18 @@ class ProductTest < ActiveSupport::TestCase
     pr = Product.new(name: 'potato with spaces')
     assert pr.save
     assert !pr.publication_date.blank?
-    assert !pr.slug.blank?
+
+    pr.product_translations.each do |translation|
+      assert !translation.slug.blank?
+    end
 
     pt = ProductTranslation.new(name: 'potato with spaces', locale: :en)
     pr = Product.new(product_translations: [pt])
     assert pr.save
-    assert !pr.slug.blank?
+
+    pr.product_translations.each do |translation|
+      assert !translation.slug.blank?
+    end
   end
 
   test 'clone' do

@@ -10,22 +10,21 @@
 #  name             :string
 #  parent_id        :integer
 #  priority         :integer          default(1), not null
+#  reference_code   :string
 #  show_action_name :string
-#  slug             :string
 #  updated_at       :datetime         not null
 #  visible          :boolean          default(TRUE)
 #
 # Indexes
 #
 #  index_categories_on_parent_id  (parent_id)
-#  index_categories_on_slug       (slug)
 #
 
 class Category < ActiveRecord::Base
   include ArrayLiquid
   include InitializeSlug
 
-  translates :name, :short_description, :description
+  translates :name, :short_description, :description, :slug
 
   # TODO put children in schema erd!
   # has_many :children, class_name: 'Category', foreign_key: 'parent_id'
@@ -86,10 +85,6 @@ class Category < ActiveRecord::Base
   private
 
   def set_defaults
-    if slug.blank?
-      self.slug = generate_slug(name, category_translations, :name)
-    else
-      self.slug = parse_url_chars(slug)
-    end
+    generate_slug(:name, category_translations)
   end
 end

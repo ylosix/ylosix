@@ -2,12 +2,13 @@
 #
 # Table name: tag_translations
 #
-#  id         :integer          not null, primary key
-#  tag_id     :integer          not null
-#  locale     :string           not null
 #  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id         :integer          not null, primary key
+#  locale     :string           not null
 #  name       :string
+#  slug       :string
+#  tag_id     :integer          not null
+#  updated_at :datetime         not null
 #
 # Indexes
 #

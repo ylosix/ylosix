@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150831111240) do
+ActiveRecord::Schema.define(version: 20150902070148) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -118,15 +118,14 @@ ActiveRecord::Schema.define(version: 20150831111240) do
     t.boolean  "visible",          default: true
     t.string   "meta_keywords"
     t.string   "meta_description"
-    t.string   "slug"
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
     t.integer  "priority",         default: 1,     null: false
     t.string   "show_action_name"
+    t.string   "reference_code"
   end
 
   add_index "categories", ["parent_id"], name: "index_categories_on_parent_id", using: :btree
-  add_index "categories", ["slug"], name: "index_categories_on_slug", using: :btree
 
   create_table "category_translations", force: :cascade do |t|
     t.integer  "category_id",       null: false
@@ -274,6 +273,7 @@ ActiveRecord::Schema.define(version: 20150831111240) do
     t.text     "short_description"
     t.text     "description"
     t.hstore   "features"
+    t.string   "slug"
   end
 
   add_index "product_translations", ["locale"], name: "index_product_translations_on_locale", using: :btree
@@ -294,7 +294,6 @@ ActiveRecord::Schema.define(version: 20150831111240) do
     t.integer  "tax_id"
     t.string   "meta_keywords"
     t.string   "meta_description"
-    t.string   "slug",                                                                          null: false
     t.integer  "stock",                                         default: 0
     t.boolean  "control_stock",                                 default: false
     t.datetime "created_at"
@@ -426,6 +425,7 @@ ActiveRecord::Schema.define(version: 20150831111240) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "name"
+    t.string   "slug"
   end
 
   add_index "tag_translations", ["locale"], name: "index_tag_translations_on_locale", using: :btree
@@ -437,7 +437,6 @@ ActiveRecord::Schema.define(version: 20150831111240) do
     t.integer  "priority",      default: 1, null: false
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
-    t.string   "slug"
   end
 
   add_index "tags", ["tags_group_id"], name: "index_tags_on_tags_group_id", using: :btree

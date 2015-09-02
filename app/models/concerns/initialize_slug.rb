@@ -1,13 +1,21 @@
 module InitializeSlug
-  def generate_slug(name, array_translations, field_translation = nil)
-    slug = 'needs-to-be-changed'
-    if !name.blank?
-      slug = name
-    elsif !field_translation.blank? && array_translations.any? && !array_translations.first.name.blank?
-      slug = array_translations.first[field_translation]
-    end
+  def generate_slug(field_translation, array_translations)
+    array_translations.each do |translation|
+      slug = translation.slug
+      if slug.blank?
+        slug = 'needs-to-be-changed'
 
-    parse_url_chars(slug)
+        unless field_translation.blank?
+          if !translation[field_translation].blank?
+            slug = translation[field_translation]
+          elsif array_translations.any? && !array_translations.first[field_translation].blank?
+            slug = array_translations.first[field_translation]
+          end
+        end
+      end
+
+      translation.slug = parse_url_chars(slug)
+    end
   end
 
   def parse_url_chars(str)
@@ -21,7 +29,7 @@ module InitializeSlug
   def href(object)
     href = object.slug
 
-    if !object.slug.start_with?('#') && !object.slug.start_with?('http')
+    if !object.slug.nil? && !object.slug.start_with?('#') && !object.slug.start_with?('http')
       helpers = Rails.application.routes.url_helpers
 
       if object.class == Category

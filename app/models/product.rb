@@ -23,7 +23,6 @@
 #  retail_price_pre_tax :decimal(10, 5)   default(0.0), not null
 #  short_description    :string
 #  show_action_name     :string
-#  slug                 :string           not null
 #  stock                :integer          default(0)
 #  tax_id               :integer
 #  unpublication_date   :datetime
@@ -45,7 +44,7 @@ class Product < ActiveRecord::Base
   include InitializeSlug
   IMAGE_SIZES = {thumbnail: 'x100', small: 'x300', medium: 'x500', original: 'x720'}
 
-  translates :name, :short_description, :description, :features
+  translates :name, :short_description, :description, :features, :slug
   has_attached_file :image, styles: IMAGE_SIZES
 
   validates_attachment_size :image, less_than: 2.megabytes
@@ -178,10 +177,6 @@ class Product < ActiveRecord::Base
   def set_defaults
     self.publication_date ||= Time.now
 
-    if slug.blank?
-      self.slug = generate_slug(name, product_translations, :name)
-    else
-      self.slug = parse_url_chars(slug)
-    end
+    generate_slug(:name, product_translations)
   end
 end

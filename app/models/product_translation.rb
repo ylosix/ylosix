@@ -10,6 +10,7 @@
 #  name              :string
 #  product_id        :integer          not null
 #  short_description :text
+#  slug              :string
 #  updated_at        :datetime         not null
 #
 # Indexes

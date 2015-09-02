@@ -3,7 +3,7 @@ module ActiveAdminHelper
   TEXT_FIELD = 2
   CKEDITOR = 3
 
-  def admin_translation_text_field(translations, model_name, field, component = TEXT_FIELD)
+  def admin_translation_text_field(translations, model_name, field, options = {})
     translations.each_with_index do |t, index|
       input_name_prefix = "#{model_name}[#{model_name}_translations_attributes][#{index}]"
       input_name_suffix = field
@@ -16,21 +16,27 @@ module ActiveAdminHelper
                  input_name_prefix: input_name_prefix,
                  input_name_sufix: input_name_suffix,
                  language: t.language,
-                 component: retrieve_component("#{input_name_prefix}[#{input_name_suffix}]", component, t[field])
+                 component: retrieve_component("#{input_name_prefix}[#{input_name_suffix}]", t[field], options)
              }
     end
   end
 
   private
 
-  def retrieve_component(input_name, component, value)
-    case component
+  def retrieve_component(input_name, value, options)
+    case options[:component]
     when TEXT_AREA
-      text_area_tag(input_name, value)
+      output = text_area_tag(input_name, value, options.except(:hint))
     when CKEDITOR
-      cktext_area_tag(input_name, value)
+      output = cktext_area_tag(input_name, value, options.except(:hint))
     else
-      text_field_tag(input_name, value)
+      output = text_field_tag(input_name, value, options.except(:hint))
     end
+
+    unless options[:hint].blank?
+      output += content_tag :p, options[:hint], class: 'inline-hints'
+    end
+
+    output
   end
 end

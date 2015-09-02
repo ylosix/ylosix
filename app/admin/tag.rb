@@ -21,12 +21,12 @@ ActiveAdmin.register Tag do
 
   form do |f|
     f.inputs 'Tag Details' do
-      f.input :priority, hint: '1:+ --- 10:-'
-      f.input :slug, hint: 'Chars not allowed: (Upper chars) spaces'
       f.input :tags_group
+      f.input :priority, hint: '1:+ --- 10:-'
 
       translations = Utils.array_translations(TagTranslation, tag_id: tag.id)
       admin_translation_text_field(translations, 'tag', 'name')
+      admin_translation_text_field(translations, 'product', 'slug', hint: 'Chars not allowed: (Upper chars) spaces')
     end
     f.actions
   end

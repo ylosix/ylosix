@@ -6,7 +6,6 @@
 #  id            :integer          not null, primary key
 #  name          :string
 #  priority      :integer          default(1), not null
-#  slug          :string
 #  tags_group_id :integer
 #  updated_at    :datetime         not null
 #
