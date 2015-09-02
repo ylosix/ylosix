@@ -1,8 +1,8 @@
 ActiveAdmin.register Tag do
   menu parent: 'Catalog'
 
-  permit_params :tags_group_id, :name, :slug, :priority,
-                tag_translations_attributes: [:id, :locale, :name]
+  permit_params :tags_group_id, :priority,
+                tag_translations_attributes: [:id, :locale, :name, :slug]
 
   index do
     selectable_column

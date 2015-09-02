@@ -6,7 +6,7 @@ ActiveAdmin.register Product do
                  :description, :publication_date, :unpublication_date,
                  :retail_price_pre_tax, :retail_price, :tax_id, :image,
                  :width, :height, :depth, :weight,
-                 :meta_keywords, :meta_description, :slug, :show_action_name,
+                 :meta_keywords, :meta_description, :show_action_name,
                  :stock, :control_stock,
                  products_categories_attributes: [:id, :category_id, :product_id, :_destroy],
                  products_pictures_attributes: [:id, :image, :_destroy]]

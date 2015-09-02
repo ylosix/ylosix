@@ -1,7 +1,7 @@
 ActiveAdmin.register Category do
   menu parent: 'Catalog'
-  permit_params :parent_id, :name, :enabled, :visible, :meta_keywords,
-                :meta_description, :slug, :show_action_name, :priority,
+  permit_params :parent_id, :enabled, :visible, :meta_keywords,
+                :meta_description, :show_action_name, :priority,
                 category_translations_attributes:
                     [:id, :locale, :name, :short_description, :description, :slug]
 
