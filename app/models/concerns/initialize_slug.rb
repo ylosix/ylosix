@@ -26,10 +26,10 @@ module InitializeSlug
     out.gsub('%23', '#') # Restore hashtags
   end
 
-  def retrieve_href(object)
+  def slug_to_href(object)
     href = object.slug
 
-    if !object.slug.nil? && !object.slug.start_with?('#') && !object.slug.start_with?('http')
+    if !href.nil? && !link?(object.slug)
       helpers = Rails.application.routes.url_helpers
 
       if object.class == Category
@@ -43,5 +43,9 @@ module InitializeSlug
     end
 
     href
+  end
+
+  def link?(href)
+    href.start_with?('/') && href.start_with?('#') && href.start_with?('http')
   end
 end

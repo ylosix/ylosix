@@ -72,7 +72,7 @@ class Category < ActiveRecord::Base
   end
 
   def href
-    retrieve_href(self)
+    slug_to_href(self)
   end
 
   def to_liquid
