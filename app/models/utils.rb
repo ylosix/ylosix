@@ -5,7 +5,29 @@ class Utils
     I18n.t('errors.messages.not_saved', count: messages.count, resource: 'the form')
   end
 
+  def self.replace_design_form(content)
+    # {{ include design_forms:contact_form }}
+    content = content.gsub('&nbsp;', ' ')
+
+    regex_include_design_form = /{{\s*include design_forms\s*:\s*(?<design_tag>[^}\s]+)\s}}/
+    match_data = regex_include_design_form.match(content)
+    if match_data
+      design_form = DesignForm.find_by(tag: match_data[:design_tag])
+      design_form ||= DesignForm.find_by(id: match_data[:design_tag])
+
+      unless design_form.nil?
+        new_content = content.gsub(match_data.to_s, design_form.content)
+        content = Utils.replace_design_form(new_content)
+      end
+    end
+
+    content
+  end
+
   def self.replace_regex_include(variables, template, content)
+    # {{ include snippet_home.html }}
+
+    content = Utils.replace_design_form(content)
     regex_include_snippet = /{{\s*include\s+(?<file>[^}\s]+)\s*}}/
 
     match_data = regex_include_snippet.match(content)

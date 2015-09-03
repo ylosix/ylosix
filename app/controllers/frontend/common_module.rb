@@ -124,20 +124,22 @@ module Frontend
       helper = Rails.application.routes.url_helpers
       append_link_variables(helper)
       append_customer_variables(helper)
-      fill_descriptions_with_variables(@variables)
+      fill_descriptions_with_variables(@variables, template)
     end
 
-    def fill_descriptions_with_variables(hash)
+    def fill_descriptions_with_variables(hash, template)
       hash.each do |k, v|
         if v.class.name == 'Array'
           v.each do |elem|
-            fill_descriptions_with_variables(elem)
+            fill_descriptions_with_variables(elem, template)
           end
         end
 
-        fill_descriptions_with_variables(v) if v.class.name == 'Hash'
+        fill_descriptions_with_variables(v, template) if v.class.name == 'Hash'
 
         if k.include?('description') && !v.blank?
+          v = Utils.replace_regex_include(@variables, template, v)
+
           # Parses and compiles the description field
           template_liquid = Liquid::Template.parse(v)
           hash[k] = template_liquid.render(@variables)

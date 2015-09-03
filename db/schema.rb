@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150902070148) do
+ActiveRecord::Schema.define(version: 20150903103918) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -229,6 +229,23 @@ ActiveRecord::Schema.define(version: 20150902070148) do
     t.hstore   "fields",     default: {}, null: false
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+  end
+
+  create_table "design_form_translations", force: :cascade do |t|
+    t.integer  "design_form_id", null: false
+    t.string   "locale",         null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.text     "content"
+  end
+
+  add_index "design_form_translations", ["design_form_id"], name: "index_design_form_translations_on_design_form_id", using: :btree
+  add_index "design_form_translations", ["locale"], name: "index_design_form_translations_on_locale", using: :btree
+
+  create_table "design_forms", force: :cascade do |t|
+    t.string   "tag"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "feature_translations", force: :cascade do |t|
