@@ -122,6 +122,10 @@ class Product < ActiveRecord::Base
     image_src
   end
 
+  def href
+    retrieve_href(self)
+  end
+
   def to_liquid
     helpers = Rails.application.routes.url_helpers
     s_short_description = ''
@@ -135,7 +139,7 @@ class Product < ActiveRecord::Base
         'short_description' => s_short_description,
         'description' => s_description,
         'retail_price' => retail_price,
-        'href' => href(self),
+        'href' => href,
         'add_cart_href' => helpers.add_to_shopping_cart_products_path(self),
         'delete_cart_href' => helpers.delete_from_shopping_cart_products_path(self)
     }

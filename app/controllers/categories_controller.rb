@@ -1,5 +1,6 @@
 class CategoriesController < Frontend::CommonController
   include ShowActionName
+
   layout 'searcher_and_side_bar'
   before_action :set_category, except: [:index]
 
@@ -30,7 +31,7 @@ class CategoriesController < Frontend::CommonController
     array_categories << @category unless @category.nil?     # append current.
 
     array_categories.each do |category|
-      add_breadcrumb(Breadcrumb.new(url: show_slug_categories_path(category.slug), name: category.name))
+      add_breadcrumb(Breadcrumb.new(url: category.href, name: category.name))
     end
   end
 

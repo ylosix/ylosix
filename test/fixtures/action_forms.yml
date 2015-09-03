@@ -13,7 +13,7 @@
 
 one:
   tag: MyString
-  mapping: {}
+  mapping: { aaa: bbb }
 
 two:
   tag: MyString

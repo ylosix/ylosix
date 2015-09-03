@@ -38,6 +38,7 @@ class ActionForm < ActiveRecord::Base
     locale = data_form.fields[:locale] unless data_form.fields[:locale].blank?
 
     translations = action_form_translations.find_by(locale: locale)
+    return if translations.nil?
 
     # Parses and compiles the subject
     template_liquid = Liquid::Template.parse(translations[:subject])

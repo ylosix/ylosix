@@ -26,7 +26,7 @@ module InitializeSlug
     out.gsub('%23', '#') # Restore hashtags
   end
 
-  def href(object)
+  def retrieve_href(object)
     href = object.slug
 
     if !object.slug.nil? && !object.slug.start_with?('#') && !object.slug.start_with?('http')

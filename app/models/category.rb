@@ -71,13 +71,17 @@ class Category < ActiveRecord::Base
     root_categories
   end
 
+  def href
+    retrieve_href(self)
+  end
+
   def to_liquid
     {
         'name' => name,
         'short_description' => short_description,
         'description' => description,
         'priority' => priority,
-        'href' => href(self),
+        'href' => href,
         'children' => array_to_liquid(children)
     }
   end

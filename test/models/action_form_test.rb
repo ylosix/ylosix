@@ -12,7 +12,12 @@
 require 'test_helper'
 
 class ActionFormTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test 'perform_with_data' do
+    action_form = action_forms(:one)
+    data_form = data_forms(:one)
+
+    action_form.perform_with_data(data_form)
+
+    assert true
+  end
 end
