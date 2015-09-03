@@ -46,6 +46,6 @@ module InitializeSlug
   end
 
   def link?(href)
-    href.start_with?('/') && href.start_with?('#') && href.start_with?('http')
+    href.start_with?('/') || href.start_with?('#') || href.start_with?('http')
   end
 end
