@@ -124,7 +124,6 @@ module Frontend
       helper = Rails.application.routes.url_helpers
       append_link_variables(helper)
       append_customer_variables(helper)
-      fill_descriptions_with_variables(@variables, template)
     end
 
     def fill_descriptions_with_variables(hash, template)
@@ -185,6 +184,7 @@ module Frontend
 
     def render(*args)
       get_template_variables(@render_template)
+      fill_descriptions_with_variables(@variables, @render_template)
 
       file_html = retrieve_file_html(controller_name, action_name, args)
       contains_template_layout = (args.any? && args[0].is_a?(Hash) && args[0][:layout] == 'custom_template')

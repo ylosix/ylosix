@@ -1,8 +1,6 @@
 require 'test_helper'
 
 class HomeControllerTest < ActionController::TestCase
-  include Devise::TestHelpers
-
   def prepare_template
     object = templates(:test_template)
 
