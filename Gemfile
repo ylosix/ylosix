@@ -79,7 +79,7 @@ group :development, :test, :profile do
 
   # Use debugger (incompatible with Rubymine)
   # gem 'debugger'
-  gem 'rubocop'
+  gem 'rubocop', '0.33.0'
   gem 'mailcatcher'
 
   gem 'simplecov'
