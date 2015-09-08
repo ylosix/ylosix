@@ -49,7 +49,7 @@ ActiveAdmin.register Product do
 
       row 'Features' do
         table_for Feature.all do
-          column (:feature) { |feature| feature.name }
+          column :name
           column (:value) { |feature| product.features[feature.id.to_s] unless product.features.nil? }
         end
       end
