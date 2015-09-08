@@ -17,13 +17,7 @@ namespace :db do
     puts '####################'
     puts '## Creating categories'
     puts '####################'
-
-    root_attributes = {:parent_id => nil,
-                       category_translations_attributes: [{locale: :en, name: 'Root', slug: 'root'},
-                                                          {locale: :es, name: 'Inicio', slug: 'inicio'}],
-                       :enabled => true,
-                       :visible => true}
-    root = Utils.create_or_update_model(Category, {:reference_code => 'root'}, root_attributes)
+    root = Category.find_by({:reference_code => 'root'})
 
     photo_attributes = {:parent_id => root.id,
                         category_translations_attributes: [{locale: :en, name: 'Photography', slug: PHOTOGRAPHY_SLUG},

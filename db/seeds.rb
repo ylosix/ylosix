@@ -134,6 +134,19 @@ def create_defaults_statuses
   Utils.create_or_update_model(ShoppingOrdersStatus, {:color => '#DC143C'}, sos_accepted_attributes)
 end
 
+def create_default_category
+  puts '####################'
+  puts '## Creating default category'
+  puts '####################'
+
+  root_attributes = {:parent_id => nil,
+                     category_translations_attributes: [{locale: :en, name: 'Root', slug: 'root'},
+                                                        {locale: :es, name: 'Inicio', slug: 'inicio'}],
+                     :enabled => true,
+                     :visible => true}
+  Utils.create_or_update_model(Category, {:reference_code => 'root'}, root_attributes)
+end
+
 def create_defaults
   create_default_languages
   create_default_ylos_template
@@ -141,6 +154,7 @@ def create_defaults
   create_default_admin_user
   create_default_countries
   create_defaults_statuses
+  create_default_category
 end
 
 create_defaults
