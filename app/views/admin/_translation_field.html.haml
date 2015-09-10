@@ -1,6 +1,6 @@
 %li{id: "#{id_prefix}_input", class: 'string input optional stringish'}
   %label{class: 'label', for: id_prefix}
-    = input_name_sufix
+    = input_label
     - if language.flag?
       = image_tag(language.flag.url(:original))
     - else

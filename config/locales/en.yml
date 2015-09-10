@@ -21,6 +21,7 @@
 
 en:
   active_admin:
+    catalog: Catalog
     comments:
       title_content: 'Admin comments'
   time:

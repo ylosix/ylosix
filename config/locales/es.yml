@@ -20,14 +20,50 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 es:
+  formtastic:
+    create: "Crear %{model}"
+    update: "Guardar %{model}"
+    detail: "Detalle de %{model}"
+
   active_admin:
-      comments:
-        title_content: Comentarios internos
+    catalog: Catálogo
+    comments:
+      title_content: Comentarios internos
   time:
     formats:
       default: "%Y/%m/%d"
       short: "%b %d"
       long: "%b %d, %Y %H:%M"
+
+  activerecord:
+    models:
+      category:
+        zero: no categoría
+        one: Categoría
+        other: Categorías
+
+    attributes:
+      category:
+        reference_code: Referencia
+        parent: Padre
+        enabled: Habilitado
+        visible: Visible
+        slug: Slug
+        priority: Prioridad
+
+        name: Nombre
+        short_description: Descripción Corta
+        description: Descripción
+
+        created_at: Creado en
+        updated_at: Actualizado en
+
+      category_translation:
+        name: Nombre
+        short_description: Descripción Corta
+        description: Descripción
+
+
 
 ## copied from: https://github.com/svenfuchs/rails-i18n/blob/master/rails/locale/es.yml
   date:

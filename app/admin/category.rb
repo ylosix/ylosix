@@ -1,6 +1,6 @@
 ActiveAdmin.register Category do
   menu parent: 'Catalog'
-  permit_params :parent_id, :enabled, :visible, :meta_keywords,
+  permit_params :parent_id, :reference_code, :enabled, :visible, :meta_keywords,
                 :meta_description, :show_action_name, :priority,
                 category_translations_attributes:
                     [:id, :locale, :name, :short_description, :description, :slug]
@@ -9,7 +9,7 @@ ActiveAdmin.register Category do
     selectable_column
     id_column
 
-    column 'Parent', sortable: :parent do |category|
+    column t('activerecord.attributes.category.parent'), sortable: :parent do |category|
       array = Utils.get_parents_array(category)
       (array.map { |item| auto_link(item, item.name) }).join(' || ').html_safe
     end
@@ -22,13 +22,15 @@ ActiveAdmin.register Category do
     actions
   end
 
-  filter :translations_name, as: :string, label: 'Name'
+  filter :translations_name, as: :string, label: proc { I18n.t 'activerecord.attributes.category.name' }
   filter :visible
   filter :parent
 
   form do |f|
-    f.inputs 'Category Details' do
+    f.inputs t('formtastic.detail', model: t('activerecord.models.category.one')) do
+      f.input :reference_code
       f.input :parent
+
       f.input :enabled
       f.input :visible
 

@@ -193,7 +193,7 @@ ActiveAdmin.setup do |config|
       # menu.add label: 'Dashboard', url: 'dashboard', :priority => 1
 
 
-      menu.add label: 'Catalog', :priority => 2
+      menu.add id: 'catalog', label: proc { I18n.t 'active_admin.catalog' }, :priority => 2
       # menu.add label: 'Products', :parent => 'Catalog', url: '/admin/products', :priority => 0
 
       menu.add label: 'Orders', :priority => 3
