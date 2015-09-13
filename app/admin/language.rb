@@ -1,7 +1,7 @@
 ActiveAdmin.register Language do
   menu parent: 'Localization'
 
-  permit_params :locale, :flag, :appears_in_backoffice, :appears_in_web, :name
+  permit_params :locale, :flag, :appears_in_backoffice, :appears_in_web, :default, :name
 
   index do
     selectable_column
@@ -12,6 +12,7 @@ ActiveAdmin.register Language do
 
     column :appears_in_backoffice
     column :appears_in_web
+    column :default
 
     actions defaults: true do |language|
       link_to 'Set', change_locale_path(language.locale)
@@ -30,6 +31,7 @@ ActiveAdmin.register Language do
       f.input :flag, hint: (image_tag(f.object.flag.url(:original)) if f.object.flag?)
       f.input :appears_in_backoffice
       f.input :appears_in_web
+      f.input :default
     end
     f.actions
   end

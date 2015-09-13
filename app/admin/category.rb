@@ -27,7 +27,7 @@ ActiveAdmin.register Category do
   filter :parent
 
   form do |f|
-    f.inputs t('formtastic.detail', model: t('activerecord.models.category.one')) do
+    f.inputs t('formtastic.edit_form', model: t('activerecord.models.category.one')) do
       f.input :reference_code
       f.input :parent
 

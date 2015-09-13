@@ -51,7 +51,13 @@ class ApplicationController < ActionController::Base
 
   def set_locale
     if session[:locale].nil?
-      session[:locale] = extract_locale_from_accept_language_header
+      language = Language.find_by(default: true)
+
+      if language.nil?
+        session[:locale] = extract_locale_from_accept_language_header
+      else
+        session[:locale] = language.locale
+      end
     end
 
     I18n.locale = session[:locale]

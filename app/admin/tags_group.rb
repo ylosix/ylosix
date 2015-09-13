@@ -12,10 +12,10 @@ ActiveAdmin.register TagsGroup do
     actions
   end
 
-  filter :translations_name, as: :string, label: 'Name'
+  filter :translations_name, as: :string, label: proc { I18n.t 'activerecord.attributes.tags_group.name' }
 
   form do |f|
-    f.inputs 'Tag Details' do
+    f.inputs t('formtastic.edit_form', model: t('activerecord.models.tags_group.one')) do
       translations = Utils.array_translations(TagsGroupTranslation, tags_group_id: tags_group.id)
       admin_translation_text_field(translations, 'tags_group', 'name')
 
