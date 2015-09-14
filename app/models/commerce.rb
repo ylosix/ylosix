@@ -8,6 +8,7 @@
 #  ga_account_id             :string
 #  http                      :string
 #  id                        :integer          not null, primary key
+#  language_id               :integer
 #  logo_content_type         :string
 #  logo_file_name            :string
 #  logo_file_size            :integer
@@ -34,6 +35,7 @@ class Commerce < ActiveRecord::Base
   attr_accessor :template_from
 
   belongs_to :template
+  belongs_to :language
   has_many :shopping_orders
 
   has_attached_file :logo, styles: {original: '300x100'}

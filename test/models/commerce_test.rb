@@ -8,6 +8,7 @@
 #  ga_account_id             :string
 #  http                      :string
 #  id                        :integer          not null, primary key
+#  language_id               :integer
 #  logo_content_type         :string
 #  logo_file_name            :string
 #  logo_file_size            :integer
