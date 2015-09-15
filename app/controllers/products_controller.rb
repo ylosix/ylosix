@@ -58,12 +58,16 @@ class ProductsController < Frontend::CommonController
     #   @category = Category.find_by(slug: params[:category_slug])
     # end
 
-    if !params[:slug].blank? || !params[:id].blank?
-      attributes = {enabled: true}
-      attributes[:slug] = params[:slug] unless params[:slug].blank?
-      attributes[:id] = params[:id] unless params[:id].blank?
+    unless params[:product_id].blank?
+      attributes = {enabled: true, id: params[:product_id]}
 
       @product = Product.find_by(attributes)
+
+      if @product.nil?
+        attributes = {enabled: true, product_translations: {slug: params[:product_id]}}
+        @product = Product.with_translations.find_by(attributes)
+      end
+
       unless @product.nil?
         @category = @product.categories.first if @product.categories.any?
         @product.replace_keys_features

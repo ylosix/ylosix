@@ -17,21 +17,18 @@ Rails.application.routes.draw do
   get '/admin/shopping_orders/:id/invoice' => 'admin/shopping_orders#invoice', :as => :admin_invoice_shopping_order
 
   # Frontend
-  resource :categories, only: [] do
-    get '/' => 'categories#index'
-    get '/:slug' => 'categories#show', as: :show_slug
-    get '/:id/show' => 'categories#show', as: :show_id
-    get '/:category_slug/products/:slug' => 'products#show', as: :show_product_slug
-    match '/:slug/tag/*slug_tags' => 'categories#tags', as: :tags, via: [:get]
+  resources :categories, only: [:index] do
+    get '/' => 'categories#show'
+    get '/products/:slug' => 'products#show', as: :show_product_slug
+    match '/tag/*slug_tags' => 'categories#tags', as: :tags, via: [:get]
   end
 
   match '/tag/*slug_tags' => 'categories#tags', as: :tags, via: [:get]
 
-  resource :products, only: [] do
-    get '/:slug' => 'products#show', as: :show_slug
-    get '/:id/show' => 'products#show', as: :show_id
-    get '/:id/add_to_shopping_cart' => 'products#add_to_shopping_cart', as: :add_to_shopping_cart
-    get '/:id/delete_from_shopping_cart' => 'products#delete_from_shopping_cart', as: :delete_from_shopping_cart
+  resources :products, only: [:index] do
+    get '/' => 'products#show'
+    get '/add_to_shopping_cart' => 'products#add_to_shopping_cart', as: :add_to_shopping_cart
+    get '/delete_from_shopping_cart' => 'products#delete_from_shopping_cart', as: :delete_from_shopping_cart
   end
 
   resource :searches, only: [] do

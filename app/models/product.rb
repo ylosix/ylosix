@@ -140,8 +140,8 @@ class Product < ActiveRecord::Base
         'description' => s_description,
         'retail_price' => retail_price,
         'href' => href,
-        'add_cart_href' => helpers.add_to_shopping_cart_products_path(self),
-        'delete_cart_href' => helpers.delete_from_shopping_cart_products_path(self)
+        'add_cart_href' => helpers.product_add_to_shopping_cart_path(self),
+        'delete_cart_href' => helpers.product_delete_from_shopping_cart_path(self)
     }
 
     append_images(liquid)

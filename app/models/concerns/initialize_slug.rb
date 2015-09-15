@@ -33,11 +33,11 @@ module InitializeSlug
       helpers = Rails.application.routes.url_helpers
 
       if object.class == Category
-        href = helpers.show_slug_categories_path(object.slug)
+        href = helpers.category_path(object.slug)
       elsif object.class == Product
-        href = helpers.show_slug_products_path(object.slug)
+        href = helpers.product_path(object.slug)
         if object.categories.any?
-          href = helpers.show_product_slug_categories_path(object.categories.first.slug, object.slug)
+          href = helpers.category_show_product_slug_path(object.categories.first.slug, object.slug)
         end
       end
     end

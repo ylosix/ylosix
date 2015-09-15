@@ -1,18 +1,20 @@
 require 'test_helper'
 
 class CategoriesControllerTest < ActionController::TestCase
+  setup do
+    @category = categories(:digital_cameras)
+  end
+
   test 'should get index' do
     get :index, format: 'json'
     assert_response :success
   end
 
   test 'should get show' do
-    object = categories(:digital_cameras)
-
-    get :show, slug: object.slug
+    get :show, category_id: @category.slug
     assert_response :success
 
-    get :show, id: object.id
+    get :show, category_id: @category.id
     assert_response :success
 
     # TODO: check when id nil return 404 not found
@@ -21,7 +23,7 @@ class CategoriesControllerTest < ActionController::TestCase
   test 'should get tag' do
     tag = tags(:cameras)
 
-    get :tags, slug_tags: tag.id
+    get :tags, category_id: @category.id, slug_tags: tag.id
     assert_response :success
   end
 end

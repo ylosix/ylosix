@@ -60,7 +60,7 @@
                         %div.col-md-4
                           = image_tag(scp.product.image.url(:thumbnail), :class => 'img-responsive')
                         %div.col-md-8
-                          = link_to scp.product.name, show_slug_products_path(scp.product.slug)
+                          = link_to scp.product.name, product_path(scp.product.slug)
                           %br
                           = "Quantity: #{scp.quantity}"
 

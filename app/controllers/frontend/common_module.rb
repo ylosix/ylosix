@@ -21,7 +21,7 @@ module Frontend
     def retrieve_tags_path(ids)
       if defined?(@category) && !@category.nil?
         if ids.empty?
-          show_slug_categories_path(@category.slug)
+          category_path(@category.slug)
         else
           tags_categories_path(@category.slug, ids)
         end

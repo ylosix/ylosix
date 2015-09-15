@@ -36,7 +36,7 @@
                 = image_tag product.retrieve_main_image(:thumbnail)
               %div.col-md-9
                 %div.col-md-12
-                  = link_to product.name, show_slug_products_path(product.slug)
+                  = link_to product.name, product_path(product.slug)
                 %br
                 %div.col-md-12
                   = "Quantity: #{sop.quantity}"
@@ -45,4 +45,4 @@
                   = "#{sop.retail_price} €"
 
                 %div.col-md-6
-                  = link_to 'Buy another', add_to_shopping_cart_products_path(product), :class => 'btn btn-default btn-block'
+                  = link_to 'Buy another', product_add_to_shopping_cart_path(product), :class => 'btn btn-default btn-block'

@@ -11,7 +11,7 @@
 
     - reset_href = @variables['commerce']['root_href']
     - unless @category.nil?
-      - reset_href = show_slug_categories_path(@category.slug)
+      - reset_href = category_path(@category.slug)
 
     %div.col-md-2
       %div.thumbnail
