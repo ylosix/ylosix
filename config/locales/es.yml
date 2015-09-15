@@ -22,8 +22,10 @@
 es:
   formtastic:
     create: "Crear %{model}"
+    add_another: "Añadir otro/a %{model}"
     update: "Guardar %{model}"
     edit_form: "Editando %{model}"
+    clone: "Clonar %{model}"
 
   active_admin:
     catalog: Catálogo
@@ -41,6 +43,18 @@ es:
         zero: no categoría
         one: Categoría
         other: Categorías
+      feature:
+        zero: no característica
+        one: Característica
+        other: Características
+      product:
+        zero: no producto
+        one: Producto
+        other: Productos
+      tag:
+        zero: no tag
+        one: Tag
+        other: Tag
       tags_group:
         zero: no grupo de tag
         one: Grupo de tag
@@ -48,11 +62,11 @@ es:
 
     attributes:
       category:
-        reference_code: Referencia
+        reference_code: Código de referencia
         parent: Padre
         enabled: Habilitado
         visible: Visible
-        slug: Slug
+        slug: Enlace
         priority: Prioridad
 
         name: Nombre
@@ -62,19 +76,42 @@ es:
         created_at: Creado en
         updated_at: Actualizado en
 
-      category_translation:
+      feature:
         name: Nombre
-        short_description: Descripción Corta
+        priority: Prioridad
+
+        created_at: Creado en
+        updated_at: Actualizado en
+
+      product:
+        name: Nombre
+        enabled: Habilitado
+        image: Imágen
+        slug: Enlace
+        short_description: Descripción corta
         description: Descripción
+        reference_code: Código de referencia
+        barcode: Código de barras
+        publication_date: Fecha de publicación
+        unpublication_date: Fecha de despublicación
+
+        created_at: Creado en
+        updated_at: Actualizado en
+
+      tag:
+        name: Nombre
+        slug: Enlace
+        priority: Prioridad
+        tags_group: Grupo de tag
+
+        created_at: Creado en
+        updated_at: Actualizado en
 
       tags_group:
         name: Nombre
 
         created_at: Creado en
         updated_at: Actualizado en
-
-      tags_group_translation:
-        name: Nombre
 
 
 ## copied from: https://github.com/svenfuchs/rails-i18n/blob/master/rails/locale/es.yml

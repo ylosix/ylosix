@@ -4,7 +4,7 @@ module Admin
   class CommercesControllerTest < ActionController::TestCase
     include Devise::TestHelpers
 
-    def setup
+    setup do
       login_admin
     end
 
@@ -18,6 +18,13 @@ module Admin
 
       get :show, id: object.id
       assert_response :success
+    end
+
+    test 'should post update' do
+      object = commerces(:one)
+      object.social_networks = {twitter: 'aaaaa', facebook: 'peito.com'}
+      patch :update, id: object.id, commerce: object.attributes
+      assert_response :redirect
     end
   end
 end

@@ -62,12 +62,11 @@ ActiveAdmin.register Commerce do
       super
 
       @commerce[:social_networks] = {}
-      JSON.parse(params[:commerce][:social_networks].gsub('=>', ':')).each do |k, v|
+      JSON.parse(params[:commerce][:social_networks].to_s.gsub('=>', ':')).each do |k, v|
         @commerce[:social_networks][k] = v
       end
 
       @commerce.save
-      puts @commerce.inspect
     end
   end
 end
