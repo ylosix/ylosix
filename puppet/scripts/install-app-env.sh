@@ -27,13 +27,11 @@ su - vagrant -c "cd $APP_PATH; echo \"2.1.6\" > .ruby-version"
 su - vagrant -c "cd $APP_PATH; echo \"ecommerce\" > .ruby-gemset"
 su - vagrant -c "cd $APP_PATH; echo $RAILS_ENV > .ruby-env"
 
-database=sqlite
-if [ "$RAILS_ENV" == "production" ]; then
-  database=postgresql
-fi
+database=postgresql
 
 su - vagrant -c "cd $APP_PATH; echo 'RAILS_ENV=$RAILS_ENV' > .env"
 su - vagrant -c "cd $APP_PATH; echo 'RAILS_DB=$database' >> .env"
+su - vagrant -c "cd $APP_PATH; echo 'DATABASE_URL=$DATABASE_URL' >> .env"
 su - vagrant -c "cd $APP_PATH; echo 'PORT=3000' >> .env"
 su - vagrant -c "cd $APP_PATH; echo 'GEM_PATH=$RVM_PATH/gems/ruby-2.1.6@ecommerce' >> .env"
 su - vagrant -c "cd $APP_PATH; echo 'PATH=$RVM_PATH/wrappers/ruby-2.1.6@ecommerce:$RVM_PATH/gems/ruby-2.1.6/bin:$RVM_PATH/rubies/ruby-2.1.6/bin:/home/user/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$RVM_PATH/bin' >> .env"
@@ -53,7 +51,6 @@ su - vagrant -c "cd $APP_PATH; rm -R public/system"
 su - vagrant -c "cd $APP_PATH; rm db/*.sqlite3"
 
 if [ "$RAILS_ENV" == "production" ]; then
-  su - vagrant -c "cd $APP_PATH; echo 'DATABASE_URL=$DATABASE_URL' >> .env"
   su - vagrant -c "cd $APP_PATH; $RVM_WRAPPERS_PATH/bundle install --without development test profile"
 else
   su - vagrant -c "cd $APP_PATH; $RVM_WRAPPERS_PATH/bundle install --without production"
@@ -65,15 +62,10 @@ if [ -z $SECRET_KEY_BASE ]; then
   su - vagrant -c "cd $APP_PATH; echo 'SECRET_KEY_BASE=$SECRET_KEY_BASE' >> .env"
 fi
 
-if [ "$RAILS_ENV" == "production" ]; then
-  project_parameters=`echo " RAILS_ENV=$RAILS_ENV SECRET_KEY_BASE=$SECRET_KEY_BASE RAILS_DB=$database DATABASE_URL=$DATABASE_URL "`
-else
-  project_parameters=`echo " RAILS_ENV=$RAILS_ENV SECRET_KEY_BASE=$SECRET_KEY_BASE RAILS_DB=$database "`
-  su - vagrant -c "cd $APP_PATH; $RVM_WRAPPERS_PATH/rake db:create $project_parameters"
-fi
-
+project_parameters=`echo " RAILS_ENV=$RAILS_ENV SECRET_KEY_BASE=$SECRET_KEY_BASE RAILS_DB=$database DATABASE_URL=$DATABASE_URL "`
+su - vagrant -c "cd $APP_PATH; $RVM_WRAPPERS_PATH/rake db:create $project_parameters"
 su - vagrant -c "cd $APP_PATH; $RVM_WRAPPERS_PATH/rake db:migrate $project_parameters"
-su - vagrant -c "cd $APP_PATH; $RVM_WRAPPERS_PATH/rake db:seed $project_parameters"
+su - vagrant -c "cd $APP_PATH; $RVM_WRAPPERS_PATH/rake db:gen_demo $project_parameters"
 
 if [ "$RAILS_ENV" == "production" ]; then
   su - vagrant -c "cd $APP_PATH; $RVM_WRAPPERS_PATH/rake assets:precompile $project_parameters"

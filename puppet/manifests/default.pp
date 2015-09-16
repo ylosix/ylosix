@@ -55,7 +55,12 @@ class { 'postgresql::server':
 
 postgresql::server::db { 'ecommerce':
   user     => 'ecommerce_user',
-  password => postgresql_password('ecommerce_user', 'ecommerce_pass');
+  password => postgresql_password('ecommerce_user', 'ecommerce_pass')
+}
+
+postgresql::server::role { "ecommerce_user":
+  password_hash => postgresql_password('ecommerce_user', 'ecommerce_pass'),
+  superuser => true
 }
 
 #dump facts variables
