@@ -27,4 +27,8 @@ su -c "mkdir -p /home/vagrant/logs"
 su -c "chown -R vagrant:vagrant /home/vagrant"
 su -c "chmod -R 0774 /home/vagrant"
 
+# Add keys for rvm.
+# timeout => su -c "gpg --keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3"
+su -c "gpg --keyserver hkp://keyserver.ubuntu.com --recv-keys D39DC0E3"
+
 

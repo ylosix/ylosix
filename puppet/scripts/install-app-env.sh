@@ -13,8 +13,6 @@ fi
 
 # TODO the ecommerce doesn't need super privileges remove enable hstore and did with user postgres
 su -c "apt-get install -y postgresql-contrib"
-su -c "echo 'localhost:5432:postgres:postgres:postgres' > ~/.pgpass"
-su -c "psql -c 'ALTER USER ecommerce_user WITH SUPERUSER;' -h localhost -U postgres postgres"
 
 # Set permisions
 su -c "chmod 775 $APP_PATH"
@@ -30,6 +28,7 @@ su - vagrant -c "cd $APP_PATH; echo $RAILS_ENV > .ruby-env"
 database=postgresql
 
 su - vagrant -c "cd $APP_PATH; echo 'RAILS_ENV=$RAILS_ENV' > .env"
+su - vagrant -c "cd $APP_PATH; echo 'HOME=/home/vagrant ' >> .env"
 su - vagrant -c "cd $APP_PATH; echo 'RAILS_DB=$database' >> .env"
 su - vagrant -c "cd $APP_PATH; echo 'DATABASE_URL=$DATABASE_URL' >> .env"
 su - vagrant -c "cd $APP_PATH; echo 'PORT=3000' >> .env"
@@ -72,11 +71,7 @@ if [ "$RAILS_ENV" == "production" ]; then
   su - vagrant -c "cd $APP_PATH; sed -i 's/git@github.com:devcows\/ecommerce.git/https:\/\/github.com\/devcows\/ecommerce.git/g' .git/config"
 fi
 
-
 # Set foreman file
-# For install nginx + unicorn
-#su - vagrant -c "echo 'web: $RVM_WRAPPERS_PATH/bundle exec unicorn -c $APP_PATH/config/unicorn.rb -E $RAILS_ENV' > $APP_PATH/Procfile"
-#su - vagrant -c "echo 'nginx: sudo /usr/sbin/nginx -c /etc/nginx/nginx.conf' >> $APP_PATH/Procfile"
 su - vagrant -c "cd $APP_PATH; $RVM_SUDO_PATH $RVM_WRAPPERS_PATH/bundle exec foreman export upstart --app=ecommerce --user=vagrant /etc/init"
 su -c "start ecommerce"
 
