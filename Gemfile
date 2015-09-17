@@ -20,6 +20,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0'
+gem 'yard'
 
 gem 'pg'
 
@@ -79,7 +80,7 @@ group :development, :test, :profile do
 
   # Use debugger (incompatible with Rubymine)
   # gem 'debugger'
-  gem 'rubocop', '0.33.0'
+  gem 'rubocop'
   gem 'mailcatcher'
 
   gem 'simplecov'

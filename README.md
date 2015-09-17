@@ -9,15 +9,19 @@ This repository contains the source for the latest version of Ylosix as well as 
 - [Frontend](http://ylos.ylosix.com)
 - [Backoffice](http://ylos.ylosix.com/admin) (email: `admin@example.com`, password: `password`)
 
+This project uses `yard` for generate the documentation:
+```
+$ rake rdoc
+```
 
 ## Table of contents
 
   * [Installation](#installation)
-  * [Deploy at production environments](#deploy-at-production-environments)
   * [Testing](#testing)
-  * [Dependencies](#dependencies)
-  * [Collaboration](#collaboration)
-  * [License](#license)
+  * [Troubleshooting](#troubleshooting)
+  * [Dependencies](#dependencies-)
+  * [Contributions](#contributions)
+  * [License](#license-)
 
 
 ## Installation
@@ -42,7 +46,7 @@ $ vagrant plugin install vagrant-triggers
 
 Now, depending on your target environment you will have to use a different Vagrant provider. Currently we support Virtualbox, DigitalOcean, Heroku.
 
-#### Virtualbox (local installation for testing/development)
+### Virtualbox (local installation for testing/development)
 
 If you don't have it already, [download and install Virtualbox and the Extension Pack](https://www.virtualbox.org/wiki/Downloads).
 
@@ -67,7 +71,7 @@ PostgreSQL configuration:
 - Password: `ecommerce_pass`
 
 
-#### DigitalOcean
+### DigitalOcean
 
 Install the `vagrant-digitalocean` package.
 
@@ -99,7 +103,7 @@ $ RAILS_ENV=production vagrant up main_app --provider=digital_ocean
 Once it is done, you will have a production-ready environment in your DigitalOcean Droplet.
 
 
-#### Heroku
+### Heroku
 
 Install [Heroku CLI](https://toolbelt.heroku.com) from the official website.
 
@@ -116,7 +120,7 @@ $ heroku run rake db:gen_demo
 ```
 
 
-#### Managed server
+### Managed server
 
 You can also install Ylosix in your managed server. Just edit the `Vagrantfile` and configure your SSH credentials.
 
@@ -143,7 +147,7 @@ $ RAILS_ENV=production vagrant up main_app --provider=managed
 $ RAILS_ENV=production vagrant provision main_app
 ```
 
-#### Docker
+### Docker
 
 
 Install [Docker](https://docs.docker.com/installation/) and [Docker Compose](https://docs.docker.com/compose/install/) from the official website.
@@ -156,7 +160,7 @@ $ docker-compose run web rake db:create db:migrate db:gen_demo
 ```
 
 
-### Troubleshooting
+## Troubleshooting
 
 Generate an empty store:
 
@@ -197,7 +201,7 @@ git config --global core.autocrlf false
 ```
 
 
-### Testing
+## Testing
 
 The tests are developed with the Ruby on Rails minitest suite. TravisCI
 automatically runs the tests every time there is a new code change.

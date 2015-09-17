@@ -29,7 +29,7 @@ ActiveAdmin.register Product do
   end
 
   action_item :view, only: [:show, :edit] do
-    link_to 'Public link', show_slug_products_path(product.slug), target: '_blank'
+    link_to 'Public link', product_path(product.slug), target: '_blank'
   end
 
   index do
