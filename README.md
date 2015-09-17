@@ -12,10 +12,10 @@ Ylosix is an open source project, the main goal is provides a CMS for build your
 We focus at E-commerce sites, we are looking for clean and effective code also in
 the frontend the project includes bootstrap, font-awesome and animate.
 
-Beta demo:
-[Frontend](http://ylos.ylosix.com)
-[Backoffice](http://ylos.ylosix.com/admin)
-The default customer user is {:email => 'user@example.com', :password => 'password' }.
+Beta demo: <br />
+[- Frontend](http://ylos.ylosix.com) <br />
+[- Backoffice](http://ylos.ylosix.com/admin) <br />
+The default customer user is {:email => 'user@example.com', :password => 'password' }.<br />
 The default admin user is {:email => 'admin@example.com', :password => 'password' }.
 
 
@@ -65,7 +65,7 @@ The default admin user is {:email => 'admin@example.com', :password => 'password
   - Main web: [http://localhost:13000](http://localhost:13000)
   - Back office: [http://localhost:13000/admin](http://localhost:13000/admin)
 
-  The default customer user is {:email => 'user@example.com', :password => 'password' }.
+  The default customer user is {:email => 'user@example.com', :password => 'password' }.<br />
   The default admin user is {:email => 'admin@example.com', :password => 'password' }.
 
   The default Postgresql config: <br />
@@ -74,6 +74,12 @@ The default admin user is {:email => 'admin@example.com', :password => 'password
     - User: ecommerce_user <br />
     - Password: ecommerce_pass <br />
 
+  Database considerations:
+
+  ```
+  $ rake db:create db:migrate db:seed       #Empty Ecommerce
+  $ rake db:create db:migrate db:gen_demo   #Demo Ecommerce
+  ```
 
   Troubleshooting gem nokoguiri in Mac os x (Yosemite):
   ```
@@ -101,8 +107,8 @@ The default admin user is {:email => 'admin@example.com', :password => 'password
 ### Deploy at production environments
 
   __With heroku:__
-    - Register at [heroku](https://www.heroku.com)
-    - Install [heroku cli](https://toolbelt.heroku.com)
+  - Register at [heroku](https://www.heroku.com)
+  - Install [heroku cli](https://toolbelt.heroku.com)
 
   ```
   $ git clone --recursive https://github.com/devcows/ecommerce.git
@@ -122,10 +128,10 @@ The default admin user is {:email => 'admin@example.com', :password => 'password
   $ vagrant plugin install vagrant-digitalocean
   ```
 
-    - Generate API token:
-      https://cloud.digitalocean.com/settings/applications
+  - Generate API token:
+    https://cloud.digitalocean.com/settings/applications
 
-    - Add token code in Vagrant file at YOUR_TOKEN:
+  - Add token code in Vagrant file at YOUR_TOKEN:
   ```
     config.vm.provider :digital_ocean do |provider, override|
       override.ssh.private_key_path = '~/.ssh/id_rsa'
@@ -139,7 +145,7 @@ The default admin user is {:email => 'admin@example.com', :password => 'password
     end
   ```
 
-    - Execute:
+  - Execute:
   ```
   $ git clone --recursive https://github.com/devcows/ecommerce.git
   $ cd ecommerce
@@ -148,7 +154,7 @@ The default admin user is {:email => 'admin@example.com', :password => 'password
 
   __With a managed server:__
 
-    - Add server ssh config:
+  - Add server ssh config:
   ```
     app.vm.provider :managed do |provider, override|
       override.ssh.username = 'username'
@@ -159,7 +165,7 @@ The default admin user is {:email => 'admin@example.com', :password => 'password
     end  
   ```
 
-    - Execute:
+  - Execute:
   ```
   $ vagrant plugin install vagrant-managed-servers
   $ git clone --recursive https://github.com/devcows/ecommerce.git
@@ -168,12 +174,12 @@ The default admin user is {:email => 'admin@example.com', :password => 'password
   $ RAILS_ENV=production vagrant provision main_app
   ```
 
-    - Troubleshooting Puppet old version:
-      https://docs.puppetlabs.com/guides/install_puppet/install_debian_ubuntu.html
+  - Troubleshooting Puppet old version:
+    https://docs.puppetlabs.com/guides/install_puppet/install_debian_ubuntu.html
 
   __With docker:__
-    - Install docker and docker-compose.
-    - Execute:
+  - Install docker and docker-compose.
+  - Execute:
   ```
   $ docker-compose up
   $ docker-compose run web rake db:create db:migrate db:gen_demo
@@ -200,12 +206,3 @@ Also you can follow us at [Jira](https://ylos-hispania.atlassian.net/secure/Dash
 ## License
 
 Ylosix is released under the Apache v2 License.
-
-
-
-## Database creation
-
-```
-$ rake db:create db:migrate db:seed       #Empty Ecommerce
-$ rake db:create db:migrate db:gen_demo   #Demo Ecommerce
-```
