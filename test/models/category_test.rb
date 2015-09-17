@@ -17,7 +17,8 @@
 #
 # Indexes
 #
-#  index_categories_on_parent_id  (parent_id)
+#  index_categories_on_parent_id       (parent_id)
+#  index_categories_on_reference_code  (reference_code)
 #
 
 require 'test_helper'

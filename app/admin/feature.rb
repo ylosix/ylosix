@@ -12,10 +12,10 @@ ActiveAdmin.register Feature do
     actions
   end
 
-  filter :translations_name, as: :string, label: 'Name'
+  filter :translations_name, as: :string, label: proc { I18n.t 'activerecord.attributes.feature.name' }
 
   form do |f|
-    f.inputs 'Feature Details' do
+    f.inputs t('formtastic.edit_form', model: t('activerecord.models.feature.one')) do
       translations = Utils.array_translations(FeatureTranslation, feature_id: feature.id)
       admin_translation_text_field(translations, 'feature', 'name')
 

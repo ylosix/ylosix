@@ -118,14 +118,15 @@ ActiveRecord::Schema.define(version: 20150914100553) do
     t.boolean  "visible",          default: true
     t.string   "meta_keywords"
     t.string   "meta_description"
+    t.string   "reference_code"
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
     t.integer  "priority",         default: 1,     null: false
     t.string   "show_action_name"
-    t.string   "reference_code"
   end
 
   add_index "categories", ["parent_id"], name: "index_categories_on_parent_id", using: :btree
+  add_index "categories", ["reference_code"], name: "index_categories_on_reference_code", using: :btree
 
   create_table "category_translations", force: :cascade do |t|
     t.integer  "category_id",       null: false

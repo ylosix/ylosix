@@ -20,6 +20,18 @@ ActiveAdmin.register Product do
     permitted
   end
 
+  action_item :view, only: :show do
+    link_to(t('formtastic.clone', model: t('activerecord.models.product.one')), admin_clone_product_path(product))
+  end
+
+  action_item :view, only: :show do
+    link_to(t('formtastic.add_another', model: t('activerecord.models.product.one')), new_admin_category_path)
+  end
+
+  action_item :view, only: [:show, :edit] do
+    link_to 'Public link', show_slug_products_path(product.slug), target: '_blank'
+  end
+
   index do
     selectable_column
     id_column
@@ -72,7 +84,7 @@ ActiveAdmin.register Product do
   end
 
   filter :reference_code
-  filter :translations_name, as: :string, label: 'Name'
+  filter :translations_name, as: :string, label: proc { I18n.t 'activerecord.attributes.product.name' }
   filter :enabled
 
   form do |f|
@@ -154,11 +166,6 @@ ActiveAdmin.register Product do
     end
 
     f.actions
-  end
-
-  # Clone product
-  action_item :view, only: :show do
-    link_to('Clone Product', admin_clone_product_path(product))
   end
 
   controller do

@@ -5,6 +5,14 @@ ActiveAdmin.register Category do
                 category_translations_attributes:
                     [:id, :locale, :name, :short_description, :description, :slug]
 
+  action_item :view, only: :show do
+    link_to t('formtastic.add_another', model: t('activerecord.models.category.one')), new_admin_category_path
+  end
+
+  action_item :view, only: [:show, :edit] do
+    link_to 'Public link', show_slug_categories_path(category.slug), target: '_blank'
+  end
+
   index do
     selectable_column
     id_column
