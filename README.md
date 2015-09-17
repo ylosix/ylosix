@@ -22,91 +22,91 @@ This repository contains the source for the latest version of Ylosix as well as 
 
 ## Installation
 
-  The easiest way to install Ylosix either locally, on your managed server, or on the cloud, is to cloning this repository and using Vagrant to deploy it with all its dependencies.
+The easiest way to install Ylosix either locally, on your managed server, or on the cloud, is to cloning this repository and using Vagrant to deploy it with all its dependencies.
 
-  Follow the next instructions to install Ylosix.
+Follow the next instructions to install Ylosix.
 
-  Install `git` and clone the repository. Note the `--recursive` parameter to also download git submodules.
+Install `git` and clone the repository. Note the `--recursive` parameter to also download git submodules.
 
-  ```
-  $ git clone --recursive https://github.com/ylosix/ylosix.git
-  ```
+```
+$ git clone --recursive https://github.com/ylosix/ylosix.git
+```
 
-  [Download and install Vagrant](http://www.vagrantup.com/downloads.html) from their website according your OS.
+[Download and install Vagrant](http://www.vagrantup.com/downloads.html) from their website according your OS.
 
-  Install the `vagrant-triggers` plugin.
+Install the `vagrant-triggers` plugin.
 
-  ```
-  $ vagrant plugin install vagrant-triggers
-  ```
+```
+$ vagrant plugin install vagrant-triggers
+```
 
-  Now, depending on your target environment you will have to use a different Vagrant provider. Currently we support Virtualbox, DigitalOcean, Heroku.
+Now, depending on your target environment you will have to use a different Vagrant provider. Currently we support Virtualbox, DigitalOcean, Heroku.
 
-  #### Virtualbox (local installation for testing/development)
+#### Virtualbox (local installation for testing/development)
 
-  If you don't have it already, [download and install Virtualbox and the Extension Pack](https://www.virtualbox.org/wiki/Downloads).
+If you don't have it already, [download and install Virtualbox and the Extension Pack](https://www.virtualbox.org/wiki/Downloads).
 
-  Create the guest machine and provision it.
+Create the guest machine and provision it.
 
-  ```
-  $ vagrant up main_app
-  ```
+```
+$ vagrant up main_app
+```
 
-  The first time you run `vagrant up` will take more time because it will need to download the base image and install the required dependencies in the virtual machine. Next runs will be much quicker.
+The first time you run `vagrant up` will take more time because it will need to download the base image and install the required dependencies in the virtual machine. Next runs will be much quicker.
 
-  Once it is done, you will already have a working environment. Ylosix will be running at your local port 13000:
+Once it is done, you will already have a working environment. Ylosix will be running at your local port 13000:
 
-  - Store front: [http://localhost:13000](http://localhost:13000)
-  - Backoffice: [http://localhost:13000/admin](http://localhost:13000/admin)
-
-
-  #### DigitalOcean
-
-  Install the `vagrant-digitalocean` package.
-
-  ```
-  $ vagrant plugin install vagrant-digitalocean
-  ```
-
-  [Generate an API token](https://cloud.digitalocean.com/settings/applications) and replace the `YOUR_TOKEN` string by yours in the `Vagrantfile`. You can also configure other parameters such as the region or the Droplet size.
-
-  ```
-    config.vm.provider :digital_ocean do |provider, override|
-      override.ssh.private_key_path = '~/.ssh/id_rsa'
-      override.vm.box = 'digital_ocean'
-      override.vm.box_url = 'https://github.com/smdahlen/vagrant-digitalocean/raw/master/box/digital_ocean.box'
-
-      provider.token = 'YOUR_TOKEN'
-      provider.image = 'ubuntu-14-04-x64'
-      provider.region = 'nyc2'
-      provider.size = '512mb'
-    end
-  ```
-
-  Create the Droplet and install Ylosix:
-
-  ```
-  $ RAILS_ENV=production vagrant up main_app --provider=digital_ocean
-  ```
-
-  Once it is done, you will have a production-ready environment in your DigitalOcean Droplet.
+- Store front: [http://localhost:13000](http://localhost:13000)
+- Backoffice: [http://localhost:13000/admin](http://localhost:13000/admin)
 
 
-  #### Heroku
+#### DigitalOcean
 
-  Install [Heroku CLI](https://toolbelt.heroku.com) from the official website.
+Install the `vagrant-digitalocean` package.
 
-  Run the following commands to create a Heroku dyno and install Ylosix.
+```
+$ vagrant plugin install vagrant-digitalocean
+```
 
-  ```
-  $ heroku login
-  $ heroku create
-  $ heroku addons:add heroku-postgresql:hobby-dev
-  $ heroku config:set RAILS_DB=postgresql
-  $ git push heroku develop:master
-  $ heroku run rake db:migrate RAILS_ENV=production
-  $ heroku run rake db:gen_demo
-  ```
+[Generate an API token](https://cloud.digitalocean.com/settings/applications) and replace the `YOUR_TOKEN` string by yours in the `Vagrantfile`. You can also configure other parameters such as the region or the Droplet size.
+
+```
+  config.vm.provider :digital_ocean do |provider, override|
+    override.ssh.private_key_path = '~/.ssh/id_rsa'
+    override.vm.box = 'digital_ocean'
+    override.vm.box_url = 'https://github.com/smdahlen/vagrant-digitalocean/raw/master/box/digital_ocean.box'
+
+    provider.token = 'YOUR_TOKEN'
+    provider.image = 'ubuntu-14-04-x64'
+    provider.region = 'nyc2'
+    provider.size = '512mb'
+  end
+```
+
+Create the Droplet and install Ylosix:
+
+```
+$ RAILS_ENV=production vagrant up main_app --provider=digital_ocean
+```
+
+Once it is done, you will have a production-ready environment in your DigitalOcean Droplet.
+
+
+#### Heroku
+
+Install [Heroku CLI](https://toolbelt.heroku.com) from the official website.
+
+Run the following commands to create a Heroku dyno and install Ylosix.
+
+```
+$ heroku login
+$ heroku create
+$ heroku addons:add heroku-postgresql:hobby-dev
+$ heroku config:set RAILS_DB=postgresql
+$ git push heroku develop:master
+$ heroku run rake db:migrate RAILS_ENV=production
+$ heroku run rake db:gen_demo
+```
 
 
 #### Managed server
@@ -202,7 +202,7 @@ $ docker-compose run web rake db:create db:migrate db:gen_demo
   ```
 
   If you are cloning the repository from Windows please set `autocrlf` to false to avoid end-of-line issues.
-  
+
   ```
   git config --global core.autocrlf false
   ```
