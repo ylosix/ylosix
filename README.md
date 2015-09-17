@@ -6,101 +6,201 @@
 [![security](https://hakiri.io/github/ylosix/ylosix/develop.svg)](https://hakiri.io/github/ylosix/ylosix)
 [![License](http://img.shields.io/:license-Apache_v2-blue.svg)](https://raw.githubusercontent.com/ylosix/ylosix/develop/LICENSE)
 
-## REAME
+## YLOSIX
 
-Open source ecommerce includes bootstrap, font-awesome and animate.
+Ylosix is an open source project, the main goal is provides a CMS for build your site.
+We focus at E-commerce sites, we are looking for clean and effective code also in
+the frontend the project includes bootstrap, font-awesome and animate.
 
-  * Ruby version: 2.1.6
-  
-  * Rails version: 4.2.3
-  
-  * Puppet: 3.7.5
-  
-  * [Jira](#jira)
-  
-  * [Installation](#installation)
-  
-  * Configuration
-  
-  * [Design schema](#design-schema)
-  
-  * [Database creation](#database-creation)
-  
-  * [How to run the test suite](#testing)
-  
-  * [The ecommerce](#the-ecommerce)
-  
-  * Services (job queues, cache servers, search engines, etc.)
-  
-  * [Deployment instructions](#deployment-instructions)
+Beta demo:
+[Frontend](http://ylos.ylosix.com)
+[Backoffice](http://ylos.ylosix.com/admin)
+The default customer user is {:email => 'user@example.com', :password => 'password' }.
+The default admin user is {:email => 'admin@example.com', :password => 'password' }.
 
+
+  * [Dependencies](#dependencies)
+  * [Getting started](#getting-started)   
+    * [Installation](#installation)
+    * [Deploy at production environments](#deploy-at-production-environments)
+    * [Testing](#testing)
+    * [TODO] Docs
+
+  * [Collaboration](#collaboration)
   * [License](#license)
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+## Dependencies
 
-## Jira
+  * Ruby version: 2.1.6
+  * Rails version: 4.2.3
+  * Puppet: 3.7.5
 
-Follow us [here](https://ylos-hispania.atlassian.net/secure/Dashboard.jspa).
+
+## Getting started
+
+### Installation
+
+  Install git and after clone the repository(be careful with submodules):
+
+  ```
+  $ git clone --recursive https://github.com/devcows/ecommerce.git
+  ```
+
+  To install Vagrant download [Vagrant](https://www.vagrantup.com) and install it. Install Vagrant plugin triggers, open a console and type:
+
+  ```
+  $ vagrant plugin install vagrant-triggers
+  ```
+
+  After open a console in project path:
+
+  ```
+  $ vagrant up main_app
+  ```
+
+  The first time Vagrant takes more time and prepare the virtual machine. The next runs Vagrant goes more quickly.
+
+  After vagrant up, you already have a develop environment, the application is running at: <br />
+  - Main web: [http://localhost:13000](http://localhost:13000)
+  - Back office: [http://localhost:13000/admin](http://localhost:13000/admin)
+
+  The default customer user is {:email => 'user@example.com', :password => 'password' }.
+  The default admin user is {:email => 'admin@example.com', :password => 'password' }.
+
+  The default Postgresql config: <br />
+    - Port: 15432 <br />
+    - Database: ecommerce <br />
+    - User: ecommerce_user <br />
+    - Password: ecommerce_pass <br />
 
 
-## Installation
+  Troubleshooting gem nokoguiri in Mac os x (Yosemite):
+  ```
+  $ port install libiconv libxslt libxml2
+  $ gem install nokogiri -- --use-system-libraries --with-iconv-dir=/opt/local --with-xml2-dir=/opt/local --with-xslt-dir=/opt/local
+  ```
 
-Install git and after clone the repository(be careful with submodules):
+  Troubleshooting gem pg in Mac os x (Yosemite):
+  ```
+  Download and install postgresql from:
+  http://www.postgresql.org/download/macosx
 
+  And after:
+
+  $ gem install pg -- --with-pg-config=/Library/PostgreSQL/9.4/bin/pg_config
+  ```
+
+  Troubleshooting git clone in windows:
+    - Windows by default use crlf true and adds \r in every \n. The puppet recipe fails with \r.
+  ```
+  git config --global core.autocrlf false
+  ```
+
+
+### Deploy at production environments
+
+  __With heroku:__
+    - Register at [heroku](https://www.heroku.com)
+    - Install [heroku cli](https://toolbelt.heroku.com)
+
+  ```
+  $ git clone --recursive https://github.com/devcows/ecommerce.git
+  $ cd ecommerce
+  $ heroku login
+  $ heroku create
+  $ heroku addons:add heroku-postgresql:hobby-dev
+  $ heroku config:set RAILS_DB=postgresql
+  $ git push heroku develop:master
+
+  $ heroku run rake db:migrate RAILS_ENV=production
+  $ heroku run rake db:gen_demo
+  ```
+
+  __With digital ocean:__
+  ```
+  $ vagrant plugin install vagrant-digitalocean
+  ```
+
+    - Generate API token:
+      https://cloud.digitalocean.com/settings/applications
+
+    - Add token code in Vagrant file at YOUR_TOKEN:
+  ```
+    config.vm.provider :digital_ocean do |provider, override|
+      override.ssh.private_key_path = '~/.ssh/id_rsa'
+      override.vm.box = 'digital_ocean'
+      override.vm.box_url = 'https://github.com/smdahlen/vagrant-digitalocean/raw/master/box/digital_ocean.box'
+
+      provider.token = 'YOUR_TOKEN'
+      provider.image = 'ubuntu-14-04-x64'
+      provider.region = 'nyc2'
+      provider.size = '512mb'
+    end
+  ```
+
+    - Execute:
+  ```
+  $ git clone --recursive https://github.com/devcows/ecommerce.git
+  $ cd ecommerce
+  $ RAILS_ENV=production vagrant up main_app --provider=digital_ocean
+  ```
+
+  __With a managed server:__
+
+    - Add server ssh config:
+  ```
+    app.vm.provider :managed do |provider, override|
+      override.ssh.username = 'username'
+      override.ssh.private_key_path = '~/.ssh/id_rsa'
+      override.vm.box = 'tknerr/managed-server-dummy'
+
+      provider.server = 'example.com'
+    end  
+  ```
+
+    - Execute:
+  ```
+  $ vagrant plugin install vagrant-managed-servers
+  $ git clone --recursive https://github.com/devcows/ecommerce.git
+  $ cd ecommerce
+  $ RAILS_ENV=production vagrant up main_app --provider=managed
+  $ RAILS_ENV=production vagrant provision main_app
+  ```
+
+    - Troubleshooting Puppet old version:
+      https://docs.puppetlabs.com/guides/install_puppet/install_debian_ubuntu.html
+
+  __With docker:__
+    - Install docker and docker-compose.
+    - Execute:
+  ```
+  $ docker-compose up
+  $ docker-compose run web rake db:create db:migrate db:gen_demo
+  ```
+
+
+### Testing
+
+The tests are developed with the Ruby on Rails minitest suite. Travis-ci
+automatically run the test on github commits and to run the test at local machine
+execute:
 ```
-$ git clone --recursive https://github.com/devcows/ecommerce.git
+$ rake
 ```
 
-To install Vagrant download [Vagrant](https://www.vagrantup.com) and install it. Install Vagrant plugin triggers, open a console and type:
 
-```
-$ vagrant plugin install vagrant-triggers
-```
+## Collaboration
 
-After open a console in project path:
+To collaborate with us use github issues and pull-request.
 
-```
-$ vagrant up main_app
-```
+Also you can follow us at [Jira](https://ylos-hispania.atlassian.net/secure/Dashboard.jspa).
 
-The first time Vagrant takes more time and prepare the virtual machine. The next runs Vagrant goes more quickly.
 
-After vagrant up, you already have a develop environment, the application is running at: <br />
-[http://localhost:13000](http://localhost:13000)
+## License
 
-Troubleshooting gem nokoguiri in Mac os x (Yosemite):
-```
-$ port install libiconv libxslt libxml2
-$ gem install nokogiri -- --use-system-libraries --with-iconv-dir=/opt/local --with-xml2-dir=/opt/local --with-xslt-dir=/opt/local
-```
+Ylosix is released under the Apache v2 License.
 
-Troubleshooting gem pg in Mac os x (Yosemite):
-```
-Download and install postgresql from:
-http://www.postgresql.org/download/macosx
-
-And after:
-
-$ gem install pg -- --with-pg-config=/Library/PostgreSQL/9.4/bin/pg_config
-```
-
-Troubleshooting git clone in windows:
-  - Windows by default use crlf true and adds \r in every \n. The puppet recipe fails with \r. 
-```
-git config --global core.autocrlf false
-```
-
-Run with docker:
-```
-$ docker-compose up
-$ docker-compose run web rake db:create db:migrate db:gen_demo
-```
-
-## Design schema
-
-![Alt text](https://raw.githubusercontent.com/devcows/ecommerce/develop/erd.png "Design")
 
 
 ## Database creation
@@ -109,109 +209,3 @@ $ docker-compose run web rake db:create db:migrate db:gen_demo
 $ rake db:create db:migrate db:seed       #Empty Ecommerce
 $ rake db:create db:migrate db:gen_demo   #Demo Ecommerce
 ```
-
-## Testing
-
-To run the test suite execute:
-
-```
-$ rake
-```
-
-## The ecommerce
-
-Default Postgresql config: <br />
-  - Port: 15432 <br />
-  - Database: ecommerce <br />
-  - User: ecommerce_user <br />
-  - Password: ecommerce_pass <br />
-
-The main web application is running at: <br />
-[http://localhost:13000](http://localhost:13000)
-
-The default customer user is {:email => 'user@example.com', :password => 'password' }.
-
-The application backoffice is running at: <br />
-[http://localhost:13000/admin](http://localhost:13000/admin)
-
-The default admin user is {:email => 'admin@example.com', :password => 'password' }.
-
-Demo at: <br />
-[Link to heroku](http://devcows-ecommerce.herokuapp.com)
-
-## Deployment instructions
-
-__With heroku:__
-  - Register at [heroku](https://www.heroku.com)
-  - Install [heroku cli](https://toolbelt.heroku.com)
-
-```
-$ git clone --recursive https://github.com/devcows/ecommerce.git
-$ cd ecommerce
-$ heroku login
-$ heroku create
-$ heroku addons:add heroku-postgresql:hobby-dev
-$ heroku config:set RAILS_DB=postgresql
-$ git push heroku develop:master
-
-$ heroku run rake db:migrate RAILS_ENV=production
-$ heroku run rake db:gen_demo
-```
-
-__With digital ocean:__
-```
-$ vagrant plugin install vagrant-digitalocean
-```
-
-  - Generate API token:
-    https://cloud.digitalocean.com/settings/applications
-
-  - Add token code in Vagrant file at YOUR_TOKEN:
-```
-  config.vm.provider :digital_ocean do |provider, override|
-    override.ssh.private_key_path = '~/.ssh/id_rsa'
-    override.vm.box = 'digital_ocean'
-    override.vm.box_url = 'https://github.com/smdahlen/vagrant-digitalocean/raw/master/box/digital_ocean.box'
-
-    provider.token = 'YOUR_TOKEN'
-    provider.image = 'ubuntu-14-04-x64'
-    provider.region = 'nyc2'
-    provider.size = '512mb'
-  end
-```
-
-  - Execute:
-```
-$ git clone --recursive https://github.com/devcows/ecommerce.git
-$ cd ecommerce
-$ RAILS_ENV=production vagrant up main_app --provider=digital_ocean
-```
-
-__With a managed server:__
-
-  - Add server ssh config:
-```
-  app.vm.provider :managed do |provider, override|
-    override.ssh.username = 'username'
-    override.ssh.private_key_path = '~/.ssh/id_rsa'
-    override.vm.box = 'tknerr/managed-server-dummy'
-
-    provider.server = 'example.com'
-  end  
-```
-
-  - Execute:
-```
-$ vagrant plugin install vagrant-managed-servers
-$ git clone --recursive https://github.com/devcows/ecommerce.git
-$ cd ecommerce
-$ RAILS_ENV=production vagrant up main_app --provider=managed
-$ RAILS_ENV=production vagrant provision main_app
-```
-
-  - Troubleshooting Puppet old version:
-    https://docs.puppetlabs.com/guides/install_puppet/install_debian_ubuntu.html
-
-## License
-
-Ylosix is released under the Apache v2 License.
