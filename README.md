@@ -59,6 +59,13 @@ Once it is done, you will already have a working environment. Ylosix will be run
 - Store front: [http://localhost:13000](http://localhost:13000)
 - Backoffice: [http://localhost:13000/admin](http://localhost:13000/admin)
 
+PostgreSQL configuration:
+
+- Port: `15432`
+- Database: `ecommerce`
+- User: `ecommerce_user`
+- Password: `ecommerce_pass`
+
 
 #### DigitalOcean
 
@@ -103,7 +110,7 @@ $ heroku login
 $ heroku create
 $ heroku addons:add heroku-postgresql:hobby-dev
 $ heroku config:set RAILS_DB=postgresql
-$ git push heroku develop:master
+$ git push heroku master:master
 $ heroku run rake db:migrate RAILS_ENV=production
 $ heroku run rake db:gen_demo
 ```
@@ -148,64 +155,46 @@ $ docker-compose up
 $ docker-compose run web rake db:create db:migrate db:gen_demo
 ```
 
-### Default credentials
-
-  A default customer user will be created with the following credentials:
-
-  - Email: `user@example.com`
-  - Password: `password`
-
-  And also an admin user:
-
-  - Email: `admin@example.com`
-  - Password: `password`
-
-  Postgresql configuration:
-    - Port: `15432`
-    - Database: `ecommerce`
-    - User: `ecommerce_user`
-    - Password: `ecommerce_pass`
-
 
 ### Troubleshooting
 
-  Generate an empty store:
+Generate an empty store:
 
-  ```
-  $ rake db:create db:migrate db:seed
- ```
+```
+$ rake db:create db:migrate db:seed
+```
 
- Generate a demo electronic store:
-  ```
-  $ rake db:create db:migrate db:gen_demo
-  ```
+Generate a demo electronic store:
+```
+$ rake db:create db:migrate db:gen_demo
+```
 
 
-  Error when running `bundle install` about the gem `nokoguiri` in Mac OS X (Yosemite):
+Error when running `bundle install` about the gem `nokoguiri` in Mac OS X (Yosemite):
 
-  ```
-  $ port install libiconv libxslt libxml2
-  $ gem install nokogiri -- --use-system-libraries --with-iconv-dir=/opt/local --with-xml2-dir=/opt/local --with-xslt-dir=/opt/local
-  ```
+```
+$ port install libiconv libxslt libxml2
+$ gem install nokogiri -- --use-system-libraries --with-iconv-dir=/opt/local --with-xml2-dir=/opt/local --with-xslt-dir=/opt/local
+```
 
-  Error when running `bundle install` about the gem `pg` in Mac OS X (Yosemite).
+Error when running `bundle install` about the gem `pg` in Mac OS X (Yosemite).
 
-  Download and install postgresql from:
+Download and install postgresql from:
 
-  ```
-  http://www.postgresql.org/download/macosx
-  ```
-  Then run:
+```
+http://www.postgresql.org/download/macosx
+```
+Then run:
 
-  ```
-  $ gem install pg -- --with-pg-config=/Library/PostgreSQL/9.4/bin/pg_config
-  ```
+```
+$ gem install pg -- --with-pg-config=/Library/PostgreSQL/9.4/bin/pg_config
+```
 
-  If you are cloning the repository from Windows please set `autocrlf` to false to avoid end-of-line issues.
+If you are cloning the repository from Windows please set `autocrlf` to false to avoid end-of-line issues.
 
-  ```
-  git config --global core.autocrlf false
-  ```
+```
+git config --global core.autocrlf false
+```
 
 
 ### Testing
