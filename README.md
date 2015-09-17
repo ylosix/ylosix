@@ -12,12 +12,12 @@ Ylosix is an open source project, the main goal is provides a CMS for build your
 We focus at E-commerce sites, we are looking for clean and effective code also in
 the frontend the project includes bootstrap, font-awesome and animate.
 
-Beta demo: <br />
-[- Frontend](http://ylos.ylosix.com) <br />
-[- Backoffice](http://ylos.ylosix.com/admin) <br />
+Beta demo:
+- [Frontend](http://ylos.ylosix.com)
+- [Backoffice](http://ylos.ylosix.com/admin)
+
 The default customer user is {:email => 'user@example.com', :password => 'password' }.<br />
 The default admin user is {:email => 'admin@example.com', :password => 'password' }.
-
 
   * [Dependencies](#dependencies)
   * [Getting started](#getting-started)   
@@ -106,7 +106,7 @@ The default admin user is {:email => 'admin@example.com', :password => 'password
 
 ### Deploy at production environments
 
-  __With heroku:__
+__With heroku:__
   - Register at [heroku](https://www.heroku.com)
   - Install [heroku cli](https://toolbelt.heroku.com)
 
@@ -123,7 +123,7 @@ The default admin user is {:email => 'admin@example.com', :password => 'password
   $ heroku run rake db:gen_demo
   ```
 
-  __With digital ocean:__
+__With digital ocean:__
   ```
   $ vagrant plugin install vagrant-digitalocean
   ```
@@ -152,7 +152,7 @@ The default admin user is {:email => 'admin@example.com', :password => 'password
   $ RAILS_ENV=production vagrant up main_app --provider=digital_ocean
   ```
 
-  __With a managed server:__
+__With a managed server:__
 
   - Add server ssh config:
   ```
@@ -177,7 +177,7 @@ The default admin user is {:email => 'admin@example.com', :password => 'password
   - Troubleshooting Puppet old version:
     https://docs.puppetlabs.com/guides/install_puppet/install_debian_ubuntu.html
 
-  __With docker:__
+__With docker:__
   - Install docker and docker-compose.
   - Execute:
   ```
