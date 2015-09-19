@@ -10,13 +10,13 @@
         %span.icon-bar
 
       = link_to @variables['commerce']['name'], @variables['commerce']['root_href'], :class => 'navbar-brand'
-
+      = link_to "Articles",articles_path, :class => 'navbar-brand'
+      
     -# Collect the nav links, forms, and other content for toggling
     %div{:class => 'collapse navbar-collapse', :id => 'bs-example-navbar-collapse-1'}
       %ul{:class => 'nav navbar-nav pull-right'}
         %li
           %a About
-
         - if !@variables.nil? && !@variables['languages'].nil?
           - @variables['languages'].each do |lang|
             - image_src = ''
