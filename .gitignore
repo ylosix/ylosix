@@ -18,6 +18,8 @@ pickle-email-*.html
 /.bundle
 /vendor/bundle
 /coverage
+/doc
+/.yardoc
 /config/newrelic.yml
 
 .idea
