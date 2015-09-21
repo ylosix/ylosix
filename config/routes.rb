@@ -20,10 +20,10 @@ Rails.application.routes.draw do
   resources :categories, only: [:index] do
     get '/' => 'categories#show'
     get '/products/:slug' => 'products#show', as: :show_product_slug
-    match '/tag/*slug_tags' => 'categories#tags', as: :tags, via: [:get]
+    match '/tags/*slug_tags' => 'categories#tags', as: :tags, via: [:get]
   end
 
-  match '/tag/*slug_tags' => 'categories#tags', as: :tags, via: [:get]
+  match '/tags/*slug_tags' => 'categories#tags', as: :tags, via: [:get]
 
   resources :products, only: [:index] do
     get '/' => 'products#show'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150914100553) do
+ActiveRecord::Schema.define(version: 20150918100129) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -116,27 +116,25 @@ ActiveRecord::Schema.define(version: 20150914100553) do
     t.string   "name"
     t.boolean  "enabled",          default: false
     t.boolean  "visible",          default: true
-    t.string   "meta_keywords"
-    t.string   "meta_description"
-    t.string   "reference_code"
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
     t.integer  "priority",         default: 1,     null: false
     t.string   "show_action_name"
+    t.string   "reference_code"
   end
 
   add_index "categories", ["parent_id"], name: "index_categories_on_parent_id", using: :btree
-  add_index "categories", ["reference_code"], name: "index_categories_on_reference_code", using: :btree
 
   create_table "category_translations", force: :cascade do |t|
-    t.integer  "category_id",       null: false
-    t.string   "locale",            null: false
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.integer  "category_id",                    null: false
+    t.string   "locale",                         null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.string   "name"
     t.text     "description"
     t.text     "short_description"
     t.string   "slug"
+    t.hstore   "meta_tags",         default: {}, null: false
   end
 
   add_index "category_translations", ["category_id"], name: "index_category_translations_on_category_id", using: :btree
@@ -161,8 +159,6 @@ ActiveRecord::Schema.define(version: 20150914100553) do
   create_table "commerces", force: :cascade do |t|
     t.string   "http"
     t.string   "name"
-    t.string   "meta_keywords"
-    t.string   "meta_description"
     t.integer  "template_id"
     t.boolean  "default"
     t.datetime "created_at",                                null: false
@@ -177,6 +173,7 @@ ActiveRecord::Schema.define(version: 20150914100553) do
     t.boolean  "no_redirect_shopping_cart", default: false, null: false
     t.hstore   "social_networks",           default: {},    null: false
     t.integer  "language_id"
+    t.hstore   "meta_tags",                 default: {},    null: false
   end
 
   add_index "commerces", ["template_id"], name: "index_commerces_on_template_id", using: :btree
@@ -285,15 +282,16 @@ ActiveRecord::Schema.define(version: 20150914100553) do
   add_index "languages", ["locale"], name: "index_languages_on_locale", using: :btree
 
   create_table "product_translations", force: :cascade do |t|
-    t.integer  "product_id",        null: false
-    t.string   "locale",            null: false
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.integer  "product_id",                     null: false
+    t.string   "locale",                         null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.string   "name"
     t.text     "short_description"
     t.text     "description"
     t.hstore   "features"
     t.string   "slug"
+    t.hstore   "meta_tags",         default: {}, null: false
   end
 
   add_index "product_translations", ["locale"], name: "index_product_translations_on_locale", using: :btree
@@ -312,8 +310,6 @@ ActiveRecord::Schema.define(version: 20150914100553) do
     t.decimal  "retail_price_pre_tax", precision: 10, scale: 5, default: 0.0,                   null: false
     t.decimal  "retail_price",         precision: 10, scale: 2, default: 0.0,                   null: false
     t.integer  "tax_id"
-    t.string   "meta_keywords"
-    t.string   "meta_description"
     t.integer  "stock",                                         default: 0
     t.boolean  "control_stock",                                 default: false
     t.datetime "created_at"

@@ -7,6 +7,7 @@
 #  features          :hstore
 #  id                :integer          not null, primary key
 #  locale            :string           not null
+#  meta_tags         :hstore           default({}), not null
 #  name              :string
 #  product_id        :integer          not null
 #  short_description :text

@@ -14,8 +14,6 @@
 #  image_file_name      :string
 #  image_file_size      :integer
 #  image_updated_at     :datetime
-#  meta_description     :string
-#  meta_keywords        :string
 #  name                 :string
 #  publication_date     :datetime         default(Thu, 01 Jan 2015 00:00:00 UTC +00:00), not null
 #  reference_code       :string
@@ -78,5 +76,10 @@ class ProductTest < ActiveSupport::TestCase
     Product::IMAGE_SIZES.each do |size, _k|
       assert hash.key? "image_#{size}_src"
     end
+  end
+
+  test 'replace_keys_features' do
+    product = products(:camera)
+    assert product.replace_keys_features.class == Hash
   end
 end

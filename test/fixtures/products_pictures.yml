@@ -27,4 +27,10 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
+one:
+  product: camera
+  image_file_name: MyString
+
+two:
+  product: lens_canon
+  image_file_name: MyString

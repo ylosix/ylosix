@@ -23,6 +23,14 @@ class HomeControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test 'should get index with default language' do
+    language = languages(:en)
+    language.update_attributes(default: true)
+
+    get :index
+    assert_response :success
+  end
+
   test 'should get index with template' do
     prepare_template
 

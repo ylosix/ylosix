@@ -8,34 +8,52 @@ module ActiveAdminHelper
       options[:ckeditor] = {language: session[:locale]}
     end
 
-    translations.each_with_index do |t, index|
-      input_name_prefix = "#{model_name}[#{model_name}_translations_attributes][#{index}]"
-      input_name_suffix = field
+    translations.each_with_index do |translation, index|
+      if translation[field].class == Hash
+        translation[field].each do |k, v|
+          label_text = t("activerecord.attributes.#{model_name}.#{k}")
+          label_for = "#{model_name}_#{model_name}_translations_attributes_#{index}_#{field}_#{k}"
 
-      render partial: 'admin/translation_field',
-             locals: {
-                 id: t.id,
-                 id_prefix:
-                     "#{model_name}_#{model_name}_translations_attributes_#{index}_#{input_name_suffix}",
-                 input_name_prefix: input_name_prefix,
-                 input_name_sufix: input_name_suffix,
-                 language: t.language,
-                 input_label: t("activerecord.attributes.#{model_name}.#{field}"),
-                 component: retrieve_component("#{input_name_prefix}[#{input_name_suffix}]", t[field], options)
-             }
+          input_prefix_name = "#{model_name}[#{model_name}_translations_attributes][#{index}]"
+          input_suffix_name = "[#{field}][#{k}]"
+
+          render_input_text_field(label_text, label_for, input_prefix_name, input_suffix_name, v, translation, options)
+        end
+      elsif translation[field].class == String
+        label_text = t("activerecord.attributes.#{model_name}.#{field}")
+        label_for = "#{model_name}_#{model_name}_translations_attributes_#{index}_#{field}"
+
+        input_prefix_name = "#{model_name}[#{model_name}_translations_attributes][#{index}]"
+        input_suffix_name = "[#{field}]"
+
+        render_input_text_field(label_text, label_for, input_prefix_name, input_suffix_name, translation[field], translation, options)
+      end
     end
   end
 
   private
 
+  # input_prefix_name = 'category[category_translations_attributes][0]'
+  # input_suffix_name = '[name]'
+  def render_input_text_field(label_text, label_for, input_prefix_name, input_suffix_name, value, translation, options)
+    render partial: 'admin/translation_field',
+           locals: {
+               input_prefix_name: input_prefix_name,
+               translation: translation,
+               label_text: label_text,
+               label_for: label_for,
+               component: retrieve_component("#{input_prefix_name}#{input_suffix_name}", value, options)
+           }
+  end
+
   def retrieve_component(input_name, value, options)
     case options[:component]
-    when TEXT_AREA
-      output = text_area_tag(input_name, value, options.except(:hint))
-    when CKEDITOR
-      output = cktext_area_tag(input_name, value, options.except(:hint))
-    else
-      output = text_field_tag(input_name, value, options.except(:hint))
+      when TEXT_AREA
+        output = text_area_tag(input_name, value, options.except(:hint))
+      when CKEDITOR
+        output = cktext_area_tag(input_name, value, options.except(:hint))
+      else
+        output = text_field_tag(input_name, value, options.except(:hint))
     end
 
     unless options[:hint].blank?

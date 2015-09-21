@@ -7,6 +7,7 @@
 #  features          :hstore
 #  id                :integer          not null, primary key
 #  locale            :string           not null
+#  meta_tags         :hstore           default({}), not null
 #  name              :string
 #  product_id        :integer          not null
 #  short_description :text
@@ -28,6 +29,11 @@ camara_en:
   short_description: Camera reflex canon 12MP.
   description: Camera reflex canon 12MP (not includes SD).
   slug: camera-reflex-canon-450D
+  meta_tags:
+    keywords: MyString
+    description: MyString
+  features:
+    Feature1: MyString
 
 camara_es:
   locale: es
@@ -36,3 +42,8 @@ camara_es:
   short_description: Cámara reflex canon 12MP.
   description: Cámera reflex canon 12MP (no incluye SD).
   slug: camera-reflex-canon-450D
+  meta_tags:
+    keywords: MyString
+    description: MyString
+  features:
+    Feature1: MyString

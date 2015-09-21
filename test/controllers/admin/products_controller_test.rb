@@ -47,6 +47,7 @@ module Admin
       attributes = @object.attributes
       attributes[:products_categories_ids] = [categories(:digital_cameras).id]
       attributes[:products_tags_ids] = [tags(:cameras).id]
+      attributes[:product_translations_attributes] = {'0' => {locale: 'en', 'Feature1' => 'blabla', meta_tags: {keywords: 'abc'}}}
 
       patch :update, id: @object, product: attributes
       assert_redirected_to admin_product_path(assigns(:product))

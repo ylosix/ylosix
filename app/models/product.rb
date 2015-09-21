@@ -14,8 +14,6 @@
 #  image_file_name      :string
 #  image_file_size      :integer
 #  image_updated_at     :datetime
-#  meta_description     :string
-#  meta_keywords        :string
 #  name                 :string
 #  publication_date     :datetime         default(Thu, 01 Jan 2015 00:00:00 UTC +00:00), not null
 #  reference_code       :string
@@ -44,7 +42,7 @@ class Product < ActiveRecord::Base
   include InitializeSlug
   IMAGE_SIZES = {thumbnail: 'x100', small: 'x300', medium: 'x500', original: 'x720'}
 
-  translates :name, :short_description, :description, :features, :slug
+  translates :name, :short_description, :description, :features, :slug, :meta_tags
   has_attached_file :image, styles: IMAGE_SIZES
 
   validates_attachment_size :image, less_than: 2.megabytes

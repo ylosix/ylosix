@@ -11,7 +11,7 @@
 #
 
 class Template < ActiveRecord::Base
-  attr_accessor :home_index
+  attr_accessor :home_index, :from
 
   before_save :set_only_one_template_active
 
@@ -24,8 +24,10 @@ class Template < ActiveRecord::Base
   def self.active_template(current_admin_user)
     if !current_admin_user.nil? && !current_admin_user.debug_template.nil?
       template = current_admin_user.debug_template
+      template.from = 'admin_user'
     else
       template = Template.find_by(enabled: true)
+      template.from = 'default_template' unless template.nil?
     end
 
     template
@@ -75,6 +77,7 @@ class Template < ActiveRecord::Base
 
   def to_liquid
     {
+        'from' => from,
         'name' => name,
         'path' => path,
         'public_path' => public_path,
