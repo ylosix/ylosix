@@ -1,8 +1,8 @@
 namespace :db do
   def create_product(product_attributes, categories, tags)
     product = Utils.create_or_update_model(Product,
-                                         {reference_code: product_attributes[:reference_code]},
-                                         product_attributes)
+                                           {reference_code: product_attributes[:reference_code]},
+                                           product_attributes)
 
     product.categories = categories
     product.tags = tags
@@ -20,8 +20,16 @@ namespace :db do
 
     camera_image = File.new "#{Rails.root}/app/assets/images/products/canon_450d.png"
     product_attributes = {:reference_code => 'ref1',
-                          product_translations_attributes: [{:locale => :en, name: 'Canon 450D', short_description: 'Camera reflex canon 12MP.', description: 'Camera reflex canon 12 MP (not includes SD).'},
-                                                            {:locale => :es, name: 'Canon 450D', short_description: 'Camera reflex canon 12MP.', description: 'Camera reflex canon 12 MP (not includes SD).'}],
+                          product_translations_attributes: [{locale: :en,
+                                                             meta_tags: {keywords: 'canon_450d', description: 'Camera reflex canon'},
+                                                             name: 'Canon 450D',
+                                                             short_description: 'Camera reflex canon 12MP.',
+                                                             description: 'Camera reflex canon 12 MP (not includes SD).'},
+                                                            {locale: :es,
+                                                             meta_tags: {keywords: 'canon_450d', description: 'Camera reflex canon'},
+                                                             name: 'Canon 450D',
+                                                             short_description: 'Camera reflex canon 12MP.',
+                                                             description: 'Camera reflex canon 12 MP (not includes SD).'}],
 
                           :barcode => '123456789',
                           :enabled => true,
@@ -31,8 +39,6 @@ namespace :db do
                           :retail_price => 423.5,
                           :tax => tax_iva,
 
-                          :meta_keywords => 'canon_450d',
-                          :meta_description => 'Camera reflex canon',
                           :slug => 'canon_450d',
                           :stock => 100,
                           :control_stock => true,
@@ -42,8 +48,16 @@ namespace :db do
 
     camera_image = File.new "#{Rails.root}/app/assets/images/products/nikon_d5500.png"
     product_attributes = {:reference_code => 'ref2',
-                          product_translations_attributes: [{:locale => :en, name: 'Nikon D5500', short_description: 'Camera reflex Nikon 24MP.', description: 'Camera reflex Nikon 24 MP (not includes SD).'},
-                                                            {:locale => :es, name: 'Nikon D5500', short_description: 'Camera reflex Nikon 24MP.', description: 'Camera reflex Nikon 24 MP (not includes SD).'}],
+                          product_translations_attributes: [{locale: :en,
+                                                             meta_tags: {keywords: 'nikon_D5500-24mm', description: 'Camera reflex nikon'},
+                                                             name: 'Nikon D5500',
+                                                             short_description: 'Camera reflex Nikon 24MP.',
+                                                             description: 'Camera reflex Nikon 24 MP (not includes SD).'},
+                                                            {locale: :es,
+                                                             meta_tags: {keywords: 'nikon_D5500-24mm', description: 'Camera reflex nikon'},
+                                                             name: 'Nikon D5500',
+                                                             short_description: 'Camera reflex Nikon 24MP.',
+                                                             description: 'Camera reflex Nikon 24 MP (not includes SD).'}],
 
                           :barcode => '1234567890',
                           :enabled => true,
@@ -53,8 +67,6 @@ namespace :db do
                           :retail_price => 423.5,
                           :tax => tax_iva,
 
-                          :meta_keywords => 'nikon_D5500',
-                          :meta_description => 'Camera reflex nikon',
                           :slug => 'nikon_d5500',
                           :stock => 100,
                           :control_stock => true,
@@ -70,8 +82,16 @@ namespace :db do
 
     zoom_image = File.new "#{Rails.root}/app/assets/images/products/DX-Zoom-10-24mm.png"
     product_attributes = {:reference_code => 'ref3',
-                          product_translations_attributes: [{:locale => :en, name: 'AF-S DX 10-24mm', short_description: 'AF-S DX Zoom-NIKKOR 10-24mm f/3.5-4.5G ED.', description: 'AF-S DX Zoom-NIKKOR 10-24mm f/3.5-4.5G ED.'},
-                                                            {:locale => :es, name: 'Nikon D5500', short_description: 'AF-S DX Zoom-NIKKOR 10-24mm f/3.5-4.5G ED.', description: 'AF-S DX Zoom-NIKKOR 10-24mm f/3.5-4.5G ED.'}],
+                          product_translations_attributes: [{locale: :en,
+                                                             meta_tags: {keywords: 'dx_zoom_10-24mm', description: 'Zoom reflex nikon'},
+                                                             name: 'AF-S DX 10-24mm',
+                                                             short_description: 'AF-S DX Zoom-NIKKOR 10-24mm f/3.5-4.5G ED.',
+                                                             description: 'AF-S DX Zoom-NIKKOR 10-24mm f/3.5-4.5G ED.'},
+                                                            {locale: :es,
+                                                             meta_tags: {keywords: 'dx_zoom_10-24mm', description: 'Zoom reflex nikon'},
+                                                             name: 'Nikon D5500',
+                                                             short_description: 'AF-S DX Zoom-NIKKOR 10-24mm f/3.5-4.5G ED.',
+                                                             description: 'AF-S DX Zoom-NIKKOR 10-24mm f/3.5-4.5G ED.'}],
 
                           :barcode => '1234567891',
                           :enabled => true,
@@ -81,8 +101,6 @@ namespace :db do
                           :retail_price => 423.5,
                           :tax => tax_iva,
 
-                          :meta_keywords => 'dx_zoom_10-24mm',
-                          :meta_description => 'Zoom reflex nikon',
                           :slug => 'zoom-nikkor-10-24mm',
                           :stock => 100,
                           :control_stock => true,
@@ -99,10 +117,12 @@ namespace :db do
 
     camera_image = File.new "#{Rails.root}/app/assets/images/products/Huawei-Ascend-G630.png"
     product_attributes = {:reference_code => 'ref4',
-                          product_translations_attributes: [{:locale => :en,
+                          product_translations_attributes: [{locale: :en,
+                                                             meta_tags: {keywords: 'huawei', description: 'huawei smartphone'},
                                                              name: 'Huawei Ascend G630 white 5" HD & 8MP', short_description: 'AF-S DX Zoom-NIKKOR 10-24mm f/3.5-4.5G ED.',
                                                              description: 'AF-S DX Zoom-NIKKOR 10-24mm f/3.5-4.5G ED.'},
-                                                            {:locale => :es,
+                                                            {locale: :es,
+                                                             meta_tags: {keywords: 'huawei', description: 'huawei teléfono'},
                                                              name: 'Huawei Ascend G630 blanco 5" HD & 8MP',
                                                              short_description: 'Sé el más de la clase (aunque ya ni vayas) y hazte ya con el móvil Huawei Ascend G630, que te dará todo lo que buscas en un smartphone, pero con el precio que aún no encontrabas...',
                                                              description: '<p>Sé el más de la clase (aunque ya ni vayas) y hazte ya con el móvil Huawei Ascend G630, que te dará todo lo que buscas en un smartphone, pero con el precio que aún no encontrabas.</p>
@@ -120,8 +140,6 @@ namespace :db do
                           :retail_price => 121.0,
                           :tax => tax_iva,
 
-                          :meta_keywords => 'huawei',
-                          :meta_description => 'huawei smartphone',
                           :slug => 'huawei-ascend-g630',
                           :stock => 100,
                           :control_stock => true,

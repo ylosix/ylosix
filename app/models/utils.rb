@@ -80,13 +80,17 @@ class Utils
     array.reverse
   end
 
-  def self.array_translations(model, attributes)
+  def self.array_translations(model, attributes, defaults = {})
     translations = []
 
     Language.in_backoffice.each do |lang|
       attributes[:locale] = lang.locale
       ct = model.find_by(attributes)
       ct = model.new(attributes) if ct.nil?
+
+      defaults.each do |k, v|
+        ct[k] = v if ct[k].nil? || ct[k].empty?
+      end
 
       translations << ct
     end

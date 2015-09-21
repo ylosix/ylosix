@@ -14,8 +14,6 @@
 #  image_file_name      :string
 #  image_file_size      :integer
 #  image_updated_at     :datetime
-#  meta_description     :string
-#  meta_keywords        :string
 #  name                 :string
 #  publication_date     :datetime         default(Thu, 01 Jan 2015 00:00:00 UTC +00:00), not null
 #  reference_code       :string
@@ -55,8 +53,6 @@ camera:
   retail_price: 423.5
   tax: iva_es
 
-  meta_keywords: canon_450d
-  meta_description: Camera reflex canon
   stock: 100
   control_stock: true
 
@@ -73,7 +69,5 @@ lens_canon:
   retail_price: 120
   tax: iva_es
 
-  meta_keywords: lenses_canon_
-  meta_description: Lens canon
   stock: 50
   control_stock: true

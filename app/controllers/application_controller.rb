@@ -94,6 +94,7 @@ class ApplicationController < ActionController::Base
 
     @variables ||= {}
     @variables['commerce'] = @commerce.to_liquid
+    @variables['meta_tags'] = @commerce.meta_tags
   end
 
   def retrieve_http_server_name

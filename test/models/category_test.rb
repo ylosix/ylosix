@@ -5,8 +5,6 @@
 #  created_at       :datetime         not null
 #  enabled          :boolean          default(FALSE)
 #  id               :integer          not null, primary key
-#  meta_description :string
-#  meta_keywords    :string
 #  name             :string
 #  parent_id        :integer
 #  priority         :integer          default(1), not null
@@ -17,8 +15,7 @@
 #
 # Indexes
 #
-#  index_categories_on_parent_id       (parent_id)
-#  index_categories_on_reference_code  (reference_code)
+#  index_categories_on_parent_id  (parent_id)
 #
 
 require 'test_helper'

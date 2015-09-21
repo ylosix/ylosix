@@ -15,7 +15,15 @@ ActiveAdmin.register Product do
     Feature.all.each do |feature|
       pta << feature.id.to_s.to_sym
     end
-    permitted << { product_translations_attributes: pta }
+
+    if !params[:product].blank? && !params[:product][:product_translations_attributes].blank?
+      unless params[:product][:product_translations_attributes]['0'][:meta_tags].blank?
+        meta_tags = params[:product][:product_translations_attributes]['0'][:meta_tags].keys
+        pta << {meta_tags: meta_tags}
+      end
+    end
+
+    permitted << {product_translations_attributes: pta}
 
     permitted
   end
@@ -66,9 +74,6 @@ ActiveAdmin.register Product do
         end
       end
 
-      row :meta_keywords
-      row :meta_description
-
       row :width
       row :height
       row :depth
@@ -88,7 +93,10 @@ ActiveAdmin.register Product do
   filter :enabled
 
   form do |f|
-    translations = Utils.array_translations(ProductTranslation, product_id: product.id)
+    translations = Utils.array_translations(ProductTranslation,
+                                            {product_id: product.id},
+                                            meta_tags: {keywords: '', description: ''})
+
     f.inputs 'Information' do
       admin_translation_text_field(translations, 'product', 'name')
       f.input :reference_code
@@ -112,8 +120,7 @@ ActiveAdmin.register Product do
     end
 
     f.inputs 'Seo' do
-      f.input :meta_keywords
-      f.input :meta_description
+      admin_translation_text_field(translations, 'product', 'meta_tags')
       admin_translation_text_field(translations, 'product', 'slug', hint: 'Chars not allowed: (Upper chars) spaces')
       f.input :show_action_name, hint: 'File name of show render'
     end

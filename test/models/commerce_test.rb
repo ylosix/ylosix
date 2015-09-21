@@ -13,8 +13,7 @@
 #  logo_file_name            :string
 #  logo_file_size            :integer
 #  logo_updated_at           :datetime
-#  meta_description          :string
-#  meta_keywords             :string
+#  meta_tags                 :hstore           default({}), not null
 #  name                      :string
 #  no_redirect_shopping_cart :boolean          default(FALSE), not null
 #  order_prefix              :string           default(""), not null

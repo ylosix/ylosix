@@ -1,9 +1,19 @@
 ActiveAdmin.register Commerce do
   menu parent: 'Preferences'
-  permit_params :default, :language_id, :no_redirect_shopping_cart, :http, :logo,
-                :order_prefix, :meta_keywords, :meta_description,
-                :ga_account_id, :name, :template_id, :address_1, :address_2,
-                :postal_code, :city, :country, :phone, :cif, :social_networks
+
+  permit_params do
+    permitted = [:default, :language_id, :no_redirect_shopping_cart, :http, :logo,
+                 :order_prefix, :ga_account_id, :name, :template_id,
+                 :address_1, :address_2, :postal_code, :city, :country, :phone,
+                 :cif, :social_networks]
+
+    if !params[:commerce].blank? && !params[:commerce][:meta_tags].blank?
+      meta_tags = params[:commerce][:meta_tags].keys
+      permitted << { meta_tags: meta_tags }
+    end
+
+    permitted
+  end
 
   index do
     selectable_column
@@ -30,8 +40,7 @@ ActiveAdmin.register Commerce do
     end
 
     f.inputs 'Seo & Google analytics' do
-      f.input :meta_keywords
-      f.input :meta_description
+      render partial: 'admin/commerces/meta_tags', locals: {commerce: commerce}
       f.input :ga_account_id
     end
 

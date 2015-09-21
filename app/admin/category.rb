@@ -1,9 +1,20 @@
 ActiveAdmin.register Category do
   menu parent: 'Catalog'
-  permit_params :parent_id, :reference_code, :enabled, :visible, :meta_keywords,
-                :meta_description, :show_action_name, :priority,
-                category_translations_attributes:
-                    [:id, :locale, :name, :short_description, :description, :slug]
+  permit_params do
+    permitted = [:parent_id, :reference_code, :enabled, :visible, :meta_keywords,
+                 :meta_description, :show_action_name, :priority]
+
+    cta = [:id, :locale, :name, :short_description, :description, :slug]
+    if !params[:category].blank? && !params[:category][:category_translations_attributes].blank?
+      unless params[:category][:category_translations_attributes]['0'][:meta_tags].blank?
+        meta_tags = params[:category][:category_translations_attributes]['0'][:meta_tags].keys
+        cta << {meta_tags: meta_tags}
+      end
+    end
+    permitted << {category_translations_attributes: cta}
+
+    permitted
+  end
 
   action_item :view, only: :show do
     link_to t('formtastic.add_another', model: t('activerecord.models.category.one')), new_admin_category_path
@@ -35,6 +46,10 @@ ActiveAdmin.register Category do
   filter :parent
 
   form do |f|
+    translations = Utils.array_translations(CategoryTranslation,
+                                            {category_id: category.id},
+                                            meta_tags: {keywords: '', description: ''})
+
     f.inputs t('formtastic.edit_form', model: t('activerecord.models.category.one')) do
       f.input :reference_code
       f.input :parent
@@ -42,16 +57,17 @@ ActiveAdmin.register Category do
       f.input :enabled
       f.input :visible
 
-      translations = Utils.array_translations(CategoryTranslation, category_id: category.id)
       admin_translation_text_field(translations, 'category', 'name')
-      admin_translation_text_field(translations, 'category', 'slug', hint: 'Chars not allowed: (Upper chars) spaces')
       admin_translation_text_field(translations, 'category', 'short_description', component: ActiveAdminHelper::CKEDITOR)
       admin_translation_text_field(translations, 'category', 'description', component: ActiveAdminHelper::CKEDITOR)
 
-      f.input :meta_keywords
-      f.input :meta_description
-      f.input :show_action_name, hint: 'File name of show render'
       f.input :priority, hint: '1:+ --- 10:-'
+    end
+
+    f.inputs 'Seo' do
+      admin_translation_text_field(translations, 'category', 'meta_tags')
+      admin_translation_text_field(translations, 'category', 'slug', hint: 'Chars not allowed: (Upper chars) spaces')
+      f.input :show_action_name, hint: 'File name of show render'
     end
 
     f.actions

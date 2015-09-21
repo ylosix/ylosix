@@ -13,8 +13,7 @@
 #  logo_file_name            :string
 #  logo_file_size            :integer
 #  logo_updated_at           :datetime
-#  meta_description          :string
-#  meta_keywords             :string
+#  meta_tags                 :hstore           default({}), not null
 #  name                      :string
 #  no_redirect_shopping_cart :boolean          default(FALSE), not null
 #  order_prefix              :string           default(""), not null
@@ -66,8 +65,6 @@ class Commerce < ActiveRecord::Base
     {
         'http' => http,
         'image_src' => image_src,
-        'meta_description' => meta_description,
-        'meta_keywords' => meta_keywords,
         'name' => name,
         'billing_address' => billing_address,
         'root_href' => Rails.application.routes.url_helpers.root_path,
