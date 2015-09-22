@@ -18,7 +18,14 @@ class CategoriesController < Frontend::CommonController
   def get_template_variables(template)
     super
 
-    @variables['category'] = @category.to_liquid unless @category.nil?
+    unless @category.nil?
+      @variables['category'] = @category.to_liquid unless @category.nil?
+
+      # Tags by category, removes general tags.
+      @variables['tags_group'] = TagsGroup.general_groups(@category.id)
+      add_show_action_name(@category)
+    end
+
     @variables['products'] = []
     if params[:slug_tags].blank?
       @variables['products'] = array_to_liquid(Product.in_frontend(@category)) unless @category.nil?
@@ -66,13 +73,7 @@ class CategoriesController < Frontend::CommonController
 
       if @category.nil?
         attributes = {enabled: true, category_translations: {slug: params[:category_id]}}
-        @product = Category.with_translations.find_by(attributes)
-      end
-
-      unless @category.nil?
-        @variables ||= {}
-        @variables['tags_group'] = TagsGroup.general_groups(@category.id)
-        add_show_action_name(@category)
+        @category = Category.with_translations.find_by(attributes)
       end
     end
   end

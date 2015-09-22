@@ -23,7 +23,7 @@ module Frontend
         if ids.empty?
           category_path(@category.slug)
         else
-          tags_categories_path(@category.slug, ids)
+          category_tags_path(@category.slug, ids)
         end
       else
         if ids.empty?
@@ -34,7 +34,7 @@ module Frontend
       end
     end
 
-    def append_tags
+    def append_general_tags
       @variables['tags_group'] ||= TagsGroup.general_groups
 
       tags, ids, _slugs = set_tags
@@ -112,10 +112,10 @@ module Frontend
       append_message_variables
       append_language_variables
 
-      @variables['categories'] = array_to_liquid(Category.root_categories)
+      @variables['categories'] = array_to_liquid(Category.root_categories) # TODO This only for test.
       @variables['products'] ||= array_to_liquid(Product.all.limit(10)) # TODO This only for test.
 
-      append_tags
+      append_general_tags
 
       unless template.nil?
         @variables['template_public_path'] = template.path.gsub('/public', '')
