@@ -45,6 +45,18 @@ class Category < ActiveRecord::Base
 
   before_save :set_defaults
 
+  def self.parent_order(parent_order = 'parent_asc')
+    array_ordered = Category.all.to_a.sort do |x, y|
+      if parent_order == 'parent_desc'
+        Utils.get_parents_array(y).map(&:name).join('_') <=> Utils.get_parents_array(x).map(&:name).join('_')
+      elsif parent_order == 'parent_asc'
+        Utils.get_parents_array(x).map(&:name).join('_') <=> Utils.get_parents_array(y).map(&:name).join('_')
+      end
+    end
+
+    array_ordered
+  end
+
   def children
     children = Category.in_frontend.where(parent_id: id)
     children.to_a.sort! do |a, b|

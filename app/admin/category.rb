@@ -76,19 +76,14 @@ ActiveAdmin.register Category do
   controller do
     def render(*args)
       unless @parent_order.blank?
-        array_ordered = @categories.to_a.sort do |x, y|
-          if @parent_order == 'parent_desc'
-            Utils.get_parents_array(y).map(&:name).join('_') <=> Utils.get_parents_array(x).map(&:name).join('_')
-          elsif @parent_order == 'parent_asc'
-            Utils.get_parents_array(x).map(&:name).join('_') <=> Utils.get_parents_array(y).map(&:name).join('_')
-          end
-        end
-
         params[:order] = @parent_order
+        array_ordered = Category.parent_order(@parent_order)
 
         ids = array_ordered.map(&:id)
         order_by = ids.map { |i| "id=#{i} DESC" }.join(',')
-        @categories = Category.where(id: ids).order(order_by).page(0).per(@categories.size)
+
+        per_page = active_admin_config.per_page || 30
+        @categories = Category.where(id: ids).order(order_by).page(params[:page]).per(per_page)
       end
 
       super
