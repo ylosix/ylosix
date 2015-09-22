@@ -63,7 +63,7 @@ es:
     attributes:
       category:
         reference_code: Código de referencia
-        parent: Padre
+        parent: Categoría padre
         enabled: Habilitado
         visible: Visible
         slug: Enlace

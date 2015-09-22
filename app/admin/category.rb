@@ -44,6 +44,12 @@ ActiveAdmin.register Category do
   filter :translations_name, as: :string, label: proc { I18n.t 'activerecord.attributes.category.name' }
   filter :visible
   filter :parent
+  # TODO, locale problem need to fix
+  # filter :parent_id,
+  #        label: proc { I18n.t 'activerecord.attributes.category.parent' },
+  #        as: :select,
+  #        include_blank: true,
+  #        collection: category_collection_select
 
   form do |f|
     translations = Utils.array_translations(CategoryTranslation,
@@ -52,7 +58,11 @@ ActiveAdmin.register Category do
 
     f.inputs t('formtastic.edit_form', model: t('activerecord.models.category.one')) do
       f.input :reference_code
-      f.input :parent
+      f.input :parent_id,
+              label: t('activerecord.attributes.category.parent'),
+              as: :select,
+              include_blank: true,
+              collection: category_collection_select
 
       f.input :enabled
       f.input :visible

@@ -3,6 +3,18 @@ module ActiveAdminHelper
   TEXT_FIELD = 2
   CKEDITOR = 3
 
+  def category_collection_select
+    array = Category.parent_order.map do |c|
+      array = Utils.get_parents_array(c)
+      array << c
+      c_name = array.map(&:name).join(' || ')
+
+      [c_name, c.id]
+    end
+
+    array
+  end
+
   def admin_translation_text_field(translations, model_name, field, options = {})
     if options[:component] == CKEDITOR && !session[:locale].nil?
       options[:ckeditor] = {language: session[:locale]}
