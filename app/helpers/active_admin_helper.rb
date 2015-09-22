@@ -19,7 +19,7 @@ module ActiveAdminHelper
 
           render_input_text_field(label_text, label_for, input_prefix_name, input_suffix_name, v, translation, options)
         end
-      elsif translation[field].class == String
+      else
         label_text = t("activerecord.attributes.#{model_name}.#{field}")
         label_for = "#{model_name}_#{model_name}_translations_attributes_#{index}_#{field}"
 

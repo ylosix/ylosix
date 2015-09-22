@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150918100129) do
+ActiveRecord::Schema.define(version: 20150922080633) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -130,15 +130,16 @@ ActiveRecord::Schema.define(version: 20150918100129) do
     t.string   "locale",                         null: false
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
-    t.string   "name"
-    t.text     "description"
-    t.text     "short_description"
-    t.string   "slug"
+    t.string   "name",              default: "", null: false
+    t.text     "description",       default: "", null: false
+    t.text     "short_description", default: "", null: false
+    t.string   "slug",              default: "", null: false
     t.hstore   "meta_tags",         default: {}, null: false
   end
 
   add_index "category_translations", ["category_id"], name: "index_category_translations_on_category_id", using: :btree
   add_index "category_translations", ["locale"], name: "index_category_translations_on_locale", using: :btree
+  add_index "category_translations", ["slug"], name: "index_category_translations_on_slug", using: :btree
 
   create_table "ckeditor_assets", force: :cascade do |t|
     t.string   "data_file_name",               null: false
