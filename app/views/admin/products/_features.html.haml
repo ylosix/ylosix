@@ -1,10 +1,12 @@
 %table
   %tr
-    %th Feature
-    %th Value
+    %th
+      = t('activerecord.attributes.feature.name')
+    %th
+      = t('activerecord.attributes.feature.value')
 
-  - translations.each_with_index do |pt, i|
-    - features.each do |feature|
+  - features.each do |feature|
+    - translations.each_with_index do |pt, i|
       %tr
         %td
           %label{for: "product_product_translations_attributes_#{i}_#{feature.id}"}
@@ -19,7 +21,10 @@
               = text_field_tag "product[product_translations_attributes][#{i}][id]", pt.id, {type: 'hidden'}
 
             = '&nbsp;'.html_safe
-            = feature.name
+            - if feature.feature_translations.find_by(locale: language.locale).blank?
+              = feature.name
+            - else
+              = feature.feature_translations.find_by(locale: language.locale).name
 
         %td
           - value = nil

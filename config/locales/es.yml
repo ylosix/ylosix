@@ -78,6 +78,7 @@ es:
 
       feature:
         name: Nombre
+        value: Valor
         priority: Prioridad
 
         created_at: Creado en
