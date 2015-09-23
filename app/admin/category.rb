@@ -41,15 +41,16 @@ ActiveAdmin.register Category do
     actions
   end
 
+  filter :parent_id,
+         label: proc { I18n.t 'activerecord.attributes.category.parent' },
+         as: :select,
+         include_blank: true,
+         collection: proc { category_collection_select }
   filter :translations_name, as: :string, label: proc { I18n.t 'activerecord.attributes.category.name' }
+  filter :enabled
   filter :visible
-  filter :parent
-  # TODO, locale problem need to fix
-  # filter :parent_id,
-  #        label: proc { I18n.t 'activerecord.attributes.category.parent' },
-  #        as: :select,
-  #        include_blank: true,
-  #        collection: category_collection_select
+  filter :translations_slug, as: :string, label: proc { I18n.t 'activerecord.attributes.category.slug' }
+  filter :priority
 
   form do |f|
     translations = Utils.array_translations(CategoryTranslation,

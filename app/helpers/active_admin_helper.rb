@@ -7,7 +7,7 @@ module ActiveAdminHelper
     array = Category.parent_order.map do |c|
       array = Utils.get_parents_array(c)
       array << c
-      c_name = array.map(&:name).join(' || ')
+      c_name = array.map(&:name).join(' | ')
 
       [c_name, c.id]
     end
