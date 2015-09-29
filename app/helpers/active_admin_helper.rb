@@ -86,11 +86,11 @@ module ActiveAdminHelper
       value
     end
 
-    output += content_tag :text_area, id: "area_#{input_id}", name: input_name, class: 'hide' do
+    output += content_tag :textarea, id: "area_#{input_id}", name: input_name, class: 'hide' do
     end
 
     output += javascript_tag do
-      "    var e_#{input_id} = ace.edit('#{input_id}');
+      "        var e_#{input_id} = ace.edit('#{input_id}');
                var ta_#{input_id} = $('#area_#{input_id}');
                ta_#{input_id}.val(e_#{input_id}.getSession().getValue());
 
