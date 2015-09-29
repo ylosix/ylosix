@@ -16,7 +16,12 @@ class Utils
       object ||= model.find_by(id: match_data[label])
 
       unless object.nil?
-        new_content = content.gsub(match_data.to_s, object.content)
+        if object.content.blank?
+          new_content = 'Error => Empty content!'
+        else
+          new_content = content.gsub(match_data.to_s, object.content)
+        end
+
         content = Utils.replace_design_form(model, label, new_content)
       end
     end
