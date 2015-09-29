@@ -30,11 +30,11 @@
           %h4
             Features
 
-          - @product.features.each do |k,v|
+          - @product.array_features.each do |row|
             %div.col-md-6
-              = k
+              = row['key']
             %div.col-md-6
-              = v
+              = row['value']
 
     %div{class: 'voffset3'}
       %div.ratings

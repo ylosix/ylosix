@@ -2,6 +2,7 @@ module ActiveAdminHelper
   TEXT_AREA = 1
   TEXT_FIELD = 2
   CKEDITOR = 3
+  ACE = 4
 
   def category_collection_select
     array = Category.parent_order.map do |c|
@@ -64,12 +65,42 @@ module ActiveAdminHelper
         output = text_area_tag(input_name, value, options.except(:hint))
       when CKEDITOR
         output = cktext_area_tag(input_name, value, options.except(:hint))
+      when ACE
+        output = ace_area_tag(input_name, value, options.except(:hint))
       else
         output = text_field_tag(input_name, value, options.except(:hint))
     end
 
     unless options[:hint].blank?
       output += content_tag :p, options[:hint], class: 'inline-hints'
+    end
+
+    output
+  end
+
+  def ace_area_tag(input_name, value, _options)
+    input_id = input_name.to_s.delete(']').tr('^-a-zA-Z0-9:.', '_')
+    output = javascript_include_tag '/plugins/ace/ace.js'
+
+    output += content_tag :div, id: input_id, class: 'editor_html' do
+      value
+    end
+
+    output += content_tag :text_area, id: "area_#{input_id}", name: input_name, class: 'hide' do
+    end
+
+    output += javascript_tag do
+      "    var e_#{input_id} = ace.edit('#{input_id}');
+               var ta_#{input_id} = $('#area_#{input_id}');
+               ta_#{input_id}.val(e_#{input_id}.getSession().getValue());
+
+               e_#{input_id}.setTheme('ace/theme/crimson_editor');
+               e_#{input_id}.getSession().setMode('ace/mode/html');
+
+               e_#{input_id}.getSession().on('change', function () {
+                  ta_#{input_id}.val(e_#{input_id}.getSession().getValue());
+               });
+          ".html_safe
     end
 
     output

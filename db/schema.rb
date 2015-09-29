@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150922080633) do
+ActiveRecord::Schema.define(version: 20150928101646) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -434,6 +434,23 @@ ActiveRecord::Schema.define(version: 20150922080633) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.string   "color"
+  end
+
+  create_table "snippet_translations", force: :cascade do |t|
+    t.integer  "snippet_id", null: false
+    t.string   "locale",     null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text     "content"
+  end
+
+  add_index "snippet_translations", ["locale"], name: "index_snippet_translations_on_locale", using: :btree
+  add_index "snippet_translations", ["snippet_id"], name: "index_snippet_translations_on_snippet_id", using: :btree
+
+  create_table "snippets", force: :cascade do |t|
+    t.string   "tag"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "tag_translations", force: :cascade do |t|

@@ -1,6 +1,4 @@
 class CategoriesController < Frontend::CommonController
-  include ShowActionName
-
   layout 'searcher_and_side_bar'
   before_action :set_category, except: [:index]
 
@@ -76,5 +74,8 @@ class CategoriesController < Frontend::CommonController
         @category = Category.with_translations.find_by(attributes)
       end
     end
+
+    fail ActiveRecord::RecordNotFound if @category.blank?
+    fail ActiveRecord::RecordNotEnabled if @category && !@category.enabled
   end
 end

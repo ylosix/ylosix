@@ -71,8 +71,8 @@ class ProductTest < ActiveSupport::TestCase
     end
   end
 
-  test 'replace_keys_features' do
+  test 'array_features' do
     product = products(:camera)
-    assert product.replace_keys_features.class == Hash
+    assert product.array_features.class == Array
   end
 end

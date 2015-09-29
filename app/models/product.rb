@@ -138,7 +138,7 @@ class Product < ActiveRecord::Base
         'description' => s_description,
         'retail_price' => retail_price,
         'href' => href,
-        'features' => replace_keys_features,
+        'features' => array_features,
         'add_cart_href' => helpers.product_add_to_shopping_cart_path(self),
         'delete_cart_href' => helpers.product_delete_from_shopping_cart_path(self)
     }
@@ -146,17 +146,17 @@ class Product < ActiveRecord::Base
     append_images(liquid)
   end
 
-  def replace_keys_features
-    hash_features = {}
+  def array_features
+    array_features = []
 
     unless features.blank?
       features.each do |k, v|
         f = Feature.find_by(id: k)
-        hash_features[f.name] = v unless f.nil?
+        array_features << {'key' => f.name, 'value' => v} unless f.blank?
       end
     end
 
-    self.features = hash_features
+    array_features
   end
 
   private

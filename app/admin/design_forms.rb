@@ -1,5 +1,5 @@
 ActiveAdmin.register DesignForm do
-  menu parent: 'Preferences'
+  menu parent: 'Design'
 
   permit_params :tag,
                 design_form_translations_attributes:

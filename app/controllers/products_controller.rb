@@ -1,5 +1,4 @@
 class ProductsController < Frontend::CommonController
-  include ShowActionName
   layout 'searcher_and_side_bar'
   before_action :set_product
 
@@ -70,10 +69,11 @@ class ProductsController < Frontend::CommonController
 
       unless @product.nil?
         @category = @product.categories.first if @product.categories.any?
-        @product.replace_keys_features
-
         add_show_action_name(@product)
       end
+
+      fail ActiveRecord::RecordNotFound if @product.blank?
+      fail ActiveRecord::RecordNotEnabled if @product && !@product.enabled
     end
   end
 end

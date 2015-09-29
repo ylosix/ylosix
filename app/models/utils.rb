@@ -5,19 +5,19 @@ class Utils
     I18n.t('errors.messages.not_saved', count: messages.count, resource: 'the form')
   end
 
-  def self.replace_design_form(content)
+  def self.replace_design_form(model, label, content)
     # {{ include design_forms:contact_form }}
     content = content.gsub('&nbsp;', ' ')
 
-    regex_include_design_form = /{{\s*include design_forms\s*:\s*(?<design_tag>[^}\s]+)\s}}/
+    regex_include_design_form = /{{\s*include #{label}\s*:\s*(?<#{label}>[^}\s]+)\s}}/
     match_data = regex_include_design_form.match(content)
     if match_data
-      design_form = DesignForm.find_by(tag: match_data[:design_tag])
-      design_form ||= DesignForm.find_by(id: match_data[:design_tag])
+      object = model.find_by(tag: match_data[label])
+      object ||= model.find_by(id: match_data[label])
 
-      unless design_form.nil?
-        new_content = content.gsub(match_data.to_s, design_form.content)
-        content = Utils.replace_design_form(new_content)
+      unless object.nil?
+        new_content = content.gsub(match_data.to_s, object.content)
+        content = Utils.replace_design_form(model, label, new_content)
       end
     end
 
@@ -27,7 +27,8 @@ class Utils
   def self.replace_regex_include(variables, template, content)
     # {{ include snippet_home.html }}
 
-    content = Utils.replace_design_form(content)
+    content = Utils.replace_design_form(DesignForm, 'design_forms', content)
+    content = Utils.replace_design_form(Snippet, 'snippets', content)
     regex_include_snippet = /{{\s*include\s+(?<file>[^}\s]+)\s*}}/
 
     match_data = regex_include_snippet.match(content)
