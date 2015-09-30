@@ -8,7 +8,22 @@ class ProductsController < Frontend::CommonController
   def get_template_variables(template)
     super
 
-    @variables['product'] = @product
+    @variables['product'] = @product.to_liquid unless @product.nil?
+
+    unless @category.nil?
+      # Tags by category, removes general tags.
+      @variables['tags_group'] = TagsGroup.general_groups(@category.id)
+      add_show_action_name(@category)
+
+      array_categories = Utils.get_parents_array(@category)
+      array_categories.delete_at(0) if array_categories.any? # delete root.
+      array_categories << @category unless @category.nil? # append current category.
+      array_categories << @product unless @product.nil? # append current product.
+
+      array_categories.each do |category|
+        add_breadcrumb(Breadcrumb.new(url: category.href, name: category.name))
+      end
+    end
   end
 
   def add_to_shopping_cart
@@ -57,13 +72,16 @@ class ProductsController < Frontend::CommonController
     #   @category = Category.find_by(slug: params[:category_slug])
     # end
 
-    unless params[:product_id].blank?
-      attributes = {enabled: true, id: params[:product_id]}
+    product_id = params[:slug]
+    product_id ||= params[:product_id]
+
+    unless product_id.blank?
+      attributes = {enabled: true, id: product_id}
 
       @product = Product.find_by(attributes)
 
       if @product.nil?
-        attributes = {enabled: true, product_translations: {slug: params[:product_id]}}
+        attributes = {enabled: true, product_translations: {slug: product_id}}
         @product = Product.with_translations.find_by(attributes)
       end
 

@@ -28,7 +28,7 @@ class ProductsPicture < ActiveRecord::Base
   validates_attachment_size :image, less_than: 2.megabytes
   validates_attachment_content_type :image, content_type: %r{\Aimage/.*\Z}
 
-  def retrieve_main_image(type = :original)
+  def retrieve_image(type = :original)
     image_src = 'http://placehold.it/650x500'
 
     # TODO add fixed sizes as small, large, original, etc.
@@ -48,7 +48,7 @@ class ProductsPicture < ActiveRecord::Base
   def append_images
     hash = {}
     Product::IMAGE_SIZES.each do |size, _k|
-      hash["image_#{size}_src"] = retrieve_main_image(size)
+      hash["image_#{size}_src"] = retrieve_image(size)
     end
 
     hash

@@ -103,7 +103,7 @@ class Product < ActiveRecord::Base
     product
   end
 
-  def retrieve_main_image(type = :original)
+  def retrieve_image(type = :original)
     image_src = 'http://placehold.it/650x500'
 
     # TODO add fixed sizes as small, large, original, etc.
@@ -163,7 +163,7 @@ class Product < ActiveRecord::Base
 
   def append_images(hash)
     IMAGE_SIZES.each do |size, _k|
-      hash["image_#{size}_src"] = retrieve_main_image(size)
+      hash["image_#{size}_src"] = retrieve_image(size)
     end
 
     if products_pictures.any?

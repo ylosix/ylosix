@@ -44,7 +44,7 @@ ActiveAdmin.register Product do
     selectable_column
     id_column
     column :reference_code
-    column (:image) { |product| image_tag(product.retrieve_main_image(:thumbnail)) }
+    column (:image) { |product| image_tag(product.retrieve_image(:thumbnail)) }
     column :name
     column :enabled
     column :created_at

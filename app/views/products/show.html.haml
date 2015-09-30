@@ -7,9 +7,9 @@
       Sorry cannot find the product.
 - else
   %div.thumbnail
-    = image_tag(@product.retrieve_main_image, :class => 'img-responsive')
+    = image_tag(@product['image_medium_src'], :class => 'img-responsive')
 
-    - pictures = @product.products_pictures.map { |pic| pic.image(:original) unless pic.image.nil? }
+    - pictures = @product['products_pictures'].map { |pic| pic['image_medium_src'] }
     - if pictures.any?
       %h2 Gallery
       = render partial: 'layouts/components/carousel', locals: { pictures: pictures }
@@ -17,20 +17,20 @@
     %div{class: 'voffset3'}
       %div.caption-full
         %h4.pull-right
-          = "#{@product.retail_price} €"
+          = "#{@product['retail_price']} €"
         %h4
           %a
-            = @product.name
+            = @product['name']
 
-        - unless @product.description.blank?
+        - unless @product['description'].blank?
           %p
-            = @product.description.html_safe
+            = @product['description'].html_safe
 
-        - unless @product.features.nil?
+        - unless @product['features'].nil?
           %h4
             Features
 
-          - @product.array_features.each do |row|
+          - @product['features'].each do |row|
             %div.col-md-6
               = row['key']
             %div.col-md-6
@@ -48,4 +48,4 @@
           4.0 stars
 
   %div.row
-    = link_to 'Add to cart', product_add_to_shopping_cart_path(@product), :class => 'btn btn-success btn-block'
+    = link_to 'Add to cart', @product['add_cart_href'], :class => 'btn btn-success btn-block'

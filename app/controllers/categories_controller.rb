@@ -65,12 +65,15 @@ class CategoriesController < Frontend::CommonController
   def set_category
     @category = nil
 
-    unless params[:category_id].blank?
-      attributes = {enabled: true, id: params[:category_id]}
+    category_id = params[:slug]
+    category_id ||= params[:category_id]
+
+    unless category_id.blank?
+      attributes = {enabled: true, id: category_id}
       @category = Category.find_by(attributes)
 
       if @category.nil?
-        attributes = {enabled: true, category_translations: {slug: params[:category_id]}}
+        attributes = {enabled: true, category_translations: {slug: category_id}}
         @category = Category.with_translations.find_by(attributes)
       end
     end

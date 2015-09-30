@@ -27,7 +27,7 @@ class ProductsPictureTest < ActiveSupport::TestCase
   test 'retrieve pictures' do
     pic = products_pictures(:one)
     Product::IMAGE_SIZES.each do |k, _v|
-      assert !pic.retrieve_main_image(k.to_sym).blank?
+      assert !pic.retrieve_image(k.to_sym).blank?
     end
   end
 
