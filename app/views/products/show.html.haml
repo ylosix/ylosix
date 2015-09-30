@@ -9,8 +9,8 @@
   %div.thumbnail
     = image_tag(@product['image_medium_src'], :class => 'img-responsive')
 
-    - pictures = @product['products_pictures'].map { |pic| pic['image_medium_src'] }
-    - if pictures.any?
+    - if @product['products_pictures'].any?
+      - pictures = @product['products_pictures'].map { |pic| pic['image_medium_src'] }
       %h2 Gallery
       = render partial: 'layouts/components/carousel', locals: { pictures: pictures }
 

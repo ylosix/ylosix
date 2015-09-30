@@ -3,6 +3,10 @@ ActiveAdmin.register Feature do
   permit_params :name, :priority,
                 feature_translations_attributes: [:id, :locale, :name]
 
+  action_item :view, only: :show do
+    link_to t('formtastic.add_another', model: t('activerecord.models.feature.one')), new_admin_feature_path
+  end
+
   index do
     selectable_column
     id_column
