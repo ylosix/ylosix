@@ -1,7 +1,5 @@
 class ShoppingCartsController < Frontend::CommonController
-  layout 'shopping'
-
-  def get_template_variables(template)
+  def append_variables
     super
   end
 

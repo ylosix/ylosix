@@ -5,6 +5,8 @@ module Frontend
     before_action :set_query_text
     before_action :initialize_breadcrumb, :set_breadcrumbs
 
+    layout :determine_layout
+
     private
 
     def set_query_text

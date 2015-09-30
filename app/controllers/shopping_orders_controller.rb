@@ -1,10 +1,8 @@
 class ShoppingOrdersController < Frontend::CommonController
-  layout 'shopping'
-
   before_action :authenticate_customer!
   before_action :check_addresses, only: [:finalize, :shipping_method]
 
-  def get_template_variables(template)
+  def append_variables
     super
 
     @variables['finalize_shopping_order_href'] = finalize_customers_shopping_orders_path

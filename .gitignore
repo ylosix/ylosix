@@ -8,6 +8,7 @@ capybara-*.html
 /public/system
 /public/assets
 /public/templates/14*
+/public/templates/ylos-web*
 /public/ckeditor_assets
 /spec/tmp
 **.orig

@@ -1,11 +1,10 @@
 class ProductsController < Frontend::CommonController
-  layout 'searcher_and_side_bar'
   before_action :set_product
 
   def show
   end
 
-  def get_template_variables(template)
+  def append_variables
     super
 
     @variables['product'] = @product.to_liquid unless @product.nil?

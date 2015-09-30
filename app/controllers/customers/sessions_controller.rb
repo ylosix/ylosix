@@ -3,6 +3,8 @@ module Customers
     include Frontend::CommonModule
 
     before_action :initialize_breadcrumb, :set_breadcrumbs
+    layout :determine_layout
+
     # before_filter :configure_sign_in_params, only: [:create]
 
     # GET /resource/sign_in

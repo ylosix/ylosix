@@ -1,7 +1,7 @@
 class CustomersController < Frontend::CommonController
   before_action :authenticate_customer!
 
-  def get_template_variables(template)
+  def append_variables
     super
 
     @variables['shopping_orders'] = []

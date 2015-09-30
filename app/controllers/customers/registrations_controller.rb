@@ -7,6 +7,8 @@ module Customers
 
     before_action :initialize_breadcrumb, :set_breadcrumbs
 
+    layout :determine_layout
+
     # GET /resource/sign_up
     # def new
     #   super

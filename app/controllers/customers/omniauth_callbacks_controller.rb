@@ -2,6 +2,8 @@ module Customers
   class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     include Frontend::CommonModule
 
+    layout :determine_layout
+
     # You should configure your model like this:
     # devise :omniauthable, omniauth_providers: [:twitter]
 

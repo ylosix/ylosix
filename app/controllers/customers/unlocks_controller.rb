@@ -1,6 +1,7 @@
 module Customers
   class UnlocksController < Devise::UnlocksController
     include Frontend::CommonModule
+    layout :determine_layout
 
     # GET /resource/unlock/new
     # def new

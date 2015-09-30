@@ -106,7 +106,7 @@ module Frontend
       @variables['action_search_url'] = helper.searches_path
     end
 
-    def get_template_variables(template)
+    def append_variables
       @variables ||= {}
 
       append_message_variables
@@ -117,36 +117,34 @@ module Frontend
 
       append_general_tags
 
-      unless template.nil?
-        @variables['template_public_path'] = template.path.gsub('/public', '')
-      end
-
       helper = Rails.application.routes.url_helpers
       append_link_variables(helper)
       append_customer_variables(helper)
     end
 
     def fill_descriptions_with_variables(hash, template)
-      hash.each do |k, v|
-        if v.class.name == 'Array'
-          v.each do |elem|
-            fill_descriptions_with_variables(elem, template)
+      if hash.class == Hash
+        hash.each do |k, v|
+          if v.class.name == 'Array'
+            v.each do |elem|
+              fill_descriptions_with_variables(elem, template)
+            end
           end
-        end
 
-        fill_descriptions_with_variables(v, template) if v.class.name == 'Hash'
+          fill_descriptions_with_variables(v, template) if v.class.name == 'Hash'
 
-        if k.include?('description') && !v.blank?
-          v = Utils.replace_regex_include(@variables, template, v)
+          if k.include?('description') && !v.blank?
+            v = Utils.replace_regex_include(@variables, template, v)
 
-          # Parses and compiles the description field
-          template_liquid = Liquid::Template.parse(v)
-          hash[k] = template_liquid.render(@variables)
+            # Parses and compiles the description field
+            template_liquid = Liquid::Template.parse(v)
+            hash[k] = template_liquid.render(@variables)
+          end
         end
       end
     end
 
-    def render_template(template, file_html, args)
+    def render_template(template, file_html)
       body_code = template.reads_file(file_html)
       body_code = Utils.replace_regex_include(@variables, template, body_code)
       body_code = append_debug_variables(current_admin_user, @variables, body_code)
@@ -157,11 +155,6 @@ module Frontend
       @head_javascript = template.reads_file('common_js.js')
       @head_css = template.reads_file('common_css.css')
       @body_content = template_liquid.render(@variables)
-
-      hash = {}
-      hash = args[0] if args.any?
-      hash[:layout] = 'custom_template'
-      render hash
     end
 
     def retrieve_file_html(controller, action, args = [])
@@ -182,17 +175,33 @@ module Frontend
       file_html
     end
 
+    def determine_layout
+      file_html = retrieve_file_html(controller_name, action_name)
+      if !@render_template.nil? && @render_template.ok?(file_html)
+        'custom_template'
+      else
+        case self.class.name
+          when 'CategoriesController', 'HomeController', 'ProductsController', 'SearchesController'
+            'searcher_and_side_bar'
+          when 'ShoppingCartsController', 'ShoppingOrdersController'
+            'shopping'
+          else
+            'application'
+        end
+      end
+    end
+
     def render(*args)
-      get_template_variables(@render_template)
+      append_variables
       fill_descriptions_with_variables(@variables, @render_template)
 
       file_html = retrieve_file_html(controller_name, action_name, args)
-      contains_template_layout = (args.any? && args[0].is_a?(Hash) && args[0][:layout] == 'custom_template')
-      if !contains_template_layout && !@render_template.nil? && @render_template.ok?(file_html)
-        render_template(@render_template, file_html, args)
-      else
-        super
+      if !@render_template.nil? && @render_template.ok?(file_html)
+        render_template(@render_template, file_html)
       end
+
+      # TODO, no render action when have a template directly layout
+      super
     end
   end
 end

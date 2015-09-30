@@ -1,10 +1,8 @@
 class HomeController < Frontend::CommonController
-  layout 'searcher_and_side_bar'
-
   def index
   end
 
-  def get_template_variables(template)
+  def append_variables
     super
   end
 

@@ -2,7 +2,7 @@ class AddressesController < Frontend::CommonController
   before_action :authenticate_customer!
   before_action :set_customer_address, except: [:index, :new, :create]
 
-  def get_template_variables(template)
+  def append_variables
     super
 
     helper = Rails.application.routes.url_helpers

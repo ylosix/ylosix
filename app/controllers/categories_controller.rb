@@ -1,5 +1,4 @@
 class CategoriesController < Frontend::CommonController
-  layout 'searcher_and_side_bar'
   before_action :set_category, except: [:index]
 
   def index
@@ -13,7 +12,7 @@ class CategoriesController < Frontend::CommonController
     render '/searches/index'
   end
 
-  def get_template_variables(template)
+  def append_variables
     super
 
     unless @category.nil?
