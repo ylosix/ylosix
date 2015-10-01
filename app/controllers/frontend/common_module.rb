@@ -69,9 +69,9 @@ module Frontend
 
       if customer_signed_in?
         # Action form
-        @variables['customer_destroy_session_href'] = destroy_customer_session_path
-        @variables['customer_edit_registration_href'] = edit_customer_registration_path
-        @variables['customer_orders_href'] = orders_customers_path
+
+        @variables['customer_edit_registration_href'] = edit_customer_registration_path #DEPRECATED
+        @variables['customer_orders_href'] = orders_customers_path #DEPRECATED
       else
         # Action form
         @variables['action_customer_sign_in_url'] = customer_session_path

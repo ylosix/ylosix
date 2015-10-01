@@ -42,6 +42,5 @@ class CustomerTest < ActiveSupport::TestCase
     assert hash.key? 'name'
     assert hash.key? 'last_name'
     assert hash.key? 'birth_date'
-    assert hash.key? 'href'
   end
 end

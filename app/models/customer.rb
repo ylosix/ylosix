@@ -56,12 +56,17 @@ class Customer < ActiveRecord::Base
   end
 
   def to_liquid
+    helper = Rails.application.routes.url_helpers
+
     {
         'email' => email,
         'name' => name,
         'last_name' => last_name,
         'birth_date' => birth_date,
-        'href' => Rails.application.routes.url_helpers.show_customers_path
+        'show_customers_path' => helper.show_customers_path,
+        'customer_registration_path' => helper.customer_registration_path,
+        'edit_customer_registration_path' => helper.edit_customer_registration_path,
+        'destroy_customer_session_path' => helper.destroy_customer_session_path
     }
   end
 
