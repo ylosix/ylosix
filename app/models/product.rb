@@ -138,6 +138,7 @@ class Product < ActiveRecord::Base
         'description' => s_description,
         'retail_price' => retail_price,
         'href' => href,
+        'publication_date' => I18n.l(publication_date, format: :default),
         'features' => array_features,
         'add_cart_href' => helpers.product_add_to_shopping_cart_path(self),
         'delete_cart_href' => helpers.product_delete_from_shopping_cart_path(self)

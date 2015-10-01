@@ -70,8 +70,8 @@ module Frontend
       if customer_signed_in?
         # Action form
 
-        @variables['customer_edit_registration_href'] = edit_customer_registration_path #DEPRECATED
-        @variables['customer_orders_href'] = orders_customers_path #DEPRECATED
+        @variables['customer_edit_registration_href'] = edit_customer_registration_path # DEPRECATED
+        @variables['customer_orders_href'] = orders_customers_path # DEPRECATED
       else
         # Action form
         @variables['action_customer_sign_in_url'] = customer_session_path
@@ -157,7 +157,7 @@ module Frontend
       @body_content = template_liquid.render(@variables)
     end
 
-    def retrieve_file_html(controller, action, args = [])
+    def retrieve_file_html(controller, action)
       file_html = "#{controller}/#{action}.html"
 
       if action == 'show' && !@variables['show_action_name'].blank?
@@ -168,8 +168,13 @@ module Frontend
       end
 
       # Fixed route devise when fails sign up.
-      if controller == 'registrations' && args.include?(action: :new)
+      if controller == 'registrations' && action == 'create'
         file_html = "#{controller}/new.html"
+      end
+
+      # Fixed route devise when fails edit.
+      if controller == 'registrations' && action == 'update'
+        file_html = "#{controller}/edit.html"
       end
 
       file_html
@@ -195,7 +200,7 @@ module Frontend
       append_variables
       fill_descriptions_with_variables(@variables, @render_template)
 
-      file_html = retrieve_file_html(controller_name, action_name, args)
+      file_html = retrieve_file_html(controller_name, action_name)
       if !@render_template.nil? && @render_template.ok?(file_html)
         render_template(@render_template, file_html)
       end

@@ -16,7 +16,7 @@ ActiveAdmin.register Snippet do
 
   form do |f|
     f.inputs 'Action form Details' do
-      f.input :tag
+      f.input :tag, hint: '{{ include snippets:tag_name }}'
 
       translations = Utils.array_translations(SnippetTranslation, snippet_id: snippet.id)
       admin_translation_text_field(translations, 'snippet', 'content', component: ActiveAdminHelper::ACE)
