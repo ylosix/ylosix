@@ -1,6 +1,7 @@
 class ShoppingOrdersController < Frontend::CommonController
   before_action :authenticate_customer!
-  before_action :check_addresses, only: [:finalize, :shipping_method]
+  before_action :check_empty_cart, only: [:finalize, :shipping_method]
+  before_action :check_empty_addresses, only: [:finalize]
 
   def append_variables
     super
@@ -84,16 +85,20 @@ class ShoppingOrdersController < Frontend::CommonController
     add_breadcrumb(Breadcrumb.new(url: show_customers_path, name: 'Customers'))
   end
 
-  def check_addresses
+  def check_empty_cart
     sc = current_customer.shopping_cart
 
     if sc.nil?
-      redirect_to :customers_shopping_carts, alert: 'Shopping cart not set.'
+      redirect_to :show_shopping_carts, alert: 'Shopping cart not set.'
       return
     end
+  end
+
+  def check_empty_addresses
+    sc = current_customer.shopping_cart
 
     if sc.shipping_address.nil? || sc.billing_address.nil?
-      redirect_to :customers_shopping_orders,
+      redirect_to :shipping_method_customers_shopping_orders,
                   alert: 'To finalize the purchase sets before the shipping and billing address.'
     end
   end

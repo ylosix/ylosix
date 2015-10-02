@@ -35,16 +35,17 @@ Rails.application.routes.draw do
     post '/' => 'searches#index'
   end
 
+  resource :shopping_carts, only: [] do
+    get '/show' => 'shopping_carts#show'
+    post '/:product_id/update' => 'shopping_carts#update', as: :update
+  end
+
   resource :customers, only: [] do
     get '/show' => 'customers#show'
     get '/orders' => 'customers#orders'
     get '/orders/:id/invoice' => 'customers#invoice', as: :orders_invoice
 
     resources :addresses
-    resource :shopping_carts, only: [] do
-      get '/' => 'shopping_carts#show'
-      post '/:product_id/update' => 'shopping_carts#update', as: :update
-    end
 
     resource :shopping_orders, only: [] do
       get '/shipping_method' => 'shopping_orders#shipping_method'

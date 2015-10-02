@@ -33,7 +33,7 @@ ActiveAdmin.register Product do
   end
 
   action_item :view, only: :show do
-    link_to(t('formtastic.add_another', model: t('activerecord.models.product.one')), new_admin_category_path)
+    link_to(t('formtastic.add_another', model: t('activerecord.models.product.one')), new_admin_product_path)
   end
 
   action_item :view, only: [:show, :edit] do

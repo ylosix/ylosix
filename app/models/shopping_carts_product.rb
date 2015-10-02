@@ -38,7 +38,11 @@ class ShoppingCartsProduct < ActiveRecord::Base
   end
 
   def to_liquid
+    id = id
+    id ||= "new-#{SecureRandom.hex[1..6]}"
+
     {
+        'id' => id,
         'product' => product.to_liquid,
         'quantity' => quantity,
         'retail_price' => retail_price

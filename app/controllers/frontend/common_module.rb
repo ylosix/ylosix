@@ -65,26 +65,27 @@ module Frontend
 
     def append_customer_variables(helper)
       @variables['current_customer'] = current_customer
-      @variables['customer_carts_href'] = customers_shopping_carts_path
+      @variables['show_shopping_carts_path'] = helper.show_shopping_carts_path
+      @variables['shipping_method_customers_shopping_orders_path'] = helper.shipping_method_customers_shopping_orders_path
 
       if customer_signed_in?
         # Action form
 
-        @variables['customer_edit_registration_href'] = edit_customer_registration_path # DEPRECATED
-        @variables['customer_orders_href'] = orders_customers_path # DEPRECATED
+        @variables['customer_edit_registration_href'] = helper.edit_customer_registration_path # DEPRECATED
+        @variables['customer_orders_href'] = helper.orders_customers_path # DEPRECATED
       else
         # Action form
-        @variables['action_customer_sign_in_url'] = customer_session_path
-        @variables['action_customer_sign_up_url'] = customer_registration_path
+        @variables['action_customer_sign_in_url'] = helper.customer_session_path
+        @variables['action_customer_sign_up_url'] = helper.customer_registration_path
 
         # Links a
-        @variables['customer_forgot_password_href'] = new_customer_password_path
-        @variables['customer_sign_up_href'] = new_customer_registration_path
+        @variables['customer_forgot_password_href'] = helper.new_customer_password_path
+        @variables['customer_sign_up_href'] = helper.new_customer_registration_path
         @variables['customer_new_session_href'] = helper.new_customer_session_path
       end
 
       sc = ShoppingCart.retrieve(current_customer, session[:shopping_cart])
-      @variables['shopping_cart'] = sc
+      @variables['shopping_cart'] = sc.to_liquid
     end
 
     def append_message_variables

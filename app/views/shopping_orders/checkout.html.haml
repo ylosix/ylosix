@@ -10,23 +10,23 @@
       %div{class: 'col-md-3 col-xs-3'}
         Quantity
 
-  - sc.shopping_carts_products.each do |scp|
-    - product = scp.product
+  - sc['shopping_carts_products'].each do |scp|
+    - product = scp['product']
     %li.sc-list-item-border
 
       %div.row
         %div{class: 'col-md-6 col-xs-6'}
           %div.row
             %div{:class => 'item-image col-md-3'}
-              = image_tag product.retrieve_image(:thumbnail)
+              = image_tag product['image_thumbnail_src']
             %div{:class => 'col-md-9 col-xs-12'}
-              = product.name
+              = product['name']
         %div{class: 'col-md-3 col-xs-3'}
           %div.a-color-price
-            = "#{product.retail_price} €"
+            = "#{product['retail_price']} €"
         %div{class: 'col-md-3 col-xs-3'}
-          = scp.quantity
-  - unless sc.carrier.nil?
+          = scp['quantity']
+  - unless sc['carrier'].nil?
     %li.sc-list-item-border
       %div.row
         %div{:class => 'col-md-12 col-xs-12'}
@@ -39,15 +39,15 @@
 
           %div{:class => 'col-md-9 col-xs-12'}
             %strong
-              = sc.carrier.name
+              = sc['carrier']['name']
             %br
-            = sc.carrier.delay
+            = sc['carrier']['delay']
         %div{class: 'col-md-3 col-xs-3'}
           %div.a-color-price
-            - if sc.carrier.free_carrier
+            - if sc['carrier']['free_carrier']
               = 'Free!'
             - else
-              = "#{sc.carrier_retail_price} €"
+              = "#{sc['carrier_retail_price']} €"
         %div{class: 'col-md-3 col-xs-3'}
 
   %li.sc-list-item-border
@@ -56,20 +56,20 @@
       %div{class: 'col-md-6 col-xs-12'}
         %div.pull-right
           %span
-            = "Subtotal (#{sc.total_products} products): "
+            = "Subtotal (#{sc['total_products']} products): "
           %span.a-color-price
-            = "#{sc.total_retail_price} €"
+            = "#{sc['total_retail_price']} €"
 
 %div{class: 'row voffset2'}
   %div{class: 'col-md-6'}
     %h4 Shipping address
     %hr
-      = render partial: 'addresses/address', locals: {address: sc.shipping_address}
+      = render partial: 'addresses/address', locals: {address: sc['shipping_address']}
 
   %div{class: 'col-md-6'}
     %h4 Billing address
     %hr
-      = render partial: 'addresses/address', locals: {address: sc.billing_address}
+      = render partial: 'addresses/address', locals: {address: sc['billing_address']}
 
 %div{class: 'row voffset4'}
   %div{class: 'col-md-2'}

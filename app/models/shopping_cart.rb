@@ -100,7 +100,9 @@ class ShoppingCart < ActiveRecord::Base
         'shopping_carts_products' => array_to_liquid(shopping_carts_products),
         'total_products' => total_products,
         'total_weight' => total_weight,
-        'total_retail_price' => total_retail_price
+        'total_retail_price' => total_retail_price,
+        'shipping_address' => shipping_address,
+        'billing_address' => shipping_address
     }
   end
 

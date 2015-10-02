@@ -140,8 +140,9 @@ class Product < ActiveRecord::Base
         'href' => href,
         'publication_date' => I18n.l(publication_date, format: :default),
         'features' => array_features,
-        'add_cart_href' => helpers.product_add_to_shopping_cart_path(self),
-        'delete_cart_href' => helpers.product_delete_from_shopping_cart_path(self)
+        'add_to_shopping_cart_path' => helpers.product_add_to_shopping_cart_path(self),
+        'update_shopping_carts_path' => helpers.update_shopping_carts_path(self),
+        'delete_from_shopping_cart_path' => helpers.product_delete_from_shopping_cart_path(self)
     }
 
     append_images(liquid)

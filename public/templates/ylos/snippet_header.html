@@ -28,13 +28,13 @@
 <!--cart-->
 				<div class="col-xs-6 col-sm-4 col-md-4 pull-right">
 					<div class="homecart">
-						<a href="{{ customer_carts_href }}">
+						<a href="{{ show_shopping_carts_path }}">
 							<i class="fa fa-shopping-cart fa-3x font-color1">
 								<div class="homecart-quant">{{ shopping_cart.total_products }}</div>
 							</i>
 						</a>
 						<div class="homecart-text">
-							<a href="{{ customer_carts_href }}">
+							<a href="{{ show_shopping_carts_path }}">
 								My Cart
 							</a>
 						</div>
@@ -48,7 +48,7 @@
 								</div>
 							{% endfor %}
 							<div class="col-md-12">
-								<a class="btn btn-default btn-block" href="{{ customer_carts_href }}">My cart ({{ shopping_cart.total_products }}))</a>
+								<a class="btn btn-default btn-block" href="{{ show_shopping_carts_path }}">My cart ({{ shopping_cart.total_products }}))</a>
 							</div>
 						</div>
 					</div>

@@ -6,20 +6,20 @@
   %div{class: 'col-md-6'}
     %h4 Shipping address
     %hr
-    - if sc.shipping_address.nil?
+    - if sc['shipping_address'].nil?
       = link_to 'Select shipping address', addresses_customers_shopping_orders_path('shipping_address_id')
     - else
       = link_to 'Select other shipping address', addresses_customers_shopping_orders_path('shipping_address_id')
-      = render partial: 'addresses/address', locals: {address: sc.shipping_address}
+      = render partial: 'addresses/address', locals: {address: sc['shipping_address']}
 
   %div{class: 'col-md-6'}
     %h4 Billing address
     %hr
-    - if sc.billing_address.nil?
+    - if sc['billing_address'].nil?
       = link_to 'Select billing address', addresses_customers_shopping_orders_path('billing_address_id')
     - else
       = link_to 'Select other billing address', addresses_customers_shopping_orders_path('billing_address_id')
-      = render partial: 'addresses/address', locals: {address: sc.billing_address}
+      = render partial: 'addresses/address', locals: {address: sc['billing_address']}
 
 %span
   Select an shipping option:

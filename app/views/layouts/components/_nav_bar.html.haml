@@ -43,27 +43,27 @@
                 = link_to 'Login', new_customer_session_path
 
         - products = 0
-        - products = @variables['shopping_cart'].total_products unless @variables['shopping_cart'].nil?
+        - products = @variables['shopping_cart']['total_products'] unless @variables['shopping_cart'].nil?
         %li.dropdown
-          %a{href: customers_shopping_carts_path, class: 'text-fade'}
+          %a{href: @variables['show_shopping_carts_path'], class: 'text-fade'}
             = "My cart (#{products})"
             %span.caret
           %ul{class: 'dropdown-menu'}
             %li.dropdown
               %div.shopping-cart-panel
                 - if !@variables.nil? && !@variables['shopping_cart'].nil?
-                  - if @variables['shopping_cart'].shopping_carts_products.empty?
+                  - if @variables['shopping_cart']['shopping_carts_products'].empty?
                     Your cart is empty.
                   - else
-                    - @variables['shopping_cart'].shopping_carts_products.each do |scp|
+                    - @variables['shopping_cart']['shopping_carts_products'].each do |scp|
                       %div{class: 'row shopping-cart-row'}
                         %div.col-md-4
-                          = image_tag(scp.product.image.url(:thumbnail), :class => 'img-responsive')
+                          = image_tag(scp['product']['image_thumbnail_src'], :class => 'img-responsive')
                         %div.col-md-8
-                          = link_to scp.product.name, product_path(scp.product.slug)
+                          = link_to scp['product']['name'], scp['product']['href']
                           %br
-                          = "Quantity: #{scp.quantity}"
+                          = "Quantity: #{scp['quantity']}"
 
                 %div.row
                   %div.col-md-12
-                    = link_to "My cart (#{products})", customers_shopping_carts_path, :class => 'btn btn-default btn-block'
+                    = link_to "My cart (#{products})", @variables['show_shopping_carts_path'], :class => 'btn btn-default btn-block'

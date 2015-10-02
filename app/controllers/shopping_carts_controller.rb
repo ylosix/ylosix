@@ -4,7 +4,7 @@ class ShoppingCartsController < Frontend::CommonController
   end
 
   def show
-    add_breadcrumb(Breadcrumb.new(url: customers_shopping_carts_path, name: 'Cart'))
+    add_breadcrumb(Breadcrumb.new(url: show_shopping_carts_path, name: 'Cart'))
   end
 
   def update
@@ -19,7 +19,7 @@ class ShoppingCartsController < Frontend::CommonController
       session[:shopping_cart] = sc.to_json(include: :shopping_carts_products)
     end
 
-    redirect_to :customers_shopping_carts
+    redirect_to :show_shopping_carts
   end
 
   protected
