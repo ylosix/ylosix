@@ -12,9 +12,12 @@ ActiveAdmin.register Product do
                  products_pictures_attributes: [:id, :image, :_destroy]]
 
     pta = [:id, :locale, :name, :short_description, :description, :slug]
+
+    features = []
     Feature.all.each do |feature|
-      pta << feature.id.to_s.to_sym
+      features << feature.id.to_s.to_sym
     end
+    pta << {features: features}
 
     if !params[:product].blank? && !params[:product][:product_translations_attributes].blank?
       unless params[:product][:product_translations_attributes]['0'][:meta_tags].blank?
@@ -24,7 +27,6 @@ ActiveAdmin.register Product do
     end
 
     permitted << {product_translations_attributes: pta}
-
     permitted
   end
 

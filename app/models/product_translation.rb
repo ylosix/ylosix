@@ -23,21 +23,6 @@
 class ProductTranslation < ActiveRecord::Base
   belongs_to :product
   belongs_to :language, primary_key: :locale, foreign_key: :locale
-  after_initialize :load_features
-
-  private
-
-  def load_features
-    ProductTranslation.local_stored_attributes ||= {}
-    ProductTranslation.local_stored_attributes[:features] ||= []
-
-    features = Feature.all
-    if features.size != ProductTranslation.local_stored_attributes[:features].size
-      features.each do |feature|
-        ProductTranslation.store_accessor :features, feature.id.to_s.to_sym
-      end
-    end
-  end
 
   # validates_uniqueness_of locale: { scope: :category_id }
 end
