@@ -40,11 +40,16 @@ class CustomerAddress < ActiveRecord::Base
   end
 
   def to_liquid
+    helper = Rails.application.routes.url_helpers
+
     {
         'name' => name,
         'default_billing' => default_billing,
         'default_shipping' => default_shipping,
-        'fields' => fields
+        'fields' => fields,
+        'edit_customers_address_path' => helper.edit_customers_address_path(self),
+        'destroy_customers_address_path' => helper.customers_address_path(self),
+        'update_customers_address_path' => helper.customers_address_path(self)
     }
   end
 end

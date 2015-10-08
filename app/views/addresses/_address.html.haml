@@ -1,11 +1,11 @@
 %div.well
   %h3
-    = address.name
+    = address['name']
   %p
-    - if address.default_billing
+    - if address['default_billing']
       Default billing address
       %br
-    - if address.default_shipping
+    - if address['default_shipping']
       Default shipping address
       %br
 
@@ -13,21 +13,21 @@
 
   %ul.list-unstyled
     %li
-      = "#{address.customer_name} #{address.customer_last_name}"
+      = "#{address['fields']['customer_name']} #{address['fields']['customer_last_name']}"
     %li
-      = address.dni
+      = address['fields']['dni']
     %li
-      = address.business
+      = address['fields']['business']
     %li
-      = address.address_1
-      = "<br /> #{address.address_2}".html_safe unless address.address_2.blank?
+      = address['fields']['address_1']
+      = "<br /> #{address['address_2']}".html_safe unless address['address_2'].blank?
     %li
-      = "#{address.postal_code} #{address.city}"
+      = "#{address['fields']['postal_code']} #{address['city']}"
     %li
-      = address.country
+      = address['fields']['country']
     %li
-      = address.phone
+      = address['fields']['phone']
     %li
-      = address.mobile_phone
+      = address['fields']['mobile_phone']
     %li
-      = address.other
+      = address['fields']['other']

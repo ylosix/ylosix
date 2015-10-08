@@ -57,28 +57,34 @@ ActiveAdmin.register Category do
                                             {category_id: category.id},
                                             meta_tags: {keywords: '', description: ''})
 
-    f.inputs t('formtastic.edit_form', model: t('activerecord.models.category.one')) do
-      f.input :reference_code
-      f.input :parent_id,
-              label: t('activerecord.attributes.category.parent'),
-              as: :select,
-              include_blank: true,
-              collection: category_collection_select
+    tabs do
+      tab 'Information' do
+        f.inputs t('formtastic.edit_form', model: t('activerecord.models.category.one')) do
+          f.input :reference_code
+          f.input :parent_id,
+                  label: t('activerecord.attributes.category.parent'),
+                  as: :select,
+                  include_blank: true,
+                  collection: category_collection_select
 
-      f.input :enabled
-      f.input :visible
+          f.input :enabled
+          f.input :visible
 
-      admin_translation_text_field(translations, 'category', 'name')
-      admin_translation_text_field(translations, 'category', 'short_description', component: ActiveAdminHelper::CKEDITOR)
-      admin_translation_text_field(translations, 'category', 'description', component: ActiveAdminHelper::CKEDITOR)
+          admin_translation_text_field(translations, 'category', 'name')
+          admin_translation_text_field(translations, 'category', 'short_description', component: ActiveAdminHelper::CKEDITOR)
+          admin_translation_text_field(translations, 'category', 'description', component: ActiveAdminHelper::CKEDITOR)
 
-      f.input :priority, hint: '1:+ --- 10:-'
-    end
+          f.input :priority, hint: '1:+ --- 10:-'
+        end
+      end
 
-    f.inputs 'Seo' do
-      admin_translation_text_field(translations, 'category', 'meta_tags')
-      admin_translation_text_field(translations, 'category', 'slug', hint: 'Chars not allowed: (Upper chars) spaces')
-      f.input :show_action_name, hint: 'File name of show render'
+      tab 'Seo' do
+        f.inputs 'Seo' do
+          admin_translation_text_field(translations, 'category', 'meta_tags')
+          admin_translation_text_field(translations, 'category', 'slug', hint: 'Chars not allowed: (Upper chars) spaces')
+          f.input :show_action_name, hint: 'File name of show render'
+        end
+      end
     end
 
     f.actions

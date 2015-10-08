@@ -6,10 +6,11 @@ class AddressesController < Frontend::CommonController
     super
 
     helper = Rails.application.routes.url_helpers
-    @variables['customer_new_address_href'] = helper.new_customers_address_path
+    @variables['new_customers_address_path'] = helper.new_customers_address_path
     if customer_signed_in?
-      # @variables['customer_addresses'] = CustomerAddress.from_user(current_customer)
-      @variables['customer_addresses'] = current_customer.customer_addresses
+      @variables['customer_addresses'] = array_to_liquid(current_customer.customer_addresses)
+
+      @variables['address'] = @address.to_liquid unless @address.nil?
     end
 
     @variables['countries'] = Country.where(enabled: true)
@@ -66,6 +67,7 @@ class AddressesController < Frontend::CommonController
   end
 
   def set_customer_address
+    # TODO, security check if current_user has this address
     @address = CustomerAddress.find(params[:id])
   end
 

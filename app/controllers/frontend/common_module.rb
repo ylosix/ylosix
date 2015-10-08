@@ -73,6 +73,7 @@ module Frontend
 
         @variables['customer_edit_registration_href'] = helper.edit_customer_registration_path # DEPRECATED
         @variables['customer_orders_href'] = helper.orders_customers_path # DEPRECATED
+        @variables['customers_addresses_path'] = helper.customers_addresses_path
       else
         # Action form
         @variables['action_customer_sign_in_url'] = helper.customer_session_path

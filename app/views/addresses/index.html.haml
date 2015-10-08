@@ -18,8 +18,8 @@
           %div.col-md-4
             = render partial: 'addresses/address', locals: {address: address}
 
-            = link_to 'Edit', edit_customers_address_path(address), class: 'btn btn-default btn-block'
-            = link_to 'Destroy', customers_address_path(address), :method => :delete, class: 'btn btn-danger btn-block'
+            = link_to 'Edit', address['edit_customers_address_path'], class: 'btn btn-default btn-block'
+            = link_to 'Destroy', address['destroy_customers_address_path'], :method => :delete, class: 'btn btn-danger btn-block'
 
 %div{class: 'row voffset3'}
   %div.col-md-3

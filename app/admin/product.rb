@@ -99,79 +99,91 @@ ActiveAdmin.register Product do
                                             {product_id: product.id},
                                             meta_tags: {keywords: '', description: ''})
 
-    f.inputs 'Information' do
-      admin_translation_text_field(translations, 'product', 'name')
-      f.input :reference_code
+    tabs do
+      tab 'Information' do
+        f.inputs 'Information' do
+          admin_translation_text_field(translations, 'product', 'name')
+          f.input :reference_code
 
-      f.input :enabled
-      f.input :visible
+          f.input :enabled
+          f.input :visible
 
-      admin_translation_text_field(translations, 'product', 'short_description', component: ActiveAdminHelper::TEXT_AREA)
-      admin_translation_text_field(translations, 'product', 'description', component: ActiveAdminHelper::CKEDITOR)
+          admin_translation_text_field(translations, 'product', 'short_description', component: ActiveAdminHelper::TEXT_AREA)
+          admin_translation_text_field(translations, 'product', 'description', component: ActiveAdminHelper::CKEDITOR)
 
-      f.input :publication_date
-      f.input :unpublication_date
-    end
+          f.input :publication_date
+          f.input :unpublication_date
+        end
 
-    f.inputs 'Price' do
-      f.input :retail_price_pre_tax, input_html: {onchange: 'javascript:change_price_pre_tax(this);'}
-      f.input :retail_price, input_html: {onchange: 'javascript:change_price(this);'}
+        f.inputs 'Features' do
+          render partial: 'admin/products/features', locals: {translations: translations,
+                                                              features: Feature.all}
+        end
 
-      taxes = Tax.all
-      render partial: 'admin/products/taxes', locals: {taxes: taxes, tax: product.tax}
-    end
+        f.inputs 'Price' do
+          f.input :retail_price_pre_tax, input_html: {onchange: 'javascript:change_price_pre_tax(this);'}
+          f.input :retail_price, input_html: {onchange: 'javascript:change_price(this);'}
 
-    f.inputs 'Seo' do
-      admin_translation_text_field(translations, 'product', 'meta_tags')
-      admin_translation_text_field(translations, 'product', 'slug', hint: 'Chars not allowed: (Upper chars) spaces')
-      f.input :show_action_name, hint: 'File name of show render'
-    end
+          taxes = Tax.all
+          render partial: 'admin/products/taxes', locals: {taxes: taxes, tax: product.tax}
+        end
 
-    f.inputs 'Transport' do
-      f.input :width, hint: 'cm'
-      f.input :height, hint: 'cm'
-      f.input :depth, hint: 'cm'
-      f.input :weight, hint: 'kg'
-    end
-
-    f.inputs 'Images' do
-      f.input :image, as: :file, hint: (image_tag(product.image.url(:thumbnail)) if product.image?)
-
-      f.has_many :products_pictures, allow_destroy: true do |s|
-        s.input :image, as: :file, hint: (image_tag(s.object.image.url(:thumbnail)) if s.object.image?), allow_destroy: true
+        f.inputs 'Stock' do
+          f.input :stock
+          f.input :control_stock
+        end
       end
-    end
 
-    f.inputs 'Association' do
-      # f.has_many :products_categories, allow_destroy: true do |s|
-      #   s.input :category
-      # end
+      tab 'Association' do
+        f.inputs 'Association' do
+          # f.has_many :products_categories, allow_destroy: true do |s|
+          #   s.input :category
+          # end
 
-      # f.has_many :products_tags, allow_destroy: true do |s|
-      #   s.input :tag
-      # end
+          # f.has_many :products_tags, allow_destroy: true do |s|
+          #   s.input :tag
+          # end
 
-      render partial: 'admin/products/categories', locals:
-                                                     {
-                                                         products_categories: product.products_categories,
-                                                         root_category: Category.root_category
-                                                     }
+          render partial: 'admin/products/categories', locals:
+                                                         {
+                                                             products_categories: product.products_categories,
+                                                             root_category: Category.root_category
+                                                         }
 
-      render partial: 'admin/products/tags', locals:
-                                               {
-                                                   products_tags: product.products_tags,
-                                                   tags_groups: TagsGroup.all
-                                               }
-    end
+          render partial: 'admin/products/tags', locals:
+                                                   {
+                                                       products_tags: product.products_tags,
+                                                       tags_groups: TagsGroup.all
+                                                   }
+        end
+      end
 
-    f.inputs 'Features' do
-      render partial: 'admin/products/features', locals: {translations: translations,
-                                                          features: Feature.all}
-    end
+      tab 'Images' do
+        f.inputs 'Images' do
+          f.input :image, as: :file, hint: (image_tag(product.image.url(:thumbnail)) if product.image?)
 
-    f.inputs 'Stock' do
-      f.input :stock
-      f.input :control_stock
+          f.has_many :products_pictures, allow_destroy: true do |s|
+            s.input :image, as: :file, hint: (image_tag(s.object.image.url(:thumbnail)) if s.object.image?), allow_destroy: true
+          end
+        end
+      end
+
+      tab 'Seo' do
+        f.inputs 'Seo' do
+          admin_translation_text_field(translations, 'product', 'meta_tags')
+          admin_translation_text_field(translations, 'product', 'slug', hint: 'Chars not allowed: (Upper chars) spaces')
+          f.input :show_action_name, hint: 'File name of show render'
+        end
+      end
+
+      tab 'Transport' do
+        f.inputs 'Transport' do
+          f.input :width, hint: 'cm'
+          f.input :height, hint: 'cm'
+          f.input :depth, hint: 'cm'
+          f.input :weight, hint: 'kg'
+        end
+      end
     end
 
     f.actions

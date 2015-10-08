@@ -1,8 +1,19 @@
-%h1 Select an address
+%div.row
+  %div.col-md-3
+    = link_to 'Manage addresses', customers_addresses_path, class: 'btn btn-success btn-block'
+
+%div.row
+  %div.col-md-12
+    %h1 Select an address
 %hr
 
 %div.row
-  - @variables['customer_addresses'].each do |address|
-    %div.col-md-4
-      %a{href: save_address_customers_shopping_orders_path(@type, address), :style => 'text-decoration: none; color: #000;'}
-        = render partial: 'addresses/address', locals: {address: address}
+  - if @variables['customer_addresses'].size > 0
+    - @variables['customer_addresses'].each do |address|
+      %div.col-md-4
+        %a{href: save_address_customers_shopping_orders_path(@type, address), :style => 'text-decoration: none; color: #000;'}
+          = render partial: 'addresses/address', locals: {address: address}
+  - else
+    %div{:class => 'alert alert-warning', :role => 'alert'}
+      %span{:class => 'fa fa-exclamation-triangle', 'aria-hidden' => 'true'}
+      Please create an address
