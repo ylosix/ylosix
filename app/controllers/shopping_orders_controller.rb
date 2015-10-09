@@ -1,7 +1,7 @@
 class ShoppingOrdersController < Frontend::CommonController
   before_action :authenticate_customer!
-  before_action :check_empty_cart, only: [:finalize, :shipping_method]
-  before_action :check_empty_addresses, only: [:finalize]
+  before_action :check_empty_cart, only: [:shipping_method, :save_carrier, :finalize]
+  before_action :check_empty_addresses, only: [:finalize, :save_carrier]
 
   def append_variables
     super
@@ -19,7 +19,7 @@ class ShoppingOrdersController < Frontend::CommonController
     @variables ||= {}
 
     @type = params[:type]
-    @variables['customer_addresses'] = current_customer.customer_addresses
+    @variables['customer_addresses'] = array_to_liquid(current_customer.customer_addresses)
 
     add_breadcrumb(Breadcrumb.new(url: shipping_method_customers_shopping_orders_path, name: 'Checkout'))
     add_breadcrumb(Breadcrumb.new(url: addresses_customers_shopping_orders_path(@type), name: 'Select address'))

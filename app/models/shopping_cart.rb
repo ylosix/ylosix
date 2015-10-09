@@ -102,7 +102,7 @@ class ShoppingCart < ActiveRecord::Base
         'total_weight' => total_weight,
         'total_retail_price' => total_retail_price,
         'shipping_address' => shipping_address,
-        'billing_address' => shipping_address
+        'billing_address' => billing_address
     }
   end
 
