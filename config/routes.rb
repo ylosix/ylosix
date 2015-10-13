@@ -50,7 +50,7 @@ Rails.application.routes.draw do
     resource :shopping_orders, only: [] do
       get '/shipping_method' => 'shopping_orders#shipping_method'
       get '/:type/addresses' => 'shopping_orders#addresses', as: :addresses
-      get '/:type/:id/save_address' => 'shopping_orders#save_address', as: :save_address
+      post '/:id/save_address' => 'shopping_orders#save_address', as: :save_address
 
       post '/save_carrier' => 'shopping_orders#save_carrier'
       get '/checkout' => 'shopping_orders#checkout'

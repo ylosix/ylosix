@@ -11,8 +11,13 @@
   - if @variables['customer_addresses'].size > 0
     - @variables['customer_addresses'].each do |address|
       %div.col-md-4
-        %a{href: save_address_customers_shopping_orders_path(@type, address), :style => 'text-decoration: none; color: #000;'}
+        %form{action: address['save_address_customers_shopping_orders_path'], method: :post}
+          %input{name: 'utf8', type: 'hidden', value:'✓'}
+          %input{type: 'hidden', name: 'authenticity_token', value: @variables['authenticity_token']}
+          %input{type: 'hidden', name: 'type', value: @type}
+
           = render partial: 'addresses/address', locals: {address: address}
+          = submit_tag 'Select', class: 'btn btn-success btn-block'
   - else
     %div{:class => 'alert alert-warning', :role => 'alert'}
       %span{:class => 'fa fa-exclamation-triangle', 'aria-hidden' => 'true'}

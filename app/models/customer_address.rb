@@ -49,7 +49,8 @@ class CustomerAddress < ActiveRecord::Base
         'fields' => fields,
         'edit_customers_address_path' => helper.edit_customers_address_path(self),
         'destroy_customers_address_path' => helper.customers_address_path(self),
-        'update_customers_address_path' => helper.customers_address_path(self)
+        'update_customers_address_path' => helper.customers_address_path(self),
+        'save_address_customers_shopping_orders_path' => helper.save_address_customers_shopping_orders_path(self)
     }
   end
 end
