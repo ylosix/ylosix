@@ -1,5 +1,5 @@
 ActiveAdmin.register Language do
-  menu parent: 'Localization'
+  menu parent: 'Locales'
 
   permit_params :locale, :flag, :appears_in_backoffice, :appears_in_web, :default, :name
 

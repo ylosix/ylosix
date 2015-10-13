@@ -1,5 +1,5 @@
 ActiveAdmin.register Carrier do
-  menu parent: 'Transport'
+  menu parent: 'Transports'
 
   permit_params :enabled, :free_carrier, :name, :image,
                 carrier_translations_attributes: [:id, :locale, :name, :delay]

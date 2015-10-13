@@ -28,8 +28,24 @@ es:
     clone: "Clonar %{model}"
 
   active_admin:
-    catalog: Catálogo
+    catalog:
+      label: Catálogo
+    orders:
+      label: Pedidos
+    customers:
+      label: Clientes
+    transports:
+      label: Transportistas
+    administration:
+      label: Administración
+    locales:
+      label: Idiomas
+    preferences:
+      label: Preferencias
+    design:
+      label: Diseño
     comments:
+      label: Comentarios internos
       title_content: Comentarios internos
   time:
     formats:

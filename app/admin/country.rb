@@ -1,5 +1,5 @@
 ActiveAdmin.register Country do
-  menu parent: 'Localization'
+  menu parent: 'Locales'
 
   permit_params :zone_id, :name, :iso, :enabled, :code
 

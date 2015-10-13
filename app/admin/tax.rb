@@ -1,5 +1,5 @@
 ActiveAdmin.register Tax do
-  menu parent: 'Localization'
+  menu parent: 'Locales'
 
   permit_params :name, :rate
 

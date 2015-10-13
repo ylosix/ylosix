@@ -192,31 +192,47 @@ ActiveAdmin.setup do |config|
     admin.build_menu do |menu|
       # menu.add label: 'Dashboard', url: 'dashboard', :priority => 1
 
-
-      menu.add id: 'catalog', label: proc { I18n.t 'active_admin.catalog' }, :priority => 2
+      menu.add id: 'catalog',
+               label: proc { I18n.t 'active_admin.catalog.label' },
+               priority: 2
       # menu.add label: 'Products', :parent => 'Catalog', url: '/admin/products', :priority => 0
 
-      menu.add label: 'Orders', :priority => 3
+      menu.add id: 'orders',
+               label: proc { I18n.t 'active_admin.orders.label' },
+               priority: 3
 
-      menu.add label: 'Customers', :priority => 4
+      menu.add id: 'customers',
+               label: proc { I18n.t 'active_admin.customers.label' },
+               priority: 4
 
-
-      menu.add label: 'Administration', :priority => 5
+      menu.add id: 'administration',
+               label: proc { I18n.t 'active_admin.administration.label' },
+               :priority => 5
       # menu.add label: 'Admin users',    :parent => 'Administration', url: '/admin/admin_users', :priority => 0
       # menu.add label: 'Users',          :parent => 'Administration', url: '/admin/users', :priority => 1
-      menu.add label: 'Admin Comments', :parent => 'Administration', url: '/admin/admin_comments', :priority => 1
+      menu.add id: 'admin_comments',
+               label: proc { I18n.t 'active_admin.comments.label' },
+               parent: 'Administration',
+               url: '/admin/admin_comments',
+               priority: 1
 
+      menu.add id: 'transports',
+               label: proc { I18n.t 'active_admin.transports.label' },
+               priority: 6
 
-      menu.add label: 'Transport', :priority => 6
-
-      menu.add label: 'Localization', :priority => 7
+      menu.add id: 'locales',
+               label: proc { I18n.t 'active_admin.locales.label' },
+               priority: 7
       # menu.add label: 'Languages', url: '/admin/languages', :priority => 4
 
-      menu.add label: 'Preferences', :priority => 8
+      menu.add id: 'preferences',
+               label: proc { I18n.t 'active_admin.preferences.label' },
+               priority: 8
       # menu.add label: 'Languages', url: '/admin/languages', :priority => 4
 
-
-      menu.add label: 'Design', :priority => 9
+      menu.add id: 'design',
+               label: proc { I18n.t 'active_admin.design.label' },
+               priority: 9
     end
   end
 
