@@ -54,6 +54,7 @@ class AddressesController < Frontend::CommonController
   def new
     @address = CustomerAddress.new
 
+    @address.customer = current_customer
     @address.name = 'My address'
     @address.customer_name = current_customer.name
     @address.customer_last_name = current_customer.last_name

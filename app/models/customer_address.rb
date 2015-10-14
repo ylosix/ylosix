@@ -42,15 +42,20 @@ class CustomerAddress < ActiveRecord::Base
   def to_liquid
     helper = Rails.application.routes.url_helpers
 
-    {
+    hash = {
         'name' => name,
         'default_billing' => default_billing,
         'default_shipping' => default_shipping,
-        'fields' => fields,
-        'edit_customers_address_path' => helper.edit_customers_address_path(self),
-        'destroy_customers_address_path' => helper.customers_address_path(self),
-        'update_customers_address_path' => helper.customers_address_path(self),
-        'save_address_customers_shopping_orders_path' => helper.save_address_customers_shopping_orders_path(self)
+        'fields' => fields
     }
+
+    unless id.blank?
+      hash['edit_customers_address_path'] = helper.edit_customers_address_path(self)
+      hash['destroy_customers_address_path'] = helper.customers_address_path(self)
+      hash['update_customers_address_path'] = helper.customers_address_path(self)
+      hash['save_address_customers_shopping_orders_path'] = helper.save_address_customers_shopping_orders_path(self)
+    end
+
+    hash
   end
 end
