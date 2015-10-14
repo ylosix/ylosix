@@ -26,7 +26,6 @@ es:
     update: "Guardar %{model}"
     edit_form: "Editando %{model}"
     clone: "Clonar %{model}"
-
   active_admin:
     catalog:
       label: Catálogo
@@ -52,7 +51,6 @@ es:
       default: "%d/%m/%Y"
       short: "%d %b"
       long: "%d %b, %Y %H:%M"
-
   activerecord:
     models:
       category:
@@ -75,7 +73,30 @@ es:
         zero: no grupo de tag
         one: Grupo de tag
         other: Grupos de tag
-
+      admin_user:
+        zero: no usuario admin
+        one: Usuario admin
+        other: Usuarios admin
+      shopping_cart:
+        zero: no carrito compra
+        one: Carrito de compra
+        other: Carritos de compra
+      shopping_order:
+        zero: no pedido
+        one: Pedido
+        other: Pedidos
+      shopping_orders_status:
+        zero: no estado de pedido
+        one: Estado de pedido
+        other: Estados de pedido
+      customer_address:
+        zero: no dirección de cliente
+        one: Dirección de cliente
+        other: Direcciones de cliente
+      customer:
+        zero: no cliente
+        one: Cliente
+        other: Clientes
     attributes:
       category:
         reference_code: Código de referencia
@@ -84,22 +105,17 @@ es:
         visible: Visible
         slug: Enlace
         priority: Prioridad
-
         name: Nombre
         short_description: Descripción Corta
         description: Descripción
-
         created_at: Creado en
         updated_at: Actualizado en
-
       feature:
         name: Nombre
         value: Valor
         priority: Prioridad
-
         created_at: Creado en
         updated_at: Actualizado en
-
       product:
         name: Nombre
         enabled: Habilitado
@@ -111,22 +127,21 @@ es:
         barcode: Código de barras
         publication_date: Fecha de publicación
         unpublication_date: Fecha de despublicación
-
         created_at: Creado en
         updated_at: Actualizado en
-
       tag:
         name: Nombre
         slug: Enlace
         priority: Prioridad
         tags_group: Grupo de tag
-
         created_at: Creado en
         updated_at: Actualizado en
-
       tags_group:
         name: Nombre
-
+        created_at: Creado en
+        updated_at: Actualizado en
+      admin_user:
+        locale: Idioma
         created_at: Creado en
         updated_at: Actualizado en
 

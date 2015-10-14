@@ -99,8 +99,17 @@ class ShoppingOrder < ActiveRecord::Base
   end
 
   def to_liquid
+    status = {'color' => '',
+              'name' => 'Pending'}
+
+    unless shopping_orders_status.nil?
+      status = shopping_orders_status.to_liquid
+    end
+
     {
         'order_num' => retrieve_order_num,
+        'order_date' => I18n.l(created_at, :format => :long),
+        'order_status' => status,
         'shopping_orders_products' => array_to_liquid(shopping_orders_products),
         'total_products' => total_products,
         'total_taxes' => total_taxes,
