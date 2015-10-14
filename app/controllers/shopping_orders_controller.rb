@@ -20,6 +20,7 @@ class ShoppingOrdersController < Frontend::CommonController
 
     @type = params[:type]
     @variables['customer_addresses'] = array_to_liquid(current_customer.customer_addresses)
+    @variables['address_type'] = @type
 
     add_breadcrumb(Breadcrumb.new(url: shipping_method_customers_shopping_orders_path, name: 'Checkout'))
     add_breadcrumb(Breadcrumb.new(url: addresses_customers_shopping_orders_path(@type), name: 'Select address'))
