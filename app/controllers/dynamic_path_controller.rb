@@ -1,0 +1,2 @@
+class DynamicPathController < ApplicationController
+end
