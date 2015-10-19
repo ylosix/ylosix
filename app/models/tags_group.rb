@@ -39,7 +39,7 @@ class TagsGroup < ActiveRecord::Base
   def to_liquid
     {
         'name' => name,
-        'tags' => array_to_liquid(tags)
+        'tags' => array_to_liquid(tags.map(&:name))
     }
   end
 end

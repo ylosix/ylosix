@@ -66,6 +66,10 @@ Rails.application.routes.draw do
       scope '/data_forms' do
         post '/' => 'api/data_forms#create'
       end
+
+      scope '/categories' do
+        get '/:category_id/products' => 'api/categories_api#products'
+      end
     end
   end
 

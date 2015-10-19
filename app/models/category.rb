@@ -93,7 +93,8 @@ class Category < ActiveRecord::Base
         'description' => description,
         'priority' => priority,
         'href' => href,
-        'children' => array_to_liquid(children)
+        'children' => array_to_liquid(children),
+        'tags_groups' => array_to_liquid(tags_groups)
     }
   end
 

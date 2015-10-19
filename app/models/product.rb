@@ -40,6 +40,8 @@
 
 class Product < ActiveRecord::Base
   include InitializeSlug
+  include ArrayLiquid
+
   IMAGE_SIZES = {thumbnail: 'x100', small: 'x300', medium: 'x500', original: 'x720'}
 
   translates :name, :short_description, :description, :features, :slug, :meta_tags
@@ -137,6 +139,7 @@ class Product < ActiveRecord::Base
         'short_description' => s_short_description,
         'description' => s_description,
         'retail_price' => retail_price,
+        'tags' => array_tags,
         'href' => href,
         'publication_date' => I18n.l(publication_date, format: :default),
         'features' => array_features,
@@ -146,6 +149,18 @@ class Product < ActiveRecord::Base
     }
 
     append_images(liquid)
+  end
+
+  def array_tags
+    array_tags = []
+
+    if products_tags.any?
+      products_tags.each do |p_tag|
+        array_tags << p_tag.tag.name
+      end
+    end
+
+    array_tags
   end
 
   def array_features
