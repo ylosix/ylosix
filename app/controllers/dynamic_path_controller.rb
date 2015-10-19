@@ -62,9 +62,9 @@ class DynamicPathController < Frontend::CommonController
     end
 
     @categories.each_with_index do |category, i|
-      fail ArgumentError if @categories[i + 1].present? && category.id != @categories[i + 1].parent_id
+      fail InvalidPathError if @categories[i + 1].present? && category.id != @categories[i + 1].parent_id
     end
 
-    fail ArgumentError if @product.present? && !@product.categories.include?(@categories.last)
+    fail InvalidPathError if @product.present? && !@product.categories.include?(@categories.last)
   end
 end

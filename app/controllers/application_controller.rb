@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  class InvalidPathError < StandardError; end
+
   include ShowActionName
   include ActiveRecord
 
