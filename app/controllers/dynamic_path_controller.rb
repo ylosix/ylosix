@@ -5,14 +5,14 @@ class DynamicPathController < Frontend::CommonController
     if @product
       @variables['product'] = @product.to_liquid unless @product.nil?
 
-      if @categories        # We already have the categories from the path
+      if @categories # We already have the categories from the path
         @category = @categories.last
       else
         @category = @product.categories.first if @product.categories.any?
 
         @categories = Utils.get_parents_array(@category)
-        @categories.delete_at(0) if @categories.any?  # delete root.
-        @categories << @category unless @category.nil?     # append current.
+        @categories.delete_at(0) if @categories.any? # delete root.
+        @categories << @category unless @category.nil? # append current.
       end
     else
       @category = @categories.last
@@ -47,7 +47,7 @@ class DynamicPathController < Frontend::CommonController
     @product = ProductTranslation.find_by(slug: segments.last).try(:product)
     if @product.present?
       fail ActiveRecord::RecordNotEnabled unless @product.enabled
-      segments.pop   # Remove last segment
+      segments.pop # Remove last segment
     end
 
     parse_category_path(segments) if segments.any?

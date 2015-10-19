@@ -6,11 +6,15 @@ class DynamicPathControllerTest < ActionController::TestCase
   end
 
   test 'should route to deep category' do
-    assert_routing '/digital-cameras/digital-cameras-child', controller: 'dynamic_path', action: 'show_path', path: 'digital-cameras/digital-cameras-child'
+    assert_routing '/digital-cameras/digital-cameras-child', controller: 'dynamic_path',
+                                                             action: 'show_path',
+                                                             path: 'digital-cameras/digital-cameras-child'
   end
 
   test 'should route to product under category' do
-    assert_routing '/digital-cameras/camera', controller: 'dynamic_path', action: 'show_path', path: 'digital-cameras/camera'
+    assert_routing '/digital-cameras/camera', controller: 'dynamic_path',
+                                              action: 'show_path',
+                                              path: 'digital-cameras/camera'
   end
 
   test 'should route to product' do
