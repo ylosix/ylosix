@@ -28,3 +28,12 @@ one:
   meta_tags:
     keywords: MyString
     description: MyString
+
+two:
+  category: digital_cameras_child
+  locale: en
+  name: Digital cameras child
+  slug: digital-cameras-child
+  meta_tags:
+    keywords: MyString
+    description: MyString
