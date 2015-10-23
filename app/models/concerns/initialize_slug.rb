@@ -19,7 +19,7 @@ module InitializeSlug
   end
 
   def unique_slug(slug)
-    count = self.class.with_translations.where("slug like '#{slug}%'").uniq(:product).length
+    count = self.class.with_translations.where('slug like :slug', slug: slug + '%').uniq(self.class).length
     slug + (count == 0 ? '' : "_#{count}")
   end
 
