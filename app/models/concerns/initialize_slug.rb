@@ -14,8 +14,13 @@ module InitializeSlug
         end
       end
 
-      translation.slug = parse_url_chars(slug)
+      translation.slug = unique_slug(parse_url_chars(slug))
     end
+  end
+
+  def unique_slug(slug)
+    count = self.class.with_translations.where("slug like '#{slug}%'").uniq(:product).length
+    slug + (count == 0 ? '' : "_#{count}")
   end
 
   def parse_url_chars(str)
