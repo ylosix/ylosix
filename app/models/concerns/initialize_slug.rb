@@ -20,6 +20,13 @@ module InitializeSlug
 
   def unique_slug(slug)
     count = self.class.with_translations.where('slug like :slug', slug: slug + '%').uniq(self.class).length
+
+    if self.class == Product # we don't want categories and products have the same slug
+      count += Category.with_translations.where('slug like :slug', slug: slug + '%').uniq(Category).length
+    elsif self.class == Category
+      count += Product.with_translations.where('slug like :slug', slug: slug + '%').uniq(Product).length
+    end
+
     slug + (count == 0 ? '' : "_#{count}")
   end
 
