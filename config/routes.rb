@@ -1,3 +1,22 @@
+class RouteConstraint
+  def matches?(request)
+    includes = request.path.starts_with?('/assets')
+    includes |= request.path.ends_with?('.jpg') || request.path.ends_with?('.jpeg')
+    includes |= request.path.ends_with?('.png')
+    includes |= request.path.ends_with?('.css')
+    includes |= request.path.ends_with?('.html')
+    includes |= request.path.ends_with?('.js')
+    includes |= request.path.ends_with?('.gif')
+
+    includes |= request.path.ends_with?('.pdf')
+    includes |= request.path.ends_with?('.csv')
+    includes |= request.path.ends_with?('.doc') || request.path.ends_with?('.docx')
+    includes |= request.path.ends_with?('.xls') || request.path.ends_with?('.xlsx')
+
+    not includes
+  end
+end
+
 Rails.application.routes.draw do
   mount Ckeditor::Engine => '/ckeditor'
 
@@ -75,6 +94,8 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'home#index'
+
+  get '*path' => 'dynamic_path#show_path', :constraints => RouteConstraint.new
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
