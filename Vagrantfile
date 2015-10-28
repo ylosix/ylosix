@@ -60,6 +60,7 @@ Vagrant.configure(2) do |config|
 
     if ENV['RAILS_ENV'] == 'development'
       config.trigger.after :up do
+        begin run "vagrant ssh -c 'cd /var/www; rake db:migrate'"; rescue; end
         begin run "vagrant ssh -c 'sudo stop ecommerce'"; rescue; end
         begin run "vagrant ssh -c 'sudo start ecommerce'"; rescue; end
       end

@@ -169,7 +169,7 @@ class Product < ActiveRecord::Base
     unless features.blank?
       features.each do |k, v|
         f = Feature.find_by(id: k)
-        array_features << {'key' => f.name, 'value' => v} unless f.blank?
+        array_features << {'id' => k, 'key' => f.name, 'value' => v} unless f.blank?
       end
     end
 
