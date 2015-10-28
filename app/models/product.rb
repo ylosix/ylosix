@@ -78,6 +78,20 @@ class Product < ActiveRecord::Base
                                     "%#{text}%", "%#{text}%").group('products.id')
                        }
 
+  ransacker :by_categorization, formatter: lambda { |search|
+                                ids = Product.joins(:products_categories).where(products_categories: {category_id: search}).pluck(:id)
+                                ids.any? ? ids : nil
+                              } do |parent|
+    parent.table[:id]
+  end
+
+  ransacker :by_tagging, formatter: lambda { |search|
+                         ids = Product.joins(:products_tags).where(products_tags: {tag_id: search}).pluck(:id)
+                         ids.any? ? ids : nil
+                       } do |parent|
+    parent.table[:id]
+  end
+
   def self.in_frontend(category, not_in_list = [])
     products = Product.joins(:products_categories)
 

@@ -49,7 +49,10 @@ ActiveAdmin.register Product do
     column (:image) { |product| image_tag(product.retrieve_image(:thumbnail)) }
     column :name
     column :enabled
-    column :created_at
+
+    column (t('activerecord.models.category.other')) { |product| product.categories.map(&:name).join(', ') }
+    column (:tags) { |product| product.tags.map(&:name).join(', ') }
+
     actions
   end
 
@@ -92,6 +95,17 @@ ActiveAdmin.register Product do
 
   filter :reference_code
   filter :translations_name, as: :string, label: proc { I18n.t 'activerecord.attributes.product.name' }
+
+  filter :by_categorization_in,
+         label: proc { I18n.t 'activerecord.models.category.one' },
+         as: :select,
+         collection: proc { Category.all }
+
+  filter :by_tagging_in,
+         label: proc { I18n.t 'activerecord.models.tag.one' },
+         as: :select,
+         collection: proc { Tag.all }
+
   filter :enabled
 
   form do |f|
