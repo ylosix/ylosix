@@ -14,8 +14,21 @@ module InitializeSlug
         end
       end
 
-      translation.slug = parse_url_chars(slug)
+      translation.slug = unique_slug(parse_url_chars(slug))
     end
+  end
+
+  def unique_slug(slug, check_models = [Category, Product, Tag])
+    if check_models.empty?
+      count = self.class.with_translations.where('slug like :slug', slug: slug).uniq(self.class).length
+    else
+      count = 0
+      check_models.each do |model|
+        count += model.with_translations.where('slug like :slug', slug: slug).uniq(model).length
+      end
+    end
+
+    slug + (count == 0 ? '' : "_#{count}")
   end
 
   def parse_url_chars(str)
