@@ -203,12 +203,13 @@ module Frontend
       fill_descriptions_with_variables(@variables, @render_template)
 
       file_html = retrieve_file_html(controller_name, action_name)
-      if !@render_template.nil? && @render_template.ok?(file_html)
+      has_custom_layout = args.is_a?(Array) && args.any? && args[0][:layout] == 'custom_template'
+      if !@render_template.nil? && @render_template.ok?(file_html) && !has_custom_layout
         render_template(@render_template, file_html)
+        render text: '', layout: 'custom_template'
+      else
+        super
       end
-
-      # TODO, no render action when have a template directly layout
-      super
     end
   end
 end

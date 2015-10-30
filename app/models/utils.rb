@@ -2,7 +2,7 @@ class Utils
   def self.get_error_title(messages)
     return '' if messages.empty?
 
-    I18n.t('errors.messages.not_saved', count: messages.count, resource: 'the form')
+    I18n.t('errors.messages.not_saved', count: messages.count, resource: '')
   end
 
   def self.replace_design_form(model, label, content)
