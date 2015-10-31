@@ -2,34 +2,44 @@ class DynamicPathController < Frontend::CommonController
   def append_variables
     super
 
-    if @product
+    if @product.present?
       @variables['product'] = @product.to_liquid unless @product.nil?
 
-      if @categories # We already have the categories from the path
-        @category = @categories.last
-      else
+      if @category.blank?
         @category = @product.categories.first if @product.categories.any?
 
         @categories = Utils.get_parents_array(@category)
         @categories.delete_at(0) if @categories.any? # delete root.
         @categories << @category unless @category.nil? # append current.
       end
-    else
-      @category = @categories.last
     end
 
-    @variables['tags_group'] = TagsGroup.general_groups(@category.id)
-    add_show_action_name(@category)
+    unless @category.blank?
+      @variables['tags_group'] = TagsGroup.general_groups(@category.id)
+      add_show_action_name(@category)
+    end
 
-    @categories.each do |category|
-      add_breadcrumb(Breadcrumb.new(url: category.href, name: category.name))
+    unless @categories.blank?
+      @categories.each do |category|
+        add_breadcrumb(Breadcrumb.new(url: category.href, name: category.name))
+      end
     end
   end
 
   def show_path
     parse_path
 
-    if @product
+    if @categories
+      if @product.present? && @product.categories.any? && !@product.categories.include?(@categories.last)
+        fail InvalidPathError
+      end
+
+      @category = @categories.last
+    else
+      fail InvalidPathError if @product.present? && @product.categories.any?
+    end
+
+    if @product.present?
       render 'products/show'
     else
       render 'categories/show'
@@ -64,7 +74,5 @@ class DynamicPathController < Frontend::CommonController
     @categories.each_with_index do |category, i|
       fail InvalidPathError if @categories[i + 1].present? && category.id != @categories[i + 1].parent_id
     end
-
-    fail InvalidPathError if @product.present? && !@product.categories.include?(@categories.last)
   end
 end

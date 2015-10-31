@@ -159,7 +159,7 @@ module Frontend
       @body_content = template_liquid.render(@variables)
     end
 
-    def retrieve_file_html(controller, action)
+    def retrieve_file_html(controller, action, args = [])
       file_html = "#{controller}/#{action}.html"
 
       if action == 'show' && !@variables['show_action_name'].blank?
@@ -177,6 +177,24 @@ module Frontend
       # Fixed route devise when fails edit.
       if controller == 'registrations' && action == 'update'
         file_html = "#{controller}/edit.html"
+      end
+
+      # Fixed route pretty urls
+      if controller == 'dynamic_path' && action == 'show_path'
+        prefix = 'categories'
+        prefix = 'products' if @product.present?
+
+        if !@render_template.nil? &&
+            @render_template.ok?("#{prefix}/#{@variables['show_action_name']}.html")
+          file_html = "#{prefix}/#{@variables['show_action_name']}.html"
+        else
+          file_html = "#{prefix}/show.html"
+        end
+      end
+
+      # Fixed errors like 404
+      if args.is_a?(Array) && args.any? && args[0].is_a?(String) && args[0].start_with?('errors/')
+        file_html = "#{args[0]}.html"
       end
 
       file_html
@@ -202,8 +220,9 @@ module Frontend
       append_variables
       fill_descriptions_with_variables(@variables, @render_template)
 
-      file_html = retrieve_file_html(controller_name, action_name)
-      has_custom_layout = args.is_a?(Array) && args.any? && args[0][:layout] == 'custom_template'
+      file_html = retrieve_file_html(controller_name, action_name, args)
+      has_custom_layout = args.is_a?(Array) && args.any? && args[0].is_a?(Hash) && args[0][:layout] == 'custom_template'
+
       if !@render_template.nil? && @render_template.ok?(file_html) && !has_custom_layout
         render_template(@render_template, file_html)
         render text: '', layout: 'custom_template'
