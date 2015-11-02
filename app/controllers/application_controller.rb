@@ -10,6 +10,9 @@ class ApplicationController < ActionController::Base
 
   before_action :extract_commerce_from_url, :set_locale
 
+  rescue_from ActiveRecord::RecordNotFound, with: :not_found_exception
+  rescue_from InvalidPathError, with: :not_found_exception
+
   def change_locale
     locale = I18n.default_locale.to_s
     param_locales = permit_locale
@@ -107,5 +110,11 @@ class ApplicationController < ActionController::Base
 
   def permit_locale
     params.permit(:locale)
+  end
+
+  def not_found_exception(exception = nil)
+    logger.info "Rendering 404: #{exception.message}" if exception
+
+    render 'errors/not_found', status: 404
   end
 end

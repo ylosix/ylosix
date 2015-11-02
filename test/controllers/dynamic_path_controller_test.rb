@@ -22,17 +22,17 @@ class DynamicPathControllerTest < ActionController::TestCase
   end
 
   test 'should render product' do
-    get :show_path, 'path' => 'camera-reflex-canon-450D'
-    assert_template 'products/show'
+    get :show_path, path: 'camera-reflex-canon-450D'
+    assert_response :not_found
   end
 
   test 'should render product when category is also present' do
-    get :show_path, 'path' => 'digital-cameras/camera-reflex-canon-450D'
+    get :show_path, path: 'digital-cameras/camera-reflex-canon-450D'
     assert_template 'products/show'
   end
 
   test 'should render category' do
-    get :show_path, 'path' => 'digital-cameras'
+    get :show_path, path: 'digital-cameras'
     assert_template 'categories/show'
   end
 end
