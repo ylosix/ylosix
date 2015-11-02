@@ -99,7 +99,7 @@ ActiveAdmin.register Product do
   filter :by_categorization_in,
          label: proc { I18n.t 'activerecord.models.category.one' },
          as: :select,
-         collection: proc { Category.all }
+         collection: proc { category_collection_select }
 
   filter :by_tagging_in,
          label: proc { I18n.t 'activerecord.models.tag.one' },

@@ -1,4 +1,9 @@
-# Ylosix [![Build Status](https://travis-ci.org/ylosix/ylosix.svg?branch=develop)](https://travis-ci.org/ylosix/ylosix) [![Coverage Status](https://coveralls.io/repos/ylosix/ylosix/badge.svg?branch=develop)](https://coveralls.io/r/ylosix/ylosix?branch=develop) [![Code Climate](https://codeclimate.com/github/ylosix/ylosix/badges/gpa.svg)](https://codeclimate.com/github/ylosix/ylosix) [![security](https://hakiri.io/github/ylosix/ylosix/develop.svg)](https://hakiri.io/github/ylosix/ylosix)
+# Ylosix 
+[![Build Status](https://travis-ci.org/ylosix/ylosix.svg?branch=develop)](https://travis-ci.org/ylosix/ylosix) 
+[![Coverage Status](https://coveralls.io/repos/ylosix/ylosix/badge.svg?branch=develop)](https://coveralls.io/r/ylosix/ylosix?branch=develop) 
+[![Code Climate](https://codeclimate.com/github/ylosix/ylosix/badges/gpa.svg)](https://codeclimate.com/github/ylosix/ylosix) 
+[![Hakiri status](https://hakiri.io/github/ylosix/ylosix/develop.svg)](https://hakiri.io/github/ylosix/ylosix)
+[![Stories in Ready](https://badge.waffle.io/ylosix/ylosix.png?label=ready&title=Ready)](http://waffle.io/ylosix/ylosix)
 
 
 `Ylosix` is a new free and open source e-commerce and CMS solution written in Ruby on Rails. It is designed to be highly scalable, easily customizable, and allow plug-and-play modules to provide new features and integrations with other services.
