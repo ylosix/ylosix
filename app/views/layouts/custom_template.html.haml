@@ -13,4 +13,4 @@
 
   %body
     ="<!-- #{@variables['commerce'].to_liquid} -->".html_safe
-    = @body_content.html_safe
+    = @body_content.html_safe unless @body_content.nil?

@@ -6,11 +6,15 @@ module ActiveAdminHelper
 
   def category_collection_select
     array = Category.parent_order.map do |c|
-      array = Utils.get_parents_array(c)
-      array << c
-      c_name = array.map(&:name).join(' | ')
+      begin
+        array = Utils.get_parents_array(c)
+        array << c
+        c_name = array.map(&:name).join(' | ')
 
-      [c_name, c.id]
+        [c_name, c.id]
+      rescue ParentLoopError
+        [c.name, c.id]
+      end
     end
 
     array

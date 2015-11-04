@@ -29,8 +29,13 @@ ActiveAdmin.register Category do
     id_column
 
     column t('activerecord.attributes.category.parent'), sortable: :parent do |category|
-      array = Utils.get_parents_array(category)
-      (array.map { |item| auto_link(item, item.name) }).join(' || ').html_safe
+
+      begin
+        array = Utils.get_parents_array(category)
+        (array.map { |item| auto_link(item, item.name) }).join(' || ').html_safe
+      rescue ParentLoopError
+        'Parent loop exception'
+      end
     end
 
     column :name

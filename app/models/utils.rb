@@ -1,3 +1,5 @@
+class ParentLoopError < StandardError; end
+
 class Utils
   def self.get_error_title(messages)
     return '' if messages.empty?
@@ -81,6 +83,8 @@ class Utils
     until parent.nil?
       array << parent
       parent = parent.parent
+
+      fail ParentLoopError if !parent.nil? && parent.id == object.id
     end
 
     array.reverse

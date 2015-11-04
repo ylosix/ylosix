@@ -47,12 +47,17 @@ class Category < ActiveRecord::Base
   before_save :set_defaults
 
   def self.parent_order(parent_order = 'parent_asc')
-    array_ordered = Category.all.to_a.sort do |x, y|
-      if parent_order == 'parent_desc'
-        Utils.get_parents_array(y).map(&:name).join('_') <=> Utils.get_parents_array(x).map(&:name).join('_')
-      elsif parent_order == 'parent_asc'
-        Utils.get_parents_array(x).map(&:name).join('_') <=> Utils.get_parents_array(y).map(&:name).join('_')
+    array_ordered = Category.all.to_a
+
+    begin
+      array_ordered.sort do |x, y|
+        if parent_order == 'parent_desc'
+          Utils.get_parents_array(y).map(&:name).join('_') <=> Utils.get_parents_array(x).map(&:name).join('_')
+        elsif parent_order == 'parent_asc'
+          Utils.get_parents_array(x).map(&:name).join('_') <=> Utils.get_parents_array(y).map(&:name).join('_')
+        end
       end
+    rescue ParentLoopError
     end
 
     array_ordered
