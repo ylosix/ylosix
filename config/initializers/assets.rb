@@ -1,5 +1,8 @@
 # Be sure to restart your server when you modify this file.
 
+# No connect to sql to compile assets
+Rails.application.config.assets.initialize_on_precompile = false
+
 # Version of your assets, change this if you want to expire all your assets.
 Rails.application.config.assets.version = '1.0'
 
