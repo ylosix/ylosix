@@ -1,4 +1,19 @@
-test:
+postgresql: &postgresql
   adapter: postgresql
+  min_messages: ERROR
+  reconnect: false
+
+default: &default
+  pool: 5
+  timeout: 5000
+  encoding: utf8
+  <<: *postgresql
+
+test:
   database: travis_ci_test
   username: postgres
+  <<: *postgresql
+
+production:
+  url: <%= ENV['DATABASE_URL'] %>
+  <<: *default
