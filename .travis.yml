@@ -1,4 +1,6 @@
-sudo: false
+sudo: required
+services:
+  - docker
 cache: bundler
 language: ruby
 rvm:
@@ -9,13 +11,18 @@ rvm:
 matrix:
   allow_failures:
     - rvm: ruby-head
+env:
+  - DOCKER_IMAGE_NAME=ylosix/ylosix
 before_install:
   - gem update --remote bundler
 install:
   - bundle install --retry=3 --without development --without production
+  - docker login --email=$DOCKER_HUB_EMAIL --username=$DOCKER_HUB_USERNAME --password=$DOCKER_HUB_PASSWORD
 script:
   - RAILS_ENV=test bundle exec rake db:create
   - RAILS_ENV=test bundle exec rake
+  - docker build -t $DOCKER_IMAGE_NAME .
+  - if [ ! -z "$TRAVIS_TAG" ]; then docker tag $DOCKER_IMAGE_NAME:latest $DOCKER_IMAGE_NAME:$TRAVIS_TAG; fi && docker push $DOCKER_IMAGE_NAME
 before_script:
   - psql -c 'create database travis_ci_test;' -U postgres
   - cp config/database.yml.travis config/database.yml
