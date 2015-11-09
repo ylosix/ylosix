@@ -21,8 +21,10 @@ install:
 script:
   - RAILS_ENV=test bundle exec rake db:create
   - RAILS_ENV=test bundle exec rake
-  - docker build -t $DOCKER_IMAGE_NAME .
-  - if [ ! -z "$TRAVIS_TAG" ]; then docker tag $DOCKER_IMAGE_NAME:latest $DOCKER_IMAGE_NAME:$TRAVIS_TAG; fi && docker push $DOCKER_IMAGE_NAME
+  - docker build -t $DOCKER_IMAGE_NAME:latest .
+  - docker push $DOCKER_IMAGE_NAME:latest
+  - docker tag $DOCKER_IMAGE_NAME:$TRAVIS_BUILD_NUMBER
+  - docker push $DOCKER_IMAGE_NAME:$TRAVIS_BUILD_NUMBER
 before_script:
   - psql -c 'create database travis_ci_test;' -U postgres
   - cp config/database.yml.travis config/database.yml
