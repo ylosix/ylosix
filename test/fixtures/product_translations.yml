@@ -18,6 +18,7 @@
 #
 #  index_product_translations_on_locale      (locale)
 #  index_product_translations_on_product_id  (product_id)
+#  index_product_translations_on_slug        (slug)
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
