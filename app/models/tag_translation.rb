@@ -13,6 +13,7 @@
 # Indexes
 #
 #  index_tag_translations_on_locale  (locale)
+#  index_tag_translations_on_slug    (slug)
 #  index_tag_translations_on_tag_id  (tag_id)
 #
 

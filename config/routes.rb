@@ -1,17 +1,21 @@
 class RouteConstraint
   def matches?(request)
-    includes = request.path.starts_with?('/assets')
-    includes |= request.path.ends_with?('.jpg') || request.path.ends_with?('.jpeg')
-    includes |= request.path.ends_with?('.png')
-    includes |= request.path.ends_with?('.css')
-    includes |= request.path.ends_with?('.html')
-    includes |= request.path.ends_with?('.js')
-    includes |= request.path.ends_with?('.gif')
+    url_path = request.path.downcase
 
-    includes |= request.path.ends_with?('.pdf')
-    includes |= request.path.ends_with?('.csv')
-    includes |= request.path.ends_with?('.doc') || request.path.ends_with?('.docx')
-    includes |= request.path.ends_with?('.xls') || request.path.ends_with?('.xlsx')
+    includes = url_path.starts_with?('/assets')
+    includes |= url_path.starts_with?('"') || url_path.starts_with?('/%22')
+    includes |= url_path.starts_with?('/system')
+    includes |= url_path.ends_with?('.jpg') || url_path.ends_with?('.jpeg')
+    includes |= url_path.ends_with?('.png')
+    includes |= url_path.ends_with?('.css')
+    includes |= url_path.ends_with?('.html')
+    includes |= url_path.ends_with?('.js')
+    includes |= url_path.ends_with?('.gif')
+
+    includes |= url_path.ends_with?('.pdf')
+    includes |= url_path.ends_with?('.csv')
+    includes |= url_path.ends_with?('.doc') || url_path.ends_with?('.docx')
+    includes |= url_path.ends_with?('.xls') || url_path.ends_with?('.xlsx')
 
     not includes
   end
@@ -57,6 +61,7 @@ Rails.application.routes.draw do
   resource :shopping_carts, only: [] do
     get '/show' => 'shopping_carts#show'
     post '/:product_id/update' => 'shopping_carts#update', as: :update
+    post '/save' => 'shopping_carts#save'
   end
 
   resource :customers, only: [] do
@@ -73,7 +78,7 @@ Rails.application.routes.draw do
 
       post '/save_carrier' => 'shopping_orders#save_carrier'
       get '/checkout' => 'shopping_orders#checkout'
-      get '/finalize' => 'shopping_orders#finalize'
+      post '/finalize' => 'shopping_orders#finalize'
     end
   end
 
@@ -95,6 +100,9 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'home#index'
 
+  # constraints(RouteConstraint.new) do
+  #   get '*path' => 'dynamic_path#show_path'
+  # end
   get '*path' => 'dynamic_path#show_path', :constraints => RouteConstraint.new
 
   # The priority is based upon order of creation: first created -> highest priority.

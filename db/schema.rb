@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151019081050) do
+ActiveRecord::Schema.define(version: 20151116094537) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -298,6 +298,7 @@ ActiveRecord::Schema.define(version: 20151019081050) do
 
   add_index "product_translations", ["locale"], name: "index_product_translations_on_locale", using: :btree
   add_index "product_translations", ["product_id"], name: "index_product_translations_on_product_id", using: :btree
+  add_index "product_translations", ["slug"], name: "index_product_translations_on_slug", using: :btree
 
   create_table "products", force: :cascade do |t|
     t.string   "reference_code"
@@ -372,6 +373,7 @@ ActiveRecord::Schema.define(version: 20151019081050) do
     t.integer  "billing_address_id"
     t.integer  "carrier_id"
     t.decimal  "carrier_retail_price", precision: 10, scale: 2, default: 0.0, null: false
+    t.hstore   "extra_fields",                                  default: {},  null: false
   end
 
   add_index "shopping_carts", ["customer_id"], name: "index_shopping_carts_on_customer_id", using: :btree
@@ -383,6 +385,7 @@ ActiveRecord::Schema.define(version: 20151019081050) do
     t.datetime "updated_at",                                              null: false
     t.integer  "quantity",                                  default: 1,   null: false
     t.decimal  "retail_price",     precision: 10, scale: 2, default: 0.0, null: false
+    t.hstore   "extra_fields",                              default: {},  null: false
   end
 
   add_index "shopping_carts_products", ["product_id"], name: "index_shopping_carts_products_on_product_id", using: :btree
@@ -400,6 +403,7 @@ ActiveRecord::Schema.define(version: 20151019081050) do
     t.integer  "carrier_id"
     t.decimal  "carrier_retail_price",      precision: 10, scale: 2, default: 0.0,                                  null: false
     t.integer  "shopping_orders_status_id"
+    t.hstore   "extra_fields",                                       default: {},                                   null: false
   end
 
   add_index "shopping_orders", ["customer_id"], name: "index_shopping_orders_on_customer_id", using: :btree
@@ -413,6 +417,7 @@ ActiveRecord::Schema.define(version: 20151019081050) do
     t.decimal  "tax_rate",             precision: 5,  scale: 2, default: 0.0, null: false
     t.datetime "created_at",                                                  null: false
     t.datetime "updated_at",                                                  null: false
+    t.hstore   "extra_fields",                                  default: {},  null: false
   end
 
   add_index "shopping_orders_products", ["product_id"], name: "index_shopping_orders_products_on_product_id", using: :btree
@@ -464,6 +469,7 @@ ActiveRecord::Schema.define(version: 20151019081050) do
   end
 
   add_index "tag_translations", ["locale"], name: "index_tag_translations_on_locale", using: :btree
+  add_index "tag_translations", ["slug"], name: "index_tag_translations_on_slug", using: :btree
   add_index "tag_translations", ["tag_id"], name: "index_tag_translations_on_tag_id", using: :btree
 
   create_table "tags", force: :cascade do |t|

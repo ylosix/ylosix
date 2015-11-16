@@ -64,6 +64,8 @@ gem 'newrelic_rpm'
 gem 'formtastic', git: 'https://github.com/ylosix/formtastic.git', branch: 'master'
 
 group :development, :test, :profile do
+  gem 'rack-mini-profiler', require: false
+
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 

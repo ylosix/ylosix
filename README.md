@@ -184,6 +184,9 @@ Error when running `bundle install` about the gem `nokoguiri` in Mac OS X (Yosem
 ```
 $ port install libiconv libxslt libxml2
 $ gem install nokogiri -- --use-system-libraries --with-iconv-dir=/opt/local --with-xml2-dir=/opt/local --with-xslt-dir=/opt/local
+
+Capitan:
+$ gem install nokogiri -- --use-system-libraries=true --with-xml2-include=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/usr/include/libxml2
 ```
 
 Error when running `bundle install` about the gem `pg` in Mac OS X (Yosemite).
