@@ -63,7 +63,7 @@ class Utils
   end
 
   def self.elem_respond_to_liquid(elem)
-    hash = elem
+    hash = elem.dup unless elem.blank?
 
     if elem.respond_to?(:to_liquid)
       hash = elem.to_liquid
