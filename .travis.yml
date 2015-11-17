@@ -19,7 +19,7 @@ install:
   - bundle install --retry=3 --without development --without production
   - docker login --email=$DOCKER_HUB_EMAIL --username=$DOCKER_HUB_USERNAME --password=$DOCKER_HUB_PASSWORD
 script:
-  - RAILS_ENV=test bundle exec rake db:create
+  - RAILS_ENV=test bundle exec rake db:create db:migrate
   - RAILS_ENV=test bundle exec rake
   - docker build -t $DOCKER_IMAGE_NAME:$TRAVIS_BUILD_NUMBER .
   - docker push $DOCKER_IMAGE_NAME:$TRAVIS_BUILD_NUMBER
