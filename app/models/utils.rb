@@ -49,12 +49,35 @@ class Utils
     content
   end
 
-  def self.elem_respond_to_liquid(elem)
-    if elem.respond_to?(:to_liquid)
-      elem.to_liquid
-    else
-      elem
+  def self.clean_description(hash)
+    hash['description'] = 'Description text...' if hash.class == Hash && hash.keys.include?('description')
+    hash['short_description'] = 'Short description text...' if hash.class == Hash && hash.keys.include?('short_description')
+
+    if hash.class == Hash && hash.keys.include?('children')
+      hash['children'].each do |v|
+        clean_description(v)
+      end
     end
+
+    hash
+  end
+
+  def self.elem_respond_to_liquid(elem)
+    hash = elem
+
+    if elem.respond_to?(:to_liquid)
+      hash = elem.to_liquid
+    end
+
+    if hash.class == Array
+      hash.each do |v|
+        clean_description(v)
+      end
+    else
+      clean_description(hash)
+    end
+
+    hash
   end
 
   def self.pretty_json_template_variables(variables)
