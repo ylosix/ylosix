@@ -69,14 +69,14 @@ ActiveAdmin.register Category do
                   label: t('activerecord.attributes.category.parent'),
                   as: :select,
                   include_blank: true,
-                  collection: category_collection_select
+                  collection: category_collection_select(category)
 
           f.input :enabled
           f.input :visible
 
           admin_translation_text_field(translations, 'category', 'name')
-          admin_translation_text_field(translations, 'category', 'short_description', component: ActiveAdminHelper::CKEDITOR)
-          admin_translation_text_field(translations, 'category', 'description', component: ActiveAdminHelper::CKEDITOR)
+          admin_translation_text_field(translations, 'category', 'short_description', component: ActiveAdminHelper::CK_EDITOR)
+          admin_translation_text_field(translations, 'category', 'description', component: ActiveAdminHelper::CK_EDITOR)
 
           f.input :priority, hint: '1:+ --- 10:-'
         end

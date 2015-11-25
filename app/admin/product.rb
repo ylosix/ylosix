@@ -123,7 +123,7 @@ ActiveAdmin.register Product do
           f.input :visible
 
           admin_translation_text_field(translations, 'product', 'short_description', component: ActiveAdminHelper::TEXT_AREA)
-          admin_translation_text_field(translations, 'product', 'description', component: ActiveAdminHelper::CKEDITOR)
+          admin_translation_text_field(translations, 'product', 'description', component: ActiveAdminHelper::CK_EDITOR)
 
           f.input :publication_date
           f.input :unpublication_date

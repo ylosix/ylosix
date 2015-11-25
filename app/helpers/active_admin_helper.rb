@@ -1,11 +1,12 @@
 module ActiveAdminHelper
   TEXT_AREA = 1
   TEXT_FIELD = 2
-  CKEDITOR = 3
+  CK_EDITOR = 3
   ACE = 4
 
-  def category_collection_select
+  def category_collection_select(no_include_category = nil)
     array = Category.parent_order.map do |c|
+      next if no_include_category && no_include_category.id == c.id
       begin
         array = Utils.get_parents_array(c)
         array << c
@@ -17,11 +18,11 @@ module ActiveAdminHelper
       end
     end
 
-    array
+    array.compact
   end
 
   def admin_translation_text_field(translations, model_name, field, options = {})
-    if options[:component] == CKEDITOR && !session[:locale].nil?
+    if options[:component] == CK_EDITOR && !session[:locale].nil?
       options[:ckeditor] = {language: session[:locale]}
     end
 
@@ -67,7 +68,7 @@ module ActiveAdminHelper
     case options[:component]
       when TEXT_AREA
         output = text_area_tag(input_name, value, options.except(:hint))
-      when CKEDITOR
+      when CK_EDITOR
         output = cktext_area_tag(input_name, value, options.except(:hint))
       when ACE
         output = ace_area_tag(input_name, value, options.except(:hint))

@@ -19,7 +19,7 @@ ActiveAdmin.register DesignForm do
       f.input :tag
 
       translations = Utils.array_translations(DesignFormTranslation, design_form_id: design_form.id)
-      admin_translation_text_field(translations, 'design_form', 'content', component: ActiveAdminHelper::CKEDITOR)
+      admin_translation_text_field(translations, 'design_form', 'content', component: ActiveAdminHelper::CK_EDITOR)
     end
 
     f.actions
