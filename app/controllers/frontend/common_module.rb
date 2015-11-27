@@ -156,7 +156,7 @@ module Frontend
 
       @head_javascript = template.reads_file('common_js.js')
       @head_css = template.reads_file('common_css.css')
-      @body_content = template_liquid.render(@variables)
+      @body_content = render_to_string(inline: template_liquid.render(@variables))
     end
 
     def retrieve_file_html(controller, action, args = [])

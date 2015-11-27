@@ -26,7 +26,7 @@ class ShoppingOrdersControllerTest < ActionController::TestCase
   end
 
   test 'should get finalize with login user' do
-    get :finalize
+    post :finalize, shopping_cart: {extra_fields: {observations: 'blabla'}}
     assert_response :redirect
   end
 

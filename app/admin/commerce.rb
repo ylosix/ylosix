@@ -35,7 +35,7 @@ ActiveAdmin.register Commerce do
       f.input :no_redirect_shopping_cart
       f.input :http
       f.input :language
-      f.input :social_networks
+      f.input :social_networks, as: :text
     end
 
     f.inputs 'Seo & Google analytics' do

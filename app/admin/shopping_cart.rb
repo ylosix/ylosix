@@ -14,6 +14,20 @@ ActiveAdmin.register ShoppingCart do
     actions
   end
 
+  form do |f|
+    f.inputs 'Shopping cart details' do
+      f.input :billing_address
+      f.input :shipping_address
+      f.input :carrier
+      f.input :carrier_retail_price
+      f.input :customer
+
+      f.input :extra_fields, as: :text
+    end
+
+    f.actions
+  end
+
   show title: proc { |so| "Shopping cart ##{so.id}" } do |_so|
     attributes_table do
       row :id

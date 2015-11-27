@@ -15,6 +15,13 @@ class ShoppingCartsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test 'should post save' do
+    login_customer
+
+    post :save, shopping_cart: {extra_fields: {observations: 'blabla'}}
+    assert_response :redirect
+  end
+
   test 'should get update with login user' do
     login_customer
     scp = shopping_carts_products(:scp_camera)

@@ -44,11 +44,10 @@ class Commerce < ActiveRecord::Base
                  :city, :country, :phone, :cif
 
   def self.retrieve(http)
-    commerce = Commerce.find_by(http: http)
+    t = Commerce.arel_table
+    commerce = Commerce.where(t[:http].eq(http).or(t[:default].eq(true))).take
 
-    commerce ||= Commerce.find_by(default: true)
     commerce ||= Commerce.new
-
     commerce
   end
 

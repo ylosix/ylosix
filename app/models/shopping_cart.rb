@@ -7,6 +7,7 @@
 #  carrier_retail_price :decimal(10, 2)   default(0.0), not null
 #  created_at           :datetime         not null
 #  customer_id          :integer
+#  extra_fields         :hstore           default({}), not null
 #  id                   :integer          not null, primary key
 #  shipping_address_id  :integer
 #  updated_at           :datetime         not null
@@ -102,7 +103,8 @@ class ShoppingCart < ActiveRecord::Base
         'total_weight' => total_weight,
         'total_retail_price' => total_retail_price,
         'shipping_address' => shipping_address,
-        'billing_address' => billing_address
+        'billing_address' => billing_address,
+        'extra_fields' => extra_fields
     }
   end
 

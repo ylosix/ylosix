@@ -16,9 +16,9 @@ ActiveAdmin.register ActionForm do
   end
 
   form do |f|
-    f.inputs 'Action form Details' do
+    f.inputs 'Action form details' do
       f.input :tag
-      f.input :mapping, hint: 'ex: "email" => "reply-to"'
+      f.input :mapping, hint: 'ex: "email" => "reply-to"', as: :text
 
       translations = Utils.array_translations(ActionFormTranslation, action_form_id: action_form.id)
       admin_translation_text_field(translations, 'action_form', 'subject')

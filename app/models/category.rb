@@ -63,6 +63,18 @@ class Category < ActiveRecord::Base
     array_ordered
   end
 
+  def me_and_children
+    categories = [self]
+
+    if children.any?
+      children.each do |child|
+        categories += child.me_and_children
+      end
+    end
+
+    categories
+  end
+
   def children
     children = Category.in_frontend.where(parent_id: id)
     children.to_a.sort! do |a, b|

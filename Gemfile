@@ -46,8 +46,6 @@ gem 'exception_notification'
 gem 'slack-notifier'
 gem 'rubyzip'
 gem 'foreman'
-gem 'rails-erd'
-gem 'annotate'
 gem 'liquid', git: 'https://github.com/ylosix/liquid.git', branch: 'master'
 
 # Use Capistrano for deployment
@@ -61,11 +59,8 @@ gem 'paperclip'
 
 gem 'mailgun_rails'
 gem 'newrelic_rpm'
-gem 'formtastic', git: 'https://github.com/ylosix/formtastic.git', branch: 'master'
 
 group :development, :test, :profile do
-  gem 'rack-mini-profiler', require: false
-
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 
@@ -76,9 +71,13 @@ group :development, :test, :profile do
   gem 'spring'
   gem 'did_you_mean'
 
+  gem 'rails-erd'
+  gem 'annotate'
+
   #profiling
   gem 'bullet'
   gem 'ruby-prof', platforms: :ruby
+  gem 'rack-mini-profiler', require: false
 
   # Use debugger (incompatible with Rubymine)
   # gem 'debugger'

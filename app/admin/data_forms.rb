@@ -14,6 +14,15 @@ ActiveAdmin.register DataForm do
     actions
   end
 
+  form do |f|
+    f.inputs 'Data form details' do
+      f.input :tag
+      f.input :fields, as: :text
+    end
+
+    f.actions
+  end
+
   controller do
     def update
       super

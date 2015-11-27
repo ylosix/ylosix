@@ -99,13 +99,9 @@ class Product < ActiveRecord::Base
     products = products.where('publication_date <= ?', DateTime.now)
                    .where('unpublication_date is null or unpublication_date >= ?', DateTime.now)
                    .where(products_categories:
-                              {category_id: category.id},
+                              {category_id: category.me_and_children.map(&:id)},
                           visible: true)
                    .group('products.id')
-
-    category.children.each do |child|
-      products += Product.in_frontend(child, products.map(&:id))
-    end
 
     products
   end

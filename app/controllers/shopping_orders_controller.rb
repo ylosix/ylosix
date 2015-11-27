@@ -64,6 +64,10 @@ class ShoppingOrdersController < Frontend::CommonController
     sc = current_customer.shopping_cart
 
     unless sc.nil?
+      params_sc = params_shopping_cart
+      sc.extra_fields = params_sc[:extra_fields] unless params_sc[:extra_fields].nil?
+      sc.save
+
       so = ShoppingOrder.from_shopping_cart(sc, @commerce)
       unless so.save
         redirect_to :shipping_method_customers_shopping_orders, alert: 'A carrier needs to be selected.'
@@ -82,6 +86,10 @@ class ShoppingOrdersController < Frontend::CommonController
     params.permit(:carrier_id)
   end
 
+  def params_shopping_cart
+    params.require(:shopping_cart).permit(extra_fields: [:observations])
+  end
+
   def set_breadcrumbs
     add_breadcrumb(Breadcrumb.new(url: show_customers_path, name: 'Customers'))
   end
@@ -89,10 +97,7 @@ class ShoppingOrdersController < Frontend::CommonController
   def check_empty_cart
     sc = current_customer.shopping_cart
 
-    if sc.nil?
-      redirect_to :show_shopping_carts, alert: 'Shopping cart not set.'
-      return
-    end
+    redirect_to :show_shopping_carts, alert: 'Shopping cart not set.' if sc.nil?
   end
 
   def check_empty_addresses

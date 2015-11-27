@@ -3,6 +3,7 @@
 # Table name: shopping_carts_products
 #
 #  created_at       :datetime         not null
+#  extra_fields     :hstore           default({}), not null
 #  id               :integer          not null, primary key
 #  product_id       :integer
 #  quantity         :integer          default(1), not null
@@ -45,7 +46,8 @@ class ShoppingCartsProduct < ActiveRecord::Base
         'id' => id,
         'product' => product.to_liquid,
         'quantity' => quantity,
-        'retail_price' => retail_price
+        'retail_price' => retail_price,
+        'extra_fields' => extra_fields
     }
   end
 end

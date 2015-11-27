@@ -9,6 +9,7 @@
 #  commerce_id               :integer
 #  created_at                :datetime         not null
 #  customer_id               :integer
+#  extra_fields              :hstore           default({}), not null
 #  id                        :integer          not null, primary key
 #  order_num                 :integer          not null
 #  shipping_address          :hstore           default({}), not null

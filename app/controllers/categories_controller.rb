@@ -15,7 +15,7 @@ class CategoriesController < Frontend::CommonController
   def append_variables
     super
 
-    unless @category.nil?
+    if @category
       @variables['category'] = @category.to_liquid unless @category.nil?
 
       # Tags by category, removes general tags.
@@ -24,10 +24,17 @@ class CategoriesController < Frontend::CommonController
     end
 
     @variables['products'] = []
-    if params[:slug_tags].blank?
-      @variables['products'] = array_to_liquid(Product.in_frontend(@category)) unless @category.nil?
-    else
+    if params[:slug_tags]
       @variables['products'] = array_to_liquid(products_tags)
+    else
+      if @category
+        # TODO, get commerce per page.
+
+        @products = Product.in_frontend(@category).page(params[:page]).per(params[:per_page])
+
+        @variables['products'] = array_to_liquid(@products)
+        @variables['block_paginate'] = div_pagination(@products)
+      end
     end
 
     array_categories = Utils.get_parents_array(@category)

@@ -7,6 +7,7 @@
 #  carrier_retail_price :decimal(10, 2)   default(0.0), not null
 #  created_at           :datetime         not null
 #  customer_id          :integer
+#  extra_fields         :hstore           default({}), not null
 #  id                   :integer          not null, primary key
 #  shipping_address_id  :integer
 #  updated_at           :datetime         not null

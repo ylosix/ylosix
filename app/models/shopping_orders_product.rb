@@ -3,6 +3,7 @@
 # Table name: shopping_orders_products
 #
 #  created_at           :datetime         not null
+#  extra_fields         :hstore           default({}), not null
 #  id                   :integer          not null, primary key
 #  product_id           :integer
 #  quantity             :integer          default(1), not null
@@ -33,7 +34,8 @@ class ShoppingOrdersProduct < ActiveRecord::Base
         'product' => product.to_liquid,
         'retail_price' => retail_price,
         'retail_price_pre_tax' => retail_price_pre_tax,
-        'tax_rate' => tax_rate
+        'tax_rate' => tax_rate,
+        'extra_fields' => extra_fields
     }
   end
 end

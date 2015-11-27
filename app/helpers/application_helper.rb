@@ -1,4 +1,8 @@
 module ApplicationHelper
+  include ActionView::Helpers::TagHelper
+  include ActionView::Helpers::TextHelper
+  include ActionView::Context
+
   def initialize_breadcrumb
     add_breadcrumb(Breadcrumb.new(url: root_path, name: 'Home'))
   end
@@ -19,5 +23,24 @@ module ApplicationHelper
     end
 
     html_content
+  end
+
+  def div_pagination(scope)
+    content_tag :nav, class: 'pagination' do
+      (1..scope.total_pages).each do |i|
+        class_str = 'page'
+        class_str += ' current' if i == scope.current_page
+
+        concat(content_tag(:span, class: class_str) do
+          if i == scope.current_page
+            i.to_s
+          else
+            content_tag :a, rel: 'next', href: request.path + "?page=#{i}" do
+              i.to_s
+            end
+          end
+        end)
+      end
+    end
   end
 end
