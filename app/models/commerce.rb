@@ -17,6 +17,7 @@
 #  name                      :string
 #  no_redirect_shopping_cart :boolean          default(FALSE), not null
 #  order_prefix              :string           default(""), not null
+#  per_page                  :integer          default(20)
 #  social_networks           :hstore           default({}), not null
 #  template_id               :integer
 #  updated_at                :datetime         not null
@@ -44,10 +45,13 @@ class Commerce < ActiveRecord::Base
                  :city, :country, :phone, :cif
 
   def self.retrieve(http)
-    t = Commerce.arel_table
-    commerce = Commerce.where(t[:http].eq(http).or(t[:default].eq(true))).take
+    # t = Commerce.arel_table
+    # commerce = Commerce.where(t[:http].eq(http).or(t[:default].eq(true))).take
 
-    commerce ||= Commerce.new
+    commerce = Commerce.find_by(http: http)
+    commerce = Commerce.find_by(default: true) if commerce.nil?
+    commerce = Commerce.new if commerce.nil?
+
     commerce
   end
 

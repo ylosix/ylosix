@@ -44,6 +44,7 @@ ActiveAdmin.register Commerce do
     end
 
     f.inputs 'Design' do
+      f.input :per_page
       f.input :template
 
       f.inputs 'Dimensions 300x100' do

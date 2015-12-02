@@ -28,9 +28,7 @@ class CategoriesController < Frontend::CommonController
       @variables['products'] = array_to_liquid(products_tags)
     else
       if @category
-        # TODO, get commerce per page.
-
-        @products = Product.in_frontend(@category).page(params[:page]).per(params[:per_page])
+        @products = Product.in_frontend(@category).page(params[:page]).per(per_page)
 
         @variables['products'] = array_to_liquid(@products)
         @variables['block_paginate'] = div_pagination(@products)
@@ -47,6 +45,13 @@ class CategoriesController < Frontend::CommonController
   end
 
   protected
+
+  def per_page
+    per_page = @commerce.per_page
+    per_page = params[:per_page] unless params[:per_page].blank?
+
+    per_page
+  end
 
   def products_tags
     tags, _ids, _slugs = set_tags
