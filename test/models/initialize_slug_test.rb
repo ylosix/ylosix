@@ -23,6 +23,11 @@ class InitializeSlugTest < ActiveSupport::TestCase
     p2.product_translations.each do |translation|
       assert_equal(translation.slug, 'test-name_2')
     end
+
+    p2.save
+    p2.product_translations.each do |translation|
+      assert_equal(translation.slug, 'test-name_2')
+    end
   end
 
   test 'category should have slug without numbers' do

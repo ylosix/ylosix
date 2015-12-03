@@ -19,6 +19,8 @@ module InitializeSlug
   end
 
   def unique_slug(slug, check_models = [Category, Product, Tag])
+    return slug if link?(slug)
+
     if check_models.empty?
       count = self.class.with_translations.where('slug like :slug', slug: slug).uniq(self.class).length
     else
@@ -28,7 +30,7 @@ module InitializeSlug
       end
     end
 
-    slug + (count == 0 ? '' : "_#{count}")
+    slug + (count > 1 ? "_#{count}" : '')
   end
 
   def parse_url_chars(str)
