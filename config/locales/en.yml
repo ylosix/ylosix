@@ -21,9 +21,26 @@
 
 en:
   active_admin:
-    catalog: Catalog
+    catalog:
+      label: Catalog
     comments:
-      title_content: 'Admin comments'
+      label: Admin comments
+      title_content: Admin comments
+    orders:
+      label: Orders
+    customers:
+      label: Clients
+    transports:
+      label: Carriers
+    administration:
+      label: Administration
+    locales:
+      label: Locales
+    preferences:
+      label: Preferences
+    design:
+      label: Design
+
   time:
     formats:
       default: "%Y/%m/%d"
