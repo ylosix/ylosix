@@ -14,11 +14,11 @@ module InitializeSlug
         end
       end
 
-      translation.slug = unique_slug(parse_url_chars(slug))
+      translation.slug = unique_slug(parse_url_chars(slug), translation)
     end
   end
 
-  def unique_slug(slug, check_models = [Category, Product, Tag])
+  def unique_slug(slug, translation, check_models = [Category, Product, Tag])
     return slug if link?(slug)
 
     if check_models.empty?
@@ -30,7 +30,9 @@ module InitializeSlug
       end
     end
 
-    slug + (count > 1 ? "_#{count}" : '')
+    # slug not changed
+    count -= 1 if !translation.id.blank? && translation.slug == slug
+    slug + (count > 0 ? "_#{count}" : '')
   end
 
   def parse_url_chars(str)
