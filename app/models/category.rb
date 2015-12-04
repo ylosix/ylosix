@@ -78,7 +78,7 @@ class Category < ActiveRecord::Base
   def children
     children = Category.in_frontend.where(parent_id: id)
     children.to_a.sort! do |a, b|
-      if a.priority == b.priority
+      if a.priority == b.priority && !a.name.nil? && !b.name.nil?
         a.name.downcase <=> b.name.downcase
       else
         a.priority <=> b.priority

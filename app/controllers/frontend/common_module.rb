@@ -146,17 +146,21 @@ module Frontend
       end
     end
 
+    def parse_template(body_code)
+      template_liquid = Liquid::Template.parse(body_code)
+      template_liquid.render(@variables)
+    end
+
     def render_template(template, file_html)
       body_code = template.reads_file(file_html)
       body_code = Utils.replace_regex_include(@variables, template, body_code)
       body_code = append_debug_variables(current_admin_user, @variables, body_code)
 
       # Parses and compiles the template
-      template_liquid = Liquid::Template.parse(body_code)
+      @head_javascript = parse_template(template.reads_file('common_js.js'))
+      @head_css = parse_template(template.reads_file('common_css.css'))
 
-      @head_javascript = template.reads_file('common_js.js')
-      @head_css = template.reads_file('common_css.css')
-      @body_content = render_to_string(inline: template_liquid.render(@variables))
+      @body_content = render_to_string(inline: parse_template(body_code))
     end
 
     def retrieve_file_html(controller, action, args = [])

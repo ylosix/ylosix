@@ -102,6 +102,7 @@ class Product < ActiveRecord::Base
                               {category_id: category.me_and_children.map(&:id)},
                           visible: true)
                    .group('products.id')
+                   .order('products.publication_date DESC')
 
     products
   end

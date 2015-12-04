@@ -218,6 +218,7 @@ ActiveAdmin.register Product do
 
       update_categories
       update_tags
+      @product.publication_date = DateTime.now
     end
 
     def update
