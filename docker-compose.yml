@@ -18,3 +18,4 @@ web:
     SECRET_KEY_BASE: <%= rake secret %>
   volumes:
    - tmp/docker/system:/var/www/public/system
+   - tmp/docker/templates:/var/www/public/templates

@@ -16,7 +16,7 @@ class CategoriesController < Frontend::CommonController
     super
 
     if @category
-      @variables['category'] = @category.to_liquid unless @category.nil?
+      @variables['category'] = @category.to_liquid
 
       # Tags by category, removes general tags.
       @variables['tags_group'] = TagsGroup.general_groups(@category.id)

@@ -46,7 +46,7 @@ gem 'exception_notification'
 gem 'slack-notifier'
 gem 'rubyzip'
 gem 'foreman'
-gem 'liquid', git: 'https://github.com/ylosix/liquid.git', branch: 'master'
+gem 'liquid'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
