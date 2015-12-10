@@ -103,7 +103,9 @@ class Category < ActiveRecord::Base
     slug_to_href(self)
   end
 
-  def to_liquid
+  def to_liquid(options = {})
+    options[:current_category] = self
+
     {
         'name' => name,
         'short_description' => short_description,
@@ -111,7 +113,7 @@ class Category < ActiveRecord::Base
         'priority' => priority,
         'href' => href,
         'children' => array_to_liquid(children),
-        'tags_groups' => array_to_liquid(tags_groups),
+        'tags_groups' => array_to_liquid(tags_groups, options),
         'products' => array_to_liquid(products)
     }
   end

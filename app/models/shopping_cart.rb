@@ -96,7 +96,7 @@ class ShoppingCart < ActiveRecord::Base
     sc
   end
 
-  def to_liquid
+  def to_liquid(_options = {})
     {
         'shopping_carts_products' => array_to_liquid(shopping_carts_products),
         'total_products' => total_products,

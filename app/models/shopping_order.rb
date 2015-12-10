@@ -100,7 +100,7 @@ class ShoppingOrder < ActiveRecord::Base
     shopping_orders_products.inject(0) { |a, e| a + (e.product.weight * e.quantity) }
   end
 
-  def to_liquid
+  def to_liquid(_options = {})
     status = {'color' => '', 'name' => 'Pending'}
     status = shopping_orders_status.to_liquid unless shopping_orders_status.nil?
 

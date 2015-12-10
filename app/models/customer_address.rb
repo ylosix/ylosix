@@ -39,7 +39,7 @@ class CustomerAddress < ActiveRecord::Base
         .update_all(default_shipping: false) if default_shipping
   end
 
-  def to_liquid
+  def to_liquid(_options = {})
     helper = Rails.application.routes.url_helpers
 
     hash = {

@@ -1,10 +1,14 @@
 module ArrayLiquid
   extend ActiveSupport::Concern
 
-  def array_to_liquid(array)
+  def array_to_liquid(array, options = {})
     array_liquid = []
     array.each do |elem|
-      array_liquid << elem.to_liquid
+      if elem.class == Hash
+        array_liquid << elem
+      else
+        array_liquid << elem.to_liquid(options)
+      end
     end
 
     array_liquid

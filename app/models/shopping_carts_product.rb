@@ -38,7 +38,7 @@ class ShoppingCartsProduct < ActiveRecord::Base
     sop
   end
 
-  def to_liquid
+  def to_liquid(_options = {})
     id = id
     id ||= "new-#{SecureRandom.hex[1..6]}"
 

@@ -37,7 +37,7 @@ class Language < ActiveRecord::Base
     !language.nil?
   end
 
-  def to_liquid
+  def to_liquid(_options = {})
     image_src = 'http://placehold.it/25x25'
     image_src = flag.url(:original) if flag?
 

@@ -3,7 +3,7 @@ class Breadcrumb
 
   include InitializeAttr
 
-  def to_liquid
+  def to_liquid(_options = {})
     {
         'url' => url,
         'name' => name

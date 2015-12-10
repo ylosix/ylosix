@@ -114,7 +114,8 @@ module Frontend
       append_message_variables
       append_language_variables
 
-      @variables['categories'] = array_to_liquid(Category.root_categories) # TODO This only for test.
+      @liquid_options = {current_tags: set_tags}
+      @variables['categories'] = array_to_liquid(Category.root_categories, @liquid_options) # TODO This only for test.
       @variables['products'] ||= array_to_liquid(Product.all.limit(10)) # TODO This only for test.
 
       append_general_tags

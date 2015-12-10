@@ -23,7 +23,7 @@
 class Country < ActiveRecord::Base
   belongs_to :zone
 
-  def to_liquid
+  def to_liquid(_options = {})
     {
         'code' => code,
         'name' => name,

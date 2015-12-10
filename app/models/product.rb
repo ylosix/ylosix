@@ -137,7 +137,7 @@ class Product < ActiveRecord::Base
     slug_to_href(self)
   end
 
-  def to_liquid
+  def to_liquid(_options = {})
     helpers = Rails.application.routes.url_helpers
     s_short_description = ''
     s_short_description = short_description.html_safe unless short_description.blank?

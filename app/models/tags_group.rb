@@ -36,10 +36,16 @@ class TagsGroup < ActiveRecord::Base
     list
   end
 
-  def to_liquid
+  def to_liquid(options = {})
     {
         'name' => name,
-        'tags' => array_to_liquid(tags.map(&:name))
+        'tags' => array_to_liquid(retrieve_tags(options))
     }
+  end
+
+  def retrieve_tags(options)
+    tags.map do |tag|
+      tag.to_liquid(options)
+    end
   end
 end

@@ -55,7 +55,7 @@ class Customer < ActiveRecord::Base
     retrieve_address(default_billing: true)
   end
 
-  def to_liquid
+  def to_liquid(_options = {})
     helper = Rails.application.routes.url_helpers
 
     {

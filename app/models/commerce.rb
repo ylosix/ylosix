@@ -55,7 +55,7 @@ class Commerce < ActiveRecord::Base
     commerce
   end
 
-  def to_liquid
+  def to_liquid(_options = {})
     image_src = 'http://placehold.it/300x100'
     image_src = logo.url(:original) if logo?
 

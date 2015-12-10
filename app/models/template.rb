@@ -75,7 +75,7 @@ class Template < ActiveRecord::Base
     end
   end
 
-  def to_liquid
+  def to_liquid(_options = {})
     {
         'from' => from,
         'name' => name,

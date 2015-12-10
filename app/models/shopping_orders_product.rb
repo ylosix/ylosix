@@ -28,7 +28,7 @@ class ShoppingOrdersProduct < ActiveRecord::Base
   belongs_to :product
   belongs_to :shopping_order
 
-  def to_liquid
+  def to_liquid(_options = {})
     {
         'quantity' => quantity,
         'product' => product.to_liquid,

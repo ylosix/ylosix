@@ -16,10 +16,11 @@ class CategoriesController < Frontend::CommonController
     super
 
     if @category
+      @liquid_options[:current_category] = @category
       @variables['category'] = @category.to_liquid
 
       # Tags by category, removes general tags.
-      @variables['tags_group'] = TagsGroup.general_groups(@category.id)
+      @variables['tags_group'] = array_to_liquid(TagsGroup.general_groups(@category.id), @liquid_options)
       add_show_action_name(@category)
     end
 
