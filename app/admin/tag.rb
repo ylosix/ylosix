@@ -30,7 +30,7 @@ ActiveAdmin.register Tag do
 
       translations = Utils.array_translations(TagTranslation, tag_id: tag.id)
       admin_translation_text_field(translations, 'tag', 'name')
-      admin_translation_text_field(translations, 'product', 'slug', hint: 'Chars not allowed: (Upper chars) spaces')
+      admin_translation_text_field(translations, 'tag', 'slug', hint: 'Chars not allowed: (Upper chars) spaces')
     end
     f.actions
   end
