@@ -124,13 +124,13 @@ module Frontend
     def render_template(template, file_html)
       body_code = template.reads_file(file_html)
       body_code = Utils.replace_regex_include(@variables, template, body_code)
-      body_code = append_debug_variables(current_admin_user, @variables, body_code)
 
       # Parses and compiles the template
       @head_javascript = parse_template(template.reads_file('common_js.js'))
       @head_css = parse_template(template.reads_file('common_css.css'))
 
       @body_content = render_to_string(inline: parse_template(body_code))
+      @body_content = append_debug_variables(current_admin_user, @variables, @body_content)
     end
 
     def retrieve_file_html(controller, action, args = [])

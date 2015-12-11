@@ -19,7 +19,7 @@ module ApplicationHelper
     if !admin_user.nil? && admin_user.debug_variables
       content_hash_variables = Utils.pretty_json_template_variables(variables)
       html_code = JSON.pretty_generate(content_hash_variables)
-      html_content += "<br /><pre><code>#{html_code}</code></pre>"
+      html_content += "<br /><pre><code>#{html_code}</code></pre>".html_safe
     end
 
     html_content

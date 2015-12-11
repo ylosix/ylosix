@@ -10,10 +10,6 @@ class ProductsController < Frontend::CommonController
     @variables['product'] = @product.to_liquid unless @product.nil?
 
     unless @category.nil?
-      # Tags by category, removes general tags.
-      @variables['tags_group'] = TagsGroup.retrieve_groups(@category.id)
-      add_show_action_name(@category)
-
       array_categories = Utils.get_parents_array(@category)
       array_categories.delete_at(0) if array_categories.any? # delete root.
       array_categories << @category unless @category.nil? # append current category.

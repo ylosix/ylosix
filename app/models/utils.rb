@@ -1,4 +1,5 @@
-class ParentLoopError < StandardError; end
+class ParentLoopError < StandardError
+end
 
 class Utils
   def self.get_error_title(messages)
@@ -53,8 +54,12 @@ class Utils
     hash['description'] = 'Description text...' if hash.class == Hash && hash.keys.include?('description')
     hash['short_description'] = 'Short description text...' if hash.class == Hash && hash.keys.include?('short_description')
 
-    if hash.class == Hash && hash.keys.include?('children')
-      hash['children'].each do |v|
+    if hash.class == Hash
+      hash.each do |_k, v|
+        clean_description(v)
+      end
+    elsif hash.class == Array
+      hash.each do |v|
         clean_description(v)
       end
     end
@@ -66,13 +71,7 @@ class Utils
     hash = elem.dup if !elem.blank? && elem.class != Symbol
     hash = elem.to_liquid if elem.respond_to?(:to_liquid)
 
-    if hash.class == Array
-      hash.each do |v|
-        clean_description(v)
-      end
-    else
-      clean_description(hash)
-    end
+    clean_description(hash)
 
     hash
   end
