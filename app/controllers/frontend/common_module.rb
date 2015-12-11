@@ -18,43 +18,12 @@ module Frontend
       [tags, ids, slugs]
     end
 
-    def retrieve_tags_path(ids)
-      if defined?(@category) && !@category.nil?
-        if ids.empty?
-          category_path(@category.slug)
-        else
-          category_tags_path(@category.slug, ids)
-        end
-      else
-        if ids.empty?
-          root_path
-        else
-          tags_path(ids)
-        end
-      end
-    end
+    def append_general_tags(liquid_options)
+      @variables['tags_group'] ||= array_to_liquid(TagsGroup.retrieve_groups)
 
-    def append_general_tags
-      @variables['tags_group'] ||= TagsGroup.general_groups
-
-      tags, ids, _slugs = set_tags
-      tags.each do |tag|
-        ids_clon = ids.clone
-        ids_clon.delete(tag.id)
-
-        tag.remove_href = retrieve_tags_path(ids_clon)
-      end
-
+      tags = []
+      tags = liquid_options[0] if liquid_options
       @variables['selected_tags'] = array_to_liquid(tags)
-
-      @variables['tags_group'].each do |group|
-        group.tags.each do |tag|
-          ids_clon = ids.clone
-          ids_clon << tag.id unless ids.include?(tag.id)
-
-          tag.href = retrieve_tags_path(ids_clon)
-        end
-      end
     end
 
     def append_language_variables
@@ -118,7 +87,7 @@ module Frontend
       @variables['categories'] = array_to_liquid(Category.root_categories, @liquid_options) # TODO This only for test.
       @variables['products'] ||= array_to_liquid(Product.all.limit(10)) # TODO This only for test.
 
-      append_general_tags
+      append_general_tags(@liquid_options)
 
       helper = Rails.application.routes.url_helpers
       append_link_variables(helper)
@@ -167,7 +136,7 @@ module Frontend
     def retrieve_file_html(controller, action, args = [])
       file_html = "#{controller}/#{action}.html"
 
-      if action == 'show' && !@variables['show_action_name'].blank?
+      if %w(show tags).include?(action) && !@variables['show_action_name'].blank?
         if !@render_template.nil? &&
             @render_template.ok?("#{controller}/#{@variables['show_action_name']}.html")
           file_html = "#{controller}/#{@variables['show_action_name']}.html"

@@ -11,7 +11,7 @@ class ProductsController < Frontend::CommonController
 
     unless @category.nil?
       # Tags by category, removes general tags.
-      @variables['tags_group'] = TagsGroup.general_groups(@category.id)
+      @variables['tags_group'] = TagsGroup.retrieve_groups(@category.id)
       add_show_action_name(@category)
 
       array_categories = Utils.get_parents_array(@category)

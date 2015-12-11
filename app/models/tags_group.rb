@@ -20,7 +20,8 @@ class TagsGroup < ActiveRecord::Base
   has_many :categories, through: :tags_groups_categories
   accepts_nested_attributes_for :tags_groups_categories, allow_destroy: true
 
-  def self.general_groups(category_id = nil)
+  def self.retrieve_groups(category_id = nil)
+    list = []
     if category_id.nil?
       ids = TagsGroupsCategory.all.pluck(:tags_group_id)
       if ids.empty?
@@ -30,7 +31,7 @@ class TagsGroup < ActiveRecord::Base
       end
     else
       list = TagsGroup.joins(:tags_groups_categories).where(tags_groups_categories: {category_id: category_id})
-      list = TagsGroup.general_groups if list.empty?
+      list = TagsGroup.retrieve_groups if list.empty?
     end
 
     list

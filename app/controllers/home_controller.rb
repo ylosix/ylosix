@@ -10,7 +10,7 @@ class HomeController < Frontend::CommonController
       @variables['category'] = @category.to_liquid
 
       # Tags by category, removes general tags.
-      @variables['tags_group'] = TagsGroup.general_groups(@category.id)
+      @variables['tags_group'] = TagsGroup.retrieve_groups(@category.id)
       add_show_action_name(@category)
     end
   end
