@@ -137,7 +137,7 @@ class Product < ActiveRecord::Base
     slug_to_href(self)
   end
 
-  def to_liquid(_options = {})
+  def to_liquid(options = {})
     helpers = Rails.application.routes.url_helpers
     s_short_description = ''
     s_short_description = short_description.html_safe unless short_description.blank?
@@ -153,12 +153,12 @@ class Product < ActiveRecord::Base
         'tags' => array_tags,
         'href' => href,
         'publication_date' => I18n.l(publication_date, format: :default),
-        'features' => array_features,
         'add_to_shopping_cart_path' => helpers.product_add_to_shopping_cart_path(self),
         'update_shopping_carts_path' => helpers.update_shopping_carts_path(self),
         'delete_from_shopping_cart_path' => helpers.product_delete_from_shopping_cart_path(self)
     }
 
+    liquid[:features] = array_features if options[:features]
     append_images(liquid)
   end
 
