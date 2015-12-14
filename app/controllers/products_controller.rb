@@ -7,7 +7,7 @@ class ProductsController < Frontend::CommonController
   def append_variables
     super
 
-    @variables['product'] = @product.to_liquid({features: true}) unless @product.nil?
+    @variables['product'] = @product.to_liquid(features: true) unless @product.nil?
 
     unless @category.nil?
       array_categories = Utils.get_parents_array(@category)

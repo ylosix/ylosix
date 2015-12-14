@@ -105,7 +105,7 @@ module Frontend
 
           fill_descriptions_with_variables(v, template) if v.class.name == 'Hash'
 
-          if k.include?('description') && !v.blank?
+          if k.to_s.include?('description') && !v.blank?
             v = Utils.replace_regex_include(@variables, template, v)
 
             # Parses and compiles the description field
