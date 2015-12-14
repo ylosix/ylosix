@@ -158,7 +158,7 @@ class Product < ActiveRecord::Base
         'delete_from_shopping_cart_path' => helpers.product_delete_from_shopping_cart_path(self)
     }
 
-    liquid[:features] = array_features if options[:features]
+    liquid['features'] = array_features if options[:features]
     append_images(liquid)
   end
 
