@@ -67,7 +67,7 @@ class Commerce < ActiveRecord::Base
         'image_src' => image_src,
         'name' => name,
         'billing_address' => billing_address,
-        'root_href' => Rails.application.routes.url_helpers.root_path,
+        'root_href' => Routes.root_path,
         'template' => template_liquid,
         'ga_account_id' => ga_account_id,
         'order_prefix' => order_prefix,

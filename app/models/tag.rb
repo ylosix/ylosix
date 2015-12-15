@@ -53,19 +53,17 @@ class Tag < ActiveRecord::Base
   private
 
   def retrieve_tags_path(ids, category = nil)
-    helpers = Rails.application.routes.url_helpers
-
     if category
       if ids.empty?
-        helpers.category_path(category.slug)
+        Routes.category_path(category.slug)
       else
-        helpers.category_tags_path(category.slug, ids)
+        Routes.category_tags_path(category.slug, ids)
       end
     else
       if ids.empty?
-        helpers.root_path
+        Routes.root_path
       else
-        helpers.tags_path(ids)
+        Routes.tags_path(ids)
       end
     end
   end

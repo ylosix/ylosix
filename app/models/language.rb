@@ -45,7 +45,7 @@ class Language < ActiveRecord::Base
         'locale' => locale,
         'name' => name,
         'image_src' => image_src,
-        'href' => Rails.application.routes.url_helpers.change_locale_path(locale)
+        'href' => Routes.change_locale_path(locale)
     }
   end
 

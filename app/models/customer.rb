@@ -43,8 +43,7 @@ class Customer < ActiveRecord::Base
   has_many :customer_addresses
 
   def intern_path
-    helper = Rails.application.routes.url_helpers
-    helper.show_customers_path
+    Routes.show_customers_path
   end
 
   def shipping_address
@@ -56,17 +55,15 @@ class Customer < ActiveRecord::Base
   end
 
   def to_liquid(_options = {})
-    helper = Rails.application.routes.url_helpers
-
     {
         'email' => email,
         'name' => name,
         'last_name' => last_name,
         'birth_date' => birth_date,
-        'show_customers_path' => helper.show_customers_path,
-        'customer_registration_path' => helper.customer_registration_path,
-        'edit_customer_registration_path' => helper.edit_customer_registration_path,
-        'destroy_customer_session_path' => helper.destroy_customer_session_path
+        'show_customers_path' => Routes.show_customers_path,
+        'customer_registration_path' => Routes.customer_registration_path,
+        'edit_customer_registration_path' => Routes.edit_customer_registration_path,
+        'destroy_customer_session_path' => Routes.destroy_customer_session_path
     }
   end
 

@@ -36,7 +36,6 @@ class AdminUser < ActiveRecord::Base
   belongs_to :debug_template, class_name: 'Template', foreign_key: 'debug_template_id'
 
   def intern_path
-    helper = Rails.application.routes.url_helpers
-    helper.admin_dashboard_path
+    Routes.admin_dashboard_path
   end
 end

@@ -5,8 +5,7 @@ class AddressesController < Frontend::CommonController
   def append_variables
     super
 
-    helper = Rails.application.routes.url_helpers
-    @variables['new_customers_address_path'] = helper.new_customers_address_path
+    @variables['new_customers_address_path'] = Routes.new_customers_address_path
     if customer_signed_in?
       @variables['customer_addresses'] = array_to_liquid(current_customer.customer_addresses)
 

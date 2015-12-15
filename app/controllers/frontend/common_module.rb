@@ -32,26 +32,26 @@ module Frontend
       @variables['locale'] = session[:locale] unless session[:locale].blank?
     end
 
-    def append_customer_variables(helper)
+    def append_customer_variables
       @variables['current_customer'] = current_customer
-      @variables['show_shopping_carts_path'] = helper.show_shopping_carts_path
-      @variables['shipping_method_customers_shopping_orders_path'] = helper.shipping_method_customers_shopping_orders_path
+      @variables['show_shopping_carts_path'] = Routes.show_shopping_carts_path
+      @variables['shipping_method_customers_shopping_orders_path'] = Routes.shipping_method_customers_shopping_orders_path
 
       if customer_signed_in?
         # Action form
 
-        @variables['customer_edit_registration_href'] = helper.edit_customer_registration_path # DEPRECATED
-        @variables['customer_orders_href'] = helper.orders_customers_path # DEPRECATED
-        @variables['customers_addresses_path'] = helper.customers_addresses_path
+        @variables['customer_edit_registration_href'] = Routes.edit_customer_registration_path # DEPRECATED
+        @variables['customer_orders_href'] = Routes.orders_customers_path # DEPRECATED
+        @variables['customers_addresses_path'] = Routes.customers_addresses_path
       else
         # Action form
-        @variables['action_customer_sign_in_url'] = helper.customer_session_path
-        @variables['action_customer_sign_up_url'] = helper.customer_registration_path
+        @variables['action_customer_sign_in_url'] = Routes.customer_session_path
+        @variables['action_customer_sign_up_url'] = Routes.customer_registration_path
 
         # Links a
-        @variables['customer_forgot_password_href'] = helper.new_customer_password_path
-        @variables['customer_sign_up_href'] = helper.new_customer_registration_path
-        @variables['customer_new_session_href'] = helper.new_customer_session_path
+        @variables['customer_forgot_password_href'] = Routes.new_customer_password_path
+        @variables['customer_sign_up_href'] = Routes.new_customer_registration_path
+        @variables['customer_new_session_href'] = Routes.new_customer_session_path
       end
 
       sc = ShoppingCart.retrieve(current_customer, session[:shopping_cart])
@@ -72,9 +72,9 @@ module Frontend
       end
     end
 
-    def append_link_variables(helper)
+    def append_link_variables
       @variables['authenticity_token'] = form_authenticity_token
-      @variables['action_search_url'] = helper.searches_path
+      @variables['action_search_url'] = Routes.searches_path
     end
 
     def append_variables
@@ -89,9 +89,8 @@ module Frontend
 
       append_general_tags(@liquid_options)
 
-      helper = Rails.application.routes.url_helpers
-      append_link_variables(helper)
-      append_customer_variables(helper)
+      append_link_variables
+      append_customer_variables
     end
 
     def fill_descriptions_with_variables(hash, template)
