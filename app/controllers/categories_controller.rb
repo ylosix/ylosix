@@ -15,6 +15,7 @@ class CategoriesController < Frontend::CommonController
   def append_variables
     super
 
+    @liquid_options[:features] = true
     if @category
       @liquid_options[:current_category] = @category
       @variables['category'] = @category.to_liquid(@liquid_options)
@@ -26,12 +27,12 @@ class CategoriesController < Frontend::CommonController
 
     @variables['products'] = []
     if params[:slug_tags]
-      @variables['products'] = array_to_liquid(products_tags)
+      @variables['products'] = array_to_liquid(products_tags, @liquid_options)
     else
       if @category
         @products = Product.in_frontend(@category).page(params[:page]).per(per_page)
 
-        @variables['products'] = array_to_liquid(@products)
+        @variables['products'] = array_to_liquid(@products, @liquid_options)
         @variables['block_paginate'] = div_pagination(@products)
       end
     end
