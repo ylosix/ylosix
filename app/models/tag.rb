@@ -28,6 +28,8 @@ class Tag < ActiveRecord::Base
 
   before_save :set_defaults
 
+  default_scope { includes(:translations) }
+
   def to_liquid(options = {})
     current_ids = []
     current_ids = options[:current_tags][1] if options[:current_tags]

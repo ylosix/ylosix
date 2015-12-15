@@ -13,8 +13,8 @@ ActiveAdmin.register Tag do
     id_column
 
     column :tags_group
-    column :name
-    column :slug
+    column :name, sortable: 'tag_translations.name'
+    column :slug, sortable: 'tag_translations.slug'
     column :priority
     actions
   end

@@ -68,6 +68,8 @@ class Product < ActiveRecord::Base
 
   before_save :set_defaults
 
+  default_scope { includes(:translations, :tags, :products_pictures) }
+
   scope :search_by_text, lambda { |text|
                          joins(:product_translations)
                              .where(visible: true)

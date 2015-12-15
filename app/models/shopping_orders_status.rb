@@ -17,6 +17,8 @@ class ShoppingOrdersStatus < ActiveRecord::Base
   has_many :shopping_orders_status_translations
   accepts_nested_attributes_for :shopping_orders_status_translations
 
+  default_scope { includes(:translations) }
+
   def to_liquid(_options = {})
     {
         'name' => name,

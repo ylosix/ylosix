@@ -13,4 +13,6 @@ class Snippet < ActiveRecord::Base
 
   has_many :snippet_translations
   accepts_nested_attributes_for :snippet_translations
+
+  default_scope { includes(:translations) }
 end

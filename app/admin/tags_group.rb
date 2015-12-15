@@ -8,7 +8,7 @@ ActiveAdmin.register TagsGroup do
     selectable_column
     id_column
 
-    column :name
+    column :name, sortable: 'tags_group_translations.name'
     actions
   end
 

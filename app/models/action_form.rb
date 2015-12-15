@@ -15,6 +15,8 @@ class ActionForm < ActiveRecord::Base
   has_many :action_form_translations
   accepts_nested_attributes_for :action_form_translations
 
+  default_scope { includes(:translations) }
+
   def perform_with_data(data_form)
     attributes = {to: Ecommerce::Application::MAIN_EMAIL}
     mapping.each do |k, v|

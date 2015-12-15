@@ -20,6 +20,8 @@ class TagsGroup < ActiveRecord::Base
   has_many :categories, through: :tags_groups_categories
   accepts_nested_attributes_for :tags_groups_categories, allow_destroy: true
 
+  default_scope { includes(:translations) }
+
   def self.retrieve_groups(category_id = nil)
     list = []
     if category_id.nil?

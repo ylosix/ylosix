@@ -5,8 +5,8 @@ ActiveAdmin.register Category do
                  :meta_description, :show_action_name, :priority]
 
     cta = [:id, :locale, :name, :short_description, :description, :slug]
-    if !params[:category].blank? && !params[:category][:category_translations_attributes].blank?
-      unless params[:category][:category_translations_attributes]['0'][:meta_tags].blank?
+    if params[:category] && params[:category][:category_translations_attributes]
+      if params[:category][:category_translations_attributes]['0'][:meta_tags]
         meta_tags = params[:category][:category_translations_attributes]['0'][:meta_tags].keys
         cta << {meta_tags: meta_tags}
       end
@@ -96,7 +96,7 @@ ActiveAdmin.register Category do
 
   controller do
     def render(*args)
-      unless @parent_order.blank?
+      if @parent_order
         params[:order] = @parent_order
         array_ordered = Category.parent_order(@parent_order)
 
@@ -111,8 +111,7 @@ ActiveAdmin.register Category do
     end
 
     def index
-      @parent_order = ''
-      if !params[:order].nil? && params[:order].include?('parent')
+      if params[:order] && params[:order].include?('parent')
         @parent_order = params.delete(:order)
       end
 

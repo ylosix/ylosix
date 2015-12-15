@@ -15,4 +15,6 @@ class Feature < ActiveRecord::Base
   has_many :feature_translations
 
   accepts_nested_attributes_for :feature_translations
+
+  default_scope { includes(:translations) }
 end

@@ -25,6 +25,8 @@ class Carrier < ActiveRecord::Base
   has_attached_file :image, styles: { original: '25x25' }
   validates_attachment_content_type :image, content_type: %r{\Aimage/.*\Z}
 
+  default_scope { includes(:translations) }
+
   def calculate_shipping_cost_to(country_code, weight = 0)
     country = Country.find_by(code: country_code)
     unless country.nil?

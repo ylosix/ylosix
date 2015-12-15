@@ -46,6 +46,8 @@ class Category < ActiveRecord::Base
 
   before_save :set_defaults
 
+  default_scope { includes(:translations, :products, :tags_groups) }
+
   def self.parent_order(parent_order = 'parent_asc')
     array_ordered = Category.all.to_a
 

@@ -13,4 +13,6 @@ class DesignForm < ActiveRecord::Base
 
   has_many :design_form_translations
   accepts_nested_attributes_for :design_form_translations
+
+  default_scope { includes(:translations) }
 end

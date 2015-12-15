@@ -11,7 +11,7 @@ ActiveAdmin.register Feature do
     selectable_column
     id_column
 
-    column :name
+    column :name, sortable: 'feature_translations.name'
     column :priority
     actions
   end
