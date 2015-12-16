@@ -15,6 +15,10 @@
 #  priority           :integer          default(1), not null
 #  updated_at         :datetime         not null
 #
+# Indexes
+#
+#  index_carriers_on_enabled  (enabled)
+#
 
 require 'test_helper'
 

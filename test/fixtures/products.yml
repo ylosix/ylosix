@@ -31,7 +31,9 @@
 #
 # Indexes
 #
-#  index_products_on_tax_id  (tax_id)
+#  index_products_on_enabled  (enabled)
+#  index_products_on_tax_id   (tax_id)
+#  index_products_on_visible  (visible)
 #
 # Foreign Keys
 #

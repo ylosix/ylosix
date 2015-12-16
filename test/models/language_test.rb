@@ -17,7 +17,9 @@
 #
 # Indexes
 #
-#  index_languages_on_locale  (locale)
+#  index_languages_on_default                    (default)
+#  index_languages_on_locale                     (locale)
+#  index_languages_on_locale_and_appears_in_web  (locale,appears_in_web)
 #
 
 require 'test_helper'

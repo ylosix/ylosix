@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151202122526) do
+ActiveRecord::Schema.define(version: 20151216172200) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -98,6 +98,8 @@ ActiveRecord::Schema.define(version: 20151202122526) do
     t.datetime "image_updated_at"
   end
 
+  add_index "carriers", ["enabled"], name: "index_carriers_on_enabled", using: :btree
+
   create_table "carriers_ranges", force: :cascade do |t|
     t.integer  "zone_id"
     t.integer  "carrier_id"
@@ -123,6 +125,7 @@ ActiveRecord::Schema.define(version: 20151202122526) do
     t.string   "show_action_name"
   end
 
+  add_index "categories", ["enabled"], name: "index_categories_on_enabled", using: :btree
   add_index "categories", ["parent_id"], name: "index_categories_on_parent_id", using: :btree
   add_index "categories", ["reference_code"], name: "index_categories_on_reference_code", using: :btree
 
@@ -179,6 +182,9 @@ ActiveRecord::Schema.define(version: 20151202122526) do
     t.integer  "per_page",                  default: 20
   end
 
+  add_index "commerces", ["default", "http"], name: "index_commerces_on_default_and_http", using: :btree
+  add_index "commerces", ["default"], name: "index_commerces_on_default", using: :btree
+  add_index "commerces", ["http"], name: "index_commerces_on_http", using: :btree
   add_index "commerces", ["template_id"], name: "index_commerces_on_template_id", using: :btree
 
   create_table "countries", force: :cascade do |t|
@@ -191,6 +197,8 @@ ActiveRecord::Schema.define(version: 20151202122526) do
     t.datetime "updated_at",                 null: false
   end
 
+  add_index "countries", ["code"], name: "index_countries_on_code", using: :btree
+  add_index "countries", ["enabled"], name: "index_countries_on_enabled", using: :btree
   add_index "countries", ["zone_id"], name: "index_countries_on_zone_id", using: :btree
 
   create_table "customer_addresses", force: :cascade do |t|
@@ -202,6 +210,8 @@ ActiveRecord::Schema.define(version: 20151202122526) do
     t.boolean  "default_shipping", default: false, null: false
     t.boolean  "default_billing",  default: false, null: false
   end
+
+  add_index "customer_addresses", ["customer_id"], name: "index_customer_addresses_on_customer_id", using: :btree
 
   create_table "customers", force: :cascade do |t|
     t.string   "email",                  default: "",   null: false
@@ -282,6 +292,8 @@ ActiveRecord::Schema.define(version: 20151202122526) do
     t.boolean  "default",               default: false
   end
 
+  add_index "languages", ["default"], name: "index_languages_on_default", using: :btree
+  add_index "languages", ["locale", "appears_in_web"], name: "index_languages_on_locale_and_appears_in_web", using: :btree
   add_index "languages", ["locale"], name: "index_languages_on_locale", using: :btree
 
   create_table "product_translations", force: :cascade do |t|
@@ -329,7 +341,9 @@ ActiveRecord::Schema.define(version: 20151202122526) do
     t.string   "show_action_name"
   end
 
+  add_index "products", ["enabled"], name: "index_products_on_enabled", using: :btree
   add_index "products", ["tax_id"], name: "index_products_on_tax_id", using: :btree
+  add_index "products", ["visible"], name: "index_products_on_visible", using: :btree
 
   create_table "products_categories", force: :cascade do |t|
     t.integer  "product_id"
@@ -524,6 +538,8 @@ ActiveRecord::Schema.define(version: 20151202122526) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_index "templates", ["enabled"], name: "index_templates_on_enabled", using: :btree
 
   create_table "zones", force: :cascade do |t|
     t.string   "name"

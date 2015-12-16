@@ -84,6 +84,9 @@ module Frontend
       append_language_variables
 
       @liquid_options = {current_tags: set_tags}
+      @liquid_options[:current_category] = @category if @category
+      @liquid_options[:current_product] = @product if @product
+      @liquid_options[:current_commerce] = @commerce if @commerce
       @variables['categories'] = array_to_liquid(Category.root_categories, @liquid_options) # TODO This only for test.
       @variables['products'] ||= array_to_liquid(Product.all.limit(10)) # TODO This only for test.
 

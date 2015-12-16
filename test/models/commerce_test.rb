@@ -24,7 +24,10 @@
 #
 # Indexes
 #
-#  index_commerces_on_template_id  (template_id)
+#  index_commerces_on_default           (default)
+#  index_commerces_on_default_and_http  (default,http)
+#  index_commerces_on_http              (http)
+#  index_commerces_on_template_id       (template_id)
 #
 # Foreign Keys
 #

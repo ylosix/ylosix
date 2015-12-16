@@ -15,6 +15,7 @@
 #
 # Indexes
 #
+#  index_categories_on_enabled         (enabled)
 #  index_categories_on_parent_id       (parent_id)
 #  index_categories_on_reference_code  (reference_code)
 #
@@ -106,9 +107,10 @@ class Category < ActiveRecord::Base
   end
 
   def to_liquid(options = {})
-    options[:current_category] = self
+    current_category_id = options[:current_category].id if options[:current_category]
 
     {
+        'active' => current_category_id == id,
         'name' => name,
         'short_description' => short_description,
         'description' => description,

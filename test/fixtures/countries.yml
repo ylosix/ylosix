@@ -13,6 +13,8 @@
 #
 # Indexes
 #
+#  index_countries_on_code     (code)
+#  index_countries_on_enabled  (enabled)
 #  index_countries_on_zone_id  (zone_id)
 #
 # Foreign Keys

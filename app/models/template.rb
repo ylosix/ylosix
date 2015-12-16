@@ -2,12 +2,16 @@
 #
 # Table name: templates
 #
+#  created_at :datetime         not null
+#  enabled    :boolean
 #  id         :integer          not null, primary key
 #  name       :string
 #  path       :string
-#  enabled    :boolean
-#  created_at :datetime         not null
 #  updated_at :datetime         not null
+#
+# Indexes
+#
+#  index_templates_on_enabled  (enabled)
 #
 
 class Template < ActiveRecord::Base
