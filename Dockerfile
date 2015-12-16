@@ -1,4 +1,4 @@
-FROM ruby:2.1.6
+FROM ruby:2.2.3
 MAINTAINER ryanfox1985 <wolf.fox1985@gmail.com>
 
 # Update and upgrade

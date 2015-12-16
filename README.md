@@ -223,7 +223,7 @@ $ rake
 
 ## Dependencies [![Dependency Status](https://gemnasium.com/ylosix/ylosix.svg)](https://gemnasium.com/ylosix/ylosix)
 
-  - Ruby version: 2.1.6+
+  - Ruby version: 2.2+
   - Rails version: 4.2+
   - Puppet: 3.7.5+
   - PostgreSQL: 9.4+
