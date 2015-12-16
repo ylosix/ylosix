@@ -17,6 +17,10 @@ development:
   url: postgres://ecommerce_user:ecommerce_pass@localhost:5432/ecommerce
   <<: *default
 
+profile:
+  url: postgres://ecommerce_user:ecommerce_pass@localhost:5432/ecommerce
+  <<: *default
+
 test:
   url: postgres://ecommerce_user:ecommerce_pass@localhost:5432/ecommerce_test
   <<: *default

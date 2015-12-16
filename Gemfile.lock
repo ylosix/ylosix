@@ -123,6 +123,11 @@ GEM
       actionmailer (~> 4.0)
       activesupport (~> 4.0)
     execjs (2.6.0)
+    fast_stack (0.1.0)
+      rake
+      rake-compiler
+    flamegraph (0.1.0)
+      fast_stack
     font-awesome-rails (4.5.0.0)
       railties (>= 3.2, < 5.0)
     foreman (0.78.0)
@@ -242,6 +247,8 @@ GEM
     rainbow (2.0.0)
     raindrops (0.15.0)
     rake (10.4.2)
+    rake-compiler (0.9.5)
+      rake
     ransack (1.7.0)
       actionpack (>= 3.0)
       activerecord (>= 3.0)
@@ -350,6 +357,7 @@ DEPENDENCIES
   devise-i18n
   did_you_mean
   exception_notification
+  flamegraph
   font-awesome-rails
   foreman
   globalize (~> 5.0.0)

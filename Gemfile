@@ -77,6 +77,7 @@ group :development, :test, :profile do
   #profiling
   gem 'bullet'
   gem 'ruby-prof', platforms: :ruby
+  gem 'flamegraph'
   gem 'rack-mini-profiler', require: false
 
   # Use debugger (incompatible with Rubymine)
