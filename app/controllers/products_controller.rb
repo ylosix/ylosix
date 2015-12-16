@@ -7,9 +7,13 @@ class ProductsController < Frontend::CommonController
   def append_variables
     super
 
-    @variables['product'] = @product.to_liquid(features: true) unless @product.nil?
+    if @product
+      @liquid_options[:features] = true
+      @liquid_options[:tags] = true
+      @variables['product'] = @product.to_liquid(@liquid_options)
+    end
 
-    unless @category.nil?
+    if @category
       array_categories = Utils.get_parents_array(@category)
       array_categories.delete_at(0) if array_categories.any? # delete root.
       array_categories << @category unless @category.nil? # append current category.

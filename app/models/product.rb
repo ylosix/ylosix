@@ -70,7 +70,7 @@ class Product < ActiveRecord::Base
 
   before_save :set_defaults
 
-  default_scope { includes(:translations, :tags, :products_pictures) }
+  default_scope { includes(:translations, :products_pictures) }
 
   scope :search_by_text, lambda { |text|
                          joins(:product_translations)
@@ -153,7 +153,6 @@ class Product < ActiveRecord::Base
         'short_description' => s_short_description,
         'description' => s_description,
         'retail_price' => retail_price,
-        'tags' => array_tags,
         'href' => href,
         'publication_date' => I18n.l(publication_date, format: :default),
         'add_to_shopping_cart_path' => Routes.product_add_to_shopping_cart_path(self),
@@ -162,6 +161,7 @@ class Product < ActiveRecord::Base
     }
 
     liquid['features'] = array_features if options[:features]
+    liquid['tags'] = array_tags if options[:tags]
     append_images(liquid)
   end
 

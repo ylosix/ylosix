@@ -15,8 +15,8 @@ class CategoriesController < Frontend::CommonController
   def append_variables
     super
 
-    @liquid_options[:features] = true
     if @category
+      @liquid_options[:features] = true
       @liquid_options[:current_category] = @category
       @variables['category'] = @category.to_liquid(@liquid_options)
 
