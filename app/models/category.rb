@@ -116,9 +116,9 @@ class Category < ActiveRecord::Base
         'description' => description,
         'priority' => priority,
         'href' => href,
-        'children' => array_to_liquid(children),
+        'children' => array_to_liquid(children, options),
         'tags_groups' => array_to_liquid(tags_groups, options),
-        'products' => array_to_liquid(products)
+        'products' => array_to_liquid(products, options)
     }
   end
 
