@@ -47,7 +47,7 @@ class Category < ActiveRecord::Base
 
   before_save :set_defaults
 
-  default_scope { includes(:translations, :products, :tags_groups) }
+  default_scope { includes(:translations, :products) }
 
   def self.parent_order(parent_order = 'parent_asc')
     array_ordered = Category.all.to_a
@@ -109,7 +109,7 @@ class Category < ActiveRecord::Base
   def to_liquid(options = {})
     current_category_id = options[:current_category].id if options[:current_category]
 
-    {
+    liquid = {
         'active' => current_category_id == id,
         'name' => name,
         'short_description' => short_description,
@@ -117,9 +117,11 @@ class Category < ActiveRecord::Base
         'priority' => priority,
         'href' => href,
         'children' => array_to_liquid(children, options),
-        'tags_groups' => array_to_liquid(tags_groups, options),
         'products' => array_to_liquid(products, options)
     }
+
+    liquid['tags_groups'] = array_to_liquid(tags_groups, options) if options[:tags_groups]
+    liquid
   end
 
   private

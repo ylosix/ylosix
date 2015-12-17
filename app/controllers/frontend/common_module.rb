@@ -118,8 +118,8 @@ module Frontend
       end
     end
 
-    def parse_template(body_code)
-      template_liquid = Liquid::Template.parse(body_code)
+    def parse_template(html_code)
+      template_liquid = Liquid::Template.parse(html_code)
       template_liquid.render(@variables)
     end
 
@@ -131,7 +131,8 @@ module Frontend
       @head_javascript = parse_template(template.reads_file('common_js.js'))
       @head_css = parse_template(template.reads_file('common_css.css'))
 
-      @body_content = render_to_string(inline: parse_template(body_code))
+      # @body_content = render_to_string(inline: parse_template(body_code)) # Ruby at views.
+      @body_content = parse_template(body_code)
       @body_content = append_debug_variables(current_admin_user, @variables, @body_content)
     end
 

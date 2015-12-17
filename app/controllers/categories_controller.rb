@@ -18,6 +18,7 @@ class CategoriesController < Frontend::CommonController
     if @category
       @liquid_options[:features] = true
       @liquid_options[:tags] = true
+      @liquid_options[:tags_groups] = true
       @liquid_options[:current_category] = @category
       @variables['category'] = @category.to_liquid(@liquid_options)
 
