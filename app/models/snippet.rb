@@ -7,6 +7,10 @@
 #  tag        :string
 #  updated_at :datetime         not null
 #
+# Indexes
+#
+#  index_snippets_on_tag  (tag)
+#
 
 class Snippet < ActiveRecord::Base
   translates :content
