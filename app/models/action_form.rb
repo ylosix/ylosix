@@ -10,6 +10,8 @@
 #
 
 class ActionForm < ActiveRecord::Base
+  include TemplateFunctions
+
   translates :subject, :body
 
   has_many :action_form_translations
@@ -19,35 +21,35 @@ class ActionForm < ActiveRecord::Base
 
   def perform_with_data(data_form)
     attributes = {to: Ecommerce::Application::MAIN_EMAIL}
+    data_form_fields = data_form.fields
+
     mapping.each do |k, v|
-      if data_form.fields.key? k
+      if data_form_fields.key? k
         # ex: replace email => reply_to
-        attributes[v.to_sym] = data_form.fields[k]
+        attributes[v.to_sym] = data_form_fields[k]
       else
         # ex: replace info@abc.com => to
         attributes[v.to_sym] = k
       end
     end
 
-    render_attributes(data_form, attributes)
+    render_attributes(data_form_fields, attributes)
     ActionFormMailer.action_form_email(attributes).deliver_later
   end
 
   private
 
-  def render_attributes(data_form, attributes)
-    locale = I18n.default_locale.to_s
-    locale = data_form.fields[:locale] unless data_form.fields[:locale].blank?
+  def render_attributes(data_form_fields, attributes)
+    locale = data_form_fields[:locale]
+    locale ||= I18n.default_locale.to_s
 
     translations = action_form_translations.find_by(locale: locale)
-    return if translations.nil?
+    return unless translations
 
-    # Parses and compiles the subject
-    template_liquid = Liquid::Template.parse(translations[:subject])
-    attributes[:subject] = template_liquid.render(data_form.fields)
+    # Parses and compiles the subject and body
+    attributes[:subject] = parse_liquid(data_form_fields, translations[:subject])
 
     # Parses and compiles the body
-    template_liquid = Liquid::Template.parse(translations[:body])
-    attributes[:body] = template_liquid.render(data_form.fields)
+    attributes[:body] = parse_liquid(data_form_fields, translations[:body])
   end
 end

@@ -83,6 +83,7 @@ group :development, :test, :profile do
   # Use debugger (incompatible with Rubymine)
   # gem 'debugger'
   gem 'rubocop'
+  gem 'rubycritic', require: false
   gem 'mailcatcher'
 
   gem 'simplecov'

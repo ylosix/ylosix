@@ -47,6 +47,8 @@ class Commerce < ActiveRecord::Base
   store_accessor :billing_address, :name, :address_1, :address_2, :postal_code,
                  :city, :country, :phone, :cif
 
+  default_scope { includes(:template) }
+
   def self.retrieve(http)
     # t = Commerce.arel_table
     # commerce = Commerce.where(t[:http].eq(http).or(t[:default].eq(true))).take

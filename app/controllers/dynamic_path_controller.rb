@@ -31,12 +31,12 @@ class DynamicPathController < Frontend::CommonController
 
     if @categories
       if @product.present? && @product.categories.any? && !@product.categories.include?(@categories.last)
-        fail InvalidPathError
+        fail ClassErrors::InvalidPathError
       end
 
       @category = @categories.last
     else
-      fail InvalidPathError if @product.present? && @product.categories.any?
+      fail ClassErrors::InvalidPathError if @product.present? && @product.categories.any?
     end
 
     if @product.present?

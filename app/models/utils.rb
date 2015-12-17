@@ -1,6 +1,3 @@
-class ParentLoopError < StandardError
-end
-
 class Utils
   def self.get_error_title(messages)
     return '' if messages.empty?

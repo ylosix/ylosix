@@ -1,6 +1,4 @@
 class ApplicationController < ActionController::Base
-  class InvalidPathError < StandardError; end
-
   include ShowActionName
   include ActiveRecord
 
@@ -11,7 +9,7 @@ class ApplicationController < ActionController::Base
   before_action :extract_commerce_from_url, :set_locale
 
   rescue_from ActiveRecord::RecordNotFound, with: :not_found_exception
-  rescue_from InvalidPathError, with: :not_found_exception
+  rescue_from ClassErrors::InvalidPathError, with: :not_found_exception
 
   def change_locale
     locale = I18n.default_locale.to_s
@@ -85,7 +83,7 @@ class ApplicationController < ActionController::Base
   end
 
   def extract_commerce_from_url
-    @commerce = Commerce.retrieve(retrieve_http_server_name)
+    @commerce = Commerce.retrieve(params_server_name)
     @render_template = @commerce.template
     @render_template.from = 'commerce' unless @render_template.nil?
 
@@ -98,7 +96,7 @@ class ApplicationController < ActionController::Base
     @variables['template'] = @render_template
   end
 
-  def retrieve_http_server_name
+  def params_server_name
     http = nil
     if !request.nil? && !request.env['SERVER_NAME'].nil?
       http = request.env['SERVER_NAME']
