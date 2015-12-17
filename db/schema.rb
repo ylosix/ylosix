@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151217090124) do
+ActiveRecord::Schema.define(version: 20151217113411) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -321,10 +321,10 @@ ActiveRecord::Schema.define(version: 20151217090124) do
     t.boolean  "visible",                                       default: true
     t.string   "short_description"
     t.text     "description"
-    t.datetime "publication_date",                              default: '2015-01-01 00:00:00', null: false
+    t.datetime "publication_date",                                              null: false
     t.datetime "unpublication_date"
-    t.decimal  "retail_price_pre_tax", precision: 10, scale: 5, default: 0.0,                   null: false
-    t.decimal  "retail_price",         precision: 10, scale: 2, default: 0.0,                   null: false
+    t.decimal  "retail_price_pre_tax", precision: 10, scale: 5, default: 0.0,   null: false
+    t.decimal  "retail_price",         precision: 10, scale: 2, default: 0.0,   null: false
     t.integer  "tax_id"
     t.integer  "stock",                                         default: 0
     t.boolean  "control_stock",                                 default: false
@@ -334,10 +334,10 @@ ActiveRecord::Schema.define(version: 20151217090124) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
-    t.decimal  "width",                precision: 10, scale: 6, default: 0.0,                   null: false
-    t.decimal  "height",               precision: 10, scale: 6, default: 0.0,                   null: false
-    t.decimal  "depth",                precision: 10, scale: 6, default: 0.0,                   null: false
-    t.decimal  "weight",               precision: 10, scale: 6, default: 0.0,                   null: false
+    t.decimal  "width",                precision: 10, scale: 6, default: 0.0,   null: false
+    t.decimal  "height",               precision: 10, scale: 6, default: 0.0,   null: false
+    t.decimal  "depth",                precision: 10, scale: 6, default: 0.0,   null: false
+    t.decimal  "weight",               precision: 10, scale: 6, default: 0.0,   null: false
     t.string   "show_action_name"
   end
 
@@ -456,6 +456,19 @@ ActiveRecord::Schema.define(version: 20151217090124) do
     t.datetime "updated_at",     null: false
     t.string   "color"
   end
+
+  create_table "slugs", force: :cascade do |t|
+    t.string   "class_name", null: false
+    t.integer  "object_id",  null: false
+    t.string   "slug",       null: false
+    t.string   "locale",     null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "slugs", ["class_name"], name: "index_slugs_on_class_name", using: :btree
+  add_index "slugs", ["object_id"], name: "index_slugs_on_object_id", using: :btree
+  add_index "slugs", ["slug"], name: "index_slugs_on_slug", using: :btree
 
   create_table "snippet_translations", force: :cascade do |t|
     t.integer  "snippet_id", null: false
