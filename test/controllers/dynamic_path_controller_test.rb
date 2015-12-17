@@ -1,6 +1,11 @@
 require 'test_helper'
 
 class DynamicPathControllerTest < ActionController::TestCase
+  setup do
+    Category.all.map(&:save)
+    Product.all.map(&:save)
+  end
+
   test 'should route to first-level category' do
     assert_routing '/digital-cameras', controller: 'dynamic_path', action: 'show_path', path: 'digital-cameras'
   end
@@ -27,7 +32,7 @@ class DynamicPathControllerTest < ActionController::TestCase
   end
 
   test 'should render product when category is also present' do
-    get :show_path, path: 'digital-cameras/camera-reflex-canon-450D'
+    get :show_path, path: 'digital-cameras/camera-reflex-canon-450d'
     assert_template 'products/show'
   end
 

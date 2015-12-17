@@ -1,9 +1,10 @@
 # == Schema Information
 #
-# Table name: slugs
+# Table name: links
 #
 #  class_name :string           not null
 #  created_at :datetime         not null
+#  enabled    :boolean          not null
 #  id         :integer          not null, primary key
 #  locale     :string           not null
 #  object_id  :integer          not null
@@ -12,11 +13,11 @@
 #
 # Indexes
 #
-#  index_slugs_on_class_name  (class_name)
-#  index_slugs_on_object_id   (object_id)
-#  index_slugs_on_slug        (slug)
+#  index_links_on_class_name  (class_name)
+#  index_links_on_object_id   (object_id)
+#  index_links_on_slug        (slug)
 #
 
-class Slug < ActiveRecord::Base
+class Link < ActiveRecord::Base
   validates_uniqueness_of :slug
 end

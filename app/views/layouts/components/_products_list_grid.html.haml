@@ -1,4 +1,4 @@
-- if @variables['products'].any?
+- if @variables['products'] && @variables['products'].any?
   %div.col-md-12
     %div.thumbnail
       = "#{@variables['products'].length} products"

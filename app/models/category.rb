@@ -46,6 +46,7 @@ class Category < ActiveRecord::Base
                     }
 
   before_save :set_defaults
+  after_save :save_global_slug
 
   default_scope { includes(:translations, :products) }
 
@@ -128,5 +129,9 @@ class Category < ActiveRecord::Base
 
   def set_defaults
     generate_slug(:name, category_translations)
+  end
+
+  def save_global_slug
+    save_slug(category_translations, self)
   end
 end

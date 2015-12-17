@@ -42,7 +42,7 @@ Rails.application.routes.draw do
   # Frontend
   resources :categories, only: [:index] do
     get '/' => 'categories#show'
-    get '/products/:slug' => 'products#show', as: :show_product_slug
+    get '/products/:product_id' => 'products#show', as: :show_product_slug
     match '/tags/*slug_tags' => 'categories#tags', as: :tags, via: [:get]
   end
 

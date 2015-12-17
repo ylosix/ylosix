@@ -1,9 +1,10 @@
 # == Schema Information
 #
-# Table name: slugs
+# Table name: links
 #
 #  class_name :string           not null
 #  created_at :datetime         not null
+#  enabled    :boolean          not null
 #  id         :integer          not null, primary key
 #  locale     :string           not null
 #  object_id  :integer          not null
@@ -12,9 +13,9 @@
 #
 # Indexes
 #
-#  index_slugs_on_class_name  (class_name)
-#  index_slugs_on_object_id   (object_id)
-#  index_slugs_on_slug        (slug)
+#  index_links_on_class_name  (class_name)
+#  index_links_on_object_id   (object_id)
+#  index_links_on_slug        (slug)
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
@@ -24,9 +25,4 @@ one:
   object_id: 1
   slug: MyString
   locale: MyString
-
-two:
-  class_name: MyString
-  object_id: 1
-  slug: MyString
-  locale: MyString
+  enabled: true

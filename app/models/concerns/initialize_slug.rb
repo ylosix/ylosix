@@ -63,4 +63,23 @@ module InitializeSlug
   def link?(href)
     href.start_with?('/') || href.start_with?('#') || href.start_with?('http')
   end
+
+  def save_slug(translations, object)
+    translations.each do |t|
+      s = Link.find_by(class_name: object.class.name, object_id: object.id, locale: t.locale)
+
+      enabled = true
+      enabled = object.enabled if object.respond_to?(:enabled)
+      if s
+        s.update_attributes(slug: t.slug, enabled: enabled)
+
+      else
+        Link.create(class_name: object.class.name,
+                    object_id: object.id,
+                    slug: t.slug,
+                    locale: t.locale,
+                    enabled: enabled)
+      end
+    end
+  end
 end

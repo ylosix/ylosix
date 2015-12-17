@@ -54,23 +54,22 @@ class DynamicPathController < Frontend::CommonController
   def parse_path
     segments = params[:path].split('/')
 
-    @product = ProductTranslation.find_by(slug: segments.last).try(:product)
-    if @product.present?
-      fail ActiveRecord::RecordNotEnabled unless @product.enabled
-      segments.pop # Remove last segment
+    @categories = []
+    segments.each do |slug|
+      link = Link.find_by(slug: slug)
+
+      fail ActiveRecord::RecordNotEnabled if link && !link.enabled
+      fail ActiveRecord::RecordNotFound unless link
+
+      case link.class_name
+        when 'Category'
+          @categories << Category.find(link.object_id)
+        when 'Product'
+          @product = Product.find(link.object_id)
+      end
     end
 
-    parse_category_path(segments) if segments.any?
-  end
-
-  def parse_category_path(segments)
-    @categories = segments.map do |segment|
-      category = CategoryTranslation.find_by(slug: segment).try(:category)
-      fail ActiveRecord::RecordNotFound if category.blank?
-      fail ActiveRecord::RecordNotEnabled if category.present? && !category.enabled
-      category
-    end
-
+    # Validate categories order
     @categories.each_with_index do |category, i|
       fail InvalidPathError if @categories[i + 1].present? && category.id != @categories[i + 1].parent_id
     end

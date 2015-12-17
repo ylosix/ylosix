@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151217113411) do
+ActiveRecord::Schema.define(version: 20151217114231) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -296,6 +296,20 @@ ActiveRecord::Schema.define(version: 20151217113411) do
   add_index "languages", ["locale", "appears_in_web"], name: "index_languages_on_locale_and_appears_in_web", using: :btree
   add_index "languages", ["locale"], name: "index_languages_on_locale", using: :btree
 
+  create_table "links", force: :cascade do |t|
+    t.string   "class_name", null: false
+    t.integer  "object_id",  null: false
+    t.string   "slug",       null: false
+    t.string   "locale",     null: false
+    t.boolean  "enabled",    null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "links", ["class_name"], name: "index_links_on_class_name", using: :btree
+  add_index "links", ["object_id"], name: "index_links_on_object_id", using: :btree
+  add_index "links", ["slug"], name: "index_links_on_slug", using: :btree
+
   create_table "product_translations", force: :cascade do |t|
     t.integer  "product_id",                     null: false
     t.string   "locale",                         null: false
@@ -456,19 +470,6 @@ ActiveRecord::Schema.define(version: 20151217113411) do
     t.datetime "updated_at",     null: false
     t.string   "color"
   end
-
-  create_table "slugs", force: :cascade do |t|
-    t.string   "class_name", null: false
-    t.integer  "object_id",  null: false
-    t.string   "slug",       null: false
-    t.string   "locale",     null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "slugs", ["class_name"], name: "index_slugs_on_class_name", using: :btree
-  add_index "slugs", ["object_id"], name: "index_slugs_on_object_id", using: :btree
-  add_index "slugs", ["slug"], name: "index_slugs_on_slug", using: :btree
 
   create_table "snippet_translations", force: :cascade do |t|
     t.integer  "snippet_id", null: false

@@ -7,13 +7,9 @@ class ProductsController < Frontend::CommonController
   def append_variables
     super
 
-    if @product
-      @liquid_options[:features] = true
-      @liquid_options[:tags] = true
-      @variables['product'] = @product.to_liquid(@liquid_options)
-    end
-
     if @category
+      add_show_action_name(@category)
+
       array_categories = Utils.get_parents_array(@category)
       array_categories.delete_at(0) if array_categories.any? # delete root.
       array_categories << @category unless @category.nil? # append current category.
@@ -22,6 +18,14 @@ class ProductsController < Frontend::CommonController
       array_categories.each do |category|
         add_breadcrumb(Breadcrumb.new(url: category.href, name: category.name))
       end
+    end
+
+    if @product
+      @liquid_options[:features] = true
+      @liquid_options[:tags] = true
+      @variables['product'] = @product.to_liquid(@liquid_options)
+
+      add_show_action_name(@product)
     end
   end
 
@@ -71,26 +75,18 @@ class ProductsController < Frontend::CommonController
     #   @category = Category.find_by(slug: params[:category_slug])
     # end
 
-    product_id = params[:slug]
-    product_id ||= params[:product_id]
+    t = Link.arel_table
+    link = Link.where(t[:slug].eq(params[:product_id])
+                          .or(t[:object_id].eq(params[:product_id]))).take
 
-    unless product_id.blank?
-      attributes = {enabled: true, id: product_id}
+    fail ActiveRecord::RecordNotEnabled if link && !link.enabled
 
-      @product = Product.find_by(attributes)
+    @product = Product.find(link.object_id) if link
 
-      if @product.nil?
-        attributes = {enabled: true, product_translations: {slug: product_id}}
-        @product = Product.with_translations.find_by(attributes)
-      end
-
-      unless @product.nil?
-        @category = @product.categories.first if @product.categories.any?
-        add_show_action_name(@product)
-      end
-
-      fail ActiveRecord::RecordNotFound if @product.blank?
-      fail ActiveRecord::RecordNotEnabled if @product && !@product.enabled
+    if @product
+      @category = @product.categories.first if @product.categories.any?
+    else
+      fail ActiveRecord::RecordNotFound
     end
   end
 end

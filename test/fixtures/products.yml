@@ -51,6 +51,8 @@ camera:
   short_description: Camera reflex canon 12MP.
   description: Camera reflex canon 12MP (not includes SD).
 
+  publication_date: <%= DateTime.now %>
+
   retail_price_pre_tax: 350
   retail_price: 423.5
   tax: iva_es
@@ -66,6 +68,8 @@ lens_canon:
   visible: true
   short_description: Camera lens canon.
   description: Camera lens canon.
+
+  publication_date: <%= DateTime.now %>
 
   retail_price_pre_tax: 100
   retail_price: 120

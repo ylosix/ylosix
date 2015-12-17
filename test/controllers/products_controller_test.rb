@@ -5,6 +5,7 @@ class ProductsControllerTest < ActionController::TestCase
 
   setup do
     @product = products(:camera)
+    @product.save
   end
 
   test 'should get show' do

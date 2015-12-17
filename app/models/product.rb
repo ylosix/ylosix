@@ -70,7 +70,7 @@ class Product < ActiveRecord::Base
 
   before_save :set_defaults
   after_initialize :default_publication_date
-  after_save :save_slug
+  after_save :save_global_slug
 
   default_scope { includes(:translations, :products_pictures) }
 
@@ -218,7 +218,7 @@ class Product < ActiveRecord::Base
     self.publication_date ||= DateTime.now
   end
 
-  def save_slug
-
+  def save_global_slug
+    save_slug(product_translations, self)
   end
 end

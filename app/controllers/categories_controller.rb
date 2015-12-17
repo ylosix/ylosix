@@ -80,20 +80,14 @@ class CategoriesController < Frontend::CommonController
   def set_category
     @category = nil
 
-    category_id = params[:slug]
-    category_id ||= params[:category_id]
+    t = Link.arel_table
+    link = Link.where(t[:slug].eq(params[:category_id])
+                          .or(t[:object_id].eq(params[:category_id]))).take
 
-    unless category_id.blank?
-      attributes = {enabled: true, id: category_id}
-      @category = Category.find_by(attributes)
+    fail ActiveRecord::RecordNotEnabled if link && !link.enabled
 
-      if @category.nil?
-        attributes = {enabled: true, category_translations: {slug: category_id}}
-        @category = Category.with_translations.find_by(attributes)
-      end
-    end
+    @category = Category.find(link.object_id) if link
 
-    fail ActiveRecord::RecordNotFound if @category.blank?
-    fail ActiveRecord::RecordNotEnabled if @category && !@category.enabled
+    fail ActiveRecord::RecordNotFound unless @category
   end
 end
