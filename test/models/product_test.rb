@@ -15,7 +15,7 @@
 #  image_file_size      :integer
 #  image_updated_at     :datetime
 #  name                 :string
-#  publication_date     :datetime         default(Thu, 01 Jan 2015 00:00:00 UTC +00:00), not null
+#  publication_date     :datetime         not null
 #  reference_code       :string
 #  retail_price         :decimal(10, 2)   default(0.0), not null
 #  retail_price_pre_tax :decimal(10, 5)   default(0.0), not null
