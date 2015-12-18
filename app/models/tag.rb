@@ -26,7 +26,6 @@ class Tag < ActiveRecord::Base
   has_many :tag_translations
   accepts_nested_attributes_for :tag_translations
 
-  before_save :set_defaults
   after_save :save_global_slug
 
   default_scope { includes(:translations) }
@@ -69,11 +68,7 @@ class Tag < ActiveRecord::Base
     end
   end
 
-  def set_defaults
-    generate_slug(:name, tag_translations)
-  end
-
   def save_global_slug
-    save_slug(tag_translations, self)
+    save_slug(tag_translations, :name, self)
   end
 end

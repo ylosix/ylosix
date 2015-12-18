@@ -68,7 +68,6 @@ class Product < ActiveRecord::Base
   accepts_nested_attributes_for :products_pictures, allow_destroy: true
   accepts_nested_attributes_for :product_translations
 
-  before_save :set_defaults
   after_initialize :default_publication_date
   after_save :save_global_slug
 
@@ -210,15 +209,11 @@ class Product < ActiveRecord::Base
     hash
   end
 
-  def set_defaults
-    generate_slug(:name, product_translations)
-  end
-
   def default_publication_date
     self.publication_date ||= DateTime.now
   end
 
   def save_global_slug
-    save_slug(product_translations, self)
+    save_slug(product_translations, :name, self)
   end
 end

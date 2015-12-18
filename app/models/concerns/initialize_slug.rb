@@ -1,38 +1,35 @@
 module InitializeSlug
-  def generate_slug(field_translation, array_translations)
-    array_translations.each do |translation|
-      slug = translation.slug
-      if slug.blank?
-        slug = 'needs-to-be-changed'
+  def existence_slug(slug)
+    i = 1
+    i += 1 while Link.where(slug: "#{slug}_#{i}").size > 0
 
-        unless field_translation.blank?
-          if !translation[field_translation].blank?
-            slug = translation[field_translation]
-          elsif array_translations.any? && !array_translations.first[field_translation].blank?
-            slug = array_translations.first[field_translation]
-          end
-        end
-      end
-
-      translation.slug = unique_slug(parse_url_chars(slug), translation)
-    end
+    "#{slug}_#{i}"
   end
 
-  def unique_slug(slug, translation, check_models = [Category, Product, Tag])
+  def unique_slug(object, slug, locale, enabled)
     return slug if link?(slug)
 
-    if check_models.empty?
-      count = self.class.with_translations.where('slug like :slug', slug: slug).uniq(self.class).length
+    link = Link.find_by(slug: slug)
+    if id.nil? && link
+      slug = existence_slug(slug)
     else
-      count = 0
-      check_models.each do |model|
-        count += model.with_translations.where('slug like :slug', slug: slug).uniq(model).length
+      if link
+        if link.class_name != object.class.name || link.object_id != object.id
+          slug = existence_slug(slug)
+        else
+          link.update_attribute(:slug, slug)
+          return slug
+        end
+      else
+        Link.create(class_name: object.class.name,
+                    object_id: object.id,
+                    slug: slug,
+                    locale: locale,
+                    enabled: enabled)
       end
     end
 
-    # slug not changed
-    count -= 1 if !translation.id.blank? && translation.slug == slug
-    slug + (count > 0 ? "_#{count}" : '')
+    slug
   end
 
   def parse_url_chars(str)
@@ -64,22 +61,25 @@ module InitializeSlug
     href.start_with?('/') || href.start_with?('#') || href.start_with?('http')
   end
 
-  def save_slug(translations, object)
-    translations.each do |t|
-      s = Link.find_by(class_name: object.class.name, object_id: object.id, locale: t.locale)
+  def save_slug(translations, field_translation, object)
+    enabled = true
+    enabled = object.enabled if object.respond_to?(:enabled)
 
-      enabled = true
-      enabled = object.enabled if object.respond_to?(:enabled)
-      if s
-        s.update_attributes(slug: t.slug, enabled: enabled)
+    translations.each do |translation|
+      slug = translation.slug
+      unless slug
+        slug = 'needs-to-be-changed'
 
-      else
-        Link.create(class_name: object.class.name,
-                    object_id: object.id,
-                    slug: t.slug,
-                    locale: t.locale,
-                    enabled: enabled)
+        if field_translation
+          if translation[field_translation]
+            slug = translation[field_translation]
+          elsif translations.any? && translations.first[field_translation]
+            slug = translations.first[field_translation]
+          end
+        end
       end
+
+      translation.slug = unique_slug(object, parse_url_chars(slug), translation.locale, enabled)
     end
   end
 end
