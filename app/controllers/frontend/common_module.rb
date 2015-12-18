@@ -118,22 +118,15 @@ module Frontend
       end
     end
 
-    def parse_template(html_code)
-      template_liquid = Liquid::Template.parse(html_code)
-      template_liquid.render(@variables)
-    end
-
     def render_template(template, file_html)
       body_code = template.reads_file(file_html)
       body_code = Utils.replace_regex_include(@variables, template, body_code)
 
-      # Parses and compiles the template
-      @head_javascript = parse_template(template.reads_file('common_js.js'))
-      @head_css = parse_template(template.reads_file('common_css.css'))
+      @head_javascript = template.reads_file('common_js.js')
+      @head_css = template.reads_file('common_css.css')
 
-      # @body_content = render_to_string(inline: parse_template(body_code)) # Ruby at views.
-      @body_content = parse_template(body_code)
-      @body_content = append_debug_variables(current_admin_user, @variables, @body_content)
+      @body_content = append_debug_variables(current_admin_user, @variables, body_code)
+      render_to_string(layout: 'custom_template')
     end
 
     def retrieve_file_html(controller, action, args = [])
@@ -198,11 +191,13 @@ module Frontend
       fill_descriptions_with_variables(@variables, @render_template)
 
       file_html = retrieve_file_html(controller_name, action_name, args)
-      has_custom_layout = args.is_a?(Array) && args.any? && args[0].is_a?(Hash) && args[0][:layout] == 'custom_template'
+      has_custom_layout = args.is_a?(Array) && args.any? && args[0].is_a?(Hash) && args[0][:common_module]
 
       if !@render_template.nil? && @render_template.ok?(file_html) && !has_custom_layout
-        render_template(@render_template, file_html)
-        render text: '', layout: 'custom_template'
+        html_code = render_template(@render_template, file_html)
+
+        template_liquid = Liquid::Template.parse(html_code)
+        render text: template_liquid.render(@variables), common_module: true
       else
         super
       end
