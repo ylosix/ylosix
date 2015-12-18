@@ -1,3 +1,9 @@
+GIT
+  remote: git://github.com/ylosix/liquid.git
+  revision: 9a4df89f38c1706013092601cb2ad0761697a8f9
+  specs:
+    liquid (4.0.0.alpha)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -194,7 +200,6 @@ GEM
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     kgio (2.10.0)
-    liquid (3.0.6)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.3)
@@ -422,7 +427,7 @@ DEPENDENCIES
   haml
   jbuilder (~> 2.0)
   jquery-rails
-  liquid
+  liquid!
   mailcatcher
   mailgun_rails
   newrelic_rpm

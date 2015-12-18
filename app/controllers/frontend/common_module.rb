@@ -96,37 +96,26 @@ module Frontend
       append_customer_variables
     end
 
-    def fill_descriptions_with_variables(hash, template)
-      if hash.class == Hash
-        hash.each do |k, v|
-          if v.class.name == 'Array'
-            v.each do |elem|
-              fill_descriptions_with_variables(elem, template)
-            end
-          end
-
-          fill_descriptions_with_variables(v, template) if v.class.name == 'Hash'
-
-          if k.to_s.include?('description') && !v.blank?
-            v = Utils.replace_regex_include(@variables, template, v)
-
-            # Parses and compiles the description field
-            template_liquid = Liquid::Template.parse(v)
-            hash[k] = template_liquid.render(@variables)
-          end
-        end
-      end
-    end
-
     def render_template(template, file_html)
       body_code = template.reads_file(file_html)
       body_code = Utils.replace_regex_include(@variables, template, body_code)
 
+      # First time filling descriptions
+      template_first = Liquid::Template.parse(body_code)
+      body_code = template_first.render(@variables)
+      @body_content = Utils.replace_regex_include(@variables, template, body_code)
+
       @head_javascript = template.reads_file('common_js.js')
       @head_css = template.reads_file('common_css.css')
 
-      @body_content = append_debug_variables(current_admin_user, @variables, body_code)
-      render_to_string(layout: 'custom_template')
+      html_code = render_to_string(layout: 'custom_template')
+
+      # Second time with descriptions
+      template_second = Liquid::Template.parse(html_code)
+      template_second.instance_assigns = template_first.instance_assigns
+      html_code = template_second.render(@variables)
+
+      append_debug_variables(current_admin_user, @variables, html_code)
     end
 
     def retrieve_file_html(controller, action, args = [])
@@ -188,16 +177,12 @@ module Frontend
 
     def render(*args)
       append_variables
-      fill_descriptions_with_variables(@variables, @render_template)
 
       file_html = retrieve_file_html(controller_name, action_name, args)
       has_custom_layout = args.is_a?(Array) && args.any? && args[0].is_a?(Hash) && args[0][:common_module]
 
       if !@render_template.nil? && @render_template.ok?(file_html) && !has_custom_layout
-        html_code = render_template(@render_template, file_html)
-
-        template_liquid = Liquid::Template.parse(html_code)
-        render text: template_liquid.render(@variables), common_module: true
+        render text: render_template(@render_template, file_html), common_module: true
       else
         super
       end

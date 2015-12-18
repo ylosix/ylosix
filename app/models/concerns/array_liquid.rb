@@ -4,12 +4,11 @@ module ArrayLiquid
   def array_to_liquid(array, options = {})
     return [] unless array
 
-    array_liquid = []
-    array.each do |elem|
+    array_liquid = array.map do |elem|
       if elem.class == Hash
-        array_liquid << elem
+        elem
       else
-        array_liquid << elem.to_liquid(options)
+        elem.to_liquid(options)
       end
     end
 
