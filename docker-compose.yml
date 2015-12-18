@@ -12,10 +12,11 @@ web:
   environment:
     RAILS_ENV: production
     RAILS_PIDS: /tmp/rufact-web-puma.pid
-    RAILS_SERVE_STATIC_FILES: true
+    RAILS_SERVE_STATIC_FILES: 'True'
 
     DATABASE_URL: postgres://postgres:YlosixPassword@db:5432/ecommerce
     SECRET_KEY_BASE: <%= rake secret %>
   volumes:
+   - tmp/docker/ckeditor_assets:/var/www/public/ckeditor_assets
    - tmp/docker/system:/var/www/public/system
    - tmp/docker/templates:/var/www/public/templates
