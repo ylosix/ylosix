@@ -4,13 +4,13 @@
 #
 #  created_at :datetime         not null
 #  id         :integer          not null, primary key
-#  name       :string
+#  name       :hstore           default({}), not null
 #  updated_at :datetime         not null
 #
 
 class TagsGroup < ActiveRecord::Base
   include ArrayLiquid
-  translates :name
+  # translates :name
 
   has_many :tags
   has_many :tags_group_translations
@@ -20,7 +20,7 @@ class TagsGroup < ActiveRecord::Base
   has_many :categories, through: :tags_groups_categories
   accepts_nested_attributes_for :tags_groups_categories, allow_destroy: true
 
-  default_scope { includes(:translations) }
+  # default_scope { includes(:translations) }
 
   def self.retrieve_groups(category_id = nil)
     list = []

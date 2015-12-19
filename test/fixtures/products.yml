@@ -6,21 +6,24 @@
 #  control_stock        :boolean          default(FALSE)
 #  created_at           :datetime
 #  depth                :decimal(10, 6)   default(0.0), not null
-#  description          :text
+#  description          :hstore           default({}), not null
 #  enabled              :boolean          default(FALSE)
+#  features             :hstore           default({}), not null
 #  height               :decimal(10, 6)   default(0.0), not null
 #  id                   :integer          not null, primary key
 #  image_content_type   :string
 #  image_file_name      :string
 #  image_file_size      :integer
 #  image_updated_at     :datetime
-#  name                 :string
+#  meta_tags            :hstore           default({}), not null
+#  name                 :hstore           default({}), not null
 #  publication_date     :datetime         not null
 #  reference_code       :string
 #  retail_price         :decimal(10, 2)   default(0.0), not null
 #  retail_price_pre_tax :decimal(10, 5)   default(0.0), not null
-#  short_description    :string
+#  short_description    :hstore           default({}), not null
 #  show_action_name     :string
+#  slug                 :hstore           default({}), not null
 #  stock                :integer          default(0)
 #  tax_id               :integer
 #  unpublication_date   :datetime

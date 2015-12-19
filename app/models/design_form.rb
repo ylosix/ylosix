@@ -2,6 +2,7 @@
 #
 # Table name: design_forms
 #
+#  content    :hstore           default({}), not null
 #  created_at :datetime         not null
 #  id         :integer          not null, primary key
 #  tag        :string
@@ -9,10 +10,8 @@
 #
 
 class DesignForm < ActiveRecord::Base
-  translates :content
+  # translates :content
 
   has_many :design_form_translations
   accepts_nested_attributes_for :design_form_translations
-
-  default_scope { includes(:translations) }
 end

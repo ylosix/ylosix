@@ -139,12 +139,12 @@ def create_default_category
   puts '## Creating default category'
   puts '####################'
 
-  root_attributes = {:parent_id => nil,
-                     category_translations_attributes: [{locale: :en, name: 'Root', slug: 'root'},
-                                                        {locale: :es, name: 'Inicio', slug: 'inicio'}],
-                     :enabled => true,
-                     :visible => true}
-  Utils.create_or_update_model(Category, {:reference_code => 'root'}, root_attributes)
+  root_attributes = {parent_id: nil,
+                     name: {en: 'root', es: 'Inicio'},
+                     slug: {en: 'root', es: 'inicio'},
+                     enabled: true,
+                     visible: true}
+  Utils.create_or_update_model(Category, {reference_code: 'root'}, root_attributes)
 end
 
 def create_defaults

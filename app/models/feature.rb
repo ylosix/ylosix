@@ -4,17 +4,15 @@
 #
 #  created_at :datetime         not null
 #  id         :integer          not null, primary key
-#  name       :string
+#  name       :hstore           default({}), not null
 #  priority   :integer          default(1), not null
 #  updated_at :datetime         not null
 #
 
 class Feature < ActiveRecord::Base
-  translates :name
+  # translates :name
 
   has_many :feature_translations
 
   accepts_nested_attributes_for :feature_translations
-
-  default_scope { includes(:translations) }
 end

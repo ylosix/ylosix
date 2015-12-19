@@ -6,7 +6,7 @@
 #  created_at     :datetime         not null
 #  enable_invoice :boolean
 #  id             :integer          not null, primary key
-#  name           :string
+#  name           :hstore           default({}), not null
 #  updated_at     :datetime         not null
 #
 

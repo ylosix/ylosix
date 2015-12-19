@@ -31,7 +31,7 @@ gem 'bootstrap-sass', '~> 3.3.4'
 gem 'font-awesome-rails'
 gem 'animate-rails', '~> 1.0.8'
 
-gem 'globalize', '~> 5.0.0'
+gem 'hstore_translate'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

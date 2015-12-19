@@ -2,16 +2,20 @@
 #
 # Table name: categories
 #
-#  created_at       :datetime         not null
-#  enabled          :boolean          default(FALSE)
-#  id               :integer          not null, primary key
-#  name             :string
-#  parent_id        :integer
-#  priority         :integer          default(1), not null
-#  reference_code   :string
-#  show_action_name :string
-#  updated_at       :datetime         not null
-#  visible          :boolean          default(TRUE)
+#  created_at        :datetime         not null
+#  description       :hstore           default({}), not null
+#  enabled           :boolean          default(FALSE)
+#  id                :integer          not null, primary key
+#  meta_tags         :hstore           default({}), not null
+#  name              :hstore           default({}), not null
+#  parent_id         :integer
+#  priority          :integer          default(1), not null
+#  reference_code    :string
+#  short_description :hstore           default({}), not null
+#  show_action_name  :string
+#  slug              :hstore           default({}), not null
+#  updated_at        :datetime         not null
+#  visible           :boolean          default(TRUE)
 #
 # Indexes
 #
@@ -24,7 +28,7 @@ class Category < ActiveRecord::Base
   include ArrayLiquid
   include InitializeSlug
 
-  translates :name, :short_description, :description, :slug, :meta_tags
+  # translates :name, :short_description, :description, :slug, :meta_tags
 
   # TODO put children in schema erd!
   # has_many :children, class_name: 'Category', foreign_key: 'parent_id'
@@ -47,7 +51,7 @@ class Category < ActiveRecord::Base
 
   after_save :save_global_slug
 
-  default_scope { includes(:translations, :products) }
+  default_scope { includes(:products) }
 
   def self.parent_order(parent_order = 'parent_asc')
     array_ordered = Category.all.to_a

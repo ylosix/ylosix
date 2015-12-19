@@ -4,8 +4,9 @@
 #
 #  created_at    :datetime         not null
 #  id            :integer          not null, primary key
-#  name          :string
+#  name          :hstore           default({}), not null
 #  priority      :integer          default(1), not null
+#  slug          :hstore           default({}), not null
 #  tags_group_id :integer
 #  updated_at    :datetime         not null
 #
@@ -17,7 +18,7 @@
 class Tag < ActiveRecord::Base
   include InitializeSlug
   attr_accessor :href, :remove_href
-  translates :name, :slug
+  # translates :name, :slug
 
   belongs_to :tags_group
   has_many :products_tags
@@ -27,8 +28,6 @@ class Tag < ActiveRecord::Base
   accepts_nested_attributes_for :tag_translations
 
   after_save :save_global_slug
-
-  default_scope { includes(:translations) }
 
   def to_liquid(options = {})
     current_ids = []

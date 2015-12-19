@@ -2,9 +2,11 @@
 #
 # Table name: action_forms
 #
+#  body       :hstore           default({}), not null
 #  created_at :datetime         not null
 #  id         :integer          not null, primary key
 #  mapping    :hstore           default({}), not null
+#  subject    :hstore           default({}), not null
 #  tag        :string
 #  updated_at :datetime         not null
 #
@@ -12,12 +14,10 @@
 class ActionForm < ActiveRecord::Base
   include TemplateFunctions
 
-  translates :subject, :body
+  # translates :subject, :body
 
   has_many :action_form_translations
   accepts_nested_attributes_for :action_form_translations
-
-  default_scope { includes(:translations) }
 
   def perform_with_data(data_form)
     attributes = {to: Ecommerce::Application::MAIN_EMAIL}

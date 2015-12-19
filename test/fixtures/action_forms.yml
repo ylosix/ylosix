@@ -2,9 +2,11 @@
 #
 # Table name: action_forms
 #
+#  body       :hstore           default({}), not null
 #  created_at :datetime         not null
 #  id         :integer          not null, primary key
 #  mapping    :hstore           default({}), not null
+#  subject    :hstore           default({}), not null
 #  tag        :string
 #  updated_at :datetime         not null
 #

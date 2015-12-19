@@ -2,6 +2,7 @@
 #
 # Table name: snippets
 #
+#  content    :hstore           default({}), not null
 #  created_at :datetime         not null
 #  id         :integer          not null, primary key
 #  tag        :string
@@ -13,10 +14,8 @@
 #
 
 class Snippet < ActiveRecord::Base
-  translates :content
+  # translates :content
 
   has_many :snippet_translations
   accepts_nested_attributes_for :snippet_translations
-
-  default_scope { includes(:translations) }
 end

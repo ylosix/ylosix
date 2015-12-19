@@ -2,16 +2,20 @@
 #
 # Table name: categories
 #
-#  created_at       :datetime         not null
-#  enabled          :boolean          default(FALSE)
-#  id               :integer          not null, primary key
-#  name             :string
-#  parent_id        :integer
-#  priority         :integer          default(1), not null
-#  reference_code   :string
-#  show_action_name :string
-#  updated_at       :datetime         not null
-#  visible          :boolean          default(TRUE)
+#  created_at        :datetime         not null
+#  description       :hstore           default({}), not null
+#  enabled           :boolean          default(FALSE)
+#  id                :integer          not null, primary key
+#  meta_tags         :hstore           default({}), not null
+#  name              :hstore           default({}), not null
+#  parent_id         :integer
+#  priority          :integer          default(1), not null
+#  reference_code    :string
+#  short_description :hstore           default({}), not null
+#  show_action_name  :string
+#  slug              :hstore           default({}), not null
+#  updated_at        :datetime         not null
+#  visible           :boolean          default(TRUE)
 #
 # Indexes
 #
@@ -25,16 +29,16 @@
 root:
   parent_id: nil
   enabled: true
-  name: root
+  name: { en: root }
 
 digital_cameras:
   parent: root
-  name: Digital cameras
+  name: { en: Digital cameras }
   enabled: true
   visible: true
 
 digital_cameras_child:
   parent: digital_cameras
-  name: Digital cameras child
+  name: { en: Digital cameras child }
   enabled: true
   visible: true

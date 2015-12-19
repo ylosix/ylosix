@@ -4,7 +4,7 @@
 #
 #  created_at :datetime         not null
 #  id         :integer          not null, primary key
-#  name       :string
+#  name       :hstore           default({}), not null
 #  updated_at :datetime         not null
 #
 
