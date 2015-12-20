@@ -21,31 +21,18 @@ module ActiveAdminHelper
     array.compact
   end
 
-  def admin_translation_text_field(translations, model_name, field, options = {})
+  def admin_translation_text_field(object, model_name, field, options = {})
     if options[:component] == CK_EDITOR && !session[:locale].nil?
       options[:ckeditor] = {language: session[:locale]}
     end
 
-    translations.each_with_index do |translation, index|
-      if translation[field].class == Hash
-        translation[field].each do |k, v|
-          label_text = t("activerecord.attributes.#{model_name}.#{k}")
-          label_for = "#{model_name}_#{model_name}_translations_attributes_#{index}_#{field}_#{k}"
+    languages = Language.in_backoffice
+    languages.each do |language|
+      label_text = t("activerecord.attributes.#{model_name}.#{field}")
+      label_for = "#{model_name}_#{field}_#{language.locale}"
 
-          input_prefix_name = "#{model_name}[#{model_name}_translations_attributes][#{index}]"
-          input_suffix_name = "[#{field}][#{k}]"
-
-          render_input_text_field(label_text, label_for, input_prefix_name, input_suffix_name, v, translation, options)
-        end
-      else
-        label_text = t("activerecord.attributes.#{model_name}.#{field}")
-        label_for = "#{model_name}_#{model_name}_translations_attributes_#{index}_#{field}"
-
-        input_prefix_name = "#{model_name}[#{model_name}_translations_attributes][#{index}]"
-        input_suffix_name = "[#{field}]"
-
-        render_input_text_field(label_text, label_for, input_prefix_name, input_suffix_name, translation[field], translation, options)
-      end
+      input_name = "#{model_name}[#{field}][#{language.locale}]"
+      render_input_text_field(label_text, label_for, input_name, object[field][language.locale], language, options)
     end
   end
 
@@ -53,14 +40,14 @@ module ActiveAdminHelper
 
   # input_prefix_name = 'category[category_translations_attributes][0]'
   # input_suffix_name = '[name]'
-  def render_input_text_field(label_text, label_for, input_prefix_name, input_suffix_name, value, translation, options)
+  def render_input_text_field(label_text, label_for, input_name, value, language, options)
     render partial: 'admin/translation_field',
            locals: {
-               input_prefix_name: input_prefix_name,
-               translation: translation,
+               input_name: input_name,
+               language: language,
                label_text: label_text,
                label_for: label_for,
-               component: retrieve_component("#{input_prefix_name}#{input_suffix_name}", value, options)
+               component: retrieve_component("#{input_name}", value, options)
            }
   end
 

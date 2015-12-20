@@ -1,13 +1,9 @@
 %li{id: "#{label_for}_input", class: 'string input optional stringish'}
   %label{class: 'label', for: label_for}
     = label_text
-    - if translation.language.flag?
-      = image_tag(translation.language.flag.url(:original))
+    - if language.flag?
+      = image_tag(language.flag.url(:original))
     - else
-      = translation.language.locale
-  = text_field_tag "#{input_prefix_name}[locale]", translation.language.locale, {type: 'hidden'}
-
-  - unless translation.id.nil?
-    = text_field_tag "#{input_prefix_name}[id]", translation.id, {type: 'hidden'}
+      = language.locale
 
   = component

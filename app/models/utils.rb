@@ -197,7 +197,7 @@ class Utils
   end
 
   def self.create_model_translations(model, key, value, value_all = nil)
-    object = model.with_translations.find_by(key => value)
+    object = model.find_by(key => value)
     if value_all.nil?
       object = model.create!(value) if object.nil?
     else

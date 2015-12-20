@@ -31,11 +31,11 @@ ActiveRecord::Schema.define(version: 20151219161812) do
 
   create_table "action_forms", force: :cascade do |t|
     t.string   "tag"
-    t.hstore   "mapping",    default: {}, null: false
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-    t.hstore   "subject",    default: {}, null: false
-    t.hstore   "body",       default: {}, null: false
+    t.hstore   "mapping",              default: {}, null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.hstore   "subject_translations", default: {}, null: false
+    t.hstore   "body_translations",    default: {}, null: false
   end
 
   create_table "active_admin_comments", force: :cascade do |t|
@@ -96,8 +96,8 @@ ActiveRecord::Schema.define(version: 20151219161812) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
-    t.hstore   "delay",              default: {},    null: false
-    t.hstore   "name",               default: {},    null: false
+    t.hstore   "delay_translations", default: {},    null: false
+    t.hstore   "name_translations",  default: {},    null: false
   end
 
   add_index "carriers", ["enabled"], name: "index_carriers_on_enabled", using: :btree
@@ -117,18 +117,18 @@ ActiveRecord::Schema.define(version: 20151219161812) do
 
   create_table "categories", force: :cascade do |t|
     t.integer  "parent_id"
-    t.boolean  "enabled",           default: false
-    t.boolean  "visible",           default: true
+    t.boolean  "enabled",                        default: false
+    t.boolean  "visible",                        default: true
     t.string   "reference_code"
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
-    t.integer  "priority",          default: 1,     null: false
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
+    t.integer  "priority",                       default: 1,     null: false
     t.string   "show_action_name"
-    t.hstore   "description",       default: {},    null: false
-    t.hstore   "short_description", default: {},    null: false
-    t.hstore   "meta_tags",         default: {},    null: false
-    t.hstore   "slug",              default: {},    null: false
-    t.hstore   "name",              default: {},    null: false
+    t.hstore   "description_translations",       default: {},    null: false
+    t.hstore   "short_description_translations", default: {},    null: false
+    t.hstore   "meta_tags_translations",         default: {},    null: false
+    t.hstore   "slug_translations",              default: {},    null: false
+    t.hstore   "name_translations",              default: {},    null: false
   end
 
   add_index "categories", ["enabled"], name: "index_categories_on_enabled", using: :btree
@@ -262,9 +262,9 @@ ActiveRecord::Schema.define(version: 20151219161812) do
 
   create_table "design_forms", force: :cascade do |t|
     t.string   "tag"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-    t.hstore   "content",    default: {}, null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.hstore   "content_translations", default: {}, null: false
   end
 
   create_table "feature_translations", force: :cascade do |t|
@@ -279,10 +279,10 @@ ActiveRecord::Schema.define(version: 20151219161812) do
   add_index "feature_translations", ["locale"], name: "index_feature_translations_on_locale", using: :btree
 
   create_table "features", force: :cascade do |t|
-    t.integer  "priority",   default: 1,  null: false
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-    t.hstore   "name",       default: {}, null: false
+    t.integer  "priority",          default: 1,  null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.hstore   "name_translations", default: {}, null: false
   end
 
   create_table "languages", force: :cascade do |t|
@@ -337,32 +337,32 @@ ActiveRecord::Schema.define(version: 20151219161812) do
   create_table "products", force: :cascade do |t|
     t.string   "reference_code"
     t.string   "barcode"
-    t.boolean  "enabled",                                       default: false
-    t.boolean  "visible",                                       default: true
-    t.datetime "publication_date",                                              null: false
+    t.boolean  "enabled",                                                 default: false
+    t.boolean  "visible",                                                 default: true
+    t.datetime "publication_date",                                                        null: false
     t.datetime "unpublication_date"
-    t.decimal  "retail_price_pre_tax", precision: 10, scale: 5, default: 0.0,   null: false
-    t.decimal  "retail_price",         precision: 10, scale: 2, default: 0.0,   null: false
+    t.decimal  "retail_price_pre_tax",           precision: 10, scale: 5, default: 0.0,   null: false
+    t.decimal  "retail_price",                   precision: 10, scale: 2, default: 0.0,   null: false
     t.integer  "tax_id"
-    t.integer  "stock",                                         default: 0
-    t.boolean  "control_stock",                                 default: false
+    t.integer  "stock",                                                   default: 0
+    t.boolean  "control_stock",                                           default: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
-    t.decimal  "width",                precision: 10, scale: 6, default: 0.0,   null: false
-    t.decimal  "height",               precision: 10, scale: 6, default: 0.0,   null: false
-    t.decimal  "depth",                precision: 10, scale: 6, default: 0.0,   null: false
-    t.decimal  "weight",               precision: 10, scale: 6, default: 0.0,   null: false
+    t.decimal  "width",                          precision: 10, scale: 6, default: 0.0,   null: false
+    t.decimal  "height",                         precision: 10, scale: 6, default: 0.0,   null: false
+    t.decimal  "depth",                          precision: 10, scale: 6, default: 0.0,   null: false
+    t.decimal  "weight",                         precision: 10, scale: 6, default: 0.0,   null: false
     t.string   "show_action_name"
-    t.hstore   "description",                                   default: {},    null: false
-    t.hstore   "features",                                      default: {},    null: false
-    t.hstore   "meta_tags",                                     default: {},    null: false
-    t.hstore   "name",                                          default: {},    null: false
-    t.hstore   "short_description",                             default: {},    null: false
-    t.hstore   "slug",                                          default: {},    null: false
+    t.hstore   "description_translations",                                default: {},    null: false
+    t.hstore   "features_translations",                                   default: {},    null: false
+    t.hstore   "meta_tags_translations",                                  default: {},    null: false
+    t.hstore   "name_translations",                                       default: {},    null: false
+    t.hstore   "short_description_translations",                          default: {},    null: false
+    t.hstore   "slug_translations",                                       default: {},    null: false
   end
 
   add_index "products", ["enabled"], name: "index_products_on_enabled", using: :btree
@@ -475,10 +475,10 @@ ActiveRecord::Schema.define(version: 20151219161812) do
 
   create_table "shopping_orders_statuses", force: :cascade do |t|
     t.boolean  "enable_invoice"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.string   "color"
-    t.hstore   "name",           default: {}, null: false
+    t.hstore   "name_translations", default: {}, null: false
   end
 
   create_table "snippet_translations", force: :cascade do |t|
@@ -494,9 +494,9 @@ ActiveRecord::Schema.define(version: 20151219161812) do
 
   create_table "snippets", force: :cascade do |t|
     t.string   "tag"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-    t.hstore   "content",    default: {}, null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.hstore   "content_translations", default: {}, null: false
   end
 
   add_index "snippets", ["tag"], name: "index_snippets_on_tag", using: :btree
@@ -516,11 +516,11 @@ ActiveRecord::Schema.define(version: 20151219161812) do
 
   create_table "tags", force: :cascade do |t|
     t.integer  "tags_group_id"
-    t.integer  "priority",      default: 1,  null: false
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-    t.hstore   "name",          default: {}, null: false
-    t.hstore   "slug",          default: {}, null: false
+    t.integer  "priority",          default: 1,  null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.hstore   "name_translations", default: {}, null: false
+    t.hstore   "slug_translations", default: {}, null: false
   end
 
   add_index "tags", ["tags_group_id"], name: "index_tags_on_tags_group_id", using: :btree
@@ -537,9 +537,9 @@ ActiveRecord::Schema.define(version: 20151219161812) do
   add_index "tags_group_translations", ["tags_group_id"], name: "index_tags_group_translations_on_tags_group_id", using: :btree
 
   create_table "tags_groups", force: :cascade do |t|
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-    t.hstore   "name",       default: {}, null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.hstore   "name_translations", default: {}, null: false
   end
 
   create_table "tags_groups_categories", force: :cascade do |t|

@@ -2,13 +2,13 @@
 #
 # Table name: tags
 #
-#  created_at    :datetime         not null
-#  id            :integer          not null, primary key
-#  name          :hstore           default({}), not null
-#  priority      :integer          default(1), not null
-#  slug          :hstore           default({}), not null
-#  tags_group_id :integer
-#  updated_at    :datetime         not null
+#  created_at        :datetime         not null
+#  id                :integer          not null, primary key
+#  name_translations :hstore           default({}), not null
+#  priority          :integer          default(1), not null
+#  slug_translations :hstore           default({}), not null
+#  tags_group_id     :integer
+#  updated_at        :datetime         not null
 #
 # Indexes
 #
@@ -18,7 +18,7 @@
 class Tag < ActiveRecord::Base
   include InitializeSlug
   attr_accessor :href, :remove_href
-  # translates :name, :slug
+  translates :name, :slug
 
   belongs_to :tags_group
   has_many :products_tags

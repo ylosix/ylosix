@@ -2,13 +2,13 @@
 #
 # Table name: action_forms
 #
-#  body       :hstore           default({}), not null
-#  created_at :datetime         not null
-#  id         :integer          not null, primary key
-#  mapping    :hstore           default({}), not null
-#  subject    :hstore           default({}), not null
-#  tag        :string
-#  updated_at :datetime         not null
+#  body_translations    :hstore           default({}), not null
+#  created_at           :datetime         not null
+#  id                   :integer          not null, primary key
+#  mapping              :hstore           default({}), not null
+#  subject_translations :hstore           default({}), not null
+#  tag                  :string
+#  updated_at           :datetime         not null
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
@@ -16,7 +16,11 @@
 one:
   tag: MyString
   mapping: { aaa: bbb }
+  subject: { en: Subject }
+  body: { en: Body }
 
 two:
   tag: MyString
   mapping: { aaa: bbb }
+  subject: { en: Subject }
+  body: { en: Body }

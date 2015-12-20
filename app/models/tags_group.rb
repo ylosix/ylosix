@@ -2,10 +2,10 @@
 #
 # Table name: tags_groups
 #
-#  created_at :datetime         not null
-#  id         :integer          not null, primary key
-#  name       :hstore           default({}), not null
-#  updated_at :datetime         not null
+#  created_at        :datetime         not null
+#  id                :integer          not null, primary key
+#  name_translations :hstore           default({}), not null
+#  updated_at        :datetime         not null
 #
 
 class TagsGroup < ActiveRecord::Base

@@ -2,11 +2,11 @@
 #
 # Table name: snippets
 #
-#  content    :hstore           default({}), not null
-#  created_at :datetime         not null
-#  id         :integer          not null, primary key
-#  tag        :string
-#  updated_at :datetime         not null
+#  content_translations :hstore           default({}), not null
+#  created_at           :datetime         not null
+#  id                   :integer          not null, primary key
+#  tag                  :string
+#  updated_at           :datetime         not null
 #
 # Indexes
 #

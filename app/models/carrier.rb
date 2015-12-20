@@ -3,7 +3,7 @@
 # Table name: carriers
 #
 #  created_at         :datetime         not null
-#  delay              :hstore           default({}), not null
+#  delay_translations :hstore           default({}), not null
 #  enabled            :boolean          default(FALSE), not null
 #  free_carrier       :boolean          default(FALSE), not null
 #  id                 :integer          not null, primary key
@@ -11,7 +11,7 @@
 #  image_file_name    :string
 #  image_file_size    :integer
 #  image_updated_at   :datetime
-#  name               :hstore           default({}), not null
+#  name_translations  :hstore           default({}), not null
 #  priority           :integer          default(1), not null
 #  updated_at         :datetime         not null
 #

@@ -11,11 +11,11 @@ namespace :db do
     puts '####################'
     Rake::Task['db:gen_demo_users'].invoke
     Rake::Task['db:gen_demo_categories'].invoke
-    Rake::Task['db:gen_demo_tags'].invoke
-    Rake::Task['db:gen_demo_taxes'].invoke
-    Rake::Task['db:gen_demo_products'].invoke
-    Rake::Task['db:gen_demo_shopping_carts'].invoke
-    Rake::Task['db:gen_demo_shopping_orders'].invoke
-    Rake::Task['db:gen_demo_carriers'].invoke
+    # Rake::Task['db:gen_demo_tags'].invoke
+    # Rake::Task['db:gen_demo_taxes'].invoke
+    # Rake::Task['db:gen_demo_products'].invoke
+    # Rake::Task['db:gen_demo_shopping_carts'].invoke
+    # Rake::Task['db:gen_demo_shopping_orders'].invoke
+    # Rake::Task['db:gen_demo_carriers'].invoke
   end
 end

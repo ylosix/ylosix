@@ -2,12 +2,12 @@
 #
 # Table name: shopping_orders_statuses
 #
-#  color          :string
-#  created_at     :datetime         not null
-#  enable_invoice :boolean
-#  id             :integer          not null, primary key
-#  name           :hstore           default({}), not null
-#  updated_at     :datetime         not null
+#  color             :string
+#  created_at        :datetime         not null
+#  enable_invoice    :boolean
+#  id                :integer          not null, primary key
+#  name_translations :hstore           default({}), not null
+#  updated_at        :datetime         not null
 #
 
 require 'test_helper'
