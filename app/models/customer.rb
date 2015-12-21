@@ -70,8 +70,8 @@ class Customer < ActiveRecord::Base
   private
 
   def retrieve_address(options)
-    address = CustomerAddress.find_by(options)
-    address ||= CustomerAddress.first
+    address = customer_addresses.find_by(options)
+    address ||= customer_addresses.first
     address
   end
 end
