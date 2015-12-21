@@ -6,10 +6,10 @@
       = t('activerecord.attributes.feature.value')
 
   - features.each do |feature|
-    - languages.each_with_index do |language, i|
+    - languages.each do |language|
       %tr
         %td
-          %label{for: "product_product_features_tranlations_#{i}_#{feature.id}"}
+          %label{for: "product_features_translations_#{language.locale}_#{feature.id}"}
             - if language.flag?
               = image_tag(language.flag.url(:original))
             - else
@@ -19,6 +19,7 @@
             = feature.name
 
         %td
-          - value = nil
-          - value = product.features[feature.id] unless product.features.nil?
-          = text_field_tag "product[features_translations][#{language.locale}][#{feature.id}]", value
+          - value = ''
+          - value = product.features_translations[language.locale].to_s unless product.features_translations[language.locale].blank?
+          - features = JSON.parse(value.gsub('=>', ':'))
+          = text_field_tag "product[features_translations][#{language.locale}][#{feature.id}]", features[feature.id.to_s]

@@ -50,6 +50,7 @@ class Category < ActiveRecord::Base
                     }
 
   after_save :save_global_slug
+  default_scope { includes(:products) }
 
   ransacker :by_name, formatter: lambda { |search|
                       ids = Category.where('lower(name_translations->?) LIKE lower(?)', I18n.locale, "%#{search}%").pluck(:id)

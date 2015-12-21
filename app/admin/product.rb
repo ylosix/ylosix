@@ -11,20 +11,13 @@ ActiveAdmin.register Product do
                  products_categories_attributes: [:id, :category_id, :product_id, :_destroy],
                  products_pictures_attributes: [:id, :image, :_destroy]]
 
-    pta = [:id, :locale, :name, :short_description, :description, :slug]
-
-    features = []
-    Feature.all.each do |feature|
-      features << feature.id.to_s.to_sym
-    end
-    pta << {features: features}
-
+    features = Feature.pluck(:id).map { |id| id.to_s.to_sym }
     locales = Language.pluck(:locale).map(&:to_sym)
     permitted << {
         name_translations: locales,
         short_description_translations: locales,
         description_translations: locales,
-        features_translations: locales,
+        features_translations: locales.map{ |locale| {locale => features} },
         slug_translations: locales,
         meta_tags_translations: locales
     }
@@ -79,7 +72,7 @@ ActiveAdmin.register Product do
       row 'Features' do
         table_for Feature.all do
           column :name
-          column (:value) { |feature| product.features[feature.id.to_s] unless product.features.nil? }
+          column (:value) { |feature| JSON.parse(product.features.gsub('=>', ':'))[feature.id.to_s] unless product.features.nil? }
         end
       end
 
@@ -115,10 +108,6 @@ ActiveAdmin.register Product do
   filter :enabled
 
   form do |f|
-    # translations = Utils.array_translations(ProductTranslation,
-    #                                         {product_id: product.id},
-    #                                         meta_tags: {keywords: '', description: ''})
-
     tabs do
       tab 'Information' do
         f.inputs 'Information' do
@@ -171,12 +160,11 @@ ActiveAdmin.register Product do
                                                              root_category: Category.root_category
                                                          }
 
-          # TODO, fix this
-          # render partial: 'admin/products/tags', locals:
-          #                                          {
-          #                                              products_tags: product.products_tags,
-          #                                              tags_groups: TagsGroup.all
-          #                                          }
+          render partial: 'admin/products/tags', locals:
+                                                   {
+                                                       products_tags: product.products_tags,
+                                                       tags_groups: TagsGroup.all
+                                                   }
         end
       end
 

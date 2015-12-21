@@ -176,6 +176,8 @@ class Product < ActiveRecord::Base
     append_images(liquid)
   end
 
+  private
+
   def array_tags
     array_tags = []
 
@@ -192,7 +194,7 @@ class Product < ActiveRecord::Base
     array_features = []
 
     unless features.blank?
-      features.each do |k, v|
+      JSON.parse(features.gsub('=>', ':')).each do |k, v|
         f = Feature.find_by(id: k)
         array_features << {'id' => k, 'key' => f.name, 'value' => v} unless f.blank?
       end
@@ -200,8 +202,6 @@ class Product < ActiveRecord::Base
 
     array_features
   end
-
-  private
 
   def append_images(hash)
     IMAGE_SIZES.each do |size, _k|
