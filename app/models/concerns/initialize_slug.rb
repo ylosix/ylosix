@@ -61,25 +61,22 @@ module InitializeSlug
     href.start_with?('/') || href.start_with?('#') || href.start_with?('http')
   end
 
-  def save_slug(translations, field_translation, object)
+  def save_slug(_translations, field_translation, object)
     enabled = true
     enabled = object.enabled if object.respond_to?(:enabled)
 
-    translations.each do |translation|
-      slug = translation.slug
-      unless slug
-        slug = 'needs-to-be-changed'
+    Language.in_backoffice.each do |language|
+      slug = object[:slug_translations][language.locale]
 
-        if field_translation
-          if translation[field_translation]
-            slug = translation[field_translation]
-          elsif translations.any? && translations.first[field_translation]
-            slug = translations.first[field_translation]
-          end
+      unless slug
+        if field_translation && object[field_translation]
+          slug = object[field_translation][language.locale]
         end
+
+        slug ||= 'needs-to-be-changed'
       end
 
-      translation.slug = unique_slug(object, parse_url_chars(slug), translation.locale, enabled)
+      object[:slug_translations][language.locale] = unique_slug(object, parse_url_chars(slug), language.locale, enabled)
     end
   end
 end

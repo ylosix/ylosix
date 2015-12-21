@@ -28,19 +28,11 @@ require 'test_helper'
 
 class CategoryTest < ActiveSupport::TestCase
   test 'set_defaults' do
-    c = Category.new(name: 'potato with spaces', locale: :en)
-
-    assert c.save
-    c.category_translations.each do |translation|
-      assert !translation.slug.blank?
-    end
-
-    ct = CategoryTranslation.new(name: 'potato with spaces', locale: :en)
-    c = Category.new(category_translations: [ct])
+    c = Category.new(name_translations: {en: 'potato with spaces'})
     assert c.save
 
-    c.category_translations.each do |translation|
-      assert !translation.slug.blank?
+    c.slug_translations.each do |_k, v|
+      assert !v.blank?
     end
   end
 

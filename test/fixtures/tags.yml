@@ -18,9 +18,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 cameras:
-  name: { en: Cameras }
+  name_translations: { en: Cameras }
   priority: 1
 
 reflex:
-  name: { en: Reflex }
+  name_translations: { en: Reflex }
   priority: 1

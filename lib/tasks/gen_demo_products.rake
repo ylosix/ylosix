@@ -154,8 +154,7 @@ namespace :db do
     puts '## Creating products'
     puts '####################'
 
-    # TODO fix this.
-    # create_photograpy_products
-    # create_phones_products
+    create_photograpy_products
+    create_phones_products
   end
 end

@@ -19,14 +19,16 @@ ActiveAdmin.register Product do
     end
     pta << {features: features}
 
-    if !params[:product].blank? && !params[:product][:product_translations_attributes].blank?
-      unless params[:product][:product_translations_attributes]['0'][:meta_tags].blank?
-        meta_tags = params[:product][:product_translations_attributes]['0'][:meta_tags].keys
-        pta << {meta_tags: meta_tags}
-      end
-    end
+    locales = Language.pluck(:locale).map(&:to_sym)
+    permitted << {
+        name_translations: locales,
+        short_description_translations: locales,
+        description_translations: locales,
+        features_translations: locales,
+        slug_translations: locales,
+        meta_tags_translations: locales
+    }
 
-    permitted << {product_translations_attributes: pta}
     permitted
   end
 
@@ -58,7 +60,7 @@ ActiveAdmin.register Product do
     actions
   end
 
-  show title: proc { |p| "Product ##{p.id}" } do
+  show title: proc { |p| "#{p.name}" } do
     attributes_table do
       row :id
       row :reference_code
@@ -96,7 +98,9 @@ ActiveAdmin.register Product do
   end
 
   filter :reference_code
-  filter :translations_name, as: :string, label: proc { I18n.t 'activerecord.attributes.product.name' }
+  filter :by_name_in,
+         label: proc { I18n.t 'activerecord.attributes.product.name' },
+         as: :string
 
   filter :by_categorization_in,
          label: proc { I18n.t 'activerecord.models.category.one' },
@@ -111,28 +115,29 @@ ActiveAdmin.register Product do
   filter :enabled
 
   form do |f|
-    translations = Utils.array_translations(ProductTranslation,
-                                            {product_id: product.id},
-                                            meta_tags: {keywords: '', description: ''})
+    # translations = Utils.array_translations(ProductTranslation,
+    #                                         {product_id: product.id},
+    #                                         meta_tags: {keywords: '', description: ''})
 
     tabs do
       tab 'Information' do
         f.inputs 'Information' do
-          admin_translation_text_field(translations, 'product', 'name')
+          admin_translation_text_field(product, 'product', 'name_translations')
           f.input :reference_code
 
           f.input :enabled
           f.input :visible
 
-          admin_translation_text_field(translations, 'product', 'short_description', component: ActiveAdminHelper::TEXT_AREA)
-          admin_translation_text_field(translations, 'product', 'description', component: ActiveAdminHelper::CK_EDITOR)
+          admin_translation_text_field(product, 'product', 'short_description_tranlations', component: ActiveAdminHelper::TEXT_AREA)
+          admin_translation_text_field(product, 'product', 'description_translations', component: ActiveAdminHelper::CK_EDITOR)
 
           f.input :publication_date
           f.input :unpublication_date
         end
 
         f.inputs 'Features' do
-          render partial: 'admin/products/features', locals: {translations: translations,
+          render partial: 'admin/products/features', locals: {product: product,
+                                                              languages: Language.in_backoffice,
                                                               features: Feature.all}
         end
 
@@ -166,11 +171,12 @@ ActiveAdmin.register Product do
                                                              root_category: Category.root_category
                                                          }
 
-          render partial: 'admin/products/tags', locals:
-                                                   {
-                                                       products_tags: product.products_tags,
-                                                       tags_groups: TagsGroup.all
-                                                   }
+          # TODO, fix this
+          # render partial: 'admin/products/tags', locals:
+          #                                          {
+          #                                              products_tags: product.products_tags,
+          #                                              tags_groups: TagsGroup.all
+          #                                          }
         end
       end
 
@@ -186,8 +192,8 @@ ActiveAdmin.register Product do
 
       tab 'Seo' do
         f.inputs 'Seo' do
-          admin_translation_text_field(translations, 'product', 'meta_tags')
-          admin_translation_text_field(translations, 'product', 'slug', hint: 'Chars not allowed: (Upper chars) spaces')
+          admin_translation_text_field(product, 'product', 'meta_tags_translations')
+          admin_translation_text_field(product, 'product', 'slugs_translations', hint: 'Chars not allowed: (Upper chars) spaces')
           f.input :show_action_name, hint: 'File name of show render'
         end
       end

@@ -23,15 +23,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: { en: MyString }
-  delay: { en: MyString }
+  name_translations: { en: MyString }
+  delay_translations: { en: MyString }
   enabled: false
   free_carrier: true
   priority: 1
 
 two:
-  name: { en: MyString }
-  delay: { en: MyString }
+  name_translations: { en: MyString }
+  delay_translations: { en: MyString }
   enabled: false
   free_carrier: false
   priority: 1

@@ -25,15 +25,26 @@ ActiveAdmin.register Tag do
     actions
   end
 
-  # filter :name, label: proc { I18n.t 'activerecord.attributes.tag.name' }
+  filter :by_name_in,
+         label: proc { I18n.t 'activerecord.attributes.tag.name' },
+         as: :string
+
   filter :tags_group
+
+  show title: proc { |p| "#{p.name}" } do
+    attributes_table do
+      row :id
+      row :created_at
+      row :updated_at
+      row :name
+    end
+  end
 
   form do |f|
     f.inputs t('formtastic.edit_form', model: t('activerecord.models.tag.one')) do
       f.input :tags_group
       f.input :priority, hint: '1:+ --- 10:-'
 
-      # translations = Utils.array_translations(TagTranslation, tag_id: tag.id)
       admin_translation_text_field(tag, 'tag', 'name_translations')
       admin_translation_text_field(tag, 'tag', 'slug_translations', hint: 'Chars not allowed: (Upper chars) spaces')
     end

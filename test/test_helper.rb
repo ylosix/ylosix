@@ -27,7 +27,8 @@ module ActionDispatch
 end
 
 Rake::Task['rubocop'].invoke
-Rake::Task['db:gen_demo'].invoke
+# TODO, fix gen_demo without globalize
+# Rake::Task['db:gen_demo'].invoke
 
 module ActiveSupport
   class TestCase

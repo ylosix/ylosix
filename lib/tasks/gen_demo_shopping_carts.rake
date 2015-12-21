@@ -8,11 +8,10 @@ namespace :db do
     customer = Customer.find_by(email: 'customer@ylosix.com')
     sc = ShoppingCart.new(customer: customer)
 
-    # TODO fix this
-    # products = Product.where(enabled: true)
-    #
-    # sc.add_product(products[0])
-    # sc.add_product(products[1])
+    products = Product.where(enabled: true)
+
+    sc.add_product(products[0])
+    sc.add_product(products[1])
 
     sc.save
   end

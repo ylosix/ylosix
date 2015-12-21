@@ -1,8 +1,14 @@
 ActiveAdmin.register Carrier do
   menu parent: 'Transports'
 
-  permit_params :enabled, :free_carrier, :name, :image,
-                carrier_translations_attributes: [:id, :locale, :name, :delay]
+  permit_params do
+    permitted = [:enabled, :free_carrier, :image]
+
+    locales = Language.pluck(:locale).map(&:to_sym)
+    permitted << {name_translations: locales}
+    permitted << {delay_translations: locales}
+    permitted
+  end
 
   index do
     selectable_column
@@ -22,9 +28,8 @@ ActiveAdmin.register Carrier do
 
   form do |f|
     f.inputs 'Carrier details' do
-      translations = Utils.array_translations(CarrierTranslation, carrier_id: carrier.id)
-      admin_translation_text_field(translations, 'carrier', 'name')
-      admin_translation_text_field(translations, 'carrier', 'delay')
+      admin_translation_text_field(carrier, 'carrier', 'name_translations')
+      admin_translation_text_field(carrier, 'carrier', 'delay_translations')
 
       f.input :image, hint: (image_tag(carrier.image.url(:original)) if carrier.image?)
 

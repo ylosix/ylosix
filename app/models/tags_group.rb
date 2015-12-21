@@ -10,7 +10,7 @@
 
 class TagsGroup < ActiveRecord::Base
   include ArrayLiquid
-  # translates :name
+  translates :name
 
   has_many :tags
   has_many :tags_group_translations
@@ -20,10 +20,14 @@ class TagsGroup < ActiveRecord::Base
   has_many :categories, through: :tags_groups_categories
   accepts_nested_attributes_for :tags_groups_categories, allow_destroy: true
 
-  # default_scope { includes(:translations) }
+  ransacker :by_name, formatter: lambda { |search|
+                      ids = TagsGroup.where('lower(name_translations->?) LIKE lower(?)', I18n.locale, "%#{search}%").pluck(:id)
+                      ids.any? ? ids : nil
+                    } do |parent|
+    parent.table[:id]
+  end
 
   def self.retrieve_groups(category_id = nil)
-    list = []
     if category_id.nil?
       ids = TagsGroupsCategory.all.pluck(:tags_group_id)
       if ids.empty?

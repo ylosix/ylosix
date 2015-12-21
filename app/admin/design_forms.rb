@@ -1,9 +1,13 @@
 ActiveAdmin.register DesignForm do
   menu parent: 'Design'
 
-  permit_params :tag,
-                design_form_translations_attributes:
-                    [:id, :locale, :content]
+  permit_params do
+    permitted = [:tag]
+
+    locales = Language.pluck(:locale).map(&:to_sym)
+    permitted << {content_translations: locales}
+    permitted
+  end
 
   index do
     selectable_column
@@ -14,12 +18,13 @@ ActiveAdmin.register DesignForm do
     actions
   end
 
+  filter :tag
+
   form do |f|
     f.inputs 'Action form Details' do
       f.input :tag
 
-      translations = Utils.array_translations(DesignFormTranslation, design_form_id: design_form.id)
-      admin_translation_text_field(translations, 'design_form', 'content', component: ActiveAdminHelper::CK_EDITOR)
+      admin_translation_text_field(design_form, 'design_form', 'content_translations', component: ActiveAdminHelper::CK_EDITOR)
     end
 
     f.actions

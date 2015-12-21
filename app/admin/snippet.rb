@@ -1,9 +1,13 @@
 ActiveAdmin.register Snippet do
   menu parent: 'Design'
 
-  permit_params :tag,
-                snippet_translations_attributes:
-                    [:id, :locale, :content]
+  permit_params do
+    permitted = [:tag]
+
+    locales = Language.pluck(:locale).map(&:to_sym)
+    permitted << {content_translations: locales}
+    permitted
+  end
 
   index do
     selectable_column
@@ -18,8 +22,7 @@ ActiveAdmin.register Snippet do
     f.inputs 'Action form Details' do
       f.input :tag, hint: '{{ include snippets:tag_name }}'
 
-      translations = Utils.array_translations(SnippetTranslation, snippet_id: snippet.id)
-      admin_translation_text_field(translations, 'snippet', 'content', component: ActiveAdminHelper::ACE)
+      admin_translation_text_field(snippet, 'snippet', 'content_translations', component: ActiveAdminHelper::ACE)
     end
 
     f.actions

@@ -16,11 +16,11 @@
 one:
   tag: MyString
   mapping: { aaa: bbb }
-  subject: { en: Subject }
-  body: { en: Body }
+  subject_translations: { en: Subject }
+  body_translations: { en: Body }
 
 two:
   tag: MyString
   mapping: { aaa: bbb }
-  subject: { en: Subject }
-  body: { en: Body }
+  subject_translations: { en: Subject }
+  body_translations: { en: Body }

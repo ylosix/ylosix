@@ -154,7 +154,7 @@ def create_defaults
   create_default_admin_user
   create_default_countries
   create_defaults_statuses
-  create_default_category
+  # create_default_category
 end
 
 create_defaults

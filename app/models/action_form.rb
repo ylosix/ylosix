@@ -14,7 +14,7 @@
 class ActionForm < ActiveRecord::Base
   include TemplateFunctions
 
-  # translates :subject, :body
+  translates :subject, :body
 
   has_many :action_form_translations
   accepts_nested_attributes_for :action_form_translations

@@ -1,9 +1,14 @@
 ActiveAdmin.register ActionForm do
   menu parent: 'Preferences'
 
-  permit_params :tag, :mapping,
-                action_form_translations_attributes:
-                    [:id, :locale, :subject, :body]
+  permit_params do
+    permitted = [:tag, :mapping]
+
+    locales = Language.pluck(:locale).map(&:to_sym)
+    permitted << {subject_translations: locales}
+    permitted << {body_translations: locales}
+    permitted
+  end
 
   index do
     selectable_column
@@ -15,17 +20,29 @@ ActiveAdmin.register ActionForm do
     actions
   end
 
+  filter :tag
+
   form do |f|
     f.inputs 'Action form details' do
       f.input :tag
       f.input :mapping, hint: 'ex: "email" => "reply-to"', as: :text
 
-      translations = Utils.array_translations(ActionFormTranslation, action_form_id: action_form.id)
-      admin_translation_text_field(translations, 'action_form', 'subject')
-      admin_translation_text_field(translations, 'action_form', 'body', component: ActiveAdminHelper::CK_EDITOR)
+      admin_translation_text_field(action_form, 'action_form', 'subject_translations')
+      admin_translation_text_field(action_form, 'action_form', 'body_translations', component: ActiveAdminHelper::CK_EDITOR)
     end
 
     f.actions
+  end
+
+  show title: proc { |p| "#{p.tag}" } do
+    attributes_table do
+      row :id
+      row :created_at
+      row :updated_at
+      row :tag
+      row :subject
+      row :body
+    end
   end
 
   controller do

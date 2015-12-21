@@ -4,14 +4,12 @@ ActiveAdmin.register Category do
     permitted = [:parent_id, :reference_code, :enabled, :visible, :meta_keywords,
                  :meta_description, :show_action_name, :priority]
 
-    cta = [:id, :locale, :name, :short_description, :description, :slug]
-    if params[:category] && params[:category][:category_translations_attributes]
-      if params[:category][:category_translations_attributes]['0'][:meta_tags]
-        meta_tags = params[:category][:category_translations_attributes]['0'][:meta_tags].keys
-        cta << {meta_tags: meta_tags}
-      end
-    end
-    permitted << {category_translations_attributes: cta}
+    locales = Language.pluck(:locale).map(&:to_sym)
+    permitted << {name_translations: locales}
+    permitted << {short_description_translations: locales}
+    permitted << {description_translations: locales}
+    permitted << {slug_translations: locales}
+    permitted << {meta_tags_translations: locales}
 
     permitted
   end
@@ -33,7 +31,7 @@ ActiveAdmin.register Category do
       begin
         array = Utils.get_parents_array(category)
         (array.map { |item| auto_link(item, item.name) }).join(' || ').html_safe
-      rescue ParentLoopError
+      rescue ClassErrors::ParentLoopError
         'Parent loop exception'
       end
     end
@@ -50,17 +48,21 @@ ActiveAdmin.register Category do
          label: proc { I18n.t 'activerecord.attributes.category.parent' },
          as: :select,
          collection: proc { category_collection_select }
-  filter :translations_name, as: :string, label: proc { I18n.t 'activerecord.attributes.category.name' }
+
+  filter :by_name_in,
+         label: proc { I18n.t 'activerecord.attributes.category.name' },
+         as: :string
+
   filter :enabled
   filter :visible
-  filter :translations_slug, as: :string, label: proc { I18n.t 'activerecord.attributes.category.slug' }
+
+  filter :by_slug_in,
+         label: proc { I18n.t 'activerecord.attributes.category.slug' },
+         as: :string
+
   filter :priority
 
   form do |f|
-    translations = Utils.array_translations(CategoryTranslation,
-                                            {category_id: category.id},
-                                            meta_tags: {keywords: '', description: ''})
-
     tabs do
       tab 'Information' do
         f.inputs t('formtastic.edit_form', model: t('activerecord.models.category.one')) do
@@ -74,9 +76,9 @@ ActiveAdmin.register Category do
           f.input :enabled
           f.input :visible
 
-          admin_translation_text_field(translations, 'category', 'name')
-          admin_translation_text_field(translations, 'category', 'short_description', component: ActiveAdminHelper::CK_EDITOR)
-          admin_translation_text_field(translations, 'category', 'description', component: ActiveAdminHelper::CK_EDITOR)
+          admin_translation_text_field(category, 'category', 'name_translations')
+          admin_translation_text_field(category, 'category', 'short_description_translations', component: ActiveAdminHelper::CK_EDITOR)
+          admin_translation_text_field(category, 'category', 'description_translations', component: ActiveAdminHelper::CK_EDITOR)
 
           f.input :priority, hint: '1:+ --- 10:-'
         end
@@ -84,8 +86,8 @@ ActiveAdmin.register Category do
 
       tab 'Seo' do
         f.inputs 'Seo' do
-          admin_translation_text_field(translations, 'category', 'meta_tags')
-          admin_translation_text_field(translations, 'category', 'slug', hint: 'Chars not allowed: (Upper chars) spaces')
+          admin_translation_text_field(category, 'category', 'meta_tags_translations')
+          admin_translation_text_field(category, 'category', 'slug_translations', hint: 'Chars not allowed: (Upper chars) spaces')
           f.input :show_action_name, hint: 'File name of show render'
         end
       end
@@ -94,8 +96,29 @@ ActiveAdmin.register Category do
     f.actions
   end
 
+  show title: proc { |p| "#{p.name}" } do
+    attributes_table do
+      row :id
+      row :name
+      row :parent
+      row :enabled
+      row :visible
+      row :reference_code
+      row :created_at
+      row :updated_at
+      row :priority
+      row :show_action_name
+
+      row :description
+      row :short_description
+      row :meta_tags
+      row :slug
+    end
+  end
+
   controller do
     def render(*args)
+      # TODO, not working order by parent
       if @parent_order
         params[:order] = @parent_order
         array_ordered = Category.parent_order(@parent_order)

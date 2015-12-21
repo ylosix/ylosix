@@ -47,12 +47,13 @@
 #
 camera:
   reference_code: ref1
-  name: { en: Canon 450D }
+  name_translations: { en: Canon 450D }
+  slug_translations: { en: camera-reflex-canon-450D }
   barcode: 123456789
   enabled: true
   visible: true
-  short_description: { en: Camera reflex canon 12MP. }
-  description: { en: Camera reflex canon 12MP (not includes SD). }
+  short_description_translations: { en: Camera reflex canon 12MP. }
+  description_translations: { en: Camera reflex canon 12MP (not includes SD). }
 
   publication_date: <%= DateTime.now %>
 
@@ -65,12 +66,13 @@ camera:
 
 lens_canon:
   reference_code: ref2
-  name: { en: Lens canon }
+  name_translations: { en: Lens canon }
+  slug_translations: { en: lens-canon }
   barcode: 12345666
   enabled: true
   visible: true
-  short_description: { en: Camera lens canon. }
-  description: { en: Camera lens canon. }
+  short_description_translations: { en: Camera lens canon. }
+  description_translations: { en: Camera lens canon. }
 
   publication_date: <%= DateTime.now %>
 

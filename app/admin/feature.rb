@@ -1,7 +1,13 @@
 ActiveAdmin.register Feature do
   menu parent: 'Catalog'
-  permit_params :name, :priority,
-                feature_translations_attributes: [:id, :locale, :name]
+
+  permit_params do
+    permitted = [:priority]
+
+    locales = Language.pluck(:locale).map(&:to_sym)
+    permitted << {name_translations: locales}
+    permitted
+  end
 
   action_item :view, only: :show do
     link_to t('formtastic.add_another', model: t('activerecord.models.feature.one')), new_admin_feature_path
@@ -11,17 +17,29 @@ ActiveAdmin.register Feature do
     selectable_column
     id_column
 
-    column :name, sortable: 'feature_translations.name'
+    column :name
     column :priority
     actions
   end
 
-  filter :translations_name, as: :string, label: proc { I18n.t 'activerecord.attributes.feature.name' }
+  filter :by_name_in,
+         label: proc { I18n.t 'activerecord.attributes.feature.name' },
+         as: :string
+  filter :priority
+
+  show title: proc { |p| "#{p.name}" } do
+    attributes_table do
+      row :id
+      row :created_at
+      row :updated_at
+      row :name
+      row :priority
+    end
+  end
 
   form do |f|
     f.inputs t('formtastic.edit_form', model: t('activerecord.models.feature.one')) do
-      translations = Utils.array_translations(FeatureTranslation, feature_id: feature.id)
-      admin_translation_text_field(translations, 'feature', 'name')
+      admin_translation_text_field(feature, 'feature', 'name_translations')
 
       f.input :priority, hint: '1:+ --- 10:-'
     end

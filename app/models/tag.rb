@@ -29,6 +29,13 @@ class Tag < ActiveRecord::Base
 
   after_save :save_global_slug
 
+  ransacker :by_name, formatter: lambda { |search|
+                                ids = Tag.where('lower(name_translations->?) LIKE lower(?)', I18n.locale, "%#{search}%").pluck(:id)
+                                ids.any? ? ids : nil
+                              } do |parent|
+    parent.table[:id]
+  end
+
   def to_liquid(options = {})
     current_ids = []
     current_ids = options[:current_tags][1] if options[:current_tags]
@@ -68,6 +75,6 @@ class Tag < ActiveRecord::Base
   end
 
   def save_global_slug
-    save_slug(tag_translations, :name, self)
+    save_slug(tag_translations, :name_translations, self)
   end
 end

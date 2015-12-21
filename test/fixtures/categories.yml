@@ -29,16 +29,19 @@
 root:
   parent_id: nil
   enabled: true
-  name: { en: root }
+  name_translations: { en: root }
+  slug_translations: { en: root }
 
 digital_cameras:
   parent: root
-  name: { en: Digital cameras }
+  name_translations: { en: Digital cameras }
+  slug_translations: { en: digital-cameras }
   enabled: true
   visible: true
 
 digital_cameras_child:
   parent: digital_cameras
-  name: { en: Digital cameras child }
+  name_translations: { en: Digital cameras child }
+  slug_translations: { en: digital-cameras-child }
   enabled: true
   visible: true

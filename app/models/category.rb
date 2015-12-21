@@ -28,7 +28,7 @@ class Category < ActiveRecord::Base
   include ArrayLiquid
   include InitializeSlug
 
-  # translates :name, :short_description, :description, :slug, :meta_tags
+  translates :name, :short_description, :description, :slug, :meta_tags
 
   # TODO put children in schema erd!
   # has_many :children, class_name: 'Category', foreign_key: 'parent_id'
@@ -51,7 +51,19 @@ class Category < ActiveRecord::Base
 
   after_save :save_global_slug
 
-  default_scope { includes(:products) }
+  ransacker :by_name, formatter: lambda { |search|
+                      ids = Category.where('lower(name_translations->?) LIKE lower(?)', I18n.locale, "%#{search}%").pluck(:id)
+                      ids.any? ? ids : nil
+                    } do |parent|
+    parent.table[:id]
+  end
+
+  ransacker :by_slug, formatter: lambda { |search|
+                      ids = Category.where('lower(slug_translations->?) LIKE lower(?)', I18n.locale, "%#{search}%").pluck(:id)
+                      ids.any? ? ids : nil
+                    } do |parent|
+    parent.table[:id]
+  end
 
   def self.parent_order(parent_order = 'parent_asc')
     array_ordered = Category.all.to_a
@@ -64,7 +76,7 @@ class Category < ActiveRecord::Base
           Utils.get_parents_array(x).map(&:name).join('_') <=> Utils.get_parents_array(y).map(&:name).join('_')
         end
       end
-    rescue ParentLoopError
+    rescue ClassErrors::ParentLoopError
     end
 
     array_ordered
@@ -131,6 +143,6 @@ class Category < ActiveRecord::Base
   private
 
   def save_global_slug
-    save_slug(category_translations, :name, self)
+    save_slug(category_translations, :name_translations, self)
   end
 end

@@ -21,7 +21,7 @@
 #
 
 class Carrier < ActiveRecord::Base
-  # translates :name, :delay
+  translates :name, :delay
 
   has_many :carrier_translations
   accepts_nested_attributes_for :carrier_translations

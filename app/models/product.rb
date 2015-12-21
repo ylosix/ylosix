@@ -49,7 +49,7 @@ class Product < ActiveRecord::Base
 
   IMAGE_SIZES = {thumbnail: 'x100', small: 'x300', medium: 'x500', original: 'x720'}
 
-  # translates :name, :short_description, :description, :features, :slug, :meta_tags
+  translates :name, :short_description, :description, :features, :slug, :meta_tags
   has_attached_file :image, styles: IMAGE_SIZES
 
   validates_attachment_size :image, less_than: 2.megabytes
@@ -85,6 +85,13 @@ class Product < ActiveRecord::Base
                                       OR LOWER(product_translations.description) LIKE LOWER(?)',
                                     "%#{text}%", "%#{text}%").group('products.id')
                        }
+
+  ransacker :by_name, formatter: lambda { |search|
+                      ids = Product.where('lower(name_translations->?) LIKE lower(?)', I18n.locale, "%#{search}%").pluck(:id)
+                      ids.any? ? ids : nil
+                    } do |parent|
+    parent.table[:id]
+  end
 
   ransacker :by_categorization, formatter: lambda { |search|
                                 ids = Product.joins(:products_categories).where(products_categories: {category_id: search}).pluck(:id)
@@ -217,6 +224,6 @@ class Product < ActiveRecord::Base
   end
 
   def save_global_slug
-    save_slug(product_translations, :name, self)
+    save_slug(product_translations, :name_translations, self)
   end
 end

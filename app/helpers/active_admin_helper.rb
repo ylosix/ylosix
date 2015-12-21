@@ -13,7 +13,7 @@ module ActiveAdminHelper
         c_name = array.map(&:name).join(' | ')
 
         [c_name, c.id]
-      rescue ParentLoopError
+      rescue ClassErrors::ParentLoopError
         [c.name, c.id]
       end
     end
@@ -32,14 +32,15 @@ module ActiveAdminHelper
       label_for = "#{model_name}_#{field}_#{language.locale}"
 
       input_name = "#{model_name}[#{field}][#{language.locale}]"
-      render_input_text_field(label_text, label_for, input_name, object[field][language.locale], language, options)
+      value = ''
+      value = object[field][language.locale] if object[field]
+      render_input_text_field(label_text, label_for, input_name, value, language, options)
     end
   end
 
   private
 
-  # input_prefix_name = 'category[category_translations_attributes][0]'
-  # input_suffix_name = '[name]'
+  # input_name = 'category[name_translations][en]'
   def render_input_text_field(label_text, label_for, input_name, value, language, options)
     render partial: 'admin/translation_field',
            locals: {

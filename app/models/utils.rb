@@ -100,7 +100,7 @@ class Utils
       array << parent
       parent = parent.parent
 
-      fail ParentLoopError if !parent.nil? && parent.id == object.id
+      fail ClassErrors::ParentLoopError if !parent.nil? && parent.id == object.id
     end
 
     array.reverse
