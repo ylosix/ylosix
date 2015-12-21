@@ -74,4 +74,4 @@ class Customer < ActiveRecord::Base
     address ||= customer_addresses.first
     address
   end
-endrake
+end
