@@ -181,7 +181,7 @@ ActiveAdmin.register Product do
       tab 'Seo' do
         f.inputs 'Seo' do
           admin_translation_text_field(product, 'product', 'meta_tags_translations')
-          admin_translation_text_field(product, 'product', 'slugs_translations', hint: 'Chars not allowed: (Upper chars) spaces')
+          admin_translation_text_field(product, 'product', 'slug_translations', hint: 'Chars not allowed: (Upper chars) spaces')
           f.input :show_action_name, hint: 'File name of show render'
         end
       end
