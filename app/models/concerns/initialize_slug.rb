@@ -86,7 +86,8 @@ module InitializeSlug
 
     Language.in_backoffice.each do |language|
       locale_sym = language.locale.to_sym
-      slug = object[:slug_translations][locale_sym]
+      slug = object[:slug_translations][language.locale]
+      slug ||= object[:slug_translations][locale_sym]
 
       unless slug
         if field_translation && object[field_translation]
