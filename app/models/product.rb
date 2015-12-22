@@ -79,33 +79,33 @@ class Product < ActiveRecord::Base
   default_scope { includes(:products_pictures) }
 
   scope :search_by_text, lambda { |text|
-                         joins(:product_translations)
-                             .where(visible: true)
-                             .where('publication_date <= ?', DateTime.now)
-                             .where('unpublication_date is null or unpublication_date >= ?', DateTime.now)
-                             .where('LOWER(product_translations.name) LIKE LOWER(?)
+    joins(:product_translations)
+        .where(visible: true)
+        .where('publication_date <= ?', DateTime.now)
+        .where('unpublication_date is null or unpublication_date >= ?', DateTime.now)
+        .where('LOWER(product_translations.name) LIKE LOWER(?)
                                       OR LOWER(product_translations.description) LIKE LOWER(?)',
-                                    "%#{text}%", "%#{text}%").group('products.id')
-                       }
+               "%#{text}%", "%#{text}%").group('products.id')
+  }
 
   ransacker :by_name, formatter: lambda { |search|
-                      ids = Product.where('lower(name_translations->?) LIKE lower(?)', I18n.locale, "%#{search}%").pluck(:id)
-                      ids.any? ? ids : nil
-                    } do |parent|
+    ids = Product.where('lower(name_translations->?) LIKE lower(?)', I18n.locale, "%#{search}%").pluck(:id)
+    ids.any? ? ids : nil
+  } do |parent|
     parent.table[:id]
   end
 
   ransacker :by_categorization, formatter: lambda { |search|
-                                ids = Product.joins(:products_categories).where(products_categories: {category_id: search}).pluck(:id)
-                                ids.any? ? ids : nil
-                              } do |parent|
+    ids = Product.joins(:products_categories).where(products_categories: {category_id: search}).pluck(:id)
+    ids.any? ? ids : nil
+  } do |parent|
     parent.table[:id]
   end
 
   ransacker :by_tagging, formatter: lambda { |search|
-                         ids = Product.joins(:products_tags).where(products_tags: {tag_id: search}).pluck(:id)
-                         ids.any? ? ids : nil
-                       } do |parent|
+    ids = Product.joins(:products_tags).where(products_tags: {tag_id: search}).pluck(:id)
+    ids.any? ? ids : nil
+  } do |parent|
     parent.table[:id]
   end
 
@@ -177,8 +177,6 @@ class Product < ActiveRecord::Base
     append_images(liquid)
   end
 
-  private
-
   def array_tags
     array_tags = []
 
@@ -203,6 +201,8 @@ class Product < ActiveRecord::Base
 
     array_features
   end
+
+  protected
 
   def append_images(hash)
     IMAGE_SIZES.each do |size, _k|

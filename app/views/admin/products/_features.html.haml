@@ -21,5 +21,6 @@
         %td
           - value = ''
           - value = product.features_translations[language.locale].to_s unless product.features_translations[language.locale].blank?
-          - features = JSON.parse(value.gsub('=>', ':'))
+          - features = {}
+          - features = JSON.parse(value.gsub('=>', ':')) unless value.blank?
           = text_field_tag "product[features_translations][#{language.locale}][#{feature.id}]", features[feature.id.to_s]

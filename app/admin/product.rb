@@ -17,7 +17,7 @@ ActiveAdmin.register Product do
         name_translations: locales,
         short_description_translations: locales,
         description_translations: locales,
-        features_translations: locales.map{ |locale| {locale => features} },
+        features_translations: locales.map { |locale| {locale => features} },
         slug_translations: locales,
         meta_tags_translations: locales
     }
@@ -155,16 +155,16 @@ ActiveAdmin.register Product do
           # end
 
           render partial: 'admin/products/categories', locals:
-                                                         {
-                                                             products_categories: product.products_categories,
-                                                             root_category: Category.root_category
-                                                         }
+              {
+                  products_categories: product.products_categories,
+                  root_category: Category.root_category
+              }
 
           render partial: 'admin/products/tags', locals:
-                                                   {
-                                                       products_tags: product.products_tags,
-                                                       tags_groups: TagsGroup.all
-                                                   }
+              {
+                  products_tags: product.products_tags,
+                  tags_groups: TagsGroup.all
+              }
         end
       end
 
