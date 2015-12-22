@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151219161812) do
+ActiveRecord::Schema.define(version: 20151221123621) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -129,6 +129,7 @@ ActiveRecord::Schema.define(version: 20151219161812) do
     t.hstore   "meta_tags_translations",         default: {},    null: false
     t.hstore   "slug_translations",              default: {},    null: false
     t.hstore   "name_translations",              default: {},    null: false
+    t.hstore   "href_translations",              default: {},    null: false
   end
 
   add_index "categories", ["enabled"], name: "index_categories_on_enabled", using: :btree
@@ -311,6 +312,7 @@ ActiveRecord::Schema.define(version: 20151219161812) do
     t.boolean  "enabled",    null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "href"
   end
 
   add_index "links", ["class_name"], name: "index_links_on_class_name", using: :btree
@@ -363,6 +365,7 @@ ActiveRecord::Schema.define(version: 20151219161812) do
     t.hstore   "name_translations",                                       default: {},    null: false
     t.hstore   "short_description_translations",                          default: {},    null: false
     t.hstore   "slug_translations",                                       default: {},    null: false
+    t.hstore   "href_translations",                                       default: {},    null: false
   end
 
   add_index "products", ["enabled"], name: "index_products_on_enabled", using: :btree
@@ -521,6 +524,7 @@ ActiveRecord::Schema.define(version: 20151219161812) do
     t.datetime "updated_at",                     null: false
     t.hstore   "name_translations", default: {}, null: false
     t.hstore   "slug_translations", default: {}, null: false
+    t.hstore   "href_translations", default: {}, null: false
   end
 
   add_index "tags", ["tags_group_id"], name: "index_tags_on_tags_group_id", using: :btree

@@ -10,6 +10,7 @@
 #  enabled                        :boolean          default(FALSE)
 #  features_translations          :hstore           default({}), not null
 #  height                         :decimal(10, 6)   default(0.0), not null
+#  href_translations              :hstore           default({}), not null
 #  id                             :integer          not null, primary key
 #  image_content_type             :string
 #  image_file_name                :string
@@ -49,7 +50,7 @@ class Product < ActiveRecord::Base
 
   IMAGE_SIZES = {thumbnail: 'x100', small: 'x300', medium: 'x500', original: 'x720'}
 
-  translates :name, :short_description, :description, :features, :slug, :meta_tags
+  translates :name, :short_description, :description, :features, :slug, :href, :meta_tags
   has_attached_file :image, styles: IMAGE_SIZES
 
   validates_attachment_size :image, less_than: 2.megabytes
@@ -72,6 +73,7 @@ class Product < ActiveRecord::Base
   accepts_nested_attributes_for :product_translations
 
   after_initialize :default_publication_date
+
   after_save :save_global_slug
 
   default_scope { includes(:products_pictures) }
@@ -148,10 +150,6 @@ class Product < ActiveRecord::Base
     image_src
   end
 
-  def href
-    slug_to_href(self)
-  end
-
   def to_liquid(options = {})
     s_short_description = ''
     s_short_description = short_description.html_safe unless short_description.blank?
@@ -159,12 +157,15 @@ class Product < ActiveRecord::Base
     s_description = ''
     s_description = description.html_safe unless description.blank?
 
+    product_href = href
+    product_href = slug_to_href(self) unless href
+
     liquid = {
         'name' => name,
         'short_description' => s_short_description,
         'description' => s_description,
         'retail_price' => retail_price,
-        'href' => href,
+        'href' => product_href,
         'publication_date' => I18n.l(publication_date, format: :default),
         'add_to_shopping_cart_path' => Routes.product_add_to_shopping_cart_path(self),
         'update_shopping_carts_path' => Routes.update_shopping_carts_path(self),

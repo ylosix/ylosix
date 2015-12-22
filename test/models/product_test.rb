@@ -10,6 +10,7 @@
 #  enabled                        :boolean          default(FALSE)
 #  features_translations          :hstore           default({}), not null
 #  height                         :decimal(10, 6)   default(0.0), not null
+#  href_translations              :hstore           default({}), not null
 #  id                             :integer          not null, primary key
 #  image_content_type             :string
 #  image_file_name                :string

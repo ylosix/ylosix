@@ -5,6 +5,7 @@
 #  created_at                     :datetime         not null
 #  description_translations       :hstore           default({}), not null
 #  enabled                        :boolean          default(FALSE)
+#  href_translations              :hstore           default({}), not null
 #  id                             :integer          not null, primary key
 #  meta_tags_translations         :hstore           default({}), not null
 #  name_translations              :hstore           default({}), not null
@@ -28,7 +29,7 @@ class Category < ActiveRecord::Base
   include ArrayLiquid
   include InitializeSlug
 
-  translates :name, :short_description, :description, :slug, :meta_tags
+  translates :name, :short_description, :description, :slug, :href, :meta_tags
 
   # TODO put children in schema erd!
   # has_many :children, class_name: 'Category', foreign_key: 'parent_id'
@@ -119,12 +120,11 @@ class Category < ActiveRecord::Base
     root_categories
   end
 
-  def href
-    slug_to_href(self)
-  end
-
   def to_liquid(options = {})
     current_category_id = options[:current_category].id if options[:current_category]
+
+    category_href = href
+    category_href = slug_to_href(self) unless category_href
 
     liquid = {
         'active' => current_category_id == id,
@@ -132,7 +132,7 @@ class Category < ActiveRecord::Base
         'short_description' => short_description,
         'description' => description,
         'priority' => priority,
-        'href' => href,
+        'href' => category_href,
         'children' => array_to_liquid(children, options),
         'products' => array_to_liquid(products, options)
     }

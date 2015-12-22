@@ -5,6 +5,7 @@
 #  class_name :string           not null
 #  created_at :datetime         not null
 #  enabled    :boolean          not null
+#  href       :string
 #  id         :integer          not null, primary key
 #  locale     :string           not null
 #  object_id  :integer          not null

@@ -14,7 +14,7 @@ default: &default
   <<: *postgresql
 
 development:
-  url: postgres://ecommerce_user:ecommerce_pass@localhost:5432/ecommerce
+  url: postgres://ecommerce_user:ecommerce_pass@localhost:5432/ecommerce_ylosweb_new
   <<: *default
 
 profile:

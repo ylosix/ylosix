@@ -3,6 +3,7 @@
 # Table name: tags
 #
 #  created_at        :datetime         not null
+#  href_translations :hstore           default({}), not null
 #  id                :integer          not null, primary key
 #  name_translations :hstore           default({}), not null
 #  priority          :integer          default(1), not null

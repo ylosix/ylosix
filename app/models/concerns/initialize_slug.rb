@@ -13,17 +13,21 @@ module InitializeSlug
     if id.nil? && link
       slug = existence_slug(slug)
     else
+      href = slug_to_href(object, locale)
+
       if link
         if link.class_name != object.class.name || link.object_id != object.id
           slug = existence_slug(slug)
         else
           link.update_attribute(:slug, slug)
+          link.update_attribute(:href, href)
           return slug
         end
       else
         Link.create(class_name: object.class.name,
                     object_id: object.id,
                     slug: slug,
+                    href: href,
                     locale: locale,
                     enabled: enabled)
       end
@@ -40,17 +44,23 @@ module InitializeSlug
     out.gsub('%23', '#') # Restore hashtags
   end
 
-  def slug_to_href(object)
-    href = object.slug
+  def slug_to_href(object, locale = nil)
+    if locale.nil?
+      href = object.slug
+    else
+      href = object.slug_translations[locale]
+    end
+    slug = href
 
-    if !href.nil? && !link?(object.slug)
+    if !href.nil? && !link?(slug)
       if object.class == Category
-        href = Routes.category_path(object.slug)
+        href = Routes.category_path(slug)
       elsif object.class == Product
-        href = Routes.product_path(object.slug)
-        if object.categories.any?
-          href = Routes.category_show_product_slug_path(object.categories.first.slug, object.slug)
-        end
+        href = Routes.product_path(slug)
+        # TODO, refactor this
+        # if object.categories.any?
+        #   href = Routes.category_show_product_slug_path(object.categories.first.slug, slug)
+        # end
       end
     end
 
@@ -58,7 +68,7 @@ module InitializeSlug
   end
 
   def link?(href)
-    href.start_with?('/') || href.start_with?('#') || href.start_with?('http')
+    !href.nil? && (href.start_with?('/') || href.start_with?('#') || href.start_with?('http'))
   end
 
   def save_slug(_translations, field_translation, object)
@@ -77,6 +87,10 @@ module InitializeSlug
       end
 
       object[:slug_translations][language.locale] = unique_slug(object, parse_url_chars(slug), language.locale, enabled)
+      object.update_column(:slug_translations, object[:slug_translations])
+
+      object[:href_translations][language.locale] = slug_to_href(object, language.locale)
+      object.update_column(:href_translations, object[:href_translations])
     end
   end
 end

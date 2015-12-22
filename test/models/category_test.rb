@@ -5,6 +5,7 @@
 #  created_at                     :datetime         not null
 #  description_translations       :hstore           default({}), not null
 #  enabled                        :boolean          default(FALSE)
+#  href_translations              :hstore           default({}), not null
 #  id                             :integer          not null, primary key
 #  meta_tags_translations         :hstore           default({}), not null
 #  name_translations              :hstore           default({}), not null
