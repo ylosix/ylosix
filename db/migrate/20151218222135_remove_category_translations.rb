@@ -9,7 +9,7 @@ class RemoveCategoryTranslations < ActiveRecord::Migration
     remove_column :categories, :name
     add_column :categories, :name_translations, :hstore, null: false, default: {}
 
-    CategoryTranslation.all.each do |t|
+    CategoryTranslation.order('locale DESC').each do |t|
       object = t.category
 
       object.description_translations[t.locale.to_sym] = t.description

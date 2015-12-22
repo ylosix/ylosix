@@ -12,7 +12,7 @@ class RemoveProductTranslations < ActiveRecord::Migration
     add_column :products, :short_description_translations, :hstore, null: false, default: {}
     add_column :products, :slug_translations, :hstore, null: false, default: {}
 
-    ProductTranslation.all.each do |t|
+    ProductTranslation.order('locale DESC').each do |t|
       object = t.product
 
       object.name_translations[t.locale.to_sym] = t.name
