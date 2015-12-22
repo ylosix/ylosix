@@ -14,7 +14,7 @@
 #
 
 class Snippet < ActiveRecord::Base
-  # translates :content
+  translates :content
 
   has_many :snippet_translations
   accepts_nested_attributes_for :snippet_translations
