@@ -20,16 +20,19 @@ module InitializeSlug
           slug = existence_slug(slug)
         else
           link.update_attribute(:slug, slug)
-          link.update_attribute(:href, href)
+          link.update_attribute(:href, href) if Link.respond_to?(:href)
           return slug
         end
       else
-        Link.create(class_name: object.class.name,
-                    object_id: object.id,
-                    slug: slug,
-                    href: href,
-                    locale: locale,
-                    enabled: enabled)
+        attributes = {class_name: object.class.name,
+                      object_id: object.id,
+                      slug: slug,
+                      locale: locale,
+                      enabled: enabled}
+
+        attributes[:href] = href if Link.respond_to?(:href)
+
+        Link.create(attributes)
       end
     end
 
@@ -76,21 +79,24 @@ module InitializeSlug
     enabled = object.enabled if object.respond_to?(:enabled)
 
     Language.in_backoffice.each do |language|
-      slug = object[:slug_translations][language.locale]
+      locale_sym = language.locale.to_sym
+      slug = object[:slug_translations][locale_sym]
 
       unless slug
         if field_translation && object[field_translation]
-          slug = object[field_translation][language.locale]
+          slug = object[field_translation][locale_sym]
         end
 
         slug ||= 'needs-to-be-changed'
       end
 
-      object[:slug_translations][language.locale] = unique_slug(object, parse_url_chars(slug), language.locale, enabled)
+      object[:slug_translations][locale_sym] = unique_slug(object, parse_url_chars(slug), language.locale, enabled)
       object.update_column(:slug_translations, object[:slug_translations])
 
-      object[:href_translations][language.locale] = slug_to_href(object, language.locale)
-      object.update_column(:href_translations, object[:href_translations])
+      if object.respond_to?(:href_translations)
+        object[:href_translations][locale_sym] = slug_to_href(object, language.locale)
+        object.update_column(:href_translations, object[:href_translations])
+      end
     end
   end
 end

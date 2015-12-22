@@ -9,9 +9,5 @@ class CreateLinks < ActiveRecord::Migration
 
       t.timestamps null: false
     end
-
-    Product.all.map(&:save)
-    Category.all.map(&:save)
-    Tag.all.map(&:save)
   end
 end
