@@ -114,6 +114,13 @@ module Frontend
       template_second = Liquid::Template.parse(html_code)
       template_second.instance_assigns = template_first.instance_assigns
       html_code = template_second.render(@variables)
+      html_code = Utils.replace_regex_include(@variables, template, html_code)
+
+      # Third time with descriptions
+      template_third = Liquid::Template.parse(html_code)
+      template_third.instance_assigns = template_second.instance_assigns
+      html_code = template_third.render(@variables)
+      html_code = Utils.replace_regex_include(@variables, template, html_code)
 
       append_debug_variables(current_admin_user, @variables, html_code)
     end
