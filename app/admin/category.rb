@@ -113,6 +113,7 @@ ActiveAdmin.register Category do
       row :short_description
       row :meta_tags
       row :slug
+      row :href
     end
   end
 

@@ -21,7 +21,7 @@ module InitializeSlug
         else
           link.update_attribute(:slug, slug)
           link.update_attribute(:enabled, enabled)
-          link.update_attribute(:href, href) if Link.respond_to?(:href)
+          link.update_attribute(:href, href)
           return slug
         end
       end
@@ -29,10 +29,9 @@ module InitializeSlug
       attributes = {class_name: object.class.name,
                     object_id: object.id,
                     slug: slug,
+                    href: href,
                     locale: locale,
                     enabled: enabled}
-
-      attributes[:href] = href if Link.respond_to?(:href)
 
       link = Link.find_by(class_name: object.class.name, object_id: object.id, locale: locale)
       if link
@@ -98,13 +97,11 @@ module InitializeSlug
         slug ||= 'needs-to-be-changed'
       end
 
-      object[:slug_translations][locale_sym] = unique_slug(object, parse_url_chars(slug), language.locale, enabled)
+      object[:slug_translations][language.locale] = unique_slug(object, parse_url_chars(slug), language.locale, enabled)
       object.update_column(:slug_translations, object[:slug_translations])
 
-      if object.respond_to?(:href_translations)
-        object[:href_translations][locale_sym] = slug_to_href(object, language.locale)
-        object.update_column(:href_translations, object[:href_translations])
-      end
+      object[:href_translations][language.locale] = slug_to_href(object, language.locale)
+      object.update_column(:href_translations, object[:href_translations])
     end
   end
 end
