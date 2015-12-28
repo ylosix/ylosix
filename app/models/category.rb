@@ -46,39 +46,37 @@ class Category < ActiveRecord::Base
 
   scope :are_enabled, -> { where(enabled: true) }
   scope :in_frontend, lambda {
-                      where(enabled: true, visible: true)
-                          .order(:priority)
-                    }
+    where(enabled: true, visible: true)
+        .order(:priority)
+  }
 
   after_save :save_global_slug
   default_scope { includes(:products) }
 
   ransacker :by_name, formatter: lambda { |search|
-                      ids = Category.where('lower(name_translations->?) LIKE lower(?)', I18n.locale, "%#{search}%").pluck(:id)
-                      ids.any? ? ids : nil
-                    } do |parent|
+    ids = Category.where('lower(categories.name_translations->?) LIKE lower(?)', I18n.locale, "%#{search}%").pluck(:id)
+    ids.any? ? ids : nil
+  } do |parent|
     parent.table[:id]
   end
 
   ransacker :by_slug, formatter: lambda { |search|
-                      ids = Category.where('lower(slug_translations->?) LIKE lower(?)', I18n.locale, "%#{search}%").pluck(:id)
-                      ids.any? ? ids : nil
-                    } do |parent|
+    ids = Category.where('lower(categories.slug_translations->?) LIKE lower(?)', I18n.locale, "%#{search}%").pluck(:id)
+    ids.any? ? ids : nil
+  } do |parent|
     parent.table[:id]
   end
 
   def self.parent_order(parent_order = 'parent_asc')
-    array_ordered = Category.all.to_a
-
-    begin
-      array_ordered.sort do |x, y|
+    array_ordered = Category.all.sort do |x, y|
+      begin
         if parent_order == 'parent_desc'
           Utils.get_parents_array(y).map(&:name).join('_') <=> Utils.get_parents_array(x).map(&:name).join('_')
         elsif parent_order == 'parent_asc'
           Utils.get_parents_array(x).map(&:name).join('_') <=> Utils.get_parents_array(y).map(&:name).join('_')
         end
+      rescue ClassErrors::ParentLoopError
       end
-    rescue ClassErrors::ParentLoopError
     end
 
     array_ordered

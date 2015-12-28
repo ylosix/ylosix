@@ -46,7 +46,7 @@ class ShoppingOrdersControllerTest < ActionController::TestCase
 
     sc.reload
     assert sc.shipping_address_id == address.id
-    assert sc.billing_address_id.nil?
+    assert sc.billing_address_id == address.id
 
     get :save_address, type: 'billing_address_id', id: address.id
     assert_response :redirect

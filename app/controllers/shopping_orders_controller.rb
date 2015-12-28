@@ -37,8 +37,16 @@ class ShoppingOrdersController < Frontend::CommonController
       attributes = {}
       attributes[type] = id
       sc = current_customer.shopping_cart
-      unless sc.nil?
+      if sc
         sc.attributes = attributes
+
+        # set both addresses if are nil
+        if params[:type] == 'billing_address_id'
+          sc.shipping_address = sc.billing_address unless sc.shipping_address
+        else # params[:type] == 'shipping_address_id'
+          sc.billing_address = sc.shipping_address unless sc.billing_address
+        end
+
         sc.save
       end
     end
@@ -48,7 +56,7 @@ class ShoppingOrdersController < Frontend::CommonController
 
   def save_carrier
     sc = current_customer.shopping_cart
-    unless sc.nil?
+    if sc
       sc.attributes = params_shopping_order
       sc.save
     end
@@ -63,7 +71,7 @@ class ShoppingOrdersController < Frontend::CommonController
   def finalize
     sc = current_customer.shopping_cart
 
-    unless sc.nil?
+    if sc
       params_sc = params_shopping_cart
       sc.extra_fields = params_sc[:extra_fields] unless params_sc[:extra_fields].nil?
       sc.save

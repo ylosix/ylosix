@@ -103,7 +103,7 @@ Rails.application.routes.draw do
   # constraints(RouteConstraint.new) do
   #   get '*path' => 'dynamic_path#show_path'
   # end
-  get '*path' => 'dynamic_path#show_path', :constraints => RouteConstraint.new
+  get '*path' => 'dynamic_path#show_path', constraints: RouteConstraint.new
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
