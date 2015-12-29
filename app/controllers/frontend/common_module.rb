@@ -108,7 +108,7 @@ module Frontend
       @head_javascript = template.reads_file('common_js.js')
       @head_css = template.reads_file('common_css.css')
 
-      html_code = render_to_string(layout: 'custom_template')
+      html_code = render_to_string(text: '', layout: 'custom_template')
 
       # Second time with descriptions
       template_second = Liquid::Template.parse(html_code)
