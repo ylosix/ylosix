@@ -54,7 +54,14 @@ class ApplicationController < ActionController::Base
     resource.intern_path
   end
 
-  private
+  protected
+
+  def per_page
+    per_page = @commerce.per_page
+    per_page = params[:per_page] unless params[:per_page].blank?
+
+    per_page
+  end
 
   def set_locale
     if session[:locale].nil?

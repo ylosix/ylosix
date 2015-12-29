@@ -50,13 +50,6 @@ class CategoriesController < Frontend::CommonController
 
   protected
 
-  def per_page
-    per_page = @commerce.per_page
-    per_page = params[:per_page] unless params[:per_page].blank?
-
-    per_page
-  end
-
   def products_tags
     tags, _ids, _slugs = set_tags
 

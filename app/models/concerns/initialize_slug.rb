@@ -52,7 +52,7 @@ module InitializeSlug
     out.gsub('%23', '#') # Restore hashtags
   end
 
-  def slug_to_href(object, locale = nil)
+  def slug_to_href(object, locale)
     if locale.nil?
       href = object.slug
     else
@@ -62,9 +62,35 @@ module InitializeSlug
 
     if !href.nil? && !link?(slug)
       if object.class == Category
-        href = Routes.category_path(slug)
+        slugs = Utils.get_parents_array(object).map(&:slug_translations).map { |x| x[locale] }
+
+        slugs << slug
+        slugs.delete_at(0) if slugs.size > 1
+        slugs = slugs.delete_if { |i| link?(i) }
+
+        href = Routes.dynamic_path_path(slugs)
       elsif object.class == Product
-        href = Routes.product_path(slug)
+        if object.categories.any?
+          categories = object.categories.sort do |x, y|
+            begin
+              Utils.get_parents_array(y).size <=> Utils.get_parents_array(x).size
+            rescue ClassErrors::ParentLoopError
+            end
+          end
+
+          slugs = Utils.get_parents_array(categories.first)
+          slugs << categories.first
+          slugs = slugs.map(&:slug_translations).map { |x| x[locale] }
+
+          slugs << object.slug_translations[locale]
+          slugs.delete_at(0) if slugs.size > 1
+          slugs = slugs.delete_if { |i| link?(i) }
+
+          href = Routes.dynamic_path_path(slugs)
+        else
+          href = Routes.product_path(slug)
+        end
+
         # TODO, refactor this
         # if object.categories.any?
         #   href = Routes.category_show_product_slug_path(object.categories.first.slug, slug)

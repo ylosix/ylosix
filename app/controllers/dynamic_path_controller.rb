@@ -2,21 +2,27 @@ class DynamicPathController < Frontend::CommonController
   def append_variables
     super
 
-    if @product.present?
-      @variables['product'] = @product.to_liquid unless @product.nil?
+    if @product
+      @liquid_options[:features] = true
+      @liquid_options[:tags] = true
+      @variables['product'] = @product.to_liquid(@liquid_options) unless @product.nil?
+      add_show_action_name(@product)
 
-      if @category.blank?
-        @category = @product.categories.first if @product.categories.any?
+    elsif @category
+      @liquid_options[:features] = true
+      @liquid_options[:tags] = true
+      @liquid_options[:tags_groups] = true
+      @liquid_options[:current_category] = @category
+      @variables['category'] = @category.to_liquid(@liquid_options)
 
-        @categories = Utils.get_parents_array(@category)
-        @categories.delete_at(0) if @categories.any? # delete root.
-        @categories << @category unless @category.nil? # append current.
-      end
-    end
-
-    unless @category.blank?
-      @variables['tags_group'] = TagsGroup.retrieve_groups(@category.id)
+      # Tags by category, removes general tags.
+      @variables['tags_group'] = array_to_liquid(TagsGroup.retrieve_groups(@category.id), @liquid_options)
       add_show_action_name(@category)
+
+      @products = Product.in_frontend(@category).page(params[:page]).per(per_page)
+
+      @variables['products'] = array_to_liquid(@products, @liquid_options)
+      @variables['block_paginate'] = div_pagination(@products)
     end
 
     unless @categories.blank?

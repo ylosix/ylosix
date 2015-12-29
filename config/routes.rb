@@ -100,10 +100,7 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'home#index'
 
-  # constraints(RouteConstraint.new) do
-  #   get '*path' => 'dynamic_path#show_path'
-  # end
-  get '*path' => 'dynamic_path#show_path', constraints: RouteConstraint.new
+  get '*path' => 'dynamic_path#show_path', constraints: RouteConstraint.new, as: :dynamic_path
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
