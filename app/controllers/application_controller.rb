@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
 
   rescue_from ActiveRecord::RecordNotFound, with: :not_found_exception
   rescue_from ClassErrors::InvalidPathError, with: :not_found_exception
+  rescue_from ActiveRecord::RecordNotEnabled, with: :not_enabled_exception
 
   def change_locale
     locale = I18n.default_locale.to_s
@@ -111,8 +112,14 @@ class ApplicationController < ActionController::Base
   end
 
   def not_found_exception(exception = nil)
-    logger.info "Rendering 404: #{exception.message}" if exception
+    logger.info "Rendering not-found 404: #{exception.message}" if exception
 
     render 'errors/not_found', status: 404
+  end
+
+  def not_enabled_exception(exception = nil)
+    logger.info "Rendering not-enabled 404: #{exception.message}" if exception
+
+    render 'errors/not_enabled', status: 404
   end
 end
