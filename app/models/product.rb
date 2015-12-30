@@ -157,15 +157,12 @@ class Product < ActiveRecord::Base
     s_description = ''
     s_description = description.html_safe unless description.blank?
 
-    product_href = href
-    product_href = slug_to_href(self) unless href
-
     liquid = {
         'name' => name,
         'short_description' => s_short_description,
         'description' => s_description,
         'retail_price' => retail_price,
-        'href' => product_href,
+        'href' => href,
         'publication_date' => I18n.l(publication_date, format: :default),
         'add_to_shopping_cart_path' => Routes.product_add_to_shopping_cart_path(self),
         'update_shopping_carts_path' => Routes.update_shopping_carts_path(self),

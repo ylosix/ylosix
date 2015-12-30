@@ -121,16 +121,13 @@ class Category < ActiveRecord::Base
   def to_liquid(options = {})
     current_category_id = options[:current_category].id if options[:current_category]
 
-    category_href = href
-    category_href = slug_to_href(self) unless category_href
-
     liquid = {
         'active' => current_category_id == id,
         'name' => name,
         'short_description' => short_description,
         'description' => description,
         'priority' => priority,
-        'href' => category_href,
+        'href' => href,
         'children' => array_to_liquid(children, options),
         'products' => array_to_liquid(products, options)
     }
