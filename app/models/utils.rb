@@ -197,7 +197,16 @@ class Utils
   end
 
   def self.create_model_translations(model, key, value, value_all = nil)
-    object = model.find_by(key => value)
+    query = model
+
+    key.each do |k, v|
+      v.each do |locale, value_str|
+        query = query.where("lower(#{model.table_name}.#{k}->?) LIKE lower(?)", locale, "%#{value_str}%")
+      end
+    end
+
+    object = query.take
+
     if value_all.nil?
       object = model.create!(value) if object.nil?
     else
