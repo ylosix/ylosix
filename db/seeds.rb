@@ -54,7 +54,7 @@ def create_default_languages
                            :appears_in_backoffice => true,
                            :appears_in_web => true}
 
-    Utils.create_or_update_model(Language, {:locale => locale}, language_attributes)
+    Utils.create_or_update_model(Language, {locale: locale}, language_attributes)
   end
 end
 
@@ -102,36 +102,36 @@ def create_defaults_statuses
   puts '## Creating default statuses'
   puts '####################'
 
-  sos_accepted_attributes = {shopping_orders_status_translations_attributes: [{locale: :en, name: 'Payment accepted'},
-                                                                              {locale: :es, name: 'Pago aceptado'}],
+  sos_accepted_attributes = {name_translations: {en: 'Payment accepted',
+                                                 es: 'Pago aceptado'},
                              enable_invoice: true,
                              color: '#32CD32'}
-  Utils.create_or_update_model(ShoppingOrdersStatus, {:color => '#32CD32'}, sos_accepted_attributes)
+  Utils.create_or_update_model(ShoppingOrdersStatus, {color: '#32CD32'}, sos_accepted_attributes)
 
-  sos_accepted_attributes = {shopping_orders_status_translations_attributes: [{locale: :en, name: 'Packaging'},
-                                                                              {locale: :es, name: 'Preparando el paquete'}],
+  sos_accepted_attributes = {name_translations: {en: 'Packaging',
+                                                 es: 'Preparando el paquete'},
                              enable_invoice: true,
                              color: '#FF8C00'}
-  Utils.create_or_update_model(ShoppingOrdersStatus, {:color => '#FF8C00'}, sos_accepted_attributes)
+  Utils.create_or_update_model(ShoppingOrdersStatus, {color: '#FF8C00'}, sos_accepted_attributes)
 
 
-  sos_accepted_attributes = {shopping_orders_status_translations_attributes: [{locale: :en, name: 'Sent'},
-                                                                              {locale: :es, name: 'Enviado'}],
+  sos_accepted_attributes = {name_translations: {en: 'Sent',
+                                                 es: 'Enviado'},
                              enable_invoice: true,
                              color: '#8A2BE2'}
-  Utils.create_or_update_model(ShoppingOrdersStatus, {:color => '#8A2BE2'}, sos_accepted_attributes)
+  Utils.create_or_update_model(ShoppingOrdersStatus, {color: '#8A2BE2'}, sos_accepted_attributes)
 
-  sos_accepted_attributes = {shopping_orders_status_translations_attributes: [{locale: :en, name: 'Committed'},
-                                                                              {locale: :es, name: 'Entregado'}],
+  sos_accepted_attributes = {name_translations: {en: 'Committed',
+                                                 es: 'Entregado'},
                              enable_invoice: true,
                              color: '#108510'}
-  Utils.create_or_update_model(ShoppingOrdersStatus, {:color => '#108510'}, sos_accepted_attributes)
+  Utils.create_or_update_model(ShoppingOrdersStatus, {color: '#108510'}, sos_accepted_attributes)
 
-  sos_accepted_attributes = {shopping_orders_status_translations_attributes: [{locale: :en, name: 'Canceled'},
-                                                                              {locale: :es, name: 'Cancelado'}],
+  sos_accepted_attributes = {name_translations: {en: 'Canceled',
+                                                 es: 'Cancelado'},
                              enable_invoice: false,
                              color: '#DC143C'}
-  Utils.create_or_update_model(ShoppingOrdersStatus, {:color => '#DC143C'}, sos_accepted_attributes)
+  Utils.create_or_update_model(ShoppingOrdersStatus, {color: '#DC143C'}, sos_accepted_attributes)
 end
 
 def create_default_category
@@ -140,8 +140,8 @@ def create_default_category
   puts '####################'
 
   root_attributes = {parent_id: nil,
-                     name: {en: 'root', es: 'Inicio'},
-                     slug: {en: 'root', es: 'inicio'},
+                     name_translations: {en: 'root', es: 'Inicio'},
+                     slug_translations: {en: 'root', es: 'inicio'},
                      enabled: true,
                      visible: true}
   Utils.create_or_update_model(Category, {reference_code: 'root'}, root_attributes)
@@ -154,7 +154,7 @@ def create_defaults
   create_default_admin_user
   create_default_countries
   create_defaults_statuses
-  # create_default_category
+  create_default_category
 end
 
 create_defaults

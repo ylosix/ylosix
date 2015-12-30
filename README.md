@@ -161,7 +161,7 @@ Just run the following commands to create the containers.
 
 ```
 $ docker-compose up
-$ docker-compose run web rake db:create db:migrate db:gen_demo
+$ docker-compose run web rake db:create db:schema:load db:gen_demo
 ```
 
 
@@ -170,12 +170,12 @@ $ docker-compose run web rake db:create db:migrate db:gen_demo
 Generate an empty store:
 
 ```
-$ rake db:create db:migrate db:seed
+$ rake db:create db:schema:load db:seed
 ```
 
 Generate a demo electronic store:
 ```
-$ rake db:create db:migrate db:gen_demo
+$ rake db:create db:schema:load db:gen_demo
 ```
 
 
