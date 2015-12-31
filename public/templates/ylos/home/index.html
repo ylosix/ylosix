@@ -6,7 +6,9 @@
  		<div class="container">
 			<div class="col-sm-12 col-md-12">
 				<div class="row">
-					{% for product in products %} 
+					{% for category in categories %}
+					{% for child in category.children %}
+					{% for product in child.products %}
 						<div class="col-sm-6 col-lg-3 col-md-3">
 							<div class="thumbnail item-home">
 								<div class="sm-img">
@@ -42,6 +44,8 @@
 								 </div>
 							 </div>
 						</div>
+					{% endfor %}
+					{% endfor %}
 					{% endfor %}
 				</div>
 			</div>

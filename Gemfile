@@ -59,6 +59,7 @@ gem 'paperclip'
 
 gem 'mailgun_rails'
 gem 'newrelic_rpm'
+gem 'remote_syslog_logger'
 
 group :development, :test, :profile do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

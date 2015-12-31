@@ -63,7 +63,7 @@ fi
 
 project_parameters=`echo " RAILS_ENV=$RAILS_ENV SECRET_KEY_BASE=$SECRET_KEY_BASE RAILS_DB=$database DATABASE_URL=$DATABASE_URL "`
 su - vagrant -c "cd $APP_PATH; $RVM_WRAPPERS_PATH/rake db:create $project_parameters"
-su - vagrant -c "cd $APP_PATH; $RVM_WRAPPERS_PATH/rake db:migrate $project_parameters"
+su - vagrant -c "cd $APP_PATH; $RVM_WRAPPERS_PATH/rake db:schema:load $project_parameters"
 su - vagrant -c "cd $APP_PATH; $RVM_WRAPPERS_PATH/rake db:gen_demo $project_parameters"
 
 if [ "$RAILS_ENV" == "production" ]; then
