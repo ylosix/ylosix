@@ -1,7 +1,12 @@
 if (typeof CKEDITOR != 'undefined') {
     CKEDITOR.editorConfig = function (config) {
+        config.extraPlugins = 'autogrow,codemirror';
+        config.autoGrow_minHeight = 200;
+        config.autoGrow_maxHeight = 550;
+        config.autoGrow_onStartup = true;
+
         config.allowedContent = true;
-        config.extraAllowedContent = 'p(*)[*]{*};div(*)[*]{*};li(*)[*]{*};ul(*)[*]{*}';
+        config.extraAllowedContent = 'p(*)[*]{*};div(*)[*]{*};li(*)[*]{*};ul(*)[*]{*};pre[*]{*}(*)';
         config.enterMode = CKEDITOR.ENTER_BR;
 
         // Define changes to default configuration here. For example:
@@ -136,4 +141,20 @@ if (typeof CKEDITOR != 'undefined') {
     // not remove [i, b] tags
     CKEDITOR.dtd.$removeEmpty.i = 0;
     CKEDITOR.dtd.$removeEmpty.b = 0;
+
+    // auto format
+    CKEDITOR.on('instanceReady', function (ev) {
+        var blockTags = ['div', 'i', 'strong', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'pre', 'ul', 'li'];
+        var rules = {
+            indent: true,
+            breakBeforeOpen: true,
+            breakAfterOpen: true,
+            breakBeforeClose: true,
+            breakAfterClose: true
+        };
+
+        for (var i = 0; i < blockTags.length; i++) {
+            ev.editor.dataProcessor.writer.setRules(blockTags[i], rules);
+        }
+    });
 }
