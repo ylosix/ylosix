@@ -4,7 +4,7 @@ services:
 cache: bundler
 language: ruby
 rvm:
-  - 2.2.3
+  - 2.3.0
 matrix:
   allow_failures:
     - rvm: ruby-head
