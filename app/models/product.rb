@@ -199,6 +199,8 @@ class Product < ActiveRecord::Base
   protected
 
   def append_images(hash)
+    hash['image'] = image?
+
     IMAGE_SIZES.each do |size, _k|
       hash["image_#{size}_src"] = retrieve_image(size)
     end
