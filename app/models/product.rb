@@ -167,6 +167,7 @@ class Product < ActiveRecord::Base
     }
 
     liquid['features'] = array_features if options[:features]
+    liquid['features_hash'] = hash_features if options[:features]
     liquid['tags'] = array_tags if options[:tags]
     append_images(liquid)
   end
@@ -194,6 +195,19 @@ class Product < ActiveRecord::Base
     end
 
     array_features
+  end
+
+  def hash_features
+    hash_features = {}
+
+    unless features.blank?
+      JSON.parse(features.gsub('=>', ':')).each do |k, v|
+        f = Feature.find_by(id: k)
+        hash_features[f.name] = v unless f.blank?
+      end
+    end
+
+    hash_features
   end
 
   protected

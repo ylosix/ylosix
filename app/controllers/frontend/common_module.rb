@@ -83,7 +83,7 @@ module Frontend
       append_message_variables
       append_language_variables
 
-      @liquid_options = {current_tags: set_tags}
+      @liquid_options = {features: true, current_tags: set_tags}
       @liquid_options[:current_category] = @category if @category
       @liquid_options[:current_product] = @product if @product
       @liquid_options[:current_commerce] = @commerce if @commerce
