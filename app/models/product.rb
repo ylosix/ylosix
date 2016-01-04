@@ -166,6 +166,7 @@ class Product < ActiveRecord::Base
         'delete_from_shopping_cart_path' => Routes.product_delete_from_shopping_cart_path(self)
     }
 
+    # TODO, remove array_features.
     liquid['features'] = array_features if options[:features]
     liquid['features_hash'] = hash_features if options[:features]
     liquid['tags'] = array_tags if options[:tags]
@@ -188,9 +189,11 @@ class Product < ActiveRecord::Base
     array_features = []
 
     unless features.blank?
-      JSON.parse(features.gsub('=>', ':')).each do |k, v|
-        f = Feature.find_by(id: k)
-        array_features << {'id' => k, 'key' => f.name, 'value' => v} unless f.blank?
+      features_json = JSON.parse(features.gsub('=>', ':'))
+      features = Feature.where(id: features_json.keys)
+
+      features.each do |f|
+        array_features << {'id' => f.id, 'key' => f.name, 'value' => features_json[f.id.to_s]}
       end
     end
 
@@ -201,9 +204,11 @@ class Product < ActiveRecord::Base
     hash_features = {}
 
     unless features.blank?
-      JSON.parse(features.gsub('=>', ':')).each do |k, v|
-        f = Feature.find_by(id: k)
-        hash_features[f.name] = v unless f.blank?
+      features_json = JSON.parse(features.gsub('=>', ':'))
+      features = Feature.where(id: features_json.keys)
+
+      features.each do |f|
+        hash_features[f.name] = features_json[f.id.to_s] unless f.blank?
       end
     end
 
