@@ -64,10 +64,10 @@ def create_default_ylos_template
   puts '## Creating ylos template'
   puts '####################'
 
-  ylos_template = {:name => 'ylos',
-                   :path => '/public/templates/ylos',
-                   :enabled => false}
-  Utils.create_or_update_model(Template, {:name => 'ylos'}, ylos_template)
+  ylos_template = {name: 'ylos',
+                   path: '/public/templates/ylos',
+                   enabled: false}
+  Utils.create_or_update_model(Template, {name: 'ylos'}, ylos_template)
 end
 
 

@@ -6,6 +6,10 @@ namespace :db do
     puts '####################'
     Rake::Task['db:seed'].invoke
 
+    puts 'Enable template'
+    ylos_template = Template.find_by(name: 'ylos')
+    ylos_template.update_attribute(:enabled, true) if ylos_template
+
     puts '####################'
     puts '## Other tasks'
     puts '####################'
