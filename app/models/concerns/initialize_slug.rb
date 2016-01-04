@@ -105,7 +105,7 @@ module InitializeSlug
     !href.nil? && (href.start_with?('/') || href.start_with?('#') || href.start_with?('http'))
   end
 
-  def save_slug(_translations, field_translation, object)
+  def save_slug(field_translation, object)
     enabled = true
     enabled = object.enabled if object.respond_to?(:enabled)
 

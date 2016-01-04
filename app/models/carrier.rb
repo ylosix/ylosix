@@ -23,9 +23,6 @@
 class Carrier < ActiveRecord::Base
   translates :name, :delay
 
-  has_many :carrier_translations
-  accepts_nested_attributes_for :carrier_translations
-
   has_attached_file :image, styles: { original: '25x25' }
   validates_attachment_content_type :image, content_type: %r{\Aimage/.*\Z}
 

@@ -21,7 +21,7 @@ class SearchesControllerTest < ActionController::TestCase
     assert assigns(:variables)
 
     variables = assigns(:variables)
-    ids = variables['products'].map(&:id)
-    assert !ids.include?(product.id)
+    names = variables['products'].map { |obj| obj['name'] }
+    assert !names.include?(product.name)
   end
 end

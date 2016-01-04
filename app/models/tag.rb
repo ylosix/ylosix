@@ -25,9 +25,6 @@ class Tag < ActiveRecord::Base
   has_many :products_tags
   has_many :products, through: :products_tags
 
-  has_many :tag_translations
-  accepts_nested_attributes_for :tag_translations
-
   after_save :save_global_slug
 
   ransacker :by_name, formatter: lambda { |search|
@@ -76,6 +73,6 @@ class Tag < ActiveRecord::Base
   end
 
   def save_global_slug
-    save_slug(tag_translations, :name_translations, self)
+    save_slug(:name_translations, self)
   end
 end

@@ -62,15 +62,13 @@ class Product < ActiveRecord::Base
 
   has_many :products_tags
   has_many :tags, through: :products_tags
-  has_many :products_pictures
 
-  has_many :product_translations
+  has_many :products_pictures
   has_many :shopping_carts_products
 
   accepts_nested_attributes_for :products_categories, allow_destroy: true
   accepts_nested_attributes_for :products_tags, allow_destroy: true
   accepts_nested_attributes_for :products_pictures, allow_destroy: true
-  accepts_nested_attributes_for :product_translations
 
   after_initialize :default_publication_date
 
@@ -79,17 +77,16 @@ class Product < ActiveRecord::Base
   default_scope { includes(:products_pictures) }
 
   scope :search_by_text, lambda { |text|
-    joins(:product_translations)
-        .where(visible: true)
+    where(visible: true)
         .where('publication_date <= ?', DateTime.now)
         .where('unpublication_date is null or unpublication_date >= ?', DateTime.now)
-        .where('LOWER(product_translations.name) LIKE LOWER(?)
-                                      OR LOWER(product_translations.description) LIKE LOWER(?)',
-               "%#{text}%", "%#{text}%").group('products.id')
+        .where('LOWER(name_translations->?) LIKE LOWER(?)
+                                      OR LOWER(description_translations->?) LIKE LOWER(?)',
+               I18n.locale, "%#{text}%", I18n.locale, "%#{text}%").group('products.id')
   }
 
   ransacker :by_name, formatter: lambda { |search|
-    ids = Product.where('lower(name_translations->?) LIKE lower(?)', I18n.locale, "%#{search}%").pluck(:id)
+    ids = Product.where('LOWER(name_translations->?) LIKE LOWER(?)', I18n.locale, "%#{search}%").pluck(:id)
     ids.any? ? ids : nil
   } do |parent|
     parent.table[:id]
@@ -222,6 +219,6 @@ class Product < ActiveRecord::Base
   end
 
   def save_global_slug
-    save_slug(product_translations, :name_translations, self)
+    save_slug(:name_translations, self)
   end
 end

@@ -12,10 +12,6 @@
 class Feature < ActiveRecord::Base
   translates :name
 
-  has_many :feature_translations
-
-  accepts_nested_attributes_for :feature_translations
-
   ransacker :by_name, formatter: lambda { |search|
                       ids = Feature.where('lower(name_translations->?) LIKE lower(?)', I18n.locale, "%#{search}%").pluck(:id)
                       ids.any? ? ids : nil

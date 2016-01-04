@@ -38,9 +38,6 @@ class Category < ActiveRecord::Base
   has_many :products_categories
   has_many :products, through: :products_categories
 
-  has_many :category_translations
-  accepts_nested_attributes_for :category_translations
-
   has_many :tags_groups_categories
   has_many :tags_groups, through: :tags_groups_categories
 
@@ -139,6 +136,6 @@ class Category < ActiveRecord::Base
   private
 
   def save_global_slug
-    save_slug(category_translations, :name_translations, self)
+    save_slug(:name_translations, self)
   end
 end

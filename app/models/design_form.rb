@@ -11,7 +11,4 @@
 
 class DesignForm < ActiveRecord::Base
   translates :content
-
-  has_many :design_form_translations
-  accepts_nested_attributes_for :design_form_translations
 end

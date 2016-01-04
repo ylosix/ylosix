@@ -11,7 +11,7 @@
 #  customer_id               :integer
 #  extra_fields              :hstore           default({}), not null
 #  id                        :integer          not null, primary key
-#  order_num                 :integer          not null
+#  order_num                 :integer          default(0), not null
 #  shipping_address          :hstore           default({}), not null
 #  shopping_orders_status_id :integer
 #  updated_at                :datetime         not null

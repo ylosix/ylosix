@@ -14,8 +14,6 @@ class ShoppingOrdersStatus < ActiveRecord::Base
   translates :name
 
   has_many :shopping_orders
-  has_many :shopping_orders_status_translations
-  accepts_nested_attributes_for :shopping_orders_status_translations
 
   ransacker :by_name, formatter: lambda { |search|
                       ids = ShoppingOrdersStatus.where('lower(name_translations->?) LIKE lower(?)', I18n.locale, "%#{search}%").pluck(:id)

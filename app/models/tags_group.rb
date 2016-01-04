@@ -13,8 +13,6 @@ class TagsGroup < ActiveRecord::Base
   translates :name
 
   has_many :tags
-  has_many :tags_group_translations
-  accepts_nested_attributes_for :tags_group_translations
 
   has_many :tags_groups_categories
   has_many :categories, through: :tags_groups_categories
