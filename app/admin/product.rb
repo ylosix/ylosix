@@ -117,7 +117,7 @@ ActiveAdmin.register Product do
           f.input :enabled
           f.input :visible
 
-          admin_translation_text_field(product, 'product', 'short_description_tranlations', component: ActiveAdminHelper::TEXT_AREA)
+          admin_translation_text_field(product, 'product', 'short_description_translations', component: ActiveAdminHelper::TEXT_AREA)
           admin_translation_text_field(product, 'product', 'description_translations', component: ActiveAdminHelper::CK_EDITOR)
 
           f.input :publication_date
