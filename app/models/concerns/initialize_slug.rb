@@ -114,7 +114,7 @@ module InitializeSlug
       slug = object[:slug_translations][language.locale]
       slug ||= object[:slug_translations][locale_sym]
 
-      unless slug
+      if slug.blank?
         if field_translation && object[field_translation]
           slug = object[field_translation][language.locale]
           slug ||= object[field_translation][locale_sym]
