@@ -109,6 +109,7 @@ class Product < ActiveRecord::Base
   def self.in_frontend(category, not_in_list = [])
     products = Product.joins(:products_categories)
 
+    products = products.where('products.enabled = true and products.visible = true')
     products = products.where('products.id not in (?)', not_in_list) if not_in_list.any?
     products = products.where('publication_date <= ?', DateTime.now)
                    .where('unpublication_date is null or unpublication_date >= ?', DateTime.now)

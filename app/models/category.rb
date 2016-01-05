@@ -126,7 +126,7 @@ class Category < ActiveRecord::Base
         'priority' => priority,
         'href' => href,
         'children' => array_to_liquid(children, options),
-        'products' => array_to_liquid(products, options)
+        'products' => array_to_liquid(retrieve_current_products, options)
     }
 
     liquid['tags_groups'] = array_to_liquid(tags_groups, options) if options[:tags_groups]
@@ -134,6 +134,11 @@ class Category < ActiveRecord::Base
   end
 
   private
+
+  def retrieve_current_products
+    filtered_products = products.select { |p| p.enabled && p.visible }
+    filtered_products.sort { |x, y| y.publication_date <=> x.publication_date }
+  end
 
   def save_global_slug
     save_slug(:name_translations, self)
