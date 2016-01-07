@@ -4,7 +4,7 @@ ActiveAdmin.register CustomerAddress do
   permit_params :customer_id, :default_billing, :default_shipping, :name,
                 :customer_name, :customer_last_name, :business, :address_1,
                 :address_2, :postal_code, :city, :country, :phone,
-                :mobile_phone, :dni, :other
+                :mobile_phone, :nif, :other
 
   index do
     selectable_column
@@ -14,7 +14,7 @@ ActiveAdmin.register CustomerAddress do
     column 'Fields' do |caddress|
       address_array = []
       address_array << "#{caddress.customer_name} #{caddress.customer_last_name}"
-      address_array << caddress.dni
+      address_array << caddress.nif
       address_array << caddress.business
       address_array << caddress.address_1
       address_array << caddress.address_2 unless caddress.address_2.blank?
@@ -50,7 +50,7 @@ ActiveAdmin.register CustomerAddress do
       f.input :country
       f.input :phone
       f.input :mobile_phone
-      f.input :dni
+      f.input :nif
       f.input :other
     end
 

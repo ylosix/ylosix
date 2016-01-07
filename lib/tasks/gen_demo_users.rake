@@ -13,7 +13,7 @@ namespace :db do
     saddress.country = 'ES'
     saddress.phone = '977112233'
     saddress.mobile_phone = '616112233'
-    saddress.dni = '123456789T'
+    saddress.nif = '123456789T'
 
     saddress.save
   end

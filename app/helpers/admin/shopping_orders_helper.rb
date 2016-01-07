@@ -4,7 +4,7 @@ module Admin
       address_array = []
 
       address_array << "#{caddress['name']} #{caddress['customer_name']} #{caddress['customer_last_name']}"
-      address_array << "#{caddress['cif']} #{caddress['dni']}"
+      address_array << "#{caddress['nif']}"
       address_array << caddress['business']
       address_array << caddress['address_1']
       address_array << caddress['address_2'] unless caddress['address_2'].blank?

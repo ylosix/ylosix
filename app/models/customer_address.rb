@@ -27,7 +27,7 @@ class CustomerAddress < ActiveRecord::Base
   store_accessor :fields, :customer_name
   store_accessor :fields, :customer_last_name, :business, :address_1,
                  :address_2, :postal_code, :city, :country, :phone,
-                 :mobile_phone, :dni, :other
+                 :mobile_phone, :nif, :other
 
   # validates_length_of :name, :maximum => 10
 

@@ -1,6 +1,6 @@
 %div.form-group
-  = f.label :name, :class => 'control-label'
-  = f.text_field :name, :class => 'form-control'
+  = f.label :name, class: 'control-label'
+  = f.text_field :name, class: 'form-control'
 
 %div.checkbox
   %label
@@ -13,49 +13,49 @@
     Default shipping
 
 %div.form-group
-  = f.label :customer_name, :class => 'control-label'
-  = f.text_field :customer_name, :class => 'form-control'
+  = f.label :customer_name, class: 'control-label'
+  = f.text_field :customer_name, class: 'form-control'
 
 %div.form-group
-  = f.label :customer_last_name, :class => 'control-label'
-  = f.text_field :customer_last_name, :class => 'form-control'
+  = f.label :customer_last_name, class: 'control-label'
+  = f.text_field :customer_last_name, class: 'form-control'
 
 %div.form-group
-  = f.label :business, :class => 'control-label'
-  = f.text_field :business, :class => 'form-control'
+  = f.label :business, class: 'control-label'
+  = f.text_field :business, class: 'form-control'
 
 %div.form-group
-  = f.label :address_1, :class => 'control-label'
-  = f.text_field :address_1, :class => 'form-control'
+  = f.label :address_1, class: 'control-label'
+  = f.text_field :address_1, class: 'form-control'
 
 %div.form-group
-  = f.label :address_2, :class => 'control-label'
-  = f.text_field :address_2, :class => 'form-control'
+  = f.label :address_2, class: 'control-label'
+  = f.text_field :address_2, class: 'form-control'
 
 %div.form-group
-  = f.label :postal_code, :class => 'control-label'
-  = f.text_field :postal_code, :class => 'form-control'
+  = f.label :postal_code, class: 'control-label'
+  = f.text_field :postal_code, class: 'form-control'
 
 %div.form-group
-  = f.label :city, :class => 'control-label'
-  = f.text_field :city, :class => 'form-control'
+  = f.label :city, class: 'control-label'
+  = f.text_field :city, class: 'form-control'
 
 %div.form-group
-  = f.label :country, :class => 'control-label'
-  = f.select :country, @variables['countries'].collect { |p| [ p['name'], p['code'] ] }, {include_blank: false}, {:class => 'form-control'}
+  = f.label :country, class: 'control-label'
+  = f.select :country, @variables['countries'].collect { |p| [ p['name'], p['code'] ] }, {include_blank: false}, {class: 'form-control'}
 
 %div.form-group
-  = f.label :phone, :class => 'control-label'
-  = f.text_field :phone, :class => 'form-control'
+  = f.label :phone, class: 'control-label'
+  = f.text_field :phone, class: 'form-control'
 
 %div.form-group
-  = f.label :mobile_phone, :class => 'control-label'
-  = f.text_field :mobile_phone, :class => 'form-control'
+  = f.label :mobile_phone, class: 'control-label'
+  = f.text_field :mobile_phone, class: 'form-control'
 
 %div.form-group
-  = f.label :dni, :class => 'control-label'
-  = f.text_field :dni, :class => 'form-control'
+  = f.label :nif, class: 'control-label'
+  = f.text_field :nif, class: 'form-control'
 
 %div.form-group
-  = f.label :other, :class => 'control-label'
-  = f.text_area :other, :class => 'form-control'
+  = f.label :other, class: 'control-label'
+  = f.text_area :other, class: 'form-control'

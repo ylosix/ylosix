@@ -60,7 +60,9 @@ Rails.application.routes.draw do
 
   resource :shopping_carts, only: [] do
     get '/show' => 'shopping_carts#show'
+    get '/clear' => 'shopping_carts#clear'
     post '/:product_id/update' => 'shopping_carts#update', as: :update
+
     post '/save' => 'shopping_carts#save'
   end
 

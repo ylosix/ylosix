@@ -119,9 +119,9 @@ module InitializeSlug
           slug = object[field_translation][language.locale]
           slug ||= object[field_translation][locale_sym]
         end
-
-        slug ||= 'needs-to-be-changed'
       end
+
+      slug ||= 'needs-to-be-changed'
 
       object[:slug_translations][language.locale] = unique_slug(object, parse_url_chars(slug), language.locale, enabled)
       object.update_column(:slug_translations, object[:slug_translations])

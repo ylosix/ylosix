@@ -71,6 +71,10 @@ class ShoppingCart < ActiveRecord::Base
     end
   end
 
+  def clear_products
+    shopping_carts_products.destroy_all
+  end
+
   def add_product(product)
     scp = shopping_carts_product(product)
 
@@ -108,7 +112,7 @@ class ShoppingCart < ActiveRecord::Base
     }
   end
 
-  private
+  protected
 
   def calculate_shipping_cost
     self.carrier_retail_price = 0

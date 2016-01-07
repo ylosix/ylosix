@@ -77,6 +77,6 @@ class AddressesController < Frontend::CommonController
                                              :business, :address_1, :address_2,
                                              :postal_code, :city, :country,
                                              :phone, :mobile_phone, :state,
-                                             :dni, :other)
+                                             :nif, :other)
   end
 end

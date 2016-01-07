@@ -32,17 +32,21 @@ class ShoppingCartsController < Frontend::CommonController
     add_breadcrumb(Breadcrumb.new(url: show_shopping_carts_path, name: 'Cart'))
   end
 
+  def clear
+    sc = ShoppingCart.retrieve(current_customer, session[:shopping_cart])
+    sc.clear_products
+    save_shopping_cart(sc)
+
+    redirect_to :show_shopping_carts
+  end
+
   def update
     params_scp = params_shopping_cart_product
 
     sc = ShoppingCart.retrieve(current_customer, session[:shopping_cart])
     sc.update_product(params_scp[:product_id].to_i, params_scp[:quantity].to_i)
 
-    if customer_signed_in?
-      sc.save
-    else
-      session[:shopping_cart] = sc.to_json(include: :shopping_carts_products)
-    end
+    save_shopping_cart(sc)
 
     redirect_to :show_shopping_carts
   end
@@ -63,6 +67,14 @@ class ShoppingCartsController < Frontend::CommonController
   end
 
   protected
+
+  def save_shopping_cart(sc)
+    if customer_signed_in?
+      sc.save
+    else
+      session[:shopping_cart] = sc.to_json(include: :shopping_carts_products)
+    end
+  end
 
   def set_breadcrumbs
     add_breadcrumb(Breadcrumb.new(url: show_customers_path, name: 'Customers'))

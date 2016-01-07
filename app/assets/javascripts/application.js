@@ -14,4 +14,13 @@
 //= require bootstrap-sprockets
 //= require jquery_ujs
 //= require turbolinks
-//= require_tree .
+//= require active_admin
+//= require addresses
+//= require categories
+//= require customers
+//= require dynamic_path
+//= require home
+//= require products
+//= require searches
+//= require shopping_carts
+//= require_tree ./admin

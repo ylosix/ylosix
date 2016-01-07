@@ -35,6 +35,7 @@ module Frontend
     def append_customer_variables
       @variables['current_customer'] = current_customer
       @variables['show_shopping_carts_path'] = Routes.show_shopping_carts_path
+      @variables['clear_shopping_carts_path'] = Routes.clear_shopping_carts_path
       @variables['shipping_method_customers_shopping_orders_path'] = Routes.shipping_method_customers_shopping_orders_path
 
       if customer_signed_in?
