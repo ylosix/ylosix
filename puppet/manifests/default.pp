@@ -29,19 +29,19 @@ class install-rvm {
   rvm::system_user { 'vagrant': }
 
   rvm_system_ruby {
-    'ruby-2.1.6':
+    'ruby-2.3.0':
       ensure      => 'present',
       default_use => true
   }
 
   rvm_gem {
-    'ruby-2.1.6/bundler': ensure => '1.9.4';
+    'ruby-2.3.0/bundler': ensure => '1.9.4';
   }
 
   rvm_gemset {
-    'ruby-2.1.6@ecommerce':
+    'ruby-2.3.0@ecommerce':
       ensure  => present,
-      require => Rvm_system_ruby['ruby-2.1.6']
+      require => Rvm_system_ruby['ruby-2.3.0']
   }
 }
 class {'install-rvm': }

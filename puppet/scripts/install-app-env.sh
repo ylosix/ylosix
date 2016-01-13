@@ -1,7 +1,7 @@
 #!/bin/bash
 APP_PATH=/var/www
 RVM_PATH=/usr/local/rvm
-RVM_WRAPPERS_PATH=/usr/local/rvm/wrappers/ruby-2.1.6@ecommerce
+RVM_WRAPPERS_PATH=/usr/local/rvm/wrappers/ruby-2.3.0@ecommerce
 RVM_SUDO_PATH=/usr/local/rvm/bin/rvmsudo
 
 RAILS_ENV=$1
@@ -21,7 +21,7 @@ su -c "chown -R www-data:www-data $APP_PATH"
 su -c "chmod -R g+w $APP_PATH"
 
 # Create environment
-su - vagrant -c "cd $APP_PATH; echo \"2.1.6\" > .ruby-version"
+su - vagrant -c "cd $APP_PATH; echo \"2.3.0\" > .ruby-version"
 su - vagrant -c "cd $APP_PATH; echo \"ecommerce\" > .ruby-gemset"
 su - vagrant -c "cd $APP_PATH; echo $RAILS_ENV > .ruby-env"
 
@@ -32,8 +32,8 @@ su - vagrant -c "cd $APP_PATH; echo 'HOME=/home/vagrant ' >> .env"
 su - vagrant -c "cd $APP_PATH; echo 'RAILS_DB=$database' >> .env"
 su - vagrant -c "cd $APP_PATH; echo 'DATABASE_URL=$DATABASE_URL' >> .env"
 su - vagrant -c "cd $APP_PATH; echo 'PORT=3000' >> .env"
-su - vagrant -c "cd $APP_PATH; echo 'GEM_PATH=$RVM_PATH/gems/ruby-2.1.6@ecommerce' >> .env"
-su - vagrant -c "cd $APP_PATH; echo 'PATH=$RVM_PATH/wrappers/ruby-2.1.6@ecommerce:$RVM_PATH/gems/ruby-2.1.6/bin:$RVM_PATH/rubies/ruby-2.1.6/bin:/home/user/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$RVM_PATH/bin' >> .env"
+su - vagrant -c "cd $APP_PATH; echo 'GEM_PATH=$RVM_PATH/gems/ruby-2.3.0@ecommerce' >> .env"
+su - vagrant -c "cd $APP_PATH; echo 'PATH=$RVM_PATH/wrappers/ruby-2.3.0@ecommerce:$RVM_PATH/gems/ruby-2.3.0/bin:$RVM_PATH/rubies/ruby-2.3.0/bin:/home/user/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$RVM_PATH/bin' >> .env"
 su - vagrant -c "cd $APP_PATH; echo 'RAILS_PIDS=/home/vagrant/pids/rails_server.pid' >> .env"
 su - vagrant -c "cd $APP_PATH; echo 'RAILS_LOGS=/home/vagrant/logs/rails_server.log' >> .env"
 su - vagrant -c "cd $APP_PATH; echo 'RAILS_SERVE_STATIC_FILES=true' >> .env"

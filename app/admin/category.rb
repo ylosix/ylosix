@@ -19,7 +19,9 @@ ActiveAdmin.register Category do
   end
 
   action_item :view, only: [:show, :edit] do
-    link_to 'Public link', category_path(category.slug), target: '_blank'
+    if category
+      link_to 'Public link', category_path(category), target: '_blank'
+    end
   end
 
   index do
