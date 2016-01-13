@@ -34,9 +34,7 @@ ActiveAdmin.register Product do
   end
 
   action_item :view, only: [:show, :edit] do
-    if product
-      link_to 'Public link', product_path(product), target: '_blank'
-    end
+    link_to 'Public link', product_path(product), target: '_blank' if product
   end
 
   index do

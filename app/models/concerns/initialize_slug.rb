@@ -8,6 +8,7 @@ module InitializeSlug
 
   def unique_slug(object, slug, locale, enabled)
     return slug if link?(slug)
+    slug = parse_url_chars(slug)
 
     link = Link.find_by(slug: slug)
     if id.nil? && link
@@ -45,6 +46,8 @@ module InitializeSlug
   end
 
   def parse_url_chars(str)
+    return '' if str.blank?
+
     out = str.downcase
     out = out.tr(' ', '-')
 
@@ -58,9 +61,9 @@ module InitializeSlug
     else
       href = object.slug_translations[locale]
     end
-    slug = href
+    slug = parse_url_chars(href)
 
-    if !href.nil? && !link?(slug)
+    if !href.blank? && !link?(slug)
       if object.class == Category
         slugs = Utils.get_parents_array(object).map(&:slug_translations).map { |x| x[locale] }
 
@@ -123,7 +126,7 @@ module InitializeSlug
 
       slug ||= 'needs-to-be-changed'
 
-      object[:slug_translations][language.locale] = unique_slug(object, parse_url_chars(slug), language.locale, enabled)
+      object[:slug_translations][language.locale] = unique_slug(object, slug, language.locale, enabled)
       object.update_column(:slug_translations, object[:slug_translations])
 
       object[:href_translations][language.locale] = slug_to_href(object, language.locale)
