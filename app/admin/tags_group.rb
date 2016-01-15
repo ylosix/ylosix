@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: tags_groups
+#
+#  created_at        :datetime         not null
+#  id                :integer          not null, primary key
+#  name_translations :hstore           default({}), not null
+#  updated_at        :datetime         not null
+#
+
 ActiveAdmin.register TagsGroup do
   menu parent: 'Catalog'
 

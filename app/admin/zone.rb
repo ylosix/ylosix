@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: zones
+#
+#  code       :string
+#  created_at :datetime         not null
+#  id         :integer          not null, primary key
+#  name       :string
+#  updated_at :datetime         not null
+#
+
 ActiveAdmin.register Zone do
   menu parent: 'Locales', if: proc { commerce && commerce.enable_commerce_options }
 

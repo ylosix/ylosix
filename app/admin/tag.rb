@@ -1,3 +1,21 @@
+# == Schema Information
+#
+# Table name: tags
+#
+#  created_at        :datetime         not null
+#  href_translations :hstore           default({}), not null
+#  id                :integer          not null, primary key
+#  name_translations :hstore           default({}), not null
+#  priority          :integer          default(1), not null
+#  slug_translations :hstore           default({}), not null
+#  tags_group_id     :integer
+#  updated_at        :datetime         not null
+#
+# Indexes
+#
+#  index_tags_on_tags_group_id  (tags_group_id)
+#
+
 ActiveAdmin.register Tag do
   menu parent: 'Catalog'
 

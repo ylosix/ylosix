@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: templates
+#
+#  created_at :datetime         not null
+#  enabled    :boolean
+#  id         :integer          not null, primary key
+#  name       :string
+#  path       :string
+#  updated_at :datetime         not null
+#
+# Indexes
+#
+#  index_templates_on_enabled  (enabled)
+#
+
 ActiveAdmin.register Template do
   menu parent: 'Design'
 

@@ -1,3 +1,27 @@
+# == Schema Information
+#
+# Table name: languages
+#
+#  appears_in_backoffice :boolean          default(FALSE)
+#  appears_in_web        :boolean          default(FALSE)
+#  created_at            :datetime
+#  default               :boolean          default(FALSE)
+#  flag_content_type     :string
+#  flag_file_name        :string
+#  flag_file_size        :integer
+#  flag_updated_at       :datetime
+#  id                    :integer          not null, primary key
+#  locale                :string
+#  name                  :string
+#  updated_at            :datetime
+#
+# Indexes
+#
+#  index_languages_on_default                    (default)
+#  index_languages_on_locale                     (locale)
+#  index_languages_on_locale_and_appears_in_web  (locale,appears_in_web)
+#
+
 ActiveAdmin.register Language do
   menu parent: 'Locales'
 

@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: action_forms
+#
+#  body_translations    :hstore           default({}), not null
+#  created_at           :datetime         not null
+#  id                   :integer          not null, primary key
+#  mapping              :hstore           default({}), not null
+#  subject_translations :hstore           default({}), not null
+#  tag                  :string
+#  updated_at           :datetime         not null
+#
+
 ActiveAdmin.register ActionForm do
   menu parent: 'Preferences'
 

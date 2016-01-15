@@ -65,7 +65,7 @@ class ApplicationController < ActionController::Base
 
   def set_locale
     if session[:locale].nil?
-      language = @commerce.language
+      language = @commerce.language if @commerce
       language ||= Language.find_by(default: true)
 
       if language.nil?

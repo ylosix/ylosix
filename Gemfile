@@ -73,7 +73,7 @@ group :development, :test, :profile do
   gem 'did_you_mean'
 
   gem 'rails-erd'
-  gem 'annotate'
+  gem 'annotate', github: 'ryanfox1985/annotate_models'
 
   #profiling
   gem 'bullet'

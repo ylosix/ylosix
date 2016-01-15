@@ -1,3 +1,25 @@
+# == Schema Information
+#
+# Table name: customer_addresses
+#
+#  created_at       :datetime         not null
+#  customer_id      :integer
+#  default_billing  :boolean          default(FALSE), not null
+#  default_shipping :boolean          default(FALSE), not null
+#  fields           :hstore           default({}), not null
+#  id               :integer          not null, primary key
+#  name             :string
+#  updated_at       :datetime         not null
+#
+# Indexes
+#
+#  index_customer_addresses_on_customer_id  (customer_id)
+#
+# Foreign Keys
+#
+#  fk_rails_79041ef784  (customer_id => customers.id)
+#
+
 ActiveAdmin.register CustomerAddress do
   menu parent: 'Customers', if: proc { commerce && commerce.enable_commerce_options }
 

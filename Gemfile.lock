@@ -1,4 +1,12 @@
 GIT
+  remote: git://github.com/ryanfox1985/annotate_models.git
+  revision: 56abbaa3eb5e41a3b236f782c0bb2a49dc3d36f1
+  specs:
+    annotate (2.7.0)
+      activerecord (>= 3.2, < 6.0)
+      rake (~> 10.4)
+
+GIT
   remote: git://github.com/ylosix/liquid.git
   revision: 9a4df89f38c1706013092601cb2ad0761697a8f9
   specs:
@@ -61,9 +69,6 @@ GEM
       memoizable (~> 0.4.0)
     animate-rails (1.0.9)
       rails
-    annotate (2.7.0)
-      activerecord (>= 3.2, < 6.0)
-      rake (~> 10.4)
     arbre (1.0.3)
       activesupport (>= 3.0.0)
     arel (6.0.3)
@@ -409,7 +414,7 @@ PLATFORMS
 DEPENDENCIES
   activeadmin (~> 1.0.0.pre1)
   animate-rails (~> 1.0.8)
-  annotate
+  annotate!
   bootstrap-sass (~> 3.3.4)
   bullet
   byebug
