@@ -1,5 +1,5 @@
 ActiveAdmin.register Carrier do
-  menu parent: 'Transports'
+  menu parent: 'Transports', if: proc { commerce && commerce.enable_commerce_options }
 
   permit_params do
     permitted = [:enabled, :free_carrier, :image]

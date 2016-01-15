@@ -1,5 +1,5 @@
 ActiveAdmin.register Tax do
-  menu parent: 'Locales'
+  menu parent: 'Locales', if: proc { commerce && commerce.enable_commerce_options }
 
   permit_params :name, :rate
 

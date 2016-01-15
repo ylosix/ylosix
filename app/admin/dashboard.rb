@@ -21,6 +21,16 @@ ActiveAdmin.register_page 'Dashboard' do
 
         columns do
           column do
+            span 'Enable commerce options'
+          end
+
+          column do
+            commerce.enable_commerce_options ? 'Yes' : 'No'
+          end
+        end
+
+        columns do
+          column do
             span 'Http'
           end
 

@@ -1,7 +1,7 @@
 ActiveAdmin.register Commerce do
   menu parent: 'Preferences'
   permit_params do
-    permitted = [:default, :language_id, :no_redirect_shopping_cart, :http, :logo,
+    permitted = [:default, :language_id, :enable_commerce_options, :no_redirect_shopping_cart, :http, :logo,
                  :order_prefix, :ga_account_id, :name, :template_id,
                  :address_1, :address_2, :postal_code, :city, :country, :phone,
                  :cif, :social_networks]
@@ -32,6 +32,7 @@ ActiveAdmin.register Commerce do
     f.inputs 'Commerce details' do
       f.input :name
       f.input :default
+      f.input :enable_commerce_options
       f.input :no_redirect_shopping_cart
       f.input :http
       f.input :language

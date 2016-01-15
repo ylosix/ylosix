@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160104093656) do
+ActiveRecord::Schema.define(version: 20160112123642) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -147,6 +147,7 @@ ActiveRecord::Schema.define(version: 20160104093656) do
     t.integer  "language_id"
     t.hstore   "meta_tags",                 default: {},    null: false
     t.integer  "per_page",                  default: 20
+    t.boolean  "enable_commerce_options",   default: false, null: false
   end
 
   add_index "commerces", ["default", "http"], name: "index_commerces_on_default_and_http", using: :btree
@@ -356,17 +357,17 @@ ActiveRecord::Schema.define(version: 20160104093656) do
 
   create_table "shopping_orders", force: :cascade do |t|
     t.integer  "customer_id"
-    t.datetime "created_at",                                                       null: false
-    t.datetime "updated_at",                                                       null: false
+    t.datetime "created_at",                                                                                        null: false
+    t.datetime "updated_at",                                                                                        null: false
     t.integer  "commerce_id"
-    t.hstore   "shipping_address",                                   default: {},  null: false
-    t.hstore   "billing_address",                                    default: {},  null: false
-    t.hstore   "billing_commerce",                                   default: {},  null: false
-    t.integer  "order_num",                                          default: 0,   null: false
+    t.hstore   "shipping_address",                                   default: {},                                   null: false
+    t.hstore   "billing_address",                                    default: {},                                   null: false
+    t.hstore   "billing_commerce",                                   default: {},                                   null: false
+    t.integer  "order_num",                                          default: "nextval('order_num_seq'::regclass)", null: false
     t.integer  "carrier_id"
-    t.decimal  "carrier_retail_price",      precision: 10, scale: 2, default: 0.0, null: false
+    t.decimal  "carrier_retail_price",      precision: 10, scale: 2, default: 0.0,                                  null: false
     t.integer  "shopping_orders_status_id"
-    t.hstore   "extra_fields",                                       default: {},  null: false
+    t.hstore   "extra_fields",                                       default: {},                                   null: false
   end
 
   add_index "shopping_orders", ["customer_id"], name: "index_shopping_orders_on_customer_id", using: :btree

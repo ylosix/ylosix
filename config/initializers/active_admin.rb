@@ -1,4 +1,6 @@
 ActiveAdmin.setup do |config|
+  load 'config/initializers/class_errors.rb'
+
   # == Site Title
   #
   # Set the title that is displayed on the main layout
@@ -139,7 +141,7 @@ ActiveAdmin.setup do |config|
   # You can add before, after and around filters to all of your
   # Active Admin resources and pages from here.
   #
-  # config.before_filter :do_something_awesome
+  config.before_filter :extract_commerce_from_url
 
   # == Setting a Favicon
   #
