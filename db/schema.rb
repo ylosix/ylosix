@@ -357,17 +357,17 @@ ActiveRecord::Schema.define(version: 20160112123642) do
 
   create_table "shopping_orders", force: :cascade do |t|
     t.integer  "customer_id"
-    t.datetime "created_at",                                                       null: false
-    t.datetime "updated_at",                                                       null: false
+    t.datetime "created_at",                                                                                        null: false
+    t.datetime "updated_at",                                                                                        null: false
     t.integer  "commerce_id"
-    t.hstore   "shipping_address",                                   default: {},  null: false
-    t.hstore   "billing_address",                                    default: {},  null: false
-    t.hstore   "billing_commerce",                                   default: {},  null: false
-    t.integer  "order_num",                                          default: 0,   null: false
+    t.hstore   "shipping_address",                                   default: {},                                   null: false
+    t.hstore   "billing_address",                                    default: {},                                   null: false
+    t.hstore   "billing_commerce",                                   default: {},                                   null: false
+    t.integer  "order_num",                                          default: "nextval('order_num_seq'::regclass)", null: false
     t.integer  "carrier_id"
-    t.decimal  "carrier_retail_price",      precision: 10, scale: 2, default: 0.0, null: false
+    t.decimal  "carrier_retail_price",      precision: 10, scale: 2, default: 0.0,                                  null: false
     t.integer  "shopping_orders_status_id"
-    t.hstore   "extra_fields",                                       default: {},  null: false
+    t.hstore   "extra_fields",                                       default: {},                                   null: false
   end
 
   add_index "shopping_orders", ["customer_id"], name: "index_shopping_orders_on_customer_id", using: :btree

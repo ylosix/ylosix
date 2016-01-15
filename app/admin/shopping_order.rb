@@ -1,5 +1,5 @@
 ActiveAdmin.register ShoppingOrder do
-  menu parent: 'Orders'
+  menu parent: 'Orders', if: proc { commerce && commerce.enable_commerce_options }
 
   permit_params :order_num, :carrier_id, :carrier_retail_price, :commerce_id, :customer_id, :shopping_orders_status_id
 
