@@ -1,5 +1,5 @@
 ActiveAdmin.register ShoppingOrdersStatus do
-  menu parent: 'Orders'
+  menu parent: 'Orders', if: proc { commerce && commerce.enable_commerce_options }
 
   permit_params do
     permitted = [:color, :enable_invoice]

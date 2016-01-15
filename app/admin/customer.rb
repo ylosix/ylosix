@@ -1,5 +1,5 @@
 ActiveAdmin.register Customer do
-  menu parent: 'Customers'
+  menu parent: 'Customers', if: proc { commerce && commerce.enable_commerce_options }
 
   permit_params :email, :locale, :name, :last_name, :birth_date
 

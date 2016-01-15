@@ -5,6 +5,7 @@
 #  billing_address           :hstore           default({}), not null
 #  created_at                :datetime         not null
 #  default                   :boolean
+#  enable_commerce_options   :boolean          default(FALSE), not null
 #  ga_account_id             :string
 #  http                      :string
 #  id                        :integer          not null, primary key
