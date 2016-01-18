@@ -174,17 +174,20 @@ ActiveAdmin.register Product do
                                                               features: Feature.all}
         end
 
-        f.inputs 'Price' do
-          f.input :retail_price_pre_tax, input_html: {onchange: 'javascript:change_price_pre_tax(this);'}
-          f.input :retail_price, input_html: {onchange: 'javascript:change_price(this);'}
 
-          taxes = Tax.all
-          render partial: 'admin/products/taxes', locals: {taxes: taxes, tax: product.tax}
-        end
+        if commerce && commerce.enable_commerce_options
+          f.inputs 'Price' do
+            f.input :retail_price_pre_tax, input_html: {onchange: 'javascript:change_price_pre_tax(this);'}
+            f.input :retail_price, input_html: {onchange: 'javascript:change_price(this);'}
 
-        f.inputs 'Stock' do
-          f.input :stock
-          f.input :control_stock
+            taxes = Tax.all
+            render partial: 'admin/products/taxes', locals: {taxes: taxes, tax: product.tax}
+          end
+
+          f.inputs 'Stock' do
+            f.input :stock
+            f.input :control_stock
+          end
         end
       end
 
@@ -230,12 +233,14 @@ ActiveAdmin.register Product do
         end
       end
 
-      tab 'Transport' do
-        f.inputs 'Transport' do
-          f.input :width, hint: 'cm'
-          f.input :height, hint: 'cm'
-          f.input :depth, hint: 'cm'
-          f.input :weight, hint: 'kg'
+      if commerce && commerce.enable_commerce_options
+        tab 'Transport' do
+          f.inputs 'Transport' do
+            f.input :width, hint: 'cm'
+            f.input :height, hint: 'cm'
+            f.input :depth, hint: 'cm'
+            f.input :weight, hint: 'kg'
+          end
         end
       end
     end
