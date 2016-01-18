@@ -174,7 +174,6 @@ ActiveAdmin.register Product do
                                                               features: Feature.all}
         end
 
-
         if commerce && commerce.enable_commerce_options
           f.inputs 'Price' do
             f.input :retail_price_pre_tax, input_html: {onchange: 'javascript:change_price_pre_tax(this);'}
