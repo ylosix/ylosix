@@ -8,10 +8,10 @@ ActiveAdmin.register_page 'Dashboard' do
 
     commerce = Commerce.find_by(default: true)
     unless commerce.nil?
-      panel 'Default commerce' do
+      panel 'Default site' do
         columns do
           column do
-            span 'Commerce'
+            span t('activerecord.models.commerce.one')
           end
 
           column do
@@ -21,7 +21,7 @@ ActiveAdmin.register_page 'Dashboard' do
 
         columns do
           column do
-            span 'Enable commerce options'
+            span t('activerecord.attributes.commerce.enable_commerce_options')
           end
 
           column do
@@ -41,7 +41,7 @@ ActiveAdmin.register_page 'Dashboard' do
 
         columns do
           column do
-            span 'Name'
+            span t('activerecord.attributes.commerce.name')
           end
 
           column do
@@ -49,13 +49,15 @@ ActiveAdmin.register_page 'Dashboard' do
           end
         end
 
-        columns do
-          column do
-            span 'Billing address'
-          end
+        if commerce && commerce.enable_commerce_options
+          columns do
+            column do
+              span 'Billing address'
+            end
 
-          column do
-            span commerce.billing_address
+            column do
+              span commerce.billing_address
+            end
           end
         end
 
@@ -71,7 +73,7 @@ ActiveAdmin.register_page 'Dashboard' do
 
         columns do
           column do
-            span 'Template'
+            span t('activerecord.attributes.commerce.template')
           end
 
           column do

@@ -36,7 +36,7 @@
 #
 
 ActiveAdmin.register Commerce do
-  menu parent: 'Preferences'
+  menu parent: 'Preferences', priority: 1
   permit_params do
     permitted = [:default, :language_id, :enable_commerce_options, :no_redirect_shopping_cart, :http, :logo,
                  :order_prefix, :ga_account_id, :name, :template_id,

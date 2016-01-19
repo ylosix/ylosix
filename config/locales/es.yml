@@ -46,12 +46,19 @@ es:
     comments:
       label: Comentarios internos
       title_content: Comentarios internos
+    powered_by: Creado con Ylosix
   time:
     formats:
       default: "%d/%m/%Y"
       short: "%d %b"
       long: "%d %b, %Y %H:%M"
   activerecord:
+    errors:
+      messages:
+        record_invalid: "La validación falló: %{errors}"
+        restrict_dependent_destroy:
+          has_one: No se puede eliminar el registro porque existe un %{record} dependiente
+          has_many: No se puede eliminar el registro porque existen %{record} dependientes
     models:
       category:
         zero: no categoría
@@ -62,9 +69,9 @@ es:
         one: Característica
         other: Características
       product:
-        zero: no producto
-        one: Producto
-        other: Productos
+        zero: no artículo
+        one: Artículo
+        other: Artículos
       tag:
         zero: no tag
         one: Tag
@@ -97,6 +104,42 @@ es:
         zero: no cliente
         one: Cliente
         other: Clientes
+      carrier:
+        zero: no transportista
+        one: Transportista
+        other: Transportistas
+      country:
+        zero: no pais
+        one: País
+        other: Paises
+      tax:
+        zero: no impuesto
+        one: Impuesto
+        other: Impuestos
+      zone:
+        zero: no zona
+        one: Zona
+        other: Zonas
+      action_form:
+        zero: no acción formularios
+        one: Acción formulario
+        other: Acciones de formulario
+      commerce:
+        zero: no sitio
+        one: Sitio web
+        other: Sitios web
+      data_form:
+        zero: no dato de formulario
+        one: Dato de formulario
+        other: Datos de formularios
+      design_form:
+        zero: no diseño formulario
+        one: Diseño formulario
+        other: Diseño formularios
+      template:
+        zero: no plantilla
+        one: Plantilla
+        other: Plantillas
     attributes:
       category:
         reference_code: Código de referencia
@@ -104,25 +147,30 @@ es:
         enabled: Habilitado
         visible: Visible
         slug: Enlace
+        slug_translations: Enlace
         priority: Prioridad
+        name_translations: Nombre
         name: Nombre
-        short_description: Descripción Corta
-        description: Descripción
+        short_description_translations: Descripción Corta
+        description_translations: Descripción
         created_at: Creado en
         updated_at: Actualizado en
       feature:
         name: Nombre
+        name_translations: Nombre
         value: Valor
         priority: Prioridad
         created_at: Creado en
         updated_at: Actualizado en
       product:
         name: Nombre
+        name_translations: Nombre
         enabled: Habilitado
         image: Imágen
         slug: Enlace
-        short_description: Descripción corta
-        description: Descripción
+        slug_translations: Enlace
+        short_description_translations: Descripción corta
+        description_translations: Descripción
         reference_code: Código de referencia
         barcode: Código de barras
         publication_date: Fecha de publicación
@@ -131,17 +179,87 @@ es:
         updated_at: Actualizado en
       tag:
         name: Nombre
+        name_translations: Nombre
         slug: Enlace
+        slug_translations: Enlace
         priority: Prioridad
         tags_group: Grupo de tag
         created_at: Creado en
         updated_at: Actualizado en
       tags_group:
         name: Nombre
+        name_translations: Nombre
         created_at: Creado en
         updated_at: Actualizado en
       admin_user:
         locale: Idioma
+        created_at: Creado en
+        updated_at: Actualizado en
+      carrier:
+        delay: Tiempo de envio
+        delay_translations: Tiempo de envio
+        name: Nombre
+        name_translations: Nombre
+        image: Imagen
+        priority: Prioridad
+        enabled: Habilitado
+        free_carrier: Envio gratuito
+        created_at: Creado en
+        updated_at: Actualizado en
+      country:
+        code: Código
+        enabled: Habilitado
+        name: Nombre
+        zone: Zona
+        created_at: Creado en
+        updated_at: Actualizado en
+      tax:
+        name: Nombre
+        rate: Porcentaje
+        created_at: Creado en
+        updated_at: Actualizado en
+      zone:
+        name: Nombre
+        code: Código
+        created_at: Creado en
+        updated_at: Actualizado en
+      action_form:
+        created_at: Creado en
+        updated_at: Actualizado en
+      commerce:
+        enable_commerce_options: Habilitar opciones de comercio
+        default: Por Defecto
+        language: Idioma
+        name: Nombre
+        template: Plantilla
+        created_at: Creado en
+        updated_at: Actualizado en
+      data_form:
+        fields: Campos
+        created_at: Creado en
+        updated_at: Actualizado en
+      link:
+        class_name: Clase
+        slug: Enlace
+        enabled: Habilitado
+        created_at: Creado en
+        updated_at: Actualizado en
+      design_form:
+        content_translations: Contenido
+        created_at: Creado en
+        updated_at: Actualizado en
+      template:
+        name: Nombre
+        enabled: Habilitado
+        created_at: Creado en
+        updated_at: Actualizado en
+      admin_user:
+        current_sign_in_at: Último Sign In
+        sign_in_count: Contador Sign In
+        locale: Idioma
+        debug_template: Plantilla debug
+        password: Contraseña
+        password_confirmation: Confirmación contraseña
         created_at: Creado en
         updated_at: Actualizado en
 
@@ -248,6 +366,7 @@ es:
     messages:
       accepted: debe ser aceptado
       blank: no puede estar en blanco
+      present: debe estar en blanco
       confirmation: no coincide
       empty: no puede estar vacío
       equal_to: debe ser igual a %{count}
@@ -259,14 +378,22 @@ es:
       invalid: no es válido
       less_than: debe ser menor que %{count}
       less_than_or_equal_to: debe ser menor que o igual a %{count}
+      model_invalid: "La validación falló: %{errors}"
       not_a_number: no es un número
       not_an_integer: debe ser un entero
       odd: debe ser impar
-      record_invalid: 'La validación falló: %{errors}'
+      required: debe existir
       taken: ya está en uso
-      too_long: es demasiado largo (%{count} caracteres máximo)
-      too_short: es demasiado corto (%{count} caracteres mínimo)
-      wrong_length: no tiene la longitud correcta (%{count} caracteres exactos)
+      too_long:
+        one: "es demasiado largo (1 carácter máximo)"
+        other: "es demasiado largo (%{count} caracteres máximo)"
+      too_short:
+        one: "es demasiado corto (1 carácter mínimo)"
+        other: "es demasiado corto (%{count} caracteres mínimo)"
+      wrong_length:
+        one: "no tiene la longitud correcta (1 carácter exactos)"
+        other: "no tiene la longitud correcta (%{count} caracteres exactos)"
+      other_than: debe ser distinto de %{count}
     template:
       body: 'Se encontraron problemas con los siguientes campos:'
       header:
@@ -300,10 +427,14 @@ es:
         format: "%n %u"
         units:
           billion: mil millones
-          million: millón
+          million:
+            one: millón
+            other: millones
           quadrillion: mil billones
           thousand: mil
-          trillion: billón
+          trillion:
+            one: billón
+            other: billones
           unit: ''
       format:
         delimiter: ''
@@ -323,6 +454,7 @@ es:
     percentage:
       format:
         delimiter: ''
+        format: "%n %"
     precision:
       format:
         delimiter: ''
@@ -331,3 +463,10 @@ es:
       last_word_connector: " y "
       two_words_connector: " y "
       words_connector: ", "
+  time:
+    am: am
+    formats:
+      default: "%A, %d de %B de %Y %H:%M:%S %z"
+      long: "%d de %B de %Y %H:%M"
+      short: "%d de %b %H:%M"
+    pm: pm

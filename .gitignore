@@ -45,3 +45,4 @@ pickle-email-*.html
 
 # Gemnasium gem configuration file
 config/gemnasium.yml
+config/local-env.yml
