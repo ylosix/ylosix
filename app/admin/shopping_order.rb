@@ -32,6 +32,13 @@ ActiveAdmin.register ShoppingOrder do
 
   permit_params :order_num, :carrier_id, :carrier_retail_price, :commerce_id, :customer_id, :shopping_orders_status_id
 
+  filter :carrier
+  filter :customer
+  filter :commerce
+  filter :shopping_orders_status
+  filter :created_at
+  filter :updated_at
+
   index do
     selectable_column
     id_column

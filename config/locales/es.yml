@@ -262,7 +262,39 @@ es:
         password_confirmation: Confirmación contraseña
         created_at: Creado en
         updated_at: Actualizado en
-
+      shopping_order:
+        retrieve_order_num: Orden
+        order_num: Orden
+        total_products: Productos total
+        total_retail_price: Precio total
+        carrier: Transportista
+        customer: Cliente
+        commerce: Sitio web
+        shopping_orders_status: Estado de pedido
+        created_at: Creado en
+        updated_at: Actualizado en
+      shopping_orders_status:
+        name: Nombre
+        enable_invoice: Factura habilitada
+        created_at: Creado en
+        updated_at: Actualizado en
+      customer:
+        name: Nombre
+        last_name: Apellidos
+        birth_date: Aniversario
+        enabled: Habilitado
+        locale: Idioma
+        created_at: Creado en
+        updated_at: Actualizado en
+      customer_address:
+        name: Nombre
+        fields: Campos
+        customer: Cliente
+        default_shipping: Envio por defecto
+        default_billing: Facturación por defecto
+        created_at: Creado en
+        updated_at: Actualizado en
+      
 
 ## copied from: https://github.com/svenfuchs/rails-i18n/blob/master/rails/locale/es.yml
   date:
