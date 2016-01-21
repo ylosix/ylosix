@@ -94,7 +94,9 @@ ActiveAdmin.register Product do
     column (t('activerecord.models.category.other')) { |product| product.categories.map(&:name).join(', ') }
     column (:tags) { |product| product.tags.map(&:name).join(', ') }
 
-    actions
+    actions defaults: true do |product|
+      link_to t('formtastic.clone', model: ''), admin_clone_product_path(product), class: 'member_link'
+    end
   end
 
   show title: proc { |p| "#{p.name}" } do
