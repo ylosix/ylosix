@@ -45,6 +45,8 @@
 #
 
 class Product < ActiveRecord::Base
+  has_paper_trail
+
   include InitializeSlug
   include ArrayLiquid
 
