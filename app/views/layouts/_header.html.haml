@@ -3,7 +3,7 @@
 
 - if @variables['meta_tags']
   - @variables['meta_tags'].each do |meta_key, meta_content|
-    %meta{name: meta_key, content: meta_content}
+    %meta{name: meta_key.downcase, content: meta_content}
 
 %title
   = @variables['commerce']['name']
