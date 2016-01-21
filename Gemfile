@@ -64,6 +64,8 @@ gem 'paper_trail', '~> 4.0.0'
 gem 'remote_syslog_logger'
 
 group :development, :test, :profile do
+  gem 'rails-footnotes', '~> 4.0'
+
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem 'local-env', github: 'ryanfox1985/local-env'

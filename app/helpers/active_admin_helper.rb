@@ -18,7 +18,7 @@ module ActiveAdminHelper
       end
     end
 
-    array.compact
+    array.compact.sort_by { |item| item[0] }
   end
 
   def admin_translation_text_field(object, model_name, field, options = {})

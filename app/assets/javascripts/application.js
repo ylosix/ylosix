@@ -14,7 +14,6 @@
 //= require bootstrap-sprockets
 //= require jquery_ujs
 //= require turbolinks
-//= require active_admin
 //= require addresses
 //= require categories
 //= require customers
