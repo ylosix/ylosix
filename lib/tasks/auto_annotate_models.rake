@@ -18,6 +18,7 @@ if Rails.env.development?
                               'position_in_fixture'  => 'before',
                               'position_in_factory'  => 'before',
                               'routes'               => 'true',
+                              'active_admin'         => 'true',
                               'show_indexes'         => 'true',
                               'show_foreign_keys'    => 'true',
                               'simple_indexes'       => 'false',

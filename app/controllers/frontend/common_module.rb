@@ -151,12 +151,11 @@ module Frontend
         prefix = 'categories'
         prefix = 'products' if @product.present?
 
-        if !@render_template.nil? &&
-            @render_template.ok?("#{prefix}/#{@variables['show_action_name']}.html")
-          file_html = "#{prefix}/#{@variables['show_action_name']}.html"
-        else
-          file_html = "#{prefix}/show.html"
+        if !@render_template || !@render_template.ok?("#{prefix}/#{@variables['show_action_name']}.html")
+          return "#{prefix}/show.html"
         end
+
+        "#{prefix}/#{@variables['show_action_name']}.html"
       end
 
       # Fixed errors like 404

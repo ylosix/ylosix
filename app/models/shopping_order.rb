@@ -67,13 +67,9 @@ class ShoppingOrder < ActiveRecord::Base
   end
 
   def retrieve_order_num
-    if commerce.nil? || commerce.order_prefix.blank?
-      str = order_num.to_s
-    else
-      str = created_at.strftime(commerce.order_prefix.gsub('%order_num', order_num.to_s))
-    end
+    return order_num.to_s if commerce.nil? || commerce.order_prefix.blank?
 
-    str
+    created_at.strftime(commerce.order_prefix.gsub('%order_num', order_num.to_s))
   end
 
   def total_taxes

@@ -68,11 +68,11 @@ class ApplicationController < ActionController::Base
       language = @commerce.language if @commerce
       language ||= Language.find_by(default: true)
 
-      if language.nil?
-        session[:locale] = extract_locale_from_accept_language_header
-      else
-        session[:locale] = language.locale
-      end
+      session[:locale] = if language
+                           language.locale
+                         else
+                           session[:locale] = extract_locale_from_accept_language_header
+                         end
     end
 
     I18n.locale = session[:locale]

@@ -34,10 +34,7 @@ class CustomersController < Frontend::CommonController
     super
 
     @variables['shopping_orders'] = []
-
-    if customer_signed_in?
-      @variables['shopping_orders'] = current_customer.shopping_orders.order('created_at DESC')
-    end
+    @variables['shopping_orders'] = current_customer.shopping_orders.order('created_at DESC') if current_customer
   end
 
   def show
