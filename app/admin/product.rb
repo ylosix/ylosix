@@ -95,7 +95,7 @@ ActiveAdmin.register Product do
     column (:tags) { |product| product.tags.map(&:name).join(', ') }
 
     actions defaults: true do |product|
-      link_to t('formtastic.clone', model: ''), admin_clone_product_path(product), class: 'member_link'
+      link_to t('formtastic.clone', model: ''), admin_clone_product_path(product), class: 'member_link clone_link'
     end
   end
 
@@ -115,7 +115,7 @@ ActiveAdmin.register Product do
       row :retail_price
       row :tax
 
-      row 'Features' do
+      row t('activerecord.models.feature.other') do
         table_for Feature.all do
           column :name
           column (:value) { |feature| JSON.parse(product.features.gsub('=>', ':'))[feature.id.to_s] unless product.features.nil? }
@@ -170,7 +170,7 @@ ActiveAdmin.register Product do
           f.input :unpublication_date
         end
 
-        f.inputs 'Features' do
+        f.inputs t('activerecord.models.feature.other') do
           render partial: 'admin/products/features', locals: {product: product,
                                                               languages: Language.in_backoffice,
                                                               features: Feature.all}
