@@ -100,7 +100,7 @@ class ApplicationController < ActionController::Base
 
     @variables ||= {}
     @variables['commerce'] = @commerce.to_liquid
-    @variables['meta_tags'] = @commerce.meta_tags
+    @variables['meta_tags'] = @commerce.meta_tags_hash
     @variables['template'] = @render_template
   end
 

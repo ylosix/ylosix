@@ -49,6 +49,7 @@ class Product < ActiveRecord::Base
 
   include InitializeSlug
   include ArrayLiquid
+  include MetaTags
 
   IMAGE_SIZES = {thumbnail: 'x100', small: 'x300', medium: 'x500', original: 'x720'}
 

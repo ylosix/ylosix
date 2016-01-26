@@ -30,6 +30,7 @@ class Category < ActiveRecord::Base
 
   include ArrayLiquid
   include InitializeSlug
+  include MetaTags
 
   translates :name, :short_description, :description, :slug, :href, :meta_tags
 

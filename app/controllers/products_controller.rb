@@ -54,7 +54,7 @@ class ProductsController < Frontend::CommonController
     super
 
     if @category
-      @variables['meta_tags'] = @category.meta_tags
+      @variables['meta_tags'] = @category.meta_tags_hash
       add_show_action_name(@category)
 
       array_categories = Utils.get_parents_array(@category)
@@ -68,7 +68,7 @@ class ProductsController < Frontend::CommonController
     end
 
     if @product
-      @variables['meta_tags'] = @product.meta_tags
+      @variables['meta_tags'] = @product.meta_tags_hash
       @liquid_options[:features] = true
       @liquid_options[:tags] = true
       @variables['product'] = @product.to_liquid(@liquid_options)

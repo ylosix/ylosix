@@ -36,6 +36,8 @@
 #
 
 class Commerce < ActiveRecord::Base
+  include MetaTags
+
   belongs_to :template
   belongs_to :language
   has_many :shopping_orders

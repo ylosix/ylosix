@@ -43,7 +43,7 @@ class CategoriesController < Frontend::CommonController
     super
 
     if @category
-      @variables['meta_tags'] = @category.meta_tags
+      @variables['meta_tags'] = @category.meta_tags_hash
       @liquid_options[:features] = true
       @liquid_options[:tags] = true
       @liquid_options[:tags_groups] = true
