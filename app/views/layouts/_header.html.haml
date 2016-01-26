@@ -1,7 +1,7 @@
 %meta{'http-equiv' => 'X-UA-Compatible', content: 'IE=edge'}
 %meta{name: 'viewport', content: 'width=device-width, initial-scale=1'}
 
-- if @variables['meta_tags']
+- unless @variables['meta_tags'].blank?
   - @variables['meta_tags'].each do |meta_key, meta_content|
     %meta{name: meta_key.downcase, content: meta_content}
 
