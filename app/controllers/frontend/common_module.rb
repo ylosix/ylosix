@@ -127,8 +127,12 @@ module Frontend
     end
 
     def retrieve_file_html(controller, action, args = [])
-      file_html = "#{controller}/#{action}.html"
+      # Fixed errors like 404
+      if args.is_a?(Array) && args.any? && args[0].is_a?(String) && args[0].start_with?('errors/')
+        return "#{args[0]}.html"
+      end
 
+      file_html = "#{controller}/#{action}.html"
       if %w(show tags).include?(action) && !@variables['show_action_name'].blank?
         if !@render_template.nil? &&
             @render_template.ok?("#{controller}/#{@variables['show_action_name']}.html")
@@ -136,14 +140,13 @@ module Frontend
         end
       end
 
-      # Fixed route devise when fails sign up.
-      if controller == 'registrations' && action == 'create'
-        file_html = "#{controller}/new.html"
-      end
-
-      # Fixed route devise when fails edit.
-      if controller == 'registrations' && action == 'update'
-        file_html = "#{controller}/edit.html"
+      if controller == 'registrations'
+        case action
+          when 'create' # Fixed route devise when fails sign up.
+            file_html = "#{controller}/new.html"
+          when 'update' # Fixed route devise when fails edit.
+            file_html = "#{controller}/edit.html"
+        end
       end
 
       # Fixed route pretty urls
@@ -155,12 +158,7 @@ module Frontend
           return "#{prefix}/show.html"
         end
 
-        return "#{prefix}/#{@variables['show_action_name']}.html"
-      end
-
-      # Fixed errors like 404
-      if args.is_a?(Array) && args.any? && args[0].is_a?(String) && args[0].start_with?('errors/')
-        file_html = "#{args[0]}.html"
+        file_html = "#{prefix}/#{@variables['show_action_name']}.html"
       end
 
       file_html

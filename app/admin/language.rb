@@ -39,7 +39,7 @@ ActiveAdmin.register Language do
     column :default
 
     actions defaults: true do |language|
-      link_to 'Set', change_locale_path(language.locale)
+      link_to 'Set', change_locale_path(language.locale), class: 'member_link set_link'
     end
   end
 
