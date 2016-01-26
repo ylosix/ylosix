@@ -155,7 +155,7 @@ module Frontend
           return "#{prefix}/show.html"
         end
 
-        "#{prefix}/#{@variables['show_action_name']}.html"
+        return "#{prefix}/#{@variables['show_action_name']}.html"
       end
 
       # Fixed errors like 404
