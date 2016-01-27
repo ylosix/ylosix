@@ -1,7 +1,9 @@
 # This file is used by Rack-based servers to start the application.
 
 if Rails.env.development?
-  local_env = YAML.load_file("#{Rails.root}/config/local-env.yml") rescue nil
+  if File.exist?("#{Rails.root}/config/local-env.yml")
+    local_env = YAML.load_file("#{Rails.root}/config/local-env.yml")
+  end
 
   if local_env && local_env[Rails.env]
     local_env = local_env[Rails.env]
