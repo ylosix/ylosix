@@ -14,6 +14,7 @@
 @import "active_admin/mixins";
 @import "active_admin/base";
 
+
 .editor_html {
   height: 450px;
 }
@@ -32,11 +33,507 @@
   z-index: 1030;
 }
 
-#title_bar{
-  margin-top: 38px;
-}
-
 // Overriding any non-variable SASS must be done after the fact.
 // For example, to change the default status-tag color:
 //
 //   .status_tag { background: #6090DB; }
+
+//VARIABLES
+$color-1: #67c0ba;
+$color-2: #000000;
+$grey-dark: #666666;
+$grey-medium: #e6e6e6;
+$grey-soft: #F5F5F5;
+$color-alert: #ff0000;
+$color-success: #68ab11;
+$color-info: #35a6c6;
+
+$font:'Roboto', sans-serif;
+
+@mixin button ($button-color){
+  background: $button-color!important;
+  border-radius: 6px!important;
+  border: none!important;
+  font-weight: normal!important;
+  text-transform: capitalize;
+  padding: 10px 25px!important;
+  margin: 0!important;
+  color:#fff!important;
+  font-size: 15px!important;
+  line-height:15px!important;
+}
+
+@mixin small-button ($button-color){
+  background: $button-color!important;
+  border: none!important;
+  font-weight: normal!important;
+  text-transform: capitalize;
+  padding: 3px 8px;
+  margin: 0!important;
+  color:#fff!important;
+  font-size: 13px!important;
+  line-height:13px!important;
+  text-decoration: none!important;
+  margin:0 5px!important;
+  border-radius: 0px;
+}
+
+//RESETS
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  box-shadow:none!important;
+  text-shadow:none!important;
+}
+
+//FONTS
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,700,700italic);
+
+//ALERTS
+body.logged_in .flash.flash_notice {
+  background: $color-success;
+  color: #fff;
+  boder:none;
+  padding:7px 30px;
+  border-bottom:0;
+  margin-top:-25px;
+}
+
+.flash_alert {
+  color:$color-alert!important;
+  font-weight: 400 !important;
+}
+
+//LOGIN
+body.logged_out .flash {
+  text-align: center;
+}
+
+.flash_alert {
+  color:$color-alert;
+}
+body.logged_out #content_wrapper {
+  width: 350px;
+  margin: 70px auto 0;
+}
+
+body.logged_out h2 {
+  padding:10px 0px;
+  text-align: center;
+  background: $color-1;
+  font-weight: 300;
+  text-transform: uppercase;
+  font-size:18px;
+}
+.input > label  {
+  width: 100%;
+  text-align: center;
+  font-weight: 400;
+}
+
+form fieldset ol > li label {
+  text-align: left!important;
+  width: 50%!important;
+}
+
+body.logged_out #login form fieldset input[type=text], body.logged_out #login form fieldset input[type=email], body.logged_out #login form fieldset input[type=password]{
+  width: 93%;
+}
+
+form fieldset > ol > li.boolean label {
+  text-align: left;
+  padding-left: 0px;
+}
+
+form .buttons, form .actions {
+  margin-top:0px;
+}
+
+#admin_user_submit_action {
+  width: 100%;
+  text-align: center;
+}
+#admin_user_submit_action>input{
+  @include button ($color-success);
+}
+
+body.logged_out #login a {
+  float: right;
+  margin-top: 0px;
+  text-align: center;
+  width: 100%;
+  font-size:13px;
+}
+
+#session_new>fieldset>ol {
+  background:none;
+}
+
+
+//HOME
+.section, .panel, form fieldset.inputs {
+  background: none;
+  border-radius: 0px;
+  margin-bottom: 30px;
+}
+
+.section > div, .panel > div,form ol, form ul {
+  background: $grey-soft;
+  border: 2px solid #fff;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+
+.columns>.column:first-child {
+  color: $color-1;
+  font-weight: 700;
+}
+
+.columns {
+  border-bottom: 1px solid #fff;
+  margin-bottom: 0px;
+  padding: 10px 0;
+}
+
+//GENERALS
+body {font-family: $font; font-size: 15px;}
+.profiler-results {
+  display:none;
+}
+
+.index #wrapper {
+  display:block;
+  width: 100%;
+}
+
+//HEADER
+#header {
+  background: $grey-soft;
+  padding:2px 0 0px 0;
+  border-bottom:2px solid $color-1;
+  position:relative;
+}
+#header h1 {
+  color: $color-1;
+  margin-bottom:0px;
+}
+
+.site_title {
+  width: 50%;
+  float: left;
+  padding: 0px 30px 10px 30px;
+}
+
+#header #tabs{
+  float:left;
+  margin-left:21px;
+  clear: left;
+}
+
+#header a, #header a:link {
+  color: $grey-dark;
+}
+
+//MENU
+#header ul.tabs {
+  vertical-align: top;
+}
+
+#header ul.tabs > li.has_nested:hover > a {
+  background: none;
+  border-bottom: 0;
+  color: #000;
+}
+
+#header ul.tabs > li.current > a, #header ul.tabs > li.has_nested.current > a {
+  color: #000;
+  background:  none!important;
+  font-weight: 700;
+}
+#header ul.tabs > li.has_nested.current > a{
+  background:  url(/assets/active_admin/nested_menu_arrow_dark-7c43b8e0a5f8823875f49a093c9d7a6b374f885b6f9cc248ae9cd7e6e9b29034.gif) no-repeat calc(100% - 7px) 50%;
+}
+
+#header ul.tabs > li a:hover,
+#header ul.tabs > li.has_nested > a:hover {
+  background: none;
+  border-radius: 0;
+  color: #000;
+  border-bottom:none!important;
+  font-weight: 700;
+}
+
+#header ul.tabs > li ul {
+  margin-top:2px;
+  background-color: $grey-soft;
+  border-radius:0;
+  border-top:1px solid $color-1;
+}
+
+#header ul.tabs > li ul li a:hover {
+  color:#000;
+  background-color: #fff;
+  padding-bottom:1px;
+}
+
+#header ul.tabs > li ul li:hover #header ul.tabs > li {
+  background:#fff;
+  border-radius:0;
+}
+
+#logout > a:link, #logout > a:hover, #logout > a:visited, #logout > a:active {
+  padding: 0 11px !important;
+  border-radius: 5px !important;
+  color: #ffffff !important;
+  background-color: $color-alert !important;
+}
+
+//TITLE BAR
+#title_bar {
+  border:none;
+  background: $grey-medium;
+  height: 25px;
+  margin-bottom:30px;
+}
+#title_bar h2 {
+  font-weight: 300;
+  color: $color-1;
+  font-size: 1.7em;
+}
+#titlebar_left {
+  height: 25px!important;
+}
+#titlebar_right {
+  position: absolute;
+  bottom: 6px;
+  right: 20px;
+  height: auto!important;
+}
+.breadcrumb {
+  float: right;
+  display: none;
+}
+.breadcrumb a:link,.breadcrumb a:visited,.breadcrumb a:hover,.breadcrumb a:active, .breadcrumb .breadcrumb_sep {
+  color:#fff;
+}
+.action_item a:link, .action_item a:visited,.action_item a:active {
+  @include button ($color-success);
+}
+
+//CONTENT
+#active_admin_content {
+  padding:5px 20px;
+  position: relative;
+}
+
+#active_admin_content #main_content_wrapper #main_content {
+  margin-right:0;
+  position:relative;
+}
+
+#main_content_wrapper {
+  width: 75%;
+}
+
+#sidebar {
+  float: left;
+  width: 270px;
+  margin-left: -270px;
+  position: absolute;
+  right: 20px;
+  border: 1px solid #999;
+  background: #f6f6f6;
+  box-shadow: 0px 0px 7px #999!important;
+  display: none;
+}
+
+
+.view_filter {
+  @include small-button ($color-info);
+  cursor: pointer;
+  position:absolute;
+  top: -22px;
+  right:15px;
+  z-index:900;
+}
+
+.table_tools {
+  position: absolute;
+  top: -29px;
+  right: 80px;
+  z-index:900;
+}
+.batch_actions_selector>a:link {
+  @include small-button ($color-info);
+}
+
+.batch_actions_selector>a:link::after {
+  display:none;
+}
+
+table.index_table th,.section > h3, .panel > h3, form fieldset legend span {
+  border:2px solid #fff;
+  background:$color-1;
+  color:#fff;
+  font-size: 1.1em;
+  font-weight: 300;
+  line-height:1.1em;
+  padding: 6px 10px 6px 10px;
+  margin-bottom: 0px;
+}
+
+table.index_table th.sorted-asc, table.index_table th.sorted-desc {
+  background: $color-1;
+}
+
+table.index_table th a, table.index_table th a:link, table.index_table th a:visited {
+  color: #fff;
+}
+
+table.index_table th.sortable a {
+  background: url("/assets/orderable.svg no-repeat 0 4px");
+}
+
+.status_tag.yes {
+  background: $color-success;
+}
+
+.status_tag.no {
+  background: $color-alert;
+}
+
+table.index_table tr.even td {
+  background:none!important;
+}
+
+table.index_table td {
+  padding: 15px 0px 15px 0px;
+  border-bottom: 1px solid $color-1;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.view_link{
+  @include small-button ($color-info);
+  display:none;
+}
+.edit_link{
+  @include small-button ($color-success)
+}
+.delete_link{
+  @include small-button ($color-alert)
+}
+
+.clone_link {
+  @include small-button ($color-1)
+}
+
+.pagination span.page.current:not(.disabled):hover, .pagination span.page.current {
+  background: $grey-medium;
+}
+
+.pagination a {
+  background: $grey-soft!important;
+}
+
+.pagination a, .pagination span.page.current {
+  border-radius: 0px;
+  margin-right: 4px;
+  padding: 4px 5px;
+  font-size: 14px;
+}
+
+#active_admin_content #sidebar {
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+
+.sidebar_section {
+  margin-bottom:0px!important;
+}
+
+.clear_filters_btn,form fieldset.buttons li.cancel a, form fieldset.actions li.cancel a {
+  @include button ($color-alert);
+  float:right;
+  margin-left:10px;
+}
+
+form input[type=submit], form input[type=button], form button {
+  @include button ($color-success);
+  text-shadow: none;
+}
+
+li.cancel {
+  margin-left:10px;
+}
+
+.ui-tabs-nav li a {
+  @include small-button ($color-1)
+}
+
+.ui-tabs-nav li:first-child a, .ui-tabs-nav li:last-child a {
+  border-radius:0px;
+}
+
+.ui-tabs-nav {
+  border-radius:0px;
+  background: none;
+}
+
+.ui-tabs-nav li.ui-tabs-active a {
+  background: $grey-medium!important;
+}
+
+.tab-content {
+  border:none;
+}
+
+.fragments-group {
+  border:none;
+}
+
+.input > label, form fieldset > ol > li fieldset legend.label label {
+  color:$color-1;
+  font-weight: 700;
+}
+
+form input[type=text], form input[type=password], form input[type=email], form input[type=number], form input[type=url], form input[type=tel], form input[type=date], form textarea {
+  width: calc(99% - 15px);
+}
+
+#footer {
+  text-align: center;
+}
+//MEDIA QUERIES
+/* Medium Devices, Desktops */
+@media only screen and (max-width : 1050px) {
+
+}
+
+/* Small Devices, Tablets */
+@media only screen and (max-width : 768px) {
+
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (max-width : 450px) {
+  body.logged_out #content_wrapper {
+    width: 280px;
+  }
+  body.logged_out #content_wrapper #active_admin_content {
+    padding:10px 20px;
+  }
+  body.logged_out h2 {
+    margin: -10px -20px 0px -20px;
+  }
+}
