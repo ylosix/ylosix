@@ -14,7 +14,7 @@ default: &default
   <<: *postgresql
 
 development:
-  url: postgres://ecommerce_user:ecommerce_pass@localhost:5432/ecommerce
+  url: <%= ENV['DATABASE_URL'] || 'postgres://ecommerce_user:ecommerce_pass@localhost:5432/ecommerce' %>
   <<: *default
 
 profile:
