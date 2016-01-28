@@ -112,7 +112,7 @@ ActiveAdmin.register_page 'Dashboard' do
         end
 
         column do
-          span Ecommerce::Version.dup
+          span Ecommerce::VERSION.dup
         end
       end
 

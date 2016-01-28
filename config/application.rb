@@ -7,8 +7,6 @@ require 'rails/all'
 Bundler.require(*Rails.groups)
 
 module Ecommerce
-  Version = '0.1'.freeze
-
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
@@ -26,8 +24,8 @@ module Ecommerce
 
     config.assets.precompile += %w( ckeditor/* )
 
-    # TODO env vars
-    DOMAIN_HOST = 'demo.ylosix.com'
-    MAIN_EMAIL = 'admin@ylosix.com'
+    VERSION = '0.1'.freeze
+    DOMAIN_HOST = 'demo.ylosix.com'.freeze
+    MAIN_EMAIL = 'admin@ylosix.com'.freeze
   end
 end
