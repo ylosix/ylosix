@@ -7,12 +7,6 @@ GIT
       rake (~> 10.4)
 
 GIT
-  remote: git://github.com/ryanfox1985/local-env.git
-  revision: db51d7b428656ea25b6a937f076befc12f8d05fc
-  specs:
-    local-env (0.0.2)
-
-GIT
   remote: git://github.com/ylosix/liquid.git
   revision: 9a4df89f38c1706013092601cb2ad0761697a8f9
   specs:
@@ -445,7 +439,6 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   liquid!
-  local-env!
   mailcatcher
   mailgun_rails
   newrelic_rpm

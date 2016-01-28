@@ -68,7 +68,6 @@ group :development, :test, :profile do
 
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
-  gem 'local-env', github: 'ryanfox1985/local-env'
 
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
