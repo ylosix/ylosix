@@ -19,7 +19,7 @@
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
 
-es:
+en:
   formtastic:
     create: "Creating %{model}"
     add_another: "Add other %{model}"
@@ -254,7 +254,6 @@ es:
 
 ## copied from: https://github.com/svenfuchs/rails-i18n/blob/master/rails/locale/es.yml
 
-en:
   activerecord:
     errors:
       messages:
