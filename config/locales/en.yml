@@ -19,30 +19,447 @@
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
 
-en:
+es:
+  formtastic:
+    create: "Creating %{model}"
+    add_another: "Add other %{model}"
+    update: "Save %{model}"
+    edit_form: "Editing %{model}"
+    clone: "Clone %{model}"
   active_admin:
     catalog:
       label: Catalog
-    comments:
-      label: Admin comments
-      title_content: Admin comments
     orders:
-      label: Orders
+      label: Shopping orders
     customers:
-      label: Clients
+      label: Customers
     transports:
       label: Carriers
     administration:
       label: Administration
     locales:
-      label: Locales
+      label: Languages
     preferences:
       label: Preferences
     design:
       label: Design
-
+    comments:
+      label: Internal comments
+      title_content: Internal comments
+    powered_by: Created with Ylosix
   time:
     formats:
-      default: "%Y/%m/%d"
+      default: "%d/%m/%Y"
+      short: "%d %b"
+      long: "%d %b, %Y %H:%M"
+#  activerecord:
+#    errors:
+#      messages:
+#        record_invalid: "La validación falló: %{errors}"
+#        restrict_dependent_destroy:
+#          has_one: No se puede eliminar el registro porque existe un %{record} dependiente
+#          has_many: No se puede eliminar el registro porque existen %{record} dependientes
+    models:
+      category:
+        zero: no category
+        one: Category
+        other: Categories
+      feature:
+        zero: no feature
+        one: Feature
+        other: Features
+      product:
+        zero: no item
+        one: Item
+        other: Items
+      tag:
+        zero: no tag
+        one: Tag
+        other: Tag
+      tags_group:
+        zero: no tag groups
+        one: Tag group
+        other: Tag groups
+      admin_user:
+        zero: no admin user
+        one: Admin user
+        other: Admin users
+      shopping_cart:
+        zero: no shopping cart
+        one: Shopping cart
+        other: Shopping carts
+      shopping_order:
+        zero: no shopping order
+        one: Shopping order
+        other: Shopping orders
+      shopping_orders_status:
+        zero: no shopping order status
+        one: Shopping order status
+        other: Shopping order statuses
+      customer_address:
+        zero: no customer address
+        one: Customer address
+        other: Customer addresses
+      customer:
+        zero: no customer
+        one: Custumer
+        other: Custumers
+      carrier:
+        zero: no carrier
+        one: Carrier
+        other: Carriers
+      country:
+        zero: no country
+        one: Country
+        other: Countries
+      tax:
+        zero: no tax
+        one: Tax
+        other: Taxes
+      zone:
+        zero: no zone
+        one: Zone
+        other: Zones
+      action_form:
+        zero: no action form
+        one: Action form
+        other: Action forms
+      commerce:
+        zero: no web site
+        one: Web site
+        other: Web sites
+      data_form:
+        zero: no data form
+        one: Data form
+        other: Data forms
+      design_form:
+        zero: no design form
+        one: Design form
+        other: Design forms
+      template:
+        zero: no template
+        one: Template
+        other: Templates
+    attributes:
+      category:
+        reference_code: Reference code
+        parent: Parent category
+        enabled: Enabled
+        visible: Visible
+        slug: Slug
+        slug_translations: Slug
+        priority: Priority
+        name_translations: Name
+        name: Name
+        short_description_translations: Short description
+        description_translations: Description
+      feature:
+        name: Name
+        name_translations: Name
+        value: Value
+        priority: Priority
+      product:
+        name: Name
+        name_translations: Name
+        enabled: Enabled
+        image: Image
+        slug: Slug
+        slug_translations: Slug
+        short_description_translations: Short description
+        description_translations: Description
+        reference_code: Reference code
+        barcode: Barcode
+        publication_date: Publication date
+        unpublication_date: Unpublication date
+      tag:
+        name: Name
+        name_translations: Name
+        slug: Slug
+        slug_translations: Slug
+        priority: Priority
+        tags_group: Group tags
+      tags_group:
+        name: Name
+        name_translations: Name
+      admin_user:
+        locale: Locale
+      carrier:
+        delay: Delay
+        delay_translations: Delay
+        name: Name
+        name_translations: Name
+        image: Image
+        priority: Priority
+        enabled: Enabled
+        free_carrier: Free carrier
+      country:
+        code: Code
+        enabled: Enabled
+        name: Name
+        zone: Zone
+      tax:
+        name: Name
+        rate: Rate
+      zone:
+        name: Name
+        code: Code
+      action_form:
+      commerce:
+        enable_commerce_options: Enabled commerce options
+        default: Default
+        language: Language
+        name: Name
+        template: Template
+      data_form:
+        fields: Fields
+      link:
+        class_name: Class
+        slug: Slug
+        enabled: Enabled
+      design_form:
+        content_translations: Content
+      template:
+        name: Name
+        enabled: Enabled
+      admin_user:
+        current_sign_in_at: Current sign in at
+        sign_in_count: Sign in count
+        locale: Locale
+        debug_template: Debug template
+        password: Password
+        password_confirmation: Password confirmation
+      shopping_order:
+        retrieve_order_num: Order
+        order_num: Order
+        total_products: Total products
+        total_retail_price: Toal price
+        carrier: Carrier
+        customer: Customer
+        commerce: Web site
+        shopping_orders_status: Shipping order status
+      shopping_orders_status:
+        name: Name
+        enable_invoice: Invoice enabled
+      customer:
+        name: Name
+        last_name: Last Name
+        birth_date: Birth date
+      customer_address:
+        name: Name
+        fields: Fields
+        customer: Customer
+        default_shipping: Default shipping address
+        default_billing: Default billing address
+
+
+## copied from: https://github.com/svenfuchs/rails-i18n/blob/master/rails/locale/es.yml
+
+en:
+  activerecord:
+    errors:
+      messages:
+        record_invalid: "Validation failed: %{errors}"
+        restrict_dependent_destroy:
+          has_one: "Cannot delete record because a dependent %{record} exists"
+          has_many: "Cannot delete record because dependent %{record} exist"
+  date:
+    abbr_day_names:
+    - Sun
+    - Mon
+    - Tue
+    - Wed
+    - Thu
+    - Fri
+    - Sat
+    abbr_month_names:
+    -
+    - Jan
+    - Feb
+    - Mar
+    - Apr
+    - May
+    - Jun
+    - Jul
+    - Aug
+    - Sep
+    - Oct
+    - Nov
+    - Dec
+    day_names:
+    - Sunday
+    - Monday
+    - Tuesday
+    - Wednesday
+    - Thursday
+    - Friday
+    - Saturday
+    formats:
+      default: "%Y-%m-%d"
+      long: "%B %d, %Y"
       short: "%b %d"
-      long: "%b %d, %Y %H:%M"
+    month_names:
+    -
+    - January
+    - February
+    - March
+    - April
+    - May
+    - June
+    - July
+    - August
+    - September
+    - October
+    - November
+    - December
+    order:
+    - :year
+    - :month
+    - :day
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: about 1 hour
+        other: about %{count} hours
+      about_x_months:
+        one: about 1 month
+        other: about %{count} months
+      about_x_years:
+        one: about 1 year
+        other: about %{count} years
+      almost_x_years:
+        one: almost 1 year
+        other: almost %{count} years
+      half_a_minute: half a minute
+      less_than_x_minutes:
+        one: less than a minute
+        other: less than %{count} minutes
+      less_than_x_seconds:
+        one: less than 1 second
+        other: less than %{count} seconds
+      over_x_years:
+        one: over 1 year
+        other: over %{count} years
+      x_days:
+        one: 1 day
+        other: "%{count} days"
+      x_minutes:
+        one: 1 minute
+        other: "%{count} minutes"
+      x_months:
+        one: 1 month
+        other: "%{count} months"
+      x_seconds:
+        one: 1 second
+        other: "%{count} seconds"
+    prompts:
+      day: Day
+      hour: Hour
+      minute: Minute
+      month: Month
+      second: Seconds
+      year: Year
+  errors:
+    format: "%{attribute} %{message}"
+    messages:
+      accepted: must be accepted
+      blank: can't be blank
+      present: must be blank
+      confirmation: doesn't match %{attribute}
+      empty: can't be empty
+      equal_to: must be equal to %{count}
+      even: must be even
+      exclusion: is reserved
+      greater_than: must be greater than %{count}
+      greater_than_or_equal_to: must be greater than or equal to %{count}
+      inclusion: is not included in the list
+      invalid: is invalid
+      less_than: must be less than %{count}
+      less_than_or_equal_to: must be less than or equal to %{count}
+      model_invalid: "Validation failed: %{errors}"
+      not_a_number: is not a number
+      not_an_integer: must be an integer
+      odd: must be odd
+      required: must exist
+      taken: has already been taken
+      too_long:
+        one: is too long (maximum is 1 character)
+        other: is too long (maximum is %{count} characters)
+      too_short:
+        one: is too short (minimum is 1 character)
+        other: is too short (minimum is %{count} characters)
+      wrong_length:
+        one: is the wrong length (should be 1 character)
+        other: is the wrong length (should be %{count} characters)
+      other_than: must be other than %{count}
+    template:
+      body: 'There were problems with the following fields:'
+      header:
+        one: 1 error prohibited this %{model} from being saved
+        other: "%{count} errors prohibited this %{model} from being saved"
+  helpers:
+    select:
+      prompt: Please select
+    submit:
+      create: Create %{model}
+      submit: Save %{model}
+      update: Update %{model}
+  number:
+    currency:
+      format:
+        delimiter: ","
+        format: "%u%n"
+        precision: 2
+        separator: "."
+        significant: false
+        strip_insignificant_zeros: false
+        unit: "$"
+    format:
+      delimiter: ","
+      precision: 3
+      separator: "."
+      significant: false
+      strip_insignificant_zeros: false
+    human:
+      decimal_units:
+        format: "%n %u"
+        units:
+          billion: Billion
+          million: Million
+          quadrillion: Quadrillion
+          thousand: Thousand
+          trillion: Trillion
+          unit: ''
+      format:
+        delimiter: ''
+        precision: 3
+        significant: true
+        strip_insignificant_zeros: true
+      storage_units:
+        format: "%n %u"
+        units:
+          byte:
+            one: Byte
+            other: Bytes
+          gb: GB
+          kb: KB
+          mb: MB
+          tb: TB
+    percentage:
+      format:
+        delimiter: ''
+        format: "%n%"
+    precision:
+      format:
+        delimiter: ''
+  support:
+    array:
+      last_word_connector: ", and "
+      two_words_connector: " and "
+      words_connector: ", "
+  time:
+    am: am
+    formats:
+      default: "%a, %d %b %Y %H:%M:%S %z"
+      long: "%B %d, %Y %H:%M"
+      short: "%d %b %H:%M"
+    pm: pm

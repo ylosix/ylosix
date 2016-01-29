@@ -1,7 +1,7 @@
-# Ylosix 
-[![Build Status](https://travis-ci.org/ylosix/ylosix.svg?branch=develop)](https://travis-ci.org/ylosix/ylosix) 
-[![Coverage Status](https://coveralls.io/repos/ylosix/ylosix/badge.svg?branch=develop)](https://coveralls.io/r/ylosix/ylosix?branch=develop) 
-[![Code Climate](https://codeclimate.com/github/ylosix/ylosix/badges/gpa.svg)](https://codeclimate.com/github/ylosix/ylosix) 
+# Ylosix
+[![Build Status](https://travis-ci.org/ylosix/ylosix.svg?branch=develop)](https://travis-ci.org/ylosix/ylosix)
+[![Coverage Status](https://coveralls.io/repos/ylosix/ylosix/badge.svg?branch=develop)](https://coveralls.io/r/ylosix/ylosix?branch=develop)
+[![Code Climate](https://codeclimate.com/github/ylosix/ylosix/badges/gpa.svg)](https://codeclimate.com/github/ylosix/ylosix)
 [![Hakiri status](https://hakiri.io/github/ylosix/ylosix/develop.svg)](https://hakiri.io/github/ylosix/ylosix)
 [![Stories in Ready](https://badge.waffle.io/ylosix/ylosix.png?label=ready&title=Ready)](http://waffle.io/ylosix/ylosix)
 
@@ -102,7 +102,7 @@ $ vagrant plugin install vagrant-digitalocean
 Create the Droplet and install Ylosix:
 
 ```
-$ RAILS_ENV=production vagrant up main_app --provider=digital_ocean
+$ RAILS_ENV=production vagrant up remote_app --provider=digital_ocean
 ```
 
 Once it is done, you will have a production-ready environment in your DigitalOcean Droplet.
@@ -147,7 +147,7 @@ $ vagrant plugin install vagrant-managed-servers
 Provision the server and install Ylosix.
 
 ```
-$ RAILS_ENV=production vagrant up main_app --provider=managed
+$ RAILS_ENV=production vagrant up remote_app --provider=managed
 $ RAILS_ENV=production vagrant provision main_app
 ```
 
@@ -204,9 +204,17 @@ $ gem install pg -- --with-pg-config=/Library/PostgreSQL/9.4/bin/pg_config
 If you are cloning the repository from Windows please set `autocrlf` to false to avoid end-of-line issues.
 
 ```
-git config --global core.autocrlf false
+$ git config --global core.autocrlf false
 ```
 
+#### Configuring local env variables
+
+The Rails application loads config/local-env.yml, these file contains the variables for non production environments.
+
+```
+development:
+  DATABASE_URL: postgres://user:user_pass@localhost:5432/database
+```
 
 ## Testing
 
@@ -222,7 +230,7 @@ $ rake
 
 ## Dependencies [![Dependency Status](https://gemnasium.com/ylosix/ylosix.svg)](https://gemnasium.com/ylosix/ylosix)
 
-  - Ruby version: 2.2+
+  - Ruby version: 2.3+
   - Rails version: 4.2+
   - Puppet: 3.7.5+
   - PostgreSQL: 9.4+
