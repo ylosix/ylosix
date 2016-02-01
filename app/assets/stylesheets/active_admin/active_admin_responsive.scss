@@ -18,6 +18,7 @@
 
 .editor_html {
   height: 450px;
+  width: 100%;
 }
 
 .choices-subgroup {
@@ -40,7 +41,7 @@
 //   .status_tag { background: #6090DB; }
 
 //VARIABLES
-$color-1: #67c0ba;
+$color-1: #0681AB;
 $color-2: #000000;
 $grey-dark: #666666;
 $grey-medium: #e6e6e6;
@@ -199,7 +200,7 @@ body.logged_out #login a {
 
 .columns > .column:first-child {
   color: $color-1;
-  font-weight: 700;
+  font-weight: 500;
 }
 
 .columns {
@@ -257,10 +258,12 @@ body {
   vertical-align: top;
 }
 
+//menu hover titles
 #header ul.tabs > li.has_nested:hover > a {
   background: none;
   border-bottom: 0;
   color: #000;
+  font-weight: 700;
 }
 
 #header ul.tabs > li.current > a, #header ul.tabs > li.has_nested.current > a {
@@ -287,6 +290,7 @@ body {
   background-color: $grey-soft;
   border-radius: 0;
   border-top: 1px solid $color-1;
+  min-width: 200px;
 }
 
 #header ul.tabs > li ul li a:hover {
@@ -298,6 +302,7 @@ body {
 #header ul.tabs > li ul li:hover #header ul.tabs > li {
   background: #fff;
   border-radius: 0;
+  font-weight: 700;
 }
 
 #logout > a:link, #logout > a:hover, #logout > a:visited, #logout > a:active {
@@ -442,6 +447,9 @@ table.index_table td {
   @include small-button ($color-info);
   display: none;
 }
+.set_link {
+  @include small-button ($color-info);
+}
 
 .edit_link {
   @include small-button ($color-success)
@@ -521,7 +529,8 @@ li.cancel {
 
 .input > label, form fieldset > ol > li fieldset legend.label label {
   color: $color-1;
-  font-weight: 700;
+  font-weight: 500;
+  margin-bottom:5px;
 }
 
 form input[type=text], form input[type=password], form input[type=email], form input[type=number], form input[type=url], form input[type=tel], form input[type=date], form textarea {

@@ -20,4 +20,7 @@ $(document).ready(function(){
     $(".clone_link").attr('title','Clonar');
     $(".clone_link").css({'border-radius':'50%','padding':'8px 9px 11px 9px'});
     $(".clone_link").html('<i class="fa fa-copy fa-lg"></i>');
+    $(".set_link").attr('title','Predefinido');
+    $(".set_link").css({'border-radius':'50%','padding':'8px 9px 11px 9px'});
+    $(".set_link").html('<i class="fa fa-star fa-lg"></i>');
 });
