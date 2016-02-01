@@ -25,8 +25,8 @@ class ActionForm < ActiveRecord::Base
         # ex: replace email => reply_to
         attributes[v.to_sym] = data_form_fields[k]
       else
-        # ex: replace info@abc.com => to
-        attributes[v.to_sym] = k
+        # ex: replace to => info@abc.com
+        attributes[k.to_sym] = v
       end
     end
 
