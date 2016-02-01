@@ -22,8 +22,6 @@ module Ecommerce
     config.i18n.default_locale = :en
     config.i18n.available_locales = [:es, :en]
 
-    config.assets.precompile += %w( ckeditor/* )
-
     VERSION = '0.1'.freeze
     DOMAIN_HOST = 'demo.ylosix.com'.freeze
     MAIN_EMAIL = 'admin@ylosix.com'.freeze

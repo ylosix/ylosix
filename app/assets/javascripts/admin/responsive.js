@@ -3,7 +3,7 @@ $(document).ready(function(){
     $(".view_filter").click(function(){
         $("#sidebar").toggle();
     });
-    $("#footer").html('<img style="width:80px" src="/assets/ylosix_logo.svg"/><br>Version 1.0');
+    $("#footer").html('<div class="logo"></div>');
     $(".yes").css({'border-radius':'50%' , 'padding':'6px 4px 6px 5px'});
     $(".yes").html('<i class="fa fa-check fa-lg"></i>');
     $(".no").css({'border-radius':'50%' , 'padding':'6px 6px 7px 7px'});
@@ -20,5 +20,4 @@ $(document).ready(function(){
     $(".clone_link").attr('title','Clonar');
     $(".clone_link").css({'border-radius':'50%','padding':'8px 9px 11px 9px'});
     $(".clone_link").html('<i class="fa fa-copy fa-lg"></i>');
-
 });

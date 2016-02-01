@@ -7,13 +7,14 @@
 // For example, to change the sidebar width:
 // $sidebar-width: 242px;
 // Active Admin's got SASS!
-
 @import "font-awesome";
 @import "animate";
-
 @import "active_admin/mixins";
 @import "active_admin/base";
 
+//= depend_on_asset "active_admin/nested_menu_arrow_dark.gif"
+//= depend_on_asset "active_admin/orderable.png"
+//= depend_on_asset "active_admin/ylosix_logo.svg"
 
 .editor_html {
   height: 450px;
@@ -48,33 +49,33 @@ $color-alert: #ff0000;
 $color-success: #68ab11;
 $color-info: #35a6c6;
 
-$font:'Roboto', sans-serif;
+$font: 'Roboto', sans-serif;
 
-@mixin button ($button-color){
-  background: $button-color!important;
-  border-radius: 6px!important;
-  border: none!important;
-  font-weight: normal!important;
+@mixin button($button-color) {
+  background: $button-color !important;
+  border-radius: 6px !important;
+  border: none !important;
+  font-weight: normal !important;
   text-transform: capitalize;
-  padding: 10px 25px!important;
-  margin: 0!important;
-  color:#fff!important;
-  font-size: 15px!important;
-  line-height:15px!important;
+  padding: 10px 25px !important;
+  margin: 0 !important;
+  color: #fff !important;
+  font-size: 15px !important;
+  line-height: 15px !important;
 }
 
-@mixin small-button ($button-color){
-  background: $button-color!important;
-  border: none!important;
-  font-weight: normal!important;
+@mixin small-button($button-color) {
+  background: $button-color !important;
+  border: none !important;
+  font-weight: normal !important;
   text-transform: capitalize;
   padding: 3px 8px;
-  margin: 0!important;
-  color:#fff!important;
-  font-size: 13px!important;
-  line-height:13px!important;
-  text-decoration: none!important;
-  margin:0 5px!important;
+  margin: 0 !important;
+  color: #fff !important;
+  font-size: 13px !important;
+  line-height: 13px !important;
+  text-decoration: none !important;
+  margin: 0 5px !important;
   border-radius: 0px;
 }
 
@@ -92,8 +93,8 @@ article, aside, canvas, details, embed,
 figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
-  box-shadow:none!important;
-  text-shadow:none!important;
+  box-shadow: none !important;
+  text-shadow: none !important;
 }
 
 //FONTS
@@ -103,14 +104,14 @@ time, mark, audio, video {
 body.logged_in .flash.flash_notice {
   background: $color-success;
   color: #fff;
-  boder:none;
-  padding:7px 30px;
-  border-bottom:0;
-  margin-top:-25px;
+  boder: none;
+  padding: 7px 30px;
+  border-bottom: 0;
+  margin-top: -25px;
 }
 
 .flash_alert {
-  color:$color-alert!important;
+  color: $color-alert !important;
   font-weight: 400 !important;
 }
 
@@ -120,33 +121,35 @@ body.logged_out .flash {
 }
 
 .flash_alert {
-  color:$color-alert;
+  color: $color-alert;
 }
+
 body.logged_out #content_wrapper {
   width: 350px;
   margin: 70px auto 0;
 }
 
 body.logged_out h2 {
-  padding:10px 0px;
+  padding: 10px 0px;
   text-align: center;
   background: $color-1;
   font-weight: 300;
   text-transform: uppercase;
-  font-size:18px;
+  font-size: 18px;
 }
-.input > label  {
+
+.input > label {
   width: 100%;
   text-align: center;
   font-weight: 400;
 }
 
 form fieldset ol > li label {
-  text-align: left!important;
-  width: 50%!important;
+  text-align: left !important;
+  width: 50% !important;
 }
 
-body.logged_out #login form fieldset input[type=text], body.logged_out #login form fieldset input[type=email], body.logged_out #login form fieldset input[type=password]{
+body.logged_out #login form fieldset input[type=text], body.logged_out #login form fieldset input[type=email], body.logged_out #login form fieldset input[type=password] {
   width: 93%;
 }
 
@@ -156,14 +159,15 @@ form fieldset > ol > li.boolean label {
 }
 
 form .buttons, form .actions {
-  margin-top:0px;
+  margin-top: 0px;
 }
 
 #admin_user_submit_action {
   width: 100%;
   text-align: center;
 }
-#admin_user_submit_action>input{
+
+#admin_user_submit_action > input {
   @include button ($color-success);
 }
 
@@ -172,13 +176,12 @@ body.logged_out #login a {
   margin-top: 0px;
   text-align: center;
   width: 100%;
-  font-size:13px;
+  font-size: 13px;
 }
 
-#session_new>fieldset>ol {
-  background:none;
+#session_new > fieldset > ol {
+  background: none;
 }
-
 
 //HOME
 .section, .panel, form fieldset.inputs {
@@ -187,14 +190,14 @@ body.logged_out #login a {
   margin-bottom: 30px;
 }
 
-.section > div, .panel > div,form ol, form ul {
+.section > div, .panel > div, form ol, form ul {
   background: $grey-soft;
   border: 2px solid #fff;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
 }
 
-.columns>.column:first-child {
+.columns > .column:first-child {
   color: $color-1;
   font-weight: 700;
 }
@@ -206,26 +209,31 @@ body.logged_out #login a {
 }
 
 //GENERALS
-body {font-family: $font; font-size: 15px;}
+body {
+  font-family: $font;
+  font-size: 15px;
+}
+
 .profiler-results {
-  display:none;
+  display: none;
 }
 
 .index #wrapper {
-  display:block;
+  display: block;
   width: 100%;
 }
 
 //HEADER
 #header {
   background: $grey-soft;
-  padding:2px 0 0px 0;
-  border-bottom:2px solid $color-1;
-  position:relative;
+  padding: 2px 0 0px 0;
+  border-bottom: 2px solid $color-1;
+  position: relative;
 }
+
 #header h1 {
   color: $color-1;
-  margin-bottom:0px;
+  margin-bottom: 0px;
 }
 
 .site_title {
@@ -234,9 +242,9 @@ body {font-family: $font; font-size: 15px;}
   padding: 0px 30px 10px 30px;
 }
 
-#header #tabs{
-  float:left;
-  margin-left:21px;
+#header #tabs {
+  float: left;
+  margin-left: 21px;
   clear: left;
 }
 
@@ -257,11 +265,12 @@ body {font-family: $font; font-size: 15px;}
 
 #header ul.tabs > li.current > a, #header ul.tabs > li.has_nested.current > a {
   color: #000;
-  background:  none!important;
+  background: none !important;
   font-weight: 700;
 }
-#header ul.tabs > li.has_nested.current > a{
-  background:  url(/assets/active_admin/nested_menu_arrow_dark-7c43b8e0a5f8823875f49a093c9d7a6b374f885b6f9cc248ae9cd7e6e9b29034.gif) no-repeat calc(100% - 7px) 50%;
+
+#header ul.tabs > li.has_nested.current > a {
+  background: image-url('active_admin/nested_menu_arrow_dark.gif') no-repeat calc(100% - 7px) 50%;
 }
 
 #header ul.tabs > li a:hover,
@@ -269,26 +278,26 @@ body {font-family: $font; font-size: 15px;}
   background: none;
   border-radius: 0;
   color: #000;
-  border-bottom:none!important;
+  border-bottom: none !important;
   font-weight: 700;
 }
 
 #header ul.tabs > li ul {
-  margin-top:2px;
+  margin-top: 2px;
   background-color: $grey-soft;
-  border-radius:0;
-  border-top:1px solid $color-1;
+  border-radius: 0;
+  border-top: 1px solid $color-1;
 }
 
 #header ul.tabs > li ul li a:hover {
-  color:#000;
+  color: #000;
   background-color: #fff;
-  padding-bottom:1px;
+  padding-bottom: 1px;
 }
 
 #header ul.tabs > li ul li:hover #header ul.tabs > li {
-  background:#fff;
-  border-radius:0;
+  background: #fff;
+  border-radius: 0;
 }
 
 #logout > a:link, #logout > a:hover, #logout > a:visited, #logout > a:active {
@@ -300,45 +309,51 @@ body {font-family: $font; font-size: 15px;}
 
 //TITLE BAR
 #title_bar {
-  border:none;
+  border: none;
   background: $grey-medium;
   height: 25px;
-  margin-bottom:30px;
+  margin-bottom: 30px;
 }
+
 #title_bar h2 {
   font-weight: 300;
   color: $color-1;
   font-size: 1.7em;
 }
+
 #titlebar_left {
-  height: 25px!important;
+  height: 25px !important;
 }
+
 #titlebar_right {
   position: absolute;
   bottom: 6px;
   right: 20px;
-  height: auto!important;
+  height: auto !important;
 }
+
 .breadcrumb {
   float: right;
   display: none;
 }
-.breadcrumb a:link,.breadcrumb a:visited,.breadcrumb a:hover,.breadcrumb a:active, .breadcrumb .breadcrumb_sep {
-  color:#fff;
+
+.breadcrumb a:link, .breadcrumb a:visited, .breadcrumb a:hover, .breadcrumb a:active, .breadcrumb .breadcrumb_sep {
+  color: #fff;
 }
-.action_item a:link, .action_item a:visited,.action_item a:active {
+
+.action_item a:link, .action_item a:visited, .action_item a:active {
   @include button ($color-success);
 }
 
 //CONTENT
 #active_admin_content {
-  padding:5px 20px;
+  padding: 5px 20px;
   position: relative;
 }
 
 #active_admin_content #main_content_wrapper #main_content {
-  margin-right:0;
-  position:relative;
+  margin-right: 0;
+  position: relative;
 }
 
 #main_content_wrapper {
@@ -353,41 +368,41 @@ body {font-family: $font; font-size: 15px;}
   right: 20px;
   border: 1px solid #999;
   background: #f6f6f6;
-  box-shadow: 0px 0px 7px #999!important;
+  box-shadow: 0px 0px 7px #999 !important;
   display: none;
 }
-
 
 .view_filter {
   @include small-button ($color-info);
   cursor: pointer;
-  position:absolute;
+  position: absolute;
   top: -22px;
-  right:15px;
-  z-index:900;
+  right: 15px;
+  z-index: 900;
 }
 
 .table_tools {
   position: absolute;
   top: -29px;
   right: 80px;
-  z-index:900;
+  z-index: 900;
 }
-.batch_actions_selector>a:link {
+
+.batch_actions_selector > a:link {
   @include small-button ($color-info);
 }
 
-.batch_actions_selector>a:link::after {
-  display:none;
+.batch_actions_selector > a:link::after {
+  display: none;
 }
 
-table.index_table th,.section > h3, .panel > h3, form fieldset legend span {
-  border:2px solid #fff;
-  background:$color-1;
-  color:#fff;
+table.index_table th, .section > h3, .panel > h3, form fieldset legend span {
+  border: 2px solid #fff;
+  background: $color-1;
+  color: #fff;
   font-size: 1.1em;
   font-weight: 300;
-  line-height:1.1em;
+  line-height: 1.1em;
   padding: 6px 10px 6px 10px;
   margin-bottom: 0px;
 }
@@ -401,7 +416,7 @@ table.index_table th a, table.index_table th a:link, table.index_table th a:visi
 }
 
 table.index_table th.sortable a {
-  background: url("/assets/orderable.svg no-repeat 0 4px");
+  background: image-url('active_admin/orderable.png') no-repeat 0 4px;
 }
 
 .status_tag.yes {
@@ -413,7 +428,7 @@ table.index_table th.sortable a {
 }
 
 table.index_table tr.even td {
-  background:none!important;
+  background: none !important;
 }
 
 table.index_table td {
@@ -423,14 +438,16 @@ table.index_table td {
   text-align: center;
 }
 
-.view_link{
+.view_link {
   @include small-button ($color-info);
-  display:none;
+  display: none;
 }
-.edit_link{
+
+.edit_link {
   @include small-button ($color-success)
 }
-.delete_link{
+
+.delete_link {
   @include small-button ($color-alert)
 }
 
@@ -443,7 +460,7 @@ table.index_table td {
 }
 
 .pagination a {
-  background: $grey-soft!important;
+  background: $grey-soft !important;
 }
 
 .pagination a, .pagination span.page.current {
@@ -459,13 +476,13 @@ table.index_table td {
 }
 
 .sidebar_section {
-  margin-bottom:0px!important;
+  margin-bottom: 0px !important;
 }
 
-.clear_filters_btn,form fieldset.buttons li.cancel a, form fieldset.actions li.cancel a {
+.clear_filters_btn, form fieldset.buttons li.cancel a, form fieldset.actions li.cancel a {
   @include button ($color-alert);
-  float:right;
-  margin-left:10px;
+  float: right;
+  margin-left: 10px;
 }
 
 form input[type=submit], form input[type=button], form button {
@@ -474,7 +491,7 @@ form input[type=submit], form input[type=button], form button {
 }
 
 li.cancel {
-  margin-left:10px;
+  margin-left: 10px;
 }
 
 .ui-tabs-nav li a {
@@ -482,28 +499,28 @@ li.cancel {
 }
 
 .ui-tabs-nav li:first-child a, .ui-tabs-nav li:last-child a {
-  border-radius:0px;
+  border-radius: 0px;
 }
 
 .ui-tabs-nav {
-  border-radius:0px;
+  border-radius: 0px;
   background: none;
 }
 
 .ui-tabs-nav li.ui-tabs-active a {
-  background: $grey-medium!important;
+  background: $grey-medium !important;
 }
 
 .tab-content {
-  border:none;
+  border: none;
 }
 
 .fragments-group {
-  border:none;
+  border: none;
 }
 
 .input > label, form fieldset > ol > li fieldset legend.label label {
-  color:$color-1;
+  color: $color-1;
   font-weight: 700;
 }
 
@@ -514,26 +531,42 @@ form input[type=text], form input[type=password], form input[type=email], form i
 #footer {
   text-align: center;
 }
+
+#footer .logo {
+  width: 150px;
+  height: 90px;
+  margin: 0 auto;
+  background: image-url('active_admin/ylosix_logo.svg');
+}
+
 //MEDIA QUERIES
 /* Medium Devices, Desktops */
-@media only screen and (max-width : 1050px) {
+@media only screen and (max-width: 1050px) {
 
 }
 
 /* Small Devices, Tablets */
-@media only screen and (max-width : 768px) {
+@media only screen and (max-width: 768px) {
 
 }
 
 /* Extra Small Devices, Phones */
-@media only screen and (max-width : 450px) {
+@media only screen and (max-width: 450px) {
   body.logged_out #content_wrapper {
     width: 280px;
   }
   body.logged_out #content_wrapper #active_admin_content {
-    padding:10px 20px;
+    padding: 10px 20px;
   }
   body.logged_out h2 {
     margin: -10px -20px 0px -20px;
   }
+}
+
+table.index_table th.sorted-desc a {
+  background-position: 0 -56px;
+}
+
+table.index_table th.sorted-asc a {
+  background-position: 0 -27px;
 }
