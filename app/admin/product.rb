@@ -155,13 +155,13 @@ ActiveAdmin.register Product do
 
   form do |f|
     tabs do
-      tab 'Information' do
-        f.inputs 'Information' do
-          admin_translation_text_field(product, 'product', 'name_translations')
-          f.input :reference_code
-
+      tab t('active_admin.products.information') do
+        f.inputs t('active_admin.products.information') do
           f.input :enabled
           f.input :visible
+
+          admin_translation_text_field(product, 'product', 'name_translations')
+          f.input :reference_code
 
           admin_translation_text_field(product, 'product', 'short_description_translations', component: ActiveAdminHelper::TEXT_AREA)
           admin_translation_text_field(product, 'product', 'description_translations', component: ActiveAdminHelper::CK_EDITOR)
@@ -176,24 +176,39 @@ ActiveAdmin.register Product do
                                                               features: Feature.all}
         end
 
-        f.inputs 'Price' do
-          f.input :retail_price_pre_tax, input_html: {onchange: 'javascript:change_price_pre_tax(this);'}
-          f.input :retail_price, input_html: {onchange: 'javascript:change_price(this);'}
+        columns do
+          column do
+            f.inputs t('active_admin.products.prices') do
+              f.input :retail_price_pre_tax, input_html: {onchange: 'javascript:change_price_pre_tax(this);'}
+              f.input :retail_price, input_html: {onchange: 'javascript:change_price(this);'}
 
-          taxes = Tax.all
-          render partial: 'admin/products/taxes', locals: {taxes: taxes, tax: product.tax}
-        end
+              taxes = Tax.all
+              render partial: 'admin/products/taxes', locals: {taxes: taxes, tax: product.tax}
+            end
+          end
 
-        if commerce && commerce.enable_commerce_options
-          f.inputs 'Stock' do
-            f.input :stock
-            f.input :control_stock
+          if commerce && commerce.enable_commerce_options
+            column do
+              f.inputs 'Stocks' do
+                f.input :stock
+                f.input :control_stock
+              end
+            end
+
+            column do
+              f.inputs t('activerecord.models.carrier.other') do
+                # f.input :width, hint: 'cm'
+                # f.input :height, hint: 'cm'
+                # f.input :depth, hint: 'cm'
+                f.input :weight, hint: 'kg'
+              end
+            end
           end
         end
       end
 
-      tab 'Association' do
-        f.inputs 'Association' do
+      tab t('active_admin.products.associations') do
+        f.inputs t('active_admin.products.associations') do
           # f.has_many :products_categories, allow_destroy: true do |s|
           #   s.input :category
           # end
@@ -216,8 +231,8 @@ ActiveAdmin.register Product do
         end
       end
 
-      tab 'Images' do
-        f.inputs 'Images' do
+      tab t('active_admin.products.images') do
+        f.inputs t('active_admin.products.images') do
           f.input :image, as: :file, hint: (image_tag(product.image.url(:thumbnail)) if product.image?)
 
           f.has_many :products_pictures, allow_destroy: true do |s|
@@ -231,17 +246,6 @@ ActiveAdmin.register Product do
           admin_translation_text_field(product, 'product', 'meta_tags_translations')
           admin_translation_text_field(product, 'product', 'slug_translations', hint: 'Chars not allowed: (Upper chars) spaces')
           f.input :show_action_name, hint: 'File name of show render'
-        end
-      end
-
-      if commerce && commerce.enable_commerce_options
-        tab 'Transport' do
-          f.inputs 'Transport' do
-            f.input :width, hint: 'cm'
-            f.input :height, hint: 'cm'
-            f.input :depth, hint: 'cm'
-            f.input :weight, hint: 'kg'
-          end
         end
       end
     end

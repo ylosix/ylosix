@@ -1,7 +1,7 @@
 %li{id: 'product_products_tags_input', class: 'input optional'}
   %fieldset.choices
     %legend.label
-      = label_tag 'tags', 'Products tags'
+      = label_tag 'tags', t('activerecord.models.tag.other')
 
     %ol.choices-group
       - tags_groups.each do |group|

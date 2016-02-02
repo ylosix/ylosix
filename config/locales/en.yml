@@ -41,6 +41,13 @@ en:
       label: Languages
     preferences:
       label: Preferences
+    products:
+      information: General information
+      prices: Prices
+      associations: Associations
+      images: Images
+    categories:
+      information: General information
     design:
       label: Design
     comments:
@@ -75,7 +82,7 @@ en:
       tag:
         zero: no tag
         one: Tag
-        other: Tag
+        other: Tags
       tags_group:
         zero: no tag groups
         one: Tag group

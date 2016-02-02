@@ -9,3 +9,10 @@
 // Active Admin's got SASS!
 
 @import "active_admin/active_admin_responsive";
+
+.cke_chrome {
+  float: left!important;
+  width: 100%!important;
+  clear: both!important;
+  margin-bottom: 15px!important;
+}

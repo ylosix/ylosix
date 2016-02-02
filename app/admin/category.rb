@@ -91,8 +91,8 @@ ActiveAdmin.register Category do
 
   form do |f|
     tabs do
-      tab 'Information' do
-        f.inputs t('formtastic.edit_form', model: t('activerecord.models.category.one')) do
+      tab t('active_admin.categories.information') do
+        f.inputs t('active_admin.categories.information') do
           f.input :reference_code
           f.input :parent_id,
                   label: t('activerecord.attributes.category.parent'),

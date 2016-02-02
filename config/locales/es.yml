@@ -41,6 +41,13 @@ es:
       label: Idiomas
     preferences:
       label: Preferencias
+    products:
+      information: Información general
+      prices: Precios
+      associations: Asociaciones
+      images: Imágenes
+    categories:
+      information: Información general
     design:
       label: Diseño
     comments:
@@ -72,10 +79,14 @@ es:
         zero: no artículo
         one: Artículo
         other: Artículos
+      products_picture:
+        zero: no imágen
+        one: Imágen
+        other: Imágenes
       tag:
         zero: no tag
         one: Tag
-        other: Tag
+        other: Tags
       tags_group:
         zero: no grupo de tag
         one: Grupo de tag
@@ -175,6 +186,13 @@ es:
         barcode: Código de barras
         publication_date: Fecha de publicación
         unpublication_date: Fecha de despublicación
+        width: Ancho
+        height: Alto
+        depth: Profundo
+        weight: Peso
+        retail_price_pre_tax: Precio sin impuestos
+        retail_price: Precio final
+        tax: Impuesto
         created_at: Creado en
         updated_at: Actualizado en
       tag:

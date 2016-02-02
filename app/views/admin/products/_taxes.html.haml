@@ -6,5 +6,5 @@
     = text_field_tag "tax_#{tax.id}", tax.rate
 
 %li{id: 'product_tax_input', class: 'select input optional'}
-  = label_tag 'product[tax_id]', 'Tax'
+  = label_tag 'product[tax_id]', t('activerecord.models.tax.one')
   = select_tag 'product[tax_id]', options_from_collection_for_select(taxes, 'id', 'name', selected), include_blank: true, onchange: 'javascript:change_tax(this);'
