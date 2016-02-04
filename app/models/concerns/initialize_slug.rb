@@ -1,7 +1,7 @@
 module InitializeSlug
   def existence_slug(slug)
     i = 1
-    i += 1 while Link.where(slug: "#{slug}_#{i}").size > 0
+    i += 1 while Link.where(slug: "#{slug}_#{i}").count > 0
 
     "#{slug}_#{i}"
   end

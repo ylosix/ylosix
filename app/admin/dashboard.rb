@@ -4,7 +4,7 @@ ActiveAdmin.register_page 'Dashboard' do
   content title: proc { I18n.t('active_admin.dashboard') } do
     current_config = Rails.application.config
     config_db = current_config.database_configuration[Rails.env]
-    updates = `cd #{Rails.root}; git fetch; git rev-list HEAD...origin/develop --count`
+    # updates = `cd #{Rails.root}; git fetch; git rev-list HEAD...origin/develop --count`
 
     commerce = Commerce.find_by(default: true)
     unless commerce.nil?
@@ -156,19 +156,19 @@ ActiveAdmin.register_page 'Dashboard' do
         end
       end
 
-      columns do
-        column do
-          span 'GIT status'
-        end
-
-        column do
-          if updates.to_i == 0
-            span 'Up-to-date'
-          else
-            span "The repository has #{updates} updates."
-          end
-        end
-      end
+      # columns do
+      #   column do
+      #     span 'GIT status'
+      #   end
+      #
+      #   column do
+      #     if updates.to_i == 0
+      #       span 'Up-to-date'
+      #     else
+      #       span "The repository has #{updates} updates."
+      #     end
+      #   end
+      # end
     end
   end # content
 end
