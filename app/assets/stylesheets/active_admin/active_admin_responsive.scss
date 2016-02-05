@@ -46,13 +46,18 @@ $color-2: #000000;
 $grey-dark: #666666;
 $grey-medium: #e6e6e6;
 $grey-soft: #F5F5F5;
-$color-alert: #ff0000;
-$color-success: #68ab11;
-$color-info: #35a6c6;
+$color-alert: #dd4b39;
+$color-success: #00a65a;
+$color-info: #00c0ef;
+$color-border-1: #1276AB;
+$color-border-alert: #d73925;
+$color-border-success: #398439;
+$color-border-info: #00acd6;
+$color-background:#ecf0f5;
 
 $font: 'Roboto', sans-serif;
 
-@mixin button($button-color) {
+@mixin button($button-color, $button-border) {
   background: $button-color !important;
   border-radius: 6px !important;
   border: none !important;
@@ -63,9 +68,10 @@ $font: 'Roboto', sans-serif;
   color: #fff !important;
   font-size: 15px !important;
   line-height: 15px !important;
+  border:1px solid $button-border;
 }
 
-@mixin small-button($button-color) {
+@mixin small-button($button-color, $button-border) {
   background: $button-color !important;
   border: none !important;
   font-weight: normal !important;
@@ -76,8 +82,9 @@ $font: 'Roboto', sans-serif;
   font-size: 13px !important;
   line-height: 13px !important;
   text-decoration: none !important;
-  margin: 0 5px !important;
+  margin: 0 2px !important;
   border-radius: 0;
+  border:1px solid $button-border;
 }
 
 //RESETS
@@ -103,12 +110,12 @@ time, mark, audio, video {
 
 //ALERTS
 body.logged_in .flash.flash_notice {
-  background: $color-success;
-  color: #fff;
+  color: $color-success;
   boder: none;
-  padding: 7px 30px;
+  padding: 7px 15px;
   border-bottom: 0;
-  margin-top: -25px;
+  border: 1px solid $color-success;
+  margin: 0 20px;
 }
 
 .flash_alert {
@@ -117,6 +124,10 @@ body.logged_in .flash.flash_notice {
 }
 
 //LOGIN
+body.logged_out {
+  background-color: #ECF0F5;
+}
+
 body.logged_out .flash {
   text-align: center;
 }
@@ -131,12 +142,14 @@ body.logged_out #content_wrapper {
 }
 
 body.logged_out h2 {
-  padding: 10px 0;
-  text-align: center;
-  background: $color-1;
-  font-weight: 300;
-  text-transform: uppercase;
+  padding: 10px;
+  text-align: left;
+  background: #fff;
+  font-weight: 500;
   font-size: 18px;
+  color: $grey-dark;
+  border-bottom: 1px solid #f4f4f4;
+  margin: -10px -10px 0px -10px;
 }
 
 .input > label {
@@ -148,6 +161,35 @@ body.logged_out h2 {
 form fieldset ol > li label {
   text-align: left !important;
   width: 50% !important;
+}
+
+.inputs li {
+  margin-bottom:15px;
+}
+
+.tab-content .label {
+  width: 15%!important;
+}
+
+fieldset.actions {
+  padding:15px;
+}
+
+#informacion-general td:first-child {
+  width: 20%;
+}
+
+form fieldset > ol > li fieldset:not(.has_many_fields) ol {
+  padding: 0 0 0 15%;
+}
+
+.choices-group>li {
+  float: left;
+  width: 20%;
+}
+
+.choice label {
+  width: 100%!important;
 }
 
 body.logged_out #login form fieldset input[type=text], body.logged_out #login form fieldset input[type=email], body.logged_out #login form fieldset input[type=password] {
@@ -169,7 +211,7 @@ form .buttons, form .actions {
 }
 
 #admin_user_submit_action > input {
-  @include button ($color-success);
+  @include button ($color-1 , $color-border-1);
 }
 
 body.logged_out #login a {
@@ -185,18 +227,12 @@ body.logged_out #login a {
 }
 
 //HOME
-.section, .panel, form fieldset.inputs {
+/* {
   background: none;
   border-radius: 0;
   margin-bottom: 30px;
-}
+}*/
 
-.section > div, .panel > div, form ol, form ul {
-  background: $grey-soft;
-  border: 2px solid #fff;
-  border-bottom-left-radius: 15px;
-  border-bottom-right-radius: 15px;
-}
 
 .columns > .column:first-child {
   color: $color-1;
@@ -204,7 +240,7 @@ body.logged_out #login a {
 }
 
 .columns {
-  border-bottom: 1px solid #fff;
+  border-bottom: 1px solid $grey-soft;
   margin-bottom: 0;
   padding: 10px 0;
 }
@@ -219,38 +255,52 @@ body {
   display: none;
 }
 
-.index #wrapper {
+#wrapper {
   display: block;
   width: 100%;
+  background-color: $color-background;
 }
 
 //HEADER
 #header {
-  background: $grey-soft;
+  background: $color-1;
   padding: 2px 0 0 0;
-  border-bottom: 2px solid $color-1;
   position: relative;
+  border:none;
 }
 
 #header h1 {
-  color: $color-1;
+  color: #fff;
   margin-bottom: 0;
+  padding-left: 40px;
+  float: right;
+  text-align: right;
+  width: initial;
+  padding: 0px;
+  margin-right: 38px;
 }
 
 .site_title {
   width: 50%;
   float: left;
-  padding: 0 30px 10px 30px;
+  padding: 0 30px 20px 40px;
 }
 
 #header #tabs {
   float: left;
-  margin-left: 21px;
+  margin-left: 30px;
   clear: left;
+  width: initial;
+}
+
+#header #utility_nav {
+  float: right;
+  clear: right;
+  padding: 5px 26px 5px;
 }
 
 #header a, #header a:link {
-  color: $grey-dark;
+  color: #fff;
 }
 
 //MENU
@@ -258,16 +308,25 @@ body {
   vertical-align: top;
 }
 
+#header ul.tabs > li {
+  text-align: center;
+  margin-right:10px;
+}
+
+#header ul.tabs > li ul li{
+  text-align: left;
+}
+
 //menu hover titles
 #header ul.tabs > li.has_nested:hover > a {
   background: none;
   border-bottom: 0;
-  color: #000;
-  font-weight: 700;
+  color: #fff;
+  font-weight: 500;
 }
 
 #header ul.tabs > li.current > a, #header ul.tabs > li.has_nested.current > a {
-  color: #000;
+  color: #fff;
   background: none !important;
   font-weight: 700;
 }
@@ -280,29 +339,56 @@ body {
 #header ul.tabs > li.has_nested > a:hover {
   background: none;
   border-radius: 0;
-  color: #000;
+  color: #fff;
   border-bottom: none !important;
-  font-weight: 700;
+  font-weight: 500;
+}
+
+#header ul.tabs > li.has_nested > a {
+  background: url(/assets/active_admin/orderable_w.png) no-repeat calc(98% - 5px) 114%;
+  padding-right: 20px;
 }
 
 #header ul.tabs > li ul {
   margin-top: 2px;
-  background-color: $grey-soft;
+  background-color: #fff;
   border-radius: 0;
-  border-top: 1px solid $color-1;
+  border: 1px solid $color-1;
   min-width: 200px;
+}
+
+#header ul.tabs > li ul li a {
+  color: #000;
+  Border:0px;
+  border-bottom:1px solid $grey-soft;
+  border-radius: 0;
+  margin:0 10px;
 }
 
 #header ul.tabs > li ul li a:hover {
   color: #000;
-  background-color: #fff;
-  padding-bottom: 1px;
+  border:0px;
+  background-color: $grey-soft;
+  border-bottom:1px solid $grey-soft;
 }
+
+#header ul.tabs > li ul li:last-child a , #header ul.tabs > li ul li:last-child a:hover {
+  border-bottom: 1px solid #fff;
+}
+
 
 #header ul.tabs > li ul li:hover #header ul.tabs > li {
   background: #fff;
   border-radius: 0;
   font-weight: 700;
+}
+
+.header-item>li:hover a {
+  background: none!important;
+}
+
+.header-item>li>ul>li:hover a {
+  background: $grey-soft!important;
 }
 
 #logout > a:link, #logout > a:hover, #logout > a:visited, #logout > a:active {
@@ -315,14 +401,14 @@ body {
 //TITLE BAR
 #title_bar {
   border: none;
-  background: $grey-medium;
   height: 25px;
-  margin-bottom: 30px;
+  background: none;
+  padding: 25px 40px 5px 40px;
 }
 
 #title_bar h2 {
-  font-weight: 300;
-  color: $color-1;
+  font-weight: 500;
+  color: $grey-dark;
   font-size: 1.7em;
 }
 
@@ -333,7 +419,7 @@ body {
 #titlebar_right {
   position: absolute;
   bottom: 6px;
-  right: 20px;
+  right: 30px;
   height: auto !important;
 }
 
@@ -347,18 +433,33 @@ body {
 }
 
 .action_item a:link, .action_item a:visited, .action_item a:active {
-  @include button ($color-success);
+  @include button ($color-success , $color-border-success);
 }
 
 //CONTENT
-#active_admin_content {
-  padding: 5px 20px;
+#content_wrapper>#active_admin_content, .tab-content fieldset.inputs {
+  padding: 0px!important;
+  position: relative;
+  border-radius: 3px!important;
+  background: #ffffff!important;
+  border-top: 3px solid $color-1;
+  width: 100%;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.1)!important;
+}
+
+body.logged_out #login {
+  padding: 10px;
+}
+
+#wrapper>#active_admin_content {
+  padding:25px 30px;
   position: relative;
 }
 
 #active_admin_content #main_content_wrapper #main_content {
   margin-right: 0;
   position: relative;
+  min-height: 550px;
 }
 
 #main_content_wrapper {
@@ -378,50 +479,105 @@ body {
 }
 
 .view_filter {
-  @include small-button ($color-info);
+  @include small-button ($color-info , $color-border-info);
   cursor: pointer;
   position: absolute;
-  top: -22px;
-  right: 15px;
+  top: 6px;
+  right: 30px;
   z-index: 900;
 }
 
 .table_tools {
   position: absolute;
-  top: -29px;
+  top: -21px;
   right: 80px;
   z-index: 900;
 }
 
+.table_tools_segmented_control li a:hover{
+  background: $color-1!important;
+}
+
+.table_tools_segmented_control li:first-child a {
+  border-radius:initial;
+  border:none;
+  background: $color-border-info;
+  color: #fff;
+  font-weight: 500;
+  padding: 3px 14px 4px;
+}
+.table_tools_segmented_control li:last-child a {
+  border-radius:initial;
+  border:none;
+  background: $color-info;
+  color: #fff;
+  font-weight: 500;
+  padding: 3px 14px 4px;
+}
+
+.scopes li .count {
+  color: #fff;
+}
+
 .batch_actions_selector > a:link {
-  @include small-button ($color-info);
+  @include small-button ($color-info , $color-border-info);
 }
 
 .batch_actions_selector > a:link::after {
   display: none;
 }
 
-table.index_table th, .section > h3, .panel > h3, form fieldset legend span {
-  border: 2px solid #fff;
-  background: $color-1;
-  color: #fff;
-  font-size: 1.1em;
-  font-weight: 300;
-  line-height: 1.1em;
-  padding: 6px 10px 6px 10px;
+#main_content>.panel {
+  float: left;
+  margin:10px;
+  width: 32.1%;
+}
+
+.panel, .paginated_collection_contents {
+  padding: 0px !important;
+  position: relative;
+  border-radius: 3px;
+  background: #ffffff;
+  border-top: 3px solid #0681AB;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1) !important;
+  margin-bottom:5px;
+}
+
+
+.paginated_collection_contents tr {
+  margin:0 20px;
+}
+
+table.index_table th:last-child{
+  border-right:none;
+}
+
+.section > h3, .panel > h3, form fieldset legend span {
+  padding: 10px;
+  text-align: left;
+  background: #fff;
+  font-weight: 500;
+  font-size: 20px;
+  color: $grey-dark;
+  border:none;
+  border-bottom: 1px solid #f4f4f4;
+  padding: 10px;
   margin-bottom: 0;
 }
 
+legend {
+  float: left;
+  margin-bottom:5px!important;
+}
+
+table.index_table th {
+  font-size: 13px;
+  background: none;
+  font-weight: 500;
+}
+
 table.index_table th.sorted-asc, table.index_table th.sorted-desc {
-  background: $color-1;
-}
-
-table.index_table th a, table.index_table th a:link, table.index_table th a:visited {
-  color: #fff;
-}
-
-table.index_table th.sortable a {
-  background: image-url('active_admin/orderable.png') no-repeat 0 4px;
+  background: $grey-soft;
 }
 
 .status_tag.yes {
@@ -437,34 +593,54 @@ table.index_table tr.even td {
 }
 
 table.index_table td {
-  padding: 15px 0 15px 0;
-  border-bottom: 1px solid $color-1;
+  padding: 10px 15px;
   vertical-align: middle;
+}
+
+table.index_table tr{
+  border-bottom: 1px solid $grey-soft;
+}
+
+
+table.index_table tr:last-child {
+  border-bottom: none;
+}
+
+table.index_table tr:hover {
+  background: $grey-soft;
+}
+
+table.index_table tr.selected td {
+  background: none;
+}
+
+.col-selectable, .col-id, .col-enabled, .col-actions, .col-visible, .col-default {
   text-align: center;
 }
 
 .view_link {
-  @include small-button ($color-info);
+  @include small-button ($color-info , $color-border-info);
   display: none;
 }
 .set_link {
-  @include small-button ($color-info);
+  @include small-button ($color-info , $color-border-info);
 }
 
 .edit_link {
-  @include small-button ($color-success)
+  @include small-button ($color-success , $color-border-success)
 }
 
 .delete_link {
-  @include small-button ($color-alert)
+  @include small-button ($color-alert , $color-border-alert)
 }
 
 .clone_link {
-  @include small-button ($color-1)
+  @include small-button ($color-1 , $color-border-1)
 }
 
 .pagination span.page.current:not(.disabled):hover, .pagination span.page.current {
   background: $grey-medium;
+  color: #000;
 }
 
 .pagination a {
@@ -478,23 +654,19 @@ table.index_table td {
   font-size: 14px;
 }
 
-#active_admin_content #sidebar {
-  border-bottom-left-radius: 15px;
-  border-bottom-right-radius: 15px;
-}
 
 .sidebar_section {
   margin-bottom: 0 !important;
 }
 
 .clear_filters_btn, form fieldset.buttons li.cancel a, form fieldset.actions li.cancel a {
-  @include button ($color-alert);
+  @include button ($color-alert , $color-border-alert);
   float: right;
   margin-left: 10px;
 }
 
 form input[type=submit], form input[type=button], form button {
-  @include button ($color-success);
+  @include button ($color-success , $color-border-success);
   text-shadow: none;
 }
 
@@ -503,7 +675,7 @@ li.cancel {
 }
 
 .ui-tabs-nav li a {
-  @include small-button ($color-1)
+  @include small-button ($color-info , $color-border-info);
 }
 
 .ui-tabs-nav li:first-child a, .ui-tabs-nav li:last-child a {
@@ -513,14 +685,24 @@ li.cancel {
 .ui-tabs-nav {
   border-radius: 0;
   background: none;
+  margin-bottom:-1px;
 }
 
 .ui-tabs-nav li.ui-tabs-active a {
-  background: $grey-medium !important;
+  background: $color-1 !important;
 }
 
 .tab-content {
   border: none;
+  padding-top:0px;
+}
+
+.tab-content .columns {
+  border-bottom: none;
+}
+
+.cke_top, .cke_bottom {
+  background:$grey-soft!important;
 }
 
 .fragments-group {
@@ -535,6 +717,9 @@ li.cancel {
 
 form input[type=text], form input[type=password], form input[type=email], form input[type=number], form input[type=url], form input[type=tel], form input[type=date], form textarea {
   width: calc(99% - 15px);
+  border-radius: 0px;
+  box-shadow: none;
+  font-size: 16px;
 }
 
 #footer {
@@ -565,7 +750,7 @@ form input[type=text], form input[type=password], form input[type=email], form i
     width: 280px;
   }
   body.logged_out #content_wrapper #active_admin_content {
-    padding: 10px 20px;
+    padding: 10px 10px;
   }
   body.logged_out h2 {
     margin: -10px -20px 0 -20px;

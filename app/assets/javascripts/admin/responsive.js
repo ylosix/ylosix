@@ -1,9 +1,12 @@
 $(document).ready(function(){
+    //filter box
     $("#sidebar").before('<div class="view_filter">Ver filtros</div>');
     $(".view_filter").click(function(){
         $("#sidebar").toggle();
     });
+    //add footer logo ylos
     $("#footer").html('<div class="logo"></div>');
+    //add icon buttons
     $(".yes").css({'border-radius':'50%' , 'padding':'6px 4px 6px 5px'});
     $(".yes").html('<i class="fa fa-check fa-lg"></i>');
     $(".no").css({'border-radius':'50%' , 'padding':'6px 6px 7px 7px'});
@@ -23,4 +26,11 @@ $(document).ready(function(){
     $(".set_link").attr('title','Predefinido');
     $(".set_link").css({'border-radius':'50%','padding':'8px 9px 11px 9px'});
     $(".set_link").html('<i class="fa fa-star fa-lg"></i>');
+    //add menu icons
+    $("#dashboard>a").before('<i class="fa fa-dashboard fa-lg" style="color:#fff"></i><br>');
+    $("#catalog>a").before('<i class="fa fa-sitemap fa-lg" style="color:#fff"></i><br>');
+    $("#administration>a").before('<i class="fa fa-users fa-lg" style="color:#fff"></i><br>');
+    $("#locales>a").before('<i class="fa fa-language fa-lg" style="color:#fff"></i><br>');
+    $("#preferences>a").before('<i class="fa fa-cogs fa-lg" style="color:#fff"></i><br>');
+    $("#design>a").before('<i class="fa fa-pencil-square-o fa-lg" style="color:#fff"></i><br>');
 });
