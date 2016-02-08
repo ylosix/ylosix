@@ -23,6 +23,16 @@ ActiveAdmin.register_page 'Dashboard' do
 
             columns do
               column do
+                span t('activerecord.attributes.commerce.tree_category')
+              end
+
+              column do
+                span commerce.tree_category.name if commerce.tree_category
+              end
+            end
+
+            columns do
+              column do
                 span t('activerecord.attributes.commerce.enable_commerce_options')
               end
 

@@ -250,6 +250,7 @@ es:
         language: Idioma
         name: Nombre
         template: Plantilla
+        tree_category: Árbol de categoria
         created_at: Creado en
         updated_at: Actualizado en
       data_form:

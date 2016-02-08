@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160119210943) do
+ActiveRecord::Schema.define(version: 20160208115135) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -148,6 +148,7 @@ ActiveRecord::Schema.define(version: 20160119210943) do
     t.hstore   "meta_tags",                 default: {},    null: false
     t.integer  "per_page",                  default: 20
     t.boolean  "enable_commerce_options",   default: false, null: false
+    t.integer  "tree_category_id"
   end
 
   add_index "commerces", ["default", "http"], name: "index_commerces_on_default_and_http", using: :btree

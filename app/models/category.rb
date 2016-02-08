@@ -106,14 +106,16 @@ class Category < ActiveRecord::Base
   end
 
   def self.root_category
-    Category.in_frontend.find_by(parent_id: [nil, 0])
+    Category.in_frontend.where(parent_id: [nil, 0])
   end
 
-  def self.root_categories
-    root_category = Category.root_category
-
+  def self.root_categories(root_category = nil)
     root_categories = []
-    root_categories = root_category.children unless root_category.nil?
+    if root_category
+      root_categories = root_category.children
+    else
+      Category.root_category.each { |category| root_categories += category.children }
+    end
 
     root_categories
   end

@@ -1,20 +1,8 @@
 - categories.each do |category|
   %li.choice
     %label{for: "product_products_categories_ids_#{category.id}"}
-
-      - if products_categories.pluck(:category_id).include? category.id
-        %input{type: 'checkbox',
-                       name: 'product[products_categories_ids][]',
-                       id: "product_products_categories_ids_#{category.id}",
-                       value: category.id,
-                       checked: 'checked'}
-          = category.name
-      - else
-        %input{type: 'checkbox',
-                       name: 'product[products_categories_ids][]',
-                       id: "product_products_categories_ids_#{category.id}",
-                       value: category.id}
-          = category.name
+      = check_box_tag 'product[products_categories_ids][]', category.id, products_categories.pluck(:category_id).include?(category.id), id: "product_products_categories_ids_#{category.id}"
+      = category.name
 
     - if category.children.any?
       %ul.choices-subgroup

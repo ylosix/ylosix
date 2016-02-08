@@ -217,11 +217,13 @@ ActiveAdmin.register Product do
           #   s.input :tag
           # end
 
-          render partial: 'admin/products/categories', locals:
-              {
-                  products_categories: product.products_categories,
-                  root_category: Category.root_category
-              }
+          Category.root_category.each do |category|
+            render partial: 'admin/products/categories', locals:
+                {
+                    products_categories: product.products_categories,
+                    root_category: category
+                }
+          end
 
           render partial: 'admin/products/tags', locals:
               {
