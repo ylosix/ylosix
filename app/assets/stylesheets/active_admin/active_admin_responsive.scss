@@ -345,7 +345,7 @@ body {
 }
 
 #header ul.tabs > li.has_nested > a {
-  background: url(/assets/active_admin/orderable_w.png) no-repeat calc(98% - 5px) 114%;
+  background: image-url('active_admin/orderable_w.png') no-repeat calc(98% - 5px) 114%;
   padding-right: 20px;
 }
 
@@ -359,7 +359,7 @@ body {
 
 #header ul.tabs > li ul li a {
   color: #000;
-  Border:0px;
+  border:0;
   border-bottom:1px solid $grey-soft;
   border-radius: 0;
   margin:0 10px;
@@ -367,7 +367,7 @@ body {
 
 #header ul.tabs > li ul li a:hover {
   color: #000;
-  border:0px;
+  border:0;
   background-color: $grey-soft;
   border-bottom:1px solid $grey-soft;
 }
@@ -528,9 +528,7 @@ body.logged_out #login {
 }
 
 #main_content>.panel {
-  float: left;
-  margin:10px;
-  width: 32.1%;
+  margin:10px 0 30px;
 }
 
 .panel, .paginated_collection_contents {
