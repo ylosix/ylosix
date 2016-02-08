@@ -163,8 +163,17 @@ form fieldset ol > li label {
   width: 50% !important;
 }
 
+form fieldset.inputs ol > li > label{
+  width:100%!important;
+}
+
 .inputs li {
   margin-bottom:15px;
+}
+
+form fieldset ol > li.has_many_container h3 {
+  font-size:14px ;
+  font-weight: 500;
 }
 
 .tab-content .label {
@@ -210,7 +219,7 @@ form .buttons, form .actions {
   text-align: center;
 }
 
-#admin_user_submit_action > input {
+#admin_user_submit_action > input, .button {
   @include button ($color-1 , $color-border-1);
 }
 
@@ -259,6 +268,11 @@ body {
   display: block;
   width: 100%;
   background-color: $color-background;
+}
+
+select {
+  padding: 5px!important;
+  border-color: $grey-medium;
 }
 
 //HEADER
@@ -319,29 +333,35 @@ body {
 
 //menu hover titles
 #header ul.tabs > li.has_nested:hover > a {
-  background: none;
   border-bottom: 0;
   color: #fff;
   font-weight: 500;
 }
 
 #header ul.tabs > li.current > a, #header ul.tabs > li.has_nested.current > a {
+  background: none;
   color: #fff;
-  background: none !important;
-  font-weight: 700;
+  font-weight: 700!important;
 }
 
 #header ul.tabs > li.has_nested.current > a {
-  background: image-url('active_admin/nested_menu_arrow_dark.gif') no-repeat calc(100% - 7px) 50%;
+  background: image-url('active_admin/orderable_w.png') no-repeat calc(98% - 5px) 114%;
 }
 
 #header ul.tabs > li a:hover,
 #header ul.tabs > li.has_nested > a:hover {
-  background: none;
   border-radius: 0;
   color: #fff;
   border-bottom: none !important;
   font-weight: 500;
+}
+
+#header ul.tabs > li:hover a {
+  background: none;
+}
+
+#header ul.tabs > li.has_nested > a:hover, #header ul.tabs > li.has_nested:hover > a{
+background: image-url('active_admin/orderable_w.png') no-repeat calc(98% - 5px) 114%!important;
 }
 
 #header ul.tabs > li.has_nested > a {
@@ -369,7 +389,7 @@ body {
   color: #000;
   border:0;
   background-color: $grey-soft;
-  border-bottom:1px solid $grey-soft;
+  border-bottom:1px solid $grey-soft!important;
 }
 
 #header ul.tabs > li ul li:last-child a , #header ul.tabs > li ul li:last-child a:hover {
@@ -384,7 +404,8 @@ body {
 }
 
 .header-item>li:hover a {
-  background: none!important;
+  background: none;
+  background-color: none;
 }
 
 .header-item>li>ul>li:hover a {
@@ -437,7 +458,7 @@ body {
 }
 
 //CONTENT
-#content_wrapper>#active_admin_content, .tab-content fieldset.inputs {
+#content_wrapper>#active_admin_content, .tab-content fieldset.inputs, #main_content>form>fieldset.inputs {
   padding: 0px!important;
   position: relative;
   border-radius: 3px!important;
@@ -445,6 +466,10 @@ body {
   border-top: 3px solid $color-1;
   width: 100%;
   box-shadow: 0 1px 1px rgba(0,0,0,0.1)!important;
+}
+
+form fieldset.inputs{
+  background: none;
 }
 
 body.logged_out #login {

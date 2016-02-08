@@ -33,4 +33,7 @@ $(document).ready(function(){
     $("#locales>a").before('<i class="fa fa-language fa-lg" style="color:#fff"></i><br>');
     $("#preferences>a").before('<i class="fa fa-cogs fa-lg" style="color:#fff"></i><br>');
     $("#design>a").before('<i class="fa fa-pencil-square-o fa-lg" style="color:#fff"></i><br>');
+    $("#orders>a").before('<i class="fa fa-shopping-basket fa-lg" style="color:#fff"></i><br>');
+    $("#customers>a").before('<i class="fa fa-street-view fa-lg" style="color:#fff"></i><br>');
+    $("#transports>a").before('<i class="fa fa-truck fa-lg" style="color:#fff"></i><br>');
 });
