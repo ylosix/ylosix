@@ -21,6 +21,7 @@
 #  per_page                  :integer          default(20)
 #  social_networks           :hstore           default({}), not null
 #  template_id               :integer
+#  tree_category_id          :integer
 #  updated_at                :datetime         not null
 #
 # Indexes

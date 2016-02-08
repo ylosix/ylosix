@@ -29,7 +29,13 @@ class CategoriesController < Frontend::CommonController
   before_action :set_category, except: [:index]
 
   def index
-    @categories = Category.root_category.children
+    @categories = []
+
+    if @commerce.tree_category
+      @categories = @commerce.tree_category.children
+    else
+      Category.root_category.each { |category| @categories += category.children }
+    end
   end
 
   def show

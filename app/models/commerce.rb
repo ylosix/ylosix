@@ -21,6 +21,7 @@
 #  per_page                  :integer          default(20)
 #  social_networks           :hstore           default({}), not null
 #  template_id               :integer
+#  tree_category_id          :integer
 #  updated_at                :datetime         not null
 #
 # Indexes
@@ -40,6 +41,8 @@ class Commerce < ActiveRecord::Base
 
   belongs_to :template
   belongs_to :language
+  belongs_to :tree_category, class_name: 'Category', foreign_key: 'tree_category_id'
+
   has_many :shopping_orders
 
   has_attached_file :logo, styles: {original: '300x100'}

@@ -38,8 +38,8 @@
 ActiveAdmin.register Commerce do
   menu parent: 'Preferences', priority: 1
   permit_params do
-    permitted = [:default, :language_id, :enable_commerce_options, :no_redirect_shopping_cart, :http, :logo,
-                 :order_prefix, :ga_account_id, :name, :template_id,
+    permitted = [:default, :language_id, :tree_category_id, :enable_commerce_options, :no_redirect_shopping_cart,
+                 :http, :logo, :order_prefix, :ga_account_id, :name, :template_id,
                  :address_1, :address_2, :postal_code, :city, :country, :phone,
                  :cif, :social_networks]
 
@@ -57,6 +57,7 @@ ActiveAdmin.register Commerce do
 
     column :default
     column :http
+    column :tree_category
     column :language
     column (:logo) { |commerce| image_tag(commerce.logo.url(:original)) if commerce.logo? }
     column :ga_account_id
@@ -69,6 +70,7 @@ ActiveAdmin.register Commerce do
     f.inputs 'Commerce details' do
       f.input :name
       f.input :default
+      f.input :tree_category, collection: Category.root_category
       f.input :enable_commerce_options
       f.input :no_redirect_shopping_cart
       f.input :http
