@@ -171,20 +171,6 @@ ActiveAdmin.register_page 'Dashboard' do
               span config_db['adapter']
             end
           end
-
-          # columns do
-          #   column do
-          #     span 'GIT status'
-          #   end
-          #
-          #   column do
-          #     if updates.to_i == 0
-          #       span 'Up-to-date'
-          #     else
-          #       span "The repository has #{updates} updates."
-          #     end
-          #   end
-          # end
         end
       end
     end

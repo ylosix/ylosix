@@ -26,7 +26,7 @@
 #
 
 ActiveAdmin.register AdminUser do
-  menu parent: 'Administration'
+  menu parent: 'Administration', priority: 0
 
   permit_params :debug_variables, :debug_template_id, :email, :locale, :password, :password_confirmation
 

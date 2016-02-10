@@ -28,7 +28,7 @@
 #
 
 ActiveAdmin.register Customer do
-  menu parent: 'Customers', if: proc { commerce && commerce.enable_commerce_options }
+  menu parent: 'Orders', priority: 1, if: proc { commerce && commerce.enable_commerce_options }
 
   permit_params :email, :locale, :name, :last_name, :birth_date
 
@@ -36,9 +36,9 @@ ActiveAdmin.register Customer do
     selectable_column
     id_column
     column :email
-    column :locale
     column :name
     column :last_name
+    column :locale
     column :current_sign_in_at
     column :sign_in_count
     column :created_at
@@ -51,16 +51,39 @@ ActiveAdmin.register Customer do
   filter :sign_in_count
   filter :created_at
 
-  # See permitted parameters documentation:
-  # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-  #
-  # permit_params :list, :of, :attributes, :on, :model
-  #
-  # or
-  #
-  # permit_params do
-  #   permitted = [:permitted, :attributes]
-  #   permitted << :other if resource.something?
-  #   permitted
-  # end
+  show title: proc { |c| "#{c.name}" } do
+    attributes_table do
+
+      row :id
+      row :email
+      row :name
+      row :last_name
+      row :birth_date
+      row :enabled
+      row :locale
+
+      row :current_sign_in_at
+      row :sign_in_count
+      row :last_sign_in_at
+
+      row :created_at
+      row :updated_at
+
+      row t('activerecord.models.customer_address.other') do |c|
+        table_for c.customer_addresses do
+
+          column (:name) { |address| auto_link(address, address.name) }
+          column :default_billing
+          column :default_shipping
+          column (:fields) do |address|
+            address_array = admin_retrieve_array_address(address.fields)
+
+            div address_array.join(' <br/> ').html_safe
+          end
+
+          column :created_at
+        end
+      end
+    end
+  end
 end

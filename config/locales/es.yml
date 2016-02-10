@@ -20,17 +20,12 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 es:
-  formtastic:
-    create: "Crear %{model}"
-    add_another: "Añadir otro/a %{model}"
-    update: "Guardar %{model}"
-    edit_form: "Editando %{model}"
-    clone: "Clonar %{model}"
   active_admin:
+    clone: "Clonar %{model}"
     catalog:
       label: Catálogo
     orders:
-      label: Pedidos
+      label: Ventas
     customers:
       label: Clientes
     transports:
@@ -38,7 +33,7 @@ es:
     administration:
       label: Administración
     locales:
-      label: Idiomas
+      label: Locales
     preferences:
       label: Preferencias
     products:
@@ -68,13 +63,13 @@ es:
           has_many: No se puede eliminar el registro porque existen %{record} dependientes
     models:
       category:
-        zero: no categoría
-        one: Categoría
-        other: Categorías
+        zero: no categoría / família
+        one: Categoría / Família
+        other: Categorías / Famílias
       feature:
-        zero: no característica
-        one: Característica
-        other: Características
+        zero: no campo adicional
+        one: Campo adicional
+        other: Campos adicionales
       product:
         zero: no artículo
         one: Artículo
@@ -136,9 +131,13 @@ es:
         one: Acción formulario
         other: Acciones de formulario
       commerce:
-        zero: no sitio
-        one: Sitio web
-        other: Sitios web
+        zero: no canal
+        one: Canal
+        other: Canales
+      language:
+        zero: no idioma
+        one: Idioma
+        other: Idiomas
       data_form:
         zero: no dato de formulario
         one: Dato de formulario
@@ -307,6 +306,7 @@ es:
         updated_at: Actualizado en
       customer_address:
         name: Nombre
+        default_name: Mi dirección
         fields: Campos
         customer: Cliente
         default_shipping: Envio por defecto

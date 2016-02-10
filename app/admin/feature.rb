@@ -10,7 +10,7 @@
 #
 
 ActiveAdmin.register Feature do
-  menu parent: 'Catalog'
+  menu parent: 'Catalog', priority: 4
 
   permit_params do
     permitted = [:priority]
@@ -21,7 +21,7 @@ ActiveAdmin.register Feature do
   end
 
   action_item :view, only: :show do
-    link_to t('formtastic.add_another', model: t('activerecord.models.feature.one')), new_admin_feature_path
+    link_to t('active_admin.new_model', model: t('activerecord.models.feature.one')), new_admin_feature_path
   end
 
   index do
@@ -49,7 +49,7 @@ ActiveAdmin.register Feature do
   end
 
   form do |f|
-    f.inputs t('formtastic.edit_form', model: t('activerecord.models.feature.one')) do
+    f.inputs t('active_admin.edit_model', model: t('activerecord.models.feature.one')) do
       admin_translation_text_field(feature, 'feature', 'name_translations')
 
       f.input :priority, hint: '1:+ --- 10:-'

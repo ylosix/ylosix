@@ -6,7 +6,7 @@ RUN apt-get -q update
 RUN apt-get -qy upgrade
 
 # Install packages
-RUN apt-get install -qy build-essential libpq-dev nodejs git-core graphviz tree imagemagick
+RUN apt-get install -qy build-essential libpq-dev nodejs graphviz tree imagemagick
 
 ENV APP_HOME /var/www
 ENV RAILS_ENV production

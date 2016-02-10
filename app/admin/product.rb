@@ -45,7 +45,7 @@
 #
 
 ActiveAdmin.register Product do
-  menu parent: 'Catalog'
+  menu parent: 'Catalog', priority: 2
 
   permit_params do
     permitted = [:reference_code, :name, :enabled, :visible, :short_description,
@@ -72,11 +72,11 @@ ActiveAdmin.register Product do
   end
 
   action_item :view, only: :show do
-    link_to(t('formtastic.clone', model: t('activerecord.models.product.one')), admin_clone_product_path(product))
+    link_to t('active_admin.clone', model: t('activerecord.models.product.one')), admin_clone_product_path(product)
   end
 
   action_item :view, only: :show do
-    link_to(t('formtastic.add_another', model: t('activerecord.models.product.one')), new_admin_product_path)
+    link_to t('active_admin.new_model', model: t('activerecord.models.product.one')), new_admin_product_path
   end
 
   action_item :view, only: [:show, :edit] do
@@ -94,8 +94,14 @@ ActiveAdmin.register Product do
     column (t('activerecord.models.category.other')) { |product| product.categories.map(&:name).join(', ') }
     column (:tags) { |product| product.tags.map(&:name).join(', ') }
 
-    actions defaults: true do |product|
-      link_to t('formtastic.clone', model: ''), admin_clone_product_path(product), class: 'member_link clone_link'
+    actions defaults: false do |product|
+      links = link_to t('active_admin.clone', model: ''), admin_clone_product_path(product), class: 'member_link clone_link'
+      links += link_to t('active_admin.edit'), edit_admin_product_path(product), class: 'member_link edit_link'
+      links += link_to t('active_admin.delete'), admin_products_path(product), method: :delete,
+                       confirm: t('active_admin.delete_confirmation'),
+                       class: 'member_link delete_link'
+
+      links.html_safe
     end
   end
 

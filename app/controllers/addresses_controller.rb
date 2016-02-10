@@ -54,7 +54,7 @@ class AddressesController < Frontend::CommonController
     @address = CustomerAddress.new
 
     @address.customer = current_customer
-    @address.name = 'My address'
+    @address.name = t('activerecord.attributes.customer_address.default_name')
     @address.customer_name = current_customer.name
     @address.customer_last_name = current_customer.last_name
   end
@@ -62,8 +62,8 @@ class AddressesController < Frontend::CommonController
   protected
 
   def set_breadcrumbs
-    add_breadcrumb(Breadcrumb.new(url: show_customers_path, name: 'Customers'))
-    add_breadcrumb(Breadcrumb.new(url: customers_addresses_path, name: 'Addresses'))
+    add_breadcrumb(Breadcrumb.new(url: show_customers_path, name: t('activerecord.models.customer.other')))
+    add_breadcrumb(Breadcrumb.new(url: customers_addresses_path, name: t('activerecord.models.customer_address.other')))
   end
 
   def set_customer_address

@@ -41,7 +41,7 @@ ActiveAdmin.register TagsGroup do
   end
 
   form do |f|
-    f.inputs t('formtastic.edit_form', model: t('activerecord.models.tags_group.one')) do
+    f.inputs t('active_admin.edit_model', model: t('activerecord.models.tags_group.one')) do
       # translations = Utils.array_translations(TagsGroupTranslation, tags_group_id: tags_group.id)
       admin_translation_text_field(tags_group, 'tags_group', 'name_translations')
 

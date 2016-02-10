@@ -26,7 +26,7 @@
 #
 
 ActiveAdmin.register Category do
-  menu parent: 'Catalog'
+  menu parent: 'Catalog', priority: 3
   permit_params do
     permitted = [:parent_id, :reference_code, :enabled, :visible, :meta_keywords,
                  :meta_description, :show_action_name, :priority]
@@ -42,7 +42,7 @@ ActiveAdmin.register Category do
   end
 
   action_item :view, only: :show do
-    link_to t('formtastic.add_another', model: t('activerecord.models.category.one')), new_admin_category_path
+    link_to t('active_admin.new_model', model: t('activerecord.models.category.one')), new_admin_category_path
   end
 
   action_item :view, only: [:show, :edit] do

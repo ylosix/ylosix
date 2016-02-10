@@ -10,7 +10,7 @@
 #
 
 ActiveAdmin.register DesignForm do
-  menu parent: 'Design'
+  menu parent: 'Preferences'
 
   permit_params do
     permitted = [:tag]

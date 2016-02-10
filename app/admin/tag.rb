@@ -29,7 +29,7 @@ ActiveAdmin.register Tag do
   end
 
   action_item :view, only: :show do
-    link_to t('formtastic.add_another', model: t('activerecord.models.tag.one')), new_admin_tag_path
+    link_to t('active_admin.new_model', model: t('activerecord.models.tag.one')), new_admin_tag_path
   end
 
   index do
@@ -59,7 +59,7 @@ ActiveAdmin.register Tag do
   end
 
   form do |f|
-    f.inputs t('formtastic.edit_form', model: t('activerecord.models.tag.one')) do
+    f.inputs t('active_admin.edit_model', model: t('activerecord.models.tag.one')) do
       f.input :tags_group
       f.input :priority, hint: '1:+ --- 10:-'
 

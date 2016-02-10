@@ -20,13 +20,8 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  formtastic:
-    create: "Creating %{model}"
-    add_another: "Add other %{model}"
-    update: "Save %{model}"
-    edit_form: "Editing %{model}"
-    clone: "Clone %{model}"
   active_admin:
+    clone: "Clone %{model}"
     catalog:
       label: Catalog
     orders:
@@ -38,7 +33,7 @@ en:
     administration:
       label: Administration
     locales:
-      label: Languages
+      label: Locales
     preferences:
       label: Preferences
     products:
@@ -135,6 +130,10 @@ en:
         zero: no web site
         one: Web site
         other: Web sites
+      language:
+        zero: no idioma
+        one: Idioma
+        other: Idiomas
       data_form:
         zero: no data form
         one: Data form
@@ -253,6 +252,7 @@ en:
         birth_date: Birth date
       customer_address:
         name: Name
+        default_name: My address
         fields: Fields
         customer: Customer
         default_shipping: Default shipping address

@@ -21,7 +21,7 @@
 #
 
 ActiveAdmin.register CustomerAddress do
-  menu parent: 'Customers', if: proc { commerce && commerce.enable_commerce_options }
+  menu false
 
   permit_params :customer_id, :default_billing, :default_shipping, :name,
                 :customer_name, :customer_last_name, :business, :address_1,

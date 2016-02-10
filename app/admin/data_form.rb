@@ -21,6 +21,7 @@ ActiveAdmin.register DataForm do
 
     column :tag
     column :fields
+    column :created_at
 
     actions
   end

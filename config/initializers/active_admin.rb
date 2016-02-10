@@ -203,13 +203,9 @@ ActiveAdmin.setup do |config|
                label: proc { I18n.t 'active_admin.orders.label' },
                priority: 3
 
-      menu.add id: 'customers',
-               label: proc { I18n.t 'active_admin.customers.label' },
-               priority: 4
-
       menu.add id: 'administration',
                label: proc { I18n.t 'active_admin.administration.label' },
-               :priority => 5
+               priority: 5
       # menu.add label: 'Admin users',    :parent => 'Administration', url: '/admin/admin_users', :priority => 0
       # menu.add label: 'Users',          :parent => 'Administration', url: '/admin/users', :priority => 1
       menu.add id: 'admin_comments',

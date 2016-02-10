@@ -24,7 +24,7 @@
 #
 
 ActiveAdmin.register ShoppingCart do
-  menu parent: 'Customers', if: proc { commerce && commerce.enable_commerce_options }
+  menu parent: 'Orders', priority: 4, if: proc { commerce && commerce.enable_commerce_options }
 
   # permit_params :email, :name, :last_name, :birth_date
 
