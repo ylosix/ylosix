@@ -9,7 +9,7 @@
             %a{href: tag['remove_href']}
               %i{class: 'fa fa-trash-o'}
 
-    - reset_href = @variables['commerce']['root_href']
+    - reset_href = @variables['my_site']['root_href']
     - unless @category.nil?
       - reset_href = category_path(@category.slug)
 

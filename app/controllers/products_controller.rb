@@ -89,7 +89,7 @@ class ProductsController < Frontend::CommonController
     end
 
     link = :show_shopping_carts
-    if !@variables['commerce'].nil? && @variables['commerce']['no_redirect_shopping_cart']
+    if !@variables['my_site'].nil? && @variables['my_site']['no_redirect_shopping_cart']
       link = request.referer || request.url || root_url
     end
 

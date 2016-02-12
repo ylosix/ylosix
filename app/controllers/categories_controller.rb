@@ -31,8 +31,8 @@ class CategoriesController < Frontend::CommonController
   def index
     @categories = []
 
-    if @commerce.tree_category
-      @categories = @commerce.tree_category.children
+    if @my_site.tree_category
+      @categories = @my_site.tree_category.children
     else
       Category.root_category.each { |category| @categories += category.children }
     end

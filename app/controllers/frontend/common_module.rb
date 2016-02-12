@@ -87,9 +87,9 @@ module Frontend
       @liquid_options = {features: true, current_tags: set_tags}
       @liquid_options[:current_category] = @category if @category
       @liquid_options[:current_product] = @product if @product
-      @liquid_options[:current_commerce] = @commerce if @commerce
+      @liquid_options[:current_commerce] = @my_site if @my_site
 
-      @variables['categories'] = array_to_liquid(Category.root_categories(@commerce.tree_category), @liquid_options)
+      @variables['categories'] = array_to_liquid(Category.root_categories(@my_site.tree_category), @liquid_options)
 
       append_general_tags(@liquid_options)
 

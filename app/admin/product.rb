@@ -193,7 +193,7 @@ ActiveAdmin.register Product do
             end
           end
 
-          if commerce && commerce.enable_commerce_options
+          if my_site && my_site.enable_commerce_options
             column do
               f.inputs 'Stocks' do
                 f.input :stock

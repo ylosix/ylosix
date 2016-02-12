@@ -57,7 +57,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def per_page
-    per_page = @commerce.per_page
+    per_page = @my_site.per_page
     per_page = params[:per_page] unless params[:per_page].blank?
 
     per_page
@@ -65,7 +65,7 @@ class ApplicationController < ActionController::Base
 
   def set_locale
     if session[:locale].nil?
-      language = @commerce.language if @commerce
+      language = @my_site.language if @my_site
       language ||= Language.find_by(default: true)
 
       session[:locale] = if language
@@ -91,16 +91,16 @@ class ApplicationController < ActionController::Base
   end
 
   def extract_commerce_from_url
-    @commerce = Commerce.retrieve(params_server_name)
-    @render_template = @commerce.template
+    @my_site = Commerce.retrieve(params_server_name)
+    @render_template = @my_site.template
     @render_template.from = 'commerce' unless @render_template.nil?
 
     enabled_template = Template.active_template(current_admin_user)
     @render_template = enabled_template unless enabled_template.nil?
 
     @variables ||= {}
-    @variables['commerce'] = @commerce.to_liquid
-    @variables['meta_tags'] = @commerce.meta_tags_hash
+    @variables['my_site'] = @my_site.to_liquid
+    @variables['meta_tags'] = @my_site.meta_tags_hash
     @variables['template'] = @render_template
   end
 

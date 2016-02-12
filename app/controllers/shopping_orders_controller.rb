@@ -105,7 +105,7 @@ class ShoppingOrdersController < Frontend::CommonController
       sc.extra_fields = params_sc[:extra_fields] unless params_sc[:extra_fields].nil?
       sc.save
 
-      so = ShoppingOrder.from_shopping_cart(sc, @commerce)
+      so = ShoppingOrder.from_shopping_cart(sc, @my_site)
       unless so.save
         redirect_to :shipping_method_customers_shopping_orders, alert: 'A carrier needs to be selected.'
         return
