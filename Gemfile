@@ -61,7 +61,11 @@ gem 'mailgun_rails'
 gem 'newrelic_rpm'
 gem 'paper_trail', '~> 4.0.0'
 
-gem 'remote_syslog_logger'
+# papertrailapp logs
+#gem 'remote_syslog_logger'
+
+# logentries
+gem 'le'
 
 # Access an IRB console on exception pages or by using <%= console %> in views
 gem 'web-console', group: :development

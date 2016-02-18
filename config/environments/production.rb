@@ -53,7 +53,11 @@ Rails.application.configure do
 
   # Use a different logger for distributed setups.
   # config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new)
-  config.logger = RemoteSyslogLogger.new('logs3.papertrailapp.com', 36207, program: 'rails-ylosix')
+
+  # papertrail logger
+  # config.logger = RemoteSyslogLogger.new('logs3.papertrailapp.com', 36207, program: 'rails-ylosix')
+  # logentries logs
+  config.logger = Le.new('abc903bb-671d-414b-b089-c7cb18859875', debug: true, local: true)
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
