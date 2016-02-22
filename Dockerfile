@@ -6,7 +6,7 @@ RUN apt-get -q update
 RUN apt-get -qy upgrade
 
 # Install packages
-RUN apt-get install -qy build-essential libpq-dev nodejs graphviz tree imagemagick
+RUN apt-get install -qy build-essential libpq-dev nodejs-legacy npm graphviz tree imagemagick
 
 ENV APP_HOME /var/www
 ENV RAILS_ENV production
@@ -21,9 +21,13 @@ COPY Gemfile.lock $APP_HOME/Gemfile.lock
 
 # Install gems
 RUN bundle install --without development test profile
+RUN npm install -g bower
 
 # Add the rails app
 COPY . $APP_HOME
+
+# Bower install
+RUN rake bower:install['--allow-root']
 
 # Compile assets
 RUN rake assets:precompile
