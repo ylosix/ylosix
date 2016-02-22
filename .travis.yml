@@ -13,6 +13,7 @@ env:
 before_install:
   - gem install bundler
   - gem update --remote bundler
+  - npm install -g bower
 install:
   - bundle install --retry=3 --without development --without production
   - rake bower:install

@@ -39,7 +39,6 @@ gem 'hstore_translate'
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
 platforms :ruby do # Only linux
-  gem 'unicorn' # Use unicorn as the app server
   gem 'puma'
 end
 
