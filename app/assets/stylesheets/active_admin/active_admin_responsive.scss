@@ -77,12 +77,11 @@ $font: 'Roboto', sans-serif;
   font-weight: normal !important;
   text-transform: capitalize;
   padding: 3px 8px;
-  margin: 0 !important;
   color: #fff !important;
   font-size: 13px !important;
   line-height: 13px !important;
   text-decoration: none !important;
-  margin: 0 2px !important;
+  margin: 0 7px !important;
   border-radius: 0;
   border:1px solid $button-border;
 }
@@ -168,7 +167,9 @@ form fieldset.inputs ol > li > label{
 }
 
 .inputs li {
-  margin-bottom:15px;
+  margin-bottom: 15px;
+  float: left;
+  width: 98%;
 }
 
 form fieldset ol > li.has_many_container h3 {
@@ -185,25 +186,41 @@ fieldset.actions {
 }
 
 form fieldset > ol > li fieldset:not(.has_many_fields) ol {
-  padding: 0 0 0 15%;
+  padding: 0 0 0 20%;
+  width: 80%;
 }
 
 .choices-group>li {
   float: left;
-  width: 20%;
+  width: 24%;
+  border-left: 1px solid #f6f6f6!important;
+  padding-left: 5px!important;
 }
 
-.choice label {
-  width: 100%!important;
+.choices-subgroup {
+  margin-left:18px;
 }
+
+.choices-subgroup .choice label, .choices-subgroup label {
+  width: 100%!important;
+  font-weight: 500;
+}
+
 
 body.logged_out #login form fieldset input[type=text], body.logged_out #login form fieldset input[type=email], body.logged_out #login form fieldset input[type=password] {
   width: 93%;
 }
 
+form fieldset > ol > li.boolean {
+  float: left;
+  width: inherit!important;
+  clear: none;
+}
+
 form fieldset > ol > li.boolean label {
   text-align: left;
   padding-left: 0;
+  width: inherit!important;
 }
 
 form .buttons, form .actions {
@@ -408,6 +425,11 @@ background: image-url('active_admin/orderable_w.png') no-repeat calc(98% - 5px) 
   background: $grey-soft!important;
 }
 
+li#tags_groups, li#shopping_orders_statuses {
+  border-top: 1px solid #0681AB!important;
+  padding-top: 10px;
+}
+
 #logout > a:link, #logout > a:hover, #logout > a:visited, #logout > a:active {
   padding: 0 11px !important;
   border-radius: 5px !important;
@@ -608,7 +630,7 @@ table.index_table th.sorted-asc, table.index_table th.sorted-desc {
 }
 
 table.index_table tr.even td {
-  background: none !important;
+  background: #fbfbfb !important;
 }
 
 table.index_table td {
@@ -632,6 +654,9 @@ table.index_table tr:hover {
 table.index_table tr.selected td {
   background: none;
 }
+ td.col-actions {
+ padding:10px 5px!important;
+ }
 
 .col-selectable, .col-id, .col-enabled, .col-actions, .col-visible, .col-default {
   text-align: center;
@@ -646,15 +671,17 @@ table.index_table tr.selected td {
 }
 
 .edit_link {
-  @include small-button ($color-success , $color-border-success)
+  @include small-button ($color-success , $color-border-success);
 }
 
 .delete_link {
-  @include small-button ($color-alert , $color-border-alert)
+  @include small-button ($color-alert , $color-border-alert);
+  margin-right: 0px!important;
+  margin-left: 35px!important;
 }
 
 .clone_link {
-  @include small-button ($color-1 , $color-border-1)
+  @include small-button ($color-1 , $color-border-1);
 }
 
 .pagination span.page.current:not(.disabled):hover, .pagination span.page.current {
@@ -726,6 +753,14 @@ li.cancel {
 
 .fragments-group {
   border: none;
+}
+
+.fragments legend {
+  width: 20%;
+}
+
+.fragments label {
+  width: 100%!important;
 }
 
 .input > label, form fieldset > ol > li fieldset legend.label label {

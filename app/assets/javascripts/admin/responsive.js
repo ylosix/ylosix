@@ -28,7 +28,7 @@ $(document).ready(function(){
     $(".set_link").html('<i class="fa fa-star fa-lg"></i>');
     //add menu icons
     $("#dashboard>a").before('<i class="fa fa-dashboard fa-lg" style="color:#fff"></i><br>');
-    $("#catalog>a").before('<i class="fa fa-sitemap fa-lg" style="color:#fff"></i><br>');
+    $("#catalog>a").before('<i class="fa fa-book fa-lg" style="color:#fff"></i><br>');
     $("#administration>a").before('<i class="fa fa-users fa-lg" style="color:#fff"></i><br>');
     $("#locales>a").before('<i class="fa fa-language fa-lg" style="color:#fff"></i><br>');
     $("#preferences>a").before('<i class="fa fa-cogs fa-lg" style="color:#fff"></i><br>');
