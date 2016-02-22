@@ -73,7 +73,7 @@ module ActiveAdminHelper
 
   def ace_area_tag(input_name, value, _options)
     input_id = input_name.to_s.delete(']').tr('^-a-zA-Z0-9:.', '_')
-    output = javascript_include_tag '/plugins/ace/ace.js'
+    output = javascript_include_tag '/assets/ace-editor-bower/ace.js'
 
     output += content_tag :div, id: input_id, class: 'editor_html' do
       value
