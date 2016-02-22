@@ -9,6 +9,7 @@ capybara-*.html
 /public/assets
 /public/templates/14*
 /public/templates/ylos-web*
+/public/templates/demo*
 /public/ckeditor_assets
 /spec/tmp
 **.orig
