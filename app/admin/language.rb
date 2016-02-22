@@ -38,8 +38,15 @@ ActiveAdmin.register Language do
     column :appears_in_web
     column :default
 
-    actions defaults: true do |language|
-      link_to 'Set', change_locale_path(language.locale), class: 'member_link set_link'
+
+    actions defaults: false do |language|
+      links = link_to 'Set', change_locale_path(language.locale), class: 'member_link set_link'
+      links += link_to t('active_admin.edit'), edit_admin_product_path(language), class: 'member_link edit_link'
+      links += link_to t('active_admin.delete'), admin_products_path(language), method: :delete,
+                       confirm: t('active_admin.delete_confirmation'),
+                       class: 'member_link delete_link'
+
+      links.html_safe
     end
   end
 
