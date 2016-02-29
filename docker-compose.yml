@@ -17,6 +17,6 @@ web:
     DATABASE_URL: postgres://postgres:YlosixPassword@db:5432/ecommerce
     SECRET_KEY_BASE: <%= rake secret %>
   volumes:
-   - tmp/docker/ckeditor_assets:/var/www/public/ckeditor_assets
-   - tmp/docker/system:/var/www/public/system
-   - tmp/docker/templates:/var/www/public/templates
+   - ./public/ckeditor_assets:/var/www/public/ckeditor_assets
+   - ./public/system:/var/www/public/system
+   - ./public/templates:/var/www/public/templates
