@@ -51,7 +51,7 @@ class Commerce < ActiveRecord::Base
   validates_attachment_content_type :logo, content_type: %r{\Aimage/.*\Z}
 
   store_accessor :billing_address, :name, :address_1, :address_2, :postal_code,
-                 :city, :country, :phone, :cif
+                 :city, :country, :phone, :cif, :email
 
   default_scope { includes(:template) }
 

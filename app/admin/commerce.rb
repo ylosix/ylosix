@@ -41,7 +41,7 @@ ActiveAdmin.register Commerce do
     permitted = [:default, :language_id, :tree_category_id, :enable_commerce_options, :no_redirect_shopping_cart,
                  :http, :logo, :order_prefix, :ga_account_id, :name, :template_id,
                  :address_1, :address_2, :postal_code, :city, :country, :phone,
-                 :cif, :social_networks]
+                 :cif, :email, :social_networks]
 
     if !params[:commerce].blank? && !params[:commerce][:meta_tags].blank?
       meta_tags = params[:commerce][:meta_tags].keys
@@ -94,6 +94,7 @@ ActiveAdmin.register Commerce do
 
     f.inputs 'Billing address' do
       f.input :order_prefix, hint: 'Variables => %Y: year, %order_num: #order'
+      f.input :email
       f.input :address_1
       f.input :address_2
       f.input :postal_code
