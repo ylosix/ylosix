@@ -22,7 +22,7 @@ module Ecommerce
 
     config.active_job.queue_adapter = :inline
     config.i18n.default_locale = :en
-    config.i18n.available_locales = [:es, :en]
+    config.i18n.available_locales = [:es, :en, :ca]
 
     VERSION = '0.1'.freeze
     DOMAIN_HOST = 'demo.ylosix.com'.freeze
