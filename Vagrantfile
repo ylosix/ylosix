@@ -24,11 +24,21 @@ Vagrant.configure(2) do |config|
     # Ubuntu
     app.vm.box = 'box-cutter/ubuntu1404-docker'
 
-    # Setup the containers when the VM is first created
+    # Setup postgres container
     app.vm.provision 'shell', path: 'vagrant/setup.sh'
 
     # Make sure the correct containers are running
     # every time we start the VM.
     app.vm.provision 'shell', run: 'always', path: 'vagrant/start.sh'
+
+    #set environment variables
+    config.vm.provision 'shell', path: "vagrant/set_env_var.sh"
+
+    # install RVM
+    config.vm.provision :shell, path: "vagrant/install-rvm.sh", privileged: false
+
+    # launch rails app
+    app.vm.provision 'shell', path: 'vagrant/launch_rails_app.sh'
+
   end
 end
