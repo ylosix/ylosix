@@ -24,18 +24,15 @@ Vagrant.configure(2) do |config|
     # Ubuntu
     app.vm.box = 'box-cutter/ubuntu1404-docker'
 
-    # Setup project dependencies and postgres container
-    app.vm.provision 'shell', path: 'vagrant/setup.sh'
     # install RVM
     config.vm.provision :shell, path: "vagrant/install-rvm.sh", args: "stable", privileged: false
     # install Ruby
     config.vm.provision :shell, path: "vagrant/install-ruby.sh", args: "2.3.0 rails bundler", privileged: false
-    # Install gems and generate Dababase
-    app.vm.provision 'shell', path: 'vagrant/setup_gems_database.sh', privileged: false
+    # Setup project dependencies and postgres container
+    app.vm.provision 'shell', path: 'vagrant/setup.sh'
     #set environment variables
     config.vm.provision 'shell', run: 'always', path: "vagrant/set_env_var.sh", privileged: false
     # Launch app
     app.vm.provision 'shell', run: 'always', path: 'vagrant/start.sh', privileged: false
-
   end
 end
