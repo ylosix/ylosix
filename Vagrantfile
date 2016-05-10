@@ -29,21 +29,13 @@ Vagrant.configure(2) do |config|
     # install RVM
     config.vm.provision :shell, path: "vagrant/install-rvm.sh", args: "stable", privileged: false
     # install Ruby
-    config.vm.provision :shell, path: "vagrant/install-ruby.sh", args: "1.9.3", privileged: false
-    config.vm.provision :shell, path: "vagrant/install-ruby.sh", args: "2.0.0 rails haml", privileged: false
-    config.vm.provision :shell, path: "vagrant/install-ruby.sh", args: "2.3.0", privileged: false
-
+    config.vm.provision :shell, path: "vagrant/install-ruby.sh", args: "2.3.0 rails bundler", privileged: false
     # Install gems and generate Dababase
-    app.vm.provision 'shell', path: 'vagrant/setup_gems_database.sh'
-
-    # Launch app
-    app.vm.provision 'shell', run: 'always', path: 'vagrant/start.sh'
-
+    app.vm.provision 'shell', path: 'vagrant/setup_gems_database.sh', privileged: false
     #set environment variables
-    #config.vm.provision 'shell', path: "vagrant/set_env_var.sh"
-
-    # launch rails app
-    #app.vm.provision 'shell', path: 'vagrant/launch_rails_app.sh'
+    config.vm.provision 'shell', run: 'always', path: "vagrant/set_env_var.sh", privileged: false
+    # Launch app
+    app.vm.provision 'shell', run: 'always', path: 'vagrant/start.sh', privileged: false
 
   end
 end

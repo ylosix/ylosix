@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Sets neede environment variables
+# Sets needed environment variables
 source ~/.bashrc
 
 if [ -z "$RAILS_ENV" ]; then # only checks if VAR is set, regardless of its value
