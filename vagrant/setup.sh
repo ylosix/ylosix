@@ -14,8 +14,7 @@ sudo apt-get -qy install nodejs
 sudo apt-get install -qy imagemagick
 #sudo gem install mailcatcher
 sudo apt-get install -qy libpq-dev   # dependency for pg gem
-# optional install psql client for Database testing
-#sudo apt-get install -qy postgresql-client
+sudo apt-get install -qy postgresql-client
 
 # To start using RVM you need to run `source /home/vagrant/.rvm/scripts/rvm`
 # in all your open shell windows, in rare cases you need to reopen all shell windows.
@@ -26,14 +25,12 @@ gem update --system
 rvm gemset use global
 gem update
 # disable gem documentation install to speed up gem installation
-echo "gem: --no-document" >> ~/.gemrc
 echo "gem: --no-rdoc --no-ri" >> ~/.gemrc
 gem install bundler
 
-# TODO Set the working environment
-#export RAILS_ENV=development
-#export DATABASE_URL=postgres://postgres:postgres@127.0.0.1:5432/ecommerce
-#./set_env_var.sh
+# Set the working environment
+source ~/.profile && [ -z "$DATABASE_URL" ] && \
+    echo "export DATABASE_URL=postgres://postgres:postgres@127.0.0.1:5432/ecommerce" >> ~/.profile
 
 # generate database
 cd /vagrant
