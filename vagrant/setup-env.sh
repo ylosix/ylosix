@@ -1,5 +1,4 @@
 #!/bin/bash
-echo "********* setup-env.sh ************"
 
 # Stop and remove any existing containers
 docker stop $(docker ps -a -q)
@@ -12,6 +11,3 @@ docker run -d -p 5432:5432 -v /vagrant:/vagrant -e "POSTGRES_PASSWORD=postgres" 
 sudo apt-get update
 sudo apt-get install -qy git nodejs imagemagick libpq-dev postgresql-client
     #libpq-dev   # dependency for pg gem
-
-
-
