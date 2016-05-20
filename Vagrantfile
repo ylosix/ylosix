@@ -23,14 +23,13 @@ Vagrant.configure(2) do |config|
     # Ubuntu
     app.vm.box = 'box-cutter/ubuntu1404-docker'
 
-    # Set environment variables
+    # Set environment variables and rvm project config files
     app.vm.provision "shell", privileged: false, inline: <<-SHELL
       source ~/.profile && [ -z "$DATABASE_URL" ] && echo "export DATABASE_URL=postgres://postgres:postgres@127.0.0.1:5432/ecommerce" >> ~/.profile
       source ~/.profile && [ -z "$RAILS_ENV" ] && echo "export RAILS_ENV=development" >> ~/.profile
+      echo 2.3.0 > .ruby-version
+      echo ylosix > .ruby-gemset
     SHELL
-    # set rvm project config files
-    app.vm.provision "shell", inline: "echo 2.3.0 > .ruby-version", privileged: false
-    app.vm.provision "shell", inline: "echo ylosix > .ruby-gemset", privileged: false
     # install RVM
     app.vm.provision :shell, path: "vagrant/install-rvm.sh", args: "stable", privileged: false
     # install Ruby
