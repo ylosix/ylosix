@@ -1,4 +1,5 @@
 # Ylosix
+
 [![Build Status](https://travis-ci.org/ylosix/ylosix.svg?branch=develop)](https://travis-ci.org/ylosix/ylosix)
 [![Coverage Status](https://coveralls.io/repos/ylosix/ylosix/badge.svg?branch=develop)](https://coveralls.io/r/ylosix/ylosix?branch=develop)
 [![Code Climate](https://codeclimate.com/github/ylosix/ylosix/badges/gpa.svg)](https://codeclimate.com/github/ylosix/ylosix)
@@ -43,14 +44,6 @@ $ git clone --recursive https://github.com/ylosix/ylosix.git
 
 [Download and install Vagrant](http://www.vagrantup.com/downloads.html) from their website according your OS.
 
-Install the `vagrant-triggers` plugin.
-
-```
-$ vagrant plugin install vagrant-triggers
-```
-
-Now, depending on your target environment you will have to use a different Vagrant provider. Currently we support Virtualbox, DigitalOcean, Heroku.
-
 ### Virtualbox (local installation for testing/development)
 
 If you don't have it already, [download and install Virtualbox and the Extension Pack](https://www.virtualbox.org/wiki/Downloads).
@@ -58,7 +51,8 @@ If you don't have it already, [download and install Virtualbox and the Extension
 Create the guest machine and provision it.
 
 ```
-$ vagrant up main_app
+$ vagrant up
+$ vagrant ssh -c 'cd /vagrant; rails s Puma'
 ```
 
 The first time you run `vagrant up` will take more time because it will need to download the base image and install the required dependencies in the virtual machine. Next runs will be much quicker.
@@ -75,81 +69,6 @@ PostgreSQL configuration:
 - User: `ecommerce_user`
 - Password: `ecommerce_pass`
 
-
-### DigitalOcean
-
-Install the `vagrant-digitalocean` package.
-
-```
-$ vagrant plugin install vagrant-digitalocean
-```
-
-[Generate an API token](https://cloud.digitalocean.com/settings/applications) and replace the `YOUR_TOKEN` string by yours in the `Vagrantfile`. You can also configure other parameters such as the region or the Droplet size.
-
-```
-  config.vm.provider :digital_ocean do |provider, override|
-    override.ssh.private_key_path = '~/.ssh/id_rsa'
-    override.vm.box = 'digital_ocean'
-    override.vm.box_url = 'https://github.com/smdahlen/vagrant-digitalocean/raw/master/box/digital_ocean.box'
-
-    provider.token = 'YOUR_TOKEN'
-    provider.image = 'ubuntu-14-04-x64'
-    provider.region = 'nyc2'
-    provider.size = '512mb'
-  end
-```
-
-Create the Droplet and install Ylosix:
-
-```
-$ RAILS_ENV=production vagrant up remote_app --provider=digital_ocean
-```
-
-Once it is done, you will have a production-ready environment in your DigitalOcean Droplet.
-
-
-### Heroku
-
-Install [Heroku CLI](https://toolbelt.heroku.com) from the official website.
-
-Run the following commands to create a Heroku dyno and install Ylosix.
-
-```
-$ heroku login
-$ heroku create
-$ heroku addons:add heroku-postgresql:hobby-dev
-$ heroku config:set RAILS_DB=postgresql
-$ git push heroku master:master
-$ heroku run rake db:schema:load db:gen_demo RAILS_ENV=production
-```
-
-
-### Managed server
-
-You can also install Ylosix in your managed server. Just edit the `Vagrantfile` and configure your SSH credentials.
-
-```
-  app.vm.provider :managed do |provider, override|
-    override.ssh.username = 'username'
-    override.ssh.private_key_path = '~/.ssh/id_rsa'
-    override.vm.box = 'tknerr/managed-server-dummy'
-
-    provider.server = 'example.com'
-  end  
-```
-
-Install the `vagrant-managed-servers` plugin.
-
-```
-$ vagrant plugin install vagrant-managed-servers
-```
-
-Provision the server and install Ylosix.
-
-```
-$ RAILS_ENV=production vagrant up remote_app --provider=managed
-$ RAILS_ENV=production vagrant provision main_app
-```
 
 ### Docker
 
