@@ -13,7 +13,7 @@ This repository contains the source for the latest version of Ylosix as well as 
 
 ### Demo
 - [Frontend](http://ylos.ylosix.com)
-- [Backoffice](http://ylos.ylosix.com/admin) (email: `admin@ylos.com`, password: `password`)
+- [Backoffice](http://ylos.ylosix.com/admin) (email: `admin@ylosix.com`, password: `password`)
 
 This project uses `yard` for generate the documentation:
 ```
