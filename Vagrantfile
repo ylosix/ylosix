@@ -2,7 +2,6 @@
 # vi: set ft=ruby :
 ENV['VAGRANT_DEFAULT_PROVIDER'] = 'virtualbox'
 ENV['RAILS_ENV'] = 'development' if ENV['RAILS_ENV'].nil? || ENV['RAILS_ENV'] == ''
-#TODO add default RUBY version
 
 puts "##### Environment => #{ENV['RAILS_ENV']}"
 
@@ -24,11 +23,21 @@ Vagrant.configure(2) do |config|
     # Ubuntu
     app.vm.box = 'box-cutter/ubuntu1404-docker'
 
-    # Setup the containers when the VM is first created
-    app.vm.provision 'shell', path: 'vagrant/setup.sh'
-
-    # Make sure the correct containers are running
-    # every time we start the VM.
-    app.vm.provision 'shell', run: 'always', path: 'vagrant/start.sh'
+    # Set environment variables and rvm project config files
+    app.vm.provision "shell", privileged: false, inline: <<-SHELL
+      source ~/.profile && [ -z "$DATABASE_URL" ] && echo "export DATABASE_URL=postgres://postgres:postgres@127.0.0.1:5432/ecommerce" >> ~/.profile
+      source ~/.profile && [ -z "$RAILS_ENV" ] && echo "export RAILS_ENV=development" >> ~/.profile
+      echo 2.3.0 > .ruby-version
+      echo ylosix > .ruby-gemset
+    SHELL
+    # install RVM
+    app.vm.provision :shell, path: "vagrant/install-rvm.sh", args: "stable", privileged: false
+    # install Ruby
+    app.vm.provision :shell, path: "vagrant/install-ruby.sh", args: "2.3.0 rails bundler mailcatcher", privileged: false
+    # Setup project dependencies and postgres container
+    app.vm.provision 'shell', path: 'vagrant/setup-env.sh'
+    app.vm.provision 'shell', path: 'vagrant/setup-app.sh', privileged: false
+    # Launch app
+    app.vm.provision 'shell', run: 'always', path: 'vagrant/start.sh', privileged: false
   end
 end
