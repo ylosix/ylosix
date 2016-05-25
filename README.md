@@ -13,7 +13,7 @@ This repository contains the source for the latest version of Ylosix as well as 
 
 ### Demo
 - [Frontend](http://ylos.ylosix.com)
-- [Backoffice](http://ylos.ylosix.com/admin) (email: `admin@example.com`, password: `password`)
+- [Backoffice](http://ylos.ylosix.com/admin) (email: `admin@ylosix.com`, password: `password`)
 
 This project uses `yard` for generate the documentation:
 ```
@@ -52,7 +52,7 @@ Create the guest machine and provision it.
 
 ```
 $ vagrant up
-$ vagrant ssh -c 'cd /vagrant; rails s Puma'
+$ vagrant ssh -c 'cd /vagrant; rails s Puma -b 0.0.0.0'
 ```
 
 The first time you run `vagrant up` will take more time because it will need to download the base image and install the required dependencies in the virtual machine. Next runs will be much quicker.
