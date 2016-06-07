@@ -99,4 +99,10 @@ group :development, :test, :profile do
   gem 'simplecov'
   gem 'coveralls'
   gem 'codeclimate-test-reporter'
+
+  gem 'awesome_print'
+  gem 'pry'
+  gem 'pry-rails'
+  gem 'pry-doc'
+  gem 'pry-stack_explorer'
 end
