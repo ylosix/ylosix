@@ -7,6 +7,10 @@
 #  enabled                        :boolean          default(FALSE)
 #  href_translations              :hstore           default({}), not null
 #  id                             :integer          not null, primary key
+#  image_content_type             :string
+#  image_file_name                :string
+#  image_file_size                :integer
+#  image_updated_at               :datetime
 #  meta_tags_translations         :hstore           default({}), not null
 #  name_translations              :hstore           default({}), not null
 #  parent_id                      :integer

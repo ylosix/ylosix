@@ -7,6 +7,10 @@
 #  enabled                        :boolean          default(FALSE)
 #  href_translations              :hstore           default({}), not null
 #  id                             :integer          not null, primary key
+#  image_content_type             :string
+#  image_file_name                :string
+#  image_file_size                :integer
+#  image_updated_at               :datetime
 #  meta_tags_translations         :hstore           default({}), not null
 #  name_translations              :hstore           default({}), not null
 #  parent_id                      :integer
@@ -33,6 +37,12 @@ class Category < ActiveRecord::Base
   include MetaTags
 
   translates :name, :short_description, :description, :slug, :href, :meta_tags
+
+  IMAGE_SIZES = Product::IMAGE_SIZES
+
+  has_attached_file :image, styles: IMAGE_SIZES
+  validates_attachment_size :image, less_than: 2.megabytes
+  validates_attachment_content_type :image, content_type: %r{\Aimage/.*\Z}
 
   # TODO put children in schema erd!
   # has_many :children, class_name: 'Category', foreign_key: 'parent_id'
@@ -135,8 +145,51 @@ class Category < ActiveRecord::Base
     }
 
     liquid['tags_groups'] = array_to_liquid(tags_groups, options) if options[:tags_groups]
-    liquid
+    append_images(liquid)
   end
+
+  # Returns category image url for the image type passed as param. If no image
+  # is assigned to the category, returns the url of an image place holder with
+  # the same size as the required image type
+  #
+  # @param [symbol] type image type to return url
+  # @return [String] image url for the specified image type or, if no image is
+  #   assigned to the category, url of an equivalent place holder
+  def retrieve_image(type = :original)
+    image_src = 'http://placehold.it/650x500'
+
+    # TODO add fixed sizes as small, large, original, etc.
+    case type
+      when :thumbnail
+        image_src = 'http://placehold.it/130x100'
+      when :small
+        image_src = 'http://placehold.it/390x300'
+      when :medium
+        image_src = 'http://placehold.it/650x500'
+    end
+
+    image_src = image.url(type) if image?
+    image_src
+  end
+
+  protected
+
+  # Appends a image url for each image size to the hash passed as param.
+  # The {key => value} entries appended are in the form:
+  #   "image_<size_name>_src" => image_url
+  #
+  # @param [Hash] hash hash to append images url
+  # @return [Hash] original hash appended with a image url for each image size
+  def append_images(hash)
+    hash['image'] = image?
+
+    IMAGE_SIZES.each do |size, _k|
+      hash["image_#{size}_src"] = retrieve_image(size)
+    end
+
+    hash
+  end
+
 
   private
 
