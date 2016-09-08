@@ -29,7 +29,7 @@ ActiveAdmin.register Category do
   menu parent: 'Catalog', priority: 3
   permit_params do
     permitted = [:parent_id, :reference_code, :enabled, :visible, :meta_keywords,
-                 :meta_description, :show_action_name, :priority]
+                 :meta_description, :show_action_name, :priority, :image]
 
     locales = Language.pluck(:locale).map(&:to_sym)
     permitted << {name_translations: locales}
@@ -93,6 +93,7 @@ ActiveAdmin.register Category do
     tabs do
       tab t('active_admin.categories.information') do
         f.inputs t('active_admin.categories.information') do
+          f.input :image, as: :file, hint: (image_tag(category.image.url(:thumbnail)) if category.image?)
           f.input :reference_code
           f.input :parent_id,
                   label: t('activerecord.attributes.category.parent'),
@@ -125,6 +126,7 @@ ActiveAdmin.register Category do
 
   show title: proc { |p| "#{p.name}" } do
     attributes_table do
+      row :image
       row :id
       row :name
       row :parent

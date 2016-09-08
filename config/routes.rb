@@ -141,7 +141,6 @@
 #                                  admin_link GET        /admin/links/:id(.:format)                                admin/links#show
 #                                             PATCH      /admin/links/:id(.:format)                                admin/links#update
 #                                             PUT        /admin/links/:id(.:format)                                admin/links#update
-#                                             DELETE     /admin/links/:id(.:format)                                admin/links#destroy
 #                 batch_action_admin_products POST       /admin/products/batch_action(.:format)                    admin/products#batch_action
 #                              admin_products GET        /admin/products(.:format)                                 admin/products#index
 #                                             POST       /admin/products(.:format)                                 admin/products#create
@@ -286,6 +285,7 @@
 #                  POST   /attachment_files(.:format)     ckeditor/attachment_files#create
 #  attachment_file DELETE /attachment_files/:id(.:format) ckeditor/attachment_files#destroy
 #
+
 
 class RouteConstraint
   def matches?(request)
