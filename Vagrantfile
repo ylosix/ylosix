@@ -21,7 +21,7 @@ Vagrant.configure(2) do |config|
     app.vm.hostname = 'ylosix-vm'
 
     # Ubuntu
-    app.vm.box = 'box-cutter/ubuntu1404-docker'
+     app.vm.box = 'box-cutter/ubuntu1604'
 
     # Set environment variables and rvm project config files
     app.vm.provision "shell", privileged: false, inline: <<-SHELL
