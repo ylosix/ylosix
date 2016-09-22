@@ -33,8 +33,6 @@ Vagrant.configure(2) do |config|
     # provision Docker and run postgres container
     config.vm.provision "docker" do |d|
       d.run "postgres:9.4.1",
-        #cmd: "bash -l",
-        #args: "-v '/vagrant:/var/www'"
         args: "-d -p 5432:5432 -v /vagrant:/vagrant -e 'POSTGRES_PASSWORD=postgres' --name postgres"
     end
     # install RVM
